@@ -156,20 +156,31 @@ class AppsRecyclerAdapter(val activity: Activity,
      * The function [filter] is used to search elements within this [RecyclerView].
      */
     fun filter(text: String) {
+        // normalize text for search
+        fun normalize(text: String): String{
+            return text.toLowerCase(Locale.ROOT).replace("[^a-z0-9]", "")
+        }
         appsListDisplayed.clear()
         if (text.isEmpty()) {
             appsListDisplayed.addAll(appsList)
         } else {
+            var appsSecondary: MutableList<AppInfo> = ArrayList();
+            var normalizedText: String = normalize(text);
             for (item in appsList) {
-                if (item.label.toString().toLowerCase(Locale.ROOT).contains(text.toLowerCase(Locale.ROOT))) {
+                var itemLabel: String = normalize(item.label.toString());
+
+                if (itemLabel.startsWith(normalizedText)) {
                     appsListDisplayed.add(item)
+                }else if(itemLabel.contains(normalizedText)){
+                    appsSecondary.add(item)
                 }
             }
+            appsListDisplayed.addAll(appsSecondary);
         }
 
         // Launch apps automatically if only one result is found and the user wants it
         // Disabled at the moment. The Setting 'PREF_SEARCH_AUTO_LAUNCH' may be
-        // modifyable at some later point.
+        // modifiable at some later point.
         if (appsListDisplayed.size == 1 && intention == "view"
             && launcherPreferences.getBoolean(PREF_SEARCH_AUTO_LAUNCH, false)) {
             launch(appsListDisplayed[0].packageName.toString(), activity)

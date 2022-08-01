@@ -213,6 +213,17 @@ private fun getIntent(packageName: String, context: Context): Intent? {
     return intent
 }
 
+fun canReachSettings(): Boolean {
+    var availableActions = ACTIONS;
+    if(!launcherPreferences.getBoolean(PREF_DOUBLE_ACTIONS_ENABLED, false)){
+        availableActions = listOf(
+           ACTION_UP, ACTION_DOWN, ACTION_RIGHT, ACTION_LEFT, ACTION_VOL_UP,
+            ACTION_VOL_DOWN, ACTION_DOUBLE_CLICK, ACTION_LONG_CLICK, ACTION_DATE, ACTION_TIME
+        )
+    }
+    return availableActions.contains("launcher:settings") || availableActions.contains("launcher:choose")
+}
+
 fun launch(
     data: String, activity: Activity,
     animationIn: Int = android.R.anim.fade_in, animationOut: Int = android.R.anim.fade_out

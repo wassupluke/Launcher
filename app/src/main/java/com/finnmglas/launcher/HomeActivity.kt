@@ -198,18 +198,20 @@ class HomeActivity: UIObject, AppCompatActivity(),
             true -> {
                 hideSettingsIcon()
             }
-            false -> showSettingsIcon()
+            false -> {showSettingsIcon()}
         }
         return false
     }
 
     private fun showSettingsIcon(){
-        home_settings_icon.fadeRotateIn()
-        home_settings_icon.visibility = View.VISIBLE
-        settingsIconShown = true
+        if(!canReachSettings()) {
+            home_settings_icon.fadeRotateIn()
+            home_settings_icon.visibility = View.VISIBLE
+            settingsIconShown = true
 
-        tooltipTimer = fixedRateTimer("tooltipTimer", true, 10000, 1000) {
-            this@HomeActivity.runOnUiThread { hideSettingsIcon() }
+            tooltipTimer = fixedRateTimer("tooltipTimer", true, 10000, 1000) {
+                this@HomeActivity.runOnUiThread { hideSettingsIcon() }
+            }
         }
     }
 

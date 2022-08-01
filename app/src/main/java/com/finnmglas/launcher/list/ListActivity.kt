@@ -17,6 +17,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.finnmglas.launcher.list.apps.ListFragmentApps
 import com.finnmglas.launcher.list.other.ListFragmentOther
+import kotlinx.android.synthetic.main.home.*
+import kotlinx.android.synthetic.main.list_apps.*
 
 var intendedChoosePause = false // know when to close
 
@@ -38,6 +40,10 @@ class ListActivity : AppCompatActivity(), UIObject {
 
         // Initialise layout
         setContentView(R.layout.list)
+
+        list_settings.setOnClickListener() {
+            launch("launcher:settings", this, R.anim.bottom_up)
+        }
     }
 
     override fun onStart(){

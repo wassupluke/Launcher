@@ -23,6 +23,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <com.finnmglas.launcher.libraries.FontAwesome
+                android:id="@+id/list_settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:gravity="center"
+                android:includeFontPadding="true"
+                android:paddingLeft="16sp"
+                android:paddingRight="16sp"
+                android:text="@string/fas_settings"
+                android:textColor="?attr/colorAccent"
+                android:textSize="22sp"
+                custom:layout_constraintBottom_toBottomOf="parent"
+                custom:layout_constraintStart_toStartOf="parent"
+                custom:layout_constraintTop_toTopOf="parent"
+                custom:type="solid" />
+
             <TextView
                 android:id="@+id/list_heading"
                 android:layout_width="wrap_content"
