@@ -158,7 +158,7 @@ class AppsRecyclerAdapter(val activity: Activity,
     fun filter(text: String) {
         // normalize text for search
         fun normalize(text: String): String{
-            return text.toLowerCase(Locale.ROOT).replace("[^a-z0-9]", "")
+            return text.toLowerCase(Locale.ROOT).replace("[^a-z0-9]".toRegex(), "")
         }
         appsListDisplayed.clear()
         if (text.isEmpty()) {
