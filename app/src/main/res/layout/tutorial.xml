@@ -37,7 +37,7 @@
                 custom:layout_constraintStart_toStartOf="parent"
                 custom:layout_constraintTop_toTopOf="parent" />
 
-            <com.finnmglas.launcher.libraries.FontAwesome
+            <de.jrpie.android.launcher.libraries.FontAwesome
                 android:id="@+id/tutorial_close"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

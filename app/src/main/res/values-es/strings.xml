@@ -124,14 +124,12 @@
     <string name="settings_meta_reset">Configuración por defecto</string>
     <string name="settings_meta_reset_confirm">Todas sus preferencias se eliminarán. Desea continuar?</string>
 
-    <string name="settings_meta_link_github">https://github.com/finnmglas/Launcher#en</string>
+    <string name="settings_meta_link_github">https://github.de.jrpie.android.launcher#en</string>
 
     <string name="settings_meta_report_bug">Reportar un error</string>
 
     <string name="settings_meta_contact">Contactar al desarrollador</string>
     <string name="settings_meta_contact_url">https://www.finnmglas.com/contact/</string>
-
-    <string name="settings_meta_donate_url">https://www.finnmglas.com/sponsor</string>
 
     <string name="settings_meta_discord">Unete a nuestro discord!</string>
 

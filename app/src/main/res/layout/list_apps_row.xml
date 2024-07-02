@@ -33,7 +33,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.finnmglas.launcher.libraries.FontAwesome
+    <de.jrpie.android.launcher.libraries.FontAwesome
         android:id="@+id/list_apps_row_menu"
         android:layout_width="30sp"
         android:layout_height="0dp"

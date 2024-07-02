@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="15sp">
 
-    <com.finnmglas.launcher.libraries.FontAwesome
+    <de.jrpie.android.launcher.libraries.FontAwesome
         android:id="@+id/list_other_row_icon"
         android:layout_width="35sp"
         android:layout_height="35sp"

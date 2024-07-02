@@ -11,7 +11,7 @@
 
     <fragment
         android:id="@+id/settings_actions_rview_fragment"
-        android:name="com.finnmglas.launcher.settings.actions.SettingsFragmentActionsRecycler"
+        android:name="de.jrpie.android.launcher.settings.actions.SettingsFragmentActionsRecycler"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="16dp"

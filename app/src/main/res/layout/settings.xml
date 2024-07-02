@@ -33,7 +33,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.finnmglas.launcher.libraries.FontAwesome
+            <de.jrpie.android.launcher.libraries.FontAwesome
                 android:id="@+id/settings_close"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 custom:type="solid" />
 
-            <com.finnmglas.launcher.libraries.FontAwesome
+            <de.jrpie.android.launcher.libraries.FontAwesome
                 android:id="@+id/settings_system"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

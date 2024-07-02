@@ -32,7 +32,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.finnmglas.launcher.libraries.FontAwesome
+    <de.jrpie.android.launcher.libraries.FontAwesome
         android:id="@+id/settings_actions_row_icon"
         android:layout_width="@dimen/app_icon_side"
         android:layout_height="@dimen/app_icon_side"
@@ -55,7 +55,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
 
-    <com.finnmglas.launcher.libraries.FontAwesome
+    <de.jrpie.android.launcher.libraries.FontAwesome
         android:id="@+id/settings_actions_row_remove"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

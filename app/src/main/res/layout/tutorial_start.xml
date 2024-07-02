@@ -11,7 +11,7 @@
     android:background="?attr/colorPrimary"
     tools:context=".tutorial.tabs.TutorialFragmentStart">
 
-    <com.finnmglas.launcher.libraries.FontAwesome
+    <de.jrpie.android.launcher.libraries.FontAwesome
         android:id="@+id/tutorial_start_icon_right_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.finnmglas.launcher.libraries.FontAwesome
+    <de.jrpie.android.launcher.libraries.FontAwesome
         android:id="@+id/tutorial_start_icon_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

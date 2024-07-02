@@ -36,7 +36,7 @@
 
     <fragment
         android:id="@+id/tutorial_setup_actions_rview_fragment"
-        android:name="com.finnmglas.launcher.settings.actions.SettingsFragmentActionsRecycler"
+        android:name="de.jrpie.android.launcher.settings.actions.SettingsFragmentActionsRecycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="32dp"

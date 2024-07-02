@@ -36,62 +36,6 @@
         android:text="@string/settings_meta_reset"
         android:textAllCaps="false" />
 
-    <LinearLayout
-        android:id="@+id/settings_meta_layout_icons"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32sp"
-        android:layout_marginBottom="32sp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <com.finnmglas.launcher.libraries.FontAwesome
-            android:id="@+id/settings_meta_icon_store"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:includeFontPadding="true"
-            android:paddingLeft="16sp"
-            android:paddingRight="16sp"
-            android:text="@string/fas_store"
-            android:textColor="?attr/colorAccent"
-            android:textSize="40sp"
-            custom:type="solid" />
-
-        <com.finnmglas.launcher.libraries.FontAwesome
-            android:id="@+id/settings_meta_icon_github"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:includeFontPadding="true"
-            android:paddingLeft="16sp"
-            android:paddingRight="16sp"
-            android:text="@string/fab_github"
-            android:textColor="?attr/colorAccent"
-            android:textSize="40sp"
-            custom:type="brands" />
-
-        <com.finnmglas.launcher.libraries.FontAwesome
-            android:id="@+id/settings_meta_icon_donate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:includeFontPadding="true"
-            android:paddingLeft="16sp"
-            android:paddingRight="16sp"
-            android:text="@string/fas_heart"
-            android:textColor="?attr/colorAccent"
-            android:textSize="40sp"
-            custom:type="solid" />
-
-    </LinearLayout>
 
     <Button
         android:id="@+id/settings_meta_button_report_bug"
@@ -101,18 +45,19 @@
         android:text="@string/settings_meta_report_bug"
         android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/settings_meta_button_discord"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/settings_meta_discord"
-        android:textAllCaps="false" />
 
     <Button
         android:id="@+id/settings_meta_button_contact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/settings_meta_contact"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/settings_meta_button_fork_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_meta_fork_contact"
         android:textAllCaps="false" />
 
 </LinearLayout>

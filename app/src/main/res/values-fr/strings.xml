@@ -100,7 +100,7 @@
     <string name="settings_meta_reset">Réinitialiser</string>
     <string name="settings_meta_reset_confirm">Vous allez supprimer toutes vos préférences. Continuer?</string>
 
-    <string name="settings_meta_link_github">https://github.com/finnmglas/Launcher#fr</string>
+    <string name="settings_meta_link_github">https://github.de.jrpie.android.launcher#fr</string>
 
     <string name="settings_meta_report_bug">Signaler une erreur</string>
 
@@ -109,7 +109,6 @@
     <string name="settings_meta_contact">Contacter le développeur</string>
     <string name="settings_meta_contact_url">https://www.finnmglas.com/fr/contact/</string>
 
-    <string name="settings_meta_donate_url">https://www.finnmglas.com/fr/sponsor</string>
 
     <!--
       -
