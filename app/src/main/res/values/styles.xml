@@ -20,6 +20,8 @@
         <item name="android:textColorPrimary">@color/finnmglasTheme_text_color</item>
         <item name="android:textColorHint">#555</item>
 
+        <item name="android:fontFamily">@font/hack</item>
+
         <item name="android:buttonStyle">@style/Widget.AppCompat.Button.Colored</item>
         <item name="colorButtonNormal">#555</item>
 
