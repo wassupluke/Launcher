@@ -46,6 +46,7 @@ class HomeActivity: UIObject, AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        this.setTheme(android.R.style.Theme_Wallpaper_NoTitleBar_Fullscreen)
         // Initialise globals
         launcherPreferences = this.getSharedPreferences(
             getString(R.string.preference_file_key), Context.MODE_PRIVATE)
@@ -103,9 +104,6 @@ class HomeActivity: UIObject, AppCompatActivity(),
 
     override fun onResume() {
         super.onResume()
-
-        if (home_background_image != null && getSavedTheme(this) == "custom")
-            home_background_image.setImageBitmap(background)
 
         // Applying the date / time format (changeable in settings)
         val dFormat = launcherPreferences.getInt(PREF_DATE_FORMAT, 0)
@@ -215,9 +213,9 @@ class HomeActivity: UIObject, AppCompatActivity(),
 
     override fun applyTheme() {
 
-        home_container.setBackgroundColor(dominantColor)
+        // home_container.setBackgroundColor(dominantColor)
 
-        if (launcherPreferences.getString(PREF_WALLPAPER, "") != "") {
+        /*if (launcherPreferences.getString(PREF_WALLPAPER, "") != "") {
             try {
                 background = MediaStore.Images.Media.getBitmap(
                     this.contentResolver, Uri.parse(
@@ -229,10 +227,7 @@ class HomeActivity: UIObject, AppCompatActivity(),
             // Background image was deleted or something unexpected happened
             if (background == null) resetToDefaultTheme(this)
 
-            home_background_image.visibility = View.VISIBLE
-        } else {
-            home_background_image.visibility = View.INVISIBLE
-        }
+        }*/
     }
 
     override fun setOnClicks() {

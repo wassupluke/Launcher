@@ -7,18 +7,8 @@
     android:id="@+id/home_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorPrimary"
     android:longClickable="false"
     tools:context=".HomeActivity">
-
-    <ImageView
-        android:id="@+id/home_background_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:adjustViewBounds="true"
-        android:orientation="vertical"
-        android:scaleType="centerCrop"
-        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/home_upper_view"
