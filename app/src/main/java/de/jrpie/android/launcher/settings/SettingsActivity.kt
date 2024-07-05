@@ -62,8 +62,8 @@ class SettingsActivity: AppCompatActivity(), UIObject {
     override fun applyTheme() {
         // settings_appbar.setBackgroundColor(dominantColor)
 
-        settings_system.setTextColor(vibrantColor)
-        settings_close.setTextColor(vibrantColor)
+        //settings_system.setTextColor(vibrantColor)
+        //settings_close.setTextColor(vibrantColor)
         settings_tabs.setSelectedTabIndicatorColor(vibrantColor)
     }
 

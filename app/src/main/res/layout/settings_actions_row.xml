@@ -32,7 +32,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <de.jrpie.android.launcher.libraries.FontAwesome
+    <ImageView
         android:id="@+id/settings_actions_row_icon"
         android:layout_width="@dimen/app_icon_side"
         android:layout_height="@dimen/app_icon_side"
@@ -55,12 +55,12 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
 
-    <de.jrpie.android.launcher.libraries.FontAwesome
+    <ImageView
         android:id="@+id/settings_actions_row_remove"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8sp"
-        android:text="@string/fas_times"
+        android:src="@drawable/baseline_close_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/settings_actions_row_icon_img"

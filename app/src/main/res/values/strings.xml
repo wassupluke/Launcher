@@ -185,5 +185,6 @@
     <string name="tutorial_finish_title">Let\'s go!</string>
     <string name="tutorial_finish_text">You are ready to get started!\n\nI hope this is of great value to you!\n\n- Finn (who made Launcher)</string>
     <string name="tutorial_finish_button">Start</string>
+    <string name="settings">Settings</string>
 
 </resources>

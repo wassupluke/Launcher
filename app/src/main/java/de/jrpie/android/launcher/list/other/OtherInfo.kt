@@ -8,8 +8,8 @@ package de.jrpie.android.launcher.list.other
  *
  * @param data - a string identifying the thing to be launched
 */
-class OtherInfo(label: String, data: String, icon: String) {
+class OtherInfo(label: String, data: String, icon: Int) {
     var label: CharSequence? = label
     var data: CharSequence? = data
-    var icon: CharSequence? = icon
+    var icon: Int = icon
 }

@@ -6,11 +6,11 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
-import de.jrpie.android.launcher.libraries.*
 import de.jrpie.android.launcher.list.forApp
 
 /**
@@ -28,7 +28,7 @@ class OtherRecyclerAdapter(val activity: Activity):
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
         var textView: TextView = itemView.findViewById(R.id.list_other_row_name)
-        var iconView: FontAwesome = itemView.findViewById(R.id.list_other_row_icon)
+        var iconView: ImageView = itemView.findViewById(R.id.list_other_row_icon)
 
 
         override fun onClick(v: View) {
@@ -43,10 +43,10 @@ class OtherRecyclerAdapter(val activity: Activity):
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
         val otherLabel = othersList[i].label.toString()
-        val icon = othersList[i].icon.toString()
+        val icon = othersList[i].icon
 
         viewHolder.textView.text = otherLabel
-        viewHolder.iconView.text = icon
+        viewHolder.iconView.setImageResource(icon)
     }
 
     override fun getItemCount(): Int { return othersList.size }
@@ -62,33 +62,37 @@ class OtherRecyclerAdapter(val activity: Activity):
         othersList.add(
             OtherInfo(activity.getString(R.string.list_other_settings),
             "launcher:settings",
-                activity.getString(R.string.fas_settings)))
+                R.drawable.baseline_settings_24)
+        )
         othersList.add(
             OtherInfo(activity.getString(R.string.list_other_list),
                 "launcher:choose",
-                activity.getString(R.string.fas_bars)))
+                R.drawable.baseline_menu_24)
+        )
         othersList.add(
             OtherInfo(activity.getString(R.string.list_other_volume_up),
                 "launcher:volumeUp",
-                activity.getString(R.string.fas_plus)))
+                R.drawable.baseline_volume_up_24)
+        )
         othersList.add(
             OtherInfo(activity.getString(R.string.list_other_volume_down),
                 "launcher:volumeDown",
-                activity.getString(R.string.fas_minus)))
+                R.drawable.baseline_volume_down_24)
+        )
 
         if (Build.VERSION.SDK_INT >= 19) { // requires Android KitKat +
             othersList.add(
                 OtherInfo(
                     activity.getString(R.string.list_other_track_next),
                     "launcher:nextTrack",
-                    activity.getString(R.string.fas_forward)
+                    R.drawable.baseline_skip_next_24
                 )
             )
             othersList.add(
                 OtherInfo(
                     activity.getString(R.string.list_other_track_previous),
                     "launcher:previousTrack",
-                    activity.getString(R.string.fas_back)
+                    R.drawable.baseline_skip_previous_24
                 )
             )
         }

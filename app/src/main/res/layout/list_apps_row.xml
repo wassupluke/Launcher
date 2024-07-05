@@ -33,13 +33,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <de.jrpie.android.launcher.libraries.FontAwesome
+    <ImageView
         android:id="@+id/list_apps_row_menu"
         android:layout_width="30sp"
         android:layout_height="0dp"
         android:gravity="center"
-        android:text="@string/fas_three_dots"
-        android:textSize="20sp"
+        android:src="@drawable/baseline_more_horiz_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

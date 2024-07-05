@@ -26,8 +26,8 @@
             android:iconifiedByDefault="false"
             app:iconifiedByDefault="false"
             app:queryHint="@string/list_apps_search_hint"
-            app:searchHintIcon="@android:drawable/ic_menu_search"
-            app:searchIcon="@android:drawable/ic_menu_search" />
+            app:searchHintIcon="@drawable/baseline_search_24"
+            app:searchIcon="@drawable/baseline_search_24" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView

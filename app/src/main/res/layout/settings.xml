@@ -35,7 +35,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <de.jrpie.android.launcher.libraries.FontAwesome
+            <ImageView
                 android:id="@+id/settings_close"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -44,15 +44,13 @@
                 android:includeFontPadding="true"
                 android:paddingLeft="16sp"
                 android:paddingRight="16sp"
-                android:text="@string/fa_close_window"
-                android:textColor="?attr/colorAccent"
-                android:textSize="22sp"
+                android:src="@drawable/baseline_close_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 custom:type="solid" />
 
-            <de.jrpie.android.launcher.libraries.FontAwesome
+            <ImageView
                 android:id="@+id/settings_system"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,9 +59,7 @@
                 android:includeFontPadding="true"
                 android:paddingLeft="16sp"
                 android:paddingRight="16sp"
-                android:text="@string/fas_settings"
-                android:textColor="?attr/colorAccent"
-                android:textSize="22sp"
+                android:src="@drawable/baseline_settings_applications_24"
                 custom:layout_constraintBottom_toBottomOf="parent"
                 custom:layout_constraintStart_toStartOf="parent"
                 custom:layout_constraintTop_toTopOf="parent"

@@ -15,7 +15,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import de.jrpie.android.launcher.libraries.FontAwesome
 import de.jrpie.android.launcher.settings.intendedSettingsPause
 import java.lang.Exception
 
@@ -60,10 +59,10 @@ class ActionsRecyclerAdapter(val activity: Activity):
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
         var textView: TextView = itemView.findViewById(R.id.settings_actions_row_name)
-        var fontAwesome: FontAwesome = itemView.findViewById(R.id.settings_actions_row_icon)
+        var actionIcon: ImageView = itemView.findViewById(R.id.settings_actions_row_icon)
         var img: ImageView = itemView.findViewById(R.id.settings_actions_row_icon_img) as ImageView
         var chooseButton: Button = itemView.findViewById(R.id.settings_actions_row_button_choose)
-        var removeAction: FontAwesome = itemView.findViewById(R.id.settings_actions_row_remove)
+        var removeAction: ImageView = itemView.findViewById(R.id.settings_actions_row_remove)
 
         override fun onClick(v: View) { }
 
@@ -85,7 +84,7 @@ class ActionsRecyclerAdapter(val activity: Activity):
 
             loadSettings() // apply new settings to the app
 
-            viewHolder.fontAwesome.visibility = View.INVISIBLE
+            viewHolder.actionIcon.visibility = View.INVISIBLE
             viewHolder.img.visibility = View.INVISIBLE
             viewHolder.removeAction.visibility = View.GONE
             viewHolder.chooseButton.visibility = View.VISIBLE
@@ -96,22 +95,22 @@ class ActionsRecyclerAdapter(val activity: Activity):
 
         if (content!!.startsWith("launcher")) {
             // Set fontAwesome icon
-            viewHolder.fontAwesome.visibility = View.VISIBLE
-            viewHolder.fontAwesome.setOnClickListener{ chooseApp(actionName.toString()) }
+            viewHolder.actionIcon.visibility = View.VISIBLE
+            viewHolder.actionIcon.setOnClickListener{ chooseApp(actionName.toString()) }
 
             when (content.split(":")[1]) {
                 "settings" ->
-                    viewHolder.fontAwesome.text = activity.getString(R.string.fas_settings)
+                    viewHolder.actionIcon.setImageResource(R.drawable.baseline_settings_24)
                 "choose" ->
-                    viewHolder.fontAwesome.text = activity.getString(R.string.fas_bars)
+                    viewHolder.actionIcon.setImageResource(R.drawable.baseline_menu_24)
                 "volumeUp" ->
-                    viewHolder.fontAwesome.text = activity.getString(R.string.fas_plus)
+                    viewHolder.actionIcon.setImageResource(R.drawable.baseline_volume_up_24)
                 "volumeDown" ->
-                    viewHolder.fontAwesome.text = activity.getString(R.string.fas_minus)
+                    viewHolder.actionIcon.setImageResource(R.drawable.baseline_volume_down_24)
                 "nextTrack" ->
-                    viewHolder.fontAwesome.text = activity.getString(R.string.fas_forward)
+                    viewHolder.actionIcon.setImageResource(R.drawable.baseline_skip_next_24)
                 "previousTrack" ->
-                    viewHolder.fontAwesome.text = activity.getString(R.string.fas_back)
+                    viewHolder.actionIcon.setImageResource(R.drawable.baseline_skip_previous_24)
             }
         } else {
             // Set image icon (by packageName)

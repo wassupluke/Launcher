@@ -15,7 +15,6 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import de.jrpie.android.launcher.*
-import de.jrpie.android.launcher.libraries.FontAwesome
 import de.jrpie.android.launcher.list.intendedChoosePause
 import java.util.*
 import kotlin.collections.ArrayList
@@ -39,7 +38,7 @@ class AppsRecyclerAdapter(val activity: Activity,
         View.OnClickListener {
         var textView: TextView = itemView.findViewById(R.id.list_apps_row_name)
         var img: ImageView = itemView.findViewById(R.id.list_apps_row_icon) as ImageView
-        var menuDots: FontAwesome = itemView.findViewById(R.id.list_apps_row_menu)
+        var menuDots: ImageView = itemView.findViewById(R.id.list_apps_row_menu)
 
         override fun onClick(v: View) {
             val pos = adapterPosition
