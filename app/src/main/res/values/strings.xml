@@ -89,7 +89,6 @@
     <string-array name="settings_launcher_theme_spinner_items">
         <item>Default</item>
         <item>Dark</item>
-        <item>Wallpaper</item>
     </string-array>
 
     <string name="settings_launcher_choose_wallpaper">Choose a wallpaper</string>
@@ -128,7 +127,7 @@
     <string name="settings_meta_report_bug_link" translatable="false">https://github.com/jrpie/Launcher/issues/new</string>
 
     <string name="settings_meta_fork_contact">Contact the developer of the fork</string>
-    <string name="settings_meta_fork_contact_url">https://jrpie.de/contact/</string>
+    <string name="settings_meta_fork_contact_url" translatable="false">https://s.jrpie.de/contact/</string>
 
     <string name="settings_meta_contact">Contact the original developer</string>
     <string name="settings_meta_contact_url">https://www.finnmglas.com/contact/</string>

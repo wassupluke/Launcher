@@ -67,7 +67,6 @@
     <string-array name="settings_launcher_theme_spinner_items">
         <item>Défaut</item>
         <item>Noir</item>
-        <item>Image de fond</item>
     </string-array>
 
     <string name="settings_launcher_choose_wallpaper">Choisir un image</string>

@@ -60,8 +60,7 @@ class SettingsActivity: AppCompatActivity(), UIObject {
     }
 
     override fun applyTheme() {
-        settings_container.setBackgroundColor(dominantColor)
-        settings_appbar.setBackgroundColor(dominantColor)
+        // settings_appbar.setBackgroundColor(dominantColor)
 
         settings_system.setTextColor(vibrantColor)
         settings_close.setTextColor(vibrantColor)

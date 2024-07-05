@@ -22,7 +22,7 @@
   <string name="fas_forward" translatable="false">&#xf051;</string>
 
   <string name="fas_angle_double_left" translatable="false">&#xf100;</string>
-  <string name="fas_angle_double_right" translatable="false">&#xf101;</string>
+  <string name="fas_angle_double_right" translatable="false">">>"</string>
   <string name="fas_angle_double_up" translatable="false">&#xf102;</string>
   <string name="fas_angle_double_down" translatable="false">&#xf103;</string>
   <string name="fas_store" translatable="false">&#xf54e;</string>

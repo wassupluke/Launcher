@@ -46,7 +46,6 @@ class HomeActivity: UIObject, AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        this.setTheme(android.R.style.Theme_Wallpaper_NoTitleBar_Fullscreen)
         // Initialise globals
         launcherPreferences = this.getSharedPreferences(
             getString(R.string.preference_file_key), Context.MODE_PRIVATE)
@@ -209,25 +208,6 @@ class HomeActivity: UIObject, AppCompatActivity(),
         }
 
         return if (mDetector.onTouchEvent(event)) { false } else { super.onTouchEvent(event) }
-    }
-
-    override fun applyTheme() {
-
-        // home_container.setBackgroundColor(dominantColor)
-
-        /*if (launcherPreferences.getString(PREF_WALLPAPER, "") != "") {
-            try {
-                background = MediaStore.Images.Media.getBitmap(
-                    this.contentResolver, Uri.parse(
-                        launcherPreferences.getString(PREF_WALLPAPER, "")
-                    )
-                )
-            } catch (e: Exception) { }
-
-            // Background image was deleted or something unexpected happened
-            if (background == null) resetToDefaultTheme(this)
-
-        }*/
     }
 
     override fun setOnClicks() {

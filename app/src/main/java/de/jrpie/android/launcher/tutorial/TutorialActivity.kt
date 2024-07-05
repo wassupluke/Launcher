@@ -30,9 +30,8 @@ class TutorialActivity: AppCompatActivity(), UIObject {
         setContentView(R.layout.tutorial)
 
         // Check if the app was started before
-        if (launcherPreferences.getBoolean(PREF_STARTED, false))
-            tutorial_appbar.visibility = View.VISIBLE
-        else resetSettings(this)
+        if (!launcherPreferences.getBoolean(PREF_STARTED, false))
+            resetSettings(this)
 
         loadSettings()
 
@@ -47,16 +46,6 @@ class TutorialActivity: AppCompatActivity(), UIObject {
     override fun onStart() {
         super<AppCompatActivity>.onStart()
         super<UIObject>.onStart()
-    }
-
-    override fun applyTheme() {
-        tutorial_appbar.setBackgroundColor(dominantColor)
-        tutorial_container.setBackgroundColor(dominantColor)
-        tutorial_close.setTextColor(vibrantColor)
-    }
-
-    override fun setOnClicks() {
-        tutorial_close.setOnClickListener() { finish() }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

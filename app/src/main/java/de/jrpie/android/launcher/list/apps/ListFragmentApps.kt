@@ -33,9 +33,6 @@ class ListFragmentApps : Fragment(), UIObject {
     }
 
     override fun applyTheme() {
-        list_apps_container.setBackgroundColor(dominantColor)
-        list_apps_searchview.setBackgroundColor(dominantColor)
-        list_apps_searchbar.setBackgroundColor(dominantColor)
     }
 
     override fun setOnClicks() { }

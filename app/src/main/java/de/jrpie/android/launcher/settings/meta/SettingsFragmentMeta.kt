@@ -59,8 +59,6 @@ class SettingsFragmentMeta : Fragment(), UIObject {
     }
 
     override fun applyTheme() {
-        settings_meta_container.setBackgroundColor(dominantColor)
-
         setButtonColor(settings_meta_button_select_launcher, vibrantColor)
         setButtonColor(settings_meta_button_view_tutorial, vibrantColor)
         setButtonColor(settings_meta_button_reset_settings, vibrantColor)

@@ -8,6 +8,7 @@ import android.graphics.PorterDuff
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.TextUtils
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
@@ -44,71 +45,6 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
         super<UIObject>.onStart()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
-        when (requestCode) {
-            REQUEST_PERMISSION_STORAGE -> letUserPickImage()
-            REQUEST_PICK_IMAGE -> handlePickedImage(resultCode, data)
-            else -> super.onActivityResult(requestCode, resultCode, data)
-        }
-    }
-
-    private fun letUserPickImage(crop: Boolean = false) {
-        val intent = Intent()
-        intent.type = "image/*"
-        intent.action = Intent.ACTION_PICK // other option: Intent.ACTION_GET_CONTENT
-
-        if (crop) { // crop to for the target devices screen
-            intent.putExtra("crop", "true")
-            val displayMetrics = DisplayMetrics()
-            activity!!.windowManager.defaultDisplay.getMetrics(displayMetrics)
-            intent.putExtra("aspectX", displayMetrics.widthPixels)
-            intent.putExtra("aspectY", displayMetrics.heightPixels)
-        }
-        
-        intendedSettingsPause = true
-        startActivityForResult(intent, REQUEST_PICK_IMAGE)
-    }
-
-    private fun handlePickedImage(resultCode: Int, data: Intent?) {
-        if (resultCode == AppCompatActivity.RESULT_OK) {
-            if (data == null) return
-
-            val imageUri = data.data
-            background = MediaStore.Images.Media.getBitmap(context!!.contentResolver, imageUri)
-
-            Palette.Builder(background!!).generate {
-                it?.let { palette ->
-                    dominantColor = palette.getDominantColor(ContextCompat.getColor(context!!, R.color.darkTheme_accent_color))
-                    vibrantColor = palette.getVibrantColor(ContextCompat.getColor(context!!, R.color.darkTheme_accent_color))
-
-                    // never let dominantColor equal vibrantColor
-                    if(dominantColor == vibrantColor) {
-                        vibrantColor =
-                            manipulateColor(
-                                vibrantColor,
-                                1.2F
-                            )
-                        dominantColor =
-                            manipulateColor(
-                                dominantColor,
-                                0.8F
-                            )
-                    }
-
-                    /* Save image Uri as string */
-                    launcherPreferences.edit()
-                        .putString(PREF_WALLPAPER, imageUri.toString())
-                        .putInt(PREF_DOMINANT, dominantColor)
-                        .putInt(PREF_VIBRANT, vibrantColor)
-                        .apply()
-
-                    intendedSettingsPause = true
-                    activity!!.recreate()
-                }
-            }
-        }
-    }
 
     override fun applyTheme() {
 
@@ -118,14 +54,20 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
         setSwitchColor(settings_launcher_switch_auto_keyboard, vibrantColor)
         setSwitchColor(settings_launcher_switch_enable_double, vibrantColor)
 
-        settings_launcher_container.setBackgroundColor(dominantColor)
-        setButtonColor(settings_theme_custom_button_select, vibrantColor)
+        setButtonColor(settings_launcher_button_choose_wallpaper, vibrantColor)
         settings_seekbar_sensitivity.progressDrawable.setColorFilter(vibrantColor, PorterDuff.Mode.SRC_IN);
     }
 
     override fun setOnClicks() {
 
-        settings_theme_custom_button_select.setOnClickListener { resetToCustomTheme(activity!!) }
+        settings_launcher_button_choose_wallpaper.setOnClickListener {
+            // https://github.com/LineageOS/android_packages_apps_Trebuchet/blob/6caab89b21b2b91f0a439e1fd8c4510dcb255819/src/com/android/launcher3/views/OptionsPopupView.java#L271
+            val intent = Intent(Intent.ACTION_SET_WALLPAPER)
+                //.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                .putExtra("com.android.wallpaper.LAUNCH_SOURCE", "app_launched_launcher")
+                .putExtra("com.android.launcher3.WALLPAPER_FLAVOR", "focus_wallpaper")
+            startActivity(intent);
+        }
 
         settings_launcher_switch_screen_timeout.isChecked = launcherPreferences.getBoolean(PREF_SCREEN_TIMEOUT_DISABLED, false)
         settings_launcher_switch_screen_timeout.setOnCheckedChangeListener { _, isChecked ->  // Toggle screen timeout
@@ -185,27 +127,9 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
         intendedSettingsPause = true
         saveTheme("custom") // TODO: Fix the bug this creates (displays custom theme without chosen img)
 
-        // Request permission (on newer APIs)
-        if (Build.VERSION.SDK_INT >= 23) {
-            when {
-                ContextCompat.checkSelfPermission(context,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-                -> letUserPickImage(true)
-                shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                -> {}
-                else
-                -> requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                    REQUEST_PERMISSION_STORAGE
-                )
-            }
-        }
-        else letUserPickImage()
     }
 
     override fun adjustLayout() {
-        if (getSavedTheme(activity!!) == "custom") settings_theme_custom_button_select.text = getString(
-            R.string.settings_launcher_change_wallpaper
-        )
 
         // Load values into the date-format spinner
         val staticAdapter = ArrayAdapter.createFromResource(
@@ -238,7 +162,6 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
         val themeInt = when (getSavedTheme(activity!!)) {
             "finn" -> 0
             "dark" -> 1
-            "custom" -> 2
             else -> 0
         };
 
@@ -249,7 +172,6 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
                 when (position) {
                     0 -> if (getSavedTheme(activity!!) != "finn") resetToDefaultTheme(activity!!)
                     1 -> if (getSavedTheme(activity!!) != "dark") resetToDarkTheme(activity!!)
-                    2 -> if (getSavedTheme(activity!!) != "custom") resetToCustomTheme(activity!!)
                 }
             }
             override fun onNothingSelected(parent: AdapterView<*>?) { }

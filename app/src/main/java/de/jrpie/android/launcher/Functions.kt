@@ -67,7 +67,6 @@ val ACTIONS = listOf(
 
 const val PREF_DOMINANT = "custom_dominant"
 const val PREF_VIBRANT = "custom_vibrant"
-const val PREF_WALLPAPER = "background_uri"
 const val PREF_THEME = "theme"
 
 const val PREF_SCREEN_TIMEOUT_DISABLED = "disableTimeout"
@@ -362,7 +361,6 @@ fun resetToDefaultTheme(activity: Activity) {
     vibrantColor = activity.resources.getColor(R.color.finnmglasTheme_accent_color)
 
     launcherPreferences.edit()
-        .putString(PREF_WALLPAPER, "")
         .putInt(PREF_DOMINANT, dominantColor)
         .putInt(PREF_VIBRANT, vibrantColor)
         .apply()
@@ -379,7 +377,6 @@ fun resetToDarkTheme(activity: Activity) {
     vibrantColor = activity.resources.getColor(R.color.darkTheme_accent_color)
 
     launcherPreferences.edit()
-        .putString(PREF_WALLPAPER, "")
         .putInt(PREF_DOMINANT, dominantColor)
         .putInt(PREF_VIBRANT, vibrantColor)
         .apply()
@@ -466,7 +463,6 @@ fun resetSettings(context: Context) {
     vibrantColor = context.resources.getColor(R.color.finnmglasTheme_accent_color)
 
     editor
-        .putString(PREF_WALLPAPER, "")
         .putInt(PREF_DOMINANT, dominantColor)
         .putInt(PREF_VIBRANT, vibrantColor)
         .putString(PREF_THEME, "finn")

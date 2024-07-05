@@ -9,7 +9,6 @@
     android:id="@+id/settings_launcher_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorPrimary"
     android:gravity="center|top"
     android:orientation="vertical"
     android:paddingLeft="32sp"
@@ -49,7 +48,7 @@
             android:text="@string/settings_launcher_time_format"
             android:textSize="16sp" />
 
-        <Space
+        <android.widget.Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
@@ -76,7 +75,7 @@
             android:text="@string/settings_launcher_theme"
             android:textSize="16sp" />
 
-        <Space
+        <android.widget.Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
@@ -96,7 +95,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/settings_theme_custom_button_select"
+            android:id="@+id/settings_launcher_button_choose_wallpaper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/settings_launcher_choose_wallpaper"
@@ -136,7 +135,7 @@
             android:text="@string/settings_launcher_disable_timeout"
             android:textSize="16sp" />
 
-        <Space
+        <android.widget.Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
@@ -165,7 +164,7 @@
             android:text="@string/settings_launcher_full_screen"
             android:textSize="16sp" />
 
-        <Space
+        <android.widget.Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
@@ -236,7 +235,7 @@
             android:text="@string/settings_launcher_auto_launch"
             android:textSize="16sp" />
 
-        <Space
+        <android.widget.Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
@@ -265,7 +264,7 @@
             android:text="@string/settings_launcher_auto_keyboard"
             android:textSize="16sp" />
 
-        <Space
+        <android.widget.Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
@@ -294,7 +293,7 @@
             android:text="@string/settings_launcher_enable_double"
             android:textSize="16sp" />
 
-        <Space
+        <android.widget.Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />

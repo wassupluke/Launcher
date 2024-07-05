@@ -27,10 +27,6 @@ class ListFragmentOther : Fragment() {
     }
 
     override fun onStart() {
-        if (getSavedTheme(context!!) == "custom") {
-            list_other_container.setBackgroundColor(dominantColor)
-        }
-
         // set up the list / recycler
         val viewManager = LinearLayoutManager(context)
         val viewAdapter = de.jrpie.android.launcher.list.other.OtherRecyclerAdapter(activity!!)

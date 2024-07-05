@@ -91,7 +91,6 @@
     <string-array name="settings_launcher_theme_spinner_items">
         <item>Normal</item>
         <item>Oscuro</item>
-        <item>Fondo de pantalla</item>
     </string-array>
 
     <string name="settings_launcher_choose_wallpaper">Seleccionar fondo de pantalla</string>

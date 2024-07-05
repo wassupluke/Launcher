@@ -11,6 +11,8 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/settings_appbar"
+        android:background="@null"
+        android:elevation="0dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
