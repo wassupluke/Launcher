@@ -75,7 +75,7 @@
 
     <!-- Double click - Notes -->
     <string-array name="default_double_click">
-        <iteam>it.niedermann.owncloud.notes</iteam>
+        <item>it.niedermann.owncloud.notes</item>
         <item>com.samsung.android.app.notes</item> <!-- Samsung Notes -->
         <item>com.sec.android.widgetapp.diotek.smemo</item> <!-- S Memo (older devices) -->
     </string-array>
