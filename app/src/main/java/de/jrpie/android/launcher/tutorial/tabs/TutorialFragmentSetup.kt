@@ -27,7 +27,4 @@ class TutorialFragmentSetup(): Fragment(), UIObject {
         super<UIObject>.onStart()
     }
 
-    override fun applyTheme() {
-        tutorial_setup_container.setBackgroundColor(dominantColor)
-    }
 }

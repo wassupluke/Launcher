@@ -1,19 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Base theme for Launcher
-
-     This does not define the actual style of launcher,
-     as the style / colors etc are dynamically generated.
-
-     This is more like a fallback- theme that may partially be used by older apis.
-
-     -->
     <style name="baseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/finnmglasTheme_background_color</item>
         <item name="colorPrimaryDark">@color/finnmglasTheme_background_color</item>
         <item name="android:colorBackground">@color/finnmglasTheme_background_color</item>
 
-        <item name="android:statusBarColor">@null</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
 
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowShowWallpaper">true</item>
@@ -35,20 +28,5 @@
 
         <item name="android:windowDisablePreview">true</item>
         <item name="android:windowAnimationStyle">@style/WindowFadeTransition</item>
-    </style>
-
-
-    <style name="PopupMenuCustom" parent="@android:style/Widget.PopupMenu">
-        <item name="android:popupBackground">#252827</item>
-    </style>
-
-    <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:textColor">#000000</item>
-    </style>
-
-    <!-- Set the fade in animation on all activities by default -->
-    <style name="WindowFadeTransition">
-        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
-        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
     </style>
 </resources>

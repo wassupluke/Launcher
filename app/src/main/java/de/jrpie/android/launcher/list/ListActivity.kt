@@ -76,8 +76,6 @@ class ListActivity : AppCompatActivity(), UIObject {
     }
 
     override fun applyTheme() {
-        list_container.setBackgroundColor(dominantColor)
-        list_appbar.setBackgroundColor(dominantColor)
         list_close.setTextColor(vibrantColor)
 
         list_tabs.setSelectedTabIndicatorColor(vibrantColor)

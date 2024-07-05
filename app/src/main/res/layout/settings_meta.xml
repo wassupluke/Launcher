@@ -6,7 +6,6 @@
     android:id="@+id/settings_meta_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorPrimary"
     android:gravity="center|top"
     android:orientation="vertical"
     android:paddingLeft="32sp"

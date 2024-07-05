@@ -67,7 +67,6 @@
     <string-array name="settings_launcher_theme_spinner_items">
         <item>Standard</item>
         <item>Dunkel</item>
-        <item>Hintergrund</item>
     </string-array>
 
     <string name="settings_launcher_choose_wallpaper">Hintergrund auswählen</string>
