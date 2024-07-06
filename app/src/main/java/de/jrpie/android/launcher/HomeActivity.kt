@@ -10,6 +10,7 @@ import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
 import de.jrpie.android.launcher.BuildConfig.VERSION_NAME
+import de.jrpie.android.launcher.list.other.LauncherAction
 import de.jrpie.android.launcher.tutorial.TutorialActivity
 import kotlinx.android.synthetic.main.home.*
 import java.text.SimpleDateFormat
@@ -129,8 +130,7 @@ class HomeActivity: UIObject, AppCompatActivity(),
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         when (keyCode) {
-            KeyEvent.KEYCODE_BACK -> {
-                launch("launcher:choose", this) }
+            KeyEvent.KEYCODE_BACK -> LauncherAction.CHOOSE.launch(this)
             KeyEvent.KEYCODE_VOLUME_UP -> launch(volumeUpApp, this,0, 0)
             KeyEvent.KEYCODE_VOLUME_DOWN -> launch(volumeDownApp, this,0, 0)
         }

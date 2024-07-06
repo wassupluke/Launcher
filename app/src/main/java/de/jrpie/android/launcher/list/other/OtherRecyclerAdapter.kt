@@ -2,7 +2,6 @@ package de.jrpie.android.launcher.list.other
 
 import android.app.Activity
 import android.content.Intent
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +22,7 @@ import de.jrpie.android.launcher.list.forApp
 class OtherRecyclerAdapter(val activity: Activity):
     RecyclerView.Adapter<OtherRecyclerAdapter.ViewHolder>() {
 
-    private val othersList: MutableList<OtherInfo> = ArrayList()
+    private val othersList: Array<LauncherAction> = LauncherAction.values();
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
@@ -35,14 +34,14 @@ class OtherRecyclerAdapter(val activity: Activity):
             val pos = adapterPosition
             val content = othersList[pos]
 
-            returnChoiceIntent(forApp, content.data.toString())
+            returnChoiceIntent(forApp, content.id)
         }
 
         init { itemView.setOnClickListener(this) }
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
-        val otherLabel = othersList[i].label.toString()
+        val otherLabel = activity.getString(othersList[i].label);
         val icon = othersList[i].icon
 
         viewHolder.textView.text = otherLabel
@@ -55,48 +54,6 @@ class OtherRecyclerAdapter(val activity: Activity):
         val inflater = LayoutInflater.from(parent.context)
         val view: View = inflater.inflate(R.layout.list_other_row, parent, false)
         return ViewHolder(view)
-    }
-
-    init {
-        othersList.add(
-            OtherInfo(activity.getString(R.string.list_other_settings),
-            "launcher:settings",
-                R.drawable.baseline_settings_24)
-        )
-        othersList.add(
-            OtherInfo(activity.getString(R.string.list_other_list),
-                "launcher:choose",
-                R.drawable.baseline_menu_24)
-        )
-        othersList.add(
-            OtherInfo(activity.getString(R.string.list_other_volume_up),
-                "launcher:volumeUp",
-                R.drawable.baseline_volume_up_24)
-        )
-        othersList.add(
-            OtherInfo(activity.getString(R.string.list_other_volume_down),
-                "launcher:volumeDown",
-                R.drawable.baseline_volume_down_24)
-        )
-        othersList.add(
-            OtherInfo(
-                activity.getString(R.string.list_other_track_next),
-                "launcher:nextTrack",
-                R.drawable.baseline_skip_next_24
-            )
-        )
-        othersList.add(
-            OtherInfo(
-                activity.getString(R.string.list_other_track_previous),
-                "launcher:previousTrack",
-                R.drawable.baseline_skip_previous_24
-            )
-        )
-        othersList.add(
-            OtherInfo(activity.getString(R.string.list_other_nop),
-                "launcher:nop",
-                R.drawable.baseline_not_interested_24)
-        )
     }
 
     private fun returnChoiceIntent(forApp: String, value: String) {

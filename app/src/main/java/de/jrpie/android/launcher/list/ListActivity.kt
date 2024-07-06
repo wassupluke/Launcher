@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
+import de.jrpie.android.launcher.list.other.LauncherAction
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_UNINSTALL
 import de.jrpie.android.launcher.UIObject
@@ -44,7 +45,8 @@ class ListActivity : AppCompatActivity(), UIObject {
         setContentView(R.layout.list)
 
         list_settings.setOnClickListener {
-            launch("launcher:settings", this, R.anim.bottom_up)
+            launch(LauncherAction.SETTINGS.id, this@ListActivity, R.anim.bottom_up)
+            LauncherAction.SETTINGS.launch(this@ListActivity);
         }
     }
 

@@ -15,6 +15,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import de.jrpie.android.launcher.list.other.LauncherAction
 import de.jrpie.android.launcher.settings.intendedSettingsPause
 import java.lang.Exception
 
@@ -91,26 +92,10 @@ class ActionsRecyclerAdapter(val activity: Activity):
             setButtonColor(viewHolder.chooseButton, vibrantColor)
         }
 
-        if (content.startsWith("launcher")) {
-
-            viewHolder.img.visibility = View.VISIBLE
+        if (LauncherAction.isOtherAction(content.toString())) {
             viewHolder.img.setOnClickListener{ chooseApp(actionName.toString()) }
-
-            when (content.split(":")[1]) {
-                "settings" ->
-                    viewHolder.img.setImageResource(R.drawable.baseline_settings_24)
-                "choose" ->
-                    viewHolder.img.setImageResource(R.drawable.baseline_menu_24)
-                "volumeUp" ->
-                    viewHolder.img.setImageResource(R.drawable.baseline_volume_up_24)
-                "volumeDown" ->
-                    viewHolder.img.setImageResource(R.drawable.baseline_volume_down_24)
-                "nextTrack" ->
-                    viewHolder.img.setImageResource(R.drawable.baseline_skip_next_24)
-                "previousTrack" ->
-                    viewHolder.img.setImageResource(R.drawable.baseline_skip_previous_24)
-                "nop" ->
-                    viewHolder.img.setImageResource(R.drawable.baseline_not_interested_24)
+            LauncherAction.byId(content.toString())?.let {
+                viewHolder.img.setImageResource(it.icon)
             }
         } else {
             // Set image icon (by packageName)

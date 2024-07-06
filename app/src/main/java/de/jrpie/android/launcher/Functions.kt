@@ -19,6 +19,7 @@ import android.os.Bundle
 import android.os.SystemClock
 import android.provider.Settings
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.Window
@@ -33,6 +34,7 @@ import android.widget.Toast
 import de.jrpie.android.launcher.list.ListActivity
 import de.jrpie.android.launcher.list.apps.AppInfo
 import de.jrpie.android.launcher.list.apps.AppsRecyclerAdapter
+import de.jrpie.android.launcher.list.other.LauncherAction
 import de.jrpie.android.launcher.settings.SettingsActivity
 import de.jrpie.android.launcher.settings.intendedSettingsPause
 import de.jrpie.android.launcher.tutorial.TutorialActivity
@@ -147,8 +149,7 @@ fun isInstalled(uri: String, context: Context): Boolean {
     try {
         context.packageManager.getPackageInfo(uri, PackageManager.GET_ACTIVITIES)
         return true
-    } catch (_: PackageManager.NameNotFoundException) {
-    }
+    } catch (_: PackageManager.NameNotFoundException) { }
     return false
 }
 
@@ -163,17 +164,9 @@ fun launch(
     animationIn: Int = android.R.anim.fade_in, animationOut: Int = android.R.anim.fade_out
 ) {
 
-    if (data.startsWith("launcher:")) // [type]:[info]
-        when(data.split(":")[1]) {
-            "settings" -> openSettings(activity)
-            "choose" -> openAppsList(activity)
-            "volumeUp" -> audioVolumeUp(activity)
-            "volumeDown" -> audioVolumeDown(activity)
-            "nextTrack" -> audioNextTrack(activity)
-            "previousTrack" -> audioPreviousTrack(activity)
-            "tutorial" -> openTutorial(activity)
-            "nop" -> {}
-        }
+    if (LauncherAction.isOtherAction(data)) { // [type]:[info]
+        LauncherAction.byId(data)?.let {it.launch(activity) }
+    }
     else launchApp(data, activity) // app
 
     activity.overridePendingTransition(animationIn, animationOut)
@@ -338,6 +331,7 @@ fun openAppsList(activity: Activity){
     val intent = Intent(activity, ListActivity::class.java)
     intent.putExtra("intention", "view")
     intendedSettingsPause = true
+    Log.i("de.jrpie", "openAppsList")
     activity.startActivity(intent)
 }
 
