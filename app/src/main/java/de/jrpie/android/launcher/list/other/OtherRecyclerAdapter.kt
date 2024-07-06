@@ -78,23 +78,25 @@ class OtherRecyclerAdapter(val activity: Activity):
                 "launcher:volumeDown",
                 R.drawable.baseline_volume_down_24)
         )
-
-        if (Build.VERSION.SDK_INT >= 19) { // requires Android KitKat +
-            othersList.add(
-                OtherInfo(
-                    activity.getString(R.string.list_other_track_next),
-                    "launcher:nextTrack",
-                    R.drawable.baseline_skip_next_24
-                )
+        othersList.add(
+            OtherInfo(
+                activity.getString(R.string.list_other_track_next),
+                "launcher:nextTrack",
+                R.drawable.baseline_skip_next_24
             )
-            othersList.add(
-                OtherInfo(
-                    activity.getString(R.string.list_other_track_previous),
-                    "launcher:previousTrack",
-                    R.drawable.baseline_skip_previous_24
-                )
+        )
+        othersList.add(
+            OtherInfo(
+                activity.getString(R.string.list_other_track_previous),
+                "launcher:previousTrack",
+                R.drawable.baseline_skip_previous_24
             )
-        }
+        )
+        othersList.add(
+            OtherInfo(activity.getString(R.string.list_other_nop),
+                "launcher:nop",
+                R.drawable.baseline_not_interested_24)
+        )
     }
 
     private fun returnChoiceIntent(forApp: String, value: String) {

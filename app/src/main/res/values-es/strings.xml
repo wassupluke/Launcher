@@ -156,6 +156,7 @@
     <string name="list_other_volume_down">Música: Bajar</string>
     <string name="list_other_track_next">Música: Siguiente</string>
     <string name="list_other_track_previous">Música: Anterior</string>
+    <string name="list_other_nop">Nada</string>
 
     <!--
       -

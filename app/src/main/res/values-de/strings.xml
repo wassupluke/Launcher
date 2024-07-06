@@ -133,6 +133,7 @@
     <string name="list_other_volume_down">Musik: Leiser</string>
     <string name="list_other_track_next">Musik: Weiter</string>
     <string name="list_other_track_previous">Musik: Zurück</string>
+    <string name="list_other_nop">Nichts tun</string>
 
     <!--
       -

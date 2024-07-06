@@ -59,7 +59,6 @@ class ActionsRecyclerAdapter(val activity: Activity):
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
         var textView: TextView = itemView.findViewById(R.id.settings_actions_row_name)
-        var actionIcon: ImageView = itemView.findViewById(R.id.settings_actions_row_icon)
         var img: ImageView = itemView.findViewById(R.id.settings_actions_row_icon_img)
         var chooseButton: Button = itemView.findViewById(R.id.settings_actions_row_button_choose)
         var removeAction: ImageView = itemView.findViewById(R.id.settings_actions_row_remove)
@@ -84,7 +83,6 @@ class ActionsRecyclerAdapter(val activity: Activity):
 
             loadSettings() // apply new settings to the app
 
-            viewHolder.actionIcon.visibility = View.INVISIBLE
             viewHolder.img.visibility = View.INVISIBLE
             viewHolder.removeAction.visibility = View.GONE
             viewHolder.chooseButton.visibility = View.VISIBLE
@@ -94,23 +92,25 @@ class ActionsRecyclerAdapter(val activity: Activity):
         }
 
         if (content.startsWith("launcher")) {
-            // Set fontAwesome icon
-            viewHolder.actionIcon.visibility = View.VISIBLE
-            viewHolder.actionIcon.setOnClickListener{ chooseApp(actionName.toString()) }
+
+            viewHolder.img.visibility = View.VISIBLE
+            viewHolder.img.setOnClickListener{ chooseApp(actionName.toString()) }
 
             when (content.split(":")[1]) {
                 "settings" ->
-                    viewHolder.actionIcon.setImageResource(R.drawable.baseline_settings_24)
+                    viewHolder.img.setImageResource(R.drawable.baseline_settings_24)
                 "choose" ->
-                    viewHolder.actionIcon.setImageResource(R.drawable.baseline_menu_24)
+                    viewHolder.img.setImageResource(R.drawable.baseline_menu_24)
                 "volumeUp" ->
-                    viewHolder.actionIcon.setImageResource(R.drawable.baseline_volume_up_24)
+                    viewHolder.img.setImageResource(R.drawable.baseline_volume_up_24)
                 "volumeDown" ->
-                    viewHolder.actionIcon.setImageResource(R.drawable.baseline_volume_down_24)
+                    viewHolder.img.setImageResource(R.drawable.baseline_volume_down_24)
                 "nextTrack" ->
-                    viewHolder.actionIcon.setImageResource(R.drawable.baseline_skip_next_24)
+                    viewHolder.img.setImageResource(R.drawable.baseline_skip_next_24)
                 "previousTrack" ->
-                    viewHolder.actionIcon.setImageResource(R.drawable.baseline_skip_previous_24)
+                    viewHolder.img.setImageResource(R.drawable.baseline_skip_previous_24)
+                "nop" ->
+                    viewHolder.img.setImageResource(R.drawable.baseline_not_interested_24)
             }
         } else {
             // Set image icon (by packageName)

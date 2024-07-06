@@ -135,6 +135,7 @@
     <string name="list_other_volume_down">Musique: plus calme</string>
     <string name="list_other_track_next">Musique: suivant</string>
     <string name="list_other_track_previous">Musique: dernier</string>
+    <string name="list_other_nop">Rien</string>
 
     <!--
       -

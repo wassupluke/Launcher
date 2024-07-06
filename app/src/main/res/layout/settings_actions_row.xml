@@ -33,18 +33,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/settings_actions_row_icon"
-        android:layout_width="@dimen/app_icon_side"
-        android:layout_height="@dimen/app_icon_side"
-        android:gravity="center"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/settings_actions_row_button_choose"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintStart_toStartOf="@+id/settings_actions_row_button_choose"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
         android:id="@+id/settings_actions_row_icon_img"
         android:layout_width="@dimen/app_icon_side"
         android:layout_height="@dimen/app_icon_side"

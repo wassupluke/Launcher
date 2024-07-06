@@ -117,10 +117,8 @@ var vibrantColor = 0
 
 /* REQUEST CODES */
 
-const val REQUEST_PICK_IMAGE = 1
-const val REQUEST_CHOOSE_APP = 2
-const val REQUEST_UNINSTALL = 3
-const val REQUEST_PERMISSION_STORAGE = 4
+const val REQUEST_CHOOSE_APP = 1
+const val REQUEST_UNINSTALL = 2
 
 /* Animate */
 
@@ -174,6 +172,7 @@ fun launch(
             "nextTrack" -> audioNextTrack(activity)
             "previousTrack" -> audioPreviousTrack(activity)
             "tutorial" -> openTutorial(activity)
+            "nop" -> {}
         }
     else launchApp(data, activity) // app
 
