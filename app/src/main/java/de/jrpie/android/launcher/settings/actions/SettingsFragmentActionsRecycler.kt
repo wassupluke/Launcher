@@ -60,7 +60,7 @@ class ActionsRecyclerAdapter(val activity: Activity):
         View.OnClickListener {
         var textView: TextView = itemView.findViewById(R.id.settings_actions_row_name)
         var actionIcon: ImageView = itemView.findViewById(R.id.settings_actions_row_icon)
-        var img: ImageView = itemView.findViewById(R.id.settings_actions_row_icon_img) as ImageView
+        var img: ImageView = itemView.findViewById(R.id.settings_actions_row_icon_img)
         var chooseButton: Button = itemView.findViewById(R.id.settings_actions_row_button_choose)
         var removeAction: ImageView = itemView.findViewById(R.id.settings_actions_row_remove)
 
@@ -93,7 +93,7 @@ class ActionsRecyclerAdapter(val activity: Activity):
             setButtonColor(viewHolder.chooseButton, vibrantColor)
         }
 
-        if (content!!.startsWith("launcher")) {
+        if (content.startsWith("launcher")) {
             // Set fontAwesome icon
             viewHolder.actionIcon.visibility = View.VISIBLE
             viewHolder.actionIcon.setOnClickListener{ chooseApp(actionName.toString()) }
@@ -118,7 +118,7 @@ class ActionsRecyclerAdapter(val activity: Activity):
                 viewHolder.img.setImageDrawable(activity.packageManager.getApplicationIcon(content.toString()))
                 viewHolder.img.setOnClickListener{ chooseApp(actionName.toString()) }
 
-                if (getSavedTheme(activity) == "dark") transformGrayscale(
+                if (getSavedTheme() == "dark") transformGrayscale(
                     viewHolder.img
                 )
 

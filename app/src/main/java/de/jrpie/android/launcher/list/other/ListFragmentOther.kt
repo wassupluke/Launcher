@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import de.jrpie.android.launcher.R
-import de.jrpie.android.launcher.dominantColor
-import de.jrpie.android.launcher.getSavedTheme
 import kotlinx.android.synthetic.main.list_other.*
 
 /**
@@ -29,7 +27,7 @@ class ListFragmentOther : Fragment() {
     override fun onStart() {
         // set up the list / recycler
         val viewManager = LinearLayoutManager(context)
-        val viewAdapter = de.jrpie.android.launcher.list.other.OtherRecyclerAdapter(activity!!)
+        val viewAdapter = OtherRecyclerAdapter(activity!!)
 
         list_other_rview.apply {
             // improve performance (since content changes don't change the layout size)

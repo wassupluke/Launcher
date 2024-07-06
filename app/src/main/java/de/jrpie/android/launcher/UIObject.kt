@@ -1,7 +1,6 @@
 package de.jrpie.android.launcher
 
 import android.app.Activity
-import android.view.WindowManager
 
 /**
  * An interface implemented by every [Activity], Fragment etc. in Launcher.

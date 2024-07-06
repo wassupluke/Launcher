@@ -158,4 +158,7 @@
     <string name="tutorial_finish_text">Du bist bereit loszulegen!\n\nIch hoffe diese App ist sehr wertvoll für dich!\n\n- Finn (der Entwickler)</string>
     <string name="tutorial_finish_button">Starten</string>
 
+    <string name="settings">Einstellungen</string>
+    <string name="ic_menu_alt">Mehr Optionen</string>
+
 </resources>

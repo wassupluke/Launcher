@@ -23,7 +23,7 @@ import de.jrpie.android.launcher.list.forApp
 class OtherRecyclerAdapter(val activity: Activity):
     RecyclerView.Adapter<OtherRecyclerAdapter.ViewHolder>() {
 
-    private val othersList: MutableList<OtherInfo>
+    private val othersList: MutableList<OtherInfo> = ArrayList()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
@@ -58,7 +58,6 @@ class OtherRecyclerAdapter(val activity: Activity):
     }
 
     init {
-        othersList = ArrayList()
         othersList.add(
             OtherInfo(activity.getString(R.string.list_other_settings),
             "launcher:settings",
@@ -98,7 +97,7 @@ class OtherRecyclerAdapter(val activity: Activity):
         }
     }
 
-    private fun returnChoiceIntent(forAction: String, value: String) {
+    private fun returnChoiceIntent(forApp: String, value: String) {
         val returnIntent = Intent()
         returnIntent.putExtra("value", value)
         returnIntent.putExtra("forApp", forApp)

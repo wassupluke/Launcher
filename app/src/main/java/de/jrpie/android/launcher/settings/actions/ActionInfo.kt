@@ -7,8 +7,5 @@ package de.jrpie.android.launcher.settings.actions
  *
  * @param data - a string identifying the app / action / intent to be launched
  */
-class ActionInfo(actionText: CharSequence, actionName: CharSequence, data: CharSequence) {
-    val actionName: CharSequence? = actionName
-    val actionText: CharSequence? = actionText
-    val data: CharSequence? = data
+class ActionInfo(val actionText: CharSequence, val actionName: CharSequence, val data: CharSequence) {
 }

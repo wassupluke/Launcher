@@ -1,24 +1,26 @@
 package de.jrpie.android.launcher.list
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager.widget.ViewPager
-import de.jrpie.android.launcher.*
-import de.jrpie.android.launcher.settings.intendedSettingsPause
-import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.list.*
-import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayout
+import de.jrpie.android.launcher.R
+import de.jrpie.android.launcher.REQUEST_UNINSTALL
+import de.jrpie.android.launcher.UIObject
+import de.jrpie.android.launcher.launch
 import de.jrpie.android.launcher.list.apps.ListFragmentApps
 import de.jrpie.android.launcher.list.other.ListFragmentOther
-import kotlinx.android.synthetic.main.home.*
-import kotlinx.android.synthetic.main.list_apps.*
+import de.jrpie.android.launcher.settings.intendedSettingsPause
+import de.jrpie.android.launcher.vibrantColor
+import kotlinx.android.synthetic.main.list.*
 
 var intendedChoosePause = false // know when to close
 
@@ -41,7 +43,7 @@ class ListActivity : AppCompatActivity(), UIObject {
         // Initialise layout
         setContentView(R.layout.list)
 
-        list_settings.setOnClickListener() {
+        list_settings.setOnClickListener {
             launch("launcher:settings", this, R.anim.bottom_up)
         }
     }
@@ -82,7 +84,7 @@ class ListActivity : AppCompatActivity(), UIObject {
     }
 
     override fun setOnClicks() {
-        list_close.setOnClickListener() { finish() }
+        list_close.setOnClickListener { finish() }
     }
 
     override fun adjustLayout() {
@@ -127,12 +129,12 @@ class ListSectionsPagerAdapter(private val context: Context, fm: FragmentManager
     override fun getItem(position: Int): Fragment {
         return when (position){
             0 -> ListFragmentApps()
-            1 -> de.jrpie.android.launcher.list.other.ListFragmentOther()
+            1 -> ListFragmentOther()
             else -> Fragment()
         }
     }
 
-    override fun getPageTitle(position: Int): CharSequence? {
+    override fun getPageTitle(position: Int): CharSequence {
         return context.resources.getString(TAB_TITLES[position])
     }
 

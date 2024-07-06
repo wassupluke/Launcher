@@ -1,10 +1,10 @@
 package de.jrpie.android.launcher.tutorial.tabs
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import de.jrpie.android.launcher.*
 import kotlinx.android.synthetic.main.tutorial_usage.*
 
@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.tutorial_usage.*
  *
  * Tells the user how his screen will look and how the app can be used
  */
-class TutorialFragmentUsage(): Fragment(), UIObject {
+class TutorialFragmentUsage : Fragment(), UIObject {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

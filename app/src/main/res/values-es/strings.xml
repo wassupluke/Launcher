@@ -181,4 +181,8 @@
     <string name="tutorial_finish_text">Estás listo para iniciar!\n\n Esperamos que esto te sea de gran ayuda!\n\n- Finn M Glas\n(el desarrollador)</string>
     <string name="tutorial_finish_button">Iniciar</string>
 
+
+    <string name="settings">Configuración</string>
+    <string name="ic_menu_alt">Más opciones</string>
+
 </resources>

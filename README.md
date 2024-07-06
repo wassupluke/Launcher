@@ -1,7 +1,6 @@
 <!-- Shields from shields.io -->
 <!--[![][shield-release]][latest-release] -->
 [![][shield-license]][license]
-[![][shield-contribute]][issues]
 
 <!-- ENGLISH README -->
 

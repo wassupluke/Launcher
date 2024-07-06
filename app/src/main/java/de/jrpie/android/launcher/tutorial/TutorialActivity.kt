@@ -1,18 +1,26 @@
 package de.jrpie.android.launcher.tutorial
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
-import de.jrpie.android.launcher.*
-import de.jrpie.android.launcher.tutorial.tabs.*
 import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.tutorial.*
+import de.jrpie.android.launcher.PREF_STARTED
+import de.jrpie.android.launcher.R
+import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
+import de.jrpie.android.launcher.UIObject
+import de.jrpie.android.launcher.launcherPreferences
+import de.jrpie.android.launcher.loadSettings
+import de.jrpie.android.launcher.resetSettings
+import de.jrpie.android.launcher.saveListActivityChoice
+import de.jrpie.android.launcher.tutorial.tabs.TutorialFragmentConcept
+import de.jrpie.android.launcher.tutorial.tabs.TutorialFragmentFinish
+import de.jrpie.android.launcher.tutorial.tabs.TutorialFragmentSetup
+import de.jrpie.android.launcher.tutorial.tabs.TutorialFragmentStart
+import de.jrpie.android.launcher.tutorial.tabs.TutorialFragmentUsage
 
 /**
  * The [TutorialActivity] is displayed automatically on new installations.
@@ -36,7 +44,7 @@ class TutorialActivity: AppCompatActivity(), UIObject {
         loadSettings()
 
         // set up tabs and swiping in settings
-        val sectionsPagerAdapter = TutorialSectionsPagerAdapter(this, supportFragmentManager)
+        val sectionsPagerAdapter = TutorialSectionsPagerAdapter(supportFragmentManager)
         val viewPager: ViewPager = findViewById(R.id.tutorial_viewpager)
         viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout = findViewById(R.id.tutorial_tabs)
@@ -69,7 +77,7 @@ class TutorialActivity: AppCompatActivity(), UIObject {
  *
  * Tabs: (Start | Concept | Usage | Setup | Finish)
  */
-class TutorialSectionsPagerAdapter(private val context: Context, fm: FragmentManager)
+class TutorialSectionsPagerAdapter(fm: FragmentManager)
     : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     override fun getItem(position: Int): Fragment {
@@ -84,6 +92,6 @@ class TutorialSectionsPagerAdapter(private val context: Context, fm: FragmentMan
     }
 
     /* We don't use titles here, as we have the dots */
-    override fun getPageTitle(position: Int): CharSequence? { return "" }
+    override fun getPageTitle(position: Int): CharSequence { return "" }
     override fun getCount(): Int { return 5 }
 }

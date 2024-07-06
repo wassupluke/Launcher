@@ -3,11 +3,15 @@ package de.jrpie.android.launcher
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.graphics.*
+import android.graphics.BlendMode
+import android.graphics.BlendModeColorFilter
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.media.AudioManager
 import android.net.Uri
 import android.os.Build
@@ -19,7 +23,8 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
-import android.view.animation.*
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.ImageView
@@ -31,7 +36,6 @@ import de.jrpie.android.launcher.list.apps.AppsRecyclerAdapter
 import de.jrpie.android.launcher.settings.SettingsActivity
 import de.jrpie.android.launcher.settings.intendedSettingsPause
 import de.jrpie.android.launcher.tutorial.TutorialActivity
-import kotlin.math.roundToInt
 
 
 /* Preferences (global, initialised when app is started) */
@@ -103,10 +107,10 @@ var volumeDownApp = ""
 var doubleClickApp = ""
 var longClickApp = ""
 
+
 var timeApp = ""
 var dateApp = ""
 
-var background : Bitmap? = null
 
 var dominantColor = 0
 var vibrantColor = 0
@@ -137,62 +141,6 @@ fun View.blink(
     })
 }
 
-fun View.fadeIn(duration: Long = 300L) {
-    startAnimation(AlphaAnimation(0f, 1f).also {
-        it.interpolator = DecelerateInterpolator()
-        it.duration = duration
-    })
-}
-
-fun View.fadeOut(duration: Long = 300L) {
-    startAnimation(AlphaAnimation(1f, 0f).also {
-        it.interpolator = DecelerateInterpolator()
-        it.duration = duration
-    })
-}
-
-fun View.fadeRotateIn(duration: Long = 500L) {
-    val combined = AnimationSet(false)
-    combined.addAnimation(
-        AlphaAnimation(0f, 1F).also {
-            it.interpolator = DecelerateInterpolator()
-            it.duration = duration
-        }
-    )
-    combined.addAnimation(
-        RotateAnimation(
-            0F, 180F, Animation.RELATIVE_TO_SELF,
-            0.5f, Animation.RELATIVE_TO_SELF, 0.5f
-        ).also {
-            it.duration = duration * 2
-            it.interpolator = DecelerateInterpolator()
-        }
-    )
-
-    startAnimation(combined)
-}
-
-fun View.fadeRotateOut(duration: Long = 500L) {
-    val combined = AnimationSet(false)
-    combined.addAnimation(
-        AlphaAnimation(1F, 0F).also {
-            it.interpolator = AccelerateInterpolator()
-            it.duration = duration
-        }
-    )
-    combined.addAnimation(
-        RotateAnimation(
-            0F, 180F, Animation.RELATIVE_TO_SELF,
-            0.5f, Animation.RELATIVE_TO_SELF, 0.5f
-        ).also {
-            it.duration = duration
-            it.interpolator = AccelerateInterpolator()
-        }
-    )
-
-    startAnimation(combined)
-}
-
 /* Activity related */
 
 fun isInstalled(uri: String, context: Context): Boolean {
@@ -201,7 +149,7 @@ fun isInstalled(uri: String, context: Context): Boolean {
     try {
         context.packageManager.getPackageInfo(uri, PackageManager.GET_ACTIVITIES)
         return true
-    } catch (e: PackageManager.NameNotFoundException) {
+    } catch (_: PackageManager.NameNotFoundException) {
     }
     return false
 }
@@ -210,17 +158,6 @@ private fun getIntent(packageName: String, context: Context): Intent? {
     val intent: Intent? = context.packageManager.getLaunchIntentForPackage(packageName)
     intent?.addCategory(Intent.CATEGORY_LAUNCHER)
     return intent
-}
-
-fun canReachSettings(): Boolean {
-    var availableActions = ACTIONS;
-    if(!launcherPreferences.getBoolean(PREF_DOUBLE_ACTIONS_ENABLED, false)){
-        availableActions = listOf(
-           ACTION_UP, ACTION_DOWN, ACTION_RIGHT, ACTION_LEFT, ACTION_VOL_UP,
-            ACTION_VOL_DOWN, ACTION_DOUBLE_CLICK, ACTION_LONG_CLICK, ACTION_DATE, ACTION_TIME
-        )
-    }
-    return availableActions.contains("launcher:settings") || availableActions.contains("launcher:choose")
 }
 
 fun launch(
@@ -246,33 +183,29 @@ fun launch(
 /* Media player actions */
 
 fun audioNextTrack(activity: Activity) {
-    if (Build.VERSION.SDK_INT >= 19) { // requires Android KitKat +
-        val mAudioManager = activity.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
-        val eventTime: Long = SystemClock.uptimeMillis()
+    val mAudioManager = activity.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
-        val downEvent =
-            KeyEvent(eventTime, eventTime, KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_NEXT, 0)
-        mAudioManager.dispatchMediaKeyEvent(downEvent)
+    val eventTime: Long = SystemClock.uptimeMillis()
 
-        val upEvent = KeyEvent(eventTime, eventTime, KeyEvent.ACTION_UP, KeyEvent.KEYCODE_MEDIA_NEXT, 0)
-        mAudioManager.dispatchMediaKeyEvent(upEvent)
-    }
+    val downEvent = KeyEvent(eventTime, eventTime, KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_NEXT, 0)
+    mAudioManager.dispatchMediaKeyEvent(downEvent)
+
+    val upEvent = KeyEvent(eventTime, eventTime, KeyEvent.ACTION_UP, KeyEvent.KEYCODE_MEDIA_NEXT, 0)
+    mAudioManager.dispatchMediaKeyEvent(upEvent)
 }
 
 fun audioPreviousTrack(activity: Activity) {
-    if (Build.VERSION.SDK_INT >= 19) { // requires Android KitKat +
-        val mAudioManager = activity.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+    val mAudioManager = activity.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
-        val eventTime: Long = SystemClock.uptimeMillis()
+    val eventTime: Long = SystemClock.uptimeMillis()
 
-        val downEvent =
-            KeyEvent(eventTime, eventTime, KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PREVIOUS, 0)
-        mAudioManager.dispatchMediaKeyEvent(downEvent)
+    val downEvent =
+        KeyEvent(eventTime, eventTime, KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PREVIOUS, 0)
+    mAudioManager.dispatchMediaKeyEvent(downEvent)
 
-        val upEvent = KeyEvent(eventTime, eventTime, KeyEvent.ACTION_UP, KeyEvent.KEYCODE_MEDIA_PREVIOUS, 0)
-        mAudioManager.dispatchMediaKeyEvent(upEvent)
-    }
+    val upEvent = KeyEvent(eventTime, eventTime, KeyEvent.ACTION_UP, KeyEvent.KEYCODE_MEDIA_PREVIOUS, 0)
+    mAudioManager.dispatchMediaKeyEvent(upEvent)
 }
 
 fun audioVolumeUp(activity: Activity) {
@@ -313,14 +246,14 @@ fun launchApp(packageName: String, context: Context) {
             )
                 .setTitle(context.getString(R.string.alert_cant_open_title))
                 .setMessage(context.getString(R.string.alert_cant_open_message))
-                .setPositiveButton(android.R.string.yes,
-                    DialogInterface.OnClickListener { dialog, which ->
-                        openAppSettings(
-                            packageName,
-                            context
-                        )
-                    })
-                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.ok
+                ) { _, _ ->
+                    openAppSettings(
+                        packageName,
+                        context
+                    )
+                }
+                .setNegativeButton(android.R.string.cancel, null)
                 .setIcon(android.R.drawable.ic_dialog_info)
                 .show()
         } else {
@@ -344,7 +277,7 @@ fun openNewTabWindow(urls: String, context: Context) {
 
 /* Settings related functions */
 
-fun getSavedTheme(context: Context) : String {
+fun getSavedTheme() : String {
     return launcherPreferences.getString(PREF_THEME, "finn").toString()
 }
 
@@ -567,20 +500,6 @@ fun setSwitchColor(sw: Switch, trackColor: Int) {
     else {
         sw.trackDrawable.colorFilter = PorterDuffColorFilter(trackColor, PorterDuff.Mode.SRC_ATOP)
     }
-}
-
-// Taken from: https://stackoverflow.com/a/33072575/12787264
-fun manipulateColor(color: Int, factor: Float): Int {
-    val a = Color.alpha(color)
-    val r = (Color.red(color) * factor).roundToInt()
-    val g = (Color.green(color) * factor).roundToInt()
-    val b = (Color.blue(color) * factor).roundToInt()
-    return Color.argb(
-        a,
-        r.coerceAtMost(255),
-        g.coerceAtMost(255),
-        b.coerceAtMost(255)
-    )
 }
 
 // Taken from: https://stackoverflow.com/a/30340794/12787264

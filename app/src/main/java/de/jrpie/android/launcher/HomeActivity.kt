@@ -2,20 +2,20 @@ package de.jrpie.android.launcher
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
-import android.provider.MediaStore
-import android.view.*
+import android.view.GestureDetector
+import android.view.KeyEvent
+import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
+import de.jrpie.android.launcher.BuildConfig.VERSION_NAME
 import de.jrpie.android.launcher.tutorial.TutorialActivity
 import kotlinx.android.synthetic.main.home.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.concurrent.fixedRateTimer
 import kotlin.math.abs
-import de.jrpie.android.launcher.BuildConfig.VERSION_NAME
 
 /**
  * [HomeActivity] is the actual application Launcher,
@@ -39,9 +39,6 @@ class HomeActivity: UIObject, AppCompatActivity(),
 
     // timers
     private var clockTimer = Timer()
-    private var tooltipTimer = Timer()
-
-    private var settingsIconShown = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,7 +66,7 @@ class HomeActivity: UIObject, AppCompatActivity(),
                  * were not stored anywhere. Now they have to be stored:
                  * -> we just reset them using newly implemented functions
                  */
-                when (getSavedTheme(this)) {
+                when (getSavedTheme()) {
                     "finn" -> resetToDefaultTheme(this)
                     "dark" -> resetToDarkTheme(this)
                 }
@@ -131,12 +128,12 @@ class HomeActivity: UIObject, AppCompatActivity(),
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            launch("launcher:choose", this) }
-        else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP)
-            launch(volumeUpApp, this,0, 0)
-        else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN)
-            launch(volumeDownApp, this,0, 0)
+        when (keyCode) {
+            KeyEvent.KEYCODE_BACK -> {
+                launch("launcher:choose", this) }
+            KeyEvent.KEYCODE_VOLUME_UP -> launch(volumeUpApp, this,0, 0)
+            KeyEvent.KEYCODE_VOLUME_DOWN -> launch(volumeDownApp, this,0, 0)
+        }
         return true
     }
 
@@ -212,14 +209,14 @@ class HomeActivity: UIObject, AppCompatActivity(),
 
     override fun setOnClicks() {
 
-        home_upper_view.setOnClickListener() {
+        home_upper_view.setOnClickListener {
             when (launcherPreferences.getInt(PREF_DATE_FORMAT, 0)) {
                 0 -> launch(dateApp, this)
                 else -> launch(timeApp,this)
             }
         }
 
-        home_lower_view.setOnClickListener() {
+        home_lower_view.setOnClickListener {
             when (launcherPreferences.getInt(PREF_DATE_FORMAT, 0)) {
                 0 -> launch(timeApp, this)
                 else -> launch(dateApp,this)

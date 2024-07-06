@@ -1,20 +1,22 @@
 package de.jrpie.android.launcher.settings.meta
 
 import android.app.AlertDialog
-import android.content.ActivityNotFoundException
-import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import de.jrpie.android.launcher.*
-import de.jrpie.android.launcher.tutorial.TutorialActivity
+import androidx.fragment.app.Fragment
+import de.jrpie.android.launcher.R
+import de.jrpie.android.launcher.UIObject
+import de.jrpie.android.launcher.openNewTabWindow
+import de.jrpie.android.launcher.resetSettings
+import de.jrpie.android.launcher.setButtonColor
 import de.jrpie.android.launcher.settings.intendedSettingsPause
+import de.jrpie.android.launcher.tutorial.TutorialActivity
+import de.jrpie.android.launcher.vibrantColor
 import kotlinx.android.synthetic.main.settings_meta.*
 
 /**

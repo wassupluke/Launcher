@@ -160,4 +160,8 @@
     <string name="tutorial_finish_text">Vous êtes prêt à commencer!\n\nJ\'espère que cette application vous sera très précieuse!\n\n- Finn M Glas\n(le développeur)</string>
     <string name="tutorial_finish_button">Ouvrir</string>
 
+
+    <string name="settings">Réglages</string>
+    <string name="ic_menu_alt">Plus d\'options</string>
+
 </resources>

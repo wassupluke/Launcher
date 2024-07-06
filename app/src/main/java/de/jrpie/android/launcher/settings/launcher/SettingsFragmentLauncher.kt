@@ -1,28 +1,33 @@
 package de.jrpie.android.launcher.settings.launcher
 
-import android.Manifest
-import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.PorterDuff
-import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
-import android.text.TextUtils
-import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.SeekBar
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.palette.graphics.Palette
-import de.jrpie.android.launcher.*
+import de.jrpie.android.launcher.PREF_DATE_FORMAT
+import de.jrpie.android.launcher.PREF_DOUBLE_ACTIONS_ENABLED
+import de.jrpie.android.launcher.PREF_SCREEN_FULLSCREEN
+import de.jrpie.android.launcher.PREF_SCREEN_TIMEOUT_DISABLED
+import de.jrpie.android.launcher.PREF_SEARCH_AUTO_KEYBOARD
+import de.jrpie.android.launcher.PREF_SEARCH_AUTO_LAUNCH
+import de.jrpie.android.launcher.PREF_SLIDE_SENSITIVITY
+import de.jrpie.android.launcher.R
+import de.jrpie.android.launcher.UIObject
+import de.jrpie.android.launcher.getSavedTheme
+import de.jrpie.android.launcher.launcherPreferences
+import de.jrpie.android.launcher.resetToDarkTheme
+import de.jrpie.android.launcher.resetToDefaultTheme
+import de.jrpie.android.launcher.setButtonColor
+import de.jrpie.android.launcher.setSwitchColor
+import de.jrpie.android.launcher.setWindowFlags
 import de.jrpie.android.launcher.settings.intendedSettingsPause
+import de.jrpie.android.launcher.vibrantColor
 import kotlinx.android.synthetic.main.settings_launcher.*
 
 
@@ -55,7 +60,7 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
         setSwitchColor(settings_launcher_switch_enable_double, vibrantColor)
 
         setButtonColor(settings_launcher_button_choose_wallpaper, vibrantColor)
-        settings_seekbar_sensitivity.progressDrawable.setColorFilter(vibrantColor, PorterDuff.Mode.SRC_IN);
+        settings_seekbar_sensitivity.progressDrawable.setColorFilter(vibrantColor, PorterDuff.Mode.SRC_IN)
     }
 
     override fun setOnClicks() {
@@ -66,7 +71,7 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
                 //.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 .putExtra("com.android.wallpaper.LAUNCH_SOURCE", "app_launched_launcher")
                 .putExtra("com.android.launcher3.WALLPAPER_FLAVOR", "focus_wallpaper")
-            startActivity(intent);
+            startActivity(intent)
         }
 
         settings_launcher_switch_screen_timeout.isChecked = launcherPreferences.getBoolean(PREF_SCREEN_TIMEOUT_DISABLED, false)
@@ -123,12 +128,6 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
         )
     }
 
-    fun resetToCustomTheme(context: Activity) {
-        intendedSettingsPause = true
-        saveTheme("custom") // TODO: Fix the bug this creates (displays custom theme without chosen img)
-
-    }
-
     override fun adjustLayout() {
 
         // Load values into the date-format spinner
@@ -159,19 +158,19 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
         staticThemeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         settings_launcher_theme_spinner.adapter = staticThemeAdapter
 
-        val themeInt = when (getSavedTheme(activity!!)) {
+        val themeInt = when (getSavedTheme()) {
             "finn" -> 0
             "dark" -> 1
             else -> 0
-        };
+        }
 
         settings_launcher_theme_spinner.setSelection(themeInt)
 
         settings_launcher_theme_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 when (position) {
-                    0 -> if (getSavedTheme(activity!!) != "finn") resetToDefaultTheme(activity!!)
-                    1 -> if (getSavedTheme(activity!!) != "dark") resetToDarkTheme(activity!!)
+                    0 -> if (getSavedTheme() != "finn") resetToDefaultTheme(activity!!)
+                    1 -> if (getSavedTheme() != "dark") resetToDarkTheme(activity!!)
                 }
             }
             override fun onNothingSelected(parent: AdapterView<*>?) { }

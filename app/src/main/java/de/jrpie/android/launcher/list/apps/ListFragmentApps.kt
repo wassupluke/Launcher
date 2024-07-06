@@ -6,10 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import de.jrpie.android.launcher.*
+import de.jrpie.android.launcher.PREF_SEARCH_AUTO_KEYBOARD
+import de.jrpie.android.launcher.R
+import de.jrpie.android.launcher.UIObject
+import de.jrpie.android.launcher.launcherPreferences
 import de.jrpie.android.launcher.list.forApp
 import de.jrpie.android.launcher.list.intention
-import kotlinx.android.synthetic.main.list.*
+import de.jrpie.android.launcher.openSoftKeyboard
 import kotlinx.android.synthetic.main.list_apps.*
 
 
@@ -53,12 +56,12 @@ class ListFragmentApps : Fragment(), UIObject {
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String): Boolean {
-                appsRViewAdapter.filter(query);
+                appsRViewAdapter.filter(query)
                 return false
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                appsRViewAdapter.filter(newText);
+                appsRViewAdapter.filter(newText)
                 return false
             }
         })

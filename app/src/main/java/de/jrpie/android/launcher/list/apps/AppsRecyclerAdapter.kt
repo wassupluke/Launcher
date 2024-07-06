@@ -3,7 +3,6 @@ package de.jrpie.android.launcher.list.apps
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.AsyncTask
 import android.view.LayoutInflater
@@ -14,10 +13,19 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import de.jrpie.android.launcher.*
+import de.jrpie.android.launcher.PREF_SEARCH_AUTO_LAUNCH
+import de.jrpie.android.launcher.R
+import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
+import de.jrpie.android.launcher.REQUEST_UNINSTALL
+import de.jrpie.android.launcher.appsList
+import de.jrpie.android.launcher.getSavedTheme
+import de.jrpie.android.launcher.launch
+import de.jrpie.android.launcher.launcherPreferences
 import de.jrpie.android.launcher.list.intendedChoosePause
+import de.jrpie.android.launcher.loadApps
+import de.jrpie.android.launcher.openAppSettings
+import de.jrpie.android.launcher.transformGrayscale
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * A [RecyclerView] (efficient scrollable list) containing all apps on the users device.
@@ -37,7 +45,7 @@ class AppsRecyclerAdapter(val activity: Activity,
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
         var textView: TextView = itemView.findViewById(R.id.list_apps_row_name)
-        var img: ImageView = itemView.findViewById(R.id.list_apps_row_icon) as ImageView
+        var img: ImageView = itemView.findViewById(R.id.list_apps_row_icon)
         var menuDots: ImageView = itemView.findViewById(R.id.list_apps_row_menu)
 
         override fun onClick(v: View) {
@@ -73,7 +81,7 @@ class AppsRecyclerAdapter(val activity: Activity,
         viewHolder.textView.text = appLabel
         viewHolder.img.setImageDrawable(appIcon)
 
-        if (getSavedTheme(activity) == "dark") transformGrayscale(
+        if (getSavedTheme() == "dark") transformGrayscale(
             viewHolder.img
         )
 
@@ -95,6 +103,7 @@ class AppsRecyclerAdapter(val activity: Activity,
         }
     }
 
+    @Suppress("SameReturnValue")
     private fun showOptionsPopup(viewHolder: ViewHolder, appPackageName: String): Boolean {
         //create the popup menu
 
@@ -163,10 +172,10 @@ class AppsRecyclerAdapter(val activity: Activity,
         if (text.isEmpty()) {
             appsListDisplayed.addAll(appsList)
         } else {
-            var appsSecondary: MutableList<AppInfo> = ArrayList();
-            var normalizedText: String = normalize(text);
+            val appsSecondary: MutableList<AppInfo> = ArrayList()
+            val normalizedText: String = normalize(text)
             for (item in appsList) {
-                var itemLabel: String = normalize(item.label.toString());
+                val itemLabel: String = normalize(item.label.toString())
 
                 if (itemLabel.startsWith(normalizedText)) {
                     appsListDisplayed.add(item)
@@ -174,7 +183,7 @@ class AppsRecyclerAdapter(val activity: Activity,
                     appsSecondary.add(item)
                 }
             }
-            appsListDisplayed.addAll(appsSecondary);
+            appsListDisplayed.addAll(appsSecondary)
         }
 
         // Launch apps automatically if only one result is found and the user wants it

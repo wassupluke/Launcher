@@ -67,7 +67,7 @@ class SettingsActivity: AppCompatActivity(), UIObject {
 
     override fun setOnClicks(){
         // As older APIs somehow do not recognize the xml defined onClick
-        settings_close.setOnClickListener() { finish() }
+        settings_close.setOnClickListener { finish() }
         // open device settings (see https://stackoverflow.com/a/62092663/12787264)
         settings_system.setOnClickListener {
             intendedSettingsPause = true
@@ -101,7 +101,7 @@ class SettingsSectionsPagerAdapter(private val context: Context, fm: FragmentMan
         }
     }
 
-    override fun getPageTitle(position: Int): CharSequence? {
+    override fun getPageTitle(position: Int): CharSequence {
         return context.resources.getString(TAB_TITLES[position])
     }
 

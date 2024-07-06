@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.tutorial_finish.*
  *
  * It is used to display further resources and let the user start Launcher
  */
-class TutorialFragmentFinish(): Fragment(), UIObject {
+class TutorialFragmentFinish : Fragment(), UIObject {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

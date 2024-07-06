@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.tutorial_start.*
  *
  * It displays info about the app and gets the user into the tutorial
  */
-class TutorialFragmentStart(): Fragment(), UIObject {
+class TutorialFragmentStart : Fragment(), UIObject {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

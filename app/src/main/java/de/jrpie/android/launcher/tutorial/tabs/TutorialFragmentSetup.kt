@@ -1,19 +1,19 @@
 package de.jrpie.android.launcher.tutorial.tabs
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import de.jrpie.android.launcher.*
-import kotlinx.android.synthetic.main.tutorial_setup.*
+import androidx.fragment.app.Fragment
+import de.jrpie.android.launcher.R
+import de.jrpie.android.launcher.UIObject
 
 /**
  * The [TutorialFragmentSetup] is a used as a tab in the TutorialActivity.
  *
  * It is used to display info in the tutorial
  */
-class TutorialFragmentSetup(): Fragment(), UIObject {
+class TutorialFragmentSetup : Fragment(), UIObject {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
