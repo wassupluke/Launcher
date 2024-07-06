@@ -1,19 +1,32 @@
-<!-- Shields form shields.io -->
-[![][shield-release]][latest-release]
+<!-- Shields from shields.io -->
+<!--[![][shield-release]][latest-release] -->
 [![][shield-license]][license]
-[![][shield-discord]][discord]
 [![][shield-contribute]][issues]
 
 <!-- ENGLISH README -->
 
 # <a name="en"></a> Launcher
 
-This is a fork of [finnmglas' Launcher][original-repo].
-There are only some small changes:
+This is a fork of [finnmglas's app Launcher][original-repo].
 
+## Notable changes:
+
+### Visual
+* This app uses the system wallpaper instead of rolling a custom solution.
 * The font has been changed to [Hack][hack-font].
-* The search algorithm was modified to prefer 
-* small improvement of gesture detection.
+* Font Awesome Icons were replaced by Material icons.
+* The gear button on the home screen was removed. Instead pressing back opens the list of applications and the app settings are accessible from there.
+
+
+### Search
+* The search algorithm was modified to prefer matches at the beginning of the app name, i.e. when searching for `"te"`, `"termux"` is sorted before `"notes"`.
+* The search bar was moved to the bottom of the screen.
+
+### Technical
+* Small improvements to the gesture detection.
+* Different apps set as default.
+* Package name was changed to `de.jrpie.android.launcher` to avoid clashing with the original app.
+* Dropped support for API < 21 (i.e. pre Lollypop)
 ---
 ---
   [hack-font]: https://sourcefoundry.org/hack/
