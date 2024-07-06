@@ -99,14 +99,13 @@
     <string name="settings_meta_reset">Zurücksetzen</string>
     <string name="settings_meta_reset_confirm">All deine Einstellungen gehen verloren. Weitermachen?</string>
 
-    <string name="settings_meta_link_github">https://github.de.jrpie.android.launcher#de</string>
-
     <string name="settings_meta_report_bug">Einen Fehler melden</string>
 
     <string name="settings_meta_discord">Unserem Discord beitreten</string>
 
     <string name="settings_meta_contact">Entwickler kontaktieren</string>
     <string name="settings_meta_contact_url">https://www.finnmglas.com/de/kontakt/</string>
+    <string name="settings_meta_fork_contact">Entwickler des Fork kontaktieren</string>
 
 
     <!--

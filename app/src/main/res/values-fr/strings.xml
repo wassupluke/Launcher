@@ -107,6 +107,7 @@
 
     <string name="settings_meta_contact">Contacter le développeur</string>
     <string name="settings_meta_contact_url">https://www.finnmglas.com/fr/contact/</string>
+    <string name="settings_meta_fork_contact">Contact the developer of the fork (malheureusement, il ne parle pas français)</string>
 
 
     <!--

@@ -49,11 +49,7 @@ class SettingsFragmentMeta : Fragment(), UIObject {
             Uri.parse(String.format("%s?id=%s", url, this.context!!.packageName))
         )
         var flags = Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
-        flags = if (Build.VERSION.SDK_INT >= 21) {
-            flags or Intent.FLAG_ACTIVITY_NEW_DOCUMENT
-        } else {
-            flags or Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET
-        }
+        flags = flags or Intent.FLAG_ACTIVITY_NEW_DOCUMENT
         intent.addFlags(flags)
         return intent
     }
@@ -69,36 +65,10 @@ class SettingsFragmentMeta : Fragment(), UIObject {
 
     override fun setOnClicks() {
 
-        // Button onClicks
-
         settings_meta_button_select_launcher.setOnClickListener {
             intendedSettingsPause = true
-            // on newer sdk: choose launcher
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                val callHomeSettingIntent = Intent(Settings.ACTION_HOME_SETTINGS)
-                startActivity(callHomeSettingIntent)
-            }
-            // on older sdk: manage app details
-            else {
-                AlertDialog.Builder(this.context!!, R.style.AlertDialogCustom)
-                    .setTitle(getString(R.string.settings_meta_cant_select_launcher))
-                    .setMessage(getString(R.string.settings_meta_cant_select_launcher_msg))
-                    .setPositiveButton(android.R.string.yes,
-                        DialogInterface.OnClickListener { _, _ ->
-                            try {
-                                openAppSettings(
-                                    this.context!!.packageName,
-                                    this.context!!
-                                )
-                            } catch ( e : ActivityNotFoundException) {
-                                val intent = Intent(Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS)
-                                startActivity(intent)
-                            }
-                        })
-                    .setNegativeButton(android.R.string.no, null)
-                    .setIcon(android.R.drawable.ic_dialog_info)
-                    .show()
-            }
+            val callHomeSettingIntent = Intent(Settings.ACTION_HOME_SETTINGS)
+            startActivity(callHomeSettingIntent)
         }
 
         settings_meta_button_view_tutorial.setOnClickListener {
@@ -111,12 +81,12 @@ class SettingsFragmentMeta : Fragment(), UIObject {
             AlertDialog.Builder(this.context!!, R.style.AlertDialogCustom)
                 .setTitle(getString(R.string.settings_meta_reset))
                 .setMessage(getString(R.string.settings_meta_reset_confirm))
-                .setPositiveButton(android.R.string.yes,
-                    DialogInterface.OnClickListener { _, _ ->
-                        resetSettings(this.context!!)
-                        activity!!.finish()
-                    })
-                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.ok
+                ) { _, _ ->
+                    resetSettings(this.context!!)
+                    activity!!.finish()
+                }
+                .setNegativeButton(android.R.string.cancel, null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show()
         }

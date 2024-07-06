@@ -552,7 +552,7 @@ fun openSoftKeyboard(context: Context, view: View) {
 fun setButtonColor(btn: Button, color: Int) {
     if (Build.VERSION.SDK_INT >= 29)
         btn.background.colorFilter = BlendModeColorFilter(color, BlendMode.MULTIPLY)
-    else if(Build.VERSION.SDK_INT >= 21) {
+    else {
         // tested with API 17 (Android 4.4.2 on S4 mini) -> fails
         // tested with API 28 (Android 9 on S8) -> necessary
         btn.background.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
@@ -564,7 +564,7 @@ fun setSwitchColor(sw: Switch, trackColor: Int) {
     if (Build.VERSION.SDK_INT >= 29) {
         sw.trackDrawable.colorFilter = BlendModeColorFilter(trackColor, BlendMode.MULTIPLY)
     }
-    else if(Build.VERSION.SDK_INT >= 21) {
+    else {
         sw.trackDrawable.colorFilter = PorterDuffColorFilter(trackColor, PorterDuff.Mode.SRC_ATOP)
     }
 }
