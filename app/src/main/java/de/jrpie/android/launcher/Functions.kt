@@ -19,7 +19,6 @@ import android.os.Bundle
 import android.os.SystemClock
 import android.provider.Settings
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.Window
@@ -40,36 +39,7 @@ import de.jrpie.android.launcher.settings.intendedSettingsPause
 import de.jrpie.android.launcher.tutorial.TutorialActivity
 
 
-/* Preferences (global, initialised when app is started) */
-lateinit var launcherPreferences: SharedPreferences
-
 /* Preference Key Constants */
-
-const val ACTION_UP = "action_upApp"
-const val ACTION_DOUBLE_UP = "action_doubleUpApp"
-const val ACTION_DOWN = "action_downApp"
-const val ACTION_DOUBLE_DOWN = "action_doubleDownApp"
-const val ACTION_RIGHT = "action_rightApp"
-const val ACTION_DOUBLE_RIGHT = "action_doubleRightApp"
-const val ACTION_LEFT = "action_leftApp"
-const val ACTION_DOUBLE_LEFT = "action_doubleLeftApp"
-
-const val ACTION_VOL_UP = "action_volumeUpApp"
-const val ACTION_VOL_DOWN = "action_volumeDownApp"
-const val ACTION_DOUBLE_CLICK = "action_doubleClickApp"
-const val ACTION_LONG_CLICK = "action_longClickApp"
-
-const val ACTION_DATE = "action_dateApp"
-const val ACTION_TIME = "action_timeApp"
-
-val ACTIONS = listOf(
-    ACTION_UP, ACTION_DOUBLE_UP,
-    ACTION_DOWN, ACTION_DOUBLE_DOWN,
-    ACTION_RIGHT, ACTION_LEFT,
-    ACTION_VOL_UP, ACTION_VOL_DOWN,
-    ACTION_DOUBLE_CLICK, ACTION_LONG_CLICK,
-    ACTION_DATE, ACTION_TIME
-)
 
 const val PREF_DOMINANT = "custom_dominant"
 const val PREF_VIBRANT = "custom_vibrant"
@@ -96,24 +66,6 @@ val appsList: MutableList<AppInfo> = ArrayList()
 /* Variables containing settings */
 val displayMetrics = DisplayMetrics()
 
-var upApp = ""
-var doubleUpApp = ""
-var downApp = ""
-var doubleDownApp = ""
-var rightApp = ""
-var doubleRightApp = ""
-var leftApp = ""
-var doubleLeftApp = ""
-var volumeUpApp = ""
-var volumeDownApp = ""
-var doubleClickApp = ""
-var longClickApp = ""
-
-
-var timeApp = ""
-var dateApp = ""
-
-
 var dominantColor = 0
 var vibrantColor = 0
 
@@ -139,6 +91,13 @@ fun View.blink(
         it.repeatMode = repeatMode
         it.repeatCount = times
     })
+}
+
+fun getPreferences(context: Context): SharedPreferences{
+    return context.getSharedPreferences(
+        context.getString(R.string.preference_file_key),
+        Context.MODE_PRIVATE
+    )
 }
 
 /* Activity related */
@@ -269,12 +228,12 @@ fun openNewTabWindow(urls: String, context: Context) {
 
 /* Settings related functions */
 
-fun getSavedTheme() : String {
-    return launcherPreferences.getString(PREF_THEME, "finn").toString()
+fun getSavedTheme(context: Context) : String {
+    return getPreferences(context).getString(PREF_THEME, "finn").toString()
 }
 
-fun saveTheme(themeName: String) : String {
-    launcherPreferences.edit()
+fun saveTheme(context: Context, themeName: String) : String {
+    getPreferences(context).edit()
         .putString(PREF_THEME, themeName)
         .apply()
 
@@ -285,13 +244,13 @@ fun resetToDefaultTheme(activity: Activity) {
     dominantColor = activity.resources.getColor(R.color.finnmglasTheme_background_color)
     vibrantColor = activity.resources.getColor(R.color.finnmglasTheme_accent_color)
 
-    launcherPreferences.edit()
+    getPreferences(activity).edit()
         .putInt(PREF_DOMINANT, dominantColor)
         .putInt(PREF_VIBRANT, vibrantColor)
         .apply()
 
-    saveTheme("finn")
-    loadSettings()
+    saveTheme(activity,"finn")
+    loadSettings(activity)
 
     intendedSettingsPause = true
     activity.recreate()
@@ -301,12 +260,12 @@ fun resetToDarkTheme(activity: Activity) {
     dominantColor = activity.resources.getColor(R.color.darkTheme_background_color)
     vibrantColor = activity.resources.getColor(R.color.darkTheme_accent_color)
 
-    launcherPreferences.edit()
+    getPreferences(activity).edit()
         .putInt(PREF_DOMINANT, dominantColor)
         .putInt(PREF_VIBRANT, vibrantColor)
         .apply()
 
-    saveTheme("dark")
+    saveTheme(activity,"dark")
 
     intendedSettingsPause = true
     activity.recreate()
@@ -329,9 +288,8 @@ fun openTutorial(activity: Activity){
 
 fun openAppsList(activity: Activity){
     val intent = Intent(activity, ListActivity::class.java)
-    intent.putExtra("intention", "view")
+    intent.putExtra("intention", ListActivity.ListActivityIntention.VIEW.toString())
     intendedSettingsPause = true
-    Log.i("de.jrpie", "openAppsList")
     activity.startActivity(intent)
 }
 
@@ -358,31 +316,15 @@ fun loadApps(packageManager: PackageManager) {
     appsList.addAll(loadList)
 }
 
-fun loadSettings() {
-    upApp = launcherPreferences.getString(ACTION_UP, "")!!
-    doubleUpApp = launcherPreferences.getString(ACTION_DOUBLE_UP, "")!!
-    downApp = launcherPreferences.getString(ACTION_DOWN, "")!!
-    doubleDownApp = launcherPreferences.getString(ACTION_DOUBLE_DOWN, "")!!
-    rightApp = launcherPreferences.getString(ACTION_RIGHT, "")!!
-    doubleRightApp = launcherPreferences.getString(ACTION_DOUBLE_RIGHT, "")!!
-    leftApp = launcherPreferences.getString(ACTION_LEFT, "")!!
-    doubleLeftApp = launcherPreferences.getString(ACTION_DOUBLE_LEFT, "")!!
-    volumeUpApp = launcherPreferences.getString(ACTION_VOL_UP, "")!!
-    volumeDownApp = launcherPreferences.getString(ACTION_VOL_DOWN, "")!!
-
-    doubleClickApp = launcherPreferences.getString(ACTION_DOUBLE_CLICK, "")!!
-    longClickApp = launcherPreferences.getString(ACTION_LONG_CLICK, "")!!
-
-    dateApp = launcherPreferences.getString(ACTION_DATE, "")!!
-    timeApp = launcherPreferences.getString(ACTION_TIME, "")!!
-
-    dominantColor = launcherPreferences.getInt(PREF_DOMINANT, 0)
-    vibrantColor = launcherPreferences.getInt(PREF_VIBRANT, 0)
+fun loadSettings(context: Context) {
+    val preferences = getPreferences(context)
+    dominantColor = preferences.getInt(PREF_DOMINANT, 0)
+    vibrantColor = preferences.getInt(PREF_VIBRANT, 0)
 }
 
 fun resetSettings(context: Context) {
 
-    val editor = launcherPreferences.edit()
+    val editor = getPreferences(context).edit()
 
     // set default theme
     dominantColor = context.resources.getColor(R.color.finnmglasTheme_background_color)
@@ -399,9 +341,7 @@ fun resetSettings(context: Context) {
         .putBoolean(PREF_DOUBLE_ACTIONS_ENABLED, false)
         .putInt(PREF_SLIDE_SENSITIVITY, 50)
 
-    // load action defaults
-    for (actionKey in ACTIONS)
-        editor.putString(actionKey, pickDefaultApp(actionKey, context))
+    Gesture.values().forEach { editor.putString(it.id, it.pickDefaultApp(context)) }
 
     editor.apply()
 }
@@ -409,8 +349,9 @@ fun resetSettings(context: Context) {
 fun setWindowFlags(window: Window) {
     window.setFlags(0, 0) // clear flags
 
+    val preferences = getPreferences(window.context)
     // Display notification bar
-    if (launcherPreferences.getBoolean(PREF_SCREEN_FULLSCREEN, true))
+    if (preferences.getBoolean(PREF_SCREEN_FULLSCREEN, true))
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
@@ -418,7 +359,7 @@ fun setWindowFlags(window: Window) {
     else window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
     // Screen Timeout
-    if (launcherPreferences.getBoolean(PREF_SCREEN_TIMEOUT_DISABLED, false))
+    if (preferences.getBoolean(PREF_SCREEN_TIMEOUT_DISABLED, false))
         window.setFlags(
             WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
             WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
@@ -426,46 +367,17 @@ fun setWindowFlags(window: Window) {
     else window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 }
 
-
-fun pickDefaultApp(action: String, context: Context) : String {
-    val arrayResource = when (action) {
-        ACTION_UP -> R.array.default_up
-        ACTION_DOUBLE_UP -> R.array.default_double_up
-        ACTION_DOWN -> R.array.default_down
-        ACTION_DOUBLE_DOWN -> R.array.default_double_down
-        ACTION_RIGHT -> R.array.default_right
-        ACTION_DOUBLE_RIGHT -> R.array.default_double_right
-        ACTION_LEFT -> R.array.default_left
-        ACTION_DOUBLE_LEFT -> R.array.default_double_left
-        ACTION_VOL_UP -> R.array.default_volume_up
-        ACTION_VOL_DOWN -> R.array.default_volume_down
-        ACTION_DOUBLE_CLICK -> R.array.default_double_click
-        ACTION_LONG_CLICK -> R.array.default_long_click
-        ACTION_TIME -> R.array.default_time
-        ACTION_DATE -> R.array.default_date
-
-        else -> return "" // just prevent crashing on unknown input
-    }
-
-    val list = context.resources.getStringArray(arrayResource)
-    for (packageName in list)
-        if (isInstalled(packageName, context)) return packageName
-    return ""
-}
-
 // Used in Tutorial and Settings `ActivityOnResult`
-fun saveListActivityChoice(data: Intent?) {
+fun saveListActivityChoice(context: Context, data: Intent?) {
     val value = data?.getStringExtra("value")
-    val forApp = data?.getStringExtra("forApp") ?: return
+    val forGesture = data?.getStringExtra("forGesture") ?: return
 
-    launcherPreferences.edit()
-        .putString("action_$forApp", value.toString())
-        .apply()
+    Gesture.byId(forGesture)?.setApp(context, value.toString())
 
-    loadSettings()
+    loadSettings(context)
 }
 
-// Taken form https://stackoverflow.com/a/50743764/12787264
+// Taken from https://stackoverflow.com/a/50743764/12787264
 fun openSoftKeyboard(context: Context, view: View) {
     view.requestFocus()
     // open the soft keyboard

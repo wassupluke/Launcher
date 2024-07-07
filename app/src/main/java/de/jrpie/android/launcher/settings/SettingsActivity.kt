@@ -77,7 +77,7 @@ class SettingsActivity: AppCompatActivity(), UIObject {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
-            REQUEST_CHOOSE_APP -> saveListActivityChoice(data)
+            REQUEST_CHOOSE_APP -> saveListActivityChoice(this, data)
             else -> super.onActivityResult(requestCode, resultCode, data)
         }
     }

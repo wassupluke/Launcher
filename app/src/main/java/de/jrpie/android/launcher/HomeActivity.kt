@@ -1,6 +1,5 @@
 package de.jrpie.android.launcher
 
-import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
@@ -44,18 +43,15 @@ class HomeActivity: UIObject, AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Initialise globals
-        launcherPreferences = this.getSharedPreferences(
-            getString(R.string.preference_file_key), Context.MODE_PRIVATE)
-
+        val preferences = getPreferences(this)
         windowManager.defaultDisplay.getMetrics(displayMetrics)
 
-        loadSettings()
+        loadSettings(this)
 
         // First time opening the app: show Tutorial, else: check versions
-        if (!launcherPreferences.getBoolean(PREF_STARTED, false))
+        if (!preferences.getBoolean(PREF_STARTED, false))
             startActivity(Intent(this, TutorialActivity::class.java))
-        else when (launcherPreferences.getString(PREF_VERSION, "")) {
+        else when (preferences.getString(PREF_VERSION, "")) {
             // Check versions, make sure transitions between versions go well
 
             VERSION_NAME -> { /* the version installed and used previously are the same */ }
@@ -67,12 +63,12 @@ class HomeActivity: UIObject, AppCompatActivity(),
                  * were not stored anywhere. Now they have to be stored:
                  * -> we just reset them using newly implemented functions
                  */
-                when (getSavedTheme()) {
+                when (getSavedTheme(this)) {
                     "finn" -> resetToDefaultTheme(this)
                     "dark" -> resetToDarkTheme(this)
                 }
 
-                launcherPreferences.edit()
+                preferences.edit()
                     .putString(PREF_VERSION, VERSION_NAME) // save new version
                     .apply()
 
@@ -95,7 +91,7 @@ class HomeActivity: UIObject, AppCompatActivity(),
         mDetector.setOnDoubleTapListener(this)
 
         // for if the settings changed
-        loadSettings()
+        loadSettings(this)
         super<UIObject>.onStart()
     }
 
@@ -103,7 +99,7 @@ class HomeActivity: UIObject, AppCompatActivity(),
         super.onResume()
 
         // Applying the date / time format (changeable in settings)
-        val dFormat = launcherPreferences.getInt(PREF_DATE_FORMAT, 0)
+        val dFormat = getPreferences(this).getInt(PREF_DATE_FORMAT, 0)
         val upperFMT = resources.getStringArray(R.array.settings_launcher_time_formats_upper)
         val lowerFMT = resources.getStringArray(R.array.settings_launcher_time_formats_lower)
 
@@ -131,8 +127,8 @@ class HomeActivity: UIObject, AppCompatActivity(),
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         when (keyCode) {
             KeyEvent.KEYCODE_BACK -> LauncherAction.CHOOSE.launch(this)
-            KeyEvent.KEYCODE_VOLUME_UP -> launch(volumeUpApp, this,0, 0)
-            KeyEvent.KEYCODE_VOLUME_DOWN -> launch(volumeDownApp, this,0, 0)
+            KeyEvent.KEYCODE_VOLUME_UP -> Gesture.VOLUME_UP(this)
+            KeyEvent.KEYCODE_VOLUME_DOWN -> Gesture.VOLUME_DOWN(this)
         }
         return true
     }
@@ -145,45 +141,43 @@ class HomeActivity: UIObject, AppCompatActivity(),
         val diffX = e1.x - e2.x
         val diffY = e1.y - e2.y
 
-        val doubleActions = launcherPreferences.getBoolean(PREF_DOUBLE_ACTIONS_ENABLED, false)
+        val preferences = getPreferences(this)
+
+        val doubleActions = preferences.getBoolean(PREF_DOUBLE_ACTIONS_ENABLED, false)
 
         // how distinguished the swipe has to be to launch something
         // strictness = opposite of sensitivity. TODO - May have to be adjusted
-        val strictness = (4 / bufferedPointerCount) * ((100 - launcherPreferences.getInt(PREF_SLIDE_SENSITIVITY, 50)) / 50)
+        val strictness = (4 / bufferedPointerCount) * ((100 - preferences.getInt(PREF_SLIDE_SENSITIVITY, 50)) / 50)
 
-
-        if(abs(diffX) > abs(diffY)) { // horizontal swipe
-            if (diffX > width / 4 && abs(diffX) > strictness * abs(diffY)) {
-                if (bufferedPointerCount == 1) launch(leftApp,this, R.anim.right_left)
-                else if (bufferedPointerCount == 2 && doubleActions) launch(doubleLeftApp,this, R.anim.right_left)
-            }
-            else if (diffX < -width / 4 && abs(diffX) > strictness * abs(diffY)) {
-                if (bufferedPointerCount == 1) launch(rightApp, this, R.anim.left_right)
-                else if (bufferedPointerCount == 2 && doubleActions) launch(doubleRightApp, this, R.anim.left_right)
-            }
+        var gesture = if(abs(diffX) > abs(diffY)) { // horizontal swipe
+            if (diffX > width / 4 && abs(diffX) > strictness * abs(diffY))
+                Gesture.SWIPE_LEFT
+            else if (diffX < -width / 4 && abs(diffX) > strictness * abs(diffY))
+                Gesture.SWIPE_RIGHT
+            else null
         } else { // vertical swipe
             // Only open if the swipe was not from the phones top edge
-            if (diffY < -height / 8 && abs(diffY) > strictness * abs(diffX) && e1.y > 100) {
-                if (bufferedPointerCount == 1) launch(downApp, this, R.anim.top_down)
-                else if (bufferedPointerCount == 2 && doubleActions) launch(doubleDownApp, this, R.anim.top_down)
-            }
-            else if (diffY > height / 8 && abs(diffY) > strictness * abs(diffX)) {
-                if (bufferedPointerCount == 1) launch(upApp, this, R.anim.bottom_up)
-                else if (bufferedPointerCount == 2 && doubleActions) launch(doubleUpApp, this, R.anim.bottom_up)
-            }
+            if (diffY < -height / 8 && abs(diffY) > strictness * abs(diffX) && e1.y > 100)
+                Gesture.SWIPE_DOWN
+            else if (diffY > height / 8 && abs(diffY) > strictness * abs(diffX))
+                Gesture.SWIPE_UP
+            else null
         }
+
+        if (doubleActions && bufferedPointerCount > 1) {
+            gesture = gesture?.let(Gesture::getDoubleVariant)
+        }
+        gesture?.invoke(this)
 
         return true
     }
 
     override fun onLongPress(event: MotionEvent) {
-        launch(longClickApp, this)
-        overridePendingTransition(0, 0)
+        Gesture.LONG_CLICK(this)
     }
 
     override fun onDoubleTap(event: MotionEvent): Boolean {
-        launch(doubleClickApp, this)
-        overridePendingTransition(0, 0)
+        Gesture.DOUBLE_CLICK(this)
         return false
     }
 
@@ -209,17 +203,18 @@ class HomeActivity: UIObject, AppCompatActivity(),
 
     override fun setOnClicks() {
 
+        val preferences = getPreferences(this)
         home_upper_view.setOnClickListener {
-            when (launcherPreferences.getInt(PREF_DATE_FORMAT, 0)) {
-                0 -> launch(dateApp, this)
-                else -> launch(timeApp,this)
+            when (preferences.getInt(PREF_DATE_FORMAT, 0)) {
+                0 -> Gesture.DATE(this)
+                else -> Gesture.TIME(this)
             }
         }
 
         home_lower_view.setOnClickListener {
-            when (launcherPreferences.getInt(PREF_DATE_FORMAT, 0)) {
-                0 -> launch(timeApp, this)
-                else -> launch(dateApp,this)
+            when (preferences.getInt(PREF_DATE_FORMAT, 0)) {
+                0 -> Gesture.TIME(this)
+                else -> Gesture.DATE(this)
             }
         }
     }

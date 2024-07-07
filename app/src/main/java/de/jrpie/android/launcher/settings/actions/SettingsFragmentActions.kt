@@ -47,7 +47,7 @@ class SettingsFragmentActions : Fragment(), UIObject {
         // App management buttons
         settings_actions_button_view_apps.setOnClickListener{
             val intent = Intent(this.context, ListActivity::class.java)
-            intent.putExtra("intention", "view")
+            intent.putExtra("intention", ListActivity.ListActivityIntention.VIEW.toString())
             intendedSettingsPause = true
             startActivity(intent)
         }

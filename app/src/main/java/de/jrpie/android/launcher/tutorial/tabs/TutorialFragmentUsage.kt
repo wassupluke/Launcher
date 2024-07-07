@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import de.jrpie.android.launcher.*
-import kotlinx.android.synthetic.main.tutorial_usage.*
+import de.jrpie.android.launcher.R
+import de.jrpie.android.launcher.UIObject
 
 /**
  * The [TutorialFragmentUsage] is a used as a tab in the TutorialActivity.

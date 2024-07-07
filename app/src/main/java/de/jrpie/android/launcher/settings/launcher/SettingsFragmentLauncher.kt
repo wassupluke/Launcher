@@ -19,8 +19,8 @@ import de.jrpie.android.launcher.PREF_SEARCH_AUTO_LAUNCH
 import de.jrpie.android.launcher.PREF_SLIDE_SENSITIVITY
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.UIObject
+import de.jrpie.android.launcher.getPreferences
 import de.jrpie.android.launcher.getSavedTheme
-import de.jrpie.android.launcher.launcherPreferences
 import de.jrpie.android.launcher.resetToDarkTheme
 import de.jrpie.android.launcher.resetToDefaultTheme
 import de.jrpie.android.launcher.setButtonColor
@@ -74,40 +74,42 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
             startActivity(intent)
         }
 
-        settings_launcher_switch_screen_timeout.isChecked = launcherPreferences.getBoolean(PREF_SCREEN_TIMEOUT_DISABLED, false)
+        val preferences = getPreferences(activity!!)
+
+        settings_launcher_switch_screen_timeout.isChecked = preferences.getBoolean(PREF_SCREEN_TIMEOUT_DISABLED, false)
         settings_launcher_switch_screen_timeout.setOnCheckedChangeListener { _, isChecked ->  // Toggle screen timeout
-            launcherPreferences.edit()
+            preferences.edit()
                 .putBoolean(PREF_SCREEN_TIMEOUT_DISABLED, isChecked)
                 .apply()
 
             setWindowFlags(activity!!.window)
         }
-        settings_launcher_switch_screen_full.isChecked = launcherPreferences.getBoolean(PREF_SCREEN_FULLSCREEN, true)
+        settings_launcher_switch_screen_full.isChecked = preferences.getBoolean(PREF_SCREEN_FULLSCREEN, true)
         settings_launcher_switch_screen_full.setOnCheckedChangeListener { _, isChecked -> // Toggle fullscreen
-            launcherPreferences.edit()
+            preferences.edit()
                 .putBoolean(PREF_SCREEN_FULLSCREEN, isChecked)
                 .apply()
 
             setWindowFlags(activity!!.window)
         }
 
-        settings_launcher_switch_auto_launch.isChecked = launcherPreferences.getBoolean(PREF_SEARCH_AUTO_LAUNCH, false)
+        settings_launcher_switch_auto_launch.isChecked = preferences.getBoolean(PREF_SEARCH_AUTO_LAUNCH, false)
         settings_launcher_switch_auto_launch.setOnCheckedChangeListener { _, isChecked -> // Toggle double actions
-            launcherPreferences.edit()
+            preferences.edit()
                 .putBoolean(PREF_SEARCH_AUTO_LAUNCH, isChecked)
                 .apply()
         }
 
-        settings_launcher_switch_auto_keyboard.isChecked = launcherPreferences.getBoolean(PREF_SEARCH_AUTO_KEYBOARD, true)
+        settings_launcher_switch_auto_keyboard.isChecked = preferences.getBoolean(PREF_SEARCH_AUTO_KEYBOARD, true)
         settings_launcher_switch_auto_keyboard.setOnCheckedChangeListener { _, isChecked -> // Toggle double actions
-            launcherPreferences.edit()
+            preferences.edit()
                 .putBoolean(PREF_SEARCH_AUTO_KEYBOARD, isChecked)
                 .apply()
         }
 
-        settings_launcher_switch_enable_double.isChecked = launcherPreferences.getBoolean(PREF_DOUBLE_ACTIONS_ENABLED, false)
+        settings_launcher_switch_enable_double.isChecked = preferences.getBoolean(PREF_DOUBLE_ACTIONS_ENABLED, false)
         settings_launcher_switch_enable_double.setOnCheckedChangeListener { _, isChecked -> // Toggle double actions
-            launcherPreferences.edit()
+            preferences.edit()
                 .putBoolean(PREF_DOUBLE_ACTIONS_ENABLED, isChecked)
                 .apply()
 
@@ -120,7 +122,7 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
                 override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {}
                 override fun onStartTrackingTouch(p0: SeekBar?) {}
                 override fun onStopTrackingTouch(p0: SeekBar?) {
-                    launcherPreferences.edit()
+                    preferences.edit()
                         .putInt(PREF_SLIDE_SENSITIVITY, p0!!.progress * 100 / 4) // scale to %
                         .apply()
                 }
@@ -130,6 +132,7 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
 
     override fun adjustLayout() {
 
+        val preferences = getPreferences(activity!!)
         // Load values into the date-format spinner
         val staticAdapter = ArrayAdapter.createFromResource(
                 activity!!, R.array.settings_launcher_time_format_spinner_items,
@@ -138,11 +141,11 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
         staticAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         settings_launcher_format_spinner.adapter = staticAdapter
 
-        settings_launcher_format_spinner.setSelection(launcherPreferences.getInt(PREF_DATE_FORMAT, 0))
+        settings_launcher_format_spinner.setSelection(preferences.getInt(PREF_DATE_FORMAT, 0))
 
         settings_launcher_format_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                launcherPreferences.edit()
+                preferences.edit()
                     .putInt(PREF_DATE_FORMAT, position)
                     .apply()
             }
@@ -158,7 +161,7 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
         staticThemeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         settings_launcher_theme_spinner.adapter = staticThemeAdapter
 
-        val themeInt = when (getSavedTheme()) {
+        val themeInt = when (getSavedTheme(activity!!)) {
             "finn" -> 0
             "dark" -> 1
             else -> 0
@@ -169,13 +172,13 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
         settings_launcher_theme_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 when (position) {
-                    0 -> if (getSavedTheme() != "finn") resetToDefaultTheme(activity!!)
-                    1 -> if (getSavedTheme() != "dark") resetToDarkTheme(activity!!)
+                    0 -> if (getSavedTheme(activity!!) != "finn") resetToDefaultTheme(activity!!)
+                    1 -> if (getSavedTheme(activity!!) != "dark") resetToDarkTheme(activity!!)
                 }
             }
             override fun onNothingSelected(parent: AdapterView<*>?) { }
         }
 
-        settings_seekbar_sensitivity.progress = launcherPreferences.getInt(PREF_SLIDE_SENSITIVITY, 2) * 4 / 100
+        settings_seekbar_sensitivity.progress = preferences.getInt(PREF_SLIDE_SENSITIVITY, 2) * 4 / 100
     }
 }

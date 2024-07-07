@@ -28,11 +28,11 @@ enum class LauncherAction(val id: String, val label: Int, val icon: Int, val lau
 
     companion object {
         fun byId(id: String): LauncherAction? {
-            return LauncherAction.values().singleOrNull { it.id == id };
+            return LauncherAction.values().singleOrNull { it.id == id }
         }
 
         fun isOtherAction(id: String): Boolean {
-            return id.startsWith("launcher");
+            return id.startsWith("launcher")
         }
     }
 }

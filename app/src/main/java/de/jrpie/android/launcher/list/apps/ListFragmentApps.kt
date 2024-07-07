@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import de.jrpie.android.launcher.PREF_SEARCH_AUTO_KEYBOARD
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.UIObject
-import de.jrpie.android.launcher.launcherPreferences
-import de.jrpie.android.launcher.list.forApp
+import de.jrpie.android.launcher.getPreferences
+import de.jrpie.android.launcher.list.ListActivity
+import de.jrpie.android.launcher.list.forGesture
 import de.jrpie.android.launcher.list.intention
 import de.jrpie.android.launcher.openSoftKeyboard
 import kotlinx.android.synthetic.main.list_apps.*
@@ -42,7 +43,7 @@ class ListFragmentApps : Fragment(), UIObject {
 
     override fun adjustLayout() {
 
-        val appsRViewAdapter = AppsRecyclerAdapter(activity!!, intention, forApp)
+        val appsRViewAdapter = AppsRecyclerAdapter(activity!!, intention, forGesture)
 
         // set up the list / recycler
         list_apps_rview.apply {
@@ -66,7 +67,9 @@ class ListFragmentApps : Fragment(), UIObject {
             }
         })
 
-        if (intention == "view" && launcherPreferences.getBoolean(PREF_SEARCH_AUTO_KEYBOARD, true)) {
+        if (intention == ListActivity.ListActivityIntention.VIEW
+            && getPreferences(context!!)
+                .getBoolean(PREF_SEARCH_AUTO_KEYBOARD, true)) {
             openSoftKeyboard(context!!, list_apps_searchview)
         }
     }

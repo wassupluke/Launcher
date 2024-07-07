@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
-import de.jrpie.android.launcher.list.forApp
+import de.jrpie.android.launcher.list.forGesture
 
 /**
  * The [OtherRecyclerAdapter] will only be displayed in the ListActivity,
@@ -22,7 +22,7 @@ import de.jrpie.android.launcher.list.forApp
 class OtherRecyclerAdapter(val activity: Activity):
     RecyclerView.Adapter<OtherRecyclerAdapter.ViewHolder>() {
 
-    private val othersList: Array<LauncherAction> = LauncherAction.values();
+    private val othersList: Array<LauncherAction> = LauncherAction.values()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
@@ -34,14 +34,14 @@ class OtherRecyclerAdapter(val activity: Activity):
             val pos = adapterPosition
             val content = othersList[pos]
 
-            returnChoiceIntent(forApp, content.id)
+            forGesture?.let { returnChoiceIntent(it, content.id) }
         }
 
         init { itemView.setOnClickListener(this) }
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
-        val otherLabel = activity.getString(othersList[i].label);
+        val otherLabel = activity.getString(othersList[i].label)
         val icon = othersList[i].icon
 
         viewHolder.textView.text = otherLabel
@@ -59,7 +59,7 @@ class OtherRecyclerAdapter(val activity: Activity):
     private fun returnChoiceIntent(forApp: String, value: String) {
         val returnIntent = Intent()
         returnIntent.putExtra("value", value)
-        returnIntent.putExtra("forApp", forApp)
+        returnIntent.putExtra("forGesture", forApp)
         activity.setResult(REQUEST_CHOOSE_APP, returnIntent)
         activity.finish()
     }

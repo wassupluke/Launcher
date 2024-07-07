@@ -26,8 +26,8 @@ import kotlinx.android.synthetic.main.list.*
 var intendedChoosePause = false // know when to close
 
 // TODO: Better solution for this intercommunication functionality (used in list-fragments)
-var intention = "view"
-var forApp = ""
+var intention = ListActivity.ListActivityIntention.VIEW
+var forGesture: String? = null
 
 /**
  * The [ListActivity] is the most general purpose activity in Launcher:
@@ -37,7 +37,10 @@ var forApp = ""
  * The activity itself can also be chosen to be launched as an action.
  */
 class ListActivity : AppCompatActivity(), UIObject {
-
+    enum class ListActivityIntention(val titleResource: Int) {
+        VIEW(R.string.list_title_view), /* view list of apps */
+        PICK(R.string.list_title_pick)  /* choose app or action to associate to a gesture */
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -46,7 +49,7 @@ class ListActivity : AppCompatActivity(), UIObject {
 
         list_settings.setOnClickListener {
             launch(LauncherAction.SETTINGS.id, this@ListActivity, R.anim.bottom_up)
-            LauncherAction.SETTINGS.launch(this@ListActivity);
+            LauncherAction.SETTINGS.launch(this@ListActivity)
         }
     }
 
@@ -57,13 +60,7 @@ class ListActivity : AppCompatActivity(), UIObject {
 
     override fun onPause() {
         super.onPause()
-        intendedSettingsPause = false
-        if(!intendedChoosePause) finish()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        intendedChoosePause = false
+        finish()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -91,22 +88,21 @@ class ListActivity : AppCompatActivity(), UIObject {
 
     override fun adjustLayout() {
         // get info about which action this activity is open for
-        val bundle = intent.extras
-        if (bundle != null) {
-            intention = bundle.getString("intention")!! // why choose an app
-            if (intention != "view")
-                forApp = bundle.getString("forApp")!! // which app we choose
+        intent.extras?.let { bundle ->
+            intention = bundle.getString("intention")
+                ?.let { ListActivityIntention.valueOf(it) }
+                ?: ListActivityIntention.VIEW
+
+            if (intention != ListActivityIntention.VIEW)
+                forGesture = bundle.getString("forGesture")
         }
 
         // Hide tabs for the "view" action
-        if (intention == "view") {
+        if (intention == ListActivityIntention.VIEW) {
             list_tabs.visibility = View.GONE
         }
 
-        when (intention) {
-            "view" -> list_heading.text = getString(R.string.list_title_view)
-            "pick" -> list_heading.text = getString(R.string.list_title_pick)
-        }
+        list_heading.text = getString(intention.titleResource)
 
         val sectionsPagerAdapter = ListSectionsPagerAdapter(this, supportFragmentManager)
         val viewPager: ViewPager = findViewById(R.id.list_viewpager)
@@ -142,7 +138,7 @@ class ListSectionsPagerAdapter(private val context: Context, fm: FragmentManager
 
     override fun getCount(): Int {
         return when (intention) {
-            "view" -> 1
+            ListActivity.ListActivityIntention.VIEW -> 1
             else -> 2
         }
     }

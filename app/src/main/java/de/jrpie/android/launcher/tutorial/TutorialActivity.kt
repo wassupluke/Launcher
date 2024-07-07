@@ -12,7 +12,7 @@ import de.jrpie.android.launcher.PREF_STARTED
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
 import de.jrpie.android.launcher.UIObject
-import de.jrpie.android.launcher.launcherPreferences
+import de.jrpie.android.launcher.getPreferences
 import de.jrpie.android.launcher.loadSettings
 import de.jrpie.android.launcher.resetSettings
 import de.jrpie.android.launcher.saveListActivityChoice
@@ -37,11 +37,12 @@ class TutorialActivity: AppCompatActivity(), UIObject {
         // Initialise layout
         setContentView(R.layout.tutorial)
 
+        val preferences = getPreferences(this)
         // Check if the app was started before
-        if (!launcherPreferences.getBoolean(PREF_STARTED, false))
+        if (!preferences.getBoolean(PREF_STARTED, false))
             resetSettings(this)
 
-        loadSettings()
+        loadSettings(this)
 
         // set up tabs and swiping in settings
         val sectionsPagerAdapter = TutorialSectionsPagerAdapter(supportFragmentManager)
@@ -58,14 +59,14 @@ class TutorialActivity: AppCompatActivity(), UIObject {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
-            REQUEST_CHOOSE_APP -> saveListActivityChoice(data)
+            REQUEST_CHOOSE_APP -> saveListActivityChoice(this,data)
             else -> super.onActivityResult(requestCode, resultCode, data)
         }
     }
 
     // Default: prevent going back, allow if viewed again later
     override fun onBackPressed() {
-        if (launcherPreferences.getBoolean(PREF_STARTED, false))
+        if (getPreferences(this).getBoolean(PREF_STARTED, false))
             super.onBackPressed()
     }
 

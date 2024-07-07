@@ -39,13 +39,18 @@ class TutorialFragmentFinish : Fragment(), UIObject {
     }
 
     private fun finishTutorial() {
-        if (!launcherPreferences.getBoolean(PREF_STARTED, false)){
-            launcherPreferences.edit()
-                .putBoolean(PREF_STARTED, true) // never auto run this again
-                .putLong(PREF_STARTED_TIME, System.currentTimeMillis() / 1000L) // record first startup timestamp
-                .putString(PREF_VERSION, VERSION_NAME) // save current launcher version
-                .apply()
+        context?.let { getPreferences(it) }?.let {
+            if (!it.getBoolean(PREF_STARTED, false)) {
+                it.edit()
+                    .putBoolean(PREF_STARTED, true) // never auto run this again
+                    .putLong(
+                        PREF_STARTED_TIME,
+                        System.currentTimeMillis() / 1000L
+                    ) // record first startup timestamp
+                    .putString(PREF_VERSION, VERSION_NAME) // save current launcher version
+                    .apply()
+            }
         }
-        activity!!.finish()
+        activity?.finish()
     }
 }

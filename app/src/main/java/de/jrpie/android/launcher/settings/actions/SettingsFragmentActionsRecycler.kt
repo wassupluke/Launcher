@@ -55,7 +55,7 @@ class SettingsFragmentActionsRecycler : Fragment(), UIObject {
 class ActionsRecyclerAdapter(val activity: Activity):
     RecyclerView.Adapter<ActionsRecyclerAdapter.ViewHolder>() {
 
-    private val actionsList: MutableList<ActionInfo>
+    private val gesturesList: List<Gesture>
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
@@ -70,54 +70,45 @@ class ActionsRecyclerAdapter(val activity: Activity):
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
-        val actionText = actionsList[i].actionText
-        val actionName = actionsList[i].actionName
-        val content = actionsList[i].data
-
-        viewHolder.textView.text = actionText
-
-        viewHolder.removeAction.setOnClickListener{
-
-            launcherPreferences.edit()
-                .putString("action_$actionName", "") // clear it
-                .apply()
-
-            loadSettings() // apply new settings to the app
-
-            viewHolder.img.visibility = View.INVISIBLE
-            viewHolder.removeAction.visibility = View.GONE
-            viewHolder.chooseButton.visibility = View.VISIBLE
-            viewHolder.chooseButton.setOnClickListener{ chooseApp(actionName.toString()) }
-
-            setButtonColor(viewHolder.chooseButton, vibrantColor)
-        }
-
-        if (LauncherAction.isOtherAction(content.toString())) {
-            viewHolder.img.setOnClickListener{ chooseApp(actionName.toString()) }
-            LauncherAction.byId(content.toString())?.let {
-                viewHolder.img.setImageResource(it.icon)
-            }
-        } else {
-            // Set image icon (by packageName)
-            try {
-                viewHolder.img.setImageDrawable(activity.packageManager.getApplicationIcon(content.toString()))
-                viewHolder.img.setOnClickListener{ chooseApp(actionName.toString()) }
-
-                if (getSavedTheme() == "dark") transformGrayscale(
-                    viewHolder.img
-                )
-
-            } catch (e : Exception) { // the button is shown, user asked to select an action
+        val gesture = gesturesList[i]
+        viewHolder.textView.text = gesture.getLabel(activity)
+        setButtonColor(viewHolder.chooseButton, vibrantColor)
+        if (getSavedTheme(activity) == "dark") transformGrayscale(
+            viewHolder.img
+        )
+        fun updateViewHolder() {
+            val content = gesture.getApp(activity)
+            if (content == ""){
                 viewHolder.img.visibility = View.INVISIBLE
                 viewHolder.removeAction.visibility = View.GONE
                 viewHolder.chooseButton.visibility = View.VISIBLE
-                viewHolder.chooseButton.setOnClickListener{ chooseApp(actionName.toString()) }
-                setButtonColor(viewHolder.chooseButton, vibrantColor)
             }
+            else if (LauncherAction.isOtherAction(content)) {
+                LauncherAction.byId(content)?.let {
+                    viewHolder.img.setImageResource(it.icon)
+                }
+            } else {
+                // Set image icon (by packageName)
+                try {
+                    viewHolder.img.setImageDrawable(activity.packageManager.getApplicationIcon(content))
+                } catch (e : Exception) {
+                    // the button is shown, user asked to select an action
+                    viewHolder.img.visibility = View.INVISIBLE
+                    viewHolder.removeAction.visibility = View.GONE
+                    viewHolder.chooseButton.visibility = View.VISIBLE
+                }
+            }
+        }
+        updateViewHolder()
+        viewHolder.img.setOnClickListener{ chooseApp(gesture) }
+        viewHolder.chooseButton.setOnClickListener{ chooseApp(gesture) }
+        viewHolder.removeAction.setOnClickListener{
+            gesture.removeApp(activity)
+            updateViewHolder()
         }
     }
 
-    override fun getItemCount(): Int { return actionsList.size }
+    override fun getItemCount(): Int { return gesturesList.size }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -126,58 +117,15 @@ class ActionsRecyclerAdapter(val activity: Activity):
     }
 
     init {
-        val doubleActions = launcherPreferences.getBoolean(PREF_DOUBLE_ACTIONS_ENABLED, false)
-
-        actionsList = ArrayList()
-        actionsList.add(ActionInfo(activity.getString(R.string.settings_apps_up),"upApp",
-            upApp
-        ))
-        if ( doubleActions) actionsList.add(ActionInfo(activity.getString(R.string.settings_apps_double_up), "doubleUpApp",
-            doubleUpApp
-        ))
-        actionsList.add(ActionInfo(activity.getString(R.string.settings_apps_down),"downApp",
-            downApp
-        ))
-        if ( doubleActions) actionsList.add(ActionInfo(activity.getString(R.string.settings_apps_double_down), "doubleDownApp",
-            doubleDownApp
-        ))
-        actionsList.add(ActionInfo(activity.getString(R.string.settings_apps_left), "leftApp",
-            leftApp
-        ))
-        if ( doubleActions) actionsList.add(ActionInfo(activity.getString(R.string.settings_apps_double_left), "doubleLeftApp",
-            doubleLeftApp
-        ))
-        actionsList.add(ActionInfo(activity.getString(R.string.settings_apps_right), "rightApp",
-            rightApp
-        ))
-        if ( doubleActions) actionsList.add(ActionInfo(activity.getString(R.string.settings_apps_double_right), "doubleRightApp",
-            doubleRightApp
-        ))
-        actionsList.add(ActionInfo(activity.getString(R.string.settings_apps_vol_up), "volumeUpApp",
-            volumeUpApp
-        ))
-        actionsList.add(ActionInfo(activity.getString(R.string.settings_apps_vol_down), "volumeDownApp",
-            volumeDownApp
-        ))
-        actionsList.add(ActionInfo(activity.getString(R.string.settings_apps_double_click), "doubleClickApp",
-            doubleClickApp
-        ))
-        actionsList.add(ActionInfo(activity.getString(R.string.settings_apps_long_click), "longClickApp",
-            longClickApp
-        ))
-        actionsList.add(ActionInfo(activity.getString(R.string.settings_apps_time), "timeApp",
-            timeApp
-        ))
-        actionsList.add(ActionInfo(activity.getString(R.string.settings_apps_date), "dateApp",
-            dateApp
-        ))
+        val doubleActions = getPreferences(activity).getBoolean(PREF_DOUBLE_ACTIONS_ENABLED, false)
+        gesturesList = Gesture.values().filter { doubleActions || !it.isDoubleVariant() }
     }
 
     /*  */
-    private fun chooseApp(forAction: String) {
+    private fun chooseApp(gesture: Gesture) {
         val intent = Intent(activity, ListActivity::class.java)
-        intent.putExtra("intention", "pick")
-        intent.putExtra("forApp", forAction) // for which action we choose the app
+        intent.putExtra("intention", ListActivity.ListActivityIntention.PICK.toString())
+        intent.putExtra("forGesture", gesture.id) // for which action we choose the app
         intendedSettingsPause = true
         activity.startActivityForResult(intent,
             REQUEST_CHOOSE_APP

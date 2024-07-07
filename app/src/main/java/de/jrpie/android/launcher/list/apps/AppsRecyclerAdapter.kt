@@ -18,9 +18,10 @@ import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
 import de.jrpie.android.launcher.REQUEST_UNINSTALL
 import de.jrpie.android.launcher.appsList
+import de.jrpie.android.launcher.getPreferences
 import de.jrpie.android.launcher.getSavedTheme
 import de.jrpie.android.launcher.launch
-import de.jrpie.android.launcher.launcherPreferences
+import de.jrpie.android.launcher.list.ListActivity
 import de.jrpie.android.launcher.list.intendedChoosePause
 import de.jrpie.android.launcher.loadApps
 import de.jrpie.android.launcher.openAppSettings
@@ -33,11 +34,12 @@ import java.util.*
  *
  * @param activity - the activity this is in
  * @param intention - why the list is displayed ("view", "pick")
- * @param forApp - the action which an app is chosen for (when the intention is "pick")
+ * @param forGesture - the action which an app is chosen for (when the intention is "pick")
  */
 class AppsRecyclerAdapter(val activity: Activity,
-                          val intention: String? = "view",
-                          val forApp: String? = ""):
+                          val intention: ListActivity.ListActivityIntention
+                            = ListActivity.ListActivityIntention.VIEW,
+                          val forGesture: String? = ""):
     RecyclerView.Adapter<AppsRecyclerAdapter.ViewHolder>() {
 
     private val appsListDisplayed: MutableList<AppInfo>
@@ -54,15 +56,15 @@ class AppsRecyclerAdapter(val activity: Activity,
             val appPackageName = appsListDisplayed[pos].packageName.toString()
 
             when (intention){
-                "view" -> {
+                ListActivity.ListActivityIntention.VIEW -> {
                     val launchIntent: Intent = context.packageManager
                         .getLaunchIntentForPackage(appPackageName)!!
                     context.startActivity(launchIntent)
                 }
-                "pick" -> {
+                ListActivity.ListActivityIntention.PICK -> {
                     val returnIntent = Intent()
                     returnIntent.putExtra("value", appPackageName)
-                    returnIntent.putExtra("forApp", forApp)
+                    returnIntent.putExtra("forGesture", forGesture)
                     activity.setResult(REQUEST_CHOOSE_APP, returnIntent)
                     activity.finish()
                 }
@@ -81,12 +83,12 @@ class AppsRecyclerAdapter(val activity: Activity,
         viewHolder.textView.text = appLabel
         viewHolder.img.setImageDrawable(appIcon)
 
-        if (getSavedTheme() == "dark") transformGrayscale(
+        if (getSavedTheme(activity) == "dark") transformGrayscale(
             viewHolder.img
         )
 
         // decide when to show the options popup menu about
-        if (isSystemApp || intention == "pick") {
+        if (isSystemApp || intention == ListActivity.ListActivityIntention.PICK) {
             viewHolder.menuDots.visibility = View.INVISIBLE
         }
         else {
@@ -166,7 +168,7 @@ class AppsRecyclerAdapter(val activity: Activity,
     fun filter(text: String) {
         // normalize text for search
         fun normalize(text: String): String{
-            return text.toLowerCase(Locale.ROOT).replace("[^a-z0-9]".toRegex(), "")
+            return text.lowercase(Locale.ROOT).replace("[^a-z0-9]".toRegex(), "")
         }
         appsListDisplayed.clear()
         if (text.isEmpty()) {
@@ -189,8 +191,8 @@ class AppsRecyclerAdapter(val activity: Activity,
         // Launch apps automatically if only one result is found and the user wants it
         // Disabled at the moment. The Setting 'PREF_SEARCH_AUTO_LAUNCH' may be
         // modifiable at some later point.
-        if (appsListDisplayed.size == 1 && intention == "view"
-            && launcherPreferences.getBoolean(PREF_SEARCH_AUTO_LAUNCH, false)) {
+        if (appsListDisplayed.size == 1 && intention == ListActivity.ListActivityIntention.VIEW
+            && getPreferences(activity).getBoolean(PREF_SEARCH_AUTO_LAUNCH, false)) {
             launch(appsListDisplayed[0].packageName.toString(), activity)
 
             val inputMethodManager = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager

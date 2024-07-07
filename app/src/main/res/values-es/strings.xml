@@ -35,20 +35,20 @@
       - Settings : Apps
       -
       -->
-    <string name="settings_apps_up">Deslizar Arriba</string>
-    <string name="settings_apps_double_up">Doble Arriba</string>
-    <string name="settings_apps_down">Deslizar Abajo</string>
-    <string name="settings_apps_double_down">Doble Abajo</string>
-    <string name="settings_apps_left">Deslizar Izquierda</string>
-    <string name="settings_apps_double_left">Doble Izquierda</string>
-    <string name="settings_apps_right">Deslizar Derecha</string>
-    <string name="settings_apps_double_right">Doble Derecha</string>
-    <string name="settings_apps_vol_up">Subir Volumen</string>
-    <string name="settings_apps_vol_down">Bajar Volumen</string>
-    <string name="settings_apps_double_click">Doble Click</string>
-    <string name="settings_apps_long_click">Click Largo</string>
-    <string name="settings_apps_date">Toca la fecha</string>
-    <string name="settings_apps_time">Toca el reloj</string>
+    <string name="settings_gesture_up">Deslizar Arriba</string>
+    <string name="settings_gesture_double_up">Doble Arriba</string>
+    <string name="settings_gesture_down">Deslizar Abajo</string>
+    <string name="settings_gesture_double_down">Doble Abajo</string>
+    <string name="settings_gesture_left">Deslizar Izquierda</string>
+    <string name="settings_gesture_double_left">Doble Izquierda</string>
+    <string name="settings_gesture_right">Deslizar Derecha</string>
+    <string name="settings_gesture_double_right">Doble Derecha</string>
+    <string name="settings_gesture_vol_up">Subir Volumen</string>
+    <string name="settings_gesture_vol_down">Bajar Volumen</string>
+    <string name="settings_gesture_double_click">Doble Click</string>
+    <string name="settings_gesture_long_click">Click Largo</string>
+    <string name="settings_gesture_date">Toca la fecha</string>
+    <string name="settings_gesture_time">Toca el reloj</string>
 
     <string name="settings_apps_choose">Elegir Aplicación</string>
 

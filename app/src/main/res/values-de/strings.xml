@@ -25,20 +25,20 @@
       - Settings : Apps
       -
       -->
-    <string name="settings_apps_up">Hochwischen</string>
-    <string name="settings_apps_double_up">Doppelt hoch</string>
-    <string name="settings_apps_down">Runterwischen</string>
-    <string name="settings_apps_double_down">Doppelt runter</string>
-    <string name="settings_apps_left">Linkswischen</string>
-    <string name="settings_apps_double_left">Doppelt links</string>
-    <string name="settings_apps_right">Rechtswischen</string>
-    <string name="settings_apps_double_right">Doppelt rechts</string>
-    <string name="settings_apps_vol_up">Lautstärke +</string>
-    <string name="settings_apps_vol_down">Lautstärke -</string>
-    <string name="settings_apps_double_click">Doppelklick</string>
-    <string name="settings_apps_long_click">Langer Klick</string>
-    <string name="settings_apps_date">Datum antippen</string>
-    <string name="settings_apps_time">Uhr antippen</string>
+    <string name="settings_gesture_up">Hochwischen</string>
+    <string name="settings_gesture_double_up">Doppelt hoch</string>
+    <string name="settings_gesture_down">Runterwischen</string>
+    <string name="settings_gesture_double_down">Doppelt runter</string>
+    <string name="settings_gesture_left">Linkswischen</string>
+    <string name="settings_gesture_double_left">Doppelt links</string>
+    <string name="settings_gesture_right">Rechtswischen</string>
+    <string name="settings_gesture_double_right">Doppelt rechts</string>
+    <string name="settings_gesture_vol_up">Lautstärke +</string>
+    <string name="settings_gesture_vol_down">Lautstärke -</string>
+    <string name="settings_gesture_double_click">Doppelklick</string>
+    <string name="settings_gesture_long_click">Langer Klick</string>
+    <string name="settings_gesture_date">Datum antippen</string>
+    <string name="settings_gesture_time">Uhr antippen</string>
 
     <string name="settings_apps_choose">App wählen</string>
 

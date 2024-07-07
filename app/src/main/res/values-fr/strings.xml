@@ -25,20 +25,20 @@
       - Settings : Apps
       -
       -->
-    <string name="settings_apps_up">Balayez haut</string>
-    <string name="settings_apps_double_up">Double haut</string>
-    <string name="settings_apps_down">Balayez bas</string>
-    <string name="settings_apps_double_down">Double bas</string>
-    <string name="settings_apps_left">Balayez gauche</string>
-    <string name="settings_apps_double_left">Double gauche</string>
-    <string name="settings_apps_right">Balayez droit</string>
-    <string name="settings_apps_double_right">Double droit</string>
-    <string name="settings_apps_vol_up">Monter volume</string>
-    <string name="settings_apps_vol_down">Baisser volume</string>
-    <string name="settings_apps_double_click">Double clic</string>
-    <string name="settings_apps_long_click">Clic long</string>
-    <string name="settings_apps_date">Touchez date</string>
-    <string name="settings_apps_time">Touchez horloge</string>
+    <string name="settings_gesture_up">Balayez haut</string>
+    <string name="settings_gesture_double_up">Double haut</string>
+    <string name="settings_gesture_down">Balayez bas</string>
+    <string name="settings_gesture_double_down">Double bas</string>
+    <string name="settings_gesture_left">Balayez gauche</string>
+    <string name="settings_gesture_double_left">Double gauche</string>
+    <string name="settings_gesture_right">Balayez droit</string>
+    <string name="settings_gesture_double_right">Double droit</string>
+    <string name="settings_gesture_vol_up">Monter volume</string>
+    <string name="settings_gesture_vol_down">Baisser volume</string>
+    <string name="settings_gesture_double_click">Double clic</string>
+    <string name="settings_gesture_long_click">Clic long</string>
+    <string name="settings_gesture_date">Touchez date</string>
+    <string name="settings_gesture_time">Touchez horloge</string>
 
     <string name="settings_apps_choose">Choisir App</string>
 
