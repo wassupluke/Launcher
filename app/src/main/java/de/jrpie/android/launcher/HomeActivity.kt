@@ -133,7 +133,9 @@ class HomeActivity: UIObject, AppCompatActivity(),
         return true
     }
 
-    override fun onFling(e1: MotionEvent, e2: MotionEvent, dX: Float, dY: Float): Boolean {
+    override fun onFling(e1: MotionEvent?, e2: MotionEvent, dX: Float, dY: Float): Boolean {
+
+        if (e1 == null) return false;
 
         val width = displayMetrics.widthPixels
         val height = displayMetrics.heightPixels
@@ -223,7 +225,8 @@ class HomeActivity: UIObject, AppCompatActivity(),
      *  because this inherits from GestureDetector.OnGestureListener */
     override fun onDoubleTapEvent(event: MotionEvent): Boolean { return false }
     override fun onDown(event: MotionEvent): Boolean { return false }
-    override fun onScroll(e1: MotionEvent, e2: MotionEvent, dX: Float, dY: Float): Boolean { return false }
+    override fun onScroll(e1: MotionEvent?, e2: MotionEvent, dX: Float, dY: Float): Boolean { return false }
     override fun onShowPress(event: MotionEvent) {}
     override fun onSingleTapUp(event: MotionEvent): Boolean { return false }
+
 }
