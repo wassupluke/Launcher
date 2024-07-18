@@ -107,6 +107,8 @@
     <string name="settings_meta_contact_url">https://www.finnmglas.com/de/kontakt/</string>
     <string name="settings_meta_fork_contact">Entwickler des Fork kontaktieren</string>
 
+    <string name="settings_meta_privacy">Datenschutzerklärung</string>
+
 
     <!--
       -

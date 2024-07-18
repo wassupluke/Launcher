@@ -129,6 +129,7 @@
     <string name="settings_meta_contact_url">https://www.finnmglas.com/contact/</string>
     <string name="settings_meta_fork_contact">Contact the developer of the fork (desgraciadamente no habla español)</string>
 
+    <string name="settings_meta_privacy">Política de privacidad</string>
     <string name="settings_meta_discord">Unete a nuestro discord!</string>
 
     <!--

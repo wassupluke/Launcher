@@ -103,6 +103,8 @@ class SettingsFragmentMeta : Fragment(), UIObject {
             )
         }
 
+
+
         // contact developer
         settings_meta_button_contact.setOnClickListener {
             intendedSettingsPause = true
@@ -117,6 +119,15 @@ class SettingsFragmentMeta : Fragment(), UIObject {
             intendedSettingsPause = true
             openNewTabWindow(
                 getString(R.string.settings_meta_fork_contact_url),
+                context!!
+            )
+        }
+
+        // privacy policy
+        settings_meta_button_privacy.setOnClickListener {
+            intendedSettingsPause = true
+            openNewTabWindow(
+                getString(R.string.settings_meta_privacy_url),
                 context!!
             )
         }
