@@ -118,7 +118,10 @@ class ActionsRecyclerAdapter(val activity: Activity):
 
     init {
         val doubleActions = getPreferences(activity).getBoolean(PREF_DOUBLE_ACTIONS_ENABLED, false)
-        gesturesList = Gesture.values().filter { doubleActions || !it.isDoubleVariant() }
+        val edgeActions = getPreferences(activity).getBoolean(PREF_EDGE_ACTIONS_ENABLED, false)
+        gesturesList = Gesture.values().filter {
+            (doubleActions || !it.isDoubleVariant())
+                    && (edgeActions || !it.isEdgeVariant())}
     }
 
     /*  */

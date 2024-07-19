@@ -10,6 +10,8 @@ This is a fork of [finnmglas's app Launcher][original-repo].
 
 ## Notable changes:
 
+* Edge gestures: There is a setting to allow distinguishing swiping at the edges of the screen from swiping in the center.
+
 ### Visual
 * This app uses the system wallpaper instead of rolling a custom solution.
 * The font has been changed to [Hack][hack-font].
@@ -26,6 +28,7 @@ This is a fork of [finnmglas's app Launcher][original-repo].
 * Different apps set as default.
 * Package name was changed to `de.jrpie.android.launcher` to avoid clashing with the original app.
 * Dropped support for API < 21 (i.e. pre Lollypop)
+* Some refactoring
 ---
 ---
   [hack-font]: https://sourcefoundry.org/hack/

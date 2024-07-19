@@ -41,6 +41,14 @@
     <string name="settings_gesture_double_left">Double Left</string>
     <string name="settings_gesture_right">Swipe Right</string>
     <string name="settings_gesture_double_right">Double Right</string>
+    <string name="settings_gesture_right_top_edge">Swipe Right (Top)</string>
+    <string name="settings_gesture_right_bottom_edge">Swipe Right (Bottom)</string>
+    <string name="settings_gesture_left_bottom_edge">Swipe Left (Bottom)</string>
+    <string name="settings_gesture_left_top_edge">Swipe Left (Top)</string>
+    <string name="settings_gesture_up_left_edge">Swipe Up (Left Edge)</string>
+    <string name="settings_gesture_up_right_edge">Swipe Up (Right Edge)</string>
+    <string name="settings_gesture_down_left_edge">Swipe Down (Left Edge)</string>
+    <string name="settings_gesture_down_right_edge">Swipe Down (Right Edge)</string>
     <string name="settings_gesture_vol_up">Volume Up</string>
     <string name="settings_gesture_vol_down">Volume Down</string>
     <string name="settings_gesture_double_click">Double Click</string>
@@ -102,6 +110,7 @@
     <string name="settings_launcher_section_functions">Functions</string>
 
     <string name="settings_launcher_enable_double">Double swipe actions</string>
+    <string name="settings_launcher_enable_edge">Edge swipe actions</string>
     <string name="settings_launcher_auto_launch">Launch search results</string>
     <string name="settings_launcher_auto_keyboard">Start keyboard for search</string>
 

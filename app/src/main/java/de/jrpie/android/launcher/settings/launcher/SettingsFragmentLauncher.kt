@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.SeekBar
+import android.widget.Switch
 import androidx.fragment.app.Fragment
 import de.jrpie.android.launcher.PREF_DATE_FORMAT
 import de.jrpie.android.launcher.PREF_DOUBLE_ACTIONS_ENABLED
+import de.jrpie.android.launcher.PREF_EDGE_ACTIONS_ENABLED
 import de.jrpie.android.launcher.PREF_SCREEN_FULLSCREEN
 import de.jrpie.android.launcher.PREF_SCREEN_TIMEOUT_DISABLED
 import de.jrpie.android.launcher.PREF_SEARCH_AUTO_KEYBOARD
@@ -58,12 +60,26 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
         setSwitchColor(settings_launcher_switch_auto_launch, vibrantColor)
         setSwitchColor(settings_launcher_switch_auto_keyboard, vibrantColor)
         setSwitchColor(settings_launcher_switch_enable_double, vibrantColor)
+        setSwitchColor(settings_launcher_switch_enable_edge, vibrantColor)
+
 
         setButtonColor(settings_launcher_button_choose_wallpaper, vibrantColor)
         settings_seekbar_sensitivity.progressDrawable.setColorFilter(vibrantColor, PorterDuff.Mode.SRC_IN)
     }
 
     override fun setOnClicks() {
+
+        val preferences = getPreferences(activity!!)
+
+        fun bindSwitchToPref(switch: Switch, pref: String, default: Boolean, onChange: (Boolean) -> Unit){
+            switch.isChecked = preferences.getBoolean(pref, default)
+            switch.setOnCheckedChangeListener { _, isChecked -> // Toggle double actions
+                preferences.edit()
+                    .putBoolean(pref, isChecked)
+                    .apply()
+                onChange(isChecked);
+            }
+        }
 
         settings_launcher_button_choose_wallpaper.setOnClickListener {
             // https://github.com/LineageOS/android_packages_apps_Trebuchet/blob/6caab89b21b2b91f0a439e1fd8c4510dcb255819/src/com/android/launcher3/views/OptionsPopupView.java#L271
@@ -74,45 +90,21 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
             startActivity(intent)
         }
 
-        val preferences = getPreferences(activity!!)
 
-        settings_launcher_switch_screen_timeout.isChecked = preferences.getBoolean(PREF_SCREEN_TIMEOUT_DISABLED, false)
-        settings_launcher_switch_screen_timeout.setOnCheckedChangeListener { _, isChecked ->  // Toggle screen timeout
-            preferences.edit()
-                .putBoolean(PREF_SCREEN_TIMEOUT_DISABLED, isChecked)
-                .apply()
 
+        bindSwitchToPref(settings_launcher_switch_screen_timeout, PREF_SCREEN_TIMEOUT_DISABLED, false) {
             setWindowFlags(activity!!.window)
         }
-        settings_launcher_switch_screen_full.isChecked = preferences.getBoolean(PREF_SCREEN_FULLSCREEN, true)
-        settings_launcher_switch_screen_full.setOnCheckedChangeListener { _, isChecked -> // Toggle fullscreen
-            preferences.edit()
-                .putBoolean(PREF_SCREEN_FULLSCREEN, isChecked)
-                .apply()
-
+        bindSwitchToPref(settings_launcher_switch_screen_full, PREF_SCREEN_FULLSCREEN, true) {
             setWindowFlags(activity!!.window)
         }
-
-        settings_launcher_switch_auto_launch.isChecked = preferences.getBoolean(PREF_SEARCH_AUTO_LAUNCH, false)
-        settings_launcher_switch_auto_launch.setOnCheckedChangeListener { _, isChecked -> // Toggle double actions
-            preferences.edit()
-                .putBoolean(PREF_SEARCH_AUTO_LAUNCH, isChecked)
-                .apply()
+        bindSwitchToPref(settings_launcher_switch_auto_launch, PREF_SEARCH_AUTO_LAUNCH, false) {}
+        bindSwitchToPref(settings_launcher_switch_auto_keyboard, PREF_SEARCH_AUTO_KEYBOARD, true) {}
+        bindSwitchToPref(settings_launcher_switch_enable_double, PREF_DOUBLE_ACTIONS_ENABLED, false) {
+            intendedSettingsPause = true
+            activity!!.recreate()
         }
-
-        settings_launcher_switch_auto_keyboard.isChecked = preferences.getBoolean(PREF_SEARCH_AUTO_KEYBOARD, true)
-        settings_launcher_switch_auto_keyboard.setOnCheckedChangeListener { _, isChecked -> // Toggle double actions
-            preferences.edit()
-                .putBoolean(PREF_SEARCH_AUTO_KEYBOARD, isChecked)
-                .apply()
-        }
-
-        settings_launcher_switch_enable_double.isChecked = preferences.getBoolean(PREF_DOUBLE_ACTIONS_ENABLED, false)
-        settings_launcher_switch_enable_double.setOnCheckedChangeListener { _, isChecked -> // Toggle double actions
-            preferences.edit()
-                .putBoolean(PREF_DOUBLE_ACTIONS_ENABLED, isChecked)
-                .apply()
-
+        bindSwitchToPref(settings_launcher_switch_enable_edge, PREF_EDGE_ACTIONS_ENABLED, false) {
             intendedSettingsPause = true
             activity!!.recreate()
         }

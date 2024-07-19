@@ -8,6 +8,9 @@
         <item>launcher:choose</item> <!-- The apps list -->
     </string-array>
 
+    <string-array name="default_up_left" />
+    <string-array name="default_up_right" />
+
     <!-- Swipe double up - Translation app -->
     <string-array name="default_double_up">
         <item>com.google.android.apps.translate</item> <!-- Google Translate -->
@@ -26,6 +29,9 @@
         <item>com.android.chrome</item> <!-- Chrome -->
     </string-array>
 
+    <string-array name="default_down_left" />
+    <string-array name="default_down_right" />
+
     <!-- Swipe double down - Secure Browser -->
     <string-array name="default_double_down">
         <item>org.torproject.torbrowser</item> <!-- Tor Browser -->
@@ -39,6 +45,9 @@
         <item>com.google.android.gm</item> <!-- Google Mail -->
     </string-array>
 
+    <string-array name="default_right_top" />
+    <string-array name="default_right_bottom" />
+
     <!-- Swipe double right -->
     <string-array name="default_double_right">
         <item>com.android.documentsui</item>
@@ -51,6 +60,11 @@
         <item>im.vector.app</item> <!-- Element -->
         <item>org.thoughtcrime.securesms</item> <!-- Signal -->
     </string-array>
+
+
+    <string-array name="default_left_top" />
+    <string-array name="default_left_bottom" />
+
 
     <!-- Swipe double left - More messengers -->
     <string-array name="default_double_left">

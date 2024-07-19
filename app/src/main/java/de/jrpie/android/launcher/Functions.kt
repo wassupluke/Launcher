@@ -50,6 +50,7 @@ const val PREF_SCREEN_FULLSCREEN = "useFullScreen"
 const val PREF_DATE_FORMAT = "dateFormat"
 
 const val PREF_DOUBLE_ACTIONS_ENABLED = "enableDoubleActions"
+const val PREF_EDGE_ACTIONS_ENABLED = "enableEdgeActions"
 const val PREF_SEARCH_AUTO_LAUNCH = "searchAutoLaunch"
 const val PREF_SEARCH_AUTO_KEYBOARD = "searchAutoKeyboard"
 

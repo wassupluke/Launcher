@@ -16,6 +16,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.concurrent.fixedRateTimer
 import kotlin.math.abs
+import kotlin.math.max
+import kotlin.math.min
 
 /**
  * [HomeActivity] is the actual application Launcher,
@@ -146,7 +148,8 @@ class HomeActivity: UIObject, AppCompatActivity(),
         val preferences = getPreferences(this)
 
         val doubleActions = preferences.getBoolean(PREF_DOUBLE_ACTIONS_ENABLED, false)
-
+        val edgeActions = preferences.getBoolean(PREF_EDGE_ACTIONS_ENABLED, false)
+        val edgeStrictness = 0.15
         // how distinguished the swipe has to be to launch something
         // strictness = opposite of sensitivity. TODO - May have to be adjusted
         val strictness = (4 / bufferedPointerCount) * ((100 - preferences.getInt(PREF_SLIDE_SENSITIVITY, 50)) / 50)
@@ -168,6 +171,20 @@ class HomeActivity: UIObject, AppCompatActivity(),
 
         if (doubleActions && bufferedPointerCount > 1) {
             gesture = gesture?.let(Gesture::getDoubleVariant)
+        }
+
+        if (edgeActions) {
+            if(max(e1.x, e2.x) < edgeStrictness * width){
+                gesture = gesture?.let{it.getEdgeVariant(Gesture.Edge.LEFT)};
+            } else if (min(e1.x, e2.x) > (1-edgeStrictness) * width){
+                gesture = gesture?.let{it.getEdgeVariant(Gesture.Edge.RIGHT)};
+            }
+
+            if(max(e1.y, e2.y) < edgeStrictness * height){
+                gesture = gesture?.let{it.getEdgeVariant(Gesture.Edge.TOP)};
+            } else if (min(e1.y, e2.y) > (1-edgeStrictness) * height){
+                gesture = gesture?.let{it.getEdgeVariant(Gesture.Edge.BOTTOM)};
+            }
         }
         gesture?.invoke(this)
 
