@@ -51,7 +51,6 @@ class ListActivity : AppCompatActivity(), UIObject {
         setContentView(R.layout.list)
 
         list_settings.setOnClickListener {
-            launch(LauncherAction.SETTINGS.id, this@ListActivity, R.anim.bottom_up)
             LauncherAction.SETTINGS.launch(this@ListActivity)
         }
 
