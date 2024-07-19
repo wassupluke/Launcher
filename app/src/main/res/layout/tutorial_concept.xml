@@ -46,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
+    <TextView
         android:id="@+id/tutorial_concept_badge_version"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -54,7 +54,8 @@
         android:layout_marginLeft="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:src="@drawable/badge_version"
+        android:textSize="32sp"
+        android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/tutorial_concept_text_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
