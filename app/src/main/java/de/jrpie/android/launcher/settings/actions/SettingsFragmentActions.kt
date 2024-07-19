@@ -56,8 +56,9 @@ class SettingsFragmentActions : Fragment(), UIObject {
                 val rateIntent = Intent(
                     Intent.ACTION_VIEW,
                     Uri.parse("https://play.google.com/store/apps/"))
-                startActivity(rateIntent)
+
                 intendedSettingsPause = true
+                startActivity(rateIntent)
             } catch (e: ActivityNotFoundException) {
                 Toast.makeText(this.context, getString(R.string.settings_apps_toast_store_not_found), Toast.LENGTH_SHORT)
                     .show()

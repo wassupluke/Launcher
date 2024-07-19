@@ -63,6 +63,7 @@ class SettingsFragmentMeta : Fragment(), UIObject {
         setButtonColor(settings_meta_button_report_bug, vibrantColor)
         setButtonColor(settings_meta_button_contact, vibrantColor)
         setButtonColor(settings_meta_button_fork_contact, vibrantColor)
+        setButtonColor(settings_meta_button_privacy, vibrantColor)
     }
 
     override fun setOnClicks() {
