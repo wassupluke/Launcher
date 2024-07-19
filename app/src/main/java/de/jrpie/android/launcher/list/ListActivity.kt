@@ -3,6 +3,7 @@ package de.jrpie.android.launcher.list
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -12,16 +13,18 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
-import de.jrpie.android.launcher.list.other.LauncherAction
+import de.jrpie.android.launcher.PREF_SCREEN_FULLSCREEN
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_UNINSTALL
 import de.jrpie.android.launcher.UIObject
+import de.jrpie.android.launcher.getPreferences
 import de.jrpie.android.launcher.launch
 import de.jrpie.android.launcher.list.apps.ListFragmentApps
+import de.jrpie.android.launcher.list.other.LauncherAction
 import de.jrpie.android.launcher.list.other.ListFragmentOther
-import de.jrpie.android.launcher.settings.intendedSettingsPause
 import de.jrpie.android.launcher.vibrantColor
 import kotlinx.android.synthetic.main.list.*
+
 
 var intendedChoosePause = false // know when to close
 
@@ -50,6 +53,25 @@ class ListActivity : AppCompatActivity(), UIObject {
         list_settings.setOnClickListener {
             launch(LauncherAction.SETTINGS.id, this@ListActivity, R.anim.bottom_up)
             LauncherAction.SETTINGS.launch(this@ListActivity)
+        }
+
+        // android:windowSoftInputMode="adjustResize" doesn't work in full screen.
+        // workaround from https://stackoverflow.com/a/57623505
+        this.window.decorView.viewTreeObserver.addOnGlobalLayoutListener {
+            val r = Rect()
+            window.decorView.getWindowVisibleDisplayFrame(r)
+            val height: Int =
+                list_container.context.resources.displayMetrics.heightPixels
+            val diff = height - r.bottom
+            if (diff != 0 && getPreferences(this).getBoolean(PREF_SCREEN_FULLSCREEN, false)) {
+                if (list_container.paddingBottom !== diff) {
+                    list_container.setPadding(0, 0, 0, diff)
+                }
+            } else {
+                if (list_container.paddingBottom !== 0) {
+                    list_container.setPadding(0, 0, 0, 0)
+                }
+            }
         }
     }
 
