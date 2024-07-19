@@ -13,7 +13,7 @@ This is a fork of [finnmglas's app Launcher][original-repo].
 * Edge gestures: There is a setting to allow distinguishing swiping at the edges of the screen from swiping in the center.
 
 ### Visual
-* This app uses the system wallpaper instead of rolling a custom solution.
+* This app uses the system wallpaper instead of a custom solution.
 * The font has been changed to [Hack][hack-font].
 * Font Awesome Icons were replaced by Material icons.
 * The gear button on the home screen was removed. Instead pressing back opens the list of applications and the app settings are accessible from there.
