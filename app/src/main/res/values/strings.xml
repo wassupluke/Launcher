@@ -4,7 +4,7 @@
       - General
       -
       -->
-    <string name="app_name" translatable="false">Launcher</string>
+    <string name="app_name" translatable="false">μLauncher</string>
     <string name="preference_file_key" translatable="false">V3RYR4ND0MK3YCR4P</string>
 
     <!--
@@ -196,7 +196,7 @@
     <string name="tutorial_setup_text_2">You can also change your selection later.</string>
 
     <string name="tutorial_finish_title">Let\'s go!</string>
-    <string name="tutorial_finish_text">You are ready to get started!\n\nI hope this is of great value to you!\n\n- Finn (who made Launcher)</string>
+    <string name="tutorial_finish_text">You are ready to get started!\n\nI hope this is of great value to you!\n\n- Finn (who made Launcher)\n\tand Josia (who made some improvements and maintains the fork μLauncher)</string>
     <string name="tutorial_finish_button">Start</string>
 
 

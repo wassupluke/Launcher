@@ -101,12 +101,14 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
         bindSwitchToPref(settings_launcher_switch_auto_launch, PREF_SEARCH_AUTO_LAUNCH, false) {}
         bindSwitchToPref(settings_launcher_switch_auto_keyboard, PREF_SEARCH_AUTO_KEYBOARD, true) {}
         bindSwitchToPref(settings_launcher_switch_enable_double, PREF_DOUBLE_ACTIONS_ENABLED, false) {
-            intendedSettingsPause = true
-            activity?.recreate()
+            //intendedSettingsPause = true
+            // TODO fixme: This causes the app to crash on some devices.
+            //activity?.recreate()
         }
         bindSwitchToPref(settings_launcher_switch_enable_edge, PREF_EDGE_ACTIONS_ENABLED, false) {
-            intendedSettingsPause = true
-            activity?.recreate()
+            //intendedSettingsPause = true
+            // TODO fixme
+            //activity?.recreate()
         }
 
         settings_seekbar_sensitivity.setOnSeekBarChangeListener(
