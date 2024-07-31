@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import de.jrpie.android.launcher.*
 import de.jrpie.android.launcher.list.ListActivity
 import de.jrpie.android.launcher.settings.intendedSettingsPause
-import kotlinx.android.synthetic.main.settings_actions.*
+import de.jrpie.android.launcher.databinding.SettingsActionsBinding
 
 
 /**
@@ -25,11 +25,13 @@ import kotlinx.android.synthetic.main.settings_actions.*
 
 class SettingsFragmentActions : Fragment(), UIObject {
 
+    private lateinit var binding: SettingsActionsBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.settings_actions, container, false)
+        binding = SettingsActionsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onStart() {
@@ -38,20 +40,20 @@ class SettingsFragmentActions : Fragment(), UIObject {
     }
 
     override fun applyTheme() {
-        setButtonColor(settings_actions_button_view_apps, vibrantColor)
-        setButtonColor(settings_actions_button_install_apps, vibrantColor)
+        setButtonColor(binding.settingsActionsButtonViewApps, vibrantColor)
+        setButtonColor(binding.settingsActionsButtonInstallApps, vibrantColor)
     }
 
     override fun setOnClicks() {
 
         // App management buttons
-        settings_actions_button_view_apps.setOnClickListener{
+        binding.settingsActionsButtonViewApps.setOnClickListener{
             val intent = Intent(this.context, ListActivity::class.java)
             intent.putExtra("intention", ListActivity.ListActivityIntention.VIEW.toString())
             intendedSettingsPause = true
             startActivity(intent)
         }
-        settings_actions_button_install_apps.setOnClickListener{
+        binding.settingsActionsButtonInstallApps.setOnClickListener{
             try {
                 val rateIntent = Intent(
                     Intent.ACTION_VIEW,

@@ -1,10 +1,23 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 34
     buildToolsVersion "34.0.0"
+
+    dataBinding {
+        enabled = true
+    }
+
+    packaging {
+        resources.excludes.addAll(
+                [
+                        "META-INF/LICENSE.md",
+                        "META-INF/NOTICE.md",
+                        "META-INF/LICENSE-notice.md"
+                ]
+        )
+    }
 
     defaultConfig {
         applicationId "de.jrpie.android.launcher"
@@ -15,6 +28,20 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+
+
 
     buildTypes {
         release {
@@ -42,4 +69,6 @@ dependencies {
     implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     implementation 'androidx.palette:palette-ktx:1.0.0'
+    implementation "com.android.databinding:compiler:$android_plugin_version"
 }
+

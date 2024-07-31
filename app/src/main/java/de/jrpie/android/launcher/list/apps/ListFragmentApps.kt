@@ -8,13 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import de.jrpie.android.launcher.PREF_SEARCH_AUTO_KEYBOARD
 import de.jrpie.android.launcher.R
+import de.jrpie.android.launcher.databinding.ListAppsBinding
 import de.jrpie.android.launcher.UIObject
 import de.jrpie.android.launcher.getPreferences
 import de.jrpie.android.launcher.list.ListActivity
 import de.jrpie.android.launcher.list.forGesture
 import de.jrpie.android.launcher.list.intention
 import de.jrpie.android.launcher.openSoftKeyboard
-import kotlinx.android.synthetic.main.list_apps.*
 
 
 /**
@@ -23,12 +23,14 @@ import kotlinx.android.synthetic.main.list_apps.*
  * It is a list of all installed applications that are can be launched.
  */
 class ListFragmentApps : Fragment(), UIObject {
+    private lateinit var binding: ListAppsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.list_apps, container, false)
+        binding = ListAppsBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onStart() {
@@ -46,14 +48,14 @@ class ListFragmentApps : Fragment(), UIObject {
         val appsRViewAdapter = AppsRecyclerAdapter(activity!!, intention, forGesture)
 
         // set up the list / recycler
-        list_apps_rview.apply {
+        binding.listAppsRview.apply {
             // improve performance (since content changes don't change the layout size)
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = appsRViewAdapter
         }
 
-        list_apps_searchview.setOnQueryTextListener(object :
+        binding.listAppsSearchview.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String): Boolean {
@@ -68,9 +70,9 @@ class ListFragmentApps : Fragment(), UIObject {
         })
 
         if (intention == ListActivity.ListActivityIntention.VIEW
-            && getPreferences(context!!)
+            && getPreferences(requireContext())
                 .getBoolean(PREF_SEARCH_AUTO_KEYBOARD, true)) {
-            openSoftKeyboard(context!!, list_apps_searchview)
+            openSoftKeyboard(requireContext(), binding.listAppsSearchview)
         }
     }
 }

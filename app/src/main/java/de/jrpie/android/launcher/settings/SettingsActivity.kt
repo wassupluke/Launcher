@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import de.jrpie.android.launcher.*
 import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.settings.*
+import de.jrpie.android.launcher.databinding.SettingsBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -29,12 +29,14 @@ var intendedSettingsPause = false // know when to close
  * Settings are closed automatically if the activity goes `onPause` unexpectedly.
  */
 class SettingsActivity: AppCompatActivity(), UIObject {
+    private lateinit var binding: SettingsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         // Initialise layout
-        setContentView(R.layout.settings)
+        binding = SettingsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // set up tabs and swiping in settings
         val sectionsPagerAdapter = SettingsSectionsPagerAdapter(this, supportFragmentManager)
@@ -62,14 +64,14 @@ class SettingsActivity: AppCompatActivity(), UIObject {
     override fun applyTheme() {
         //settings_system.setTextColor(vibrantColor)
         //settings_close.setTextColor(vibrantColor)
-        settings_tabs.setSelectedTabIndicatorColor(vibrantColor)
+        binding.settingsTabs.setSelectedTabIndicatorColor(vibrantColor)
     }
 
     override fun setOnClicks(){
         // As older APIs somehow do not recognize the xml defined onClick
-        settings_close.setOnClickListener { finish() }
+        binding.settingsClose.setOnClickListener { finish() }
         // open device settings (see https://stackoverflow.com/a/62092663/12787264)
-        settings_system.setOnClickListener {
+        binding.settingsSystem.setOnClickListener {
             intendedSettingsPause = true
             startActivity(Intent(Settings.ACTION_SETTINGS))
         }

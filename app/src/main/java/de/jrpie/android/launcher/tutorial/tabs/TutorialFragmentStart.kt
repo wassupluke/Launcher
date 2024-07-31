@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import de.jrpie.android.launcher.*
-import kotlinx.android.synthetic.main.tutorial_start.*
+import de.jrpie.android.launcher.databinding.TutorialStartBinding
 
 /**
  * The [TutorialFragmentStart] is a used as a tab in the TutorialActivity.
@@ -15,11 +15,13 @@ import kotlinx.android.synthetic.main.tutorial_start.*
  */
 class TutorialFragmentStart : Fragment(), UIObject {
 
+    private lateinit var binding: TutorialStartBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.tutorial_start, container, false)
+        binding = TutorialStartBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onStart(){
@@ -29,8 +31,8 @@ class TutorialFragmentStart : Fragment(), UIObject {
 
     override fun applyTheme() {
 
-        tutorial_start_icon_right.setTextColor(vibrantColor)
-        tutorial_start_icon_right.blink()
+        binding.tutorialStartIconRight.setTextColor(vibrantColor)
+        binding.tutorialStartIconRight.blink()
 
     }
 }

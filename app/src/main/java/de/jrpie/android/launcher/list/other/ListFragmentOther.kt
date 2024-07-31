@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import de.jrpie.android.launcher.R
-import kotlinx.android.synthetic.main.list_other.*
+import de.jrpie.android.launcher.databinding.ListOtherBinding
 
 /**
  * The [ListFragmentOther] is used as a tab in ListActivity,
@@ -17,19 +17,22 @@ import kotlinx.android.synthetic.main.list_other.*
  */
 class ListFragmentOther : Fragment() {
 
+    private lateinit var binding: ListOtherBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.list_other, container, false)
+        binding = ListOtherBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onStart() {
         // set up the list / recycler
         val viewManager = LinearLayoutManager(context)
-        val viewAdapter = OtherRecyclerAdapter(activity!!)
+        val viewAdapter = OtherRecyclerAdapter(requireActivity())
 
-        list_other_rview.apply {
+        binding.listOtherRview.apply {
             // improve performance (since content changes don't change the layout size)
             setHasFixedSize(true)
             layoutManager = viewManager

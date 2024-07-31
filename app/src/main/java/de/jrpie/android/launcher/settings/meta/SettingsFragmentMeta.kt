@@ -17,7 +17,7 @@ import de.jrpie.android.launcher.setButtonColor
 import de.jrpie.android.launcher.settings.intendedSettingsPause
 import de.jrpie.android.launcher.tutorial.TutorialActivity
 import de.jrpie.android.launcher.vibrantColor
-import kotlinx.android.synthetic.main.settings_meta.*
+import de.jrpie.android.launcher.databinding.SettingsMetaBinding
 
 /**
  * The [SettingsFragmentMeta] is a used as a tab in the SettingsActivity.
@@ -29,11 +29,13 @@ import kotlinx.android.synthetic.main.settings_meta.*
  */
 class SettingsFragmentMeta : Fragment(), UIObject {
 
+    private lateinit var binding: SettingsMetaBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.settings_meta, container, false)
+        binding = SettingsMetaBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onStart() {
@@ -57,37 +59,37 @@ class SettingsFragmentMeta : Fragment(), UIObject {
     }
 
     override fun applyTheme() {
-        setButtonColor(settings_meta_button_select_launcher, vibrantColor)
-        setButtonColor(settings_meta_button_view_tutorial, vibrantColor)
-        setButtonColor(settings_meta_button_reset_settings, vibrantColor)
-        setButtonColor(settings_meta_button_report_bug, vibrantColor)
-        setButtonColor(settings_meta_button_contact, vibrantColor)
-        setButtonColor(settings_meta_button_fork_contact, vibrantColor)
-        setButtonColor(settings_meta_button_privacy, vibrantColor)
+        setButtonColor(binding.settingsMetaButtonSelectLauncher, vibrantColor)
+        setButtonColor(binding.settingsMetaButtonViewTutorial, vibrantColor)
+        setButtonColor(binding.settingsMetaButtonResetSettings, vibrantColor)
+        setButtonColor(binding.settingsMetaButtonReportBug, vibrantColor)
+        setButtonColor(binding.settingsMetaButtonContact, vibrantColor)
+        setButtonColor(binding.settingsMetaButtonForkContact, vibrantColor)
+        setButtonColor(binding.settingsMetaButtonPrivacy, vibrantColor)
     }
 
     override fun setOnClicks() {
 
-        settings_meta_button_select_launcher.setOnClickListener {
+        binding.settingsMetaButtonSelectLauncher.setOnClickListener {
             intendedSettingsPause = true
             val callHomeSettingIntent = Intent(Settings.ACTION_HOME_SETTINGS)
             startActivity(callHomeSettingIntent)
         }
 
-        settings_meta_button_view_tutorial.setOnClickListener {
+        binding.settingsMetaButtonViewTutorial.setOnClickListener {
             intendedSettingsPause = true
             startActivity(Intent(this.context, TutorialActivity::class.java))
         }
 
         // prompting for settings-reset confirmation
-        settings_meta_button_reset_settings.setOnClickListener {
-            AlertDialog.Builder(this.context!!, R.style.AlertDialogCustom)
+        binding.settingsMetaButtonResetSettings.setOnClickListener {
+            AlertDialog.Builder(this.requireContext(), R.style.AlertDialogCustom)
                 .setTitle(getString(R.string.settings_meta_reset))
                 .setMessage(getString(R.string.settings_meta_reset_confirm))
                 .setPositiveButton(android.R.string.ok
                 ) { _, _ ->
-                    resetSettings(this.context!!)
-                    activity!!.finish()
+                    resetSettings(this.requireContext())
+                    requireActivity().finish()
                 }
                 .setNegativeButton(android.R.string.cancel, null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
@@ -96,7 +98,7 @@ class SettingsFragmentMeta : Fragment(), UIObject {
 
 
         // report a bug
-        settings_meta_button_report_bug.setOnClickListener {
+        binding.settingsMetaButtonReportBug.setOnClickListener {
             intendedSettingsPause = true
             openNewTabWindow(
                 getString(R.string.settings_meta_report_bug_link),
@@ -107,7 +109,7 @@ class SettingsFragmentMeta : Fragment(), UIObject {
 
 
         // contact developer
-        settings_meta_button_contact.setOnClickListener {
+        binding.settingsMetaButtonContact.setOnClickListener {
             intendedSettingsPause = true
             openNewTabWindow(
                 getString(R.string.settings_meta_contact_url),
@@ -116,7 +118,7 @@ class SettingsFragmentMeta : Fragment(), UIObject {
         }
 
         // contact fork developer
-        settings_meta_button_fork_contact.setOnClickListener {
+        binding.settingsMetaButtonForkContact.setOnClickListener {
             intendedSettingsPause = true
             openNewTabWindow(
                 getString(R.string.settings_meta_fork_contact_url),
@@ -125,7 +127,7 @@ class SettingsFragmentMeta : Fragment(), UIObject {
         }
 
         // privacy policy
-        settings_meta_button_privacy.setOnClickListener {
+        binding.settingsMetaButtonPrivacy.setOnClickListener {
             intendedSettingsPause = true
             openNewTabWindow(
                 getString(R.string.settings_meta_privacy_url),

@@ -11,13 +11,15 @@ import androidx.core.view.GestureDetectorCompat
 import de.jrpie.android.launcher.BuildConfig.VERSION_NAME
 import de.jrpie.android.launcher.list.other.LauncherAction
 import de.jrpie.android.launcher.tutorial.TutorialActivity
-import kotlinx.android.synthetic.main.home.*
+import de.jrpie.android.launcher.databinding.HomeBinding
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.concurrent.fixedRateTimer
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
+
+
 
 /**
  * [HomeActivity] is the actual application Launcher,
@@ -33,6 +35,11 @@ import kotlin.math.min
  */
 class HomeActivity: UIObject, AppCompatActivity(),
     GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {
+
+    private lateinit var binding: HomeBinding
+
+
+
 
     private var bufferedPointerCount = 1 // how many fingers on screen
     private var pointerBufferTimer = Timer()
@@ -83,7 +90,8 @@ class HomeActivity: UIObject, AppCompatActivity(),
         AsyncTask.execute { loadApps(packageManager) }
 
         // Initialise layout
-        setContentView(R.layout.home)
+        binding = HomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 
     override fun onStart(){
@@ -108,15 +116,16 @@ class HomeActivity: UIObject, AppCompatActivity(),
         val dateFormat = SimpleDateFormat(upperFMT[dFormat], Locale.getDefault())
         val timeFormat = SimpleDateFormat(lowerFMT[dFormat], Locale.getDefault())
 
+
         clockTimer = fixedRateTimer("clockTimer", true, 0L, 100) {
             this@HomeActivity.runOnUiThread {
                 val t = timeFormat.format(Date())
-                if (home_lower_view.text != t)
-                    home_lower_view.text = t
+                if (binding.homeLowerView.text != t)
+                    binding.homeLowerView.setText(t)
 
                 val d = dateFormat.format(Date())
-                if (home_upper_view.text != d)
-                    home_upper_view.text = d
+                if (binding.homeUpperView.text != d)
+                    binding.homeUpperView.setText(d)
             }
         }
     }
@@ -223,14 +232,14 @@ class HomeActivity: UIObject, AppCompatActivity(),
     override fun setOnClicks() {
 
         val preferences = getPreferences(this)
-        home_upper_view.setOnClickListener {
+        binding.homeUpperView.setOnClickListener {
             when (preferences.getInt(PREF_DATE_FORMAT, 0)) {
                 0 -> Gesture.DATE(this)
                 else -> Gesture.TIME(this)
             }
         }
 
-        home_lower_view.setOnClickListener {
+        binding.homeLowerView.setOnClickListener {
             when (preferences.getInt(PREF_DATE_FORMAT, 0)) {
                 0 -> Gesture.TIME(this)
                 else -> Gesture.DATE(this)

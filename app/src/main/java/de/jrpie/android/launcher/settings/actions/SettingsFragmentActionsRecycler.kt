@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import de.jrpie.android.launcher.*
 import de.jrpie.android.launcher.list.ListActivity
-import kotlinx.android.synthetic.main.settings_actions_recycler.*
 import android.app.Activity
 import android.content.Intent
 import android.widget.Button
@@ -17,6 +16,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import de.jrpie.android.launcher.list.other.LauncherAction
 import de.jrpie.android.launcher.settings.intendedSettingsPause
+import de.jrpie.android.launcher.databinding.SettingsActionsRecyclerBinding
 import java.lang.Exception
 
 /**
@@ -27,11 +27,13 @@ import java.lang.Exception
  */
 class SettingsFragmentActionsRecycler : Fragment(), UIObject {
 
+    private lateinit var binding: SettingsActionsRecyclerBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.settings_actions_recycler, container, false)
+        binding = SettingsActionsRecyclerBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onStart() {
@@ -39,9 +41,9 @@ class SettingsFragmentActionsRecycler : Fragment(), UIObject {
 
         // set up the list / recycler
         val actionViewManager = LinearLayoutManager(context)
-        val actionViewAdapter = ActionsRecyclerAdapter( activity!! )
+        val actionViewAdapter = ActionsRecyclerAdapter( requireActivity() )
 
-        settings_actions_rview.apply {
+        binding.settingsActionsRview.apply {
             // improve performance (since content changes don't change the layout size)
             setHasFixedSize(true)
             layoutManager = actionViewManager

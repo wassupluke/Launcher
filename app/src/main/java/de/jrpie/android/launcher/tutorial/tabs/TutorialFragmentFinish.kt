@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import de.jrpie.android.launcher.*
 import de.jrpie.android.launcher.BuildConfig.VERSION_NAME
-import kotlinx.android.synthetic.main.tutorial_finish.*
+import de.jrpie.android.launcher.databinding.TutorialFinishBinding
 
 /**
  * The [TutorialFragmentFinish] is a used as a tab in the TutorialActivity.
@@ -16,11 +16,14 @@ import kotlinx.android.synthetic.main.tutorial_finish.*
  */
 class TutorialFragmentFinish : Fragment(), UIObject {
 
+    private lateinit var binding: TutorialFinishBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.tutorial_finish, container, false)
+        binding = TutorialFinishBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onStart() {
@@ -29,13 +32,13 @@ class TutorialFragmentFinish : Fragment(), UIObject {
     }
 
     override fun applyTheme() {
-        setButtonColor(tutorial_finish_button_start, vibrantColor)
-        tutorial_finish_button_start.blink()
+        setButtonColor(binding.tutorialFinishButtonStart, vibrantColor)
+        binding.tutorialFinishButtonStart.blink()
     }
 
     override fun setOnClicks() {
         super.setOnClicks()
-        tutorial_finish_button_start.setOnClickListener{ finishTutorial() }
+        binding.tutorialFinishButtonStart.setOnClickListener{ finishTutorial() }
     }
 
     private fun finishTutorial() {

@@ -30,7 +30,7 @@ import de.jrpie.android.launcher.setSwitchColor
 import de.jrpie.android.launcher.setWindowFlags
 import de.jrpie.android.launcher.settings.intendedSettingsPause
 import de.jrpie.android.launcher.vibrantColor
-import kotlinx.android.synthetic.main.settings_launcher.*
+import de.jrpie.android.launcher.databinding.SettingsLauncherBinding
 
 
 /**
@@ -40,11 +40,13 @@ import kotlinx.android.synthetic.main.settings_launcher.*
  */
 class SettingsFragmentLauncher : Fragment(), UIObject {
 
+    private lateinit var binding: SettingsLauncherBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.settings_launcher, container, false)
+        binding = SettingsLauncherBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onStart(){
@@ -55,21 +57,21 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
 
     override fun applyTheme() {
 
-        setSwitchColor(settings_launcher_switch_screen_timeout, vibrantColor)
-        setSwitchColor(settings_launcher_switch_screen_full, vibrantColor)
-        setSwitchColor(settings_launcher_switch_auto_launch, vibrantColor)
-        setSwitchColor(settings_launcher_switch_auto_keyboard, vibrantColor)
-        setSwitchColor(settings_launcher_switch_enable_double, vibrantColor)
-        setSwitchColor(settings_launcher_switch_enable_edge, vibrantColor)
+        setSwitchColor(binding.settingsLauncherSwitchScreenTimeout, vibrantColor)
+        setSwitchColor(binding.settingsLauncherSwitchScreenFull, vibrantColor)
+        setSwitchColor(binding.settingsLauncherSwitchAutoLaunch, vibrantColor)
+        setSwitchColor(binding.settingsLauncherSwitchAutoKeyboard, vibrantColor)
+        setSwitchColor(binding.settingsLauncherSwitchEnableDouble, vibrantColor)
+        setSwitchColor(binding.settingsLauncherSwitchEnableEdge, vibrantColor)
 
 
-        setButtonColor(settings_launcher_button_choose_wallpaper, vibrantColor)
-        settings_seekbar_sensitivity.progressDrawable.setColorFilter(vibrantColor, PorterDuff.Mode.SRC_IN)
+        setButtonColor(binding.settingsLauncherButtonChooseWallpaper, vibrantColor)
+        binding.settingsSeekbarSensitivity.progressDrawable.setColorFilter(vibrantColor, PorterDuff.Mode.SRC_IN)
     }
 
     override fun setOnClicks() {
 
-        val preferences = getPreferences(activity!!)
+        val preferences = getPreferences(requireActivity())
 
         fun bindSwitchToPref(switch: Switch, pref: String, default: Boolean, onChange: (Boolean) -> Unit){
             switch.isChecked = preferences.getBoolean(pref, default)
@@ -81,7 +83,7 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
             }
         }
 
-        settings_launcher_button_choose_wallpaper.setOnClickListener {
+        binding.settingsLauncherButtonChooseWallpaper.setOnClickListener {
             // https://github.com/LineageOS/android_packages_apps_Trebuchet/blob/6caab89b21b2b91f0a439e1fd8c4510dcb255819/src/com/android/launcher3/views/OptionsPopupView.java#L271
             val intent = Intent(Intent.ACTION_SET_WALLPAPER)
                 //.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -92,26 +94,26 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
 
 
 
-        bindSwitchToPref(settings_launcher_switch_screen_timeout, PREF_SCREEN_TIMEOUT_DISABLED, false) {
+        bindSwitchToPref(binding.settingsLauncherSwitchScreenTimeout, PREF_SCREEN_TIMEOUT_DISABLED, false) {
             activity?.let{setWindowFlags(it.window)}
         }
-        bindSwitchToPref(settings_launcher_switch_screen_full, PREF_SCREEN_FULLSCREEN, true) {
+        bindSwitchToPref(binding.settingsLauncherSwitchScreenFull, PREF_SCREEN_FULLSCREEN, true) {
             activity?.let{setWindowFlags(it.window)}
         }
-        bindSwitchToPref(settings_launcher_switch_auto_launch, PREF_SEARCH_AUTO_LAUNCH, false) {}
-        bindSwitchToPref(settings_launcher_switch_auto_keyboard, PREF_SEARCH_AUTO_KEYBOARD, true) {}
-        bindSwitchToPref(settings_launcher_switch_enable_double, PREF_DOUBLE_ACTIONS_ENABLED, false) {
+        bindSwitchToPref(binding.settingsLauncherSwitchAutoLaunch, PREF_SEARCH_AUTO_LAUNCH, false) {}
+        bindSwitchToPref(binding.settingsLauncherSwitchAutoKeyboard, PREF_SEARCH_AUTO_KEYBOARD, true) {}
+        bindSwitchToPref(binding.settingsLauncherSwitchEnableDouble, PREF_DOUBLE_ACTIONS_ENABLED, false) {
             //intendedSettingsPause = true
             // TODO fixme: This causes the app to crash on some devices.
             //activity?.recreate()
         }
-        bindSwitchToPref(settings_launcher_switch_enable_edge, PREF_EDGE_ACTIONS_ENABLED, false) {
+        bindSwitchToPref(binding.settingsLauncherSwitchEnableEdge, PREF_EDGE_ACTIONS_ENABLED, false) {
             //intendedSettingsPause = true
             // TODO fixme
             //activity?.recreate()
         }
 
-        settings_seekbar_sensitivity.setOnSeekBarChangeListener(
+        binding.settingsSeekbarSensitivity.setOnSeekBarChangeListener(
             object : SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {}
                 override fun onStartTrackingTouch(p0: SeekBar?) {}
@@ -126,18 +128,18 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
 
     override fun adjustLayout() {
 
-        val preferences = getPreferences(activity!!)
+        val preferences = getPreferences(requireActivity())
         // Load values into the date-format spinner
         val staticAdapter = ArrayAdapter.createFromResource(
-                activity!!, R.array.settings_launcher_time_format_spinner_items,
+                requireActivity(), R.array.settings_launcher_time_format_spinner_items,
                 android.R.layout.simple_spinner_item )
 
         staticAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        settings_launcher_format_spinner.adapter = staticAdapter
+        binding.settingsLauncherFormatSpinner.adapter = staticAdapter
 
-        settings_launcher_format_spinner.setSelection(preferences.getInt(PREF_DATE_FORMAT, 0))
+        binding.settingsLauncherFormatSpinner.setSelection(preferences.getInt(PREF_DATE_FORMAT, 0))
 
-        settings_launcher_format_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        binding.settingsLauncherFormatSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 preferences.edit()
                     .putInt(PREF_DATE_FORMAT, position)
@@ -153,7 +155,7 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
             android.R.layout.simple_spinner_item )
 
         staticThemeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        settings_launcher_theme_spinner.adapter = staticThemeAdapter
+        binding.settingsLauncherThemeSpinner.adapter = staticThemeAdapter
 
         val themeInt = when (getSavedTheme(activity!!)) {
             "finn" -> 0
@@ -161,9 +163,9 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
             else -> 0
         }
 
-        settings_launcher_theme_spinner.setSelection(themeInt)
+        binding.settingsLauncherThemeSpinner.setSelection(themeInt)
 
-        settings_launcher_theme_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        binding.settingsLauncherThemeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 when (position) {
                     0 -> if (getSavedTheme(activity!!) != "finn") resetToDefaultTheme(activity!!)
@@ -173,6 +175,6 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
             override fun onNothingSelected(parent: AdapterView<*>?) { }
         }
 
-        settings_seekbar_sensitivity.progress = preferences.getInt(PREF_SLIDE_SENSITIVITY, 2) * 4 / 100
+        binding.settingsSeekbarSensitivity.progress = preferences.getInt(PREF_SLIDE_SENSITIVITY, 2) * 4 / 100
     }
 }

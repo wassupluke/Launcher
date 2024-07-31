@@ -18,12 +18,11 @@ import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_UNINSTALL
 import de.jrpie.android.launcher.UIObject
 import de.jrpie.android.launcher.getPreferences
-import de.jrpie.android.launcher.launch
 import de.jrpie.android.launcher.list.apps.ListFragmentApps
 import de.jrpie.android.launcher.list.other.LauncherAction
 import de.jrpie.android.launcher.list.other.ListFragmentOther
 import de.jrpie.android.launcher.vibrantColor
-import kotlinx.android.synthetic.main.list.*
+import de.jrpie.android.launcher.databinding.ListBinding
 
 
 var intendedChoosePause = false // know when to close
@@ -40,6 +39,9 @@ var forGesture: String? = null
  * The activity itself can also be chosen to be launched as an action.
  */
 class ListActivity : AppCompatActivity(), UIObject {
+    private lateinit var binding: ListBinding
+
+
     enum class ListActivityIntention(val titleResource: Int) {
         VIEW(R.string.list_title_view), /* view list of apps */
         PICK(R.string.list_title_pick)  /* choose app or action to associate to a gesture */
@@ -48,9 +50,10 @@ class ListActivity : AppCompatActivity(), UIObject {
         super.onCreate(savedInstanceState)
 
         // Initialise layout
-        setContentView(R.layout.list)
+        binding = ListBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        list_settings.setOnClickListener {
+        binding.listSettings.setOnClickListener {
             LauncherAction.SETTINGS.launch(this@ListActivity)
         }
 
@@ -60,15 +63,15 @@ class ListActivity : AppCompatActivity(), UIObject {
             val r = Rect()
             window.decorView.getWindowVisibleDisplayFrame(r)
             val height: Int =
-                list_container.context.resources.displayMetrics.heightPixels
+                binding.listContainer.context.resources.displayMetrics.heightPixels
             val diff = height - r.bottom
             if (diff != 0 && getPreferences(this).getBoolean(PREF_SCREEN_FULLSCREEN, false)) {
-                if (list_container.paddingBottom !== diff) {
-                    list_container.setPadding(0, 0, 0, diff)
+                if (binding.listContainer.paddingBottom !== diff) {
+                    binding.listContainer.setPadding(0, 0, 0, diff)
                 }
             } else {
-                if (list_container.paddingBottom !== 0) {
-                    list_container.setPadding(0, 0, 0, 0)
+                if (binding.listContainer.paddingBottom !== 0) {
+                    binding.listContainer.setPadding(0, 0, 0, 0)
                 }
             }
         }
@@ -100,11 +103,11 @@ class ListActivity : AppCompatActivity(), UIObject {
     override fun applyTheme() {
         // list_close.setTextColor(vibrantColor)
 
-        list_tabs.setSelectedTabIndicatorColor(vibrantColor)
+        binding.listTabs.setSelectedTabIndicatorColor(vibrantColor)
     }
 
     override fun setOnClicks() {
-        list_close.setOnClickListener { finish() }
+        binding.listClose.setOnClickListener { finish() }
     }
 
     override fun adjustLayout() {
@@ -120,10 +123,10 @@ class ListActivity : AppCompatActivity(), UIObject {
 
         // Hide tabs for the "view" action
         if (intention == ListActivityIntention.VIEW) {
-            list_tabs.visibility = View.GONE
+            binding.listTabs.visibility = View.GONE
         }
 
-        list_heading.text = getString(intention.titleResource)
+        binding.listHeading.text = getString(intention.titleResource)
 
         val sectionsPagerAdapter = ListSectionsPagerAdapter(this, supportFragmentManager)
         val viewPager: ViewPager = findViewById(R.id.list_viewpager)
