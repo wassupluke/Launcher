@@ -8,7 +8,7 @@
     android:paddingTop="16sp"
     android:paddingRight="32sp">
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/settings_actions_rview_fragment"
         android:name="de.jrpie.android.launcher.settings.actions.SettingsFragmentActionsRecycler"
         android:layout_width="match_parent"

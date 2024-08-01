@@ -102,16 +102,8 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
         }
         bindSwitchToPref(binding.settingsLauncherSwitchAutoLaunch, PREF_SEARCH_AUTO_LAUNCH, false) {}
         bindSwitchToPref(binding.settingsLauncherSwitchAutoKeyboard, PREF_SEARCH_AUTO_KEYBOARD, true) {}
-        bindSwitchToPref(binding.settingsLauncherSwitchEnableDouble, PREF_DOUBLE_ACTIONS_ENABLED, false) {
-            //intendedSettingsPause = true
-            // TODO fixme: This causes the app to crash on some devices.
-            //activity?.recreate()
-        }
-        bindSwitchToPref(binding.settingsLauncherSwitchEnableEdge, PREF_EDGE_ACTIONS_ENABLED, false) {
-            //intendedSettingsPause = true
-            // TODO fixme
-            //activity?.recreate()
-        }
+        bindSwitchToPref(binding.settingsLauncherSwitchEnableDouble, PREF_DOUBLE_ACTIONS_ENABLED, false) {}
+        bindSwitchToPref(binding.settingsLauncherSwitchEnableEdge, PREF_EDGE_ACTIONS_ENABLED, false) {}
 
         binding.settingsSeekbarSensitivity.setOnSeekBarChangeListener(
             object : SeekBar.OnSeekBarChangeListener {
@@ -151,13 +143,13 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
 
         // Load values into the theme spinner
         val staticThemeAdapter = ArrayAdapter.createFromResource(
-            activity!!, R.array.settings_launcher_theme_spinner_items,
+            requireActivity(), R.array.settings_launcher_theme_spinner_items,
             android.R.layout.simple_spinner_item )
 
         staticThemeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.settingsLauncherThemeSpinner.adapter = staticThemeAdapter
 
-        val themeInt = when (getSavedTheme(activity!!)) {
+        val themeInt = when (getSavedTheme(requireActivity())) {
             "finn" -> 0
             "dark" -> 1
             else -> 0

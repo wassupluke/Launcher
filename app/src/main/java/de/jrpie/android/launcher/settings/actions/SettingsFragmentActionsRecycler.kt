@@ -28,6 +28,7 @@ import java.lang.Exception
 class SettingsFragmentActionsRecycler : Fragment(), UIObject {
 
     private lateinit var binding: SettingsActionsRecyclerBinding
+    public var actionViewAdapter: ActionsRecyclerAdapter? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,7 +42,7 @@ class SettingsFragmentActionsRecycler : Fragment(), UIObject {
 
         // set up the list / recycler
         val actionViewManager = LinearLayoutManager(context)
-        val actionViewAdapter = ActionsRecyclerAdapter( requireActivity() )
+        actionViewAdapter = ActionsRecyclerAdapter( requireActivity() )
 
         binding.settingsActionsRview.apply {
             // improve performance (since content changes don't change the layout size)
@@ -57,7 +58,7 @@ class SettingsFragmentActionsRecycler : Fragment(), UIObject {
 class ActionsRecyclerAdapter(val activity: Activity):
     RecyclerView.Adapter<ActionsRecyclerAdapter.ViewHolder>() {
 
-    private val gesturesList: List<Gesture>
+    private val gesturesList: ArrayList<Gesture>
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
@@ -123,7 +124,18 @@ class ActionsRecyclerAdapter(val activity: Activity):
         val edgeActions = getPreferences(activity).getBoolean(PREF_EDGE_ACTIONS_ENABLED, false)
         gesturesList = Gesture.values().filter {
             (doubleActions || !it.isDoubleVariant())
-                    && (edgeActions || !it.isEdgeVariant())}
+                    && (edgeActions || !it.isEdgeVariant())} as ArrayList<Gesture>
+    }
+
+    public fun updateActions() {
+        val doubleActions = getPreferences(activity).getBoolean(PREF_DOUBLE_ACTIONS_ENABLED, false)
+        val edgeActions = getPreferences(activity).getBoolean(PREF_EDGE_ACTIONS_ENABLED, false)
+        this.gesturesList.clear()
+        gesturesList.addAll(Gesture.values().filter {
+            (doubleActions || !it.isDoubleVariant())
+                    && (edgeActions || !it.isEdgeVariant())})
+
+        notifyDataSetChanged()
     }
 
     /*  */
