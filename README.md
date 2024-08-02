@@ -11,6 +11,7 @@ This is a fork of [finnmglas's app Launcher][original-repo].
 ## Notable changes:
 
 * Edge gestures: There is a setting to allow distinguishing swiping at the edges of the screen from swiping in the center.
+* Compatible with [work profile](https://www.android.com/enterprise/work-profile/), so apps like [Shelter](https://gitea.angry.im/PeterCxy/Shelter) can be used.
 
 ### Visual
 * This app uses the system wallpaper instead of a custom solution.

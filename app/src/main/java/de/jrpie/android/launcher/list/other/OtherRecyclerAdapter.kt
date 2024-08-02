@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import de.jrpie.android.launcher.INVALID_USER
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
 import de.jrpie.android.launcher.list.forGesture
@@ -56,10 +57,11 @@ class OtherRecyclerAdapter(val activity: Activity):
         return ViewHolder(view)
     }
 
-    private fun returnChoiceIntent(forApp: String, value: String) {
+    private fun returnChoiceIntent(forGesture: String, value: String) {
         val returnIntent = Intent()
         returnIntent.putExtra("value", value)
-        returnIntent.putExtra("forGesture", forApp)
+        returnIntent.putExtra("forGesture", forGesture)
+        returnIntent.putExtra("user", INVALID_USER)
         activity.setResult(REQUEST_CHOOSE_APP, returnIntent)
         activity.finish()
     }

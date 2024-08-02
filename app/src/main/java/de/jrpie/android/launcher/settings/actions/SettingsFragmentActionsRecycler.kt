@@ -80,7 +80,8 @@ class ActionsRecyclerAdapter(val activity: Activity):
             viewHolder.img
         )
         fun updateViewHolder() {
-            val content = gesture.getApp(activity)
+            val app = gesture.getApp(activity)
+            val content = app.first
             if (content == ""){
                 viewHolder.img.visibility = View.INVISIBLE
                 viewHolder.removeAction.visibility = View.GONE
@@ -93,7 +94,7 @@ class ActionsRecyclerAdapter(val activity: Activity):
             } else {
                 // Set image icon (by packageName)
                 try {
-                    viewHolder.img.setImageDrawable(activity.packageManager.getApplicationIcon(content))
+                    viewHolder.img.setImageDrawable(getAppIcon(activity, content, app.second))
                 } catch (e : Exception) {
                     // the button is shown, user asked to select an action
                     viewHolder.img.visibility = View.INVISIBLE

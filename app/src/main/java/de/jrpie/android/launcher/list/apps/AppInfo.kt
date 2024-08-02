@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable
  * Represents an app installed on the users device.
  */
 class AppInfo {
+    var user: Int? = null
     var label: CharSequence? = null
     var packageName: CharSequence? = null
     var icon: Drawable? = null

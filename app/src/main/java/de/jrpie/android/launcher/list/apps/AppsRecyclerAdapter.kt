@@ -21,6 +21,7 @@ import de.jrpie.android.launcher.appsList
 import de.jrpie.android.launcher.getPreferences
 import de.jrpie.android.launcher.getSavedTheme
 import de.jrpie.android.launcher.launch
+import de.jrpie.android.launcher.launchApp
 import de.jrpie.android.launcher.list.ListActivity
 import de.jrpie.android.launcher.list.intendedChoosePause
 import de.jrpie.android.launcher.loadApps
@@ -54,9 +55,10 @@ class AppsRecyclerAdapter(val activity: Activity,
             val pos = adapterPosition
             val context: Context = v.context
             val appPackageName = appsListDisplayed[pos].packageName.toString()
-
+            val appUser = appsListDisplayed[pos].user
             when (intention){
                 ListActivity.ListActivityIntention.VIEW -> {
+                    launchApp(appPackageName, appUser, activity)
                     val launchIntent: Intent = context.packageManager
                         .getLaunchIntentForPackage(appPackageName)!!
                     context.startActivity(launchIntent)
@@ -64,6 +66,7 @@ class AppsRecyclerAdapter(val activity: Activity,
                 ListActivity.ListActivityIntention.PICK -> {
                     val returnIntent = Intent()
                     returnIntent.putExtra("value", appPackageName)
+                    appUser?.let{ returnIntent.putExtra("user", it) }
                     returnIntent.putExtra("forGesture", forGesture)
                     activity.setResult(REQUEST_CHOOSE_APP, returnIntent)
                     activity.finish()
@@ -152,9 +155,9 @@ class AppsRecyclerAdapter(val activity: Activity,
     init {
         // Load the apps
         if (appsList.size == 0)
-            loadApps(activity.packageManager)
+            loadApps(activity.packageManager, activity)
         else {
-            AsyncTask.execute { loadApps(activity.packageManager) }
+            AsyncTask.execute { loadApps(activity.packageManager, activity) }
             notifyDataSetChanged()
         }
 
@@ -193,7 +196,8 @@ class AppsRecyclerAdapter(val activity: Activity,
         // modifiable at some later point.
         if (appsListDisplayed.size == 1 && intention == ListActivity.ListActivityIntention.VIEW
             && getPreferences(activity).getBoolean(PREF_SEARCH_AUTO_LAUNCH, false)) {
-            launch(appsListDisplayed[0].packageName.toString(), activity)
+            val info = appsListDisplayed[0]
+            launch(info.packageName.toString(), info.user, activity)
 
             val inputMethodManager = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(View(activity).windowToken, 0)

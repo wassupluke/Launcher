@@ -87,7 +87,7 @@ class HomeActivity: UIObject, AppCompatActivity(),
         }
 
         // Preload apps to speed up the Apps Recycler
-        AsyncTask.execute { loadApps(packageManager) }
+        AsyncTask.execute { loadApps(packageManager, applicationContext) }
 
         // Initialise layout
         binding = HomeBinding.inflate(layoutInflater)

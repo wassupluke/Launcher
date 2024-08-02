@@ -41,8 +41,12 @@ enum class Gesture (val id: String, private val labelResource: Int,
                    TOP, BOTTOM, LEFT, RIGHT
     }
 
-    fun getApp(context: Context): String {
-        return getPreferences(context).getString(this.id, "")!!
+    fun getApp(context: Context): Pair<String, Int?> {
+        val preferences = getPreferences(context)
+        var packageName = preferences.getString(this.id, "")!!
+        var u: Int?  = preferences.getInt(this.id + "_user", INVALID_USER)
+        u = if(u == INVALID_USER) null else u
+        return Pair(packageName,u)
     }
 
     fun removeApp(context: Context) {
@@ -51,9 +55,14 @@ enum class Gesture (val id: String, private val labelResource: Int,
             .apply()
     }
 
-    fun setApp(context: Context, app: String) {
+    fun setApp(context: Context, app: String, user: Int?) {
         getPreferences(context).edit()
             .putString(this.id, app)
+            .apply()
+
+        val u = user?: INVALID_USER
+        getPreferences(context).edit()
+            .putInt(this.id + "_user", u)
             .apply()
     }
 
@@ -132,7 +141,8 @@ enum class Gesture (val id: String, private val labelResource: Int,
     }
 
     operator fun invoke(activity: Activity) {
-        launch(this.getApp(activity), activity, this.animationIn, this.animationOut)
+        val app = this.getApp(activity)
+        launch(app.first, app.second, activity, this.animationIn, this.animationOut)
     }
 
     companion object {

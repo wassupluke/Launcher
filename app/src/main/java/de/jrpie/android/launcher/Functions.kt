@@ -67,6 +67,8 @@ const val PREF_STARTED_TIME = "firstStartup"
 
 const val PREF_VERSION = "version"
 
+const val INVALID_USER = -1
+
 /* Objects used by multiple activities */
 val appsList: MutableList<AppInfo> = ArrayList()
 
@@ -153,14 +155,15 @@ private fun getIntent(packageName: String, context: Context): Intent? {
 }
 
 fun launch(
-    data: String, activity: Activity,
+    data: String, user: Int?,
+    activity: Activity,
     animationIn: Int = android.R.anim.fade_in, animationOut: Int = android.R.anim.fade_out
 ) {
 
     if (LauncherAction.isOtherAction(data)) { // [type]:[info]
         LauncherAction.byId(data)?.let {it.launch(activity) }
     }
-    else launchApp(data, activity) // app
+    else launchApp(data, user, activity) // app
 
     activity.overridePendingTransition(animationIn, animationOut)
 }
@@ -217,7 +220,20 @@ fun audioVolumeDown(activity: Activity) {
 
 /* --- */
 
-fun launchApp(packageName: String, context: Context) {
+fun launchApp(packageName: String, user: Int?, context: Context) {
+    Log.i("Launcher", "Starting: " + packageName + " (user " +user.toString()+ ")")
+    if (user != null) {
+        val launcherApps = context.getSystemService(Service.LAUNCHER_APPS_SERVICE) as LauncherApps
+        val userManager = context.getSystemService(Service.USER_SERVICE) as UserManager
+        userManager.userProfiles.firstOrNull { it.hashCode() == user }?.let {
+            userHandle -> launcherApps.getActivityList(packageName, userHandle).firstOrNull()?.let {
+                app -> launcherApps.startMainActivity(app.componentName, userHandle, null, null)
+                return
+
+            }
+        }
+    }
+
     val intent = getIntent(packageName, context)
 
     if (intent != null) {
@@ -327,25 +343,57 @@ fun openAppsList(activity: Activity){
     activity.startActivity(intent)
 }
 
+fun getAppIcon(context: Context, packageName: String, user: Int?): Drawable {
+    if (user != null) {
+        val launcherApps = context.getSystemService(Service.LAUNCHER_APPS_SERVICE) as LauncherApps
+        val userManager = context.getSystemService(Service.USER_SERVICE) as UserManager
+        userManager.userProfiles.firstOrNull { it.hashCode() == user }?.let {
+                userHandle -> launcherApps.getActivityList(packageName, userHandle).firstOrNull()?.let {
+                    app -> return app.getBadgedIcon(0)
+            }
+        }
+    }
+    return context.packageManager.getApplicationIcon(packageName)
+}
+
 /**
  * [loadApps] is used to speed up the [AppsRecyclerAdapter] loading time,
  * as it caches all the apps and allows for fast access to the data.
  */
-fun loadApps(packageManager: PackageManager) {
+fun loadApps(packageManager: PackageManager, context: Context) {
     val loadList = mutableListOf<AppInfo>()
 
-    val i = Intent(Intent.ACTION_MAIN, null)
-    i.addCategory(Intent.CATEGORY_LAUNCHER)
-    val allApps = packageManager.queryIntentActivities(i, 0)
-    for (ri in allApps) {
-        val app = AppInfo()
-        app.label = ri.loadLabel(packageManager)
-        app.packageName = ri.activityInfo.packageName
-        app.icon = ri.activityInfo.loadIcon(packageManager)
-        loadList.add(app)
-    }
-    loadList.sortBy { it.label.toString() }
+    val launcherApps = context.getSystemService(Service.LAUNCHER_APPS_SERVICE) as LauncherApps
+    val userManager = context.getSystemService(Service.USER_SERVICE) as UserManager
 
+    // TODO: shortcuts - launcherApps.getShortcuts()
+    val users = userManager.userProfiles
+    for(user in users) {
+        for (activityInfo in launcherApps.getActivityList(null,user)) {
+            val app = AppInfo()
+            app.label = activityInfo.label
+            app.packageName = activityInfo.applicationInfo.packageName
+            app.icon = activityInfo.getBadgedIcon(0)
+            app.user = user.hashCode()
+            loadList.add(app)
+        }
+    }
+
+
+    // fallback option
+    if(loadList.isEmpty()){
+        Log.i("Launcher", "using fallback option to load packages")
+        val i = Intent(Intent.ACTION_MAIN, null)
+        i.addCategory(Intent.CATEGORY_LAUNCHER)
+        val allApps = packageManager.queryIntentActivities(i, 0)
+        for (ri in allApps) {
+            val app = AppInfo()
+            app.label = ri.loadLabel(packageManager)
+            app.packageName = ri.activityInfo.packageName
+            app.icon = ri.activityInfo.loadIcon(packageManager)
+            loadList.add(app)
+        }
+    }
     appsList.clear()
     appsList.addAll(loadList)
 }
@@ -404,9 +452,12 @@ fun setWindowFlags(window: Window) {
 // Used in Tutorial and Settings `ActivityOnResult`
 fun saveListActivityChoice(context: Context, data: Intent?) {
     val value = data?.getStringExtra("value")
+    var user  = data?.getIntExtra("user", INVALID_USER)
+    user = user?.let{ if(it == INVALID_USER) null else it }
+
     val forGesture = data?.getStringExtra("forGesture") ?: return
 
-    Gesture.byId(forGesture)?.setApp(context, value.toString())
+    Gesture.byId(forGesture)?.setApp(context, value.toString(), user)
 
     loadSettings(context)
 }
