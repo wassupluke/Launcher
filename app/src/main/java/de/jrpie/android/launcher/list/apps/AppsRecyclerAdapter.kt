@@ -59,9 +59,7 @@ class AppsRecyclerAdapter(val activity: Activity,
             when (intention){
                 ListActivity.ListActivityIntention.VIEW -> {
                     launchApp(appPackageName, appUser, activity)
-                    val launchIntent: Intent = context.packageManager
-                        .getLaunchIntentForPackage(appPackageName)!!
-                    context.startActivity(launchIntent)
+
                 }
                 ListActivity.ListActivityIntention.PICK -> {
                     val returnIntent = Intent()
@@ -108,6 +106,7 @@ class AppsRecyclerAdapter(val activity: Activity,
         }
     }
 
+    // TODO fixme: handle work profile apps
     @Suppress("SameReturnValue")
     private fun showOptionsPopup(viewHolder: ViewHolder, appPackageName: String): Boolean {
         //create the popup menu

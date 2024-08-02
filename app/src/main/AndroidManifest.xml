@@ -9,11 +9,6 @@
     <uses-permission android:name="android.permission.ACCESS_HIDDEN_PROFILES" />
 
 
-    <queries>
-        <intent>
-            <category android:name="android.intent.category.HOME"/>
-        </intent>
-    </queries>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
