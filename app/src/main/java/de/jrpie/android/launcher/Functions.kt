@@ -2,23 +2,26 @@ package de.jrpie.android.launcher
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.ComponentName
+import android.app.Service
+import android.app.role.RoleManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.LauncherApps
 import android.content.pm.PackageManager
-import android.content.pm.ResolveInfo
 import android.graphics.BlendMode
 import android.graphics.BlendModeColorFilter
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
+import android.graphics.drawable.Drawable
 import android.media.AudioManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
+import android.os.UserManager
 import android.provider.Settings
 import android.util.DisplayMetrics
 import android.util.Log
@@ -78,6 +81,8 @@ var vibrantColor = 0
 const val REQUEST_CHOOSE_APP = 1
 const val REQUEST_UNINSTALL = 2
 
+const val REQUEST_SET_DEFAULT_HOME = 42
+
 /* Animate */
 
 // Taken from https://stackoverflow.com/questions/47293269
@@ -105,6 +110,17 @@ fun getPreferences(context: Context): SharedPreferences{
 }
 
 fun setDefaultHomeScreen(context: Context, checkDefault: Boolean = false) {
+
+    if (checkDefault
+        && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
+        && context is Activity) {
+        val roleManager = context.getSystemService(RoleManager::class.java)
+        if(!roleManager.isRoleHeld(RoleManager.ROLE_HOME)) {
+            context.startActivityForResult(roleManager.createRequestRoleIntent(RoleManager.ROLE_HOME), REQUEST_SET_DEFAULT_HOME)
+        }
+        return
+    }
+
     if(checkDefault) {
         val testIntent = Intent(Intent.ACTION_MAIN)
         testIntent.addCategory(Intent.CATEGORY_HOME)
