@@ -8,6 +8,11 @@
         tools:ignore="QueryAllPackagesPermission" />
 
 
+    <queries>
+        <intent>
+            <category android:name="android.intent.category.HOME"/>
+        </intent>
+    </queries>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -40,6 +45,7 @@
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
         </activity>
+
     </application>
 
 </manifest>

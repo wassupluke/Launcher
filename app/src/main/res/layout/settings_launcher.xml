@@ -17,6 +17,21 @@
     tools:context=".settings.meta.SettingsFragmentMeta">
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16sp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/settings_launcher_button_choose_homescreen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_launcher_choose_homescreen"
+            android:textAllCaps="false" />
+    </LinearLayout>
+
+
+    <LinearLayout
         android:id="@+id/settings_launcher_section_appearance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

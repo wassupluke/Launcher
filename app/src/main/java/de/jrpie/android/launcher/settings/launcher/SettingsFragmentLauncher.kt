@@ -31,6 +31,7 @@ import de.jrpie.android.launcher.setWindowFlags
 import de.jrpie.android.launcher.settings.intendedSettingsPause
 import de.jrpie.android.launcher.vibrantColor
 import de.jrpie.android.launcher.databinding.SettingsLauncherBinding
+import de.jrpie.android.launcher.setDefaultHomeScreen
 
 
 /**
@@ -57,6 +58,7 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
 
     override fun applyTheme() {
 
+        setButtonColor(binding.settingsLauncherButtonChooseHomescreen, vibrantColor)
         setSwitchColor(binding.settingsLauncherSwitchScreenTimeout, vibrantColor)
         setSwitchColor(binding.settingsLauncherSwitchScreenFull, vibrantColor)
         setSwitchColor(binding.settingsLauncherSwitchAutoLaunch, vibrantColor)
@@ -81,6 +83,10 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
                     .apply()
                 onChange(isChecked);
             }
+        }
+
+        binding.settingsLauncherButtonChooseHomescreen.setOnClickListener {
+            setDefaultHomeScreen(requireContext(), checkDefault = false)
         }
 
         binding.settingsLauncherButtonChooseWallpaper.setOnClickListener {

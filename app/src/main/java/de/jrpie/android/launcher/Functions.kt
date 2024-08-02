@@ -2,10 +2,12 @@ package de.jrpie.android.launcher
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
 import android.graphics.BlendMode
 import android.graphics.BlendModeColorFilter
 import android.graphics.ColorMatrix
@@ -19,6 +21,7 @@ import android.os.Bundle
 import android.os.SystemClock
 import android.provider.Settings
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.Window
@@ -99,6 +102,20 @@ fun getPreferences(context: Context): SharedPreferences{
         context.getString(R.string.preference_file_key),
         Context.MODE_PRIVATE
     )
+}
+
+fun setDefaultHomeScreen(context: Context, checkDefault: Boolean = false) {
+    if(checkDefault) {
+        val testIntent = Intent(Intent.ACTION_MAIN)
+        testIntent.addCategory(Intent.CATEGORY_HOME)
+        val defaultHome = testIntent.resolveActivity(context.packageManager)?.packageName
+        if(defaultHome == context.packageName){
+            // Launcher is already the default home app
+            return
+        }
+    }
+    val intent = Intent(Settings.ACTION_HOME_SETTINGS)
+    context.startActivity(intent)
 }
 
 /* Activity related */

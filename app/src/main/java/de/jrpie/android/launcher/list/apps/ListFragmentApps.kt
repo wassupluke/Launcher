@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import de.jrpie.android.launcher.PREF_SEARCH_AUTO_KEYBOARD
-import de.jrpie.android.launcher.R
-import de.jrpie.android.launcher.databinding.ListAppsBinding
 import de.jrpie.android.launcher.UIObject
+import de.jrpie.android.launcher.databinding.ListAppsBinding
 import de.jrpie.android.launcher.getPreferences
 import de.jrpie.android.launcher.list.ListActivity
 import de.jrpie.android.launcher.list.forGesture

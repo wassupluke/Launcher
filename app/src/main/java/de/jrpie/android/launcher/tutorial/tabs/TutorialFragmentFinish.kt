@@ -54,6 +54,8 @@ class TutorialFragmentFinish : Fragment(), UIObject {
                     .apply()
             }
         }
+        context?.let { setDefaultHomeScreen(it, checkDefault = true) }
+
         activity?.finish()
     }
 }
