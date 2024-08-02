@@ -109,6 +109,7 @@
     <!-- Date / Calendar -->
     <string-array name="default_date">
         <item>org.lineageos.etar</item> <!-- LineageOS Calendar -->
+        <item>ws.xsoh.etar</item> <!-- Etar -->
         <item>com.google.android.calendar</item> <!-- Google Calendar -->
         <item>com.samsung.android.calendar</item> <!-- Samsung Calendar -->
     </string-array>
