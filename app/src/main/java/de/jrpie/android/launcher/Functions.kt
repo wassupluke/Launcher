@@ -394,6 +394,7 @@ fun loadApps(packageManager: PackageManager, context: Context) {
             loadList.add(app)
         }
     }
+    loadList.sortBy { it.label.toString() }
     appsList.clear()
     appsList.addAll(loadList)
 }
