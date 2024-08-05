@@ -45,7 +45,7 @@
     <string name="settings_apps_view_all">Toutes les applications</string>
 
     <string name="settings_apps_install">Installer applications</string>
-    <string name="settings_apps_toast_store_not_found">Pas trouvé le PlayStore</string>
+    <string name="settings_apps_toast_store_not_found">Pas trouvé le Store</string>
 
     <!--
       -

@@ -68,15 +68,12 @@ SettingsFragmentActions : Fragment(), UIObject {
         }
         binding!!.settingsActionsButtonInstallApps.setOnClickListener{
             try {
-                val rateIntent = Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse("https://play.google.com/store/apps/"))
-
+                val intent = Intent(Intent.ACTION_MAIN)
+                intent.addCategory(Intent.CATEGORY_APP_MARKET)
                 intendedSettingsPause = true
-                startActivity(rateIntent)
+                startActivity(intent)
             } catch (e: ActivityNotFoundException) {
-                Toast.makeText(this.context, getString(R.string.settings_apps_toast_store_not_found), Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(context, getString(R.string.settings_apps_toast_store_not_found), Toast.LENGTH_SHORT).show()
             }
         }
     }
