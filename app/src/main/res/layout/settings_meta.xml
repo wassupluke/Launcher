@@ -14,13 +14,6 @@
     tools:context=".settings.meta.SettingsFragmentMeta">
 
     <Button
-        android:id="@+id/settings_meta_button_select_launcher"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/settings_meta_select_launcher"
-        android:textAllCaps="false" />
-
-    <Button
         android:id="@+id/settings_meta_button_view_tutorial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

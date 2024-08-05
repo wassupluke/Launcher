@@ -2,7 +2,6 @@ package de.jrpie.android.launcher.settings.actions
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.net.Uri
 import android.os.Bundle
@@ -11,10 +10,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import de.jrpie.android.launcher.*
+import de.jrpie.android.launcher.R
+import de.jrpie.android.launcher.UIObject
 import de.jrpie.android.launcher.databinding.SettingsActionsBinding
+import de.jrpie.android.launcher.getPreferences
 import de.jrpie.android.launcher.list.ListActivity
+import de.jrpie.android.launcher.setButtonColor
 import de.jrpie.android.launcher.settings.intendedSettingsPause
+import de.jrpie.android.launcher.vibrantColor
 
 
 /**
@@ -25,7 +28,8 @@ import de.jrpie.android.launcher.settings.intendedSettingsPause
  *  It also allows the user to view all apps ([ListActivity]) or install new ones.
  */
 
-class SettingsFragmentActions : Fragment(), UIObject {
+class
+SettingsFragmentActions : Fragment(), UIObject {
 
     private var binding: SettingsActionsBinding? = null
 

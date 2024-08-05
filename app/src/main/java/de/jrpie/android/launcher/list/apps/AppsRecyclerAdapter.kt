@@ -3,6 +3,7 @@ package de.jrpie.android.launcher.list.apps
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Rect
 import android.net.Uri
 import android.os.AsyncTask
 import android.view.LayoutInflater
@@ -27,6 +28,7 @@ import de.jrpie.android.launcher.list.intendedChoosePause
 import de.jrpie.android.launcher.loadApps
 import de.jrpie.android.launcher.openAppSettings
 import de.jrpie.android.launcher.transformGrayscale
+import de.jrpie.android.launcher.uninstallApp
 import java.util.*
 
 /**
@@ -58,8 +60,9 @@ class AppsRecyclerAdapter(val activity: Activity,
             val appUser = appsListDisplayed[pos].user
             when (intention){
                 ListActivity.ListActivityIntention.VIEW -> {
-                    launchApp(appPackageName, appUser, activity)
-
+                    val rect = Rect()
+                    img.getGlobalVisibleRect(rect)
+                    launchApp(appPackageName, appUser, activity, rect)
                 }
                 ListActivity.ListActivityIntention.PICK -> {
                     val returnIntent = Intent()
@@ -78,6 +81,7 @@ class AppsRecyclerAdapter(val activity: Activity,
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
         val appLabel = appsListDisplayed[i].label.toString()
         val appPackageName = appsListDisplayed[i].packageName.toString()
+        val appUser = appsListDisplayed[i].user
         val appIcon = appsListDisplayed[i].icon
         val isSystemApp = appsListDisplayed[i].isSystemApp
 
@@ -95,10 +99,10 @@ class AppsRecyclerAdapter(val activity: Activity,
         else {
             viewHolder.menuDots.visibility = View.VISIBLE
 
-            viewHolder.menuDots.setOnClickListener{ showOptionsPopup(viewHolder, appPackageName) }
-            viewHolder.menuDots.setOnLongClickListener{ showOptionsPopup(viewHolder, appPackageName) }
-            viewHolder.textView.setOnLongClickListener{ showOptionsPopup(viewHolder, appPackageName) }
-            viewHolder.img.setOnLongClickListener{ showOptionsPopup(viewHolder, appPackageName) }
+            viewHolder.menuDots.setOnClickListener{ showOptionsPopup(viewHolder, appPackageName, appUser) }
+            viewHolder.menuDots.setOnLongClickListener{ showOptionsPopup(viewHolder, appPackageName, appUser) }
+            viewHolder.textView.setOnLongClickListener{ showOptionsPopup(viewHolder, appPackageName, appUser) }
+            viewHolder.img.setOnLongClickListener{ showOptionsPopup(viewHolder, appPackageName, appUser) }
 
             // ensure onClicks are actually caught
             viewHolder.textView.setOnClickListener{ viewHolder.onClick(viewHolder.textView) }
@@ -106,9 +110,8 @@ class AppsRecyclerAdapter(val activity: Activity,
         }
     }
 
-    // TODO fixme: handle work profile apps
     @Suppress("SameReturnValue")
-    private fun showOptionsPopup(viewHolder: ViewHolder, appPackageName: String): Boolean {
+    private fun showOptionsPopup(viewHolder: ViewHolder, appPackageName: String, user: Int?): Boolean {
         //create the popup menu
 
         val popup = PopupMenu(activity, viewHolder.menuDots)
@@ -116,23 +119,14 @@ class AppsRecyclerAdapter(val activity: Activity,
 
         popup.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.app_menu_delete -> { // delete
+                R.id.app_menu_delete -> {
                     intendedChoosePause = true
-                    val intent = Intent(Intent.ACTION_UNINSTALL_PACKAGE)
-                    intent.data = Uri.parse("package:$appPackageName")
-                    intent.putExtra(Intent.EXTRA_RETURN_RESULT, true)
-                    activity.startActivityForResult(intent,
-                        REQUEST_UNINSTALL
-                    )
-
+                    uninstallApp(appPackageName, user, activity)
                     true
                 }
-                R.id.app_menu_info -> { // open app settings
+                R.id.app_menu_info -> {
                     intendedChoosePause = true
-                    openAppSettings(
-                        appPackageName,
-                        activity
-                    )
+                    openAppSettings(appPackageName, user, activity)
                     true
                 }
                 else -> false

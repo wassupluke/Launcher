@@ -50,7 +50,7 @@ class SettingsFragmentMeta : Fragment(), UIObject {
     private fun rateIntentForUrl(url: String): Intent {
         val intent = Intent(
             Intent.ACTION_VIEW,
-            Uri.parse(String.format("%s?id=%s", url, this.context!!.packageName))
+            Uri.parse(String.format("%s?id=%s", url, this.requireContext().packageName))
         )
         var flags = Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
         flags = flags or Intent.FLAG_ACTIVITY_NEW_DOCUMENT
@@ -59,7 +59,6 @@ class SettingsFragmentMeta : Fragment(), UIObject {
     }
 
     override fun applyTheme() {
-        setButtonColor(binding.settingsMetaButtonSelectLauncher, vibrantColor)
         setButtonColor(binding.settingsMetaButtonViewTutorial, vibrantColor)
         setButtonColor(binding.settingsMetaButtonResetSettings, vibrantColor)
         setButtonColor(binding.settingsMetaButtonReportBug, vibrantColor)
@@ -69,12 +68,6 @@ class SettingsFragmentMeta : Fragment(), UIObject {
     }
 
     override fun setOnClicks() {
-
-        binding.settingsMetaButtonSelectLauncher.setOnClickListener {
-            intendedSettingsPause = true
-            val callHomeSettingIntent = Intent(Settings.ACTION_HOME_SETTINGS)
-            startActivity(callHomeSettingIntent)
-        }
 
         binding.settingsMetaButtonViewTutorial.setOnClickListener {
             intendedSettingsPause = true
@@ -102,7 +95,7 @@ class SettingsFragmentMeta : Fragment(), UIObject {
             intendedSettingsPause = true
             openNewTabWindow(
                 getString(R.string.settings_meta_report_bug_link),
-                context!!
+                requireContext()
             )
         }
 
@@ -113,7 +106,7 @@ class SettingsFragmentMeta : Fragment(), UIObject {
             intendedSettingsPause = true
             openNewTabWindow(
                 getString(R.string.settings_meta_contact_url),
-                context!!
+                requireContext()
             )
         }
 
@@ -122,7 +115,7 @@ class SettingsFragmentMeta : Fragment(), UIObject {
             intendedSettingsPause = true
             openNewTabWindow(
                 getString(R.string.settings_meta_fork_contact_url),
-                context!!
+                requireContext()
             )
         }
 
@@ -131,7 +124,7 @@ class SettingsFragmentMeta : Fragment(), UIObject {
             intendedSettingsPause = true
             openNewTabWindow(
                 getString(R.string.settings_meta_privacy_url),
-                context!!
+                requireContext()
             )
         }
 

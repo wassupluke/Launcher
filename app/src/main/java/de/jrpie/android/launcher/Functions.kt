@@ -1,12 +1,15 @@
 package de.jrpie.android.launcher
 
 import android.app.Activity
+import android.app.ActivityOptions
 import android.app.AlertDialog
 import android.app.Service
 import android.app.role.RoleManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.ActivityInfo
+import android.content.pm.LauncherActivityInfo
 import android.content.pm.LauncherApps
 import android.content.pm.PackageManager
 import android.graphics.BlendMode
@@ -15,12 +18,14 @@ import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
+import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.media.AudioManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
+import android.os.UserHandle
 import android.os.UserManager
 import android.provider.Settings
 import android.util.DisplayMetrics
@@ -39,10 +44,12 @@ import android.widget.Toast
 import de.jrpie.android.launcher.list.ListActivity
 import de.jrpie.android.launcher.list.apps.AppInfo
 import de.jrpie.android.launcher.list.apps.AppsRecyclerAdapter
+import de.jrpie.android.launcher.list.intendedChoosePause
 import de.jrpie.android.launcher.list.other.LauncherAction
 import de.jrpie.android.launcher.settings.SettingsActivity
 import de.jrpie.android.launcher.settings.intendedSettingsPause
 import de.jrpie.android.launcher.tutorial.TutorialActivity
+import kotlin.contracts.contract
 
 
 /* Preference Key Constants */
@@ -220,17 +227,37 @@ fun audioVolumeDown(activity: Activity) {
 
 /* --- */
 
-fun launchApp(packageName: String, user: Int?, context: Context) {
+fun getUserFromId(user: Int?, context: Context): UserHandle? {
+    val userManager = context.getSystemService(Service.USER_SERVICE) as UserManager
+    return userManager.userProfiles.firstOrNull { it.hashCode() == user }
+}
+fun getLauncherActivityInfo(packageName: String, user: Int?, context: Context): LauncherActivityInfo? {
+    val launcherApps = context.getSystemService(Service.LAUNCHER_APPS_SERVICE) as LauncherApps
+    return getUserFromId(user,context)?.let {
+        userHandle -> launcherApps.getActivityList(packageName, userHandle).firstOrNull()
+    }
+}
+fun uninstallApp(packageName: String, user: Int?, activity: Activity) {
+    Log.i("Launcher", "uninstalling $packageName ($user)")
+    val intent = Intent(Intent.ACTION_UNINSTALL_PACKAGE)
+    intent.data = Uri.parse("package:$packageName")
+    getUserFromId(user, activity)?.let {
+        user -> intent.putExtra(Intent.EXTRA_USER, user)
+    }
+
+    intent.putExtra(Intent.EXTRA_RETURN_RESULT, true)
+    activity.startActivityForResult(intent,
+        REQUEST_UNINSTALL
+    )
+}
+
+fun launchApp(packageName: String, user: Int?, context: Context, rect: Rect? = null) {
     Log.i("Launcher", "Starting: " + packageName + " (user " +user.toString()+ ")")
     if (user != null) {
         val launcherApps = context.getSystemService(Service.LAUNCHER_APPS_SERVICE) as LauncherApps
-        val userManager = context.getSystemService(Service.USER_SERVICE) as UserManager
-        userManager.userProfiles.firstOrNull { it.hashCode() == user }?.let {
-            userHandle -> launcherApps.getActivityList(packageName, userHandle).firstOrNull()?.let {
-                app -> launcherApps.startMainActivity(app.componentName, userHandle, null, null)
-                return
-
-            }
+        getLauncherActivityInfo(packageName,user,context)?.let {
+            app -> launcherApps.startMainActivity(app.componentName, app.user, rect, null)
+            return
         }
     }
 
@@ -251,6 +278,7 @@ fun launchApp(packageName: String, user: Int?, context: Context) {
                 ) { _, _ ->
                     openAppSettings(
                         packageName,
+                        user,
                         context
                     )
                 }
@@ -322,10 +350,11 @@ fun resetToDarkTheme(activity: Activity) {
 }
 
 
-fun openAppSettings(pkg: String, context: Context) {
-    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-    intent.data = Uri.parse("package:$pkg")
-    context.startActivity(intent)
+fun openAppSettings(packageName: String, user: Int?, context: Context, sourceBounds: Rect? = null, opts: Bundle? = null) {
+    val launcherApps = context.getSystemService(Service.LAUNCHER_APPS_SERVICE) as LauncherApps
+    getLauncherActivityInfo(packageName, user, context)?.let {
+        app -> launcherApps.startAppDetailsActivity(app.componentName, app.user, sourceBounds, opts)
+    }
 }
 
 fun openSettings(activity: Activity) {
@@ -346,8 +375,7 @@ fun openAppsList(activity: Activity){
 fun getAppIcon(context: Context, packageName: String, user: Int?): Drawable {
     if (user != null) {
         val launcherApps = context.getSystemService(Service.LAUNCHER_APPS_SERVICE) as LauncherApps
-        val userManager = context.getSystemService(Service.USER_SERVICE) as UserManager
-        userManager.userProfiles.firstOrNull { it.hashCode() == user }?.let {
+        getUserFromId(user,context)?.let {
                 userHandle -> launcherApps.getActivityList(packageName, userHandle).firstOrNull()?.let {
                     app -> return app.getBadgedIcon(0)
             }
