@@ -102,8 +102,6 @@
     <string name="settings_launcher_choose_wallpaper">Choose a wallpaper</string>
     <string name="settings_launcher_change_wallpaper">Change wallpaper</string>
 
-    <string name="settings_launcher_choose_homescreen">Set μLauncher as home screen</string>
-
     <string name="settings_launcher_section_display">Display</string>
 
     <string name="settings_launcher_disable_timeout">Keep screen on</string>
@@ -123,7 +121,7 @@
       - Settings : Meta
       -
       -->
-    <string name="settings_meta_select_launcher">Select Launcher</string>
+    <string name="settings_launcher_choose_home_screen">Set μLauncher as home screen</string>
     <string name="settings_meta_cant_select_launcher">App Info</string>
     <string name="settings_meta_cant_select_launcher_msg">Your device does not support this feature. Manage application details instead?</string>
 

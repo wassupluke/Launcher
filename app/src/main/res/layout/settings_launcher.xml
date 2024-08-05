@@ -23,10 +23,10 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/settings_launcher_button_choose_homescreen"
+            android:id="@+id/settings_launcher_button_choose_home_screen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/settings_launcher_choose_homescreen"
+            android:text="@string/settings_launcher_choose_home_screen"
             android:textAllCaps="false" />
     </LinearLayout>
 

@@ -58,7 +58,7 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
 
     override fun applyTheme() {
 
-        setButtonColor(binding.settingsLauncherButtonChooseHomescreen, vibrantColor)
+        setButtonColor(binding.settingsLauncherButtonChooseHomeScreen, vibrantColor)
         setSwitchColor(binding.settingsLauncherSwitchScreenTimeout, vibrantColor)
         setSwitchColor(binding.settingsLauncherSwitchScreenFull, vibrantColor)
         setSwitchColor(binding.settingsLauncherSwitchAutoLaunch, vibrantColor)
@@ -85,7 +85,7 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
             }
         }
 
-        binding.settingsLauncherButtonChooseHomescreen.setOnClickListener {
+        binding.settingsLauncherButtonChooseHomeScreen.setOnClickListener {
             setDefaultHomeScreen(requireContext(), checkDefault = false)
         }
 

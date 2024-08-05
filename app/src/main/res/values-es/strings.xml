@@ -114,7 +114,7 @@
       - Settings : Meta
       -
       -->
-    <string name="settings_meta_select_launcher">Seleccionar Launcher</string>
+    <string name="settings_launcher_choose_home_screen">Seleccionar Launcher</string>
     <string name="settings_meta_cant_select_launcher">Información de la aplicación</string>
     <string name="settings_meta_cant_select_launcher_msg">Su dispositivo no posee esta caracrerística. Desea cambiar los detalles de la aplicación?</string>
 

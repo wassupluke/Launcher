@@ -90,7 +90,7 @@
       - Settings : Meta
       -
       -->
-    <string name="settings_meta_select_launcher">Launcher wählen</string>
+    <string name="settings_launcher_choose_home_screen">Launcher wählen</string>
     <string name="settings_meta_cant_select_launcher">App Info</string>
     <string name="settings_meta_cant_select_launcher_msg">Dein Gerät unterstützt diese Funktion nicht. Stattdessen die App Details bearbeiten?</string>
 

@@ -90,7 +90,7 @@
       - Settings : Meta
       -
       -->
-    <string name="settings_meta_select_launcher">Choisir Launcher</string>
+    <string name="settings_launcher_choose_home_screen">Choisir Launcher</string>
     <string name="settings_meta_cant_select_launcher">Informations sur l\'application</string>
     <string name="settings_meta_cant_select_launcher_msg">Votre appareil ne prend pas en charge cette fonctionnalité. Gérez plutôt les détails de l\'application?</string>
 
@@ -98,8 +98,6 @@
 
     <string name="settings_meta_reset">Réinitialiser</string>
     <string name="settings_meta_reset_confirm">Vous allez supprimer toutes vos préférences. Continuer?</string>
-
-    <string name="settings_meta_link_github">https://github.de.jrpie.android.launcher#fr</string>
 
     <string name="settings_meta_report_bug">Signaler une erreur</string>
 
