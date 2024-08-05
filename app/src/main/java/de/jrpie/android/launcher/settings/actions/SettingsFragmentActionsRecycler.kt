@@ -28,11 +28,11 @@ import java.lang.Exception
 class SettingsFragmentActionsRecycler : Fragment(), UIObject {
 
     private lateinit var binding: SettingsActionsRecyclerBinding
-    public var actionViewAdapter: ActionsRecyclerAdapter? = null
+    var actionViewAdapter: ActionsRecyclerAdapter? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = SettingsActionsRecyclerBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -128,7 +128,7 @@ class ActionsRecyclerAdapter(val activity: Activity):
                     && (edgeActions || !it.isEdgeVariant())} as ArrayList<Gesture>
     }
 
-    public fun updateActions() {
+    fun updateActions() {
         val doubleActions = getPreferences(activity).getBoolean(PREF_DOUBLE_ACTIONS_ENABLED, false)
         val edgeActions = getPreferences(activity).getBoolean(PREF_EDGE_ACTIONS_ENABLED, false)
         this.gesturesList.clear()

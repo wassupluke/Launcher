@@ -121,11 +121,11 @@ class HomeActivity: UIObject, AppCompatActivity(),
             this@HomeActivity.runOnUiThread {
                 val t = timeFormat.format(Date())
                 if (binding.homeLowerView.text != t)
-                    binding.homeLowerView.setText(t)
+                    binding.homeLowerView.text = t
 
                 val d = dateFormat.format(Date())
                 if (binding.homeUpperView.text != d)
-                    binding.homeUpperView.setText(d)
+                    binding.homeUpperView.text = d
             }
         }
     }
@@ -146,7 +146,7 @@ class HomeActivity: UIObject, AppCompatActivity(),
 
     override fun onFling(e1: MotionEvent?, e2: MotionEvent, dX: Float, dY: Float): Boolean {
 
-        if (e1 == null) return false;
+        if (e1 == null) return false
 
         val width = displayMetrics.widthPixels
         val height = displayMetrics.heightPixels
@@ -184,15 +184,15 @@ class HomeActivity: UIObject, AppCompatActivity(),
 
         if (edgeActions) {
             if(max(e1.x, e2.x) < edgeStrictness * width){
-                gesture = gesture?.let{it.getEdgeVariant(Gesture.Edge.LEFT)};
+                gesture = gesture?.let{it.getEdgeVariant(Gesture.Edge.LEFT)}
             } else if (min(e1.x, e2.x) > (1-edgeStrictness) * width){
-                gesture = gesture?.let{it.getEdgeVariant(Gesture.Edge.RIGHT)};
+                gesture = gesture?.let{it.getEdgeVariant(Gesture.Edge.RIGHT)}
             }
 
             if(max(e1.y, e2.y) < edgeStrictness * height){
-                gesture = gesture?.let{it.getEdgeVariant(Gesture.Edge.TOP)};
+                gesture = gesture?.let{it.getEdgeVariant(Gesture.Edge.TOP)}
             } else if (min(e1.y, e2.y) > (1-edgeStrictness) * height){
-                gesture = gesture?.let{it.getEdgeVariant(Gesture.Edge.BOTTOM)};
+                gesture = gesture?.let{it.getEdgeVariant(Gesture.Edge.BOTTOM)}
             }
         }
         gesture?.invoke(this)

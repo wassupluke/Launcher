@@ -22,7 +22,7 @@ class ListFragmentOther : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = ListOtherBinding.inflate(inflater)
         return binding.root
     }

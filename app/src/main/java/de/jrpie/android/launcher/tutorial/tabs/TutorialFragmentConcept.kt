@@ -19,7 +19,7 @@ class TutorialFragmentConcept : Fragment(), UIObject {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = TutorialConceptBinding.inflate(inflater, container, false)
         binding.tutorialConceptBadgeVersion.text = BuildConfig.VERSION_NAME
         return binding.root

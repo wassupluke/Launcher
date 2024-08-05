@@ -27,7 +27,7 @@ class ListFragmentApps : Fragment(), UIObject {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = ListAppsBinding.inflate(inflater)
         return binding.root
     }

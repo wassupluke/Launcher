@@ -45,7 +45,7 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = SettingsLauncherBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -81,7 +81,7 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
                 preferences.edit()
                     .putBoolean(pref, isChecked)
                     .apply()
-                onChange(isChecked);
+                onChange(isChecked)
             }
         }
 

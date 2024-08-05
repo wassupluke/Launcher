@@ -21,7 +21,7 @@ class TutorialFragmentFinish : Fragment(), UIObject {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = TutorialFinishBinding.inflate(inflater, container, false)
         return binding.root
     }

@@ -40,7 +40,7 @@ SettingsFragmentActions : Fragment(), UIObject {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         getPreferences(requireContext()).registerOnSharedPreferenceChangeListener(sharedPreferencesListener)
         binding = SettingsActionsBinding.inflate(inflater, container, false)
         return binding!!.root

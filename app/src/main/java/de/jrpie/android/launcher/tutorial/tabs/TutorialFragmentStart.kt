@@ -19,7 +19,7 @@ class TutorialFragmentStart : Fragment(), UIObject {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = TutorialStartBinding.inflate(inflater, container, false)
         return binding.root
     }
