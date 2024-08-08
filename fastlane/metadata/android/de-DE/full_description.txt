@@ -1,7 +1,23 @@
-Diese App ist ein Launcher (eine App, die deinen Startbildschirm verwaltet und dich andere Apps starten lässt).
-Sie ist so <b>minimalistisch, effizient und frei von Ablenkung</b> gestaltet wie möglich. Dadurch hilft sie jedem Nutzer, sein Mobiltelefon effektiver denn je zu benutzen.
-Auf deinem Startbildschim siehst du lediglich die Uhrzeit und das Datum. Keine Ablenkung. Mit nur einer kurzen Interaktion öffnest du Apps. Sobald du deine sinnvollsten Apps ausgewählt hast, wirst du keine Zeit mehr damit verlieren, sie unter all den anderen Apps zu suchen. Einmal Wischen, ein Knopfdruck - deine App öffnet sich sofort.
-Du kannst das Design auch personalisieren (Beispiel-Themes)). <b>Du wählst dein Hintergrundbild und die App passt sich daran an.</b> Diese Funktion ist noch neu (seit v1.2.0), also kannst du mir gerne Feedback dazu geben! Du kannst aber auch einfach die integrierten minimalen und ablenkungsfreieren Themes verwenden.
+Diese minimalistische App ersetzt den Startbildschirm. Sie zeigt lediglich Uhrzeit und Datum an.
+
+Die am häufigsten verwendeten Apps lassen sich mittels verschiedener Wischgesten
+und Buttons starten.
+Dies lässt sich in den Einstellungen konfigurieren.
+
+Ferner kann eine Liste aller installierten Apps angezeigt
+(Zurück-Button oder Wischen nach oben) und effizient durchsucht werden.
+
+
+Es handelt sich um einen Fork von <a href="https://f-droid.org/packages/com.finnmglas.launcher/">Finn M Glas'
+App Launcher</a>, der sich vor Allem in den folgenden Punkten unterscheidet:
+
+* Die App ist kompatibel mit dem <strong>Work Profile</strong>.
+* Es wurden <strong>mehr Gesten</strong> hinzugefügt und die Gestenerkennung verbessert.
+* Die Suchfunktion wurde verbessert.
+* Font Awesome Icons wurden durch <strong>Material Icons</strong> ersetzt, ferner wird die Schriftart Hack verwendet.
+* Der Einstellungsbutton auf dem Startbildschirm wurde entfernt.
+* Es wird das vom System festgelegte Hintergrundbild verwendet. Damit sind auch Live Wallpaper nutzbar.
+
 
 <b>Datenschutz</b>
-Diese App sammelt, empfängt und teilt keine persönlichen Daten. Sie hilft dir, egal wer du bist!
+Diese App sammelt, empfängt und teilt keine persönlichen Daten.

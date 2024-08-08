@@ -1,7 +1,20 @@
-Launcher is an android homescreen that lets you start other apps using swipe gestures and button presses.
+µLauncher is a home screen that lets you start other apps using swipe gestures and button presses.
 It is <b>minimal, efficient and free of distraction</b>.
 
-Your homescreen only displays the date, time and a wallpaper (if you want one).
+Your homescreen only displays the date, time and a wallpaper.
+Pressing back or swiping up (this can be configures) opens a list
+of all installed apps, which can be searched efficiently.
 
-This app <b>costs you nothing</b>, is <b>ad-free</b> and does not collect, receive or share any personal data.
-It boosts your efficiency, no matter who you are!
+
+This is a fork of the app <a href="https://f-droid.org/packages/com.finnmglas.launcher/">Launcher</a>
+by Finn M Glas.
+
+Notable changes:
+* Edge gestures: There is a setting to allow distinguishing swiping at the edges of the screen from swiping in the center.
+* Compatible with work profile, so apps like Shelter can be used.
+* This app uses the system wallpaper instead of a custom solution.
+* The font has been changed to Hack.
+* Font Awesome Icons were replaced by Material icons.
+* The gear button on the home screen was removed. Instead pressing back opens the list of applications and the app settings are accessible from there.
+* The search algorithm was modified to prefer matches at the beginning of the app name, i.e. when searching for "te", "termux" is sorted before "notes".
+* The search bar was moved to the bottom of the screen
