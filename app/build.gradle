@@ -23,8 +23,8 @@ android {
         applicationId "de.jrpie.android.launcher"
         minSdkVersion 21
         targetSdkVersion 35
-        versionCode 19
-        versionName "j-0.0.7"
+        versionCode 20
+        versionName "j-0.0.8"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
