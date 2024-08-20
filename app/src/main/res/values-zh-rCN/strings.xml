@@ -8,14 +8,6 @@
     <string name="settings_launcher_theme">主题</string>
     <string name="settings_launcher_section_display">显示</string>
     <string name="list_tab_other">其他</string>
-    <string name="swipe" translatable="false"></string>
-    <string name="app_name" translatable="false"></string>
-    <string name="preference_file_key" translatable="false"></string>
     <string name="settings_gesture_up">向上滑动</string>
     <string name="settings_gesture_down">向下滑动</string>
-    <string name="settings_meta_link_github" translatable="false"></string>
-    <string name="settings_meta_report_bug_link" translatable="false"></string>
-    <string name="settings_meta_fork_contact_url" translatable="false"></string>
-    <string name="settings_meta_privacy_url" translatable="false"></string>
-    <string name="settings_meta_discord_url" translatable="false"></string>
 </resources>
