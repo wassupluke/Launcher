@@ -94,7 +94,6 @@
 \n它不付费、无广告、不追踪。</string>
     <string name="tutorial_usage_text_2">您只需滑动屏幕或按下按钮即可启动应用程序。在下一步向导中选择一些应用程序。</string>
     <string name="settings_launcher_choose_home_screen">将 μLauncher 设为默认桌面</string>
-    <string name="preference_file_key" translatable="false"></string>
     <string name="settings_meta_link_github" translatable="false">https://github.com/jrpie/Launcher</string>
     <string name="settings_meta_report_bug_link" translatable="false">https://github.com/jrpie/Launcher/issues/new</string>
     <string name="app_name" translatable="false">μLauncher</string>
