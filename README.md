@@ -6,6 +6,15 @@
 
 This is a fork of [finnmglas's app Launcher][original-repo].
 
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
+     alt="Get it on F-Droid"
+     height="80">](https://f-droid.org/packages/de.jrpie.android.launcher/)
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
+     alt="Get it on Google Play"
+     height="80">](https://play.google.com/store/apps/details?id=de.jrpie.android.launcher)
+
+Or download the latest APK from the [Releases Section](https://github.com/jrpie/Launcher/releases/latest).
+
 ## Notable changes:
 
 * Edge gestures: There is a setting to allow distinguishing swiping at the edges of the screen from swiping in the center.
