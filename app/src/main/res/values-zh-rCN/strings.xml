@@ -88,18 +88,11 @@
     <string name="list_other_track_next">音乐：下一首</string>
     <string name="list_other_nop">啥也不干</string>
     <string name="tutorial_title">教程</string>
-    <string name="swipe" translatable="false">&gt;&gt;&gt;&gt;&gt;&gt;</string>
     <string name="tutorial_concept_text">μLauncher 的设计是最小、高效且无干扰。
 \n
 \n它不付费、无广告、不追踪。</string>
     <string name="tutorial_usage_text_2">您只需滑动屏幕或按下按钮即可启动应用程序。在下一步向导中选择一些应用程序。</string>
     <string name="settings_launcher_choose_home_screen">将 μLauncher 设为默认桌面</string>
-    <string name="settings_meta_link_github" translatable="false">https://github.com/jrpie/Launcher</string>
-    <string name="settings_meta_report_bug_link" translatable="false">https://github.com/jrpie/Launcher/issues/new</string>
-    <string name="app_name" translatable="false">μLauncher</string>
-    <string name="settings_meta_fork_contact_url" translatable="false">https://s.jrpie.de/contact</string>
-    <string name="settings_meta_privacy_url" translatable="false">https://s.jrpie.de/android-legal</string>
-    <string name="settings_meta_discord_url" translatable="false">https://discord.com/invite/jV2AhF8</string>
     <string name="tutorial_finish_text">您已经准备好开始了！
 \n
 \n我希望这对你有很大的价值!
