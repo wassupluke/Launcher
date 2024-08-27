@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tutorial_finish_button">开始</string>
+    <string name="settings">设置</string>
+    <string name="ic_menu_alt">更多选项</string>
+    <string name="settings_title">设置</string>
+    <string name="settings_launcher_section_appearance">外观</string>
+    <string name="settings_launcher_theme">主题</string>
+    <string name="settings_launcher_section_display">显示</string>
+    <string name="list_tab_other">其他</string>
+    <string name="settings_gesture_up">上滑</string>
+    <string name="settings_gesture_down">下滑</string>
+    <string name="alert_cant_open_title">无法打开应用</string>
+    <string name="alert_cant_open_message">要更改其设置吗？</string>
+    <string name="toast_cant_open_message">打开设置，为该操作绑定一个应用程序</string>
+    <string name="settings_tab_app">应用程序</string>
+    <string name="settings_tab_launcher">启动器</string>
+    <string name="settings_tab_meta">杂项</string>
+    <string name="settings_gesture_left">左滑</string>
+    <string name="settings_gesture_double_left">左滑两次</string>
+    <string name="settings_gesture_double_up">上滑两次</string>
+    <string name="settings_gesture_double_down">下滑两次</string>
+    <string name="settings_gesture_right">右滑</string>
+    <string name="settings_gesture_double_right">右滑两次</string>
+    <string name="settings_gesture_right_top_edge">右滑（顶部）</string>
+    <string name="settings_gesture_right_bottom_edge">右滑（底部）</string>
+    <string name="settings_gesture_left_bottom_edge">左滑（底部）</string>
+    <string name="settings_gesture_left_top_edge">左滑（顶部）</string>
+    <string name="settings_gesture_up_left_edge">上滑（左边缘）</string>
+    <string name="settings_gesture_up_right_edge">上滑（右边缘）</string>
+    <string name="settings_gesture_down_left_edge">下滑（左边缘）</string>
+    <string name="settings_gesture_down_right_edge">下滑两次（右边缘）</string>
+    <string name="settings_gesture_vol_up">音量加</string>
+    <string name="settings_gesture_vol_down">音量减</string>
+    <string name="settings_gesture_double_click">双击</string>
+    <string name="settings_gesture_long_click">长按</string>
+    <string name="settings_gesture_date">点击日期</string>
+    <string name="settings_gesture_time">点击时间</string>
+    <string name="settings_apps_choose">选择应用</string>
+    <string name="settings_apps_view_all">浏览全部应用</string>
+    <string name="settings_apps_install">安装应用</string>
+    <string name="settings_apps_toast_store_not_found">没有找到应用市场</string>
+    <string name="settings_launcher_time_format">日期格式</string>
+    <string name="settings_launcher_choose_wallpaper">选择一个壁纸</string>
+    <string name="settings_launcher_change_wallpaper">换壁纸</string>
+    <string name="settings_launcher_disable_timeout">保持屏幕常亮</string>
+    <string name="settings_launcher_full_screen">使用全屏</string>
+    <string name="settings_launcher_section_functions">功能</string>
+    <string name="settings_launcher_enable_edge">边缘滑动动作</string>
+    <string name="settings_launcher_auto_launch">零点击启动唯一搜索结果</string>
+    <string name="settings_launcher_auto_keyboard">搜索时呼出键盘</string>
+    <string name="settings_launcher_sensitivity">灵敏度</string>
+    <string name="settings_meta_cant_select_launcher">应用信息</string>
+    <string name="settings_meta_cant_select_launcher_msg">您的设备不支持此功能。要不打开应用程序详细？</string>
+    <string name="settings_meta_show_tutorial">查看启动器教程</string>
+    <string name="settings_meta_reset">重置设置</string>
+    <string name="settings_meta_reset_confirm">你将放弃你所有的配置。继续吗?</string>
+    <string name="settings_meta_report_bug">反馈 BUG</string>
+    <string name="settings_meta_fork_contact">联系该 fork 版本的作者</string>
+    <string name="settings_meta_privacy">隐私政策</string>
+    <string name="settings_meta_contact">联系原作者</string>
+    <string name="settings_meta_contact_url">https://www.finnmglas.com/contact/</string>
+    <string name="settings_meta_discord">加入 Discord！</string>
+    <string name="list_title_view">全部应用</string>
+    <string name="list_title_pick">选择应用</string>
+    <string name="tutorial_start_text">花几秒时间学下咋用这个启动器吧！</string>
+    <string name="tutorial_concept_title">概念</string>
+    <string name="tutorial_concept_text_2">该应用是开源的（MIT许可），并在 GitHub 上可用！
+\n
+\n一定要来看看代码仓库！</string>
+    <string name="tutorial_usage_title">使用方法</string>
+    <string name="tutorial_usage_text">您的主屏幕仅包含本地日期和时间，没有其它纷纷扰扰。</string>
+    <string name="tutorial_setup_title">设置</string>
+    <string name="tutorial_setup_text">我们为你选择了一些默认应用程序，你可以在此自定义。</string>
+    <string name="tutorial_setup_text_2">您也可以稍后更改选择。</string>
+    <string name="tutorial_finish_title">起飞！</string>
+    <string name="list_tab_app">应用</string>
+    <string name="list_app_delete">卸载</string>
+    <string name="list_app_info">应用信息</string>
+    <string name="list_not_removed">无法移除应用</string>
+    <string name="list_removed">移除了选定的应用</string>
+    <string name="list_apps_search_hint">搜索应用</string>
+    <string name="list_other_settings">启动器设置</string>
+    <string name="list_other_list">全部应用</string>
+    <string name="list_other_volume_up">音乐：大声</string>
+    <string name="list_other_volume_down">音乐：小声</string>
+    <string name="list_other_track_previous">音乐：上一首</string>
+    <string name="list_other_track_next">音乐：下一首</string>
+    <string name="list_other_nop">啥也不干</string>
+    <string name="tutorial_title">教程</string>
+    <string name="tutorial_concept_text">μLauncher 的设计是最小、高效且无干扰。
+\n
+\n它不付费、无广告、不追踪。</string>
+    <string name="tutorial_usage_text_2">您只需滑动屏幕或按下按钮即可启动应用程序。在下一步向导中选择一些应用程序。</string>
+    <string name="settings_launcher_choose_home_screen">将 μLauncher 设为默认桌面</string>
+    <string name="tutorial_finish_text">您已经准备好开始了！
+\n
+\n我希望这对你有很大的价值!
+\n
+\n- Finn (Launcher 的作者)
+\n以及 Josia(做了一些改进并维护了 μLauncher 分支)</string>
+    <string name="settings_launcher_enable_double">双滑动作</string>
+</resources>
