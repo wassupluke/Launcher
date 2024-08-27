@@ -9,6 +9,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.ActivityInfo
+import android.content.pm.ApplicationInfo
 import android.content.pm.LauncherActivityInfo
 import android.content.pm.LauncherApps
 import android.content.pm.PackageManager
@@ -403,6 +404,7 @@ fun loadApps(packageManager: PackageManager, context: Context) {
             app.packageName = activityInfo.applicationInfo.packageName
             app.icon = activityInfo.getBadgedIcon(0)
             app.user = user.hashCode()
+            app.isSystemApp = activityInfo.applicationInfo.flags.and(ApplicationInfo.FLAG_SYSTEM) != 0
             loadList.add(app)
         }
     }

@@ -51,11 +51,9 @@ class AppsRecyclerAdapter(val activity: Activity,
         View.OnClickListener {
         var textView: TextView = itemView.findViewById(R.id.list_apps_row_name)
         var img: ImageView = itemView.findViewById(R.id.list_apps_row_icon)
-        var menuDots: ImageView = itemView.findViewById(R.id.list_apps_row_menu)
 
         override fun onClick(v: View) {
             val pos = adapterPosition
-            val context: Context = v.context
             val appPackageName = appsListDisplayed[pos].packageName.toString()
             val appUser = appsListDisplayed[pos].user
             when (intention){
@@ -93,17 +91,9 @@ class AppsRecyclerAdapter(val activity: Activity,
         )
 
         // decide when to show the options popup menu about
-        if (isSystemApp || intention == ListActivity.ListActivityIntention.PICK) {
-            viewHolder.menuDots.visibility = View.INVISIBLE
-        }
-        else {
-            viewHolder.menuDots.visibility = View.VISIBLE
-
-            viewHolder.menuDots.setOnClickListener{ showOptionsPopup(viewHolder, appPackageName, appUser) }
-            viewHolder.menuDots.setOnLongClickListener{ showOptionsPopup(viewHolder, appPackageName, appUser) }
-            viewHolder.textView.setOnLongClickListener{ showOptionsPopup(viewHolder, appPackageName, appUser) }
-            viewHolder.img.setOnLongClickListener{ showOptionsPopup(viewHolder, appPackageName, appUser) }
-
+        if (intention == ListActivity.ListActivityIntention.VIEW) {
+            viewHolder.textView.setOnLongClickListener{ showOptionsPopup(viewHolder, appPackageName, appUser, isSystemApp) }
+            viewHolder.img.setOnLongClickListener{ showOptionsPopup(viewHolder, appPackageName, appUser, isSystemApp) }
             // ensure onClicks are actually caught
             viewHolder.textView.setOnClickListener{ viewHolder.onClick(viewHolder.textView) }
             viewHolder.img.setOnClickListener{ viewHolder.onClick(viewHolder.img) }
@@ -111,11 +101,15 @@ class AppsRecyclerAdapter(val activity: Activity,
     }
 
     @Suppress("SameReturnValue")
-    private fun showOptionsPopup(viewHolder: ViewHolder, appPackageName: String, user: Int?): Boolean {
+    private fun showOptionsPopup(viewHolder: ViewHolder, appPackageName: String, user: Int?, isSystemApp: Boolean): Boolean {
         //create the popup menu
 
-        val popup = PopupMenu(activity, viewHolder.menuDots)
+        val popup = PopupMenu(activity, viewHolder.img)
         popup.inflate(R.menu.menu_app)
+
+        if (isSystemApp) {
+            popup.menu.findItem(R.id.app_menu_delete).setVisible(false)
+        }
 
         popup.setOnMenuItemClickListener {
             when (it.itemId) {
