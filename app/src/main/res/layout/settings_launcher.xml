@@ -58,16 +58,11 @@
 
         <TextView
             android:id="@+id/settings_launcher_text_time_format"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="@string/settings_launcher_time_format"
             android:textSize="16sp" />
-
-        <android.widget.Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
         <Spinner
             android:id="@+id/settings_launcher_format_spinner"
             android:layout_width="wrap_content"
@@ -85,15 +80,11 @@
 
         <TextView
             android:id="@+id/settings_launcher_theme_text"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="@string/settings_launcher_theme"
             android:textSize="16sp" />
-
-        <android.widget.Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
 
         <Spinner
             android:id="@+id/settings_launcher_theme_spinner"
@@ -145,15 +136,12 @@
 
         <TextView
             android:id="@+id/settings_launcher_text_screen_timeout"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="@string/settings_launcher_disable_timeout"
             android:textSize="16sp" />
 
-        <android.widget.Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
 
         <Switch
             android:id="@+id/settings_launcher_switch_screen_timeout"
@@ -174,15 +162,12 @@
 
         <TextView
             android:id="@+id/settings_launcher_text_screen_full"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="@string/settings_launcher_full_screen"
             android:textSize="16sp" />
 
-        <android.widget.Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
 
         <Switch
             android:id="@+id/settings_launcher_switch_screen_full"
@@ -245,15 +230,12 @@
 
         <TextView
             android:id="@+id/settings_launcher_text_auto_launch"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="@string/settings_launcher_auto_launch"
             android:textSize="16sp" />
 
-        <android.widget.Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
 
         <Switch
             android:id="@+id/settings_launcher_switch_auto_launch"
@@ -274,15 +256,12 @@
 
         <TextView
             android:id="@+id/settings_launcher_text_start_keyboard"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="@string/settings_launcher_auto_keyboard"
-            android:textSize="16sp" />
-
-        <android.widget.Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:textSize="16sp"
+            />
 
         <Switch
             android:id="@+id/settings_launcher_switch_auto_keyboard"
@@ -303,15 +282,12 @@
 
         <TextView
             android:id="@+id/settings_launcher_text_enable_double"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="@string/settings_launcher_enable_double"
             android:textSize="16sp" />
 
-        <android.widget.Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
 
         <Switch
             android:id="@+id/settings_launcher_switch_enable_double"
@@ -332,17 +308,13 @@
 
         <TextView
             android:id="@+id/settings_launcher_text_enable_edge"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="@string/settings_launcher_enable_edge"
             android:textSize="16sp" />
 
-        <android.widget.Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <Switch
+     <Switch
             android:id="@+id/settings_launcher_switch_enable_edge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
