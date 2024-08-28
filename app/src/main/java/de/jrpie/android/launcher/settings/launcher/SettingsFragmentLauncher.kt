@@ -1,14 +1,12 @@
 package de.jrpie.android.launcher.settings.launcher
 
 import android.content.Intent
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.SeekBar
 import android.widget.Switch
 import androidx.fragment.app.Fragment
 import de.jrpie.android.launcher.PREF_DATE_FORMAT
@@ -18,7 +16,6 @@ import de.jrpie.android.launcher.PREF_SCREEN_FULLSCREEN
 import de.jrpie.android.launcher.PREF_SCREEN_TIMEOUT_DISABLED
 import de.jrpie.android.launcher.PREF_SEARCH_AUTO_KEYBOARD
 import de.jrpie.android.launcher.PREF_SEARCH_AUTO_LAUNCH
-import de.jrpie.android.launcher.PREF_SLIDE_SENSITIVITY
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.UIObject
 import de.jrpie.android.launcher.getPreferences
@@ -67,7 +64,6 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
 
 
         setButtonColor(binding.settingsLauncherButtonChooseWallpaper, vibrantColor)
-        binding.settingsSeekbarSensitivity.progressDrawable.setColorFilter(vibrantColor, PorterDuff.Mode.SRC_IN)
     }
 
     override fun setOnClicks() {
@@ -109,18 +105,6 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
         bindSwitchToPref(binding.settingsLauncherSwitchAutoKeyboard, PREF_SEARCH_AUTO_KEYBOARD, true) {}
         bindSwitchToPref(binding.settingsLauncherSwitchEnableDouble, PREF_DOUBLE_ACTIONS_ENABLED, false) {}
         bindSwitchToPref(binding.settingsLauncherSwitchEnableEdge, PREF_EDGE_ACTIONS_ENABLED, false) {}
-
-        binding.settingsSeekbarSensitivity.setOnSeekBarChangeListener(
-            object : SeekBar.OnSeekBarChangeListener {
-                override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {}
-                override fun onStartTrackingTouch(p0: SeekBar?) {}
-                override fun onStopTrackingTouch(p0: SeekBar?) {
-                    preferences.edit()
-                        .putInt(PREF_SLIDE_SENSITIVITY, p0!!.progress * 100 / 4) // scale to %
-                        .apply()
-                }
-            }
-        )
     }
 
     override fun adjustLayout() {
@@ -171,7 +155,5 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
             }
             override fun onNothingSelected(parent: AdapterView<*>?) { }
         }
-
-        binding.settingsSeekbarSensitivity.progress = preferences.getInt(PREF_SLIDE_SENSITIVITY, 2) * 4 / 100
     }
 }

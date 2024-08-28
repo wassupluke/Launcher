@@ -159,21 +159,18 @@ class HomeActivity: UIObject, AppCompatActivity(),
         val doubleActions = preferences.getBoolean(PREF_DOUBLE_ACTIONS_ENABLED, false)
         val edgeActions = preferences.getBoolean(PREF_EDGE_ACTIONS_ENABLED, false)
         val edgeStrictness = 0.15
-        // how distinguished the swipe has to be to launch something
-        // strictness = opposite of sensitivity. TODO - May have to be adjusted
-        val strictness = (4 / bufferedPointerCount) * ((100 - preferences.getInt(PREF_SLIDE_SENSITIVITY, 50)) / 50)
 
         var gesture = if(abs(diffX) > abs(diffY)) { // horizontal swipe
-            if (diffX > width / 4 && abs(diffX) > strictness * abs(diffY))
+            if (diffX > width / 4)
                 Gesture.SWIPE_LEFT
-            else if (diffX < -width / 4 && abs(diffX) > strictness * abs(diffY))
+            else if (diffX < -width / 4)
                 Gesture.SWIPE_RIGHT
             else null
         } else { // vertical swipe
             // Only open if the swipe was not from the phones top edge
-            if (diffY < -height / 8 && abs(diffY) > strictness * abs(diffX) && e1.y > 100)
+            if (diffY < -height / 8 && e1.y > 100)
                 Gesture.SWIPE_DOWN
-            else if (diffY > height / 8 && abs(diffY) > strictness * abs(diffX))
+            else if (diffY > height / 8)
                 Gesture.SWIPE_UP
             else null
         }

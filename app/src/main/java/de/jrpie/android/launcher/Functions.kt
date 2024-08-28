@@ -1,14 +1,12 @@
 package de.jrpie.android.launcher
 
 import android.app.Activity
-import android.app.ActivityOptions
 import android.app.AlertDialog
 import android.app.Service
 import android.app.role.RoleManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.pm.ActivityInfo
 import android.content.pm.ApplicationInfo
 import android.content.pm.LauncherActivityInfo
 import android.content.pm.LauncherApps
@@ -48,7 +46,6 @@ import de.jrpie.android.launcher.list.apps.AppsRecyclerAdapter
 import de.jrpie.android.launcher.list.other.LauncherAction
 import de.jrpie.android.launcher.settings.SettingsActivity
 import de.jrpie.android.launcher.tutorial.TutorialActivity
-import kotlin.contracts.contract
 
 
 /* Preference Key Constants */
@@ -65,8 +62,6 @@ const val PREF_DOUBLE_ACTIONS_ENABLED = "enableDoubleActions"
 const val PREF_EDGE_ACTIONS_ENABLED = "enableEdgeActions"
 const val PREF_SEARCH_AUTO_LAUNCH = "searchAutoLaunch"
 const val PREF_SEARCH_AUTO_KEYBOARD = "searchAutoKeyboard"
-
-const val PREF_SLIDE_SENSITIVITY = "slideSensitivity"
 
 const val PREF_STARTED = "startedBefore"
 const val PREF_STARTED_TIME = "firstStartup"
@@ -447,7 +442,6 @@ fun resetSettings(context: Context) {
         .putInt(PREF_DATE_FORMAT, 0)
         .putBoolean(PREF_SCREEN_FULLSCREEN, true)
         .putBoolean(PREF_DOUBLE_ACTIONS_ENABLED, false)
-        .putInt(PREF_SLIDE_SENSITIVITY, 50)
 
     Gesture.values().forEach { editor.putString(it.id, it.pickDefaultApp(context)) }
 

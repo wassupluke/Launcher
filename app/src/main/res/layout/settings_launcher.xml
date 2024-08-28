@@ -195,34 +195,11 @@
             tools:layout_editor_absoluteY="16dp" />
     </LinearLayout>
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16sp"
-        android:layout_marginBottom="16sp"
-        android:gravity="top"
-        android:orientation="horizontal"
-        android:paddingLeft="8sp">
-
-        <TextView
-            android:id="@+id/settings_launcher_text_sensitivity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/settings_launcher_sensitivity"
-            android:textSize="16sp" />
-
-        <SeekBar
-            android:id="@+id/settings_seekbar_sensitivity"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:max="4"
-            android:progress="2" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginBottom="16sp"
         android:gravity="top"
         android:orientation="horizontal"
