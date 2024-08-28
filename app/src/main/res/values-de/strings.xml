@@ -25,14 +25,22 @@
       - Settings : Apps
       -
       -->
-    <string name="settings_gesture_up">Hochwischen</string>
+    <string name="settings_gesture_up">Nach oben wischen</string>
     <string name="settings_gesture_double_up">Doppelt hoch</string>
-    <string name="settings_gesture_down">Runterwischen</string>
+    <string name="settings_gesture_down">Nach unten wischen</string>
     <string name="settings_gesture_double_down">Doppelt runter</string>
-    <string name="settings_gesture_left">Linkswischen</string>
+    <string name="settings_gesture_left">Nach links wischen</string>
     <string name="settings_gesture_double_left">Doppelt links</string>
-    <string name="settings_gesture_right">Rechtswischen</string>
+    <string name="settings_gesture_right">Nach rechts wischen</string>
     <string name="settings_gesture_double_right">Doppelt rechts</string>
+    <string name="settings_gesture_right_top_edge">Nach rechts wischen (oben)</string>
+    <string name="settings_gesture_right_bottom_edge">Nach rechts wischen (unten)</string>
+    <string name="settings_gesture_left_bottom_edge">"Nach links wischen (unten) "</string>
+    <string name="settings_gesture_left_top_edge">Nach links wischen (oben)</string>
+    <string name="settings_gesture_up_left_edge">Nach oben wischen (links)</string>
+    <string name="settings_gesture_up_right_edge">Nach oben wischen (rechts)</string>
+    <string name="settings_gesture_down_left_edge">Nach unten wischen (links)</string>
+    <string name="settings_gesture_down_right_edge">Nach unten wischen (rechts)</string>
     <string name="settings_gesture_vol_up">Lautstärke +</string>
     <string name="settings_gesture_vol_down">Lautstärke -</string>
     <string name="settings_gesture_double_click">Doppelklick</string>
@@ -52,7 +60,7 @@
       - Settings : Launcher
       -
       -->
-    <string name="settings_launcher_section_appearance">Erscheinung</string>
+    <string name="settings_launcher_section_appearance">Aussehen</string>
 
     <string name="settings_launcher_show_time">Zeit anzeigen</string>
     <string name="settings_launcher_show_date">Datum anzeigen</string>
@@ -70,14 +78,15 @@
 
     <string name="settings_launcher_section_display">Bildschirm</string>
 
-    <string name="settings_launcher_disable_timeout">Bildschirm wach halten</string>
-    <string name="settings_launcher_full_screen">Vollbild verwenden</string>
+    <string name="settings_launcher_disable_timeout">Bildschirm nicht ausschalten</string>
+    <string name="settings_launcher_full_screen">Vollbild</string>
 
     <string name="settings_launcher_section_functions">Funktionen</string>
 
     <string name="settings_launcher_enable_double">Doppelte Wischaktionen</string>
-    <string name="settings_launcher_auto_launch">Suchergebisse launchen</string>
-    <string name="settings_launcher_auto_keyboard">Tastatur in Suche öffnen</string>
+    <string name="settings_launcher_enable_edge">Kantenwischaktionen</string>
+    <string name="settings_launcher_auto_launch">Suchergebnis starten</string>
+    <string name="settings_launcher_auto_keyboard">Tastatur automatisch öffnen</string>
 
     <string name="settings_launcher_sensitivity">Empfindlichkeit</string>
 
@@ -93,7 +102,7 @@
     <string name="settings_meta_show_tutorial">Zum Launcher Tutorial</string>
 
     <string name="settings_meta_reset">Zurücksetzen</string>
-    <string name="settings_meta_reset_confirm">All deine Einstellungen gehen verloren. Weitermachen?</string>
+    <string name="settings_meta_reset_confirm">Alle Einstellungen gehen verloren. Weitermachen?</string>
 
     <string name="settings_meta_report_bug">Einen Fehler melden</string>
 
