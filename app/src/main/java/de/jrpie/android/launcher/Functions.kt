@@ -449,8 +449,8 @@ fun resetSettings(context: Context) {
         .putBoolean(PREF_DATE_TIME_FLIP, false)
         .putBoolean(PREF_DATE_LOCALIZED, false)
         .putBoolean(PREF_SCREEN_FULLSCREEN, true)
-        .putBoolean(PREF_DOUBLE_ACTIONS_ENABLED, false)
-
+        .putBoolean(PREF_DOUBLE_ACTIONS_ENABLED, true)
+        .putBoolean(PREF_EDGE_ACTIONS_ENABLED, true)
     Gesture.values().forEach { editor.putString(it.id, it.pickDefaultApp(context)) }
 
     editor.apply()
