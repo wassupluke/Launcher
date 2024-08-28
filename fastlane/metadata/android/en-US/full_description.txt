@@ -1,7 +1,7 @@
 µLauncher is a home screen that lets you start other apps using swipe gestures and button presses.
-It is <b>minimal, efficient and free of distraction</b>.
+It is minimal, efficient and free of distraction.
 
-Your homescreen only displays the date, time and a wallpaper.
+Your home screen only displays the date, time and a wallpaper.
 Pressing back or swiping up (this can be configures) opens a list
 of all installed apps, which can be searched efficiently.
 

@@ -4,6 +4,15 @@
 
 # μLauncher
 
+
+µLauncher is an Android home screen that lets you start other apps using swipe gestures and button presses.
+It is *minimal, efficient and free of distraction*.
+
+Your home screen only displays the date, time and a wallpaper.
+Pressing back or swiping up (this can be configures) opens a list
+of all installed apps, which can be searched efficiently.
+
+
 This is a fork of [finnmglas's app Launcher][original-repo].
 
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
@@ -15,10 +24,23 @@ This is a fork of [finnmglas's app Launcher][original-repo].
 
 Or download the latest APK from the [Releases Section](https://github.com/jrpie/Launcher/releases/latest).
 
-## Notable changes:
+## Contributing
+
+There are several ways to contribute to this app:
+* You can add or improve [translations][toolate].
+* If you find a bug or have an idea for a new feature you can open an [issue][issues]. Please note that I work on this project in my free time. Thus I might not respond immediately and not all ideas will be implemented.
+* You can implement a new feature yourself:
+  - Create a fork of this repository: [![][shield-gh-fork]][fork]
+  - Create a new branch named `feature/<your feature>` of `fix/<your fix>` and commit your changes.
+  - Open a new pull request.
+
+
+
+## Notable changes compared to [Finn's Launcher][original-repo]:
 
 * Edge gestures: There is a setting to allow distinguishing swiping at the edges of the screen from swiping in the center.
 * Compatible with [work profile](https://www.android.com/enterprise/work-profile/), so apps like [Shelter](https://gitea.angry.im/PeterCxy/Shelter) can be used.
+* The home button now works as expected.
 
 ### Visual
 * This app uses the system wallpaper instead of a custom solution.
@@ -41,6 +63,9 @@ Or download the latest APK from the [Releases Section](https://github.com/jrpie/
 ---
   [hack-font]: https://sourcefoundry.org/hack/
   [original-repo]: https://github.com/finnmglas/Launcher
+  [toolate]: https://toolate.othing.xyz/projects/jrpie-launcher/
+  [issues]: https://github.com/jrpie/Launcher/issues/
+  [fork]: https://github.com/jrpie/Launcher/fork/
 
 
 <!-- Download links / stores -->
