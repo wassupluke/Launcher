@@ -44,7 +44,7 @@ class ListFragmentApps : Fragment(), UIObject {
 
     override fun adjustLayout() {
 
-        val appsRViewAdapter = AppsRecyclerAdapter(activity!!, intention, forGesture)
+        val appsRViewAdapter = AppsRecyclerAdapter(requireActivity(), intention, forGesture)
 
         // set up the list / recycler
         binding.listAppsRview.apply {
@@ -59,7 +59,8 @@ class ListFragmentApps : Fragment(), UIObject {
 
             override fun onQueryTextSubmit(query: String): Boolean {
                 appsRViewAdapter.filter(query)
-                return false
+                appsRViewAdapter.selectItem(0)
+                return true
             }
 
             override fun onQueryTextChange(newText: String): Boolean {

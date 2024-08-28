@@ -1,5 +1,10 @@
 - Chinese translation (thank you, yzqzss!)
+
+All Apps:
+- Removed three dots in app list (use long click instead)
+- Pressing enter opens the first app matching the query
 - Fixed workaround for bug when opening keyboard in full screen mode
 - Removed uninstall option for system apps
-- Removed three dots in app list (use long click instead)
+
+Settings:
 - Fixed settings for small displays

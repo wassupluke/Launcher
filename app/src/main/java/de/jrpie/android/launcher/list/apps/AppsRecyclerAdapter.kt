@@ -40,9 +40,9 @@ import java.util.*
  * @param forGesture - the action which an app is chosen for (when the intention is "pick")
  */
 class AppsRecyclerAdapter(val activity: Activity,
-                          val intention: ListActivity.ListActivityIntention
+                          private val intention: ListActivity.ListActivityIntention
                             = ListActivity.ListActivityIntention.VIEW,
-                          val forGesture: String? = ""):
+                          private val forGesture: String? = ""):
     RecyclerView.Adapter<AppsRecyclerAdapter.ViewHolder>() {
 
     private val appsListDisplayed: MutableList<AppInfo>
@@ -53,24 +53,9 @@ class AppsRecyclerAdapter(val activity: Activity,
         var img: ImageView = itemView.findViewById(R.id.list_apps_row_icon)
 
         override fun onClick(v: View) {
-            val pos = adapterPosition
-            val appPackageName = appsListDisplayed[pos].packageName.toString()
-            val appUser = appsListDisplayed[pos].user
-            when (intention){
-                ListActivity.ListActivityIntention.VIEW -> {
-                    val rect = Rect()
-                    img.getGlobalVisibleRect(rect)
-                    launchApp(appPackageName, appUser, activity, rect)
-                }
-                ListActivity.ListActivityIntention.PICK -> {
-                    val returnIntent = Intent()
-                    returnIntent.putExtra("value", appPackageName)
-                    appUser?.let{ returnIntent.putExtra("user", it) }
-                    returnIntent.putExtra("forGesture", forGesture)
-                    activity.setResult(REQUEST_CHOOSE_APP, returnIntent)
-                    activity.finish()
-                }
-            }
+            var rect = Rect()
+            img.getGlobalVisibleRect(rect)
+            selectItem(adapterPosition, rect)
         }
 
         init { itemView.setOnClickListener(this) }
@@ -150,6 +135,27 @@ class AppsRecyclerAdapter(val activity: Activity,
 
         appsListDisplayed = ArrayList()
         appsListDisplayed.addAll(appsList)
+    }
+
+    fun selectItem(pos: Int, rect: Rect = Rect()) {
+        if(pos >= appsListDisplayed.size) {
+            return
+        }
+        val appPackageName = appsListDisplayed[pos].packageName.toString()
+        val appUser = appsListDisplayed[pos].user
+        when (intention){
+            ListActivity.ListActivityIntention.VIEW -> {
+                launchApp(appPackageName, appUser, activity, rect)
+            }
+            ListActivity.ListActivityIntention.PICK -> {
+                val returnIntent = Intent()
+                returnIntent.putExtra("value", appPackageName)
+                appUser?.let{ returnIntent.putExtra("user", it) }
+                returnIntent.putExtra("forGesture", forGesture)
+                activity.setResult(REQUEST_CHOOSE_APP, returnIntent)
+                activity.finish()
+            }
+        }
     }
 
     /**
