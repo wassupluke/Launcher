@@ -46,14 +46,7 @@
       -
       -->
     <string name="settings_launcher_section_appearance">Apparence</string>
-    <string name="settings_launcher_time_format">Format de date</string>
-    <string-array name="settings_launcher_time_format_spinner_items">
-        <item>Défaut</item>
-        <item>Inversé</item>
-        <item>Temps</item>
-        <item>Allemand</item>
-        <item>Rien</item>
-    </string-array>
+    <string name="settings_launcher_section_date_time">Format de date</string>
     <string name="settings_launcher_theme">Theme</string>
     <string-array name="settings_launcher_theme_spinner_items">
         <item>Défaut</item>

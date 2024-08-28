@@ -11,3 +11,4 @@ All Apps:
 Settings:
 - Fixed settings for small displays
 - Removed sensitivity setting (everybody was setting it to maximum anyway)
+- Reworked date & time settings

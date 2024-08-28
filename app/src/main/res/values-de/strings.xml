@@ -54,15 +54,11 @@
       -->
     <string name="settings_launcher_section_appearance">Erscheinung</string>
 
-    <string name="settings_launcher_time_format">Datumsformat</string>
-    <string-array name="settings_launcher_time_format_spinner_items">
-        <item>Standard</item>
-        <item>Invertiert</item>
-        <item>Uhrzeit</item>
-        <item>Deutsch</item>
-        <item>Nichts</item>
-    </string-array>
-
+    <string name="settings_launcher_show_time">Zeit anzeigen</string>
+    <string name="settings_launcher_show_date">Datum anzeigen</string>
+    <string name="settings_launcher_date_localized">Lokalisiertes Datumsformat verwenden</string>
+    <string name="settings_launcher_date_time_flip">Datum und Uhrzeit tauschen</string>
+    <string name="settings_launcher_section_date_time"><![CDATA[Datum & Uhrzeit]]></string>
     <string name="settings_launcher_theme">Theme</string>
     <string-array name="settings_launcher_theme_spinner_items">
         <item>Standard</item>

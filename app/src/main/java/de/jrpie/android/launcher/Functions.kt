@@ -56,7 +56,11 @@ const val PREF_THEME = "theme"
 
 const val PREF_SCREEN_TIMEOUT_DISABLED = "disableTimeout"
 const val PREF_SCREEN_FULLSCREEN = "useFullScreen"
-const val PREF_DATE_FORMAT = "dateFormat"
+
+const val PREF_DATE_LOCALIZED = "dateLocalized"
+const val PREF_DATE_VISIBLE = "dateVisible"
+const val PREF_TIME_VISIBLE = "timeVisible"
+const val PREF_DATE_TIME_FLIP = "dateTimeFlip"
 
 const val PREF_DOUBLE_ACTIONS_ENABLED = "enableDoubleActions"
 const val PREF_EDGE_ACTIONS_ENABLED = "enableEdgeActions"
@@ -425,6 +429,7 @@ fun loadSettings(context: Context) {
     vibrantColor = preferences.getInt(PREF_VIBRANT, 0)
 }
 
+
 fun resetSettings(context: Context) {
 
     val editor = getPreferences(context).edit()
@@ -439,7 +444,10 @@ fun resetSettings(context: Context) {
         .putString(PREF_THEME, "finn")
         .putBoolean(PREF_SCREEN_TIMEOUT_DISABLED, false)
         .putBoolean(PREF_SEARCH_AUTO_LAUNCH, false)
-        .putInt(PREF_DATE_FORMAT, 0)
+        .putBoolean(PREF_DATE_VISIBLE, true)
+        .putBoolean(PREF_TIME_VISIBLE, true)
+        .putBoolean(PREF_DATE_TIME_FLIP, false)
+        .putBoolean(PREF_DATE_LOCALIZED, false)
         .putBoolean(PREF_SCREEN_FULLSCREEN, true)
         .putBoolean(PREF_DOUBLE_ACTIONS_ENABLED, false)
 
