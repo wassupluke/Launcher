@@ -16,9 +16,6 @@ import de.jrpie.android.launcher.settings.actions.SettingsFragmentActions
 import de.jrpie.android.launcher.settings.launcher.SettingsFragmentLauncher
 import de.jrpie.android.launcher.settings.meta.SettingsFragmentMeta
 
-
-var intendedSettingsPause = false // know when to close
-
 /**
  * The [SettingsActivity] is a tabbed activity:
  *
@@ -51,16 +48,6 @@ class SettingsActivity: AppCompatActivity(), UIObject {
         super<UIObject>.onStart()
     }
 
-    override fun onResume() {
-        super.onResume()
-        intendedSettingsPause = false
-    }
-
-    override fun onPause() {
-        super.onPause()
-        if (!intendedSettingsPause) finish()
-    }
-
     override fun applyTheme() {
         //settings_system.setTextColor(vibrantColor)
         //settings_close.setTextColor(vibrantColor)
@@ -72,7 +59,6 @@ class SettingsActivity: AppCompatActivity(), UIObject {
         binding.settingsClose.setOnClickListener { finish() }
         // open device settings (see https://stackoverflow.com/a/62092663/12787264)
         binding.settingsSystem.setOnClickListener {
-            intendedSettingsPause = true
             startActivity(Intent(Settings.ACTION_SETTINGS))
         }
     }

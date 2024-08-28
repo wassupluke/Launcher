@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,6 @@ import de.jrpie.android.launcher.UIObject
 import de.jrpie.android.launcher.openNewTabWindow
 import de.jrpie.android.launcher.resetSettings
 import de.jrpie.android.launcher.setButtonColor
-import de.jrpie.android.launcher.settings.intendedSettingsPause
 import de.jrpie.android.launcher.tutorial.TutorialActivity
 import de.jrpie.android.launcher.vibrantColor
 import de.jrpie.android.launcher.databinding.SettingsMetaBinding
@@ -70,7 +68,6 @@ class SettingsFragmentMeta : Fragment(), UIObject {
     override fun setOnClicks() {
 
         binding.settingsMetaButtonViewTutorial.setOnClickListener {
-            intendedSettingsPause = true
             startActivity(Intent(this.context, TutorialActivity::class.java))
         }
 
@@ -92,7 +89,6 @@ class SettingsFragmentMeta : Fragment(), UIObject {
 
         // report a bug
         binding.settingsMetaButtonReportBug.setOnClickListener {
-            intendedSettingsPause = true
             openNewTabWindow(
                 getString(R.string.settings_meta_report_bug_link),
                 requireContext()
@@ -103,7 +99,6 @@ class SettingsFragmentMeta : Fragment(), UIObject {
 
         // contact developer
         binding.settingsMetaButtonContact.setOnClickListener {
-            intendedSettingsPause = true
             openNewTabWindow(
                 getString(R.string.settings_meta_contact_url),
                 requireContext()
@@ -112,7 +107,6 @@ class SettingsFragmentMeta : Fragment(), UIObject {
 
         // contact fork developer
         binding.settingsMetaButtonForkContact.setOnClickListener {
-            intendedSettingsPause = true
             openNewTabWindow(
                 getString(R.string.settings_meta_fork_contact_url),
                 requireContext()
@@ -121,7 +115,6 @@ class SettingsFragmentMeta : Fragment(), UIObject {
 
         // privacy policy
         binding.settingsMetaButtonPrivacy.setOnClickListener {
-            intendedSettingsPause = true
             openNewTabWindow(
                 getString(R.string.settings_meta_privacy_url),
                 requireContext()

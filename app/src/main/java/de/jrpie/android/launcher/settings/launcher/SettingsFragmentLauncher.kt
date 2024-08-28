@@ -28,7 +28,6 @@ import de.jrpie.android.launcher.resetToDefaultTheme
 import de.jrpie.android.launcher.setButtonColor
 import de.jrpie.android.launcher.setSwitchColor
 import de.jrpie.android.launcher.setWindowFlags
-import de.jrpie.android.launcher.settings.intendedSettingsPause
 import de.jrpie.android.launcher.vibrantColor
 import de.jrpie.android.launcher.databinding.SettingsLauncherBinding
 import de.jrpie.android.launcher.setDefaultHomeScreen

@@ -45,10 +45,8 @@ import android.widget.Toast
 import de.jrpie.android.launcher.list.ListActivity
 import de.jrpie.android.launcher.list.apps.AppInfo
 import de.jrpie.android.launcher.list.apps.AppsRecyclerAdapter
-import de.jrpie.android.launcher.list.intendedChoosePause
 import de.jrpie.android.launcher.list.other.LauncherAction
 import de.jrpie.android.launcher.settings.SettingsActivity
-import de.jrpie.android.launcher.settings.intendedSettingsPause
 import de.jrpie.android.launcher.tutorial.TutorialActivity
 import kotlin.contracts.contract
 
@@ -331,7 +329,6 @@ fun resetToDefaultTheme(activity: Activity) {
     saveTheme(activity,"finn")
     loadSettings(activity)
 
-    intendedSettingsPause = true
     activity.recreate()
 }
 
@@ -346,7 +343,6 @@ fun resetToDarkTheme(activity: Activity) {
 
     saveTheme(activity,"dark")
 
-    intendedSettingsPause = true
     activity.recreate()
 }
 
@@ -369,7 +365,6 @@ fun openTutorial(activity: Activity){
 fun openAppsList(activity: Activity){
     val intent = Intent(activity, ListActivity::class.java)
     intent.putExtra("intention", ListActivity.ListActivityIntention.VIEW.toString())
-    intendedSettingsPause = true
     activity.startActivity(intent)
 }
 

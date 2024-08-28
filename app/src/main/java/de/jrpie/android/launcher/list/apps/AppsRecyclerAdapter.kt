@@ -24,7 +24,6 @@ import de.jrpie.android.launcher.getSavedTheme
 import de.jrpie.android.launcher.launch
 import de.jrpie.android.launcher.launchApp
 import de.jrpie.android.launcher.list.ListActivity
-import de.jrpie.android.launcher.list.intendedChoosePause
 import de.jrpie.android.launcher.loadApps
 import de.jrpie.android.launcher.openAppSettings
 import de.jrpie.android.launcher.transformGrayscale
@@ -99,12 +98,10 @@ class AppsRecyclerAdapter(val activity: Activity,
         popup.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.app_menu_delete -> {
-                    intendedChoosePause = true
                     uninstallApp(appPackageName, user, activity)
                     true
                 }
                 R.id.app_menu_info -> {
-                    intendedChoosePause = true
                     openAppSettings(appPackageName, user, activity)
                     true
                 }

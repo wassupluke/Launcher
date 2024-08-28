@@ -16,7 +16,6 @@ import de.jrpie.android.launcher.databinding.SettingsActionsBinding
 import de.jrpie.android.launcher.getPreferences
 import de.jrpie.android.launcher.list.ListActivity
 import de.jrpie.android.launcher.setButtonColor
-import de.jrpie.android.launcher.settings.intendedSettingsPause
 import de.jrpie.android.launcher.vibrantColor
 
 
@@ -63,14 +62,12 @@ SettingsFragmentActions : Fragment(), UIObject {
         binding!!.settingsActionsButtonViewApps.setOnClickListener{
             val intent = Intent(this.context, ListActivity::class.java)
             intent.putExtra("intention", ListActivity.ListActivityIntention.VIEW.toString())
-            intendedSettingsPause = true
             startActivity(intent)
         }
         binding!!.settingsActionsButtonInstallApps.setOnClickListener{
             try {
                 val intent = Intent(Intent.ACTION_MAIN)
                 intent.addCategory(Intent.CATEGORY_APP_MARKET)
-                intendedSettingsPause = true
                 startActivity(intent)
             } catch (e: ActivityNotFoundException) {
                 Toast.makeText(context, getString(R.string.settings_apps_toast_store_not_found), Toast.LENGTH_SHORT).show()

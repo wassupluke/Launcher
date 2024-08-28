@@ -26,8 +26,6 @@ import de.jrpie.android.launcher.list.other.ListFragmentOther
 import de.jrpie.android.launcher.vibrantColor
 
 
-var intendedChoosePause = false // know when to close
-
 // TODO: Better solution for this intercommunication functionality (used in list-fragments)
 var intention = ListActivity.ListActivityIntention.VIEW
 var forGesture: String? = null

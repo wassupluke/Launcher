@@ -19,6 +19,9 @@
 
         <activity android:name=".HomeActivity"
             android:exported="true"
+            android:excludeFromRecents="true"
+            android:clearTaskOnLaunch="true"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>

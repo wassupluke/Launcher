@@ -15,7 +15,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import de.jrpie.android.launcher.list.other.LauncherAction
-import de.jrpie.android.launcher.settings.intendedSettingsPause
 import de.jrpie.android.launcher.databinding.SettingsActionsRecyclerBinding
 import java.lang.Exception
 
@@ -144,7 +143,6 @@ class ActionsRecyclerAdapter(val activity: Activity):
         val intent = Intent(activity, ListActivity::class.java)
         intent.putExtra("intention", ListActivity.ListActivityIntention.PICK.toString())
         intent.putExtra("forGesture", gesture.id) // for which action we choose the app
-        intendedSettingsPause = true
         activity.startActivityForResult(intent,
             REQUEST_CHOOSE_APP
         )
