@@ -1,5 +1,6 @@
 - Chinese translation (thank you, yzqzss!)
-- improved French translation
+- improved French translation (thank you, toby-bro!)
+- improved German translation
 
 All Apps:
 - Removed three dots in app list (use long click instead)
@@ -11,3 +12,4 @@ All Apps:
 Settings:
 - Fixed settings for small displays
 - Removed sensitivity setting (everybody was setting it to maximum anyway)
+- Reworked date & time settings

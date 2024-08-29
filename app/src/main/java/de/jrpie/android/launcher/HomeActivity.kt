@@ -8,17 +8,17 @@ import android.view.KeyEvent
 import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
+import androidx.core.view.isVisible
 import de.jrpie.android.launcher.BuildConfig.VERSION_NAME
+import de.jrpie.android.launcher.databinding.HomeBinding
 import de.jrpie.android.launcher.list.other.LauncherAction
 import de.jrpie.android.launcher.tutorial.TutorialActivity
-import de.jrpie.android.launcher.databinding.HomeBinding
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.concurrent.fixedRateTimer
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
-
 
 
 /**
@@ -37,8 +37,6 @@ class HomeActivity: UIObject, AppCompatActivity(),
     GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {
 
     private lateinit var binding: HomeBinding
-
-
 
 
     private var bufferedPointerCount = 1 // how many fingers on screen
@@ -105,34 +103,58 @@ class HomeActivity: UIObject, AppCompatActivity(),
         super<UIObject>.onStart()
     }
 
-    override fun onResume() {
-        super.onResume()
+    private fun updateClock() {
+        clockTimer?.cancel()
+        val preferences = getPreferences(this)
+        val locale = Locale.getDefault()
+        val dateVisible = preferences.getBoolean(PREF_DATE_VISIBLE, true)
+        val timeVisible = preferences.getBoolean(PREF_TIME_VISIBLE, true)
 
-        // Applying the date / time format (changeable in settings)
-        val dFormat = getPreferences(this).getInt(PREF_DATE_FORMAT, 0)
-        val upperFMT = resources.getStringArray(R.array.settings_launcher_time_formats_upper)
-        val lowerFMT = resources.getStringArray(R.array.settings_launcher_time_formats_lower)
+        var dateFMT = "yyyy-MM-dd"
+        var timeFMT = "HH:mm:ss"
+        if (preferences.getBoolean(PREF_DATE_LOCALIZED, false)) {
+            dateFMT = android.text.format.DateFormat.getBestDateTimePattern(locale, dateFMT)
+            timeFMT = android.text.format.DateFormat.getBestDateTimePattern(locale, timeFMT)
+        }
 
-        val dateFormat = SimpleDateFormat(upperFMT[dFormat], Locale.getDefault())
-        val timeFormat = SimpleDateFormat(lowerFMT[dFormat], Locale.getDefault())
+        var upperFormat = SimpleDateFormat(dateFMT, locale)
+        var lowerFormat = SimpleDateFormat(timeFMT, locale)
+        var upperVisible = dateVisible
+        var lowerVisible = timeVisible
 
+        if(preferences.getBoolean(PREF_DATE_TIME_FLIP, false)) {
+            upperFormat = lowerFormat.also { lowerFormat = upperFormat }
+            upperVisible = lowerVisible.also { lowerVisible = upperVisible }
+        }
+
+        binding.homeUpperView.isVisible = upperVisible
+        binding.homeLowerView.isVisible = lowerVisible
 
         clockTimer = fixedRateTimer("clockTimer", true, 0L, 100) {
             this@HomeActivity.runOnUiThread {
-                val t = timeFormat.format(Date())
-                if (binding.homeLowerView.text != t)
-                    binding.homeLowerView.text = t
-
-                val d = dateFormat.format(Date())
-                if (binding.homeUpperView.text != d)
-                    binding.homeUpperView.text = d
+                if (lowerVisible) {
+                    val t = lowerFormat.format(Date())
+                    if (binding.homeLowerView.text != t)
+                        binding.homeLowerView.text = t
+                }
+                if (upperVisible) {
+                    val d = upperFormat.format(Date())
+                    if (binding.homeUpperView.text != d)
+                        binding.homeUpperView.text = d
+                }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateClock()
     }
 
     override fun onPause() {
         super.onPause()
         clockTimer.cancel()
+
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
@@ -230,16 +252,18 @@ class HomeActivity: UIObject, AppCompatActivity(),
 
         val preferences = getPreferences(this)
         binding.homeUpperView.setOnClickListener {
-            when (preferences.getInt(PREF_DATE_FORMAT, 0)) {
-                0 -> Gesture.DATE(this)
-                else -> Gesture.TIME(this)
+            if(preferences.getBoolean(PREF_DATE_TIME_FLIP, false)) {
+                Gesture.TIME(this)
+            } else {
+                Gesture.DATE(this)
             }
         }
 
         binding.homeLowerView.setOnClickListener {
-            when (preferences.getInt(PREF_DATE_FORMAT, 0)) {
-                0 -> Gesture.TIME(this)
-                else -> Gesture.DATE(this)
+            if(preferences.getBoolean(PREF_DATE_TIME_FLIP, false)) {
+                Gesture.DATE(this)
+            } else {
+                Gesture.TIME(this)
             }
         }
     }

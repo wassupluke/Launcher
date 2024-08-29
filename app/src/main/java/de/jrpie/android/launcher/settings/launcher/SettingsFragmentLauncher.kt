@@ -9,13 +9,16 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Switch
 import androidx.fragment.app.Fragment
-import de.jrpie.android.launcher.PREF_DATE_FORMAT
+import de.jrpie.android.launcher.PREF_DATE_LOCALIZED
+import de.jrpie.android.launcher.PREF_DATE_TIME_FLIP
+import de.jrpie.android.launcher.PREF_DATE_VISIBLE
 import de.jrpie.android.launcher.PREF_DOUBLE_ACTIONS_ENABLED
 import de.jrpie.android.launcher.PREF_EDGE_ACTIONS_ENABLED
 import de.jrpie.android.launcher.PREF_SCREEN_FULLSCREEN
 import de.jrpie.android.launcher.PREF_SCREEN_TIMEOUT_DISABLED
 import de.jrpie.android.launcher.PREF_SEARCH_AUTO_KEYBOARD
 import de.jrpie.android.launcher.PREF_SEARCH_AUTO_LAUNCH
+import de.jrpie.android.launcher.PREF_TIME_VISIBLE
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.UIObject
 import de.jrpie.android.launcher.getPreferences
@@ -62,6 +65,10 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
         setSwitchColor(binding.settingsLauncherSwitchEnableDouble, vibrantColor)
         setSwitchColor(binding.settingsLauncherSwitchEnableEdge, vibrantColor)
 
+        setSwitchColor(binding.settingsLauncherSwitchDateLocalized, vibrantColor)
+        setSwitchColor(binding.settingsLauncherSwitchDateVisible, vibrantColor)
+        setSwitchColor(binding.settingsLauncherSwitchTimeVisible, vibrantColor)
+        setSwitchColor(binding.settingsLauncherSwitchDateTimeFlip, vibrantColor)
 
         setButtonColor(binding.settingsLauncherButtonChooseWallpaper, vibrantColor)
     }
@@ -93,7 +100,10 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
             startActivity(intent)
         }
 
-
+        bindSwitchToPref(binding.settingsLauncherSwitchDateLocalized, PREF_DATE_LOCALIZED, false) { }
+        bindSwitchToPref(binding.settingsLauncherSwitchDateVisible, PREF_DATE_VISIBLE, true) {}
+        bindSwitchToPref(binding.settingsLauncherSwitchTimeVisible, PREF_TIME_VISIBLE, true) {}
+        bindSwitchToPref(binding.settingsLauncherSwitchDateTimeFlip, PREF_DATE_TIME_FLIP, false) {}
 
         bindSwitchToPref(binding.settingsLauncherSwitchScreenTimeout, PREF_SCREEN_TIMEOUT_DISABLED, false) {
             activity?.let{setWindowFlags(it.window)}
@@ -108,27 +118,6 @@ class SettingsFragmentLauncher : Fragment(), UIObject {
     }
 
     override fun adjustLayout() {
-
-        val preferences = getPreferences(requireActivity())
-        // Load values into the date-format spinner
-        val staticAdapter = ArrayAdapter.createFromResource(
-                requireActivity(), R.array.settings_launcher_time_format_spinner_items,
-                android.R.layout.simple_spinner_item )
-
-        staticAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.settingsLauncherFormatSpinner.adapter = staticAdapter
-
-        binding.settingsLauncherFormatSpinner.setSelection(preferences.getInt(PREF_DATE_FORMAT, 0))
-
-        binding.settingsLauncherFormatSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                preferences.edit()
-                    .putInt(PREF_DATE_FORMAT, position)
-                    .apply()
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) { }
-        }
 
         // Load values into the theme spinner
         val staticThemeAdapter = ArrayAdapter.createFromResource(

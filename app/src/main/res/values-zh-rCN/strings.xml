@@ -40,7 +40,7 @@
     <string name="settings_apps_view_all">浏览全部应用</string>
     <string name="settings_apps_install">安装应用</string>
     <string name="settings_apps_toast_store_not_found">没有找到应用市场</string>
-    <string name="settings_launcher_time_format">日期格式</string>
+    <string name="settings_launcher_section_date_time">日期格式</string>
     <string name="settings_launcher_choose_wallpaper">选择一个壁纸</string>
     <string name="settings_launcher_change_wallpaper">换壁纸</string>
     <string name="settings_launcher_disable_timeout">保持屏幕常亮</string>

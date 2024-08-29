@@ -70,34 +70,18 @@
       -->
     <string name="settings_launcher_section_appearance">Appearance</string>
 
-    <string name="settings_launcher_time_format">Date format</string>
-    <string-array name="settings_launcher_time_format_spinner_items">
-        <item>Default</item>
-        <item>Inverse</item>
-        <item>Time only</item>
-        <item>German</item>
-        <item>Nothing</item>
-    </string-array>
-    <string-array name="settings_launcher_time_formats_upper">
-        <item>yyyy-MM-dd</item>
-        <item>HH:mm:ss</item>
-        <item>HH:mm:ss</item>
-        <item>HH:mm:ss</item>
-        <item/>
-    </string-array>
-    <string-array name="settings_launcher_time_formats_lower">
-        <item>HH:mm:ss</item>
-        <item>yyyy-MM-dd</item>
-        <item/>
-        <item>dd.MM.yyyy</item>
-        <item/>
-    </string-array>
 
     <string name="settings_launcher_theme">Theme</string>
     <string-array name="settings_launcher_theme_spinner_items">
         <item>Default</item>
         <item>Dark</item>
     </string-array>
+
+    <string name="settings_launcher_section_date_time"><![CDATA[Date & time]]></string>
+    <string name="settings_launcher_show_time">Show time</string>
+    <string name="settings_launcher_show_date">Show date</string>
+    <string name="settings_launcher_date_localized">Use localized date format</string>
+    <string name="settings_launcher_date_time_flip">Flip date and time</string>
 
     <string name="settings_launcher_choose_wallpaper">Choose a wallpaper</string>
     <string name="settings_launcher_change_wallpaper">Change wallpaper</string>
