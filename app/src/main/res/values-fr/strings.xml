@@ -35,7 +35,7 @@
     <string name="settings_gesture_double_click">Double clic</string>
     <string name="settings_gesture_long_click">Clic long</string>
     <string name="settings_gesture_date">Toucher la date</string>
-    <string name="settings_gesture_time">Toucher de l\'horloge</string>
+    <string name="settings_gesture_time">Toucher l\'horloge</string>
     <string name="settings_apps_choose">Choisir App</string>
     <string name="settings_apps_view_all">Voir les applications</string>
     <string name="settings_apps_install">Installer des applications</string>
@@ -137,4 +137,8 @@
     <string name="settings_gesture_up_left_edge">Balayer vers le haut (à gauche de l\'écran)</string>
     <string name="settings_gesture_up_right_edge">Balayer vers le haut (à droite de l\'écran)</string>
     <string name="settings_gesture_down_right_edge">Balayer vers le bas (à droite de l\'écran)</string>
+    <string name="settings_launcher_show_time">Afficher l\'heure</string>
+    <string name="settings_launcher_date_time_flip">Échanger la date et l\'heure</string>
+    <string name="settings_launcher_show_date">Afficher la date</string>
+    <string name="settings_launcher_date_localized">Utiliser le format de date local</string>
 </resources>
