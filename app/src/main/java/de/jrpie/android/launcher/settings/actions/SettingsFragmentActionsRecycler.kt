@@ -81,7 +81,10 @@ class ActionsRecyclerAdapter(val activity: Activity):
         fun updateViewHolder() {
             val app = gesture.getApp(activity)
             val content = app.first
-            if (content == ""){
+            viewHolder.img.visibility = View.VISIBLE
+            viewHolder.removeAction.visibility = View.VISIBLE
+            viewHolder.chooseButton.visibility = View.INVISIBLE
+            if (content.isEmpty()){
                 viewHolder.img.visibility = View.INVISIBLE
                 viewHolder.removeAction.visibility = View.GONE
                 viewHolder.chooseButton.visibility = View.VISIBLE
