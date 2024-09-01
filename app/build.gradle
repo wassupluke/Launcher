@@ -1,9 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 34
-    buildToolsVersion "34.0.0"
 
     dataBinding {
         enabled = true
@@ -23,6 +22,7 @@ android {
         applicationId "de.jrpie.android.launcher"
         minSdkVersion 21
         targetSdkVersion 35
+        compileSdk 35
         versionCode 22
         versionName "j-0.0.9"
 
@@ -63,12 +63,12 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.13.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
     implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     implementation 'androidx.palette:palette-ktx:1.0.0'
-    implementation "com.android.databinding:compiler:$android_plugin_version"
+    annotationProcessor "com.android.databinding:compiler:$android_plugin_version"
 }
 
