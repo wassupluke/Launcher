@@ -29,6 +29,7 @@ import de.jrpie.android.launcher.openAppSettings
 import de.jrpie.android.launcher.transformGrayscale
 import de.jrpie.android.launcher.uninstallApp
 import java.util.*
+import kotlin.text.Regex.Companion.escapeReplacement
 
 /**
  * A [RecyclerView] (efficient scrollable list) containing all apps on the users device.
@@ -160,8 +161,17 @@ class AppsRecyclerAdapter(val activity: Activity,
      */
     fun filter(text: String) {
         // normalize text for search
+        var allowedSpecialCharacters = text
+            .lowercase(Locale.ROOT)
+            .toCharArray()
+            .distinct()
+            .filter { c -> ! ((c in 'a'..'z') || (c in '0'..'9')) }
+            .map { c -> escapeReplacement(c.toString())}
+            .fold("") { x,y -> x+y }
+        var disallowedCharsRegex = "[^a-z0-9$allowedSpecialCharacters]".toRegex()
+
         fun normalize(text: String): String{
-            return text.lowercase(Locale.ROOT).replace("[^a-z0-9]".toRegex(), "")
+            return text.lowercase(Locale.ROOT).replace(disallowedCharsRegex, "")
         }
         appsListDisplayed.clear()
         if (text.isEmpty()) {
