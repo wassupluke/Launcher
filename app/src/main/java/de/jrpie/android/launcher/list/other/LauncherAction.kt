@@ -6,6 +6,7 @@ import de.jrpie.android.launcher.audioNextTrack
 import de.jrpie.android.launcher.audioPreviousTrack
 import de.jrpie.android.launcher.audioVolumeDown
 import de.jrpie.android.launcher.audioVolumeUp
+import de.jrpie.android.launcher.expandNotificationsPanel
 import de.jrpie.android.launcher.openAppsList
 import de.jrpie.android.launcher.openSettings
 
@@ -24,6 +25,10 @@ enum class LauncherAction(val id: String, val label: Int, val icon: Int, val lau
     TRACK_PREV("launcher:previousTrack",
         R.string.list_other_track_previous,
         R.drawable.baseline_skip_previous_24, ::audioPreviousTrack),
+    EXPAND_NOTIFICATIONS_PANEL("launcher:expandNotificationsPanel",
+        R.string.list_other_expand_notifications_panel,
+        R.drawable.baseline_notifications_24,
+         ::expandNotificationsPanel),
     NOP("launcher:nop", R.string.list_other_nop, R.drawable.baseline_not_interested_24, {});
 
     companion object {

@@ -223,6 +223,19 @@ fun audioVolumeDown(activity: Activity) {
     )
 }
 
+fun expandNotificationsPanel(activity: Activity) {
+    /* https://stackoverflow.com/a/15582509 */
+    try {
+        @Suppress("SpellCheckingInspection")
+        val statusBarService: Any? = activity.getSystemService("statusbar")
+        val statusBarManager = Class.forName("android.app.StatusBarManager")
+        val showStatusBar = statusBarManager.getMethod("expandNotificationsPanel")
+        showStatusBar.invoke(statusBarService)
+    } catch (e: Exception) {
+        Toast.makeText(activity, activity.getString(R.string.alert_cant_expand_notifications_panel), Toast.LENGTH_LONG).show()
+    }
+}
+
 /* --- */
 
 fun getUserFromId(user: Int?, context: Context): UserHandle? {
