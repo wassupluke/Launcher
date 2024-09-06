@@ -1,10 +1,8 @@
 package de.jrpie.android.launcher.list.apps
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
-import android.net.Uri
 import android.os.AsyncTask
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import de.jrpie.android.launcher.PREF_SEARCH_AUTO_LAUNCH
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
-import de.jrpie.android.launcher.REQUEST_UNINSTALL
 import de.jrpie.android.launcher.appsList
 import de.jrpie.android.launcher.getPreferences
 import de.jrpie.android.launcher.getSavedTheme

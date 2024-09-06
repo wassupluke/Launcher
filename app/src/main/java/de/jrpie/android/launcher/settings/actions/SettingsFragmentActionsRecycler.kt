@@ -10,6 +10,8 @@ import de.jrpie.android.launcher.*
 import de.jrpie.android.launcher.list.ListActivity
 import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -26,8 +28,13 @@ import java.lang.Exception
  */
 class SettingsFragmentActionsRecycler : Fragment(), UIObject {
 
+
+    private var sharedPreferencesListener =
+        SharedPreferences.OnSharedPreferenceChangeListener { _, _ ->
+            actionViewAdapter?.updateActions()
+        }
     private lateinit var binding: SettingsActionsRecyclerBinding
-    var actionViewAdapter: ActionsRecyclerAdapter? = null
+    private var actionViewAdapter: ActionsRecyclerAdapter? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,8 +56,15 @@ class SettingsFragmentActionsRecycler : Fragment(), UIObject {
             layoutManager = actionViewManager
             adapter = actionViewAdapter
         }
+        getPreferences(requireContext()).registerOnSharedPreferenceChangeListener(sharedPreferencesListener)
 
         super<UIObject>.onStart()
+    }
+
+    override fun onDestroy() {
+        getPreferences(requireContext()).unregisterOnSharedPreferenceChangeListener(sharedPreferencesListener)
+
+        super.onDestroy()
     }
 }
 
@@ -71,6 +85,35 @@ class ActionsRecyclerAdapter(val activity: Activity):
         init { itemView.setOnClickListener(this) }
     }
 
+    private fun updateViewHolder(gesture: Gesture, viewHolder: ViewHolder) {
+        val app = gesture.getApp(activity)
+        val content = app.first
+        viewHolder.img.visibility = View.VISIBLE
+        viewHolder.removeAction.visibility = View.VISIBLE
+        viewHolder.chooseButton.visibility = View.INVISIBLE
+        if (content.isEmpty()){
+            viewHolder.img.visibility = View.INVISIBLE
+            viewHolder.removeAction.visibility = View.GONE
+            viewHolder.chooseButton.visibility = View.VISIBLE
+        }
+        else if (LauncherAction.isOtherAction(content)) {
+            LauncherAction.byId(content)?.let {
+                viewHolder.img.setImageResource(it.icon)
+            }
+        } else {
+            // Set image icon (by packageName)
+            try {
+                viewHolder.img.setImageDrawable(getAppIcon(activity, content, app.second))
+            } catch (e : Exception) {
+                // Probably the app was uninstalled
+                // the button is shown, user asked to select an action
+                viewHolder.img.visibility = View.INVISIBLE
+                viewHolder.removeAction.visibility = View.GONE
+                viewHolder.chooseButton.visibility = View.VISIBLE
+            }
+        }
+    }
+
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
         val gesture = gesturesList[i]
         viewHolder.textView.text = gesture.getLabel(activity)
@@ -78,40 +121,10 @@ class ActionsRecyclerAdapter(val activity: Activity):
         if (getSavedTheme(activity) == "dark") transformGrayscale(
             viewHolder.img
         )
-        fun updateViewHolder() {
-            val app = gesture.getApp(activity)
-            val content = app.first
-            viewHolder.img.visibility = View.VISIBLE
-            viewHolder.removeAction.visibility = View.VISIBLE
-            viewHolder.chooseButton.visibility = View.INVISIBLE
-            if (content.isEmpty()){
-                viewHolder.img.visibility = View.INVISIBLE
-                viewHolder.removeAction.visibility = View.GONE
-                viewHolder.chooseButton.visibility = View.VISIBLE
-            }
-            else if (LauncherAction.isOtherAction(content)) {
-                LauncherAction.byId(content)?.let {
-                    viewHolder.img.setImageResource(it.icon)
-                }
-            } else {
-                // Set image icon (by packageName)
-                try {
-                    viewHolder.img.setImageDrawable(getAppIcon(activity, content, app.second))
-                } catch (e : Exception) {
-                    // the button is shown, user asked to select an action
-                    viewHolder.img.visibility = View.INVISIBLE
-                    viewHolder.removeAction.visibility = View.GONE
-                    viewHolder.chooseButton.visibility = View.VISIBLE
-                }
-            }
-        }
-        updateViewHolder()
+        updateViewHolder(gesture, viewHolder)
         viewHolder.img.setOnClickListener{ chooseApp(gesture) }
         viewHolder.chooseButton.setOnClickListener{ chooseApp(gesture) }
-        viewHolder.removeAction.setOnClickListener{
-            gesture.removeApp(activity)
-            updateViewHolder()
-        }
+        viewHolder.removeAction.setOnClickListener{ gesture.removeApp(activity) }
     }
 
     override fun getItemCount(): Int { return gesturesList.size }
