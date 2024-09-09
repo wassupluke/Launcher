@@ -42,7 +42,7 @@ enum class Gesture (val id: String, private val labelResource: Int,
     }
 
     fun getApp(context: Context): Pair<String, Int?> {
-        val preferences = getPreferences(context)
+        val preferences = LauncherPreferences.getSharedPreferences()
         var packageName = preferences.getString(this.id, "")!!
         var u: Int?  = preferences.getInt(this.id + "_user", INVALID_USER)
         u = if(u == INVALID_USER) null else u
@@ -50,18 +50,18 @@ enum class Gesture (val id: String, private val labelResource: Int,
     }
 
     fun removeApp(context: Context) {
-        getPreferences(context).edit()
+        LauncherPreferences.getSharedPreferences().edit()
             .putString(this.id, "") // clear it
             .apply()
     }
 
     fun setApp(context: Context, app: String, user: Int?) {
-        getPreferences(context).edit()
+        LauncherPreferences.getSharedPreferences().edit()
             .putString(this.id, app)
             .apply()
 
         val u = user?: INVALID_USER
-        getPreferences(context).edit()
+        LauncherPreferences.getSharedPreferences().edit()
             .putInt(this.id + "_user", u)
             .apply()
     }

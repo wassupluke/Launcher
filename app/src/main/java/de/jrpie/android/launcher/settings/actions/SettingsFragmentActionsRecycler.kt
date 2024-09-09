@@ -56,13 +56,13 @@ class SettingsFragmentActionsRecycler : Fragment(), UIObject {
             layoutManager = actionViewManager
             adapter = actionViewAdapter
         }
-        getPreferences(requireContext()).registerOnSharedPreferenceChangeListener(sharedPreferencesListener)
+        LauncherPreferences.getSharedPreferences().registerOnSharedPreferenceChangeListener(sharedPreferencesListener)
 
         super<UIObject>.onStart()
     }
 
     override fun onDestroy() {
-        getPreferences(requireContext()).unregisterOnSharedPreferenceChangeListener(sharedPreferencesListener)
+        LauncherPreferences.getSharedPreferences().unregisterOnSharedPreferenceChangeListener(sharedPreferencesListener)
 
         super.onDestroy()
     }
@@ -116,9 +116,10 @@ class ActionsRecyclerAdapter(val activity: Activity):
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
         val gesture = gesturesList[i]
+        val vibrantColor = LauncherPreferences.theme().vibrant()
         viewHolder.textView.text = gesture.getLabel(activity)
         setButtonColor(viewHolder.chooseButton, vibrantColor)
-        if (getSavedTheme(activity) == "dark") transformGrayscale(
+        if (LauncherPreferences.theme().theme() == "dark") transformGrayscale(
             viewHolder.img
         )
         updateViewHolder(gesture, viewHolder)
@@ -136,16 +137,16 @@ class ActionsRecyclerAdapter(val activity: Activity):
     }
 
     init {
-        val doubleActions = getPreferences(activity).getBoolean(PREF_DOUBLE_ACTIONS_ENABLED, false)
-        val edgeActions = getPreferences(activity).getBoolean(PREF_EDGE_ACTIONS_ENABLED, false)
+        val doubleActions = LauncherPreferences.enabled_gestures().doubleSwipe()
+        val edgeActions = LauncherPreferences.enabled_gestures().edgeSwipe()
         gesturesList = Gesture.values().filter {
             (doubleActions || !it.isDoubleVariant())
                     && (edgeActions || !it.isEdgeVariant())} as ArrayList<Gesture>
     }
 
     fun updateActions() {
-        val doubleActions = getPreferences(activity).getBoolean(PREF_DOUBLE_ACTIONS_ENABLED, false)
-        val edgeActions = getPreferences(activity).getBoolean(PREF_EDGE_ACTIONS_ENABLED, false)
+        val doubleActions = LauncherPreferences.enabled_gestures().doubleSwipe()
+        val edgeActions = LauncherPreferences.enabled_gestures().edgeSwipe()
         this.gesturesList.clear()
         gesturesList.addAll(Gesture.values().filter {
             (doubleActions || !it.isDoubleVariant())

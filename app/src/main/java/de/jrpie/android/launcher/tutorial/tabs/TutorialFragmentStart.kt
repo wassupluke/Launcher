@@ -30,6 +30,7 @@ class TutorialFragmentStart : Fragment(), UIObject {
     }
 
     override fun applyTheme() {
+        val vibrantColor = LauncherPreferences.theme().vibrant()
 
         binding.tutorialStartIconRight.setTextColor(vibrantColor)
         binding.tutorialStartIconRight.blink()

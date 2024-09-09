@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <string name="app_name" translatable="false">μLauncher</string>
+        <!--
+          -
+          - Settings
+          -
+        -->
+        <string name="preference_file_key" translatable="false">V3RYR4ND0MK3YCR4P</string>
+        <string name="settings_internal_started_key" translatable="false">startedBefore</string>
+        <string name="settings_internal_started_time_key" translatable="false">firstStartup</string>
+        <string name="settings_internal_version_code_key" translatable="false">version_code</string>
+        <string name="settings_general_choose_home_screen_key">settings.general.select_launcher</string>
+        <!--
+          -
+          - Settings : Gestures
+          -
+          -->
+        <string name="settings_gesture_up_key" translatable="false">Swipe Up</string>
+        <string name="settings_gesture_double_up_key" translatable="false">Double Up</string>
+        <string name="settings_gesture_down_key" translatable="false">Swipe Down</string>
+        <string name="settings_gesture_double_down_key" translatable="false">Double Down</string>
+        <string name="settings_gesture_left_key" translatable="false">Swipe Left</string>
+        <string name="settings_gesture_double_left_key" translatable="false">Double Left</string>
+        <string name="settings_gesture_right_key" translatable="false">Swipe Right</string>
+        <string name="settings_gesture_double_right_key" translatable="false">Double Right</string>
+        <string name="settings_gesture_right_top_edge_key" translatable="false">Swipe Right (Top)</string>
+        <string name="settings_gesture_right_bottom_edge_key" translatable="false">Swipe Right (Bottom)</string>
+        <string name="settings_gesture_left_bottom_edge_key" translatable="false">Swipe Left (Bottom)</string>
+        <string name="settings_gesture_left_top_edge_key" translatable="false">Swipe Left (Top)</string>
+        <string name="settings_gesture_up_left_edge_key" translatable="false">Swipe Up (Left Edge)</string>
+        <string name="settings_gesture_up_right_edge_key" translatable="false">Swipe Up (Right Edge)</string>
+        <string name="settings_gesture_down_left_edge_key" translatable="false">Swipe Down (Left Edge)</string>
+        <string name="settings_gesture_down_right_edge_key" translatable="false">Swipe Down (Right Edge)</string>
+        <string name="settings_gesture_vol_up_key" translatable="false">Volume Up</string>
+        <string name="settings_gesture_vol_down_key" translatable="false">Volume Down</string>
+        <string name="settings_gesture_double_click_key" translatable="false">Double Click</string>
+        <string name="settings_gesture_long_click_key" translatable="false">Long Click</string>
+        <string name="settings_gesture_date_key" translatable="false">Click on Date</string>
+        <string name="settings_gesture_time_key" translatable="false">Click on Time</string>
+
+        <!--
+          -
+          - Settings : Theme
+          -
+          -->
+        <string name="settings_theme_theme_key" translatable="false">theme</string>
+        <string name="settings_theme_wallpaper_key" translatable="false">settings.theme.wallpaper</string>
+        <string name="settings_theme_dominant_key" translatable="false">custom_dominant</string>
+        <string name="settings_theme_vibrant_key" translatable="false">custom_vibrant</string>
+
+        <!--
+          -
+          - Settings : Clock
+          -
+          -->
+        <string name="settings_clock_time_visible_key" translatable="false">timeVisible</string>
+        <string name="settings_clock_date_visible_key" translatable="false">dateVisible</string>
+        <string name="settings_clock_localized_key" translatable="false">dateLocalized</string>
+        <string name="settings_clock_flip_date_time_key" translatable="false">dateTimeFlip</string>
+
+
+        <!--
+          -
+          - Settings : Functionality
+          -
+          -->
+        <string name="settings_display_screen_timeout_disabled_key" translatable="false">disableTimeout</string>
+        <string name="settings_display_full_screen_key" translatable="false">useFullScreen</string>
+
+        <string name="settings_enabled_gestures_double_swipe_key" translatable="false">enableDoubleActions</string>
+        <string name="settings_enabled_gestures_edge_swipe_key" translatable="false">enableEdgeActions</string>
+        <string name="settings_functionality_search_auto_launch_key" translatable="false">searchAutoLaunch</string>
+        <string name="settings_functionality_search_auto_open_keyboard_key" translatable="false">searchAutoKeyboard</string>
+
+
+
+        <!--
+          -
+          - URLs
+          -
+        -->
+        <string name="settings_meta_link_github" translatable="false">https://github.com/jrpie/Launcher</string>
+        <string name="settings_meta_report_bug_link" translatable="false">https://github.com/jrpie/Launcher/issues/new</string>
+        <string name="settings_meta_fork_contact_url" translatable="false">https://s.jrpie.de/contact</string>
+        <string name="settings_meta_privacy_url" translatable="false">https://s.jrpie.de/android-legal</string>
+        <string name="settings_meta_contact_url">https://www.finnmglas.com/contact/</string>
+        <string name="settings_meta_discord_url" translatable="false">https://discord.com/invite/jV2AhF8</string>
+
+
+        <!--
+          -
+          - Tutorial
+          -
+          -->
+       <string name="swipe" translatable="false"><![CDATA[>>>>>>]]></string>
+</resources>

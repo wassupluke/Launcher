@@ -1,13 +1,5 @@
 <resources>
-    <!--
-      -
-      - General
-      -
-      -->
-    <string name="app_name" translatable="false">μLauncher</string>
-    <string name="preference_file_key" translatable="false">V3RYR4ND0MK3YCR4P</string>
-
-    <!--
+   <!--
       -
       - Home
       -
@@ -71,32 +63,34 @@
     <string name="settings_launcher_section_appearance">Appearance</string>
 
 
-    <string name="settings_launcher_theme">Theme</string>
+    <string name="settings_theme_theme">Theme</string>
     <string-array name="settings_launcher_theme_spinner_items">
         <item>Default</item>
         <item>Dark</item>
     </string-array>
+    <string name="settings_theme_dominant">Dominant color</string>
+    <string name="settings_theme_vibrant">Vibrant color</string>
 
     <string name="settings_launcher_section_date_time"><![CDATA[Date & time]]></string>
-    <string name="settings_launcher_show_time">Show time</string>
-    <string name="settings_launcher_show_date">Show date</string>
-    <string name="settings_launcher_date_localized">Use localized date format</string>
-    <string name="settings_launcher_date_time_flip">Flip date and time</string>
+    <string name="settings_clock_time_visible">Show time</string>
+    <string name="settings_clock_date_visible">Show date</string>
+    <string name="settings_clock_localized">Use localized date format</string>
+    <string name="settings_clock_flip_date_time">Flip date and time</string>
 
-    <string name="settings_launcher_choose_wallpaper">Choose a wallpaper</string>
+    <string name="settings_theme_wallpaper">Choose a wallpaper</string>
     <string name="settings_launcher_change_wallpaper">Change wallpaper</string>
 
     <string name="settings_launcher_section_display">Display</string>
 
-    <string name="settings_launcher_disable_timeout">Keep screen on</string>
-    <string name="settings_launcher_full_screen">Use full screen</string>
+    <string name="settings_display_screen_timeout_disabled">Keep screen on</string>
+    <string name="settings_display_full_screen">Use full screen</string>
 
-    <string name="settings_launcher_section_functions">Functions</string>
+    <string name="settings_launcher_section_functionality">Functionality</string>
 
-    <string name="settings_launcher_enable_double">Double swipe actions</string>
-    <string name="settings_launcher_enable_edge">Edge swipe actions</string>
-    <string name="settings_launcher_auto_launch">Launch search results</string>
-    <string name="settings_launcher_auto_keyboard">Start keyboard for search</string>
+    <string name="settings_enabled_gestures_double_swipe">Double swipe actions</string>
+    <string name="settings_enabled_gestures_edge_swipe">Edge swipe actions</string>
+    <string name="settings_functionality_auto_launch">Launch search results</string>
+    <string name="settings_functionality_auto_keyboard">Start keyboard for search</string>
 
     <string name="settings_launcher_sensitivity">Sensitivity</string>
 
@@ -105,7 +99,7 @@
       - Settings : Meta
       -
       -->
-    <string name="settings_launcher_choose_home_screen">Set μLauncher as home screen</string>
+    <string name="settings_general_choose_home_screen">Set μLauncher as home screen</string>
     <string name="settings_meta_cant_select_launcher">App Info</string>
     <string name="settings_meta_cant_select_launcher_msg">Your device does not support this feature. Manage application details instead?</string>
 
@@ -114,23 +108,15 @@
     <string name="settings_meta_reset">Reset Settings</string>
     <string name="settings_meta_reset_confirm">You are going to discard all your preferences. Continue?</string>
 
-    <string name="settings_meta_link_github" translatable="false">https://github.com/jrpie/Launcher</string>
-
     <string name="settings_meta_report_bug">Report a bug</string>
-    <string name="settings_meta_report_bug_link" translatable="false">https://github.com/jrpie/Launcher/issues/new</string>
 
     <string name="settings_meta_fork_contact">Contact the developer of the fork</string>
-    <string name="settings_meta_fork_contact_url" translatable="false">https://s.jrpie.de/contact</string>
 
     <string name="settings_meta_privacy">Privacy Policy</string>
-    <string name="settings_meta_privacy_url" translatable="false">https://s.jrpie.de/android-legal</string>
 
     <string name="settings_meta_contact">Contact the original developer</string>
-    <string name="settings_meta_contact_url">https://www.finnmglas.com/contact/</string>
-
 
     <string name="settings_meta_discord">Join us on discord!</string>
-    <string name="settings_meta_discord_url" translatable="false">https://discord.com/invite/jV2AhF8</string>
 
     <!--
       -
@@ -188,7 +174,5 @@
 
     <string name="settings">Settings</string>
     <string name="ic_menu_alt">More options</string>
-    <string name="swipe" translatable="false"><![CDATA[>>>>>>]]></string>
     <string name="alert_cant_expand_notifications_panel">Error: Can\'t expand status bar.\nThis action is using functionality that is not part of the published Android API. Unfortunately, it does not seem to work on your device.</string>
-
 </resources>

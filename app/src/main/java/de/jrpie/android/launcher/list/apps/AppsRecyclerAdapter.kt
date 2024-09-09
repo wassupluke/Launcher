@@ -12,12 +12,10 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import de.jrpie.android.launcher.PREF_SEARCH_AUTO_LAUNCH
+import de.jrpie.android.launcher.LauncherPreferences
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
 import de.jrpie.android.launcher.appsList
-import de.jrpie.android.launcher.getPreferences
-import de.jrpie.android.launcher.getSavedTheme
 import de.jrpie.android.launcher.launch
 import de.jrpie.android.launcher.launchApp
 import de.jrpie.android.launcher.list.ListActivity
@@ -68,7 +66,7 @@ class AppsRecyclerAdapter(val activity: Activity,
         viewHolder.textView.text = appLabel
         viewHolder.img.setImageDrawable(appIcon)
 
-        if (getSavedTheme(activity) == "dark") transformGrayscale(
+        if (LauncherPreferences.theme().theme() == "dark") transformGrayscale(
             viewHolder.img
         )
 
@@ -188,11 +186,8 @@ class AppsRecyclerAdapter(val activity: Activity,
             appsListDisplayed.addAll(appsSecondary)
         }
 
-        // Launch apps automatically if only one result is found and the user wants it
-        // Disabled at the moment. The Setting 'PREF_SEARCH_AUTO_LAUNCH' may be
-        // modifiable at some later point.
         if (appsListDisplayed.size == 1 && intention == ListActivity.ListActivityIntention.VIEW
-            && getPreferences(activity).getBoolean(PREF_SEARCH_AUTO_LAUNCH, false)) {
+            && LauncherPreferences.functionality().searchAutoLaunch()) {
             val info = appsListDisplayed[0]
             launch(info.packageName.toString(), info.user, activity)
 

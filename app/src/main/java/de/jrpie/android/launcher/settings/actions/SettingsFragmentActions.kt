@@ -8,12 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import de.jrpie.android.launcher.LauncherPreferences
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.UIObject
 import de.jrpie.android.launcher.databinding.SettingsActionsBinding
 import de.jrpie.android.launcher.list.ListActivity
 import de.jrpie.android.launcher.setButtonColor
-import de.jrpie.android.launcher.vibrantColor
 
 
 /**
@@ -44,6 +44,7 @@ SettingsFragmentActions : Fragment(), UIObject {
     }
 
     override fun applyTheme() {
+        val vibrantColor = LauncherPreferences.theme().vibrant()
         setButtonColor(binding!!.settingsActionsButtonViewApps, vibrantColor)
         setButtonColor(binding!!.settingsActionsButtonInstallApps, vibrantColor)
     }
@@ -67,7 +68,4 @@ SettingsFragmentActions : Fragment(), UIObject {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 }

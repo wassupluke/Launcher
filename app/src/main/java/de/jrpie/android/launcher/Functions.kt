@@ -6,7 +6,6 @@ import android.app.Service
 import android.app.role.RoleManager
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.ApplicationInfo
 import android.content.pm.LauncherActivityInfo
 import android.content.pm.LauncherApps
@@ -48,30 +47,6 @@ import de.jrpie.android.launcher.settings.SettingsActivity
 import de.jrpie.android.launcher.tutorial.TutorialActivity
 
 
-/* Preference Key Constants */
-
-const val PREF_DOMINANT = "custom_dominant"
-const val PREF_VIBRANT = "custom_vibrant"
-const val PREF_THEME = "theme"
-
-const val PREF_SCREEN_TIMEOUT_DISABLED = "disableTimeout"
-const val PREF_SCREEN_FULLSCREEN = "useFullScreen"
-
-const val PREF_DATE_LOCALIZED = "dateLocalized"
-const val PREF_DATE_VISIBLE = "dateVisible"
-const val PREF_TIME_VISIBLE = "timeVisible"
-const val PREF_DATE_TIME_FLIP = "dateTimeFlip"
-
-const val PREF_DOUBLE_ACTIONS_ENABLED = "enableDoubleActions"
-const val PREF_EDGE_ACTIONS_ENABLED = "enableEdgeActions"
-const val PREF_SEARCH_AUTO_LAUNCH = "searchAutoLaunch"
-const val PREF_SEARCH_AUTO_KEYBOARD = "searchAutoKeyboard"
-
-const val PREF_STARTED = "startedBefore"
-const val PREF_STARTED_TIME = "firstStartup"
-
-const val PREF_VERSION = "version"
-
 const val INVALID_USER = -1
 
 /* Objects used by multiple activities */
@@ -80,13 +55,11 @@ val appsList: MutableList<AppInfo> = ArrayList()
 /* Variables containing settings */
 val displayMetrics = DisplayMetrics()
 
-var dominantColor = 0
-var vibrantColor = 0
-
 /* REQUEST CODES */
 
 const val REQUEST_CHOOSE_APP = 1
-const val REQUEST_UNINSTALL = 2
+const val REQUEST_CHOOSE_APP_FROM_FAVORITES = 2
+const val REQUEST_UNINSTALL = 3
 
 const val REQUEST_SET_DEFAULT_HOME = 42
 
@@ -107,13 +80,6 @@ fun View.blink(
         it.repeatMode = repeatMode
         it.repeatCount = times
     })
-}
-
-fun getPreferences(context: Context): SharedPreferences{
-    return context.getSharedPreferences(
-        context.getString(R.string.preference_file_key),
-        Context.MODE_PRIVATE
-    )
 }
 
 fun setDefaultHomeScreen(context: Context, checkDefault: Boolean = false) {
@@ -223,16 +189,16 @@ fun audioVolumeDown(activity: Activity) {
     )
 }
 
-fun expandNotificationsPanel(activity: Activity) {
+fun expandNotificationsPanel(context: Context) {
     /* https://stackoverflow.com/a/15582509 */
     try {
         @Suppress("SpellCheckingInspection")
-        val statusBarService: Any? = activity.getSystemService("statusbar")
+        val statusBarService: Any? = context.getSystemService("statusbar")
         val statusBarManager = Class.forName("android.app.StatusBarManager")
         val showStatusBar = statusBarManager.getMethod("expandNotificationsPanel")
         showStatusBar.invoke(statusBarService)
     } catch (e: Exception) {
-        Toast.makeText(activity, activity.getString(R.string.alert_cant_expand_notifications_panel), Toast.LENGTH_LONG).show()
+        Toast.makeText(context, context.getString(R.string.alert_cant_expand_notifications_panel), Toast.LENGTH_LONG).show()
     }
 }
 
@@ -315,49 +281,6 @@ fun openNewTabWindow(urls: String, context: Context) {
     context.startActivity(intents)
 }
 
-/* Settings related functions */
-
-fun getSavedTheme(context: Context) : String {
-    return getPreferences(context).getString(PREF_THEME, "finn").toString()
-}
-
-fun saveTheme(context: Context, themeName: String) : String {
-    getPreferences(context).edit()
-        .putString(PREF_THEME, themeName)
-        .apply()
-
-    return themeName
-}
-
-fun resetToDefaultTheme(activity: Activity) {
-    dominantColor = activity.resources.getColor(R.color.finnmglasTheme_background_color)
-    vibrantColor = activity.resources.getColor(R.color.finnmglasTheme_accent_color)
-
-    getPreferences(activity).edit()
-        .putInt(PREF_DOMINANT, dominantColor)
-        .putInt(PREF_VIBRANT, vibrantColor)
-        .apply()
-
-    saveTheme(activity,"finn")
-    loadSettings(activity)
-
-    activity.recreate()
-}
-
-fun resetToDarkTheme(activity: Activity) {
-    dominantColor = activity.resources.getColor(R.color.darkTheme_background_color)
-    vibrantColor = activity.resources.getColor(R.color.darkTheme_accent_color)
-
-    getPreferences(activity).edit()
-        .putInt(PREF_DOMINANT, dominantColor)
-        .putInt(PREF_VIBRANT, vibrantColor)
-        .apply()
-
-    saveTheme(activity,"dark")
-
-    activity.recreate()
-}
-
 
 fun openAppSettings(packageName: String, user: Int?, context: Context, sourceBounds: Rect? = null, opts: Bundle? = null) {
     val launcherApps = context.getSystemService(Service.LAUNCHER_APPS_SERVICE) as LauncherApps
@@ -436,45 +359,10 @@ fun loadApps(packageManager: PackageManager, context: Context) {
     appsList.addAll(loadList)
 }
 
-fun loadSettings(context: Context) {
-    val preferences = getPreferences(context)
-    dominantColor = preferences.getInt(PREF_DOMINANT, 0)
-    vibrantColor = preferences.getInt(PREF_VIBRANT, 0)
-}
-
-
-fun resetSettings(context: Context) {
-
-    val editor = getPreferences(context).edit()
-
-    // set default theme
-    dominantColor = context.resources.getColor(R.color.finnmglasTheme_background_color)
-    vibrantColor = context.resources.getColor(R.color.finnmglasTheme_accent_color)
-
-    editor
-        .putInt(PREF_DOMINANT, dominantColor)
-        .putInt(PREF_VIBRANT, vibrantColor)
-        .putString(PREF_THEME, "finn")
-        .putBoolean(PREF_SCREEN_TIMEOUT_DISABLED, false)
-        .putBoolean(PREF_SEARCH_AUTO_LAUNCH, false)
-        .putBoolean(PREF_DATE_VISIBLE, true)
-        .putBoolean(PREF_TIME_VISIBLE, true)
-        .putBoolean(PREF_DATE_TIME_FLIP, false)
-        .putBoolean(PREF_DATE_LOCALIZED, false)
-        .putBoolean(PREF_SCREEN_FULLSCREEN, true)
-        .putBoolean(PREF_DOUBLE_ACTIONS_ENABLED, true)
-        .putBoolean(PREF_EDGE_ACTIONS_ENABLED, true)
-    Gesture.values().forEach { editor.putString(it.id, it.pickDefaultApp(context)) }
-
-    editor.apply()
-}
-
 fun setWindowFlags(window: Window) {
     window.setFlags(0, 0) // clear flags
-
-    val preferences = getPreferences(window.context)
     // Display notification bar
-    if (preferences.getBoolean(PREF_SCREEN_FULLSCREEN, true))
+    if (LauncherPreferences.display().fullScreen())
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
@@ -482,7 +370,7 @@ fun setWindowFlags(window: Window) {
     else window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
     // Screen Timeout
-    if (preferences.getBoolean(PREF_SCREEN_TIMEOUT_DISABLED, false))
+    if (LauncherPreferences.display().screenTimeoutDisabled())
         window.setFlags(
             WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
             WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
@@ -499,8 +387,6 @@ fun saveListActivityChoice(context: Context, data: Intent?) {
     val forGesture = data?.getStringExtra("forGesture") ?: return
 
     Gesture.byId(forGesture)?.setApp(context, value.toString(), user)
-
-    loadSettings(context)
 }
 
 // Taken from https://stackoverflow.com/a/50743764/12787264
@@ -512,7 +398,6 @@ fun openSoftKeyboard(context: Context, view: View) {
 }
 
 /* Bitmaps */
-
 fun setButtonColor(btn: Button, color: Int) {
     if (Build.VERSION.SDK_INT >= 29)
         btn.background.colorFilter = BlendModeColorFilter(color, BlendMode.MULTIPLY)

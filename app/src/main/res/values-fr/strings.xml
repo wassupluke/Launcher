@@ -47,27 +47,27 @@
       -->
     <string name="settings_launcher_section_appearance">Apparence</string>
     <string name="settings_launcher_section_date_time">Format de date</string>
-    <string name="settings_launcher_theme">Thème</string>
+    <string name="settings_theme_theme">Thème</string>
     <string-array name="settings_launcher_theme_spinner_items">
         <item>Défaut</item>
         <item>Noir</item>
     </string-array>
-    <string name="settings_launcher_choose_wallpaper">Choisir un fond d\'écran</string>
+    <string name="settings_theme_wallpaper">Choisir un fond d\'écran</string>
     <string name="settings_launcher_change_wallpaper">Changer le fond d\'écran</string>
     <string name="settings_launcher_section_display">Écran</string>
-    <string name="settings_launcher_disable_timeout">Garder l\'écran allumé</string>
+    <string name="settings_display_screen_timeout_disabled">Garder l\'écran allumé</string>
     <string name="settings_launcher_full_screen">Utiliser le plein écran</string>
-    <string name="settings_launcher_section_functions">Fonctions</string>
-    <string name="settings_launcher_enable_double">Actions de double balayage</string>
-    <string name="settings_launcher_auto_launch">Lancer apps par recherche</string>
-    <string name="settings_launcher_auto_keyboard">Ouvrir le clavier automatiquement pour la recherche</string>
+    <string name="settings_launcher_section_functionality">Fonctions</string>
+    <string name="settings_enabled_gestures_double_swipe">Actions de double balayage</string>
+    <string name="settings_functionality_auto_launch">Lancer apps par recherche</string>
+    <string name="settings_functionality_auto_keyboard">Ouvrir le clavier automatiquement pour la recherche</string>
     <string name="settings_launcher_sensitivity">Sensibilité</string>
     <!--
       -
       - Settings : Meta
       -
       -->
-    <string name="settings_launcher_choose_home_screen">Choisir Launcher comme application d\'écran d\'accueil par défaut</string>
+    <string name="settings_general_choose_home_screen">Choisir Launcher comme application d\'écran d\'accueil par défaut</string>
     <string name="settings_meta_cant_select_launcher">Informations sur l\'application</string>
     <string name="settings_meta_cant_select_launcher_msg">Votre appareil ne prend pas en charge cette fonctionnalité. Souhaitez-vous plutôt accéder aux détails de l\'application ?</string>
     <string name="settings_meta_show_tutorial">Regarder le tutoriel</string>
@@ -129,7 +129,7 @@
     <string name="settings">Réglages</string>
     <string name="ic_menu_alt">Plus d\'options</string>
     <string name="settings_gesture_right_top_edge">Balayer vers la droite (en haut de l\'écran)</string>
-    <string name="settings_launcher_enable_edge">Actions associées aux mouvements sur les bords de l\'écran</string>
+    <string name="settings_enabled_gestures_edge_swipe">Actions associées aux mouvements sur les bords de l\'écran</string>
     <string name="settings_gesture_right_bottom_edge">Balayer vers la droite (en bas de l\'écran)</string>
     <string name="settings_gesture_down_left_edge">Balayer vers le bas (à gauche de l\'écran)</string>
     <string name="settings_gesture_left_bottom_edge">Balayer vers la gauche (en bas de l\'écran)</string>
@@ -137,8 +137,8 @@
     <string name="settings_gesture_up_left_edge">Balayer vers le haut (à gauche de l\'écran)</string>
     <string name="settings_gesture_up_right_edge">Balayer vers le haut (à droite de l\'écran)</string>
     <string name="settings_gesture_down_right_edge">Balayer vers le bas (à droite de l\'écran)</string>
-    <string name="settings_launcher_show_time">Afficher l\'heure</string>
-    <string name="settings_launcher_date_time_flip">Échanger la date et l\'heure</string>
-    <string name="settings_launcher_show_date">Afficher la date</string>
-    <string name="settings_launcher_date_localized">Utiliser le format de date local</string>
+    <string name="settings_clock_time_visible">Afficher l\'heure</string>
+    <string name="settings_clock_flip_date_time">Échanger la date et l\'heure</string>
+    <string name="settings_clock_date_visible">Afficher la date</string>
+    <string name="settings_clock_localized">Utiliser le format de date local</string>
 </resources>

@@ -51,7 +51,7 @@ class SettingsActivity: AppCompatActivity(), UIObject {
     override fun applyTheme() {
         //settings_system.setTextColor(vibrantColor)
         //settings_close.setTextColor(vibrantColor)
-        binding.settingsTabs.setSelectedTabIndicatorColor(vibrantColor)
+        binding.settingsTabs.setSelectedTabIndicatorColor(LauncherPreferences.theme().vibrant())
     }
 
     override fun setOnClicks(){

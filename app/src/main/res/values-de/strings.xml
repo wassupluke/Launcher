@@ -62,31 +62,31 @@
       -->
     <string name="settings_launcher_section_appearance">Aussehen</string>
 
-    <string name="settings_launcher_show_time">Zeit anzeigen</string>
-    <string name="settings_launcher_show_date">Datum anzeigen</string>
-    <string name="settings_launcher_date_localized">Lokalisiertes Datumsformat verwenden</string>
-    <string name="settings_launcher_date_time_flip">Datum und Uhrzeit tauschen</string>
+    <string name="settings_clock_time_visible">Zeit anzeigen</string>
+    <string name="settings_clock_date_visible">Datum anzeigen</string>
+    <string name="settings_clock_localized">Lokalisiertes Datumsformat verwenden</string>
+    <string name="settings_clock_flip_date_time">Datum und Uhrzeit tauschen</string>
     <string name="settings_launcher_section_date_time"><![CDATA[Datum & Uhrzeit]]></string>
-    <string name="settings_launcher_theme">Theme</string>
+    <string name="settings_theme_theme">Theme</string>
     <string-array name="settings_launcher_theme_spinner_items">
         <item>Standard</item>
         <item>Dunkel</item>
     </string-array>
 
-    <string name="settings_launcher_choose_wallpaper">Hintergrund auswählen</string>
+    <string name="settings_theme_wallpaper">Hintergrund auswählen</string>
     <string name="settings_launcher_change_wallpaper">Hintergrund ändern</string>
 
     <string name="settings_launcher_section_display">Bildschirm</string>
 
-    <string name="settings_launcher_disable_timeout">Bildschirm nicht ausschalten</string>
+    <string name="settings_display_screen_timeout_disabled">Bildschirm nicht ausschalten</string>
     <string name="settings_launcher_full_screen">Vollbild</string>
 
-    <string name="settings_launcher_section_functions">Funktionen</string>
+    <string name="settings_launcher_section_functionality">Funktionen</string>
 
-    <string name="settings_launcher_enable_double">Doppelte Wischaktionen</string>
-    <string name="settings_launcher_enable_edge">Kantenwischaktionen</string>
-    <string name="settings_launcher_auto_launch">Suchergebnis starten</string>
-    <string name="settings_launcher_auto_keyboard">Tastatur automatisch öffnen</string>
+    <string name="settings_enabled_gestures_double_swipe">Doppelte Wischaktionen</string>
+    <string name="settings_enabled_gestures_edge_swipe">Kantenwischaktionen</string>
+    <string name="settings_functionality_auto_launch">Suchergebnis starten</string>
+    <string name="settings_functionality_auto_keyboard">Tastatur automatisch öffnen</string>
 
     <string name="settings_launcher_sensitivity">Empfindlichkeit</string>
 
@@ -95,7 +95,7 @@
       - Settings : Meta
       -
       -->
-    <string name="settings_launcher_choose_home_screen">Launcher wählen</string>
+    <string name="settings_general_choose_home_screen">Launcher wählen</string>
     <string name="settings_meta_cant_select_launcher">App Info</string>
     <string name="settings_meta_cant_select_launcher_msg">Dein Gerät unterstützt diese Funktion nicht. Stattdessen die App Details bearbeiten?</string>
 

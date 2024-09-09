@@ -8,12 +8,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
-import de.jrpie.android.launcher.PREF_STARTED
+import de.jrpie.android.launcher.LauncherPreferences
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
 import de.jrpie.android.launcher.UIObject
-import de.jrpie.android.launcher.getPreferences
-import de.jrpie.android.launcher.loadSettings
 import de.jrpie.android.launcher.resetSettings
 import de.jrpie.android.launcher.saveListActivityChoice
 import de.jrpie.android.launcher.tutorial.tabs.TutorialFragmentConcept
@@ -37,12 +35,9 @@ class TutorialActivity: AppCompatActivity(), UIObject {
         // Initialise layout
         setContentView(R.layout.tutorial)
 
-        val preferences = getPreferences(this)
         // Check if the app was started before
-        if (!preferences.getBoolean(PREF_STARTED, false))
+        if(!LauncherPreferences.internal().started())
             resetSettings(this)
-
-        loadSettings(this)
 
         // set up tabs and swiping in settings
         val sectionsPagerAdapter = TutorialSectionsPagerAdapter(supportFragmentManager)
@@ -66,7 +61,7 @@ class TutorialActivity: AppCompatActivity(), UIObject {
 
     // Default: prevent going back, allow if viewed again later
     override fun onBackPressed() {
-        if (getPreferences(this).getBoolean(PREF_STARTED, false))
+        if (LauncherPreferences.internal().started())
             super.onBackPressed()
     }
 

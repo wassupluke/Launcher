@@ -5,7 +5,7 @@
     <string name="ic_menu_alt">更多选项</string>
     <string name="settings_title">设置</string>
     <string name="settings_launcher_section_appearance">外观</string>
-    <string name="settings_launcher_theme">主题</string>
+    <string name="settings_theme_theme">主题</string>
     <string name="settings_launcher_section_display">显示</string>
     <string name="list_tab_other">其他</string>
     <string name="settings_gesture_up">上滑</string>
@@ -41,14 +41,14 @@
     <string name="settings_apps_install">安装应用</string>
     <string name="settings_apps_toast_store_not_found">没有找到应用市场</string>
     <string name="settings_launcher_section_date_time">日期和时间</string>
-    <string name="settings_launcher_choose_wallpaper">选择一个壁纸</string>
+    <string name="settings_theme_wallpaper">选择一个壁纸</string>
     <string name="settings_launcher_change_wallpaper">换壁纸</string>
-    <string name="settings_launcher_disable_timeout">保持屏幕常亮</string>
+    <string name="settings_display_screen_timeout_disabled">保持屏幕常亮</string>
     <string name="settings_launcher_full_screen">使用全屏</string>
-    <string name="settings_launcher_section_functions">功能</string>
-    <string name="settings_launcher_enable_edge">边缘滑动动作</string>
-    <string name="settings_launcher_auto_launch">零点击启动唯一搜索结果</string>
-    <string name="settings_launcher_auto_keyboard">搜索时呼出键盘</string>
+    <string name="settings_launcher_section_functionality">功能</string>
+    <string name="settings_enabled_gestures_edge_swipe">边缘滑动动作</string>
+    <string name="settings_functionality_auto_launch">零点击启动唯一搜索结果</string>
+    <string name="settings_functionality_auto_keyboard">搜索时呼出键盘</string>
     <string name="settings_launcher_sensitivity">灵敏度</string>
     <string name="settings_meta_cant_select_launcher">应用信息</string>
     <string name="settings_meta_cant_select_launcher_msg">您的设备不支持此功能。要不打开应用程序详细？</string>
@@ -92,16 +92,16 @@
 \n
 \n它不付费、无广告、不追踪。</string>
     <string name="tutorial_usage_text_2">您只需滑动屏幕或按下按钮即可启动应用程序。在下一步向导中选择一些应用程序。</string>
-    <string name="settings_launcher_choose_home_screen">将 μLauncher 设为默认桌面</string>
+    <string name="settings_general_choose_home_screen">将 μLauncher 设为默认桌面</string>
     <string name="tutorial_finish_text">您已经准备好开始了！
 \n
 \n我希望这对你有很大的价值!
 \n
 \n- Finn (Launcher 的作者)
 \n以及 Josia(做了一些改进并维护了 μLauncher 分支)</string>
-    <string name="settings_launcher_enable_double">双滑动作</string>
-    <string name="settings_launcher_date_localized">使用本地日期格式</string>
-    <string name="settings_launcher_show_time">显示时间</string>
-    <string name="settings_launcher_show_date">显示日期</string>
-    <string name="settings_launcher_date_time_flip">翻转日期和时间</string>
+    <string name="settings_enabled_gestures_double_swipe">双滑动作</string>
+    <string name="settings_clock_localized">使用本地日期格式</string>
+    <string name="settings_clock_time_visible">显示时间</string>
+    <string name="settings_clock_date_visible">显示日期</string>
+    <string name="settings_clock_flip_date_time">翻转日期和时间</string>
 </resources>

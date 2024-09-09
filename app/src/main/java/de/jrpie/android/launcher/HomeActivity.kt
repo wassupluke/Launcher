@@ -7,6 +7,7 @@ import android.view.GestureDetector
 import android.view.KeyEvent
 import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.AppLaunchChecker
 import androidx.core.view.GestureDetectorCompat
 import androidx.core.view.isVisible
 import de.jrpie.android.launcher.BuildConfig.VERSION_NAME
@@ -50,38 +51,14 @@ class HomeActivity: UIObject, AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val preferences = getPreferences(this)
-        windowManager.defaultDisplay.getMetrics(displayMetrics)
-
-        loadSettings(this)
 
         // First time opening the app: show Tutorial, else: check versions
-        if (!preferences.getBoolean(PREF_STARTED, false))
+        if (!LauncherPreferences.internal().started()) {
+
+            LauncherPreferences.internal().started(true)
             startActivity(Intent(this, TutorialActivity::class.java))
-        else when (preferences.getString(PREF_VERSION, "")) {
-            // Check versions, make sure transitions between versions go well
-
-            VERSION_NAME -> { /* the version installed and used previously are the same */ }
-            "" -> { /* The version used before was pre- v1.3.0,
-                        as version tracking started then */
-
-                /*
-                 * before, the dominant and vibrant color of the `finn` and `dark` theme
-                 * were not stored anywhere. Now they have to be stored:
-                 * -> we just reset them using newly implemented functions
-                 */
-                when (getSavedTheme(this)) {
-                    "finn" -> resetToDefaultTheme(this)
-                    "dark" -> resetToDarkTheme(this)
-                }
-
-                preferences.edit()
-                    .putString(PREF_VERSION, VERSION_NAME) // save new version
-                    .apply()
-
-                // show the new tutorial
-                startActivity(Intent(this, TutorialActivity::class.java))
-            }
+        } else {
+            migrateToNewVersion(this)
         }
 
         // Preload apps to speed up the Apps Recycler
@@ -98,21 +75,18 @@ class HomeActivity: UIObject, AppCompatActivity(),
         mDetector = GestureDetectorCompat(this, this)
         mDetector.setOnDoubleTapListener(this)
 
-        // for if the settings changed
-        loadSettings(this)
         super<UIObject>.onStart()
     }
 
     private fun updateClock() {
-        clockTimer?.cancel()
-        val preferences = getPreferences(this)
+        clockTimer.cancel()
         val locale = Locale.getDefault()
-        val dateVisible = preferences.getBoolean(PREF_DATE_VISIBLE, true)
-        val timeVisible = preferences.getBoolean(PREF_TIME_VISIBLE, true)
+        val dateVisible = LauncherPreferences.clock().dateVisible()
+        val timeVisible = LauncherPreferences.clock().timeVisible()
 
         var dateFMT = "yyyy-MM-dd"
         var timeFMT = "HH:mm:ss"
-        if (preferences.getBoolean(PREF_DATE_LOCALIZED, false)) {
+        if (LauncherPreferences.clock().localized()) {
             dateFMT = android.text.format.DateFormat.getBestDateTimePattern(locale, dateFMT)
             timeFMT = android.text.format.DateFormat.getBestDateTimePattern(locale, timeFMT)
         }
@@ -122,7 +96,7 @@ class HomeActivity: UIObject, AppCompatActivity(),
         var upperVisible = dateVisible
         var lowerVisible = timeVisible
 
-        if(preferences.getBoolean(PREF_DATE_TIME_FLIP, false)) {
+        if(LauncherPreferences.clock().flipDateTime()) {
             upperFormat = lowerFormat.also { lowerFormat = upperFormat }
             upperVisible = lowerVisible.also { lowerVisible = upperVisible }
         }
@@ -176,10 +150,8 @@ class HomeActivity: UIObject, AppCompatActivity(),
         val diffX = e1.x - e2.x
         val diffY = e1.y - e2.y
 
-        val preferences = getPreferences(this)
-
-        val doubleActions = preferences.getBoolean(PREF_DOUBLE_ACTIONS_ENABLED, false)
-        val edgeActions = preferences.getBoolean(PREF_EDGE_ACTIONS_ENABLED, false)
+        val doubleActions = LauncherPreferences.enabled_gestures().doubleSwipe()
+        val edgeActions = LauncherPreferences.enabled_gestures().edgeSwipe()
         val edgeStrictness = 0.15
 
         var gesture = if(abs(diffX) > abs(diffY)) { // horizontal swipe
@@ -250,9 +222,8 @@ class HomeActivity: UIObject, AppCompatActivity(),
 
     override fun setOnClicks() {
 
-        val preferences = getPreferences(this)
         binding.homeUpperView.setOnClickListener {
-            if(preferences.getBoolean(PREF_DATE_TIME_FLIP, false)) {
+            if(LauncherPreferences.clock().flipDateTime()) {
                 Gesture.TIME(this)
             } else {
                 Gesture.DATE(this)
@@ -260,7 +231,7 @@ class HomeActivity: UIObject, AppCompatActivity(),
         }
 
         binding.homeLowerView.setOnClickListener {
-            if(preferences.getBoolean(PREF_DATE_TIME_FLIP, false)) {
+            if(LauncherPreferences.clock().flipDateTime()) {
                 Gesture.DATE(this)
             } else {
                 Gesture.TIME(this)

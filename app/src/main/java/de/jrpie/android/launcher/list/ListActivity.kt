@@ -14,16 +14,14 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
-import de.jrpie.android.launcher.PREF_SCREEN_FULLSCREEN
+import de.jrpie.android.launcher.LauncherPreferences
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_UNINSTALL
 import de.jrpie.android.launcher.UIObject
 import de.jrpie.android.launcher.databinding.ListBinding
-import de.jrpie.android.launcher.getPreferences
 import de.jrpie.android.launcher.list.apps.ListFragmentApps
 import de.jrpie.android.launcher.list.other.LauncherAction
 import de.jrpie.android.launcher.list.other.ListFragmentOther
-import de.jrpie.android.launcher.vibrantColor
 
 
 // TODO: Better solution for this intercommunication functionality (used in list-fragments)
@@ -67,7 +65,7 @@ class ListActivity : AppCompatActivity(), UIObject {
                     binding.listContainer.context.resources.displayMetrics.heightPixels
                 val diff = height - r.bottom
                 if (diff != 0 &&
-                    getPreferences(this).getBoolean(PREF_SCREEN_FULLSCREEN, true)) {
+                    LauncherPreferences.display().fullScreen()) {
                     if (binding.listContainer.paddingBottom !== diff) {
                         binding.listContainer.setPadding(0, 0, 0, diff)
                     }
@@ -107,7 +105,7 @@ class ListActivity : AppCompatActivity(), UIObject {
     override fun applyTheme() {
         // list_close.setTextColor(vibrantColor)
 
-        binding.listTabs.setSelectedTabIndicatorColor(vibrantColor)
+        binding.listTabs.setSelectedTabIndicatorColor(LauncherPreferences.theme().vibrant())
     }
 
     override fun setOnClicks() {

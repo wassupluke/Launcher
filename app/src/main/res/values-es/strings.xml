@@ -70,19 +70,19 @@
         <item>Oscuro</item>
     </string-array>
 
-    <string name="settings_launcher_choose_wallpaper">Seleccionar fondo de pantalla</string>
+    <string name="settings_theme_wallpaper">Seleccionar fondo de pantalla</string>
     <string name="settings_launcher_change_wallpaper">Cambiar fondo de pantalla</string>
 
     <string name="settings_launcher_section_display">Pantalla</string>
 
-    <string name="settings_launcher_disable_timeout">Mantener encendida</string>
+    <string name="settings_display_screen_timeout_disabled">Mantener encendida</string>
     <string name="settings_launcher_full_screen">Pantalla completa</string>
 
-    <string name="settings_launcher_section_functions">Funciones</string>
+    <string name="settings_launcher_section_functionality">Funciones</string>
 
-    <string name="settings_launcher_enable_double">Deslizar con dos dedos</string>
-    <string name="settings_launcher_auto_launch">Auto-lanzar búsquedas</string>
-    <string name="settings_launcher_auto_keyboard">Abrir teclado en búsqueda</string>
+    <string name="settings_enabled_gestures_double_swipe">Deslizar con dos dedos</string>
+    <string name="settings_functionality_auto_launch">Auto-lanzar búsquedas</string>
+    <string name="settings_functionality_auto_keyboard">Abrir teclado en búsqueda</string>
 
     <string name="settings_launcher_sensitivity">Sensibilidad</string>
 
@@ -91,7 +91,7 @@
       - Settings : Meta
       -
       -->
-    <string name="settings_launcher_choose_home_screen">Seleccionar Launcher</string>
+    <string name="settings_general_choose_home_screen">Seleccionar Launcher</string>
     <string name="settings_meta_cant_select_launcher">Información de la aplicación</string>
     <string name="settings_meta_cant_select_launcher_msg">Su dispositivo no posee esta caracrerística. Desea cambiar los detalles de la aplicación?</string>
 

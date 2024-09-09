@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory > <!-- general -->
+        <Preference
+            android:key="@string/settings_general_choose_home_screen_key"
+            android:title="@string/settings_general_choose_home_screen"/>
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/settings_launcher_section_appearance">
+
+        <Preference
+            android:key="@string/settings_theme_wallpaper_key"
+            android:title="@string/settings_theme_wallpaper"/>
+        <!--<ListPreference
+            android:key="@string/settings_theme_theme_key"
+            android:title="@string/settings_theme_theme"
+        </ListPreference>-->
+   </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/settings_launcher_section_date_time">
+        <SwitchPreference
+            android:key="@string/settings_clock_localized_key"
+            android:defaultValue="false"
+            android:title="@string/settings_clock_localized" />
+        <SwitchPreference
+            android:key="@string/settings_clock_time_visible_key"
+            android:defaultValue="true"
+            android:title="@string/settings_clock_time_visible" />
+        <SwitchPreference
+            android:key="@string/settings_clock_date_visible_key"
+            android:defaultValue="true"
+            android:title="@string/settings_clock_date_visible" />
+        <SwitchPreference
+            android:key="@string/settings_clock_flip_date_time_key"
+            android:defaultValue="false"
+            android:title="@string/settings_clock_flip_date_time" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/settings_launcher_section_functionality">
+
+        <SwitchPreference
+            android:key="@string/settings_functionality_search_auto_launch_key"
+            android:defaultValue="true"
+            android:title="@string/settings_functionality_auto_launch" />
+        <SwitchPreference
+            android:key="@string/settings_functionality_search_auto_open_keyboard_key"
+            android:defaultValue="true"
+            android:title="@string/settings_functionality_auto_keyboard" />
+        <SwitchPreference
+            android:key="@string/settings_enabled_gestures_double_swipe_key"
+            android:defaultValue="true"
+            android:title="@string/settings_enabled_gestures_double_swipe"/>
+        <SwitchPreference
+            android:key="@string/settings_enabled_gestures_edge_swipe_key"
+            android:defaultValue="true"
+            android:title="@string/settings_enabled_gestures_edge_swipe"/>
+
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/settings_launcher_section_display">
+        <SwitchPreference
+            android:key="@string/settings_display_full_screen_key"
+            android:title="@string/settings_display_full_screen"/>
+        <SwitchPreference
+            android:key="@string/settings_display_screen_timeout_disabled_key"
+            android:title="@string/settings_display_screen_timeout_disabled"/>
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

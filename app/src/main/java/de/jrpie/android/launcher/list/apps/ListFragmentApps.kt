@@ -6,10 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import de.jrpie.android.launcher.PREF_SEARCH_AUTO_KEYBOARD
+import de.jrpie.android.launcher.LauncherPreferences
 import de.jrpie.android.launcher.UIObject
 import de.jrpie.android.launcher.databinding.ListAppsBinding
-import de.jrpie.android.launcher.getPreferences
 import de.jrpie.android.launcher.list.ListActivity
 import de.jrpie.android.launcher.list.forGesture
 import de.jrpie.android.launcher.list.intention
@@ -70,8 +69,7 @@ class ListFragmentApps : Fragment(), UIObject {
         })
 
         if (intention == ListActivity.ListActivityIntention.VIEW
-            && getPreferences(requireContext())
-                .getBoolean(PREF_SEARCH_AUTO_KEYBOARD, true)) {
+            && LauncherPreferences.functionality().searchAutoOpenKeyboard()){
             openSoftKeyboard(requireContext(), binding.listAppsSearchview)
         }
     }
