@@ -56,7 +56,6 @@
     <string name="settings_launcher_change_wallpaper">Changer le fond d\'écran</string>
     <string name="settings_launcher_section_display">Écran</string>
     <string name="settings_display_screen_timeout_disabled">Garder l\'écran allumé</string>
-    <string name="settings_launcher_full_screen">Utiliser le plein écran</string>
     <string name="settings_launcher_section_functionality">Fonctions</string>
     <string name="settings_enabled_gestures_double_swipe">Actions de double balayage</string>
     <string name="settings_functionality_auto_launch">Lancer apps par recherche</string>
@@ -76,7 +75,6 @@
     <string name="settings_meta_report_bug">Signaler une erreur</string>
     <string name="settings_meta_discord">Rejoins-nous sur Discord !</string>
     <string name="settings_meta_contact">Contacter le développeur</string>
-    <string name="settings_meta_contact_url">https://www.finnmglas.com/fr/contact/</string>
     <string name="settings_meta_fork_contact">Contact the developer of the fork (malheureusement, il ne parle pas français)</string>
     <string name="settings_meta_privacy">Déclaration de confidentialité</string>
     <!--
