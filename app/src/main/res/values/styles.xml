@@ -28,6 +28,7 @@
         <item name="android:colorBackground">@color/darkTheme_background_color</item>
         <item name="android:textColor">@color/darkTheme_text_color</item>
     </style>
+
     <style name="colorThemeDefault">
         <item name="colorPrimary">@color/finnmglasTheme_background_color</item>
         <item name="colorPrimaryDark">@color/finnmglasTheme_background_color</item>
@@ -61,12 +62,11 @@
     <style name="fontSystemDefault">
         <!--<item name="android:textSize">18sp</item>-->
     </style>
+
     <style name="fontHack">
         <item name="android:fontFamily">@font/hack</item>
         <!--<item name="android:textSize">18sp</item>-->
     </style>
-
-
 
 
     <style name="PopupMenuCustom" parent="@android:style/Widget.PopupMenu">

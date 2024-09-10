@@ -36,7 +36,7 @@ class ListFragmentApps : Fragment(), UIObject {
         super<UIObject>.onStart()
     }
 
-    override fun setOnClicks() { }
+    override fun setOnClicks() {}
 
     override fun adjustLayout() {
 
@@ -66,7 +66,8 @@ class ListFragmentApps : Fragment(), UIObject {
         })
 
         if (intention == ListActivity.ListActivityIntention.VIEW
-            && LauncherPreferences.functionality().searchAutoOpenKeyboard()){
+            && LauncherPreferences.functionality().searchAutoOpenKeyboard()
+        ) {
             openSoftKeyboard(requireContext(), binding.listAppsSearchview)
         }
     }

@@ -1,25 +1,28 @@
 package de.jrpie.android.launcher.settings.actions
 
+import android.app.Activity
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import de.jrpie.android.launcher.*
-import de.jrpie.android.launcher.list.ListActivity
-import android.app.Activity
-import android.content.Intent
-import android.content.SharedPreferences
-import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import de.jrpie.android.launcher.list.other.LauncherAction
+import de.jrpie.android.launcher.Gesture
+import de.jrpie.android.launcher.R
+import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
+import de.jrpie.android.launcher.UIObject
 import de.jrpie.android.launcher.databinding.SettingsActionsRecyclerBinding
+import de.jrpie.android.launcher.getAppIcon
+import de.jrpie.android.launcher.list.ListActivity
+import de.jrpie.android.launcher.list.other.LauncherAction
 import de.jrpie.android.launcher.preferences.LauncherPreferences
-import java.lang.Exception
+import de.jrpie.android.launcher.transformGrayscale
 
 /**
  *  The [SettingsFragmentActionsRecycler] is a fragment containing the [ActionsRecyclerAdapter],
@@ -49,7 +52,7 @@ class SettingsFragmentActionsRecycler : Fragment(), UIObject {
 
         // set up the list / recycler
         val actionViewManager = LinearLayoutManager(context)
-        actionViewAdapter = ActionsRecyclerAdapter( requireActivity() )
+        actionViewAdapter = ActionsRecyclerAdapter(requireActivity())
 
         binding.settingsActionsRview.apply {
             // improve performance (since content changes don't change the layout size)
@@ -57,19 +60,21 @@ class SettingsFragmentActionsRecycler : Fragment(), UIObject {
             layoutManager = actionViewManager
             adapter = actionViewAdapter
         }
-        LauncherPreferences.getSharedPreferences().registerOnSharedPreferenceChangeListener(sharedPreferencesListener)
+        LauncherPreferences.getSharedPreferences()
+            .registerOnSharedPreferenceChangeListener(sharedPreferencesListener)
 
         super<UIObject>.onStart()
     }
 
     override fun onDestroy() {
-        LauncherPreferences.getSharedPreferences().unregisterOnSharedPreferenceChangeListener(sharedPreferencesListener)
+        LauncherPreferences.getSharedPreferences()
+            .unregisterOnSharedPreferenceChangeListener(sharedPreferencesListener)
 
         super.onDestroy()
     }
 }
 
-class ActionsRecyclerAdapter(val activity: Activity):
+class ActionsRecyclerAdapter(val activity: Activity) :
     RecyclerView.Adapter<ActionsRecyclerAdapter.ViewHolder>() {
 
     private val gesturesList: ArrayList<Gesture>
@@ -81,9 +86,11 @@ class ActionsRecyclerAdapter(val activity: Activity):
         var chooseButton: Button = itemView.findViewById(R.id.settings_actions_row_button_choose)
         var removeAction: ImageView = itemView.findViewById(R.id.settings_actions_row_remove)
 
-        override fun onClick(v: View) { }
+        override fun onClick(v: View) {}
 
-        init { itemView.setOnClickListener(this) }
+        init {
+            itemView.setOnClickListener(this)
+        }
     }
 
     private fun updateViewHolder(gesture: Gesture, viewHolder: ViewHolder) {
@@ -92,12 +99,11 @@ class ActionsRecyclerAdapter(val activity: Activity):
         viewHolder.img.visibility = View.VISIBLE
         viewHolder.removeAction.visibility = View.VISIBLE
         viewHolder.chooseButton.visibility = View.INVISIBLE
-        if (content.isEmpty()){
+        if (content.isEmpty()) {
             viewHolder.img.visibility = View.INVISIBLE
             viewHolder.removeAction.visibility = View.GONE
             viewHolder.chooseButton.visibility = View.VISIBLE
-        }
-        else if (LauncherAction.isOtherAction(content)) {
+        } else if (LauncherAction.isOtherAction(content)) {
             LauncherAction.byId(content)?.let {
                 viewHolder.img.setImageResource(it.icon)
             }
@@ -105,7 +111,7 @@ class ActionsRecyclerAdapter(val activity: Activity):
             // Set image icon (by packageName)
             try {
                 viewHolder.img.setImageDrawable(getAppIcon(activity, content, app.second))
-            } catch (e : Exception) {
+            } catch (e: Exception) {
                 // Probably the app was uninstalled
                 // the button is shown, user asked to select an action
                 viewHolder.img.visibility = View.INVISIBLE
@@ -119,14 +125,16 @@ class ActionsRecyclerAdapter(val activity: Activity):
         val gesture = gesturesList[i]
         viewHolder.textView.text = gesture.getLabel(activity)
         if (LauncherPreferences.theme().monochromeIcons())
-            transformGrayscale( viewHolder.img )
+            transformGrayscale(viewHolder.img)
         updateViewHolder(gesture, viewHolder)
-        viewHolder.img.setOnClickListener{ chooseApp(gesture) }
-        viewHolder.chooseButton.setOnClickListener{ chooseApp(gesture) }
-        viewHolder.removeAction.setOnClickListener{ gesture.removeApp(activity) }
+        viewHolder.img.setOnClickListener { chooseApp(gesture) }
+        viewHolder.chooseButton.setOnClickListener { chooseApp(gesture) }
+        viewHolder.removeAction.setOnClickListener { gesture.removeApp(activity) }
     }
 
-    override fun getItemCount(): Int { return gesturesList.size }
+    override fun getItemCount(): Int {
+        return gesturesList.size
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -139,7 +147,8 @@ class ActionsRecyclerAdapter(val activity: Activity):
         val edgeActions = LauncherPreferences.enabled_gestures().edgeSwipe()
         gesturesList = Gesture.values().filter {
             (doubleActions || !it.isDoubleVariant())
-                    && (edgeActions || !it.isEdgeVariant())} as ArrayList<Gesture>
+                    && (edgeActions || !it.isEdgeVariant())
+        } as ArrayList<Gesture>
     }
 
     fun updateActions() {
@@ -148,7 +157,8 @@ class ActionsRecyclerAdapter(val activity: Activity):
         this.gesturesList.clear()
         gesturesList.addAll(Gesture.values().filter {
             (doubleActions || !it.isDoubleVariant())
-                    && (edgeActions || !it.isEdgeVariant())})
+                    && (edgeActions || !it.isEdgeVariant())
+        })
 
         notifyDataSetChanged()
     }
@@ -158,7 +168,8 @@ class ActionsRecyclerAdapter(val activity: Activity):
         val intent = Intent(activity, ListActivity::class.java)
         intent.putExtra("intention", ListActivity.ListActivityIntention.PICK.toString())
         intent.putExtra("forGesture", gesture.id) // for which action we choose the app
-        activity.startActivityForResult(intent,
+        activity.startActivityForResult(
+            intent,
             REQUEST_CHOOSE_APP
         )
     }

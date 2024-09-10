@@ -2,7 +2,6 @@ package de.jrpie.android.launcher
 
 import android.app.Activity
 import android.content.res.Resources
-import android.os.Build
 import android.view.Window
 import android.view.WindowManager
 import de.jrpie.android.launcher.preferences.LauncherPreferences
@@ -43,6 +42,7 @@ interface UIObject {
         setOnClicks()
         adjustLayout()
     }
+
     fun modifyTheme(theme: Resources.Theme): Resources.Theme {
         LauncherPreferences.theme().colorTheme().applyToTheme(theme)
         LauncherPreferences.theme().background().applyToTheme(theme)
@@ -52,8 +52,8 @@ interface UIObject {
     }
 
     // fun applyTheme() { }
-    fun setOnClicks() { }
-    fun adjustLayout() { }
+    fun setOnClicks() {}
+    fun adjustLayout() {}
 
     fun isHomeScreen(): Boolean {
         return false

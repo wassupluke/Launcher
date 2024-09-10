@@ -44,18 +44,22 @@ SettingsFragmentActions : Fragment(), UIObject {
     override fun setOnClicks() {
 
         // App management buttons
-        binding!!.settingsActionsButtonViewApps.setOnClickListener{
+        binding!!.settingsActionsButtonViewApps.setOnClickListener {
             val intent = Intent(this.context, ListActivity::class.java)
             intent.putExtra("intention", ListActivity.ListActivityIntention.VIEW.toString())
             startActivity(intent)
         }
-        binding!!.settingsActionsButtonInstallApps.setOnClickListener{
+        binding!!.settingsActionsButtonInstallApps.setOnClickListener {
             try {
                 val intent = Intent(Intent.ACTION_MAIN)
                 intent.addCategory(Intent.CATEGORY_APP_MARKET)
                 startActivity(intent)
             } catch (e: ActivityNotFoundException) {
-                Toast.makeText(context, getString(R.string.settings_apps_toast_store_not_found), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    getString(R.string.settings_apps_toast_store_not_found),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }

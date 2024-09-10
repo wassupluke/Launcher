@@ -13,10 +13,14 @@ fun migrateToNewVersion(activity: Activity) {
     when (LauncherPreferences.internal().versionCode()) {
         // Check versions, make sure transitions between versions go well
 
-        VERSION_CODE -> { /* the version installed and used previously are the same */ }
-        21,22,23 -> {
+        VERSION_CODE -> { /* the version installed and used previously are the same */
+        }
+
+        21, 22, 23 -> {
             // TODO
-        } else -> { /* The version used before was pre- v1.3.0,
+        }
+
+        else -> { /* The version used before was pre- v1.3.0,
                         as version tracking started then */
 
             /*
