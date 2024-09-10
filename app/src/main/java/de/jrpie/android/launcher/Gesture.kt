@@ -2,6 +2,7 @@ package de.jrpie.android.launcher
 
 import android.app.Activity
 import android.content.Context
+import de.jrpie.android.launcher.preferences.LauncherPreferences
 
 /**
  * @param id internal id to serialize the action. Used as a key in shared preferences.

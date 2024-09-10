@@ -3,6 +3,7 @@ package de.jrpie.android.launcher.list
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
@@ -14,7 +15,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
-import de.jrpie.android.launcher.LauncherPreferences
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_UNINSTALL
 import de.jrpie.android.launcher.UIObject
@@ -22,6 +22,7 @@ import de.jrpie.android.launcher.databinding.ListBinding
 import de.jrpie.android.launcher.list.apps.ListFragmentApps
 import de.jrpie.android.launcher.list.other.LauncherAction
 import de.jrpie.android.launcher.list.other.ListFragmentOther
+import de.jrpie.android.launcher.preferences.LauncherPreferences
 
 
 // TODO: Better solution for this intercommunication functionality (used in list-fragments)
@@ -102,10 +103,8 @@ class ListActivity : AppCompatActivity(), UIObject {
         }
     }
 
-    override fun applyTheme() {
-        // list_close.setTextColor(vibrantColor)
-
-        binding.listTabs.setSelectedTabIndicatorColor(LauncherPreferences.theme().vibrant())
+    override fun getTheme(): Resources.Theme {
+        return modifyTheme(super.getTheme())
     }
 
     override fun setOnClicks() {

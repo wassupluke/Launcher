@@ -78,6 +78,7 @@
             android:id="@+id/list_tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:tabIndicatorColor="?attr/colorAccent"
             custom:tabTextColor="?attr/android:textColor" />
 
     </com.google.android.material.appbar.AppBarLayout>

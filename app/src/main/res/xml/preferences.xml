@@ -1,25 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory > <!-- general -->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        app:allowDividerAbove="false" > <!-- general -->
         <Preference
             android:key="@string/settings_general_choose_home_screen_key"
             android:title="@string/settings_general_choose_home_screen"/>
 
     </PreferenceCategory>
     <PreferenceCategory
+        app:allowDividerAbove="false"
         android:title="@string/settings_launcher_section_appearance">
-
         <Preference
             android:key="@string/settings_theme_wallpaper_key"
             android:title="@string/settings_theme_wallpaper"/>
-        <!--<ListPreference
-            android:key="@string/settings_theme_theme_key"
-            android:title="@string/settings_theme_theme"
-        </ListPreference>-->
+        <DropDownPreference
+            android:entries="@array/settings_theme_color_theme_items"
+            android:entryValues="@array/settings_theme_color_theme_values"
+            android:summary="%s"
+            android:defaultValue="DEFAULT"
+            android:key="@string/settings_theme_color_theme_key"
+            android:title="@string/settings_theme_color_theme"/>
+
+        <DropDownPreference
+            android:key="@string/settings_theme_font_key"
+            android:title="@string/settings_theme_font"
+            android:entryValues="@array/settings_theme_font_values"
+            android:entries="@array/settings_theme_font_items"
+            android:summary="%s"
+            android:defaultValue="HACK"/>
+        <DropDownPreference
+            android:key="@string/settings_theme_background_key"
+            android:title="@string/settings_theme_background"
+            android:summary="%s"
+            android:entries="@array/settings_theme_background_items"
+            android:entryValues="@array/settings_theme_background_values"
+            android:defaultValue="BLUR"/>
+        <SwitchPreference
+            android:key="@string/settings_theme_monochrome_icons_key"
+            android:title="@string/settings_theme_monochrome_icons"
+            android:defaultValue="false" />
+
    </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/settings_launcher_section_date_time">
+        android:title="@string/settings_launcher_section_date_time"
+        app:allowDividerAbove="false">
         <SwitchPreference
             android:key="@string/settings_clock_localized_key"
             android:defaultValue="false"
@@ -39,7 +65,8 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/settings_launcher_section_functionality">
+        android:title="@string/settings_launcher_section_functionality"
+        app:allowDividerAbove="false">
 
         <SwitchPreference
             android:key="@string/settings_functionality_search_auto_launch_key"
@@ -61,7 +88,8 @@
 
     </PreferenceCategory>
     <PreferenceCategory
-        android:title="@string/settings_launcher_section_display">
+        android:title="@string/settings_launcher_section_display"
+        app:allowDividerAbove="false">
         <SwitchPreference
             android:key="@string/settings_display_full_screen_key"
             android:title="@string/settings_display_full_screen"/>

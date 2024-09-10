@@ -30,7 +30,8 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <ImageView
         android:id="@+id/settings_actions_row_icon_img"
@@ -53,5 +54,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/settings_actions_row_icon_img"
         app:layout_constraintTop_toTopOf="parent" />
-    <!--android:tint="@color/design_default_color_primary"-->
 </androidx.constraintlayout.widget.ConstraintLayout>

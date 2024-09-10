@@ -2,6 +2,8 @@ package de.jrpie.android.launcher.settings
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.content.res.Resources
 import android.os.Bundle
 import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +14,7 @@ import de.jrpie.android.launcher.databinding.SettingsBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.settings.actions.SettingsFragmentActions
 import de.jrpie.android.launcher.settings.launcher.SettingsFragmentLauncher
 import de.jrpie.android.launcher.settings.meta.SettingsFragmentMeta
@@ -26,6 +29,13 @@ import de.jrpie.android.launcher.settings.meta.SettingsFragmentMeta
  * Settings are closed automatically if the activity goes `onPause` unexpectedly.
  */
 class SettingsActivity: AppCompatActivity(), UIObject {
+
+    private var sharedPreferencesListener =
+        SharedPreferences.OnSharedPreferenceChangeListener { _,prefKey ->
+            if(prefKey?.startsWith("theme.") == true) {
+                recreate()
+            }
+        }
     private lateinit var binding: SettingsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,12 +56,16 @@ class SettingsActivity: AppCompatActivity(), UIObject {
     override fun onStart() {
         super<AppCompatActivity>.onStart()
         super<UIObject>.onStart()
+        LauncherPreferences.getSharedPreferences().registerOnSharedPreferenceChangeListener(sharedPreferencesListener)
     }
 
-    override fun applyTheme() {
-        //settings_system.setTextColor(vibrantColor)
-        //settings_close.setTextColor(vibrantColor)
-        binding.settingsTabs.setSelectedTabIndicatorColor(LauncherPreferences.theme().vibrant())
+    override fun onPause() {
+        LauncherPreferences.getSharedPreferences().unregisterOnSharedPreferenceChangeListener(sharedPreferencesListener)
+        super.onPause()
+    }
+
+    override fun getTheme(): Resources.Theme {
+        return modifyTheme(super.getTheme())
     }
 
     override fun setOnClicks(){

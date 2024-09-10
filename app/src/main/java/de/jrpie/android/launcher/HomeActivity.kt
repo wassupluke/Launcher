@@ -1,18 +1,19 @@
 package de.jrpie.android.launcher
 
 import android.content.Intent
+import android.content.res.Resources
 import android.os.AsyncTask
 import android.os.Bundle
 import android.view.GestureDetector
 import android.view.KeyEvent
 import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.AppLaunchChecker
 import androidx.core.view.GestureDetectorCompat
 import androidx.core.view.isVisible
-import de.jrpie.android.launcher.BuildConfig.VERSION_NAME
 import de.jrpie.android.launcher.databinding.HomeBinding
 import de.jrpie.android.launcher.list.other.LauncherAction
+import de.jrpie.android.launcher.preferences.LauncherPreferences
+import de.jrpie.android.launcher.preferences.migrateToNewVersion
 import de.jrpie.android.launcher.tutorial.TutorialActivity
 import java.text.SimpleDateFormat
 import java.util.*
@@ -118,6 +119,12 @@ class HomeActivity: UIObject, AppCompatActivity(),
                 }
             }
         }
+    }
+
+    override fun getTheme(): Resources.Theme {
+        val mTheme = modifyTheme(super.getTheme())
+            mTheme.applyStyle(R.style.backgroundWallpaper, true)
+        return mTheme
     }
 
     override fun onResume() {
@@ -246,5 +253,9 @@ class HomeActivity: UIObject, AppCompatActivity(),
     override fun onScroll(e1: MotionEvent?, e2: MotionEvent, dX: Float, dY: Float): Boolean { return false }
     override fun onShowPress(event: MotionEvent) {}
     override fun onSingleTapUp(event: MotionEvent): Boolean { return false }
+
+    override fun isHomeScreen(): Boolean {
+        return true
+    }
 
 }

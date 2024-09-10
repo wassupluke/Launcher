@@ -65,7 +65,7 @@
     <string name="settings_launcher_section_appearance">Apariencia</string>
 
     <string name="settings_launcher_section_date_time">Formato de fecha</string>
-    <string-array name="settings_launcher_theme_spinner_items">
+    <string-array name="settings_theme_color_theme_items">
         <item>Normal</item>
         <item>Oscuro</item>
     </string-array>

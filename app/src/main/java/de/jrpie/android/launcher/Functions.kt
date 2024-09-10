@@ -39,6 +39,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Switch
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import de.jrpie.android.launcher.list.ListActivity
 import de.jrpie.android.launcher.list.apps.AppInfo
 import de.jrpie.android.launcher.list.apps.AppsRecyclerAdapter
@@ -359,24 +360,6 @@ fun loadApps(packageManager: PackageManager, context: Context) {
     appsList.addAll(loadList)
 }
 
-fun setWindowFlags(window: Window) {
-    window.setFlags(0, 0) // clear flags
-    // Display notification bar
-    if (LauncherPreferences.display().fullScreen())
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
-    else window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
-
-    // Screen Timeout
-    if (LauncherPreferences.display().screenTimeoutDisabled())
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
-            WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
-        )
-    else window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-}
 
 // Used in Tutorial and Settings `ActivityOnResult`
 fun saveListActivityChoice(context: Context, data: Intent?) {
@@ -395,27 +378,6 @@ fun openSoftKeyboard(context: Context, view: View) {
     // open the soft keyboard
     val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
-}
-
-/* Bitmaps */
-fun setButtonColor(btn: Button, color: Int) {
-    if (Build.VERSION.SDK_INT >= 29)
-        btn.background.colorFilter = BlendModeColorFilter(color, BlendMode.MULTIPLY)
-    else {
-        // tested with API 17 (Android 4.4.2 on S4 mini) -> fails
-        // tested with API 28 (Android 9 on S8) -> necessary
-        btn.background.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
-    }
-    // not setting it in any other case (yet), unable to find a good solution
-}
-
-fun setSwitchColor(sw: Switch, trackColor: Int) {
-    if (Build.VERSION.SDK_INT >= 29) {
-        sw.trackDrawable.colorFilter = BlendModeColorFilter(trackColor, BlendMode.MULTIPLY)
-    }
-    else {
-        sw.trackDrawable.colorFilter = PorterDuffColorFilter(trackColor, PorterDuff.Mode.SRC_ATOP)
-    }
 }
 
 // Taken from: https://stackoverflow.com/a/30340794/12787264

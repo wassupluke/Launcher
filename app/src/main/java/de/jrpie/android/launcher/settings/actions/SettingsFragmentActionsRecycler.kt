@@ -18,6 +18,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import de.jrpie.android.launcher.list.other.LauncherAction
 import de.jrpie.android.launcher.databinding.SettingsActionsRecyclerBinding
+import de.jrpie.android.launcher.preferences.LauncherPreferences
 import java.lang.Exception
 
 /**
@@ -116,12 +117,9 @@ class ActionsRecyclerAdapter(val activity: Activity):
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
         val gesture = gesturesList[i]
-        val vibrantColor = LauncherPreferences.theme().vibrant()
         viewHolder.textView.text = gesture.getLabel(activity)
-        setButtonColor(viewHolder.chooseButton, vibrantColor)
-        if (LauncherPreferences.theme().theme() == "dark") transformGrayscale(
-            viewHolder.img
-        )
+        if (LauncherPreferences.theme().monochromeIcons())
+            transformGrayscale( viewHolder.img )
         updateViewHolder(gesture, viewHolder)
         viewHolder.img.setOnClickListener{ chooseApp(gesture) }
         viewHolder.chooseButton.setOnClickListener{ chooseApp(gesture) }

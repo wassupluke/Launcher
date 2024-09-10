@@ -1,6 +1,7 @@
 package de.jrpie.android.launcher
 
 import android.content.Context
+import de.jrpie.android.launcher.preferences.LauncherPreferences
 
 class Application: android.app.Application() {
     override fun onCreate() {

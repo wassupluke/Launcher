@@ -67,10 +67,11 @@
     <string name="settings_clock_localized">Lokalisiertes Datumsformat verwenden</string>
     <string name="settings_clock_flip_date_time">Datum und Uhrzeit tauschen</string>
     <string name="settings_launcher_section_date_time"><![CDATA[Datum & Uhrzeit]]></string>
-    <string name="settings_theme_theme">Theme</string>
-    <string-array name="settings_launcher_theme_spinner_items">
+    <string name="settings_theme_color_theme">Farbschema</string>
+    <string-array name="settings_theme_color_theme_items">
         <item>Standard</item>
         <item>Dunkel</item>
+        <!--<item>Hell</item>-->
     </string-array>
 
     <string name="settings_theme_wallpaper">Hintergrund auswählen</string>

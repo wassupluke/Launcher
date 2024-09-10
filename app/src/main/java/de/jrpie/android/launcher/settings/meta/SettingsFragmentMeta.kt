@@ -8,12 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import de.jrpie.android.launcher.LauncherPreferences
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.UIObject
 import de.jrpie.android.launcher.openNewTabWindow
-import de.jrpie.android.launcher.resetSettings
-import de.jrpie.android.launcher.setButtonColor
+import de.jrpie.android.launcher.preferences.resetSettings
 import de.jrpie.android.launcher.tutorial.TutorialActivity
 import de.jrpie.android.launcher.databinding.SettingsMetaBinding
 
@@ -54,16 +52,6 @@ class SettingsFragmentMeta : Fragment(), UIObject {
         flags = flags or Intent.FLAG_ACTIVITY_NEW_DOCUMENT
         intent.addFlags(flags)
         return intent
-    }
-
-    override fun applyTheme() {
-        val vibrantColor = LauncherPreferences.theme().vibrant()
-        setButtonColor(binding.settingsMetaButtonViewTutorial, vibrantColor)
-        setButtonColor(binding.settingsMetaButtonResetSettings, vibrantColor)
-        setButtonColor(binding.settingsMetaButtonReportBug, vibrantColor)
-        setButtonColor(binding.settingsMetaButtonContact, vibrantColor)
-        setButtonColor(binding.settingsMetaButtonForkContact, vibrantColor)
-        setButtonColor(binding.settingsMetaButtonPrivacy, vibrantColor)
     }
 
     override fun setOnClicks() {

@@ -44,11 +44,26 @@
           - Settings : Theme
           -
           -->
-        <string name="settings_theme_theme_key" translatable="false">theme</string>
-        <string name="settings_theme_wallpaper_key" translatable="false">settings.theme.wallpaper</string>
-        <string name="settings_theme_dominant_key" translatable="false">custom_dominant</string>
-        <string name="settings_theme_vibrant_key" translatable="false">custom_vibrant</string>
-
+        <string name="settings_theme_color_theme_key" translatable="false">theme.color_theme</string>
+        <string-array name="settings_theme_color_theme_values" translatable="false">
+                <item>DEFAULT</item>
+                <item>DARK</item>
+                <!--<item>light</item>-->
+        </string-array>
+        <string name="settings_theme_background_key" translatable="false">theme.background</string>
+        <string-array name="settings_theme_background_values" translatable="false">
+                <item>TRANSPARENT</item>
+                <item>DIM</item>
+                <item>BLUR</item>
+                <item>SOLID</item>
+        </string-array>
+        <string name="settings_theme_wallpaper_key" translatable="false">theme.wallpaper</string>
+        <string name="settings_theme_font_key" translatable="false">theme.font</string>
+        <string-array name="settings_theme_font_values" translatable="false">
+                <item>HACK</item>
+                <item>SYSTEM_DEFAULT</item>
+        </string-array>
+        <string name="settings_theme_monochrome_icons_key" translatable="false">theme.monochrome_icons</string>
         <!--
           -
           - Settings : Clock

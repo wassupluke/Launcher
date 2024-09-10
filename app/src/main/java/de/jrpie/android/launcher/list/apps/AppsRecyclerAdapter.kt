@@ -12,7 +12,6 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import de.jrpie.android.launcher.LauncherPreferences
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
 import de.jrpie.android.launcher.appsList
@@ -21,6 +20,7 @@ import de.jrpie.android.launcher.launchApp
 import de.jrpie.android.launcher.list.ListActivity
 import de.jrpie.android.launcher.loadApps
 import de.jrpie.android.launcher.openAppSettings
+import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.transformGrayscale
 import de.jrpie.android.launcher.uninstallApp
 import java.util.*
@@ -66,7 +66,7 @@ class AppsRecyclerAdapter(val activity: Activity,
         viewHolder.textView.text = appLabel
         viewHolder.img.setImageDrawable(appIcon)
 
-        if (LauncherPreferences.theme().theme() == "dark") transformGrayscale(
+        if (LauncherPreferences.theme().monochromeIcons()) transformGrayscale(
             viewHolder.img
         )
 

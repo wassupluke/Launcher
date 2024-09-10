@@ -1,42 +1,72 @@
 <resources>
 
-    <!-- Base theme for Launcher
-
-     This does not define the actual style of launcher,
-     as the style / colors etc are dynamically generated.
-
-     This is more like a fallback- theme that may partially be used by older apis.
-
-     -->
+    <!-- Base theme for Launcher -->
     <style name="launcherBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/finnmglasTheme_background_color</item>
         <item name="colorPrimaryDark">@color/finnmglasTheme_background_color</item>
+        <item name="colorAccent">@color/finnmglasTheme_accent_color</item>
         <item name="android:colorBackground">@color/finnmglasTheme_background_color</item>
 
+        <item name="android:textColor">@color/finnmglasTheme_text_color</item>
+        <item name="android:textColorSecondary">?android:textColor</item>
+        <item name="android:textColorPrimary">?android:textColor</item>
+        <item name="android:textColorHint">?android:textColor</item>
+
+        <item name="android:buttonStyle">@style/Widget.AppCompat.Button.Colored</item>
+        <item name="colorButtonNormal">?colorAccent</item>
+
+        <!--<item name="android:popupMenuStyle">@style/PopupMenuCustom</item>-->
+
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowAnimationStyle">@style/WindowFadeTransition</item>
+    </style>
+
+    <style name="colorThemeDark">
+        <item name="colorPrimary">@color/darkTheme_background_color</item>
+        <item name="colorPrimaryDark">@color/darkTheme_background_color</item>
+        <item name="colorAccent">@color/darkTheme_accent_color</item>
+        <item name="android:colorBackground">@color/darkTheme_background_color</item>
+        <item name="android:textColor">@color/darkTheme_text_color</item>
+    </style>
+    <style name="colorThemeDefault">
+        <item name="colorPrimary">@color/finnmglasTheme_background_color</item>
+        <item name="colorPrimaryDark">@color/finnmglasTheme_background_color</item>
+        <item name="colorAccent">@color/finnmglasTheme_accent_color</item>
+        <item name="android:colorBackground">@color/finnmglasTheme_background_color</item>
+        <item name="android:textColor">@color/finnmglasTheme_text_color</item>
+    </style>
+
+    <style name="colorThemeLight">
+        <item name="colorPrimary">@color/lightTheme_background_color</item>
+        <item name="colorPrimaryDark">@color/lightTheme_background_color</item>
+        <item name="colorAccent">@color/lightTheme_accent_color</item>
+        <item name="android:colorBackground">@color/lightTheme_background_color</item>
+        <item name="android:textColor">@color/lightTheme_text_color</item>
+    </style>
+
+
+    <style name="backgroundWallpaper">
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
 
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowShowWallpaper">true</item>
-
-        <item name="colorAccent">#555</item>
-
-        <item name="android:textColor">#ffffff</item>
-        <item name="android:textColorSecondary">@color/finnmglasTheme_text_color</item>
-        <item name="android:textColorPrimary">@color/finnmglasTheme_text_color</item>
-        <item name="android:textColorHint">?android:textColor</item>
-
-        <item name="android:fontFamily">@font/hack</item>
-
-        <item name="android:buttonStyle">@style/Widget.AppCompat.Button.Colored</item>
-        <item name="colorButtonNormal">?colorAccent</item>
-
-        <item name="android:popupMenuStyle">@style/PopupMenuCustom</item>
-
-
-        <item name="android:windowDisablePreview">true</item>
-        <item name="android:windowAnimationStyle">@style/WindowFadeTransition</item>
     </style>
+
+    <style name="backgroundSolid">
+
+    </style>
+
+
+    <style name="fontSystemDefault">
+        <!--<item name="android:textSize">18sp</item>-->
+    </style>
+    <style name="fontHack">
+        <item name="android:fontFamily">@font/hack</item>
+        <!--<item name="android:textSize">18sp</item>-->
+    </style>
+
+
 
 
     <style name="PopupMenuCustom" parent="@android:style/Widget.PopupMenu">

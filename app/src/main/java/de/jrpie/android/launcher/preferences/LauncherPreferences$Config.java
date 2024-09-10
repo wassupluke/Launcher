@@ -1,11 +1,15 @@
-package de.jrpie.android.launcher;
+package de.jrpie.android.launcher.preferences;
 
+import de.jrpie.android.launcher.R;
+import de.jrpie.android.launcher.preferences.theme.Background;
+import de.jrpie.android.launcher.preferences.theme.ColorTheme;
+import de.jrpie.android.launcher.preferences.theme.Font;
 import eu.jonahbauer.android.preference.annotations.Preference;
 import eu.jonahbauer.android.preference.annotations.PreferenceGroup;
 import eu.jonahbauer.android.preference.annotations.Preferences;
 
 @Preferences(
-        name = "de.jrpie.android.launcher.LauncherPreferences",
+        name = "de.jrpie.android.launcher.preferences.LauncherPreferences",
         makeFile = true,
         r = R.class,
         value = {
@@ -21,9 +25,10 @@ import eu.jonahbauer.android.preference.annotations.Preferences;
             }),
             @PreferenceGroup(name = "theme", prefix = "settings_theme_", suffix = "_key", value = {
                 @Preference(name = "wallpaper", type = void.class),
-                @Preference(name = "theme", type = String.class), // TODO: change to enum
-                @Preference(name = "dominant", type = int.class),
-                @Preference(name = "vibrant", type = int.class),
+                @Preference(name = "color_theme", type = ColorTheme.class, defaultValue = "DEFAULT"),
+                @Preference(name = "background", type = Background.class, defaultValue = "BLUR"),
+                @Preference(name = "font", type = Font.class, defaultValue = "HACK"),
+                @Preference(name = "monochrome_icons", type = boolean.class, defaultValue = "false"),
             }),
             @PreferenceGroup(name = "clock", prefix = "settings_clock_", suffix = "_key", value = {
                 @Preference(name = "date_visible", type = boolean.class, defaultValue = "true"),

@@ -63,11 +63,25 @@
     <string name="settings_launcher_section_appearance">Appearance</string>
 
 
-    <string name="settings_theme_theme">Theme</string>
-    <string-array name="settings_launcher_theme_spinner_items">
+    <string name="settings_theme_color_theme">Color theme</string>
+    <string-array name="settings_theme_color_theme_items">
         <item>Default</item>
         <item>Dark</item>
+        <!--<item>Light</item>-->
     </string-array>
+    <string name="settings_theme_background">Background (app list and setting)</string>
+    <string-array name="settings_theme_background_items">
+        <item>Transparent</item>
+        <item>Dim</item>
+        <item>Blur</item>
+        <item>Solid</item>
+    </string-array>
+    <string name="settings_theme_font" translatable="false">Font</string>
+    <string-array name="settings_theme_font_items">
+        <item>Hack</item>
+        <item>System default</item>
+    </string-array>
+    <string name="settings_theme_monochrome_icons">Monochrome app icons</string>
     <string name="settings_theme_dominant">Dominant color</string>
     <string name="settings_theme_vibrant">Vibrant color</string>
 

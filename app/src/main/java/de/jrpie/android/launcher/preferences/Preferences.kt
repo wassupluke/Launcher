@@ -1,9 +1,11 @@
-package de.jrpie.android.launcher
+package de.jrpie.android.launcher.preferences
 
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import de.jrpie.android.launcher.BuildConfig.VERSION_CODE
+import de.jrpie.android.launcher.Gesture
+import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.tutorial.TutorialActivity
 
 
@@ -22,10 +24,10 @@ fun migrateToNewVersion(activity: Activity) {
              * were not stored anywhere. Now they have to be stored:
              * -> we just reset them using newly implemented functions
              */
-            when (LauncherPreferences.theme().theme()) {
+            /*when (LauncherPreferences.theme().colorTheme()) {
                 "finn" -> resetToDefaultTheme(activity)
                 "dark" -> resetToDarkTheme(activity)
-            }
+            } */
             LauncherPreferences.internal().versionCode(VERSION_CODE)
             // show the new tutorial
             activity.startActivity(Intent(activity, TutorialActivity::class.java))
@@ -46,26 +48,6 @@ fun resetSettings(context: Context) {
 
     LauncherPreferences.theme().dominant(dominantColor)
     LauncherPreferences.theme().vibrant(vibrantColor)
-}
-
-fun resetToDefaultTheme(activity: Activity) {
-    val dominantColor = activity.resources.getColor(R.color.finnmglasTheme_background_color)
-    val vibrantColor = activity.resources.getColor(R.color.finnmglasTheme_accent_color)
-
-    LauncherPreferences.theme().dominant(dominantColor)
-    LauncherPreferences.theme().vibrant(vibrantColor)
-
-    activity.recreate()
-}
-
-fun resetToDarkTheme(activity: Activity) {
-    val dominantColor = activity.resources.getColor(R.color.darkTheme_background_color)
-    val vibrantColor = activity.resources.getColor(R.color.darkTheme_accent_color)
-
-    LauncherPreferences.theme().dominant(dominantColor)
-    LauncherPreferences.theme().vibrant(vibrantColor)
-
-    activity.recreate()
 }
 
 

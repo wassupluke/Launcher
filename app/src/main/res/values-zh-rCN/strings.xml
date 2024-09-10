@@ -5,7 +5,7 @@
     <string name="ic_menu_alt">更多选项</string>
     <string name="settings_title">设置</string>
     <string name="settings_launcher_section_appearance">外观</string>
-    <string name="settings_theme_theme">主题</string>
+    <string name="settings_theme_color_theme">主题</string>
     <string name="settings_launcher_section_display">显示</string>
     <string name="list_tab_other">其他</string>
     <string name="settings_gesture_up">上滑</string>

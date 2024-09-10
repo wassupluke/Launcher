@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import de.jrpie.android.launcher.LauncherPreferences
 import de.jrpie.android.launcher.UIObject
 import de.jrpie.android.launcher.databinding.ListAppsBinding
 import de.jrpie.android.launcher.list.ListActivity
 import de.jrpie.android.launcher.list.forGesture
 import de.jrpie.android.launcher.list.intention
 import de.jrpie.android.launcher.openSoftKeyboard
+import de.jrpie.android.launcher.preferences.LauncherPreferences
 
 
 /**
@@ -34,9 +34,6 @@ class ListFragmentApps : Fragment(), UIObject {
     override fun onStart() {
         super<Fragment>.onStart()
         super<UIObject>.onStart()
-    }
-
-    override fun applyTheme() {
     }
 
     override fun setOnClicks() { }

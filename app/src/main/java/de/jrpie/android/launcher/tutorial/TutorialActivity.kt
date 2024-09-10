@@ -8,11 +8,11 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
-import de.jrpie.android.launcher.LauncherPreferences
+import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
 import de.jrpie.android.launcher.UIObject
-import de.jrpie.android.launcher.resetSettings
+import de.jrpie.android.launcher.preferences.resetSettings
 import de.jrpie.android.launcher.saveListActivityChoice
 import de.jrpie.android.launcher.tutorial.tabs.TutorialFragmentConcept
 import de.jrpie.android.launcher.tutorial.tabs.TutorialFragmentFinish

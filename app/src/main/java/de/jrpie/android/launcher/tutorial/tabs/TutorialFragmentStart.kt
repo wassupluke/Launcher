@@ -21,19 +21,12 @@ class TutorialFragmentStart : Fragment(), UIObject {
         savedInstanceState: Bundle?
     ): View {
         binding = TutorialStartBinding.inflate(inflater, container, false)
+        binding.tutorialStartIconRight.blink()
         return binding.root
     }
 
     override fun onStart(){
         super<Fragment>.onStart()
         super<UIObject>.onStart()
-    }
-
-    override fun applyTheme() {
-        val vibrantColor = LauncherPreferences.theme().vibrant()
-
-        binding.tutorialStartIconRight.setTextColor(vibrantColor)
-        binding.tutorialStartIconRight.blink()
-
     }
 }

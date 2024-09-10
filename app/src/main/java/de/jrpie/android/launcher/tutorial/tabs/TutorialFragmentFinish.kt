@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import de.jrpie.android.launcher.*
 import de.jrpie.android.launcher.BuildConfig.VERSION_CODE
 import de.jrpie.android.launcher.databinding.TutorialFinishBinding
+import de.jrpie.android.launcher.preferences.LauncherPreferences
 
 /**
  * The [TutorialFragmentFinish] is a used as a tab in the TutorialActivity.
@@ -29,12 +30,6 @@ class TutorialFragmentFinish : Fragment(), UIObject {
     override fun onStart() {
         super<Fragment>.onStart()
         super<UIObject>.onStart()
-    }
-
-    override fun applyTheme() {
-        val vibrantColor = LauncherPreferences.theme().vibrant()
-        setButtonColor(binding.tutorialFinishButtonStart, vibrantColor)
-        binding.tutorialFinishButtonStart.blink()
     }
 
     override fun setOnClicks() {
