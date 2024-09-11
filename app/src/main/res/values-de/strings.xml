@@ -163,7 +163,7 @@
     <string name="tutorial_setup_text_2">Du kannst deine Einstellungen auch später noch ändern.</string>
 
     <string name="tutorial_finish_title">Los gehts!</string>
-    <string name="tutorial_finish_text">Du bist bereit loszulegen!\n\nIch hoffe diese App ist nützlich für dich!\n\n- Finn (der Entwickler)\n\tund Josia (der einige Änderungen vorgenommen hat und den Fork μLauncher entwickelt.</string>
+    <string name="tutorial_finish_text">Du bist bereit loszulegen!\n\nIch hoffe diese App ist nützlich für dich!\n\n- Finn (der Entwickler)\n\tund Josia (der einige Änderungen vorgenommen hat und den Fork μLauncher entwickelt)</string>
     <string name="tutorial_finish_button">Starten</string>
 
     <string name="settings">Einstellungen</string>
