@@ -1,6 +1,7 @@
 package de.jrpie.android.launcher
 
 import android.app.Activity
+import android.content.pm.ActivityInfo
 import android.content.res.Resources
 import android.os.Build
 import android.view.Window
@@ -38,7 +39,14 @@ fun setWindowFlags(window: Window, homeScreen: Boolean) {
 
 interface UIObject {
     fun onStart() {
-        if (this is Activity) setWindowFlags(window, isHomeScreen())
+        if (this is Activity) {
+            setWindowFlags(window, isHomeScreen())
+            requestedOrientation = if (!LauncherPreferences.display().rotateScreen()) {
+                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            } else {
+                ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+            }
+        }
 
         setOnClicks()
         adjustLayout()
