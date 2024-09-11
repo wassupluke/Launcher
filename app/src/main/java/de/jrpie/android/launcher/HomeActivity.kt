@@ -1,6 +1,7 @@
 package de.jrpie.android.launcher
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Resources
 import android.os.AsyncTask
 import android.os.Bundle
@@ -42,6 +43,13 @@ class HomeActivity: UIObject, AppCompatActivity(),
 
     private lateinit var binding: HomeBinding
 
+    private var sharedPreferencesListener =
+        SharedPreferences.OnSharedPreferenceChangeListener { _, prefKey ->
+            if(prefKey?.startsWith("clock.") == true ||
+                prefKey?.startsWith("display.") == true) {
+                recreate()
+            }
+        }
 
     private var bufferedPointerCount = 1 // how many fingers on screen
     private var pointerBufferTimer = Timer()
@@ -71,6 +79,7 @@ class HomeActivity: UIObject, AppCompatActivity(),
         // Initialise layout
         binding = HomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
     }
 
     override fun onStart(){
@@ -80,6 +89,8 @@ class HomeActivity: UIObject, AppCompatActivity(),
         mDetector.setOnDoubleTapListener(this)
 
         super<UIObject>.onStart()
+
+        LauncherPreferences.getSharedPreferences().registerOnSharedPreferenceChangeListener(sharedPreferencesListener)
     }
 
     private fun updateClock() {
@@ -127,6 +138,7 @@ class HomeActivity: UIObject, AppCompatActivity(),
     override fun getTheme(): Resources.Theme {
         val mTheme = modifyTheme(super.getTheme())
         mTheme.applyStyle(R.style.backgroundWallpaper, true)
+        LauncherPreferences.clock().font().applyToTheme(mTheme)
         return mTheme
     }
 
@@ -138,7 +150,11 @@ class HomeActivity: UIObject, AppCompatActivity(),
     override fun onPause() {
         super.onPause()
         clockTimer.cancel()
+    }
 
+    override fun onDestroy() {
+        LauncherPreferences.getSharedPreferences().unregisterOnSharedPreferenceChangeListener(sharedPreferencesListener)
+        super.onDestroy()
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {

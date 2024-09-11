@@ -65,6 +65,18 @@
         <item name="android:fontFamily">@font/hack</item>
         <!--<item name="android:textSize">18sp</item>-->
     </style>
+    <style name="fontMonospace">
+        <item name="android:fontFamily">monospace</item>
+    </style>
+    <style name="fontSerifMonospace">
+        <item name="android:fontFamily">serif-monospace</item>
+    </style>
+    <style name="fontSansSerif">
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+    <style name="fontSerif">
+        <item name="android:fontFamily">serif</item>
+    </style>
 
 
 

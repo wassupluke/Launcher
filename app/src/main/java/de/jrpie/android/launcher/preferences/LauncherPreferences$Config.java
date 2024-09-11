@@ -31,6 +31,7 @@ import eu.jonahbauer.android.preference.annotations.Preferences;
                 @Preference(name = "monochrome_icons", type = boolean.class, defaultValue = "false"),
             }),
             @PreferenceGroup(name = "clock", prefix = "settings_clock_", suffix = "_key", value = {
+                @Preference(name = "font", type = Font.class, defaultValue = "HACK"),
                 @Preference(name = "date_visible", type = boolean.class, defaultValue = "true"),
                 @Preference(name = "time_visible", type = boolean.class, defaultValue = "true"),
                 @Preference(name = "flip_date_time", type = boolean.class, defaultValue = "false"),

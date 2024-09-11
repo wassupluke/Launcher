@@ -32,7 +32,8 @@ class SettingsActivity: AppCompatActivity(), UIObject {
 
     private var sharedPreferencesListener =
         SharedPreferences.OnSharedPreferenceChangeListener { _,prefKey ->
-            if(prefKey?.startsWith("theme.") == true) {
+            if(prefKey?.startsWith("theme.") == true ||
+                prefKey?.startsWith("display.") == true) {
                 recreate()
             }
         }
@@ -49,6 +50,7 @@ class SettingsActivity: AppCompatActivity(), UIObject {
         val sectionsPagerAdapter = SettingsSectionsPagerAdapter(this, supportFragmentManager)
         val viewPager: ViewPager = findViewById(R.id.settings_viewpager)
         viewPager.adapter = sectionsPagerAdapter
+
         val tabs: TabLayout = findViewById(R.id.settings_tabs)
         tabs.setupWithViewPager(viewPager)
     }
