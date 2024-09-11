@@ -20,7 +20,7 @@ import de.jrpie.android.launcher.list.forGesture
  * It lists `other` things to be launched that are not really represented by a URI,
  * rather by Launcher- internal conventions.
  */
-class OtherRecyclerAdapter(val activity: Activity) :
+class OtherRecyclerAdapter(val activity: Activity):
     RecyclerView.Adapter<OtherRecyclerAdapter.ViewHolder>() {
 
     private val othersList: Array<LauncherAction> = LauncherAction.values()
@@ -38,9 +38,7 @@ class OtherRecyclerAdapter(val activity: Activity) :
             forGesture?.let { returnChoiceIntent(it, content.id) }
         }
 
-        init {
-            itemView.setOnClickListener(this)
-        }
+        init { itemView.setOnClickListener(this) }
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
@@ -51,9 +49,7 @@ class OtherRecyclerAdapter(val activity: Activity) :
         viewHolder.iconView.setImageResource(icon)
     }
 
-    override fun getItemCount(): Int {
-        return othersList.size
-    }
+    override fun getItemCount(): Int { return othersList.size }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)

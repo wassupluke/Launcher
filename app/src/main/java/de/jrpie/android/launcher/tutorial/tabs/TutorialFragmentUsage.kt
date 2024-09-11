@@ -22,7 +22,7 @@ class TutorialFragmentUsage : Fragment(), UIObject {
         return inflater.inflate(R.layout.tutorial_usage, container, false)
     }
 
-    override fun onStart() {
+    override fun onStart(){
         super<Fragment>.onStart()
         super<UIObject>.onStart()
     }

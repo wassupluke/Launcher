@@ -10,10 +10,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.UIObject
-import de.jrpie.android.launcher.databinding.SettingsMetaBinding
 import de.jrpie.android.launcher.openNewTabWindow
-import de.jrpie.android.launcher.preferences.resetSettings
 import de.jrpie.android.launcher.tutorial.TutorialActivity
+import de.jrpie.android.launcher.databinding.SettingsMetaBinding
+import de.jrpie.android.launcher.preferences.resetPreferences
 
 /**
  * The [SettingsFragmentMeta] is a used as a tab in the SettingsActivity.
@@ -65,10 +65,9 @@ class SettingsFragmentMeta : Fragment(), UIObject {
             AlertDialog.Builder(this.requireContext(), R.style.AlertDialogCustom)
                 .setTitle(getString(R.string.settings_meta_reset))
                 .setMessage(getString(R.string.settings_meta_reset_confirm))
-                .setPositiveButton(
-                    android.R.string.ok
+                .setPositiveButton(android.R.string.ok
                 ) { _, _ ->
-                    resetSettings(this.requireContext())
+                    resetPreferences(this.requireContext())
                     requireActivity().finish()
                 }
                 .setNegativeButton(android.R.string.cancel, null)
@@ -84,6 +83,7 @@ class SettingsFragmentMeta : Fragment(), UIObject {
                 requireContext()
             )
         }
+
 
 
         // contact developer

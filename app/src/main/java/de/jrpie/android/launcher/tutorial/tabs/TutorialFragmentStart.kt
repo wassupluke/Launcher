@@ -1,12 +1,11 @@
 package de.jrpie.android.launcher.tutorial.tabs
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import de.jrpie.android.launcher.UIObject
-import de.jrpie.android.launcher.blink
+import de.jrpie.android.launcher.*
 import de.jrpie.android.launcher.databinding.TutorialStartBinding
 
 /**
@@ -26,7 +25,7 @@ class TutorialFragmentStart : Fragment(), UIObject {
         return binding.root
     }
 
-    override fun onStart() {
+    override fun onStart(){
         super<Fragment>.onStart()
         super<UIObject>.onStart()
     }

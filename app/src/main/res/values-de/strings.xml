@@ -80,7 +80,7 @@
     <string name="settings_launcher_section_display">Bildschirm</string>
 
     <string name="settings_display_screen_timeout_disabled">Bildschirm nicht ausschalten</string>
-    <string name="settings_launcher_full_screen">Vollbild</string>
+    <string name="settings_display_full_screen">Vollbild</string>
 
     <string name="settings_launcher_section_functionality">Funktionen</string>
 
@@ -110,7 +110,6 @@
     <string name="settings_meta_discord">Unserem Discord beitreten</string>
 
     <string name="settings_meta_contact">Entwickler kontaktieren</string>
-    <string name="settings_meta_contact_url">https://www.finnmglas.com/de/kontakt/</string>
     <string name="settings_meta_fork_contact">Entwickler des Fork kontaktieren</string>
 
     <string name="settings_meta_privacy">Datenschutzerklärung</string>

@@ -34,12 +34,10 @@ import kotlin.text.Regex.Companion.escapeReplacement
  * @param intention - why the list is displayed ("view", "pick")
  * @param forGesture - the action which an app is chosen for (when the intention is "pick")
  */
-class AppsRecyclerAdapter(
-    val activity: Activity,
-    private val intention: ListActivity.ListActivityIntention
-    = ListActivity.ListActivityIntention.VIEW,
-    private val forGesture: String? = ""
-) :
+class AppsRecyclerAdapter(val activity: Activity,
+                          private val intention: ListActivity.ListActivityIntention
+                            = ListActivity.ListActivityIntention.VIEW,
+                          private val forGesture: String? = ""):
     RecyclerView.Adapter<AppsRecyclerAdapter.ViewHolder>() {
 
     private val appsListDisplayed: MutableList<AppInfo>
@@ -55,9 +53,7 @@ class AppsRecyclerAdapter(
             selectItem(adapterPosition, rect)
         }
 
-        init {
-            itemView.setOnClickListener(this)
-        }
+        init { itemView.setOnClickListener(this) }
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
@@ -76,35 +72,16 @@ class AppsRecyclerAdapter(
 
         // decide when to show the options popup menu about
         if (intention == ListActivity.ListActivityIntention.VIEW) {
-            viewHolder.textView.setOnLongClickListener {
-                showOptionsPopup(
-                    viewHolder,
-                    appPackageName,
-                    appUser,
-                    isSystemApp
-                )
-            }
-            viewHolder.img.setOnLongClickListener {
-                showOptionsPopup(
-                    viewHolder,
-                    appPackageName,
-                    appUser,
-                    isSystemApp
-                )
-            }
+            viewHolder.textView.setOnLongClickListener{ showOptionsPopup(viewHolder, appPackageName, appUser, isSystemApp) }
+            viewHolder.img.setOnLongClickListener{ showOptionsPopup(viewHolder, appPackageName, appUser, isSystemApp) }
             // ensure onClicks are actually caught
-            viewHolder.textView.setOnClickListener { viewHolder.onClick(viewHolder.textView) }
-            viewHolder.img.setOnClickListener { viewHolder.onClick(viewHolder.img) }
+            viewHolder.textView.setOnClickListener{ viewHolder.onClick(viewHolder.textView) }
+            viewHolder.img.setOnClickListener{ viewHolder.onClick(viewHolder.img) }
         }
     }
 
     @Suppress("SameReturnValue")
-    private fun showOptionsPopup(
-        viewHolder: ViewHolder,
-        appPackageName: String,
-        user: Int?,
-        isSystemApp: Boolean
-    ): Boolean {
+    private fun showOptionsPopup(viewHolder: ViewHolder, appPackageName: String, user: Int?, isSystemApp: Boolean): Boolean {
         //create the popup menu
 
         val popup = PopupMenu(activity, viewHolder.img)
@@ -120,12 +97,10 @@ class AppsRecyclerAdapter(
                     uninstallApp(appPackageName, user, activity)
                     true
                 }
-
                 R.id.app_menu_info -> {
                     openAppSettings(appPackageName, user, activity)
                     true
                 }
-
                 else -> false
             }
         }
@@ -134,9 +109,7 @@ class AppsRecyclerAdapter(
         return true
     }
 
-    override fun getItemCount(): Int {
-        return appsListDisplayed.size
-    }
+    override fun getItemCount(): Int { return appsListDisplayed.size }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -158,20 +131,19 @@ class AppsRecyclerAdapter(
     }
 
     fun selectItem(pos: Int, rect: Rect = Rect()) {
-        if (pos >= appsListDisplayed.size) {
+        if(pos >= appsListDisplayed.size) {
             return
         }
         val appPackageName = appsListDisplayed[pos].packageName.toString()
         val appUser = appsListDisplayed[pos].user
-        when (intention) {
+        when (intention){
             ListActivity.ListActivityIntention.VIEW -> {
                 launchApp(appPackageName, appUser, activity, rect)
             }
-
             ListActivity.ListActivityIntention.PICK -> {
                 val returnIntent = Intent()
                 returnIntent.putExtra("value", appPackageName)
-                appUser?.let { returnIntent.putExtra("user", it) }
+                appUser?.let{ returnIntent.putExtra("user", it) }
                 returnIntent.putExtra("forGesture", forGesture)
                 activity.setResult(REQUEST_CHOOSE_APP, returnIntent)
                 activity.finish()
@@ -188,12 +160,12 @@ class AppsRecyclerAdapter(
             .lowercase(Locale.ROOT)
             .toCharArray()
             .distinct()
-            .filter { c -> !((c in 'a'..'z') || (c in '0'..'9')) }
-            .map { c -> escapeReplacement(c.toString()) }
-            .fold("") { x, y -> x + y }
+            .filter { c -> ! ((c in 'a'..'z') || (c in '0'..'9')) }
+            .map { c -> escapeReplacement(c.toString())}
+            .fold("") { x,y -> x+y }
         var disallowedCharsRegex = "[^a-z0-9$allowedSpecialCharacters]".toRegex()
 
-        fun normalize(text: String): String {
+        fun normalize(text: String): String{
             return text.lowercase(Locale.ROOT).replace(disallowedCharsRegex, "")
         }
         appsListDisplayed.clear()
@@ -207,7 +179,7 @@ class AppsRecyclerAdapter(
 
                 if (itemLabel.startsWith(normalizedText)) {
                     appsListDisplayed.add(item)
-                } else if (itemLabel.contains(normalizedText)) {
+                }else if(itemLabel.contains(normalizedText)){
                     appsSecondary.add(item)
                 }
             }
@@ -215,13 +187,11 @@ class AppsRecyclerAdapter(
         }
 
         if (appsListDisplayed.size == 1 && intention == ListActivity.ListActivityIntention.VIEW
-            && LauncherPreferences.functionality().searchAutoLaunch()
-        ) {
+            && LauncherPreferences.functionality().searchAutoLaunch()) {
             val info = appsListDisplayed[0]
             launch(info.packageName.toString(), info.user, activity)
 
-            val inputMethodManager =
-                activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+            val inputMethodManager = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(View(activity).windowToken, 0)
         }
 

@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
-import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.preferences.LauncherPreferences
+import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.setDefaultHomeScreen
 
 
@@ -17,13 +17,9 @@ import de.jrpie.android.launcher.setDefaultHomeScreen
 class SettingsFragmentLauncher : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        preferenceManager.sharedPreferencesName = getString(R.string.preference_file_key)
-        preferenceManager.sharedPreferencesMode = Context.MODE_PRIVATE
         setPreferencesFromResource(R.xml.preferences, rootKey)
 
-        val selectWallpaper = findPreference<androidx.preference.Preference>(
-            LauncherPreferences.theme().keys().wallpaper()
-        )
+        val selectWallpaper = findPreference<androidx.preference.Preference>(LauncherPreferences.theme().keys().wallpaper())
         selectWallpaper?.setOnPreferenceClickListener {
             // https://github.com/LineageOS/android_packages_apps_Trebuchet/blob/6caab89b21b2b91f0a439e1fd8c4510dcb255819/src/com/android/launcher3/views/OptionsPopupView.java#L271
             val intent = Intent(Intent.ACTION_SET_WALLPAPER)
@@ -32,9 +28,7 @@ class SettingsFragmentLauncher : PreferenceFragmentCompat() {
             startActivity(intent)
             true
         }
-        val chooseHomeScreen = findPreference<androidx.preference.Preference>(
-            LauncherPreferences.general().keys().chooseHomeScreen()
-        )
+        val chooseHomeScreen = findPreference<androidx.preference.Preference>(LauncherPreferences.general().keys().chooseHomeScreen())
         chooseHomeScreen?.setOnPreferenceClickListener {
             setDefaultHomeScreen(requireContext(), checkDefault = false)
             true

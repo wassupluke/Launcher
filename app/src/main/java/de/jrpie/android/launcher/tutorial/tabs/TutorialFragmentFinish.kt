@@ -1,15 +1,14 @@
 package de.jrpie.android.launcher.tutorial.tabs
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import de.jrpie.android.launcher.*
 import de.jrpie.android.launcher.BuildConfig.VERSION_CODE
-import de.jrpie.android.launcher.UIObject
 import de.jrpie.android.launcher.databinding.TutorialFinishBinding
 import de.jrpie.android.launcher.preferences.LauncherPreferences
-import de.jrpie.android.launcher.setDefaultHomeScreen
 
 /**
  * The [TutorialFragmentFinish] is a used as a tab in the TutorialActivity.
@@ -35,11 +34,11 @@ class TutorialFragmentFinish : Fragment(), UIObject {
 
     override fun setOnClicks() {
         super.setOnClicks()
-        binding.tutorialFinishButtonStart.setOnClickListener { finishTutorial() }
+        binding.tutorialFinishButtonStart.setOnClickListener{ finishTutorial() }
     }
 
     private fun finishTutorial() {
-        if (!LauncherPreferences.internal().started()) {
+        if(!LauncherPreferences.internal().started()) {
             LauncherPreferences.internal().started(true)
             LauncherPreferences.internal().startedTime(System.currentTimeMillis() / 1000L)
             LauncherPreferences.internal().versionCode(VERSION_CODE)

@@ -44,7 +44,6 @@ class ListActivity : AppCompatActivity(), UIObject {
         VIEW(R.string.list_title_view), /* view list of apps */
         PICK(R.string.list_title_pick)  /* choose app or action to associate to a gesture */
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -67,8 +66,7 @@ class ListActivity : AppCompatActivity(), UIObject {
                     binding.listContainer.context.resources.displayMetrics.heightPixels
                 val diff = height - r.bottom
                 if (diff != 0 &&
-                    LauncherPreferences.display().fullScreen()
-                ) {
+                    LauncherPreferences.display().fullScreen()) {
                     if (binding.listContainer.paddingBottom !== diff) {
                         binding.listContainer.setPadding(0, 0, 0, diff)
                     }
@@ -82,7 +80,7 @@ class ListActivity : AppCompatActivity(), UIObject {
 
     }
 
-    override fun onStart() {
+    override fun onStart(){
         super<AppCompatActivity>.onStart()
         super<UIObject>.onStart()
     }
@@ -148,11 +146,11 @@ private val TAB_TITLES = arrayOf(
  * The [ListSectionsPagerAdapter] returns the fragment,
  * which corresponds to the selected tab in [ListActivity].
  */
-class ListSectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
-    FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class ListSectionsPagerAdapter(private val context: Context, fm: FragmentManager)
+    : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     override fun getItem(position: Int): Fragment {
-        return when (position) {
+        return when (position){
             0 -> ListFragmentApps()
             1 -> ListFragmentOther()
             else -> Fragment()

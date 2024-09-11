@@ -1,16 +1,14 @@
 package de.jrpie.android.launcher
 
 import android.content.Context
+import androidx.preference.PreferenceManager
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 
-class Application : android.app.Application() {
+class Application: android.app.Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val preferences = getSharedPreferences(
-            this.getString(R.string.preference_file_key),
-            Context.MODE_PRIVATE
-        )
+        val preferences = PreferenceManager.getDefaultSharedPreferences(this)
         LauncherPreferences.init(preferences, this.resources)
     }
 }

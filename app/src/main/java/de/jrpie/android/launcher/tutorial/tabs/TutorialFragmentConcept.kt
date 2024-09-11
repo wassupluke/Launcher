@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import de.jrpie.android.launcher.BuildConfig
 import de.jrpie.android.launcher.UIObject
 import de.jrpie.android.launcher.databinding.TutorialConceptBinding
-
 /**
  * The [TutorialFragmentConcept] is a used as a tab in the TutorialActivity.
  *
@@ -26,7 +25,7 @@ class TutorialFragmentConcept : Fragment(), UIObject {
         return binding.root
     }
 
-    override fun onStart() {
+    override fun onStart(){
         super<Fragment>.onStart()
         super<UIObject>.onStart()
     }

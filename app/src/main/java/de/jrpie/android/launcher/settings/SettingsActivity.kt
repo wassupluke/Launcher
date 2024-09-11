@@ -7,17 +7,14 @@ import android.content.res.Resources
 import android.os.Bundle
 import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
+import de.jrpie.android.launcher.*
+import com.google.android.material.tabs.TabLayout
+import de.jrpie.android.launcher.databinding.SettingsBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.viewpager.widget.ViewPager
-import com.google.android.material.tabs.TabLayout
-import de.jrpie.android.launcher.R
-import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
-import de.jrpie.android.launcher.UIObject
-import de.jrpie.android.launcher.databinding.SettingsBinding
 import de.jrpie.android.launcher.preferences.LauncherPreferences
-import de.jrpie.android.launcher.saveListActivityChoice
 import de.jrpie.android.launcher.settings.actions.SettingsFragmentActions
 import de.jrpie.android.launcher.settings.launcher.SettingsFragmentLauncher
 import de.jrpie.android.launcher.settings.meta.SettingsFragmentMeta
@@ -31,11 +28,11 @@ import de.jrpie.android.launcher.settings.meta.SettingsFragmentMeta
  *
  * Settings are closed automatically if the activity goes `onPause` unexpectedly.
  */
-class SettingsActivity : AppCompatActivity(), UIObject {
+class SettingsActivity: AppCompatActivity(), UIObject {
 
     private var sharedPreferencesListener =
-        SharedPreferences.OnSharedPreferenceChangeListener { _, prefKey ->
-            if (prefKey?.startsWith("theme.") == true) {
+        SharedPreferences.OnSharedPreferenceChangeListener { _,prefKey ->
+            if(prefKey?.startsWith("theme.") == true) {
                 recreate()
             }
         }
@@ -59,13 +56,11 @@ class SettingsActivity : AppCompatActivity(), UIObject {
     override fun onStart() {
         super<AppCompatActivity>.onStart()
         super<UIObject>.onStart()
-        LauncherPreferences.getSharedPreferences()
-            .registerOnSharedPreferenceChangeListener(sharedPreferencesListener)
+        LauncherPreferences.getSharedPreferences().registerOnSharedPreferenceChangeListener(sharedPreferencesListener)
     }
 
     override fun onPause() {
-        LauncherPreferences.getSharedPreferences()
-            .unregisterOnSharedPreferenceChangeListener(sharedPreferencesListener)
+        LauncherPreferences.getSharedPreferences().unregisterOnSharedPreferenceChangeListener(sharedPreferencesListener)
         super.onPause()
     }
 
@@ -73,7 +68,7 @@ class SettingsActivity : AppCompatActivity(), UIObject {
         return modifyTheme(super.getTheme())
     }
 
-    override fun setOnClicks() {
+    override fun setOnClicks(){
         // As older APIs somehow do not recognize the xml defined onClick
         binding.settingsClose.setOnClickListener { finish() }
         // open device settings (see https://stackoverflow.com/a/62092663/12787264)
@@ -96,11 +91,11 @@ private val TAB_TITLES = arrayOf(
     R.string.settings_tab_meta
 )
 
-class SettingsSectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
-    FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class SettingsSectionsPagerAdapter(private val context: Context, fm: FragmentManager)
+    : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     override fun getItem(position: Int): Fragment {
-        return when (position) {
+        return when (position){
             0 -> SettingsFragmentActions()
             1 -> SettingsFragmentLauncher()
             2 -> SettingsFragmentMeta()
@@ -112,7 +107,5 @@ class SettingsSectionsPagerAdapter(private val context: Context, fm: FragmentMan
         return context.resources.getString(TAB_TITLES[position])
     }
 
-    override fun getCount(): Int {
-        return 3
-    }
+    override fun getCount(): Int { return 3 }
 }

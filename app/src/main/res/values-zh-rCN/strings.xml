@@ -44,7 +44,7 @@
     <string name="settings_theme_wallpaper">选择一个壁纸</string>
     <string name="settings_launcher_change_wallpaper">换壁纸</string>
     <string name="settings_display_screen_timeout_disabled">保持屏幕常亮</string>
-    <string name="settings_launcher_full_screen">使用全屏</string>
+    <string name="settings_display_full_screen">使用全屏</string>
     <string name="settings_launcher_section_functionality">功能</string>
     <string name="settings_enabled_gestures_edge_swipe">边缘滑动动作</string>
     <string name="settings_functionality_auto_launch">零点击启动唯一搜索结果</string>
@@ -59,7 +59,6 @@
     <string name="settings_meta_fork_contact">联系该 fork 版本的作者</string>
     <string name="settings_meta_privacy">隐私政策</string>
     <string name="settings_meta_contact">联系原作者</string>
-    <string name="settings_meta_contact_url">https://www.finnmglas.com/contact/</string>
     <string name="settings_meta_discord">加入 Discord！</string>
     <string name="list_title_view">全部应用</string>
     <string name="list_title_pick">选择应用</string>
