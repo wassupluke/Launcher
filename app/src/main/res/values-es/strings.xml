@@ -1,6 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-	<!-- translation: things i'm not sure about:
+    <!-- translation: things i'm not sure about:
       -   translating the date formats
       -   adequate length
       -   Meta?
@@ -16,20 +16,16 @@
       -->
     <string name="alert_cant_open_title">No se pudo abrir la aplicación</string>
     <string name="alert_cant_open_message">¿Desea cambiar la configuración?</string>
-
     <string name="toast_cant_open_message">Abra la configuración para elegir una aplicación para esta acción</string>
-
     <!--
       -
       - Settings
       -
       -->
     <string name="settings_title">Configuración</string>
-
     <string name="settings_tab_app">Aplicaciones</string>
     <string name="settings_tab_launcher">Launcher</string>
     <string name="settings_tab_meta">Meta</string>
-
     <!--
       -
       - Settings : Apps
@@ -49,43 +45,32 @@
     <string name="settings_gesture_long_click">Click Largo</string>
     <string name="settings_gesture_date">Toca la fecha</string>
     <string name="settings_gesture_time">Toca el reloj</string>
-
     <string name="settings_apps_choose">Elegir Aplicación</string>
-
     <string name="settings_apps_view_all">Todas las aplicaciones</string>
-
     <string name="settings_apps_install">Instalar aplicaciones</string>
     <string name="settings_apps_toast_store_not_found">No se encontró la Store</string>
-
     <!--
       -
       - Settings : Launcher
       -
       -->
     <string name="settings_launcher_section_appearance">Apariencia</string>
-
     <string name="settings_launcher_section_date_time">Formato de fecha</string>
     <string-array name="settings_theme_color_theme_items">
         <item>Normal</item>
         <item>Oscuro</item>
     </string-array>
-
     <string name="settings_theme_wallpaper">Seleccionar fondo de pantalla</string>
     <string name="settings_launcher_change_wallpaper">Cambiar fondo de pantalla</string>
-
     <string name="settings_launcher_section_display">Pantalla</string>
-
     <string name="settings_display_screen_timeout_disabled">Mantener encendida</string>
     <string name="settings_display_full_screen">Pantalla completa</string>
 
     <string name="settings_launcher_section_functionality">Funciones</string>
-
     <string name="settings_enabled_gestures_double_swipe">Deslizar con dos dedos</string>
     <string name="settings_functionality_auto_launch">Auto-lanzar búsquedas</string>
     <string name="settings_functionality_auto_keyboard">Abrir teclado en búsqueda</string>
-
     <string name="settings_launcher_sensitivity">Sensibilidad</string>
-
     <!--
       -
       - Settings : Meta
@@ -94,20 +79,14 @@
     <string name="settings_general_choose_home_screen">Seleccionar Launcher</string>
     <string name="settings_meta_cant_select_launcher">Información de la aplicación</string>
     <string name="settings_meta_cant_select_launcher_msg">Su dispositivo no posee esta caracrerística. Desea cambiar los detalles de la aplicación?</string>
-
     <string name="settings_meta_show_tutorial">Ver tutorial de Launcher</string>
-
     <string name="settings_meta_reset">Configuración por defecto</string>
     <string name="settings_meta_reset_confirm">Todas sus preferencias se eliminarán. Desea continuar?</string>
-
     <string name="settings_meta_report_bug">Reportar un error</string>
-
     <string name="settings_meta_contact">Contactar al desarrollador</string>
     <string name="settings_meta_fork_contact">Contact the developer of the fork (desgraciadamente no habla español)</string>
-
     <string name="settings_meta_privacy">Política de privacidad</string>
     <string name="settings_meta_discord">Unete a nuestro discord!</string>
-
     <!--
       -
       - List (Launchers app drawer)
@@ -115,18 +94,13 @@
       -->
     <string name="list_title_view">Aplicaciones</string>
     <string name="list_title_pick">Seleccionar App</string>
-
     <string name="list_tab_app">Apps</string>
     <string name="list_tab_other">Otros</string>
-
     <string name="list_app_delete">Desinstalar</string>
     <string name="list_app_info">Información</string>
-
     <string name="list_removed">Se eliminó la aplicación</string>
     <string name="list_not_removed">No se pudo eliminar la aplicación</string>
-
     <string name="list_apps_search_hint">Buscar Aplicaciones</string>
-
     <string name="list_other_settings">Configuración de Launcher</string>
     <string name="list_other_list">Aplicaciones</string>
     <string name="list_other_volume_up">Música: Subir</string>
@@ -134,7 +108,6 @@
     <string name="list_other_track_next">Música: Siguiente</string>
     <string name="list_other_track_previous">Música: Anterior</string>
     <string name="list_other_nop">Nada</string>
-
     <!--
       -
       - Tutorial
@@ -142,25 +115,18 @@
       -->
     <string name="tutorial_title">Tutorial</string>
     <string name="tutorial_start_text">Tómate unos segundos para aprender a usar este launcher</string>
-
     <string name="tutorial_concept_title">Concepto</string>
     <string name="tutorial_concept_text">Launcher está diseñado para ser minimalista, eficiente y libre de distracciones.\n\nEs gratis y libre de anuncios y servicios de rastreo.</string>
     <string name="tutorial_concept_text_2">La aplicación es de código abierto (licencia MIT) y está disponible en GitHub!\n\nNo olvides echarle un vistazo al repositorio!</string>
-
     <string name="tutorial_usage_title">Uso</string>
     <string name="tutorial_usage_text">Tu pantalla de inicio contiene la fecha y hora local. Sin distracciones.</string>
     <string name="tutorial_usage_text_2">Puedes iniciar tus aplicaciones con solo presionar o deslizar una vez. Elige algunas en la siguiente pantalla.</string>
-
     <string name="tutorial_setup_title">Puesta a punto</string>
     <string name="tutorial_setup_text">Elegimos algunas aplicaciones por defecto para ti, si lo deseas puedes cambiarlas ahora.</string>
     <string name="tutorial_setup_text_2">También puedes cambiar tu selección más tarde.</string>
-
     <string name="tutorial_finish_title">Vamos!</string>
     <string name="tutorial_finish_text">Estás listo para iniciar!\n\n Esperamos que esto te sea de gran ayuda!\n\n- Finn M Glas\n(el desarrollador)</string>
     <string name="tutorial_finish_button">Iniciar</string>
-
-
     <string name="settings">Configuración</string>
     <string name="ic_menu_alt">Más opciones</string>
-
 </resources>
