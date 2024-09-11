@@ -100,7 +100,16 @@ class HomeActivity: UIObject, AppCompatActivity(),
         val timeVisible = LauncherPreferences.clock().timeVisible()
 
         var dateFMT = "yyyy-MM-dd"
-        var timeFMT = "HH:mm:ss"
+        var timeFMT = "HH:mm"
+        var period = 100L
+        if (LauncherPreferences.clock().showSeconds()) {
+            timeFMT += ":ss"
+        }
+        /*
+         I thought about adding an option to show microseconds as well ( timeFMT += ".SSS" ).
+         However setting period ot 1L (or even 10L) causes high CPU load,
+         so that doesn't seem to be a good idea.
+         */
         if (LauncherPreferences.clock().localized()) {
             dateFMT = android.text.format.DateFormat.getBestDateTimePattern(locale, dateFMT)
             timeFMT = android.text.format.DateFormat.getBestDateTimePattern(locale, timeFMT)
@@ -119,7 +128,7 @@ class HomeActivity: UIObject, AppCompatActivity(),
         binding.homeUpperView.isVisible = upperVisible
         binding.homeLowerView.isVisible = lowerVisible
 
-        clockTimer = fixedRateTimer("clockTimer", true, 0L, 100) {
+        clockTimer = fixedRateTimer("clockTimer", true, 0L, period) {
             this@HomeActivity.runOnUiThread {
                 if (lowerVisible) {
                     val t = lowerFormat.format(Date())

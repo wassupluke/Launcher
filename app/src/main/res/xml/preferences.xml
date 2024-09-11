@@ -62,6 +62,10 @@
             android:defaultValue="true"
             android:title="@string/settings_clock_time_visible" />
         <SwitchPreference
+            android:key="@string/settings_clock_show_seconds_key"
+            android:defaultValue="true"
+            android:title="@string/settings_clock_show_seconds" />
+        <SwitchPreference
             android:key="@string/settings_clock_date_visible_key"
             android:defaultValue="true"
             android:title="@string/settings_clock_date_visible" />
