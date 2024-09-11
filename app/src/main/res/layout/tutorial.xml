@@ -7,7 +7,7 @@
     android:id="@+id/tutorial_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".tutorial.TutorialActivity">
+    tools:context=".ui.tutorial.TutorialActivity">
 
 
     <androidx.viewpager.widget.ViewPager

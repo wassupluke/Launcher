@@ -8,7 +8,7 @@
     android:paddingRight="32sp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".tutorial.tabs.TutorialFragmentConcept">
+    tools:context=".ui.tutorial.tabs.TutorialFragmentConcept">
 
     <TextView
         android:id="@+id/tutorial_concept_title"

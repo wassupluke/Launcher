@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="32sp"
     android:paddingRight="32sp"
-    tools:context=".tutorial.tabs.TutorialFragmentSetup">
+    tools:context=".ui.tutorial.tabs.TutorialFragmentSetup">
 
     <TextView
         android:id="@+id/tutorial_setup_title"
@@ -35,7 +35,7 @@
 
     <fragment
         android:id="@+id/tutorial_setup_actions_rview_fragment"
-        android:name="de.jrpie.android.launcher.settings.actions.SettingsFragmentActionsRecycler"
+        android:name="de.jrpie.android.launcher.ui.settings.actions.SettingsFragmentActionsRecycler"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="32dp"

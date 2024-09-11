@@ -19,7 +19,7 @@
         android:theme="@style/launcherBaseTheme">
 
         <activity
-            android:name=".HomeActivity"
+            android:name=".ui.HomeActivity"
             android:exported="true"
             android:excludeFromRecents="true"
             android:clearTaskOnLaunch="true"
@@ -33,15 +33,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".tutorial.TutorialActivity"
+            android:name="de.jrpie.android.launcher.ui.tutorial.TutorialActivity"
             android:configChanges="orientation|screenSize" >
         </activity>
         <activity
-            android:name=".list.ListActivity"
+            android:name="de.jrpie.android.launcher.ui.list.ListActivity"
             android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
-            android:name=".settings.SettingsActivity"
+            android:name="de.jrpie.android.launcher.ui.settings.SettingsActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true" >
             <intent-filter>
