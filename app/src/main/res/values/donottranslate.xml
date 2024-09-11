@@ -9,7 +9,7 @@
         <string name="settings_internal_started_key" translatable="false">internal.started_before</string>
         <string name="settings_internal_started_time_key" translatable="false">internal.first_startup</string>
         <string name="settings_internal_version_code_key" translatable="false">internal.version_code</string>
-        <string name="settings_general_choose_home_screen_key">general.select_launcher</string>
+        <string name="settings_general_choose_home_screen_key" translatable="false">general.select_launcher</string>
         <!--
           -
           - Settings : Gestures
@@ -99,7 +99,7 @@
         <string name="settings_meta_report_bug_link" translatable="false">https://github.com/jrpie/Launcher/issues/new</string>
         <string name="settings_meta_fork_contact_url" translatable="false">https://s.jrpie.de/contact</string>
         <string name="settings_meta_privacy_url" translatable="false">https://s.jrpie.de/android-legal</string>
-        <string name="settings_meta_contact_url">https://www.finnmglas.com/contact/</string>
+        <string name="settings_meta_contact_url" translatable="false">https://www.finnmglas.com/contact/</string>
         <string name="settings_meta_discord_url" translatable="false">https://discord.com/invite/jV2AhF8</string>
 
 
