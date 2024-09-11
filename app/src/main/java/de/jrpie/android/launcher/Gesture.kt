@@ -2,7 +2,6 @@ package de.jrpie.android.launcher
 
 import android.app.Activity
 import android.content.Context
-import android.util.Log
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 
 /**
@@ -144,7 +143,6 @@ enum class Gesture (val id: String, private val labelResource: Int,
 
     operator fun invoke(activity: Activity) {
         val app = this.getApp(activity)
-        Log.d("LAUNCHER", "Launching ${app.first} (user: ${app.second}) ${this.toString()}")
         launch(app.first, app.second, activity, this.animationIn, this.animationOut)
     }
 

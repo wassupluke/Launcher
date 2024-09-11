@@ -230,7 +230,6 @@ fun uninstallApp(packageName: String, user: Int?, activity: Activity) {
 }
 
 fun launchApp(packageName: String, user: Int?, context: Context, rect: Rect? = null) {
-    Log.i("Launcher", "Starting: " + packageName + " (user " +user.toString()+ ")")
     if (user != null && user != INVALID_USER) {
         val launcherApps = context.getSystemService(Service.LAUNCHER_APPS_SERVICE) as LauncherApps
         getLauncherActivityInfo(packageName,user,context)?.let {

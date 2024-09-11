@@ -4,7 +4,6 @@ import android.content.Intent
 import android.content.res.Resources
 import android.os.AsyncTask
 import android.os.Bundle
-import android.util.Log
 import android.view.GestureDetector
 import android.view.KeyEvent
 import android.view.MotionEvent
@@ -162,8 +161,6 @@ class HomeActivity: UIObject, AppCompatActivity(),
 
         val width = displayMetrics!!.widthPixels
         val height = displayMetrics!!.heightPixels
-
-        Log.i("LAUNCHER", "width: $width, height: $height, ${e1.x}, ${e1.y}, ${e2.x}, ${e2.y}")
 
         val diffX = e1.x - e2.x
         val diffY = e1.y - e2.y

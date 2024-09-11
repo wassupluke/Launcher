@@ -14,6 +14,7 @@ import de.jrpie.android.launcher.preferences.theme.ColorTheme
  */
 const val PREFERENCE_VERSION = 1
 const val UNKNOWN_PREFERENCE_VERSION = -1
+private const val TAG = "Launcher - Preferences"
 
 
 private fun migrateStringPreference(oldPrefs: SharedPreferences, newPreferences: SharedPreferences.Editor, oldKey: String, newKey: String, default: String) {
@@ -34,7 +35,7 @@ fun migratePreferencesToNewVersion(context: Context) {
         // Check versions, make sure transitions between versions go well
         PREFERENCE_VERSION -> { /* the version installed and used previously are the same */ }
         UNKNOWN_PREFERENCE_VERSION -> { /* still using the old preferences file */
-            Log.i("Launcher", "Unknown preference version, trying to restore preferences from old version.")
+            Log.i(TAG, "Unknown preference version, trying to restore preferences from old version.")
 
 
             val oldPrefs = context.getSharedPreferences(
@@ -42,7 +43,7 @@ fun migratePreferencesToNewVersion(context: Context) {
                 Context.MODE_PRIVATE
             )
             if(!oldPrefs.contains("startedBefore")) {
-                Log.i("Launcher", "No old preferences found.")
+                Log.i(TAG, "No old preferences found.")
                 return
             }
             val newPrefs = LauncherPreferences.getSharedPreferences().edit()
@@ -121,7 +122,7 @@ fun migratePreferencesToNewVersion(context: Context) {
 
 
             LauncherPreferences.internal().versionCode(PREFERENCE_VERSION)
-            Log.i("Launcher", "migration of preferences complete.")
+            Log.i(TAG, "migration of preferences complete.")
 
             // show the new tutorial
             // context.startActivity(Intent(context, TutorialActivity::class.java))
@@ -131,7 +132,7 @@ fun migratePreferencesToNewVersion(context: Context) {
 }
 
 fun resetPreferences(context: Context) {
-    Log.i("Launcher", "resetting preferences")
+    Log.i(TAG, "resetting preferences")
     LauncherPreferences.clear()
     LauncherPreferences.internal().versionCode(PREFERENCE_VERSION)
     val editor = LauncherPreferences.getSharedPreferences().edit()
