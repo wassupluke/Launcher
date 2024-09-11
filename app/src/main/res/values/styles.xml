@@ -21,6 +21,12 @@
         <item name="android:windowAnimationStyle">@style/WindowFadeTransition</item>
     </style>
 
+    <style name="launcherHomeTheme" parent="launcherBaseTheme">
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <!--<item name="android:windowDrawsSystemBarBackgrounds">true</item>-->
+    </style>
+
     <style name="colorThemeDark">
         <item name="colorPrimary">@color/darkTheme_background_color</item>
         <item name="colorPrimaryDark">@color/darkTheme_background_color</item>
