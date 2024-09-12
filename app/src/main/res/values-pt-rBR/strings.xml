@@ -105,16 +105,11 @@
     <string name="settings_meta_reset">Redefinir configuraçãos</string>
     <string name="settings_meta_reset_confirm">Você vai descartar todas as suas preferências. Continuar?</string>
 
-    <string name="settings_meta_link_github" translatable="false">https://github.com/jrpie/Launcher</string>
-
     <string name="settings_meta_report_bug">Reportar um bug</string>
-    <string name="settings_meta_report_bug_link" translatable="false">https://github.com/jrpie/Launcher/issues/new</string>
 
     <string name="settings_meta_fork_contact">Entre em contato com o desenvolvedor do fork</string>
-    <string name="settings_meta_fork_contact_url" translatable="false">https://s.jrpie.de/contact</string>
 
     <string name="settings_meta_privacy">Política de Privacidade</string>
-    <string name="settings_meta_privacy_url" translatable="false">https://s.jrpie.de/android-legal</string>
 
     <string name="settings_meta_contact">Entre em contato com o desenvolvedor original</string>
 
