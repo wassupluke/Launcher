@@ -1,0 +1,182 @@
+<resources>
+    <!--
+      -
+      - Home
+      -
+      -->
+    <string name="alert_cant_open_title">Não é possível abrir o aplicativo</string>
+    <string name="alert_cant_open_message">Quer alterar as suas configurações?</string>
+
+    <string name="toast_cant_open_message">Abrir as configurações para escolher uma aplicação para esta ação</string>
+
+    <!--
+      -
+      - Settings
+      -
+      -->
+    <string name="settings_title">Configurações</string>
+
+    <string name="settings_tab_app">Apps</string>
+    <string name="settings_tab_launcher">Launcher</string>
+    <string name="settings_tab_meta">Meta</string>
+
+    <!--
+      -
+      - Settings : Apps
+      -
+      -->
+    <string name="settings_gesture_up">Deslizar para cima</string>
+    <string name="settings_gesture_double_up">Duplo para cima</string>
+    <string name="settings_gesture_down">Deslizar para baixo</string>
+    <string name="settings_gesture_double_down">Duplo para baixo</string>
+    <string name="settings_gesture_left">Deslizar para esquerda</string>
+    <string name="settings_gesture_double_left">Duplo para esquerda</string>
+    <string name="settings_gesture_right">Deslizar para direita</string>
+    <string name="settings_gesture_double_right">Duplo para direita</string>
+    <string name="settings_gesture_right_top_edge">Deslizar para direita (Cima)</string>
+    <string name="settings_gesture_right_bottom_edge">Deslizar para direita(Baixo)</string>
+    <string name="settings_gesture_left_bottom_edge">Deslizar para esquerda (Baixo)</string>
+    <string name="settings_gesture_left_top_edge">Deslizar para esquerda (Cima)</string>
+    <string name="settings_gesture_up_left_edge">Deslizar para cima (Borda esquerda)</string>
+    <string name="settings_gesture_up_right_edge">Deslizar para cima (Borda direita)</string>
+    <string name="settings_gesture_down_left_edge">Deslizar para baixo (Borda esquerda)</string>
+    <string name="settings_gesture_down_right_edge">Deslizar para baixo (Borda direita)</string>
+    <string name="settings_gesture_vol_up">Aumentar o volume</string>
+    <string name="settings_gesture_vol_down">Diminuir o volume</string>
+    <string name="settings_gesture_double_click">Duplo clique</string>
+    <string name="settings_gesture_long_click">Clique longo</string>
+    <string name="settings_gesture_date">Clique em Data</string>
+    <string name="settings_gesture_time">Clique em Tempo</string>
+
+    <string name="settings_apps_choose">Selecionar o aplicativo</string>
+
+    <string name="settings_apps_view_all">Ver todos os aplicativos</string>
+
+    <string name="settings_apps_install">Instalar aplicativos</string>
+    <string name="settings_apps_toast_store_not_found">Loja não encontrada</string>
+
+    <!--
+      -
+      - Settings : Launcher
+      -
+      -->
+    <string name="settings_launcher_section_appearance">Aparência</string>
+
+
+    <string name="settings_theme_color_theme">Tema</string>
+    <string-array name="settings_theme_color_theme_items">
+        <item>Padrão</item>
+        <item>Escuro</item>
+    </string-array>
+
+    <string name="settings_launcher_section_date_time"><![CDATA[Date & time]]></string>
+    <string name="settings_clock_time_visible">Mostrar Horário</string>
+    <string name="settings_clock_date_visible">Mostrar Data</string>
+    <string name="settings_clock_localized">Use formato de data localizado</string>
+    <string name="settings_clock_flip_date_time">Inverter data e hora</string>
+
+    <string name="settings_theme_wallpaper">Escolha um papel de parede</string>
+    <string name="settings_launcher_change_wallpaper">Alterar papel de parede</string>
+
+    <string name="settings_launcher_section_display">Exibição</string>
+
+    <string name="settings_display_screen_timeout_disabled">Manter a tela ligada</string>
+    <string name="settings_display_full_screen">Usar tela cheia</string>
+
+    <string name="settings_launcher_section_functionality">Funções</string>
+
+    <string name="settings_enabled_gestures_double_swipe">Ações de deslizar duas vezes</string>
+    <string name="settings_enabled_gestures_edge_swipe">Ações de deslizar nas bordas</string>
+    <string name="settings_functionality_auto_launch">Iniciar resultados da pesquisa</string>
+    <string name="settings_functionality_auto_keyboard">Iniciar teclado para pesquisa</string>
+
+    <string name="settings_launcher_sensitivity">Sensibilidade</string>
+
+    <!--
+      -
+      - Settings : Meta
+      -
+      -->
+    <string name="settings_general_choose_home_screen">Definir o μLauncher como tela inicial</string>
+    <string name="settings_meta_cant_select_launcher">Informações do aplicativo</string>
+    <string name="settings_meta_cant_select_launcher_msg">Seu dispositivo não suporta esse recurso. Gerenciar detalhes do aplicativo em vez disso?</string>
+
+    <string name="settings_meta_show_tutorial">Ver tutorial do launcher</string>
+
+    <string name="settings_meta_reset">Redefinir configuraçãos</string>
+    <string name="settings_meta_reset_confirm">Você vai descartar todas as suas preferências. Continuar?</string>
+
+    <string name="settings_meta_link_github" translatable="false">https://github.com/jrpie/Launcher</string>
+
+    <string name="settings_meta_report_bug">Reportar um bug</string>
+    <string name="settings_meta_report_bug_link" translatable="false">https://github.com/jrpie/Launcher/issues/new</string>
+
+    <string name="settings_meta_fork_contact">Entre em contato com o desenvolvedor do fork</string>
+    <string name="settings_meta_fork_contact_url" translatable="false">https://s.jrpie.de/contact</string>
+
+    <string name="settings_meta_privacy">Política de Privacidade</string>
+    <string name="settings_meta_privacy_url" translatable="false">https://s.jrpie.de/android-legal</string>
+
+    <string name="settings_meta_contact">Entre em contato com o desenvolvedor original</string>
+    <string name="settings_meta_contact_url">https://www.finnmglas.com/contact/</string>
+
+
+    <string name="settings_meta_discord">Junte-se a nós no discord!</string>
+    <string name="settings_meta_discord_url" translatable="false">https://discord.com/invite/jV2AhF8</string>
+
+    <!--
+      -
+      - List (Launchers app drawer)
+      -
+      -->
+    <string name="list_title_view">Todos os aplicativos</string>
+    <string name="list_title_pick">Escolha o aplicativo</string>
+
+    <string name="list_tab_app">Aplicativos</string>
+    <string name="list_tab_other">Outro</string>
+
+    <string name="list_app_delete">Desinstalar</string>
+    <string name="list_app_info">Informações do aplicativo</string>
+
+    <string name="list_removed">O aplicativo selecionado foi removido</string>
+    <string name="list_not_removed">Não é possível remover o aplicativo</string>
+
+    <string name="list_apps_search_hint">Pesquisar Aplicativos</string>
+
+    <string name="list_other_settings">Configurações do Launcher</string>
+    <string name="list_other_list">Todos os aplicativos</string>
+    <string name="list_other_volume_up">Music: Mais alto</string>
+    <string name="list_other_volume_down">Music: Mais silencioso</string>
+    <string name="list_other_track_next">Music: Próximo</string>
+    <string name="list_other_track_previous">Music: Anterior</string>
+    <string name="list_other_nop">Não faça nada</string>
+
+    <!--
+      -
+      - Tutorial
+      -
+      -->
+    <string name="tutorial_title">Tutorial</string>
+    <string name="tutorial_start_text">Tire alguns segundos para aprender a usar este Launcher!</string>
+
+    <string name="tutorial_concept_title">Conceito</string>
+    <string name="tutorial_concept_text">O Launcher foi projetado para ser minimalista, eficiente e livre de distrações.\n\nEle é livre de pagamentos, anúncios e serviços de rastreamento.</string>
+    <string name="tutorial_concept_text_2">O aplicativo é de código aberto (licença MIT) e está disponível no GitHub!\n\nNão deixe de conferir o repositório!</string>
+
+    <string name="tutorial_usage_title">Uso</string>
+    <string name="tutorial_usage_text">Sua tela inicial contém a data e a hora locais. Sem distração.</string>
+    <string name="tutorial_usage_text_2">Você pode iniciar seus aplicativos com um único toque ou pressionamento de botão. Escolha alguns no próximo slide.</string>
+
+    <string name="tutorial_setup_title">Configurar</string>
+    <string name="tutorial_setup_text">Selecionamos alguns aplicativos padrões para você. Se quiser, você pode alterá-los agora.</string>
+    <string name="tutorial_setup_text_2">Você também pode alterar sua seleção mais tarde.</string>
+
+    <string name="tutorial_finish_title">Vamos!</string>
+    <string name="tutorial_finish_text">Você está pronto para começar!\n\nEspero que isso seja de grande valor para você!\n\n- Finn (que criou o Launcher)\n\te Josia (que fez algumas melhorias e mantém o fork μLauncher)</string>
+    <string name="tutorial_finish_button">Começar</string>
+
+
+
+    <string name="settings">Configurações</string>
+    <string name="ic_menu_alt">Mais opções</string>
+</resources>
