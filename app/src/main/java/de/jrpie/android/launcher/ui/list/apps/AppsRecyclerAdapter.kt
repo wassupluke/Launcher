@@ -186,10 +186,10 @@ class AppsRecyclerAdapter(
             .lowercase(Locale.ROOT)
             .toCharArray()
             .distinct()
-            .filter { c -> !((c in 'a'..'z') || (c in '0'..'9')) }
+            .filter { c -> !c.isLetter() }
             .map { c -> escapeReplacement(c.toString()) }
             .fold("") { x, y -> x + y }
-        var disallowedCharsRegex = "[^a-z0-9$allowedSpecialCharacters]".toRegex()
+        var disallowedCharsRegex = "[^\\p{L}$allowedSpecialCharacters]".toRegex()
 
         fun normalize(text: String): String {
             return text.lowercase(Locale.ROOT).replace(disallowedCharsRegex, "")
