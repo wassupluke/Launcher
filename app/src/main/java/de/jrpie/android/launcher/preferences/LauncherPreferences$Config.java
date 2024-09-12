@@ -26,7 +26,7 @@ import eu.jonahbauer.android.preference.annotations.Preferences;
                 @PreferenceGroup(name = "theme", prefix = "settings_theme_", suffix = "_key", value = {
                         @Preference(name = "wallpaper", type = void.class),
                         @Preference(name = "color_theme", type = ColorTheme.class, defaultValue = "DEFAULT"),
-                        @Preference(name = "background", type = Background.class, defaultValue = "BLUR"),
+                        @Preference(name = "background", type = Background.class, defaultValue = "DIM"),
                         @Preference(name = "font", type = Font.class, defaultValue = "HACK"),
                         @Preference(name = "monochrome_icons", type = boolean.class, defaultValue = "false"),
                 }),

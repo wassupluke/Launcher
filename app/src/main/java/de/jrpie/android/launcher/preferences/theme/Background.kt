@@ -19,14 +19,15 @@ enum class Background(val id: Int, val dim: Boolean = false, val blur: Boolean =
 
     fun applyToWindow(window: Window) {
         val layoutParams: WindowManager.LayoutParams = window.attributes
-        var dimAmount = 0.5f
+        // TODO: add a setting to change this?
+        var dimAmount = 0.7f
         var dim = this.dim
         var blur = this.blur
 
         // replace blur by more intense dim on old devices
         if (blur && Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
             blur = false
-            dimAmount += 0.3f
+            dimAmount += 0.1f
         }
 
         if (dim) {

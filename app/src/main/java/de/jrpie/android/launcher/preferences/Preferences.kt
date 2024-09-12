@@ -387,13 +387,13 @@ fun migratePreferencesToNewVersion(context: Context) {
                 "finn" -> {
                     LauncherPreferences.theme().colorTheme(ColorTheme.DEFAULT)
                     LauncherPreferences.theme().monochromeIcons(false)
-                    LauncherPreferences.theme().background(Background.BLUR)
+                    LauncherPreferences.theme().background(Background.DIM)
                 }
 
                 "dark" -> {
                     LauncherPreferences.theme().colorTheme(ColorTheme.DARK)
                     LauncherPreferences.theme().monochromeIcons(true)
-                    LauncherPreferences.theme().background(Background.BLUR)
+                    LauncherPreferences.theme().background(Background.DIM)
                 }
             }
 
