@@ -69,7 +69,6 @@
         <item>Escuro</item>
     </string-array>
 
-    <string name="settings_launcher_section_date_time"><![CDATA[Date & time]]></string>
     <string name="settings_clock_time_visible">Mostrar Horário</string>
     <string name="settings_clock_date_visible">Mostrar Data</string>
     <string name="settings_clock_localized">Use formato de data localizado</string>
@@ -118,11 +117,9 @@
     <string name="settings_meta_privacy_url" translatable="false">https://s.jrpie.de/android-legal</string>
 
     <string name="settings_meta_contact">Entre em contato com o desenvolvedor original</string>
-    <string name="settings_meta_contact_url">https://www.finnmglas.com/contact/</string>
 
 
     <string name="settings_meta_discord">Junte-se a nós no discord!</string>
-    <string name="settings_meta_discord_url" translatable="false">https://discord.com/invite/jV2AhF8</string>
 
     <!--
       -
