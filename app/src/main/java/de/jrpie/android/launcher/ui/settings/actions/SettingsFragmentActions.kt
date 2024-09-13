@@ -32,6 +32,8 @@ SettingsFragmentActions : Fragment(), UIObject {
         savedInstanceState: Bundle?
     ): View {
         binding = SettingsActionsBinding.inflate(inflater, container, false)
+
+
         return binding!!.root
     }
 
@@ -39,16 +41,22 @@ SettingsFragmentActions : Fragment(), UIObject {
         super<Fragment>.onStart()
         super<UIObject>.onStart()
 
+        binding?.root?.viewTreeObserver?.addOnGlobalLayoutListener {
+            val buttonHeight = binding?.settingsActionsButtons?.height!!
+            val height = binding?.root?.height!!
+
+            if (buttonHeight > 0.2 * height) {
+                binding?.settingsActionsButtons?.visibility = View.GONE
+            } else {
+                binding?.settingsActionsButtons?.visibility = View.VISIBLE
+            }
+
+
+        }
     }
 
     override fun setOnClicks() {
 
-        // App management buttons
-        binding!!.settingsActionsButtonViewApps.setOnClickListener {
-            val intent = Intent(this.context, ListActivity::class.java)
-            intent.putExtra("intention", ListActivity.ListActivityIntention.VIEW.toString())
-            startActivity(intent)
-        }
         binding!!.settingsActionsButtonInstallApps.setOnClickListener {
             try {
                 val intent = Intent(Intent.ACTION_MAIN)
