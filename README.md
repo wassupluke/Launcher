@@ -5,7 +5,7 @@
 # μLauncher
 
 
-µLauncher is an Android home screen that lets you start other apps using swipe gestures and button presses.
+µLauncher is an Android home screen that lets you launch apps using swipe gestures and button presses.
 It is *minimal, efficient and free of distraction*.
 
 Your home screen only displays the date, time and a wallpaper.
