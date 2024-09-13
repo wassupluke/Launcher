@@ -44,6 +44,7 @@
         <activity
             android:name="de.jrpie.android.launcher.ui.settings.SettingsActivity"
             android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustNothing"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.APPLICATION_PREFERENCES"/>
