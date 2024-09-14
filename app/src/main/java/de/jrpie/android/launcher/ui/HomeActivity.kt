@@ -186,11 +186,11 @@ class HomeActivity : UIObject, AppCompatActivity(),
         if (e1 == null) return false
 
 
-        val displayMetrics: DisplayMetrics? = DisplayMetrics()
+        val displayMetrics: DisplayMetrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(displayMetrics)
 
-        val width = displayMetrics!!.widthPixels
-        val height = displayMetrics!!.heightPixels
+        val width = displayMetrics.widthPixels
+        val height = displayMetrics.heightPixels
 
         val diffX = e1.x - e2.x
         val diffY = e1.y - e2.y

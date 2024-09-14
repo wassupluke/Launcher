@@ -33,26 +33,24 @@ SettingsFragmentActions : Fragment(), UIObject {
     ): View {
         binding = SettingsActionsBinding.inflate(inflater, container, false)
 
+        binding?.root?.viewTreeObserver?.addOnGlobalLayoutListener {
+            val buttonHeight =
+                binding?.settingsActionsButtons?.height ?: return@addOnGlobalLayoutListener
+            val height = binding?.root?.height ?: return@addOnGlobalLayoutListener
+
+            if (buttonHeight > 0.2 * height) {
+                binding?.settingsActionsButtons?.visibility = View.GONE
+            } else {
+                binding?.settingsActionsButtons?.visibility = View.VISIBLE
+            }
+        }
+
         return binding!!.root
     }
 
     override fun onStart() {
         super<Fragment>.onStart()
         super<UIObject>.onStart()
-
-        binding?.root?.viewTreeObserver?.addOnGlobalLayoutListener {
-            binding?.settingsActionsButtons?.height?.let { buttonHeight ->
-                binding?.root?.height?.let { height ->
-                    if (buttonHeight > 0.2 * height) {
-                        binding?.settingsActionsButtons?.visibility = View.GONE
-                    } else {
-                        binding?.settingsActionsButtons?.visibility = View.VISIBLE
-                    }
-                }
-            }
-
-
-        }
     }
 
     override fun setOnClicks() {
