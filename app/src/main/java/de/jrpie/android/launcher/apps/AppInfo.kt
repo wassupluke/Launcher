@@ -17,6 +17,17 @@ class AppInfo(val packageName: CharSequence, val user: Int = INVALID_USER) {
         return "$packageName;$u"
     }
 
+    override fun equals(other: Any?): Boolean {
+        if(other is AppInfo) {
+            return other.user == user && other.packageName == packageName
+        }
+        return super.equals(other)
+    }
+
+    override fun hashCode(): Int {
+        return packageName.hashCode()
+    }
+
     fun getLauncherActivityInfo(
         context: Context
     ): LauncherActivityInfo? {

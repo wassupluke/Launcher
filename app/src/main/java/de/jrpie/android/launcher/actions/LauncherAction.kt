@@ -32,6 +32,12 @@ enum class LauncherAction(
         R.drawable.baseline_menu_24,
         ::openAppsList
     ),
+    CHOOSE_FROM_FAVORITES(
+        "launcher:chooseFromFavorites",
+        R.string.list_other_list_favorites,
+        R.drawable.baseline_favorite_24,
+        { context -> openAppsList(context, true)}
+    ),
     VOLUME_UP(
         "launcher:volumeUp",
         R.string.list_other_volume_up,
@@ -174,11 +180,14 @@ private fun openSettings(context: Context) {
     context.startActivity(Intent(context, SettingsActivity::class.java))
 }
 
-private fun openAppsList(context: Context) {
+fun openAppsList(context: Context, favorite: Boolean = false, hidden: Boolean = false) {
     val intent = Intent(context, ListActivity::class.java)
     intent.putExtra("intention", ListActivity.ListActivityIntention.VIEW.toString())
+    intent.putExtra("favorite", favorite)
+    intent.putExtra("hidden", hidden)
     context.startActivity(intent)
 }
+
 
 
 

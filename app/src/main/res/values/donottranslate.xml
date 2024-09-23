@@ -9,7 +9,10 @@
         <string name="settings_internal_started_key" translatable="false">internal.started_before</string>
         <string name="settings_internal_started_time_key" translatable="false">internal.first_startup</string>
         <string name="settings_internal_version_code_key" translatable="false">internal.version_code</string>
-        <string name="settings_general_choose_home_screen_key" translatable="false">general.select_launcher</string>
+    <string name="settings_apps_favorites_key" translatable="false">apps.favorites</string>
+    <string name="settings_apps_hidden_key" translatable="false">apps.hidden</string>
+
+    <string name="settings_general_choose_home_screen_key" translatable="false">general.select_launcher</string>
         <!--
           -
           - Settings : Gestures

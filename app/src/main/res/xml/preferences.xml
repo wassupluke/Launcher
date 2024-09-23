@@ -98,6 +98,17 @@
 
 
     </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/settings_launcher_section_apps"
+        app:allowDividerAbove="false">
+
+        <Preference
+            android:key="@string/settings_apps_hidden_key"
+            android:title="@string/settings_apps_hidden"
+            />
+
+    </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/settings_launcher_section_display"
         app:allowDividerAbove="false">

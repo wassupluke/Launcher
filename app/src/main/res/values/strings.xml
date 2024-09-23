@@ -114,6 +114,9 @@
 
     <string name="settings_launcher_sensitivity">Sensitivity</string>
 
+    <string name="settings_launcher_section_apps">Apps</string>
+    <string name="settings_apps_hidden">Hidden apps</string>
+
     <!--
       -
       - Settings : Meta
@@ -144,6 +147,8 @@
       -
       -->
     <string name="list_title_view">All Apps</string>
+    <string name="list_title_favorite">Favorite Apps</string>
+    <string name="list_title_hidden">Hidden Apps</string>
     <string name="list_title_pick">Choose App</string>
 
     <string name="list_tab_app">Apps</string>
@@ -151,6 +156,10 @@
 
     <string name="list_app_delete">Uninstall</string>
     <string name="list_app_info">App Info</string>
+    <string name="list_app_favorite_add">Add to favorites</string>
+    <string name="list_app_favorite_remove">Remove from favorites</string>
+    <string name="list_app_hidden_add">Hide</string>
+    <string name="list_app_hidden_remove">Show</string>
 
     <string name="list_removed">Removed the selected application</string>
     <string name="list_not_removed">Unable to remove application</string>
@@ -159,6 +168,7 @@
 
     <string name="list_other_settings">Launcher Settings</string>
     <string name="list_other_list">All Applications</string>
+    <string name="list_other_list_favorites">Favorite Applications</string>
     <string name="list_other_volume_up">Music: Louder</string>
     <string name="list_other_volume_down">Music: Quieter</string>
     <string name="list_other_track_next">Music: Next</string>
@@ -195,4 +205,6 @@
     <string name="settings">Settings</string>
     <string name="ic_menu_alt">More options</string>
     <string name="alert_cant_expand_notifications_panel">Error: Can\'t expand status bar.\nThis action is using functionality that is not part of the published Android API. Unfortunately, it does not seem to work on your device.</string>
+    <string name="snackbar_app_hidden">App hidden. You can make it visible again in settings.</string>
+    <string name="undo">Undo</string>
 </resources>

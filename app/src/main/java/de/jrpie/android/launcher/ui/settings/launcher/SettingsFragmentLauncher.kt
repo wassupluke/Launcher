@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
 import de.jrpie.android.launcher.R
+import de.jrpie.android.launcher.actions.openAppsList
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.setDefaultHomeScreen
 
@@ -63,6 +64,14 @@ class SettingsFragmentLauncher : PreferenceFragmentCompat() {
         )
         chooseHomeScreen?.setOnPreferenceClickListener {
             setDefaultHomeScreen(requireContext(), checkDefault = false)
+            true
+        }
+
+        val hiddenApps = findPreference<androidx.preference.Preference>(
+            LauncherPreferences.apps().keys().hidden()
+        )
+        hiddenApps?.setOnPreferenceClickListener {
+            openAppsList(requireContext(), favorite = false, hidden = true)
             true
         }
         updateVisibility()

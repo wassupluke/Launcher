@@ -1,11 +1,13 @@
 package de.jrpie.android.launcher.ui.list.apps
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import de.jrpie.android.launcher.apps.AppFilter
 import de.jrpie.android.launcher.databinding.ListAppsBinding
 import de.jrpie.android.launcher.openSoftKeyboard
 import de.jrpie.android.launcher.preferences.LauncherPreferences
@@ -13,6 +15,8 @@ import de.jrpie.android.launcher.ui.UIObject
 import de.jrpie.android.launcher.ui.list.ListActivity
 import de.jrpie.android.launcher.ui.list.forGesture
 import de.jrpie.android.launcher.ui.list.intention
+import de.jrpie.android.launcher.ui.list.showFavorites
+import de.jrpie.android.launcher.ui.list.showHidden
 
 
 /**
@@ -22,6 +26,12 @@ import de.jrpie.android.launcher.ui.list.intention
  */
 class ListFragmentApps : Fragment(), UIObject {
     private lateinit var binding: ListAppsBinding
+    private lateinit var appsRViewAdapter: AppsRecyclerAdapter
+
+    private var sharedPreferencesListener =
+        SharedPreferences.OnSharedPreferenceChangeListener { _, _ ->
+            appsRViewAdapter.updateAppsList()
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,13 +44,28 @@ class ListFragmentApps : Fragment(), UIObject {
     override fun onStart() {
         super<Fragment>.onStart()
         super<UIObject>.onStart()
+        LauncherPreferences.getSharedPreferences()
+            .registerOnSharedPreferenceChangeListener(sharedPreferencesListener)
+
+        binding.listAppsCheckBoxFavorites.isChecked = showFavorites
     }
+
+    override fun onStop() {
+        super.onStop()
+        LauncherPreferences.getSharedPreferences()
+            .unregisterOnSharedPreferenceChangeListener(sharedPreferencesListener)
+    }
+
 
     override fun setOnClicks() {}
 
     override fun adjustLayout() {
 
-        val appsRViewAdapter = AppsRecyclerAdapter(requireActivity(), intention, forGesture)
+        appsRViewAdapter =
+            AppsRecyclerAdapter(
+                requireActivity(), binding.root, intention, forGesture,
+                appFilter = AppFilter("", showOnlyFavorites = showFavorites, showOnlyHidden = showHidden)
+            )
 
         // set up the list / recycler
         binding.listAppsRview.apply {
@@ -54,16 +79,22 @@ class ListFragmentApps : Fragment(), UIObject {
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String): Boolean {
-                appsRViewAdapter.filter(query)
+                appsRViewAdapter.setSearchString(query)
                 appsRViewAdapter.selectItem(0)
                 return true
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                appsRViewAdapter.filter(newText)
+                appsRViewAdapter.setSearchString(newText)
                 return false
             }
         })
+
+        binding.listAppsCheckBoxFavorites.setOnClickListener {
+            showFavorites = binding.listAppsCheckBoxFavorites.isChecked
+            appsRViewAdapter.setShowOnlyFavorites(showFavorites)
+            (activity as? ListActivity)?.updateTitle()
+        }
 
         if (intention == ListActivity.ListActivityIntention.VIEW
             && LauncherPreferences.functionality().searchAutoOpenKeyboard()

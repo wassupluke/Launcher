@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Rect
 import android.os.AsyncTask
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +13,11 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
 import de.jrpie.android.launcher.actions.AppAction
+import de.jrpie.android.launcher.apps.AppFilter
 import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.apps.DetailedAppInfo
 import de.jrpie.android.launcher.appsList
@@ -24,8 +27,6 @@ import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.transformGrayscale
 import de.jrpie.android.launcher.ui.list.ListActivity
 import de.jrpie.android.launcher.uninstallApp
-import java.util.*
-import kotlin.text.Regex.Companion.escapeReplacement
 
 /**
  * A [RecyclerView] (efficient scrollable list) containing all apps on the users device.
@@ -37,13 +38,16 @@ import kotlin.text.Regex.Companion.escapeReplacement
  */
 class AppsRecyclerAdapter(
     val activity: Activity,
+    val root: View,
     private val intention: ListActivity.ListActivityIntention
     = ListActivity.ListActivityIntention.VIEW,
-    private val forGesture: String? = ""
+    private val forGesture: String? = "",
+    private var appFilter: AppFilter = AppFilter("")
 ) :
     RecyclerView.Adapter<AppsRecyclerAdapter.ViewHolder>() {
 
-    private val appsListDisplayed: MutableList<DetailedAppInfo>
+    private val appsListDisplayed: MutableList<DetailedAppInfo> = mutableListOf()
+
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
@@ -60,6 +64,7 @@ class AppsRecyclerAdapter(
             itemView.setOnClickListener(this)
         }
     }
+
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
         val appLabel = appsListDisplayed[i].label.toString()
@@ -106,6 +111,15 @@ class AppsRecyclerAdapter(
             popup.menu.findItem(R.id.app_menu_delete).setVisible(false)
         }
 
+        if (LauncherPreferences.apps().hidden()?.contains(appInfo.app) == true) {
+            popup.menu.findItem(R.id.app_menu_hidden).setTitle(R.string.list_app_hidden_remove)
+        }
+
+        if (LauncherPreferences.apps().favorites()?.contains(appInfo.app) == true) {
+            popup.menu.findItem(R.id.app_menu_favorite).setTitle(R.string.list_app_favorite_remove)
+        }
+
+
         popup.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.app_menu_delete -> {
@@ -115,6 +129,53 @@ class AppsRecyclerAdapter(
 
                 R.id.app_menu_info -> {
                     openAppSettings(appInfo.app, activity)
+                    true
+                }
+
+                R.id.app_menu_favorite -> {
+                    var favorites: MutableSet<AppInfo> =
+                        LauncherPreferences.apps().favorites() ?: mutableSetOf()
+
+                    Log.i("LAUNCHER", favorites.size.toString())
+                    for (app in favorites) {
+                        Log.i("LAUNCHER", app.serialize())
+
+                    }
+
+                    if (favorites.contains(appInfo.app)) {
+                        favorites.remove(appInfo.app)
+                        Log.i("LAUNCHER", "Removing " + appInfo.app.serialize() + " from favorites.")
+                    } else {
+                        Log.i("LAUNCHER", "Adding " + appInfo.app.serialize() + " to favorites.")
+                        favorites.add(appInfo.app)
+                    }
+                    Log.i("LAUNCHER", favorites.size.toString())
+                    for (app in favorites) {
+                        Log.i("LAUNCHER", app.serialize())
+
+                    }
+                    LauncherPreferences.apps().favorites(favorites)
+
+                    true
+                }
+
+                R.id.app_menu_hidden -> {
+                    var hidden: MutableSet<AppInfo> =
+                        LauncherPreferences.apps().hidden() ?: mutableSetOf()
+                    if (hidden.contains(appInfo.app)) {
+                        hidden.remove(appInfo.app)
+                    } else {
+                        hidden.add(appInfo.app)
+
+                        Snackbar.make(root, R.string.snackbar_app_hidden, Snackbar.LENGTH_LONG)
+                            .setAction(R.string.undo) {
+                                LauncherPreferences.apps().hidden(
+                                    LauncherPreferences.apps().hidden().minus(appInfo.app)
+                                )
+                            }.show()
+                    }
+                    LauncherPreferences.apps().hidden(hidden)
+
                     true
                 }
 
@@ -144,9 +205,8 @@ class AppsRecyclerAdapter(
             AsyncTask.execute { loadApps(activity.packageManager, activity) }
             notifyDataSetChanged()
         }
+        updateAppsList()
 
-        appsListDisplayed = ArrayList()
-        appsListDisplayed.addAll(appsList)
     }
 
     fun selectItem(pos: Int, rect: Rect = Rect()) {
@@ -169,42 +229,13 @@ class AppsRecyclerAdapter(
         }
     }
 
-    /**
-     * The function [filter] is used to search elements within this [RecyclerView].
-     */
-    fun filter(text: String) {
-        // normalize text for search
-        var allowedSpecialCharacters = text
-            .lowercase(Locale.ROOT)
-            .toCharArray()
-            .distinct()
-            .filter { c -> !c.isLetter() }
-            .map { c -> escapeReplacement(c.toString()) }
-            .fold("") { x, y -> x + y }
-        var disallowedCharsRegex = "[^\\p{L}$allowedSpecialCharacters]".toRegex()
-
-        fun normalize(text: String): String {
-            return text.lowercase(Locale.ROOT).replace(disallowedCharsRegex, "")
-        }
+    fun updateAppsList(triggerAutoLaunch: Boolean = false) {
         appsListDisplayed.clear()
-        if (text.isEmpty()) {
-            appsListDisplayed.addAll(appsList)
-        } else {
-            val appsSecondary: MutableList<DetailedAppInfo> = ArrayList()
-            val normalizedText: String = normalize(text)
-            for (item in appsList) {
-                val itemLabel: String = normalize(item.label.toString())
+        appsListDisplayed.addAll(appFilter(appsList))
 
-                if (itemLabel.startsWith(normalizedText)) {
-                    appsListDisplayed.add(item)
-                } else if (itemLabel.contains(normalizedText)) {
-                    appsSecondary.add(item)
-                }
-            }
-            appsListDisplayed.addAll(appsSecondary)
-        }
-
-        if (appsListDisplayed.size == 1 && intention == ListActivity.ListActivityIntention.VIEW
+        if (triggerAutoLaunch &&
+            appsListDisplayed.size == 1
+            && intention == ListActivity.ListActivityIntention.VIEW
             && LauncherPreferences.functionality().searchAutoLaunch()
         ) {
             val info = appsListDisplayed[0]
@@ -216,5 +247,24 @@ class AppsRecyclerAdapter(
         }
 
         notifyDataSetChanged()
+    }
+
+    /**
+     * The function [setSearchString] is used to search elements within this [RecyclerView].
+     */
+    fun setSearchString(search: String) {
+        appFilter.search = search
+        updateAppsList(true)
+
+    }
+
+    fun setShowOnlyFavorites(show: Boolean) {
+        appFilter.showOnlyFavorites = show
+        updateAppsList()
+    }
+
+    fun setShowHiddenApps(show: Boolean) {
+        appFilter.showOnlyHidden = show
+        updateAppsList()
     }
 }

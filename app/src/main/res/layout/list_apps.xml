@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list_apps_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,21 +16,41 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_weight="1"
+        android:fadeScrollbars="false"
+        android:fastScrollAlwaysVisible="true"
+        android:fastScrollEnabled="true"
         android:scrollbars="vertical">
+        <!--android:scrollbars="vertical"-->
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/list_apps_searchview"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8sp"
-        android:layout_weight="0"
-        android:iconifiedByDefault="false"
-        app:iconifiedByDefault="false"
-        app:queryHint="@string/list_apps_search_hint"
-        app:searchHintIcon="@drawable/baseline_search_24"
-        app:searchIcon="@drawable/baseline_search_24" />
+        android:orientation="horizontal"
+        android:layout_margin="8dp"
+        >
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/list_apps_searchview"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:iconifiedByDefault="false"
+            app:iconifiedByDefault="false"
+            app:queryHint="@string/list_apps_search_hint"
+            app:searchHintIcon="@drawable/baseline_search_24"
+            app:searchIcon="@drawable/baseline_search_24" />
+
+        <CheckBox
+            android:id="@+id/list_apps_check_box_favorites"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:layout_marginEnd="16dp"
+            android:button="@drawable/checkbox_favorite" />
+
+    </LinearLayout>
 
 
 </LinearLayout>

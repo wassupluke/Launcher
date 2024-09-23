@@ -27,6 +27,8 @@ import de.jrpie.android.launcher.ui.list.other.ListFragmentOther
 
 // TODO: Better solution for this intercommunication functionality (used in list-fragments)
 var intention = ListActivity.ListActivityIntention.VIEW
+var showFavorites = false
+var showHidden = false
 var forGesture: String? = null
 
 /**
@@ -45,8 +47,23 @@ class ListActivity : AppCompatActivity(), UIObject {
         PICK(R.string.list_title_pick)  /* choose app or action to associate to a gesture */
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // get info about which action this activity is open for
+        intent.extras?.let { bundle ->
+            intention = bundle.getString("intention")
+                ?.let { ListActivityIntention.valueOf(it) }
+                ?: ListActivityIntention.VIEW
+
+            showFavorites = bundle.getBoolean("favorite") ?: false
+            showHidden = bundle.getBoolean("hidden") ?: false
+
+            if (intention != ListActivityIntention.VIEW)
+                forGesture = bundle.getString("forGesture")
+        }
+
 
         // Initialise layout
         binding = ListBinding.inflate(layoutInflater)
@@ -105,6 +122,23 @@ class ListActivity : AppCompatActivity(), UIObject {
         }
     }
 
+
+    fun updateTitle() {
+        var titleResource = intention.titleResource
+        if (intention == ListActivityIntention.VIEW) {
+            titleResource = if (showHidden) {
+                R.string.list_title_hidden
+            } else if (showFavorites) {
+                R.string.list_title_favorite
+            } else {
+                R.string.list_title_view
+            }
+        }
+
+        binding.listHeading.text = getString(titleResource)
+    }
+
+
     override fun getTheme(): Resources.Theme {
         return modifyTheme(super.getTheme())
     }
@@ -114,22 +148,13 @@ class ListActivity : AppCompatActivity(), UIObject {
     }
 
     override fun adjustLayout() {
-        // get info about which action this activity is open for
-        intent.extras?.let { bundle ->
-            intention = bundle.getString("intention")
-                ?.let { ListActivityIntention.valueOf(it) }
-                ?: ListActivityIntention.VIEW
-
-            if (intention != ListActivityIntention.VIEW)
-                forGesture = bundle.getString("forGesture")
-        }
 
         // Hide tabs for the "view" action
         if (intention == ListActivityIntention.VIEW) {
             binding.listTabs.visibility = View.GONE
         }
 
-        binding.listHeading.text = getString(intention.titleResource)
+        updateTitle()
 
         val sectionsPagerAdapter = ListSectionsPagerAdapter(this, supportFragmentManager)
         val viewPager: ViewPager = findViewById(R.id.list_viewpager)
