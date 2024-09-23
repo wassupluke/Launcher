@@ -9,8 +9,8 @@ import android.media.AudioManager
 import android.os.SystemClock
 import android.view.KeyEvent
 import android.widget.Toast
-import de.jrpie.android.launcher.INVALID_USER
 import de.jrpie.android.launcher.R
+import de.jrpie.android.launcher.apps.AppInfo.Companion.INVALID_USER
 import de.jrpie.android.launcher.ui.list.ListActivity
 import de.jrpie.android.launcher.ui.settings.SettingsActivity
 

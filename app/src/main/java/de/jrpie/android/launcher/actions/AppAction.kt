@@ -8,21 +8,22 @@ import android.content.SharedPreferences
 import android.content.pm.LauncherApps
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
-import de.jrpie.android.launcher.INVALID_USER
 import de.jrpie.android.launcher.R
+import de.jrpie.android.launcher.apps.AppInfo
+import de.jrpie.android.launcher.apps.AppInfo.Companion.INVALID_USER
+import de.jrpie.android.launcher.apps.DetailedAppInfo
 import de.jrpie.android.launcher.getIntent
-import de.jrpie.android.launcher.getLauncherActivityInfo
 import de.jrpie.android.launcher.openAppSettings
 
 class AppAction(private var appInfo: AppInfo) : Action {
 
+
     override fun invoke(context: Context, rect: Rect?): Boolean {
         val packageName = appInfo.packageName.toString()
-        val user = appInfo.user
-        if (user != null && user != INVALID_USER) {
+        if (appInfo.user != INVALID_USER) {
             val launcherApps =
                 context.getSystemService(Service.LAUNCHER_APPS_SERVICE) as LauncherApps
-            getLauncherActivityInfo(packageName, user, context)?.let { app ->
+            appInfo.getLauncherActivityInfo(context)?.let { app ->
                 launcherApps.startMainActivity(app.componentName, app.user, rect, null)
                 return true
             }
@@ -35,7 +36,9 @@ class AppAction(private var appInfo: AppInfo) : Action {
             return true
         }
 
-        if (AppInfo(packageName).isInstalled(context)) {
+
+        /* check if app is installed */
+        if (isAvailable(context)) {
             AlertDialog.Builder(
                 context,
                 R.style.AlertDialogCustom
@@ -54,21 +57,16 @@ class AppAction(private var appInfo: AppInfo) : Action {
     }
 
     override fun label(context: Context): String {
-        return appInfo.label.toString()
+        return DetailedAppInfo.fromAppInfo(appInfo, context)?.label.toString()
     }
 
     override fun getIcon(context: Context): Drawable? {
-        var icon: Drawable? = null
-        try {
-            icon = appInfo.getAppIcon(context)
-        } catch (e: Exception) {
-            // probably the app was uninstalled
-        }
-        return icon
+        return DetailedAppInfo.fromAppInfo(appInfo, context)?.icon
     }
 
     override fun isAvailable(context: Context): Boolean {
-        return appInfo.isInstalled(context)
+        // check if app is installed
+        return DetailedAppInfo.fromAppInfo(appInfo, context) != null;
     }
 
     override fun bindToGesture(editor: SharedPreferences.Editor, id: String) {

@@ -7,8 +7,9 @@ import android.content.SharedPreferences.Editor
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.widget.Toast
-import de.jrpie.android.launcher.INVALID_USER
 import de.jrpie.android.launcher.R
+import de.jrpie.android.launcher.apps.AppInfo
+import de.jrpie.android.launcher.apps.AppInfo.Companion.INVALID_USER
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 
 interface Action {
@@ -29,7 +30,7 @@ interface Action {
                 return LauncherAction.byId(id)
             }
 
-            return AppAction(AppInfo(id, user))
+            return AppAction(AppInfo(id, user ?: INVALID_USER))
         }
 
         fun forGesture(gesture: Gesture): Action? {

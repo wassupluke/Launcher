@@ -6,7 +6,6 @@ import android.app.role.RoleManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
-import android.content.pm.LauncherActivityInfo
 import android.content.pm.LauncherApps
 import android.content.pm.PackageManager
 import android.graphics.ColorMatrix
@@ -18,7 +17,6 @@ import android.os.Bundle
 import android.os.UserHandle
 import android.os.UserManager
 import android.provider.Settings
-import android.util.DisplayMetrics
 import android.util.Log
 import android.view.View
 import android.view.animation.AlphaAnimation
@@ -26,25 +24,20 @@ import android.view.animation.Animation
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import de.jrpie.android.launcher.actions.Action
-import de.jrpie.android.launcher.actions.AppInfo
 import de.jrpie.android.launcher.actions.Gesture
+import de.jrpie.android.launcher.apps.AppInfo
+import de.jrpie.android.launcher.apps.DetailedAppInfo
 import de.jrpie.android.launcher.ui.list.apps.AppsRecyclerAdapter
 import de.jrpie.android.launcher.ui.tutorial.TutorialActivity
 
 
-const val INVALID_USER = -1
-
 /* Objects used by multiple activities */
-val appsList: MutableList<AppInfo> = ArrayList()
-
-/* Variables containing settings */
-val displayMetrics = DisplayMetrics()
+val appsList: MutableList<DetailedAppInfo> = ArrayList()
 
 /* REQUEST CODES */
 
 const val REQUEST_CHOOSE_APP = 1
-const val REQUEST_CHOOSE_APP_FROM_FAVORITES = 2
-const val REQUEST_UNINSTALL = 3
+const val REQUEST_UNINSTALL = 2
 
 const val REQUEST_SET_DEFAULT_HOME = 42
 
@@ -109,16 +102,6 @@ fun getUserFromId(user: Int?, context: Context): UserHandle? {
     return userManager.userProfiles.firstOrNull { it.hashCode() == user }
 }
 
-fun getLauncherActivityInfo(
-    packageName: String,
-    user: Int?,
-    context: Context
-): LauncherActivityInfo? {
-    val launcherApps = context.getSystemService(Service.LAUNCHER_APPS_SERVICE) as LauncherApps
-    return getUserFromId(user, context)?.let { userHandle ->
-        launcherApps.getActivityList(packageName, userHandle).firstOrNull()
-    }
-}
 
 fun uninstallApp(appInfo: AppInfo, activity: Activity) {
     val packageName = appInfo.packageName.toString()
@@ -154,7 +137,7 @@ fun openAppSettings(
     opts: Bundle? = null
 ) {
     val launcherApps = context.getSystemService(Service.LAUNCHER_APPS_SERVICE) as LauncherApps
-    getLauncherActivityInfo(appInfo.packageName.toString(), appInfo.user, context)?.let { app ->
+    appInfo.getLauncherActivityInfo(context)?.let { app ->
         launcherApps.startAppDetailsActivity(app.componentName, app.user, sourceBounds, opts)
     }
 }
@@ -169,7 +152,7 @@ fun openTutorial(context: Context) {
  * as it caches all the apps and allows for fast access to the data.
  */
 fun loadApps(packageManager: PackageManager, context: Context) {
-    val loadList = mutableListOf<AppInfo>()
+    val loadList = mutableListOf<DetailedAppInfo>()
 
     val launcherApps = context.getSystemService(Service.LAUNCHER_APPS_SERVICE) as LauncherApps
     val userManager = context.getSystemService(Service.USER_SERVICE) as UserManager
@@ -178,14 +161,14 @@ fun loadApps(packageManager: PackageManager, context: Context) {
     val users = userManager.userProfiles
     for (user in users) {
         for (activityInfo in launcherApps.getActivityList(null, user)) {
-            val app = AppInfo()
-            app.label = activityInfo.label
-            app.packageName = activityInfo.applicationInfo.packageName
-            app.icon = activityInfo.getBadgedIcon(0)
-            app.user = user.hashCode()
-            app.isSystemApp =
+            val app = AppInfo(activityInfo.applicationInfo.packageName, user.hashCode())
+            val detailedAppInfo = DetailedAppInfo(
+                app,
+                activityInfo.label,
+                activityInfo.getBadgedIcon(0),
                 activityInfo.applicationInfo.flags.and(ApplicationInfo.FLAG_SYSTEM) != 0
-            loadList.add(app)
+            )
+            loadList.add(detailedAppInfo)
         }
     }
 
@@ -197,11 +180,13 @@ fun loadApps(packageManager: PackageManager, context: Context) {
         i.addCategory(Intent.CATEGORY_LAUNCHER)
         val allApps = packageManager.queryIntentActivities(i, 0)
         for (ri in allApps) {
-            val app = AppInfo()
-            app.label = ri.loadLabel(packageManager)
-            app.packageName = ri.activityInfo.packageName
-            app.icon = ri.activityInfo.loadIcon(packageManager)
-            loadList.add(app)
+            val app = AppInfo(ri.activityInfo.packageName, AppInfo.INVALID_USER)
+            val detailedAppInfo = DetailedAppInfo(
+                app,
+                ri.loadLabel(packageManager),
+                ri.activityInfo.loadIcon(packageManager)
+            )
+            loadList.add(detailedAppInfo)
         }
     }
     loadList.sortBy { it.label.toString() }

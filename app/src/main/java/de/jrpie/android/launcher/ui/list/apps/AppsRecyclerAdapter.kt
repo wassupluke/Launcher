@@ -15,7 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
 import de.jrpie.android.launcher.actions.AppAction
-import de.jrpie.android.launcher.actions.AppInfo
+import de.jrpie.android.launcher.apps.AppInfo
+import de.jrpie.android.launcher.apps.DetailedAppInfo
 import de.jrpie.android.launcher.appsList
 import de.jrpie.android.launcher.loadApps
 import de.jrpie.android.launcher.openAppSettings
@@ -42,7 +43,7 @@ class AppsRecyclerAdapter(
 ) :
     RecyclerView.Adapter<AppsRecyclerAdapter.ViewHolder>() {
 
-    private val appsListDisplayed: MutableList<AppInfo>
+    private val appsListDisplayed: MutableList<DetailedAppInfo>
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
@@ -62,10 +63,7 @@ class AppsRecyclerAdapter(
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
         val appLabel = appsListDisplayed[i].label.toString()
-        val appPackageName = appsListDisplayed[i].packageName.toString()
-        val appUser = appsListDisplayed[i].user
         val appIcon = appsListDisplayed[i].icon
-        val isSystemApp = appsListDisplayed[i].isSystemApp
 
         viewHolder.textView.text = appLabel
         viewHolder.img.setImageDrawable(appIcon)
@@ -79,17 +77,13 @@ class AppsRecyclerAdapter(
             viewHolder.textView.setOnLongClickListener {
                 showOptionsPopup(
                     viewHolder,
-                    appPackageName,
-                    appUser,
-                    isSystemApp
+                    appsListDisplayed[i]
                 )
             }
             viewHolder.img.setOnLongClickListener {
                 showOptionsPopup(
                     viewHolder,
-                    appPackageName,
-                    appUser,
-                    isSystemApp
+                    appsListDisplayed[i]
                 )
             }
             // ensure onClicks are actually caught
@@ -101,28 +95,26 @@ class AppsRecyclerAdapter(
     @Suppress("SameReturnValue")
     private fun showOptionsPopup(
         viewHolder: ViewHolder,
-        appPackageName: String,
-        user: Int?,
-        isSystemApp: Boolean
+        appInfo: DetailedAppInfo
     ): Boolean {
         //create the popup menu
 
         val popup = PopupMenu(activity, viewHolder.img)
         popup.inflate(R.menu.menu_app)
 
-        if (isSystemApp) {
+        if (appInfo.isSystemApp) {
             popup.menu.findItem(R.id.app_menu_delete).setVisible(false)
         }
 
         popup.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.app_menu_delete -> {
-                    uninstallApp(AppInfo(appPackageName, user), activity)
+                    uninstallApp(appInfo.app, activity)
                     true
                 }
 
                 R.id.app_menu_info -> {
-                    openAppSettings(AppInfo(appPackageName, user), activity)
+                    openAppSettings(appInfo.app, activity)
                     true
                 }
 
@@ -164,12 +156,12 @@ class AppsRecyclerAdapter(
         val appInfo = appsListDisplayed[pos]
         when (intention) {
             ListActivity.ListActivityIntention.VIEW -> {
-                AppAction(appInfo).invoke(activity, rect)
+                AppAction(appInfo.app).invoke(activity, rect)
             }
 
             ListActivity.ListActivityIntention.PICK -> {
                 val returnIntent = Intent()
-                AppAction(appInfo).writeToIntent(returnIntent)
+                AppAction(appInfo.app).writeToIntent(returnIntent)
                 returnIntent.putExtra("forGesture", forGesture)
                 activity.setResult(REQUEST_CHOOSE_APP, returnIntent)
                 activity.finish()
@@ -198,7 +190,7 @@ class AppsRecyclerAdapter(
         if (text.isEmpty()) {
             appsListDisplayed.addAll(appsList)
         } else {
-            val appsSecondary: MutableList<AppInfo> = ArrayList()
+            val appsSecondary: MutableList<DetailedAppInfo> = ArrayList()
             val normalizedText: String = normalize(text)
             for (item in appsList) {
                 val itemLabel: String = normalize(item.label.toString())
@@ -216,7 +208,7 @@ class AppsRecyclerAdapter(
             && LauncherPreferences.functionality().searchAutoLaunch()
         ) {
             val info = appsListDisplayed[0]
-            AppAction(info).invoke(activity)
+            AppAction(info.app).invoke(activity)
 
             val inputMethodManager =
                 activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
