@@ -160,15 +160,8 @@ fun loadApps(packageManager: PackageManager, context: Context) {
     // TODO: shortcuts - launcherApps.getShortcuts()
     val users = userManager.userProfiles
     for (user in users) {
-        for (activityInfo in launcherApps.getActivityList(null, user)) {
-            val app = AppInfo(activityInfo.applicationInfo.packageName, user.hashCode())
-            val detailedAppInfo = DetailedAppInfo(
-                app,
-                activityInfo.label,
-                activityInfo.getBadgedIcon(0),
-                activityInfo.applicationInfo.flags.and(ApplicationInfo.FLAG_SYSTEM) != 0
-            )
-            loadList.add(detailedAppInfo)
+        launcherApps.getActivityList(null, user).forEach {
+            loadList.add(DetailedAppInfo(it))
         }
     }
 
@@ -180,7 +173,7 @@ fun loadApps(packageManager: PackageManager, context: Context) {
         i.addCategory(Intent.CATEGORY_LAUNCHER)
         val allApps = packageManager.queryIntentActivities(i, 0)
         for (ri in allApps) {
-            val app = AppInfo(ri.activityInfo.packageName, AppInfo.INVALID_USER)
+            val app = AppInfo(ri.activityInfo.packageName, null, AppInfo.INVALID_USER)
             val detailedAppInfo = DetailedAppInfo(
                 app,
                 ri.loadLabel(packageManager),

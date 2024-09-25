@@ -77,7 +77,7 @@ class AppAction(private var appInfo: AppInfo) : Action {
     }
 
     override fun writeToIntent(intent: Intent) {
-        intent.putExtra("action_id", appInfo.packageName)
+        intent.putExtra("action_id", "${appInfo.packageName};${appInfo.activityName}");
         appInfo.user?.let { intent.putExtra("user", it) }
     }
 }

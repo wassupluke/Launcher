@@ -16,7 +16,7 @@ class DetailedAppInfo(
 ) {
 
     constructor(activityInfo: LauncherActivityInfo) : this(
-        AppInfo(activityInfo.applicationInfo.packageName, activityInfo.user.hashCode()),
+        AppInfo(activityInfo.applicationInfo.packageName, activityInfo.name, activityInfo.user.hashCode()),
         activityInfo.label,
         activityInfo.getBadgedIcon(0),
         activityInfo.applicationInfo.flags.and(ApplicationInfo.FLAG_SYSTEM) != 0

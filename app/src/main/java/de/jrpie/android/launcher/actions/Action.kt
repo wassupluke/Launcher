@@ -30,7 +30,9 @@ interface Action {
                 return LauncherAction.byId(id)
             }
 
-            return AppAction(AppInfo(id, user ?: INVALID_USER))
+            val values =  id.split(";")
+
+            return AppAction(AppInfo(values[0], values.getOrNull(1), user ?: INVALID_USER))
         }
 
         fun forGesture(gesture: Gesture): Action? {
