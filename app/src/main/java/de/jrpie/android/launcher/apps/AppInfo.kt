@@ -12,6 +12,8 @@ import de.jrpie.android.launcher.getUserFromId
  */
 class AppInfo(val packageName: CharSequence, val activityName: CharSequence?, val user: Int = INVALID_USER) {
 
+    // TODO: make activityName non nullable (breaking change to SharedPreferences!)
+
     fun serialize(): String {
         val u = user
         var ret = "$packageName;$u"
@@ -38,11 +40,15 @@ class AppInfo(val packageName: CharSequence, val activityName: CharSequence?, va
         val launcherApps = context.getSystemService(Service.LAUNCHER_APPS_SERVICE) as LauncherApps
         return getUserFromId(user, context)?.let { userHandle ->
             launcherApps.getActivityList(packageName.toString(), userHandle).firstOrNull { app ->
-                activityName == null || app.name == activityName
+                app.name == activityName || activityName == null || activityName == ""
             }
         }
     }
 
+
+    override fun toString(): String {
+        return "AppInfo {package=$packageName, activity=$activityName, user=$user}"
+    }
 
     companion object {
         const val INVALID_USER = -1

@@ -8,6 +8,7 @@ import android.content.SharedPreferences
 import android.content.pm.LauncherApps
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
+import android.util.Log
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.apps.AppInfo.Companion.INVALID_USER
@@ -17,13 +18,13 @@ import de.jrpie.android.launcher.openAppSettings
 
 class AppAction(private var appInfo: AppInfo) : Action {
 
-
     override fun invoke(context: Context, rect: Rect?): Boolean {
         val packageName = appInfo.packageName.toString()
         if (appInfo.user != INVALID_USER) {
             val launcherApps =
                 context.getSystemService(Service.LAUNCHER_APPS_SERVICE) as LauncherApps
             appInfo.getLauncherActivityInfo(context)?.let { app ->
+                Log.i("Launcher", "Starting $appInfo")
                 launcherApps.startMainActivity(app.componentName, app.user, rect, null)
                 return true
             }
@@ -70,14 +71,20 @@ class AppAction(private var appInfo: AppInfo) : Action {
     }
 
     override fun bindToGesture(editor: SharedPreferences.Editor, id: String) {
-        val u = appInfo.user ?: INVALID_USER
+        val u = appInfo.user
+
+        // TODO: replace this by AppInfo#serialize (breaking change to SharedPreferences!)
+        var app = appInfo.packageName.toString()
+        if (appInfo.activityName != null) {
+            app += ";${appInfo.activityName}"
+        }
         editor
-            .putString("$id.app", appInfo.packageName.toString())
+            .putString("$id.app", app)
             .putInt("$id.user", u)
     }
 
     override fun writeToIntent(intent: Intent) {
-        intent.putExtra("action_id", "${appInfo.packageName};${appInfo.activityName}");
-        appInfo.user?.let { intent.putExtra("user", it) }
+        intent.putExtra("action_id", "${appInfo.packageName};${appInfo.activityName}")
+        intent.putExtra("user", appInfo.user)
     }
 }
