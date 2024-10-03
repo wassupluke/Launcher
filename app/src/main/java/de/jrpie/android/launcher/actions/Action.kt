@@ -39,7 +39,7 @@ interface Action {
             val id = gesture.id
 
             val preferences = LauncherPreferences.getSharedPreferences()
-            var actionId = preferences.getString("$id.app", "")!!
+            val actionId = preferences.getString("$id.app", "")!!
             var u: Int? = preferences.getInt("$id.user", INVALID_USER)
             u = if (u == INVALID_USER) null else u
 
@@ -48,7 +48,7 @@ interface Action {
 
         fun resetToDefaultActions(context: Context) {
             val editor = LauncherPreferences.getSharedPreferences().edit()
-            Gesture.values().forEach { gesture ->
+            Gesture.entries.forEach { gesture ->
                 context.resources
                     .getStringArray(gesture.defaultsResource)
                     .map { fromId(it, null) }
@@ -96,7 +96,7 @@ interface Action {
 
         fun fromIntent(data: Intent): Action? {
             val value = data.getStringExtra("action_id") ?: return null
-            var user = data.getIntExtra("user", INVALID_USER)
+            val user = data.getIntExtra("user", INVALID_USER)
             return fromId(value, user)
         }
     }

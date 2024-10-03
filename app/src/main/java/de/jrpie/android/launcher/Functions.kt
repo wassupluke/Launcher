@@ -97,9 +97,13 @@ fun getIntent(packageName: String, context: Context): Intent? {
 }
 /* --- */
 
-fun getUserFromId(user: Int?, context: Context): UserHandle? {
+fun getUserFromId(user: Int?, context: Context): UserHandle {
+    /* TODO: this is an ugly hack.
+        Use userManager#getUserForSerialNumber instead (breaking change to SharedPreferences!)
+     */
     val userManager = context.getSystemService(Service.USER_SERVICE) as UserManager
-    return userManager.userProfiles.firstOrNull { it.hashCode() == user }
+    val profiles = userManager.userProfiles
+    return profiles.firstOrNull { it.hashCode() == user } ?: profiles[0]
 }
 
 
@@ -107,10 +111,10 @@ fun uninstallApp(appInfo: AppInfo, activity: Activity) {
     val packageName = appInfo.packageName.toString()
     val user = appInfo.user
 
-    Log.i("Launcher", "uninstalling $packageName ($user)")
+    Log.i("Launcher", "uninstalling $appInfo")
     val intent = Intent(Intent.ACTION_UNINSTALL_PACKAGE)
     intent.data = Uri.parse("package:$packageName")
-    getUserFromId(user, activity)?.let { user ->
+    getUserFromId(user, activity).let { user ->
         intent.putExtra(Intent.EXTRA_USER, user)
     }
 
