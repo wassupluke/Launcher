@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Create a report to help improve this app
-title: ''
+title: '[bug] '
 labels: bug
 assignees: ''
 
@@ -26,6 +26,7 @@ If applicable, add screenshots to help explain your problem.
 **Smartphone (please complete the following information):**
  - Device: [e.g. Samsung A7]
  - Android Version: [e.g. Marshmallow, 6.0 or API 23]
+ - µLauncher Version: [e.g. j-0.0.11 or version code 25]
 
 **Additional info**
 Add any other info or comments about the problem here.
