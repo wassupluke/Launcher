@@ -64,7 +64,8 @@ class HomeActivity : UIObject, AppCompatActivity(),
     private var clockTimer = Timer()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        super<AppCompatActivity>.onCreate(savedInstanceState)
+        super<UIObject>.onCreate()
 
         // Try to restore old preferences
         migratePreferencesToNewVersion(this)

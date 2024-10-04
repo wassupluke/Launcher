@@ -37,16 +37,17 @@ fun setWindowFlags(window: Window, homeScreen: Boolean) {
 }
 
 interface UIObject {
-    fun onStart() {
+    fun onCreate() {
         if (this is Activity) {
             setWindowFlags(window, isHomeScreen())
-            requestedOrientation = if (!LauncherPreferences.display().rotateScreen()) {
-                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-            } else {
-                ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-            }
-        }
 
+            if (!LauncherPreferences.display().rotateScreen()) {
+                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_NOSENSOR
+            }
+
+        }
+    }
+    fun onStart() {
         setOnClicks()
         adjustLayout()
     }

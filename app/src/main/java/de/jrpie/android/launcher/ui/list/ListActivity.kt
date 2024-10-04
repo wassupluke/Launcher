@@ -49,7 +49,8 @@ class ListActivity : AppCompatActivity(), UIObject {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        super<AppCompatActivity>.onCreate(savedInstanceState)
+        super<UIObject>.onCreate()
 
         // get info about which action this activity is open for
         intent.extras?.let { bundle ->
@@ -106,6 +107,9 @@ class ListActivity : AppCompatActivity(), UIObject {
 
     override fun onPause() {
         super.onPause()
+
+        // ensure that the activity closes then an app is launched
+        // and when the user navigates to recent apps
         finish()
     }
 

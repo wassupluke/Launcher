@@ -44,7 +44,9 @@ class SettingsActivity : AppCompatActivity(), UIObject {
     private lateinit var binding: SettingsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        super<AppCompatActivity>.onCreate(savedInstanceState)
+        super<UIObject>.onCreate()
+
 
         // Initialise layout
         binding = SettingsBinding.inflate(layoutInflater)
