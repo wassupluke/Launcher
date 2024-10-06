@@ -110,6 +110,6 @@
     <string name="settings_display_rotate_screen">旋转屏幕</string>
     <string name="settings_launcher_section_apps">应用</string>
     <string name="list_other_expand_notifications_panel">展开通知面板</string>
-    <string name="alert_cant_expand_notifications_panel">错误：无法打开通知栏。
+    <string name="alert_cant_expand_status_bar_panel">错误：无法打开通知栏。
 \n这个动作使用的功能并非现有的 Android API的一部分。不幸的是，它似乎不适用于您的设备。</string>
 </resources>
