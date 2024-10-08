@@ -7,7 +7,7 @@
       -->
     <string name="alert_cant_open_title">Impossible d\'ouvrir l\'application</string>
     <string name="alert_cant_open_message">Souhaitez-vous modifier ses paramètres ?</string>
-    <string name="toast_cant_open_message">Ouvrez les paramètres pour choisir une application pour cette action</string>
+    <string name="toast_cant_open_message">Ouvrez les paramètres pour associer une action à ce geste</string>
     <!--
       -
       - Settings
@@ -83,7 +83,7 @@
       - List (Launchers app drawer)
       -
       -->
-    <string name="list_title_view">Applications</string>
+    <string name="list_title_view">Toutes les Applications</string>
     <string name="list_title_pick">Choisir App</string>
     <string name="list_tab_app">Applications</string>
     <string name="list_tab_other">Autre</string>
@@ -93,7 +93,7 @@
     <string name="list_not_removed">Impossible de désinstaller l\'application</string>
     <string name="list_apps_search_hint">Chercher des applications</string>
     <string name="list_other_settings">Réglages du launcher</string>
-    <string name="list_other_list">Applications</string>
+    <string name="list_other_list">Toutes les Applications</string>
     <string name="list_other_volume_up">Augmenter le volume</string>
     <string name="list_other_volume_down">Diminuer le volume</string>
     <string name="list_other_track_next">Musique : passer au titre suivant</string>
@@ -140,4 +140,23 @@
     <string name="settings_clock_flip_date_time">Échanger la date et l\'heure</string>
     <string name="settings_clock_date_visible">Afficher la date</string>
     <string name="settings_clock_localized">Utiliser le format de date local</string>
+    <string name="alert_cant_expand_notifications_panel">Erreur :
+\nIl est impossible d\'afficher le volet des applications. Cette fonctionnalité n\'étant pas nativement supportée par Android, elle ne semble pas être implémentée sur votre appareil.</string>
+    <string name="settings_launcher_section_apps">Applis</string>
+    <string name="settings_theme_background">Fond d\'écran (liste d\'applications et réglages)</string>
+    <string name="settings_theme_font">Police</string>
+    <string name="settings_theme_monochrome_icons">Icônes d\'applications monochromes</string>
+    <string name="settings_clock_show_seconds">Afficher les secondes</string>
+    <string name="settings_display_rotate_screen">Rotation de l\'écran</string>
+    <string name="list_other_expand_notifications_panel">Afficher le panneau de notifications</string>
+    <string name="settings_apps_hidden">Applications cachées</string>
+    <string name="list_title_favorite">Applications favorites</string>
+    <string name="list_title_hidden">Applications masquées</string>
+    <string name="list_app_favorite_add">Ajouter aux favoris</string>
+    <string name="list_app_favorite_remove">Retirer des favoris</string>
+    <string name="list_app_hidden_add">Cacher</string>
+    <string name="list_app_hidden_remove">Montrer</string>
+    <string name="list_other_list_favorites">Applications Favorites</string>
+    <string name="snackbar_app_hidden">Appli cachée. Vous pouvez l\'afficher à nouveau depuis les réglages.</string>
+    <string name="undo">Défaire</string>
 </resources>
