@@ -140,8 +140,6 @@
     <string name="settings_clock_flip_date_time">Échanger la date et l\'heure</string>
     <string name="settings_clock_date_visible">Afficher la date</string>
     <string name="settings_clock_localized">Utiliser le format de date local</string>
-    <string name="alert_cant_expand_notifications_panel">Erreur :
-\nIl est impossible d\'afficher le volet des applications. Cette fonctionnalité n\'étant pas nativement supportée par Android, elle ne semble pas être implémentée sur votre appareil.</string>
     <string name="settings_launcher_section_apps">Applis</string>
     <string name="settings_theme_background">Fond d\'écran (liste d\'applications et réglages)</string>
     <string name="settings_theme_font">Police</string>
