@@ -157,4 +157,7 @@
     <string name="list_other_list_favorites">Applications Favorites</string>
     <string name="snackbar_app_hidden">Appli cachée. Vous pouvez l\'afficher à nouveau depuis les réglages.</string>
     <string name="undo">Défaire</string>
+    <string name="alert_cant_expand_status_bar_panel">Erreur : impossible d\'afficher la barre de statut.
+\nCette action utilise des fonctionalités qui ne sont pas officiellement dans l\'API Android. Malheuresement ça ne semble pas fonctionner sur votre appareil.</string>
+    <string name="list_other_expand_settings_panel">Réglages rapides</string>
 </resources>
