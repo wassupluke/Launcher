@@ -1,8 +1,8 @@
 <!-- Shields from shields.io -->
-<!--[![][shield-release]][latest-release] -->
+[![][shield-release]][latest-release]
 [![][shield-license]][license]
 [![Chat on Matrix](https://matrix.to/img/matrix-badge.svg)][matrix]
-[Chat on Discord][discord]
+[![Chat on Discord](https://img.shields.io/badge/discord-join%20chat-007ec6.svg?style=flat)][discord]
 
 
 
@@ -81,6 +81,7 @@ There are several ways to contribute to this app:
 <!-- Shields and Badges -->
 
   [shield-release]: https://img.shields.io/github/v/release/jrpie/Launcher?style=flat
+  [latest-release]: https://github.com/jrpie/Launcher/releases/latest
   [shield-contribute]: https://img.shields.io/badge/contributions-welcome-007ec6.svg?style=flat
   [shield-license]: https://img.shields.io/badge/license-MIT-007ec6?style=flat
 
