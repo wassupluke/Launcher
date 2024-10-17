@@ -2,6 +2,7 @@
 <!--[![][shield-release]][latest-release] -->
 [![][shield-license]][license]
 [![Chat on Matrix](https://matrix.to/img/matrix-badge.svg)][matrix]
+[Chat on Discord][discord]
 
 
 
@@ -87,6 +88,7 @@ There are several ways to contribute to this app:
   [shield-gh-star]: https://img.shields.io/github/stars/jrpie/Launcher?label=Star&style=social
   [shield-gh-fork]: https://img.shields.io/github/forks/jrpie/Launcher?label=Fork&style=social
   [matrix]: https://s.jrpie.de/launcher-matrix
+  [discord]: https://s.jrpie.de/launcher-discord
 
 <!-- Helpful resources -->
 
