@@ -10,6 +10,7 @@ import android.os.SystemClock
 import android.view.KeyEvent
 import android.widget.Toast
 import de.jrpie.android.launcher.R
+import de.jrpie.android.launcher.apps.AppFilter
 import de.jrpie.android.launcher.apps.AppInfo.Companion.INVALID_USER
 import de.jrpie.android.launcher.ui.list.ListActivity
 import de.jrpie.android.launcher.ui.settings.SettingsActivity
@@ -183,8 +184,23 @@ private fun openSettings(context: Context) {
 fun openAppsList(context: Context, favorite: Boolean = false, hidden: Boolean = false) {
     val intent = Intent(context, ListActivity::class.java)
     intent.putExtra("intention", ListActivity.ListActivityIntention.VIEW.toString())
-    intent.putExtra("favorite", favorite)
-    intent.putExtra("hidden", hidden)
+    intent.putExtra(
+        "favoritesVisibility",
+        if (favorite) {
+            AppFilter.Companion.AppSetVisibility.EXCLUSIVE
+        } else {
+            AppFilter.Companion.AppSetVisibility.VISIBLE
+        }
+    )
+    intent.putExtra(
+        "hiddenVisibility",
+        if (hidden) {
+            AppFilter.Companion.AppSetVisibility.EXCLUSIVE
+        } else {
+            AppFilter.Companion.AppSetVisibility.HIDDEN
+        }
+    )
+
     context.startActivity(intent)
 }
 

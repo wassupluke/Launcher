@@ -13,10 +13,10 @@ import de.jrpie.android.launcher.openSoftKeyboard
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.ui.UIObject
 import de.jrpie.android.launcher.ui.list.ListActivity
+import de.jrpie.android.launcher.ui.list.favoritesVisibility
 import de.jrpie.android.launcher.ui.list.forGesture
+import de.jrpie.android.launcher.ui.list.hiddenVisibility
 import de.jrpie.android.launcher.ui.list.intention
-import de.jrpie.android.launcher.ui.list.showFavorites
-import de.jrpie.android.launcher.ui.list.showHidden
 
 
 /**
@@ -47,7 +47,8 @@ class ListFragmentApps : Fragment(), UIObject {
         LauncherPreferences.getSharedPreferences()
             .registerOnSharedPreferenceChangeListener(sharedPreferencesListener)
 
-        binding.listAppsCheckBoxFavorites.isChecked = showFavorites
+        binding.listAppsCheckBoxFavorites.isChecked =
+            (favoritesVisibility == AppFilter.Companion.AppSetVisibility.EXCLUSIVE)
     }
 
     override fun onStop() {
@@ -64,7 +65,11 @@ class ListFragmentApps : Fragment(), UIObject {
         appsRViewAdapter =
             AppsRecyclerAdapter(
                 requireActivity(), binding.root, intention, forGesture,
-                appFilter = AppFilter("", showOnlyFavorites = showFavorites, showOnlyHidden = showHidden)
+                appFilter = AppFilter(
+                    "",
+                    favoritesVisibility = favoritesVisibility,
+                    hiddenVisibility = hiddenVisibility
+                )
             )
 
         // set up the list / recycler
@@ -72,6 +77,7 @@ class ListFragmentApps : Fragment(), UIObject {
             // improve performance (since content changes don't change the layout size)
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
+            // TODO: option to change this to GridLayoutManager(context, numCols)
             adapter = appsRViewAdapter
         }
 
@@ -91,8 +97,13 @@ class ListFragmentApps : Fragment(), UIObject {
         })
 
         binding.listAppsCheckBoxFavorites.setOnClickListener {
-            showFavorites = binding.listAppsCheckBoxFavorites.isChecked
-            appsRViewAdapter.setShowOnlyFavorites(showFavorites)
+            favoritesVisibility =
+                if (binding.listAppsCheckBoxFavorites.isChecked) {
+                    AppFilter.Companion.AppSetVisibility.EXCLUSIVE
+                } else {
+                    AppFilter.Companion.AppSetVisibility.VISIBLE
+                }
+            appsRViewAdapter.setFavoritesVisibility(favoritesVisibility)
             (activity as? ListActivity)?.updateTitle()
         }
 

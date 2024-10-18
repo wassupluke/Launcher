@@ -6,19 +6,19 @@ import kotlin.text.Regex.Companion.escapeReplacement
 
 class AppFilter(
     var search: String,
-    var showOnlyFavorites: Boolean = false,
-    var showOnlyHidden: Boolean = false
+    var favoritesVisibility: AppSetVisibility = AppSetVisibility.VISIBLE,
+    var hiddenVisibility: AppSetVisibility = AppSetVisibility.HIDDEN,
 ) {
     operator fun invoke(apps: List<DetailedAppInfo>): List<DetailedAppInfo> {
         var apps = apps
 
         val hidden = LauncherPreferences.apps().hidden() ?: setOf()
-        apps = apps.filter { info -> !showOnlyHidden.xor(hidden.contains(info.app)) }
-
-        if (showOnlyFavorites) {
-            val favorites = LauncherPreferences.apps().favorites() ?: setOf()
-            apps = apps.filter { info -> favorites.contains(info.app) }
+        val favorites = LauncherPreferences.apps().favorites() ?: setOf()
+        apps = apps.filter { info ->
+            favoritesVisibility.predicate(favorites, info)
+                    && hiddenVisibility.predicate(hidden, info)
         }
+
         // normalize text for search
         var allowedSpecialCharacters = search
             .lowercase(Locale.ROOT)
@@ -50,6 +50,17 @@ class AppFilter(
             r.addAll(appsSecondary)
 
             return r;
+        }
+    }
+
+    companion object {
+        enum class AppSetVisibility(
+            val predicate: (set: Set<AppInfo>, DetailedAppInfo) -> Boolean
+        ) {
+            VISIBLE({ _, _ -> true }),
+            HIDDEN({ set, appInfo -> !set.contains(appInfo.app) }),
+            EXCLUSIVE({ set, appInfo -> set.contains(appInfo.app) }),
+            ;
         }
     }
 }

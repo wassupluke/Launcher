@@ -18,6 +18,7 @@ import com.google.android.material.tabs.TabLayout
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_UNINSTALL
 import de.jrpie.android.launcher.actions.LauncherAction
+import de.jrpie.android.launcher.apps.AppFilter
 import de.jrpie.android.launcher.databinding.ListBinding
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.ui.UIObject
@@ -27,8 +28,8 @@ import de.jrpie.android.launcher.ui.list.other.ListFragmentOther
 
 // TODO: Better solution for this intercommunication functionality (used in list-fragments)
 var intention = ListActivity.ListActivityIntention.VIEW
-var showFavorites = false
-var showHidden = false
+var favoritesVisibility: AppFilter.Companion.AppSetVisibility = AppFilter.Companion.AppSetVisibility.VISIBLE
+var hiddenVisibility: AppFilter.Companion.AppSetVisibility = AppFilter.Companion.AppSetVisibility.HIDDEN
 var forGesture: String? = null
 
 /**
@@ -57,8 +58,10 @@ class ListActivity : AppCompatActivity(), UIObject {
                 ?.let { ListActivityIntention.valueOf(it) }
                 ?: ListActivityIntention.VIEW
 
-            showFavorites = bundle.getBoolean("favorite") ?: false
-            showHidden = bundle.getBoolean("hidden") ?: false
+            favoritesVisibility = bundle.getSerializable("favoritesVisibility")
+                    as? AppFilter.Companion.AppSetVisibility ?: favoritesVisibility
+            hiddenVisibility = bundle.getSerializable("hiddenVisibility")
+                    as? AppFilter.Companion.AppSetVisibility ?: favoritesVisibility
 
             if (intention != ListActivityIntention.VIEW)
                 forGesture = bundle.getString("forGesture")
@@ -126,9 +129,9 @@ class ListActivity : AppCompatActivity(), UIObject {
     fun updateTitle() {
         var titleResource = intention.titleResource
         if (intention == ListActivityIntention.VIEW) {
-            titleResource = if (showHidden) {
+            titleResource = if (hiddenVisibility == AppFilter.Companion.AppSetVisibility.EXCLUSIVE) {
                 R.string.list_title_hidden
-            } else if (showFavorites) {
+            } else if (favoritesVisibility == AppFilter.Companion.AppSetVisibility.EXCLUSIVE) {
                 R.string.list_title_favorite
             } else {
                 R.string.list_title_view
