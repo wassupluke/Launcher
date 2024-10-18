@@ -9,5 +9,6 @@ class Application : android.app.Application() {
 
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
         LauncherPreferences.init(preferences, this.resources)
+
     }
 }

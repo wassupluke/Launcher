@@ -1,6 +1,10 @@
 <!-- Shields from shields.io -->
-<!--[![][shield-release]][latest-release] -->
+[![][shield-release]][latest-release]
 [![][shield-license]][license]
+[![Chat on Matrix](https://matrix.to/img/matrix-badge.svg)][matrix]
+[![Chat on Discord](https://img.shields.io/badge/discord-join%20chat-007ec6.svg?style=flat)][discord]
+
+
 
 # μLauncher
 
@@ -28,7 +32,7 @@ Or download the latest APK from the [Releases Section](https://github.com/jrpie/
 
 There are several ways to contribute to this app:
 * You can add or improve [translations][toolate].
-* If you find a bug or have an idea for a new feature you can open an [issue][issues]. Please note that I work on this project in my free time. Thus I might not respond immediately and not all ideas will be implemented.
+* If you find a bug or have an idea for a new feature you can [join the Matrix chat][matrix] or open an [issue][issues]. Please note that I work on this project in my free time. Thus I might not respond immediately and not all ideas will be implemented.
 * You can implement a new feature yourself:
   - Create a fork of this repository: [![][shield-gh-fork]][fork]
   - Create a new branch named `feature/<your feature>` of `fix/<your fix>` and commit your changes.
@@ -77,14 +81,15 @@ There are several ways to contribute to this app:
 <!-- Shields and Badges -->
 
   [shield-release]: https://img.shields.io/github/v/release/jrpie/Launcher?style=flat
+  [latest-release]: https://github.com/jrpie/Launcher/releases/latest
   [shield-contribute]: https://img.shields.io/badge/contributions-welcome-007ec6.svg?style=flat
   [shield-license]: https://img.shields.io/badge/license-MIT-007ec6?style=flat
 
   [shield-gh-watch]: https://img.shields.io/github/watchers/jrpie/Launcher?label=Watch&style=social
   [shield-gh-star]: https://img.shields.io/github/stars/jrpie/Launcher?label=Star&style=social
   [shield-gh-fork]: https://img.shields.io/github/forks/jrpie/Launcher?label=Fork&style=social
-
-
+  [matrix]: https://s.jrpie.de/launcher-matrix
+  [discord]: https://s.jrpie.de/launcher-discord
 
 <!-- Helpful resources -->
 

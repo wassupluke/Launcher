@@ -39,6 +39,7 @@
         </activity>
         <activity
             android:name="de.jrpie.android.launcher.ui.list.ListActivity"
+            android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
@@ -51,7 +52,6 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

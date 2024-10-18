@@ -65,6 +65,12 @@ enum class LauncherAction(
         R.drawable.baseline_notifications_24,
         ::expandNotificationsPanel
     ),
+    EXPAND_SETTINGS_PANEL(
+        "launcher:expandSettingsPanel",
+        R.string.list_other_expand_settings_panel,
+        R.drawable.baseline_settings_applications_24,
+        ::expandSettingsPanel
+    ),
     NOP("launcher:nop", R.string.list_other_nop, R.drawable.baseline_not_interested_24, {});
 
     override fun invoke(context: Context, rect: Rect?): Boolean {
@@ -170,7 +176,24 @@ private fun expandNotificationsPanel(context: Context) {
     } catch (e: Exception) {
         Toast.makeText(
             context,
-            context.getString(R.string.alert_cant_expand_notifications_panel),
+            context.getString(R.string.alert_cant_expand_status_bar_panel),
+            Toast.LENGTH_LONG
+        ).show()
+    }
+}
+
+private fun expandSettingsPanel(context: Context) {
+    /* https://stackoverflow.com/a/31898506 */
+    try {
+        @Suppress("SpellCheckingInspection")
+        val statusBarService: Any? = context.getSystemService("statusbar")
+        val statusBarManager = Class.forName("android.app.StatusBarManager")
+        val showStatusBar = statusBarManager.getMethod("expandSettingsPanel")
+        showStatusBar.invoke(statusBarService)
+    } catch (e: Exception) {
+        Toast.makeText(
+            context,
+            context.getString(R.string.alert_cant_expand_status_bar_panel),
             Toast.LENGTH_LONG
         ).show()
     }

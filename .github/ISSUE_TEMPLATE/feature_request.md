@@ -1,20 +1,20 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: ''
+title: '[feature] '
 labels: enhancement
 assignees: ''
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+# Mandatory: Please describe the problem to be solved
+(Remove this text: Add a clear and concise description of the addressed problem. Don't say "add a button such that ... " but **why** this button should be added. This is very important as it allows to discuss alternative solutions.)
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+# Optional: Describe the solution you would suggest
+(Remove this text: A description of the solution, e.g. "add a button to the settings activity. When clicking that button ..." )
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+# Optional: Describe alternative solutions you've considered
+(Remove this text: A description of any alternative solutions or features you've considered.)
 
-**Additional info**
-Add any other info, comments or screenshots about the feature request here.
+# Optional: Additional info
+(Remove this text: Add any other info, comments or screenshots about the feature request here.)

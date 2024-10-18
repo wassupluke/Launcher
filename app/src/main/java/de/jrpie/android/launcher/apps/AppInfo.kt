@@ -4,6 +4,7 @@ import android.app.Service
 import android.content.Context
 import android.content.pm.LauncherActivityInfo
 import android.content.pm.LauncherApps
+import android.util.Log
 import de.jrpie.android.launcher.getUserFromId
 
 /**
@@ -19,13 +20,13 @@ class AppInfo(val packageName: CharSequence, val activityName: CharSequence?, va
         var ret = "$packageName;$u"
         activityName?.let { ret += ";$activityName" }
 
-        return ret;
+        return ret
     }
 
     override fun equals(other: Any?): Boolean {
         if(other is AppInfo) {
             return other.user == user && other.packageName == packageName
-                    && other.activityName == activityName;
+                    && other.activityName == activityName
         }
         return super.equals(other)
     }
@@ -38,11 +39,10 @@ class AppInfo(val packageName: CharSequence, val activityName: CharSequence?, va
         context: Context
     ): LauncherActivityInfo? {
         val launcherApps = context.getSystemService(Service.LAUNCHER_APPS_SERVICE) as LauncherApps
-        return getUserFromId(user, context)?.let { userHandle ->
-            launcherApps.getActivityList(packageName.toString(), userHandle).firstOrNull { app ->
-                app.name == activityName || activityName == null || activityName == ""
-            }
-        }
+        val userHandle = getUserFromId(user, context)
+        val activityList = launcherApps.getActivityList(packageName.toString(), userHandle)
+        return activityList.firstOrNull { app -> app.name == activityName }
+            ?: activityList.firstOrNull()
     }
 
 

@@ -30,7 +30,8 @@ import de.jrpie.android.launcher.ui.tutorial.tabs.TutorialFragmentUsage
 class TutorialActivity : AppCompatActivity(), UIObject {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        super<AppCompatActivity>.onCreate(savedInstanceState)
+        super<UIObject>.onCreate()
 
         // Initialise layout
         setContentView(R.layout.tutorial)

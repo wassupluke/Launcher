@@ -1,5 +1,6 @@
 package de.jrpie.android.launcher.ui.list.apps
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Rect
@@ -36,6 +37,7 @@ import de.jrpie.android.launcher.uninstallApp
  * @param intention - why the list is displayed ("view", "pick")
  * @param forGesture - the action which an app is chosen for (when the intention is "pick")
  */
+@SuppressLint("NotifyDataSetChanged")
 class AppsRecyclerAdapter(
     val activity: Activity,
     val root: View,

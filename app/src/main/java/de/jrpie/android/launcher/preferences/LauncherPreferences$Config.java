@@ -51,7 +51,7 @@ import eu.jonahbauer.android.preference.annotations.serializer.PreferenceSeriali
                 @PreferenceGroup(name = "display", prefix = "settings_display_", suffix = "_key", value = {
                         @Preference(name = "screen_timeout_disabled", type = boolean.class, defaultValue = "false"),
                         @Preference(name = "full_screen", type = boolean.class, defaultValue = "true"),
-                        @Preference(name = "rotate_screen", type = boolean.class, defaultValue = "false"),
+                        @Preference(name = "rotate_screen", type = boolean.class, defaultValue = "true"),
                 }),
                 @PreferenceGroup(name = "functionality", prefix = "settings_functionality_", suffix = "_key", value = {
                         @Preference(name = "search_auto_launch", type = boolean.class, defaultValue = "true"),
