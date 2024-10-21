@@ -8,6 +8,7 @@ import android.util.DisplayMetrics
 import android.view.GestureDetector
 import android.view.KeyEvent
 import android.view.MotionEvent
+import android.view.ViewConfiguration
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
 import androidx.core.view.isVisible
@@ -200,17 +201,20 @@ class HomeActivity : UIObject, AppCompatActivity(),
         val edgeActions = LauncherPreferences.enabled_gestures().edgeSwipe()
         val edgeStrictness = 0.15
 
+        val threshold = ViewConfiguration.get(this).scaledTouchSlop
+
         var gesture = if (abs(diffX) > abs(diffY)) { // horizontal swipe
-            if (diffX > width / 4)
+            if (diffX > threshold)
                 Gesture.SWIPE_LEFT
-            else if (diffX < -width / 4)
+            else if (diffX < -threshold)
                 Gesture.SWIPE_RIGHT
             else null
         } else { // vertical swipe
             // Only open if the swipe was not from the phones top edge
-            if (diffY < -height / 8 && e1.y > 100)
+            // TODO: replace 100px by sensible dp value (e.g. twice the height of the status bar)
+            if (diffY < -threshold && e1.y > 100)
                 Gesture.SWIPE_DOWN
-            else if (diffY > height / 8)
+            else if (diffY > threshold)
                 Gesture.SWIPE_UP
             else null
         }
