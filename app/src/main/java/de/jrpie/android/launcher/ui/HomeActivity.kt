@@ -28,6 +28,7 @@ import kotlin.concurrent.fixedRateTimer
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.tan
 
 
 /**
@@ -203,13 +204,15 @@ class HomeActivity : UIObject, AppCompatActivity(),
 
         val threshold = ViewConfiguration.get(this).scaledTouchSlop
 
-        var gesture = if (abs(diffX) > abs(diffY)) { // horizontal swipe
+        val angularThreshold = tan(Math.PI / 6)
+
+        var gesture = if (angularThreshold * abs(diffX) > abs(diffY)) { // horizontal swipe
             if (diffX > threshold)
                 Gesture.SWIPE_LEFT
             else if (diffX < -threshold)
                 Gesture.SWIPE_RIGHT
             else null
-        } else { // vertical swipe
+        } else if (angularThreshold * abs(diffY) > abs(diffX)){ // vertical swipe
             // Only open if the swipe was not from the phones top edge
             // TODO: replace 100px by sensible dp value (e.g. twice the height of the status bar)
             if (diffY < -threshold && e1.y > 100)
@@ -217,7 +220,7 @@ class HomeActivity : UIObject, AppCompatActivity(),
             else if (diffY > threshold)
                 Gesture.SWIPE_UP
             else null
-        }
+        } else null
 
         if (doubleActions && bufferedPointerCount > 1) {
             gesture = gesture?.let(Gesture::getDoubleVariant)
