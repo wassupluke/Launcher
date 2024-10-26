@@ -1,13 +1,18 @@
 <resources>
-   <!--
-      -
-      - Home
-      -
-      -->
+    <string name="accessibility_service_description">Enable lock screen action</string>
+    <!--
+    -
+    - Home
+    -
+    -->
     <string name="alert_cant_open_title">Can\'t open app</string>
     <string name="alert_cant_open_message">Want to change its settings?</string>
+    <string name="alert_lock_screen_failed">Failed to lock screen</string>
+
 
     <string name="toast_cant_open_message">Open settings to choose an action for this gesture</string>
+    <string name="toast_accessibility_service_not_enabled">μLauncher\'s accessibility service is not enabled. Please enable it in settings</string>
+    <string name="toast_lock_screen_not_supported">Sorry, lock screen is available on Android 9+</string>
 
     <!--
       -
@@ -175,6 +180,7 @@
     <string name="list_other_track_previous">Music: Previous</string>
     <string name="list_other_expand_notifications_panel">Expand notifications panel</string>
     <string name="list_other_nop">Do nothing</string>
+    <string name="list_other_lock_screen">Lock Screen</string>
 
     <!--
       -
