@@ -90,11 +90,11 @@ class ListActivity : AppCompatActivity(), UIObject {
                 if (diff != 0 &&
                     LauncherPreferences.display().fullScreen()
                 ) {
-                    if (binding.listContainer.paddingBottom !== diff) {
+                    if (binding.listContainer.paddingBottom != diff) {
                         binding.listContainer.setPadding(0, 0, 0, diff)
                     }
                 } else {
-                    if (binding.listContainer.paddingBottom !== 0) {
+                    if (binding.listContainer.paddingBottom != 0) {
                         binding.listContainer.setPadding(0, 0, 0, 0)
                     }
                 }
