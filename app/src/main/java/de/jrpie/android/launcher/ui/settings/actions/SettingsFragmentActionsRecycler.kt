@@ -3,6 +3,7 @@ package de.jrpie.android.launcher.ui.settings.actions
 import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -113,6 +115,13 @@ class ActionsRecyclerAdapter(val activity: Activity) :
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
         val gesture = gesturesList[i]
         viewHolder.textView.text = gesture.getLabel(activity)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            val description = gesture.getDescription(activity)
+            viewHolder.textView.tooltipText = description
+            viewHolder.img.tooltipText = description
+            viewHolder.chooseButton.tooltipText = description
+        }
         if (LauncherPreferences.theme().monochromeIcons())
             transformGrayscale(viewHolder.img)
         updateViewHolder(gesture, viewHolder)

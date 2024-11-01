@@ -11,7 +11,9 @@ import de.jrpie.android.launcher.R
  * @param animationOut res id of transition animation (out) when using the gesture to launch an app.
  */
 enum class Gesture(
-    val id: String, private val labelResource: Int,
+    val id: String,
+    private val labelResource: Int,
+    private val descriptionResource: Int,
     internal val defaultsResource: Int,
     private val animationIn: Int = android.R.anim.fade_in,
     private val animationOut: Int = android.R.anim.fade_out
@@ -19,6 +21,7 @@ enum class Gesture(
     VOLUME_UP(
         "action.volume_up",
         R.string.settings_gesture_vol_up,
+        R.string.settings_gesture_description_vol_up,
         R.array.default_volume_up,
         0,
         0
@@ -26,108 +29,136 @@ enum class Gesture(
     VOLUME_DOWN(
         "action.volume_down",
         R.string.settings_gesture_vol_down,
+        R.string.settings_gesture_description_vol_down,
         R.array.default_volume_down, 0, 0
     ),
-    TIME("action.time", R.string.settings_gesture_time, R.array.default_time),
-    DATE("action.date", R.string.settings_gesture_date, R.array.default_date),
+    TIME("action.time",
+        R.string.settings_gesture_time,
+        R.string.settings_gesture_time,
+        R.array.default_time),
+    DATE("action.date",
+        R.string.settings_gesture_date,
+        R.string.settings_gesture_description_date,
+        R.array.default_date),
     LONG_CLICK(
         "action.long_click",
         R.string.settings_gesture_long_click,
+        R.string.settings_gesture_description_long_click,
         R.array.default_long_click, 0, 0
     ),
     DOUBLE_CLICK(
         "action.double_click",
         R.string.settings_gesture_double_click,
+        R.string.settings_gesture_description_double_click,
         R.array.default_double_click, 0, 0
     ),
-    SWIPE_UP("action.up", R.string.settings_gesture_up, R.array.default_up, R.anim.bottom_up),
+    SWIPE_UP("action.up",
+        R.string.settings_gesture_up,
+        R.string.settings_gesture_description_up,
+        R.array.default_up,
+        R.anim.bottom_up),
     SWIPE_UP_LEFT_EDGE(
         "action.up_left",
         R.string.settings_gesture_up_left_edge,
+        R.string.settings_gesture_description_up_left_edge,
         R.array.default_up_left,
         R.anim.bottom_up
     ),
     SWIPE_UP_RIGHT_EDGE(
         "action.up_right",
         R.string.settings_gesture_up_right_edge,
+        R.string.settings_gesture_description_up_right_edge,
         R.array.default_up_right,
         R.anim.bottom_up
     ),
     SWIPE_UP_DOUBLE(
         "action.double_up",
         R.string.settings_gesture_double_up,
+        R.string.settings_gesture_description_double_up,
         R.array.default_double_up,
         R.anim.bottom_up
     ),
     SWIPE_DOWN(
         "action.down",
         R.string.settings_gesture_down,
+        R.string.settings_gesture_description_down,
         R.array.default_down,
         R.anim.top_down
     ),
     SWIPE_DOWN_LEFT_EDGE(
         "action.down_left",
         R.string.settings_gesture_down_left_edge,
+        R.string.settings_gesture_description_down_left_edge,
         R.array.default_down_left,
         R.anim.top_down
     ),
     SWIPE_DOWN_RIGHT_EDGE(
         "action.down_right",
         R.string.settings_gesture_down_right_edge,
+        R.string.settings_gesture_description_down_right_edge,
         R.array.default_down_right,
         R.anim.top_down
     ),
     SWIPE_DOWN_DOUBLE(
         "action.double_down",
         R.string.settings_gesture_double_down,
+        R.string.settings_gesture_description_double_down,
         R.array.default_double_down,
         R.anim.top_down
     ),
     SWIPE_LEFT(
         "action.left",
         R.string.settings_gesture_left,
+        R.string.settings_gesture_description_left,
         R.array.default_left,
         R.anim.right_left
     ),
     SWIPE_LEFT_TOP_EDGE(
         "action.left_top",
         R.string.settings_gesture_left_top_edge,
+        R.string.settings_gesture_description_left_top_edge,
         R.array.default_left_top,
         R.anim.right_left
     ),
     SWIPE_LEFT_BOTTOM_EDGE(
         "action.left_bottom",
         R.string.settings_gesture_left_bottom_edge,
+        R.string.settings_gesture_description_left_bottom_edge,
         R.array.default_left_bottom,
         R.anim.right_left
     ),
     SWIPE_LEFT_DOUBLE(
         "action.double_left",
         R.string.settings_gesture_double_left,
+        R.string.settings_gesture_description_double_left,
         R.array.default_double_left,
         R.anim.right_left
     ),
     SWIPE_RIGHT(
         "action.right",
         R.string.settings_gesture_right,
+        R.string.settings_gesture_description_right,
         R.array.default_right,
         R.anim.left_right
     ),
     SWIPE_RIGHT_TOP_EDGE(
         "action.right_top",
         R.string.settings_gesture_right_top_edge,
+        R.string.settings_gesture_description_right_top_edge,
         R.array.default_right_top,
         R.anim.left_right
     ),
     SWIPE_RIGHT_BOTTOM_EDGE(
         "action.right_bottom",
         R.string.settings_gesture_right_bottom_edge,
+        R.string.settings_gesture_description_right_bottom_edge,
         R.array.default_right_bottom,
         R.anim.left_right
     ),
     SWIPE_RIGHT_DOUBLE(
         "action.double_right",
         R.string.settings_gesture_double_right,
+        R.string.settings_gesture_description_double_right,
         R.array.default_double_right,
         R.anim.left_right
     );
@@ -138,6 +169,9 @@ enum class Gesture(
 
     fun getLabel(context: Context): String {
         return context.resources.getString(this.labelResource)
+    }
+    fun getDescription(context: Context): String {
+        return context.resources.getString(this.descriptionResource)
     }
 
     fun getDoubleVariant(): Gesture {
