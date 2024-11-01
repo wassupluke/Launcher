@@ -6,6 +6,8 @@ import de.jrpie.android.launcher.R
 /**
  * Changes here must also be added to @array/settings_theme_font_values
  */
+
+@Suppress("unused")
 enum class Font(val id: Int) {
     HACK(R.style.fontHack),
     SYSTEM_DEFAULT(R.style.fontSystemDefault),

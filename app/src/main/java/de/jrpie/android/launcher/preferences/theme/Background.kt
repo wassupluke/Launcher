@@ -6,6 +6,7 @@ import android.view.Window
 import android.view.WindowManager
 import de.jrpie.android.launcher.R
 
+@Suppress("unused")
 enum class Background(val id: Int, val dim: Boolean = false, val blur: Boolean = false) {
     TRANSPARENT(R.style.backgroundWallpaper),
     DIM(R.style.backgroundWallpaper, dim = true),
@@ -21,7 +22,7 @@ enum class Background(val id: Int, val dim: Boolean = false, val blur: Boolean =
         val layoutParams: WindowManager.LayoutParams = window.attributes
         // TODO: add a setting to change this?
         var dimAmount = 0.7f
-        var dim = this.dim
+        val dim = this.dim
         var blur = this.blur
 
         // replace blur by more intense dim on old devices
@@ -47,6 +48,6 @@ enum class Background(val id: Int, val dim: Boolean = false, val blur: Boolean =
             }
         }
 
-        window.setAttributes(layoutParams)
+        window.attributes = layoutParams
     }
 }
