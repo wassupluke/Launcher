@@ -95,6 +95,16 @@
             android:key="@string/settings_enabled_gestures_edge_swipe_key"
             android:defaultValue="true"
             android:title="@string/settings_enabled_gestures_edge_swipe"/>
+        <PreferenceCategory
+            android:dependency="@string/settings_enabled_gestures_edge_swipe_key"
+            app:allowDividerAbove="false" >
+            <SeekBarPreference
+                android:key="@string/settings_enabled_gestures_edge_swipe_edge_width_key"
+                android:defaultValue="15"
+                android:max="33"
+                android:title="@string/settings_enabled_gestures_edge_swipe_edge_width"/>
+        </PreferenceCategory>
+
 
 
     </PreferenceCategory>

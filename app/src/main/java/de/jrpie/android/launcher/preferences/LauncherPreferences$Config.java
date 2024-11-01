@@ -60,6 +60,7 @@ import eu.jonahbauer.android.preference.annotations.serializer.PreferenceSeriali
                 @PreferenceGroup(name = "enabled_gestures", prefix = "settings_enabled_gestures_", suffix = "_key", value = {
                         @Preference(name = "double_swipe", type = boolean.class, defaultValue = "true"),
                         @Preference(name = "edge_swipe", type = boolean.class, defaultValue = "true"),
+                        @Preference(name = "edge_swipe_edge_width", type = int.class, defaultValue = "15"),
                 }),
         })
 public final class LauncherPreferences$Config {

@@ -57,6 +57,8 @@ class HomeActivity : UIObject, AppCompatActivity(),
             }
         }
 
+    private var edgeWidth = 0.15f
+
     private var bufferedPointerCount = 1 // how many fingers on screen
     private var pointerBufferTimer = Timer()
 
@@ -99,6 +101,7 @@ class HomeActivity : UIObject, AppCompatActivity(),
 
         LauncherPreferences.getSharedPreferences()
             .registerOnSharedPreferenceChangeListener(sharedPreferencesListener)
+
     }
 
     private fun updateClock() {
@@ -161,6 +164,9 @@ class HomeActivity : UIObject, AppCompatActivity(),
 
     override fun onResume() {
         super.onResume()
+
+        edgeWidth = LauncherPreferences.enabled_gestures().edgeSwipeEdgeWidth() / 100f
+
         updateClock()
     }
 
@@ -200,7 +206,6 @@ class HomeActivity : UIObject, AppCompatActivity(),
 
         val doubleActions = LauncherPreferences.enabled_gestures().doubleSwipe()
         val edgeActions = LauncherPreferences.enabled_gestures().edgeSwipe()
-        val edgeStrictness = 0.15
 
         val threshold = ViewConfiguration.get(this).scaledTouchSlop
 
@@ -227,15 +232,15 @@ class HomeActivity : UIObject, AppCompatActivity(),
         }
 
         if (edgeActions) {
-            if (max(e1.x, e2.x) < edgeStrictness * width) {
+            if (max(e1.x, e2.x) < edgeWidth * width) {
                 gesture = gesture?.let { it.getEdgeVariant(Gesture.Edge.LEFT) }
-            } else if (min(e1.x, e2.x) > (1 - edgeStrictness) * width) {
+            } else if (min(e1.x, e2.x) > (1 - edgeWidth) * width) {
                 gesture = gesture?.let { it.getEdgeVariant(Gesture.Edge.RIGHT) }
             }
 
-            if (max(e1.y, e2.y) < edgeStrictness * height) {
+            if (max(e1.y, e2.y) < edgeWidth * height) {
                 gesture = gesture?.let { it.getEdgeVariant(Gesture.Edge.TOP) }
-            } else if (min(e1.y, e2.y) > (1 - edgeStrictness) * height) {
+            } else if (min(e1.y, e2.y) > (1 - edgeWidth) * height) {
                 gesture = gesture?.let { it.getEdgeVariant(Gesture.Edge.BOTTOM) }
             }
         }

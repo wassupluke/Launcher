@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,9 +11,9 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/settings_appbar"
-        android:background="@null"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@null"
         app:elevation="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -55,6 +54,7 @@
                 android:id="@+id/settings_system"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:gravity="center"
                 android:includeFontPadding="true"
@@ -64,8 +64,7 @@
                 custom:layout_constraintBottom_toBottomOf="parent"
                 custom:layout_constraintStart_toStartOf="parent"
                 custom:layout_constraintTop_toTopOf="parent"
-                custom:type="solid"
-                android:layout_marginStart="8dp" />
+                custom:type="solid" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.tabs.TabLayout
@@ -81,4 +80,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+    <de.jrpie.android.launcher.ui.settings.GestureAreaIndicatorOverlayView
+        android:id="@+id/gestureAreaIndicatorOverlayView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:clickable="false"
+        android:visibility="invisible"
+        android:padding="0dp" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
