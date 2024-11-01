@@ -10,7 +10,6 @@ import android.os.SystemClock
 import android.view.KeyEvent
 import android.widget.Toast
 import de.jrpie.android.launcher.R
-import de.jrpie.android.launcher.actions.LauncherAccessibilityService.Companion.ACTION_LOCK_SCREEN
 import de.jrpie.android.launcher.apps.AppFilter
 import de.jrpie.android.launcher.apps.AppInfo.Companion.INVALID_USER
 import de.jrpie.android.launcher.ui.list.ListActivity
@@ -76,7 +75,7 @@ enum class LauncherAction(
         "launcher:lockScreen",
         R.string.list_other_lock_screen,
         R.drawable.baseline_lock_24px,
-        ::lockScreen
+        LauncherDeviceAdmin::lockScreen
     ),
     NOP("launcher:nop", R.string.list_other_nop, R.drawable.baseline_not_interested_24, {});
 
@@ -201,20 +200,6 @@ private fun expandSettingsPanel(context: Context) {
         Toast.makeText(
             context,
             context.getString(R.string.alert_cant_expand_status_bar_panel),
-            Toast.LENGTH_LONG
-        ).show()
-    }
-}
-
-private fun lockScreen(context: Context){
-    try {
-        context.startService(Intent(context, LauncherAccessibilityService::class.java).apply {
-            action = ACTION_LOCK_SCREEN
-        })
-    } catch (e: Exception) {
-        Toast.makeText(
-            context,
-            context.getString(R.string.alert_lock_screen_failed),
             Toast.LENGTH_LONG
         ).show()
     }
