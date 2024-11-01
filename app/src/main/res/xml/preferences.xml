@@ -89,11 +89,13 @@
             android:title="@string/settings_functionality_auto_keyboard" />
         <SwitchPreference
             android:key="@string/settings_enabled_gestures_double_swipe_key"
+            android:summary="@string/settings_enabled_gestures_double_swipe_summary"
             android:defaultValue="true"
             android:title="@string/settings_enabled_gestures_double_swipe"/>
         <SwitchPreference
             android:key="@string/settings_enabled_gestures_edge_swipe_key"
             android:defaultValue="true"
+            android:summary="@string/settings_enabled_gestures_edge_swipe_summary"
             android:title="@string/settings_enabled_gestures_edge_swipe"/>
         <PreferenceCategory
             android:dependency="@string/settings_enabled_gestures_edge_swipe_key"
