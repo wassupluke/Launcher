@@ -84,6 +84,7 @@ class ActionsRecyclerAdapter(val activity: Activity) :
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
         var textView: TextView = itemView.findViewById(R.id.settings_actions_row_name)
+        var descriptionTextView: TextView = itemView.findViewById(R.id.settings_actions_row_description)
         var img: ImageView = itemView.findViewById(R.id.settings_actions_row_icon_img)
         var chooseButton: Button = itemView.findViewById(R.id.settings_actions_row_button_choose)
         var removeAction: ImageView = itemView.findViewById(R.id.settings_actions_row_remove)
@@ -115,12 +116,16 @@ class ActionsRecyclerAdapter(val activity: Activity) :
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
         val gesture = gesturesList[i]
         viewHolder.textView.text = gesture.getLabel(activity)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
-            val description = gesture.getDescription(activity)
+        val description = gesture.getDescription(activity)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             viewHolder.textView.tooltipText = description
             viewHolder.img.tooltipText = description
             viewHolder.chooseButton.tooltipText = description
+        } else {
+            viewHolder.descriptionTextView.visibility = View.VISIBLE
+            viewHolder.descriptionTextView.text = description
         }
         if (LauncherPreferences.theme().monochromeIcons())
             transformGrayscale(viewHolder.img)

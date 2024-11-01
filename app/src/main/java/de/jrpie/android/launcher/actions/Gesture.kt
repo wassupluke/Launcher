@@ -34,7 +34,7 @@ enum class Gesture(
     ),
     TIME("action.time",
         R.string.settings_gesture_time,
-        R.string.settings_gesture_time,
+        R.string.settings_gesture_description_time,
         R.array.default_time),
     DATE("action.date",
         R.string.settings_gesture_date,

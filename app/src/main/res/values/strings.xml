@@ -25,37 +25,37 @@
       - Settings : Apps
       -
       -->
-    <string name="settings_gesture_up">Swipe Up</string>
+    <string name="settings_gesture_up">Up</string>
     <string name="settings_gesture_description_up">Swipe up</string>
     <string name="settings_gesture_double_up">Double Up</string>
     <string name="settings_gesture_description_double_up">Swipe up with two fingers</string>
-    <string name="settings_gesture_down">Swipe Down</string>
+    <string name="settings_gesture_down">Down</string>
     <string name="settings_gesture_description_down">Swipe down</string>
     <string name="settings_gesture_double_down">Double Down</string>
     <string name="settings_gesture_description_double_down">Swipe down with two fingers</string>
-    <string name="settings_gesture_left">Swipe Left</string>
+    <string name="settings_gesture_left">Left</string>
     <string name="settings_gesture_description_left">Swipe left</string>
     <string name="settings_gesture_double_left">Double Left</string>
     <string name="settings_gesture_description_double_left">Swipe left with two fingers</string>
-    <string name="settings_gesture_right">Swipe Right</string>
+    <string name="settings_gesture_right">Right</string>
     <string name="settings_gesture_description_right">Swipe right</string>
     <string name="settings_gesture_double_right">Double Right</string>
     <string name="settings_gesture_description_double_right">Swipe right with two fingers</string>
-    <string name="settings_gesture_right_top_edge">Swipe Right (Top)</string>
+    <string name="settings_gesture_right_top_edge">Right (Top)</string>
     <string name="settings_gesture_description_right_top_edge">Swipe right at the top of the screen</string>
-    <string name="settings_gesture_right_bottom_edge">Swipe Right (Bottom)</string>
+    <string name="settings_gesture_right_bottom_edge">Right (Bottom)</string>
     <string name="settings_gesture_description_right_bottom_edge">Swipe right at the bottom of the screen</string>
-    <string name="settings_gesture_left_bottom_edge">Swipe Left (Bottom)</string>
+    <string name="settings_gesture_left_bottom_edge">Left (Bottom)</string>
     <string name="settings_gesture_description_left_bottom_edge">Swipe left at the bottom of the screen</string>
-    <string name="settings_gesture_left_top_edge">Swipe Left (Top)</string>
+    <string name="settings_gesture_left_top_edge">Left (Top)</string>
     <string name="settings_gesture_description_left_top_edge">Swipe left at the top of the screen</string>
-    <string name="settings_gesture_up_left_edge">Swipe Up (Left Edge)</string>
+    <string name="settings_gesture_up_left_edge">Up (Left Edge)</string>
     <string name="settings_gesture_description_up_left_edge">Swipe up at the left edge of the screen</string>
-    <string name="settings_gesture_up_right_edge">Swipe Up (Right Edge)</string>
+    <string name="settings_gesture_up_right_edge">Up (Right Edge)</string>
     <string name="settings_gesture_description_up_right_edge">Swipe up at the right edge of the screen</string>
-    <string name="settings_gesture_down_left_edge">Swipe Down (Left Edge)</string>
+    <string name="settings_gesture_down_left_edge">Down (Left Edge)</string>
     <string name="settings_gesture_description_down_left_edge">Swipe down at the left edge of the screen</string>
-    <string name="settings_gesture_down_right_edge">Swipe Down (Right Edge)</string>
+    <string name="settings_gesture_down_right_edge">Down (Right Edge)</string>
     <string name="settings_gesture_description_down_right_edge">Swipe down at the right edge of the screen</string>
     <string name="settings_gesture_vol_up">Volume Up</string>
     <string name="settings_gesture_description_vol_up">Press the volume up button</string>
@@ -65,10 +65,10 @@
     <string name="settings_gesture_description_double_click">Double click an empty area</string>
     <string name="settings_gesture_long_click">Long Click</string>
     <string name="settings_gesture_description_long_click">Long click an empty area</string>
-    <string name="settings_gesture_date">Click on Date</string>
-    <string name="settings_gesture_description_date">Click on Date</string>
-    <string name="settings_gesture_time">Click on Time</string>
-    <string name="settings_gesture_description_time">Click on Time</string>
+    <string name="settings_gesture_date">Date</string>
+    <string name="settings_gesture_description_date">Click on date</string>
+    <string name="settings_gesture_time">Time</string>
+    <string name="settings_gesture_description_time">Click on time</string>
 
 
     <string name="settings_apps_choose">Choose App</string>
