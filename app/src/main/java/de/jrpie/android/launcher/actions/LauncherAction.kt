@@ -108,7 +108,7 @@ enum class LauncherAction(
 
     companion object {
         fun byId(id: String): LauncherAction? {
-            return LauncherAction.values().singleOrNull { it.id == id }
+            return entries.singleOrNull { it.id == id }
         }
 
         fun isOtherAction(id: String): Boolean {
