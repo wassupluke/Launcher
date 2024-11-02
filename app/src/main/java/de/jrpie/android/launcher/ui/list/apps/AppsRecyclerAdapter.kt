@@ -21,6 +21,7 @@ import com.google.android.material.snackbar.Snackbar
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
 import de.jrpie.android.launcher.actions.AppAction
+import de.jrpie.android.launcher.actions.LauncherDeviceAdmin
 import de.jrpie.android.launcher.apps.AppFilter
 import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.apps.DetailedAppInfo
@@ -28,6 +29,7 @@ import de.jrpie.android.launcher.appsList
 import de.jrpie.android.launcher.loadApps
 import de.jrpie.android.launcher.openAppSettings
 import de.jrpie.android.launcher.preferences.LauncherPreferences
+import de.jrpie.android.launcher.preferences.theme.AppListLayout
 import de.jrpie.android.launcher.transformGrayscale
 import de.jrpie.android.launcher.ui.list.ListActivity
 import de.jrpie.android.launcher.uninstallApp
@@ -212,9 +214,13 @@ class AppsRecyclerAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
+        val layout = LauncherPreferences.list_apps().layout()
         val inflater = LayoutInflater.from(parent.context)
-        val view: View = inflater.inflate(R.layout.list_apps_row, parent, false)
-        return ViewHolder(view)
+        val view: View = inflater.inflate(layout.layoutResource, parent, false)
+        val viewHolder = ViewHolder(view)
+        layout.prepareView(viewHolder)
+        return viewHolder
     }
 
     init {

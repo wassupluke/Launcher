@@ -77,7 +77,7 @@ class ListFragmentApps : Fragment(), UIObject {
         binding.listAppsRview.apply {
             // improve performance (since content changes don't change the layout size)
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = LauncherPreferences.list_apps().layout().layoutManager(context)
             // TODO: option to change this to GridLayoutManager(context, numCols)
             adapter = appsRViewAdapter
         }

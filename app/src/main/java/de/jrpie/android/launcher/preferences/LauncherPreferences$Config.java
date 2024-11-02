@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import de.jrpie.android.launcher.R;
 import de.jrpie.android.launcher.apps.AppInfo;
 import de.jrpie.android.launcher.actions.lock.LockMethod;
+import de.jrpie.android.launcher.preferences.theme.AppListLayout;
 import de.jrpie.android.launcher.preferences.theme.Background;
 import de.jrpie.android.launcher.preferences.theme.ColorTheme;
 import de.jrpie.android.launcher.preferences.theme.Font;
@@ -38,6 +39,9 @@ import eu.jonahbauer.android.preference.annotations.serializer.PreferenceSeriali
                         @Preference(name = "hidden", type = Set.class, serializer = LauncherPreferences$Config.AppInfoSetSerializer.class),
                         @Preference(name = "custom_names", type = HashMap.class, serializer = LauncherPreferences$Config.MapAppInfoStringSerializer.class),
                         @Preference(name = "hide_bound_apps", type = boolean.class, defaultValue = "false"),
+                }),
+                @PreferenceGroup(name = "list_apps", prefix = "settings_list_apps_", suffix = "_key", value = {
+                        @Preference(name = "layout", type = AppListLayout.class, defaultValue = "TEXT")
                 }),
                 @PreferenceGroup(name = "gestures", prefix = "settings_gesture_", suffix = "_key", value = {
                 }),
