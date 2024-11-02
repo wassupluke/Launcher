@@ -27,19 +27,37 @@
             android:id="@+id/settings_meta_button_reset_settings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32sp"
             android:text="@string/settings_meta_reset"
             android:textAllCaps="false" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="64sp" />
+
+        <Button
+            android:id="@+id/settings_meta_button_view_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_meta_view_code"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/settings_meta_button_report_bug"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32sp"
             android:text="@string/settings_meta_report_bug"
             android:textAllCaps="false" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="64sp" />
+
+        <Button
+            android:id="@+id/settings_meta_button_join_chat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_meta_join_chat"
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/settings_meta_button_contact"
@@ -54,6 +72,10 @@
             android:layout_height="wrap_content"
             android:text="@string/settings_meta_fork_contact"
             android:textAllCaps="false" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="64sp" />
 
         <Button
             android:id="@+id/settings_meta_button_privacy"

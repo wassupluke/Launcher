@@ -77,6 +77,14 @@ class SettingsFragmentMeta : Fragment(), UIObject {
         }
 
 
+        // view code
+        binding.settingsMetaButtonViewCode.setOnClickListener {
+            openNewTabWindow(
+                getString(R.string.settings_meta_link_github),
+                requireContext()
+            )
+        }
+
         // report a bug
         binding.settingsMetaButtonReportBug.setOnClickListener {
             openNewTabWindow(
@@ -84,6 +92,16 @@ class SettingsFragmentMeta : Fragment(), UIObject {
                 requireContext()
             )
         }
+
+
+        // join chat
+        binding.settingsMetaButtonJoinChat.setOnClickListener {
+            openNewTabWindow(
+                getString(R.string.settings_meta_chat_url),
+                requireContext()
+            )
+        }
+
 
 
         // contact developer

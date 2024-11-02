@@ -109,12 +109,11 @@
           -
         -->
         <string name="settings_meta_link_github" translatable="false">https://github.com/jrpie/Launcher</string>
-        <string name="settings_meta_report_bug_link" translatable="false">https://github.com/jrpie/Launcher/issues/new</string>
+        <string name="settings_meta_report_bug_link" translatable="false">https://github.com/jrpie/Launcher/issues/new/choose</string>
         <string name="settings_meta_fork_contact_url" translatable="false">https://s.jrpie.de/contact</string>
         <string name="settings_meta_privacy_url" translatable="false">https://s.jrpie.de/android-legal</string>
         <string name="settings_meta_contact_url" translatable="false">https://www.finnmglas.com/contact/</string>
-        <string name="settings_meta_discord_url" translatable="false">https://discord.com/invite/jV2AhF8</string>
-
+        <string name="settings_meta_chat_url" translatable="false">https://s.jrpie.de/launcher-chat</string>
 
         <!--
           -

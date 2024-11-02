@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base theme for Launcher -->
     <style name="launcherBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -42,7 +42,7 @@
         <item name="android:textColor">@color/finnmglasTheme_text_color</item>
     </style>
 
-    <style name="colorThemeLight">
+    <style name="colorThemeLight" tools:keep="@style/colorThemeLight">
         <item name="colorPrimary">@color/lightTheme_background_color</item>
         <item name="colorPrimaryDark">@color/lightTheme_background_color</item>
         <item name="colorAccent">@color/lightTheme_accent_color</item>
@@ -80,14 +80,14 @@
     <style name="fontSansSerif">
         <item name="android:fontFamily">sans-serif</item>
     </style>
-    <style name="fontSerif">
+    <style name="fontSerif" tools:keep="@style/fontSerif">
         <item name="android:fontFamily">serif</item>
     </style>
 
 
 
 
-    <style name="PopupMenuCustom" parent="@android:style/Widget.PopupMenu">
+    <style name="PopupMenuCustom" parent="@android:style/Widget.PopupMenu" tools:keep="@style/PopupMenuCustom">
         <item name="android:popupBackground">#252827</item>
     </style>
 

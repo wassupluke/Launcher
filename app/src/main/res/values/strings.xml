@@ -157,9 +157,11 @@
     <string name="settings_meta_reset">Reset Settings</string>
     <string name="settings_meta_reset_confirm">You are going to discard all your preferences. Continue?</string>
 
+    <string name="settings_meta_view_code">View source code</string>
     <string name="settings_meta_report_bug">Report a bug</string>
 
     <string name="settings_meta_fork_contact">Contact the developer of the fork</string>
+    <string name="settings_meta_join_chat">Join µLauncher chat</string>
 
     <string name="settings_meta_privacy">Privacy Policy</string>
 
