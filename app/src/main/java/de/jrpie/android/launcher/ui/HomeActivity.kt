@@ -23,7 +23,9 @@ import de.jrpie.android.launcher.preferences.migratePreferencesToNewVersion
 import de.jrpie.android.launcher.preferences.resetPreferences
 import de.jrpie.android.launcher.ui.tutorial.TutorialActivity
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
+import java.util.Timer
 import kotlin.concurrent.fixedRateTimer
 import kotlin.math.abs
 import kotlin.math.max

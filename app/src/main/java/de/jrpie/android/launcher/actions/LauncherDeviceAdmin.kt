@@ -1,6 +1,5 @@
 package de.jrpie.android.launcher.actions
 
-import android.app.Activity
 import android.app.admin.DeviceAdminReceiver
 import android.app.admin.DevicePolicyManager
 import android.content.ComponentName

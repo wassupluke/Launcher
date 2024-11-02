@@ -1,7 +1,7 @@
 package de.jrpie.android.launcher.apps
 
 import de.jrpie.android.launcher.preferences.LauncherPreferences
-import java.util.*
+import java.util.Locale
 import kotlin.text.Regex.Companion.escapeReplacement
 
 class AppFilter(
@@ -33,7 +33,7 @@ class AppFilter(
             return text.lowercase(Locale.ROOT).replace(disallowedCharsRegex, "")
         }
         if (search.isEmpty()) {
-            return apps;
+            return apps
         } else {
             val r: MutableList<DetailedAppInfo> = ArrayList()
             val appsSecondary: MutableList<DetailedAppInfo> = ArrayList()
@@ -49,7 +49,7 @@ class AppFilter(
             }
             r.addAll(appsSecondary)
 
-            return r;
+            return r
         }
     }
 

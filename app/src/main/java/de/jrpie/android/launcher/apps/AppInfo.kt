@@ -4,7 +4,6 @@ import android.app.Service
 import android.content.Context
 import android.content.pm.LauncherActivityInfo
 import android.content.pm.LauncherApps
-import android.util.Log
 import de.jrpie.android.launcher.getUserFromId
 
 /**

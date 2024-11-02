@@ -67,7 +67,7 @@ class AppAction(private var appInfo: AppInfo) : Action {
 
     override fun isAvailable(context: Context): Boolean {
         // check if app is installed
-        return DetailedAppInfo.fromAppInfo(appInfo, context) != null;
+        return DetailedAppInfo.fromAppInfo(appInfo, context) != null
     }
 
     override fun bindToGesture(editor: SharedPreferences.Editor, id: String) {

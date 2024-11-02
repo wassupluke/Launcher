@@ -1,6 +1,5 @@
 package de.jrpie.android.launcher.ui.settings
 
-import android.animation.AnimatorListenerAdapter
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Canvas
@@ -8,9 +7,6 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.util.AttributeSet
 import android.view.View
-import android.view.animation.AccelerateInterpolator
-import android.view.animation.AlphaAnimation
-import android.view.animation.Animation
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 
 /*
@@ -47,7 +43,7 @@ class GestureAreaIndicatorOverlayView(context: Context?, attrs: AttributeSet?) :
         }
 
 
-    constructor(context: Context) : this(context, null) { }
+    constructor(context: Context) : this(context, null)
 
     private val overlayPaint = Paint()
     init {
