@@ -157,7 +157,7 @@ class ActionsRecyclerAdapter(val activity: Activity) :
     init {
         val doubleActions = LauncherPreferences.enabled_gestures().doubleSwipe()
         val edgeActions = LauncherPreferences.enabled_gestures().edgeSwipe()
-        gesturesList = Gesture.values().filter {
+        gesturesList = Gesture.entries.filter {
             (doubleActions || !it.isDoubleVariant())
                     && (edgeActions || !it.isEdgeVariant())
         } as ArrayList<Gesture>
@@ -167,7 +167,7 @@ class ActionsRecyclerAdapter(val activity: Activity) :
         val doubleActions = LauncherPreferences.enabled_gestures().doubleSwipe()
         val edgeActions = LauncherPreferences.enabled_gestures().edgeSwipe()
         this.gesturesList.clear()
-        gesturesList.addAll(Gesture.values().filter {
+        gesturesList.addAll(Gesture.entries.filter {
             (doubleActions || !it.isDoubleVariant())
                     && (edgeActions || !it.isEdgeVariant())
         })
