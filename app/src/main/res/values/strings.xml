@@ -194,7 +194,7 @@
 
     <string name="list_apps_search_hint">Search Applications</string>
 
-    <string name="list_other_settings">Launcher Settings</string>
+    <string name="list_other_settings">µLauncher Settings</string>
     <string name="list_other_list">All Applications</string>
     <string name="list_other_list_favorites">Favorite Applications</string>
     <string name="list_other_volume_up">Music: Louder</string>
@@ -223,7 +223,7 @@
     <string name="tutorial_usage_text_2">You can launch your apps with a single swipe or button press. Choose some in the next slide.</string>
 
     <string name="tutorial_setup_title">Setup</string>
-    <string name="tutorial_setup_text">We chose some default apps for you, if you want to, you can change them now.</string>
+    <string name="tutorial_setup_text">We chose some default apps for you. You can change them now if you want to:</string>
     <string name="tutorial_setup_text_2">You can also change your selection later.</string>
 
     <string name="tutorial_finish_title">Let\'s go!</string>

@@ -6,7 +6,7 @@
       -
       -->
     <string name="alert_cant_open_title">App kann nicht geöffnet werden</string>
-    <string name="alert_cant_open_message">Willst du die App-Einstellungen anpassen?</string>
+    <string name="alert_cant_open_message">Möchtest du die App-Einstellungen anpassen?</string>
     <string name="toast_cant_open_message">Öffne die Einstellungen um für diese Aktion eine App zu wählen</string>
     <!--
       -
@@ -23,27 +23,49 @@
       -
       -->
     <string name="settings_gesture_up">Nach oben wischen</string>
-    <string name="settings_gesture_double_up">Doppelt hoch</string>
+    <string name="settings_gesture_description_up">Nach oben wischen</string>
+    <string name="settings_gesture_double_up">Doppelt aufwärts</string>
+    <string name="settings_gesture_description_double_up">Mit zwei Fingern nach oben wischen</string>
     <string name="settings_gesture_down">Nach unten wischen</string>
-    <string name="settings_gesture_double_down">Doppelt runter</string>
+    <string name="settings_gesture_description_down">Nach unten wischen</string>
+    <string name="settings_gesture_double_down">Doppelt abwärts</string>
+    <string name="settings_gesture_description_double_down">Mit zwei Fingern nach unten wischen</string>
     <string name="settings_gesture_left">Nach links wischen</string>
+    <string name="settings_gesture_description_left">Nach links wischen</string>
     <string name="settings_gesture_double_left">Doppelt links</string>
+    <string name="settings_gesture_description_double_left">Mit zwei Fingern nach links wischen</string>
     <string name="settings_gesture_right">Nach rechts wischen</string>
+    <string name="settings_gesture_description_right">Nach rechts wischen</string>
     <string name="settings_gesture_double_right">Doppelt rechts</string>
-    <string name="settings_gesture_right_top_edge">Nach rechts wischen (oben)</string>
-    <string name="settings_gesture_right_bottom_edge">Nach rechts wischen (unten)</string>
-    <string name="settings_gesture_left_bottom_edge">"Nach links wischen (unten) "</string>
-    <string name="settings_gesture_left_top_edge">Nach links wischen (oben)</string>
-    <string name="settings_gesture_up_left_edge">Nach oben wischen (links)</string>
-    <string name="settings_gesture_up_right_edge">Nach oben wischen (rechts)</string>
-    <string name="settings_gesture_down_left_edge">Nach unten wischen (links)</string>
-    <string name="settings_gesture_down_right_edge">Nach unten wischen (rechts)</string>
+    <string name="settings_gesture_description_double_right">Mit zwei Fingern nach rechts wischen</string>
+    <string name="settings_gesture_right_top_edge">Rechts (oben)</string>
+    <string name="settings_gesture_description_right_top_edge">An der oberen Kante nach rechts wischen</string>
+    <string name="settings_gesture_right_bottom_edge">Rechts (unten)</string>
+    <string name="settings_gesture_description_right_bottom_edge">An der unteren Kante nach rechts wischen</string>
+    <string name="settings_gesture_left_bottom_edge">Links (unten)</string>
+    <string name="settings_gesture_description_left_bottom_edge">An der unteren Kante nach links wischen</string>
+    <string name="settings_gesture_left_top_edge">Links (oben)</string>
+    <string name="settings_gesture_description_left_top_edge">An der oberen Kante nach links wischen</string>
+    <string name="settings_gesture_up_left_edge">Aufwärts (links)</string>
+    <string name="settings_gesture_description_up_left_edge">An der linken Kante nach oben wischen</string>
+    <string name="settings_gesture_up_right_edge">Aufwärts (rechts)</string>
+    <string name="settings_gesture_description_up_right_edge">An der rechten Kante nach oben wischen</string>
+    <string name="settings_gesture_down_left_edge">Abwärts (links)</string>
+    <string name="settings_gesture_description_down_left_edge">An der linken Kante nach unten wischen</string>
+    <string name="settings_gesture_down_right_edge">Abwärts (rechts)</string>
+    <string name="settings_gesture_description_down_right_edge">An der rechten Kanten nach unten wischen</string>
     <string name="settings_gesture_vol_up">Lautstärke +</string>
+    <string name="settings_gesture_description_vol_up">Die Taste \"Lauter\" drücken</string>
     <string name="settings_gesture_vol_down">Lautstärke -</string>
+    <string name="settings_gesture_description_vol_down">Die Taste \"Leiser\" drücken</string>
     <string name="settings_gesture_double_click">Doppelklick</string>
+    <string name="settings_gesture_description_double_click">In einem leeren Bereich doppelt klicken</string>
     <string name="settings_gesture_long_click">Langer Klick</string>
-    <string name="settings_gesture_date">Datum antippen</string>
-    <string name="settings_gesture_time">Uhr antippen</string>
+    <string name="settings_gesture_description_long_click">In einem leeren Bereich lange klicken</string>
+    <string name="settings_gesture_date">Datum</string>
+    <string name="settings_gesture_description_date">Auf das Datum klicken</string>
+    <string name="settings_gesture_time">Uhr</string>
+    <string name="settings_gesture_description_time">Auf die Uhrzeit klicken</string>
     <string name="settings_apps_choose">App wählen</string>
     <string name="settings_apps_view_all">Alle Anwendungen</string>
     <string name="settings_apps_install">Apps installieren</string>
@@ -73,9 +95,12 @@
     <string name="settings_launcher_section_display">Bildschirm</string>
     <string name="settings_display_screen_timeout_disabled">Bildschirm nicht ausschalten</string>
     <string name="settings_display_full_screen">Vollbild</string>
-    <string name="settings_launcher_section_functionality">Funktionen</string>
+    <string name="settings_display_rotate_screen">Bildschirm drehen</string>
+    <string name="settings_launcher_section_functionality">Funktionalität</string>
     <string name="settings_enabled_gestures_double_swipe">Doppelte Wischaktionen</string>
-    <string name="settings_enabled_gestures_edge_swipe">Kantenwischaktionen</string>
+    <string name="settings_enabled_gestures_double_swipe_summary">Mit zwei Fingern wischen</string>
+    <string name="settings_enabled_gestures_edge_swipe">Kantenaktionen</string>
+    <string name="settings_enabled_gestures_edge_swipe_edge_width">Kantenbreite</string>
     <string name="settings_functionality_auto_launch">Suchergebnis starten</string>
     <string name="settings_functionality_auto_keyboard">Tastatur automatisch öffnen</string>
     <string name="settings_launcher_sensitivity">Empfindlichkeit</string>
@@ -84,16 +109,19 @@
       - Settings : Meta
       -
       -->
+    <string name="settings_apps_hidden">Versteckte Apps</string>
     <string name="settings_general_choose_home_screen">Launcher wählen</string>
     <string name="settings_meta_cant_select_launcher">App Info</string>
     <string name="settings_meta_cant_select_launcher_msg">Dein Gerät unterstützt diese Funktion nicht. Stattdessen die App Details bearbeiten?</string>
-    <string name="settings_meta_show_tutorial">Zum Launcher Tutorial</string>
-    <string name="settings_meta_reset">Zurücksetzen</string>
+    <string name="settings_meta_show_tutorial">Zum Tutorial</string>
+    <string name="settings_meta_reset">Einstellungen zurücksetzen</string>
     <string name="settings_meta_reset_confirm">Alle Einstellungen gehen verloren. Weitermachen?</string>
+    <string name="settings_meta_view_code">Source Code ansehen</string>
     <string name="settings_meta_report_bug">Einen Fehler melden</string>
     <string name="settings_meta_discord">Unserem Discord beitreten</string>
     <string name="settings_meta_contact">Entwickler kontaktieren</string>
     <string name="settings_meta_fork_contact">Entwickler des Fork kontaktieren</string>
+    <string name="settings_meta_join_chat">Dem µLauncher-Chat beitreten</string>
     <string name="settings_meta_privacy">Datenschutzerklärung</string>
     <!--
       -
@@ -101,16 +129,19 @@
       -
       -->
     <string name="list_title_view">Alle Apps</string>
+    <string name="list_title_hidden">Versteckte Apps</string>
     <string name="list_title_pick">App wählen</string>
     <string name="list_tab_app">Apps</string>
     <string name="list_tab_other">Andere</string>
     <string name="list_app_delete">Deinstallieren</string>
     <string name="list_app_info">App Info</string>
+    <string name="list_app_hidden_remove">Sichtbar machen</string>
     <string name="list_removed">Die App wurde entfernt</string>
     <string name="list_not_removed">Die App konnte nicht entfernt werden</string>
     <string name="list_apps_search_hint">Anwendungen suchen</string>
-    <string name="list_other_settings">App Einstellungen</string>
+    <string name="list_other_settings">µLauncher Einstellungen</string>
     <string name="list_other_list">Alle Anwendungen</string>
+    <string name="list_other_list_favorites">Favoriten</string>
     <string name="list_other_volume_up">Musik: Lauter</string>
     <string name="list_other_volume_down">Musik: Leiser</string>
     <string name="list_other_track_next">Musik: Weiter</string>
@@ -121,6 +152,7 @@
       - Tutorial
       -
       -->
+    <string name="list_other_torch">Taschenlampe umschalten</string>
     <string name="tutorial_title">Tutorial</string>
     <string name="tutorial_start_text">Nimm dir kurz Zeit und lerne, wie du diesen Launcher verwendest!</string>
     <string name="tutorial_concept_title">Konzept</string>
@@ -130,8 +162,8 @@
     <string name="tutorial_usage_text">Auf deinem Homescreen siehst du nur das Datum und die Uhrzeit. Keine Ablenkung.</string>
     <string name="tutorial_usage_text_2">Du öffnest Apps indem du über den Bildschirm wischt oder die Lautstärketasten drückst. Gleich wählst du deine Apps.</string>
     <string name="tutorial_setup_title">Einrichtung</string>
-    <string name="tutorial_setup_text">Wir haben dir ein paar Standardapps ausgewählt, du kannst sie gerne ändern.</string>
-    <string name="tutorial_setup_text_2">Du kannst deine Einstellungen auch später noch ändern.</string>
+    <string name="tutorial_setup_text">Wir haben dir ein paar Standardapps ausgewählt, du kannst sie hier gerne ändern:</string>
+    <string name="tutorial_setup_text_2">Du kannst deine Auswahl in den Einstellungen später jederzeit ändern.</string>
     <string name="tutorial_finish_title">Los gehts!</string>
     <string name="tutorial_finish_text">Du bist bereit loszulegen!\n\nIch hoffe diese App ist nützlich für dich!\n\n- Finn (der Entwickler)\n\tund Josia (der einige Änderungen vorgenommen hat und den Fork μLauncher entwickelt)</string>
     <string name="tutorial_finish_button">Starten</string>
@@ -140,5 +172,20 @@
     <string name="list_other_expand_notifications_panel">Benachrichtigungen</string>
     <string name="alert_cant_expand_status_bar_panel">Fehler: Diese Funktion wird von deinem Gerät leider nicht unterstützt.</string>
     <string name="settings_clock_show_seconds">Sekunden anzeigen</string>
+    <string name="undo">Rückgängig</string>
     <string name="list_other_expand_settings_panel">Schnelleinstellungen</string>
+    <string name="settings_enabled_gestures_edge_swipe_summary">An den Kanten wischen</string>
+    <string name="settings_launcher_section_apps">Apps</string>
+    <string name="list_title_favorite">Favoriten</string>
+    <string name="list_app_favorite_add">Zu Favoriten hinzufügen</string>
+    <string name="list_app_favorite_remove">Aus Favoriten entfernen</string>
+    <string name="list_app_hidden_add">Verstecken</string>
+    <string name="list_other_lock_screen">Bildschirm sperren</string>
+    <string name="alert_requires_android_m">Diese Funktionalität benötigt Android 6 oder neuer.</string>
+    <string name="snackbar_app_hidden">Die App wurde versteckt. Sie kann in den Einstellungen wieder sichtbar gemacht werden.</string>
+    <string name="toast_device_admin_not_enabled">µLauncher muss Geräteadministrator sein, um den Bildschirm sperren zu dürfen.</string>
+    <string name="device_admin_explanation">Dies ist erforderlich, damit µLauncher den Bildschirm spreen kann.</string>
+    <string name="device_admin_description">Die Aktion \"Bildschirm sperren\" aktivieren</string>
+    <string name="alert_no_torch_found">Es wurde keine geeignete Kamera gefunden.</string>
+    <string name="alert_torch_access_exception">Fehler: Kein Zugriff auf die Kamera möglich.</string>
 </resources>
