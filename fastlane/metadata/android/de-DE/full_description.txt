@@ -1,22 +1,28 @@
 Diese minimalistische App ersetzt den Startbildschirm. Sie zeigt lediglich Uhrzeit und Datum an.
 
-Die am häufigsten verwendeten Apps lassen sich mittels verschiedener Wischgesten
+Die am häufigsten verwendeten Apps lassen sich mittels verschiedener Gesten
 und Buttons starten.
 Dies lässt sich in den Einstellungen konfigurieren.
 
 Ferner kann eine Liste aller installierten Apps angezeigt
 (Zurück-Button oder Wischen nach oben) und effizient durchsucht werden.
 
-
 Es handelt sich um einen Fork von <a href="https://f-droid.org/packages/com.finnmglas.launcher/">Finn M Glas'
-App Launcher</a>, der sich vor Allem in den folgenden Punkten unterscheidet:
+App Launcher</a>.
 
-* Die App ist kompatibel mit dem <strong>Work Profile</strong>.
-* Es wurden <strong>mehr Gesten</strong> hinzugefügt und die Gestenerkennung verbessert.
-* Die Suchfunktion wurde verbessert.
-* Font Awesome Icons wurden durch <strong>Material Icons</strong> ersetzt, ferner wird die Schriftart Hack verwendet.
-* Der Einstellungsbutton auf dem Startbildschirm wurde entfernt.
-* Es wird das vom System festgelegte Hintergrundbild verwendet. Damit sind auch Live Wallpaper nutzbar.
+<b>Funktionen:</b>
+* Aktionen können an 22 verschiedene Gesten gebunden werden.
+* Die folgenden Aktionen stehen zur Verfügung:
+    - Eine App starten
+    - Alle Apps auflisten
+    - Favorisierte Apps auflisten
+    - Lautstärke lauter / leiser
+    - Musik: Vorheriger / nächster Track
+    - Bildschirm sperren
+    - Taschenlampe
+    - Benachrichtigungen / Schnelleinstellungen anzeigen
+
+* Kompatibel mit dem <strong>Work Profile</strong>.
 
 
 <b>Datenschutz</b>
