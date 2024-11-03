@@ -117,15 +117,9 @@ class ActionsRecyclerAdapter(val activity: Activity) :
         viewHolder.textView.text = gesture.getLabel(activity)
 
         val description = gesture.getDescription(activity)
+        viewHolder.descriptionTextView.text = description
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            viewHolder.textView.tooltipText = description
-            viewHolder.img.tooltipText = description
-            viewHolder.chooseButton.tooltipText = description
-        } else {
-            viewHolder.descriptionTextView.visibility = View.VISIBLE
-            viewHolder.descriptionTextView.text = description
-        }
+
         if (LauncherPreferences.theme().monochromeIcons())
             transformGrayscale(viewHolder.img)
         updateViewHolder(gesture, viewHolder)
