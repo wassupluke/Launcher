@@ -5,10 +5,15 @@ import android.content.Intent
 import android.content.SharedPreferences.Editor
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
+import android.hardware.camera2.CameraAccessException
+import android.hardware.camera2.CameraCharacteristics
+import android.hardware.camera2.CameraManager
 import android.media.AudioManager
+import android.os.Build
 import android.os.SystemClock
 import android.view.KeyEvent
 import android.widget.Toast
+import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.apps.AppFilter
 import de.jrpie.android.launcher.apps.AppInfo.Companion.INVALID_USER
@@ -37,7 +42,7 @@ enum class LauncherAction(
         "launcher:chooseFromFavorites",
         R.string.list_other_list_favorites,
         R.drawable.baseline_favorite_24,
-        { context -> openAppsList(context, true)}
+        { context -> openAppsList(context, true) }
     ),
     VOLUME_UP(
         "launcher:volumeUp",
@@ -76,6 +81,12 @@ enum class LauncherAction(
         R.string.list_other_lock_screen,
         R.drawable.baseline_lock_24px,
         LauncherDeviceAdmin::lockScreen
+    ),
+    TORCH(
+        "launcher:toggleTorch",
+        R.string.list_other_torch,
+        R.drawable.baseline_flashlight_on_24,
+        ::toggleTorch
     ),
     NOP("launcher:nop", R.string.list_other_nop, R.drawable.baseline_not_interested_24, {});
 
@@ -170,6 +181,19 @@ private fun audioVolumeDown(context: Context) {
     )
 }
 /* End media player actions */
+
+private fun toggleTorch(context: Context) {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+        Toast.makeText(
+            context,
+            context.getString(R.string.alert_requires_android_m),
+            Toast.LENGTH_LONG
+        ).show()
+        return
+    }
+
+    (context.applicationContext as Application).torchManager?.toggleTorch(context)
+}
 
 private fun expandNotificationsPanel(context: Context) {
     /* https://stackoverflow.com/a/15582509 */

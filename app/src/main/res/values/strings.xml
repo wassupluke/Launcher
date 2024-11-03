@@ -234,10 +234,13 @@
     <string name="settings">Settings</string>
     <string name="ic_menu_alt">More options</string>
     <string name="alert_cant_expand_status_bar_panel">Error: Can\'t expand status bar.\nThis action is using functionality that is not part of the published Android API. Unfortunately, it does not seem to work on your device.</string>
+    <string name="alert_requires_android_m">This functionality requires Android 6.0 or later.</string>
     <string name="snackbar_app_hidden">App hidden. You can make it visible again in settings.</string>
     <string name="undo">Undo</string>
     <string name="list_other_expand_settings_panel">Quick Settings</string>
     <string name="toast_device_admin_not_enabled">µLauncher needs to be a device admin in order to lock the screen.</string>
     <string name="device_admin_explanation">This is required for the lock screen action.</string>
     <string name="device_admin_description">Enable the lock screen action</string>
+    <string name="alert_no_torch_found">No camera with torch detected.</string>
+    <string name="alert_torch_access_exception">Error: Can\'t access torch.</string>
 </resources>
