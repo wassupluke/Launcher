@@ -3,7 +3,6 @@ package de.jrpie.android.launcher.ui.settings.actions
 import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -33,6 +32,7 @@ import de.jrpie.android.launcher.ui.list.ListActivity
  */
 class SettingsFragmentActionsRecycler : Fragment(), UIObject {
 
+    private var savedScrollPosition = 0
 
     private var sharedPreferencesListener =
         SharedPreferences.OnSharedPreferenceChangeListener { _, _ ->
@@ -60,6 +60,7 @@ class SettingsFragmentActionsRecycler : Fragment(), UIObject {
             setHasFixedSize(true)
             layoutManager = actionViewManager
             adapter = actionViewAdapter
+
         }
         LauncherPreferences.getSharedPreferences()
             .registerOnSharedPreferenceChangeListener(sharedPreferencesListener)
@@ -73,6 +74,20 @@ class SettingsFragmentActionsRecycler : Fragment(), UIObject {
 
         super.onDestroy()
     }
+
+
+    override fun onPause() {
+        savedScrollPosition =
+            (binding.settingsActionsRview.layoutManager as LinearLayoutManager)
+                .findFirstCompletelyVisibleItemPosition()
+        super.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        (binding.settingsActionsRview.layoutManager)?.scrollToPosition(savedScrollPosition)
+    }
 }
 
 class ActionsRecyclerAdapter(val activity: Activity) :
@@ -83,7 +98,8 @@ class ActionsRecyclerAdapter(val activity: Activity) :
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
         var textView: TextView = itemView.findViewById(R.id.settings_actions_row_name)
-        var descriptionTextView: TextView = itemView.findViewById(R.id.settings_actions_row_description)
+        var descriptionTextView: TextView =
+            itemView.findViewById(R.id.settings_actions_row_description)
         var img: ImageView = itemView.findViewById(R.id.settings_actions_row_icon_img)
         var chooseButton: Button = itemView.findViewById(R.id.settings_actions_row_button_choose)
         var removeAction: ImageView = itemView.findViewById(R.id.settings_actions_row_remove)
