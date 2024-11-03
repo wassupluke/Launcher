@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
 import androidx.core.view.isVisible
 import de.jrpie.android.launcher.R
+import de.jrpie.android.launcher.actions.Action
 import de.jrpie.android.launcher.actions.Gesture
 import de.jrpie.android.launcher.actions.LauncherAction
 import de.jrpie.android.launcher.databinding.HomeBinding
@@ -186,8 +187,21 @@ class HomeActivity : UIObject, AppCompatActivity(),
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         when (keyCode) {
             KeyEvent.KEYCODE_BACK -> LauncherAction.CHOOSE.launch(this)
-            KeyEvent.KEYCODE_VOLUME_UP -> Gesture.VOLUME_UP(this)
-            KeyEvent.KEYCODE_VOLUME_DOWN -> Gesture.VOLUME_DOWN(this)
+            KeyEvent.KEYCODE_VOLUME_UP -> {
+                if (Action.forGesture(Gesture.VOLUME_UP) == LauncherAction.VOLUME_UP) {
+                    // Let the OS handle the key event. This works better with some custom ROMs
+                    // and apps like Samsung Sound Assistant.
+                    return false
+                }
+                Gesture.VOLUME_UP(this)
+            }
+            KeyEvent.KEYCODE_VOLUME_DOWN -> {
+                if (Action.forGesture(Gesture.VOLUME_DOWN) == LauncherAction.VOLUME_DOWN) {
+                    // see above
+                    return false
+                }
+                Gesture.VOLUME_DOWN(this)
+            }
         }
         return true
     }
