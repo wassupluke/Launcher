@@ -5,23 +5,32 @@
 
     <!-- Swipe up - Apps list -->
     <string-array name="default_up">
-        <item>launcher:choose</item> <!-- The apps list -->
+        <item>launcher:choose</item> <!-- All Apps -->
     </string-array>
 
-    <string-array name="default_up_left" />
-    <string-array name="default_up_right" />
+    <!-- Swipe up (left edge) - Favorite Apps -->
+    <string-array name="default_up_left">
+        <item>launcher:chooseFromFavorites</item>
+    </string-array>
 
-    <!-- Swipe double up - Translation app -->
+    <!-- Swipe up (right edge) - Maps -->
+    <string-array name="default_up_right">
+        <item>app.organicmaps</item>
+        <item>com.graphhopper.maps</item>
+        <item>net.osmand.plus</item>
+        <item>com.google.android.apps.maps</item>
+    </string-array>
+
+    <!-- Swipe double up - Transportation -->
     <string-array name="default_double_up">
-        <item>com.google.android.apps.translate</item> <!-- Google Translate -->
-        <item>com.microsoft.translator</item> <!-- Microsoft Translate -->
-        <item>translate.speech.text.translation.voicetranslator</item> <!-- MindMover Translate -->
+        <item>de.schildbach.oeffi</item> <!-- Öffi -->
+        <item>de.hafas.android.db</item> <!-- DB Navigator -->
     </string-array>
 
     <!-- Swipe down - Browser -->
     <string-array name="default_down">
         <item>org.mozilla.firefox</item> <!-- Firefox -->
-        <item>org.mozilla.fennec</item>
+        <item>org.mozilla.fennec</item> <!-- Fennec -->
         <item>org.mozilla.fennec_fdroid</item>
         <item>com.brave.browser</item> <!-- Brave Browser -->
         <item>com.duckduckgo.mobile.android</item> <!-- DuckDuckGo Browser -->
@@ -29,8 +38,21 @@
         <item>com.android.chrome</item> <!-- Chrome -->
     </string-array>
 
-    <string-array name="default_down_left" />
-    <string-array name="default_down_right" />
+    <!-- Swipe down (left edge) - Translation -->
+    <string-array name="default_down_left">
+        <item>com.bnyro.translate</item>
+        <item>com.deepl.mobiletranslator</item>
+        <item>com.google.android.apps.translate</item> <!-- Google Translate -->
+        <item>com.microsoft.translator</item> <!-- Microsoft Translate -->
+        <item>translate.speech.text.translation.voicetranslator</item> <!-- MindMover Translate -->
+    </string-array>
+
+    <string-array name="default_down_right">
+        <item>org.fdroid.fdroid</item>
+        <item>org.fdroid.basic</item>
+        <item>dev.imranr.obtainium</item>
+        <item>dev.imranr.obtainium.fdroid</item>
+    </string-array>
 
     <!-- Swipe double down - Secure Browser -->
     <string-array name="default_double_down">
@@ -45,12 +67,24 @@
         <item>com.google.android.gm</item> <!-- Google Mail -->
     </string-array>
 
-    <string-array name="default_right_top" />
-    <string-array name="default_right_bottom" />
+    <!-- Swipe right (top) -->
+    <string-array name="default_right_top">
+        <item>com.android.calculator2</item>
+        <item>com.sec.android.app.popupcalculator</item> <!-- Samsung Calculator -->
+        <item>org.mian.gitnex</item> <!-- GitNex -->
+        <item>com.github.android</item> <!-- GitHub Android -->
+    </string-array>
+
+    <!-- Swipe right (bottom) -->
+    <string-array name="default_right_bottom">
+        <item>com.android.documentsui</item> <!-- File Manager -->
+        <item>com.android.google.documentsui</item> <!-- File Manager -->
+    </string-array>
 
     <!-- Swipe double right -->
     <string-array name="default_double_right">
-        <item>com.android.documentsui</item>
+        <item>be.chvp.nanoledger</item> <!-- NanoLedger -->
+        <item>info.tangential.cone</item>
     </string-array>
 
     <!-- Swipe left - Messengers -->
@@ -61,9 +95,14 @@
         <item>org.thoughtcrime.securesms</item> <!-- Signal -->
     </string-array>
 
-
-    <string-array name="default_left_top" />
-    <string-array name="default_left_bottom" />
+    <string-array name="default_left_top">
+        <item>com.android.messaging</item> <!-- SMS -->
+        <item>com.android.google.messaging</item> <!-- SMS -->
+        <item>com.samsung.android.messaging</item> <!-- Samsung SMS -->
+    </string-array>
+    <string-array name="default_left_bottom">
+        <item>org.thoughtcrime.securesms</item> <!-- Signal -->
+    </string-array>
 
 
     <!-- Swipe double left - More messengers -->
@@ -73,18 +112,14 @@
     </string-array>
 
 
-    <!-- Volume up - Messaging -->
+    <!-- Volume up -->
     <string-array name="default_volume_up">
-        <item>org.thoughtcrime.securesms</item> <!-- Signal -->
-        <item>com.android.messaging</item>
-        <item>com.samsung.android.messaging</item> <!-- Samsung SMS -->
+        <item>launcher:volumeUp</item>
     </string-array>
 
-    <!-- Volume down - Utility -->
+    <!-- Volume down -->
     <string-array name="default_volume_down">
-        <item>com.android.calculator2</item>
-        <item>com.sec.android.app.popupcalculator</item> <!-- Samsung Calculator -->
-        <item>com.github.android</item> <!-- GitHub Android -->
+        <item>launcher:volumeDown</item>
     </string-array>
 
     <!-- Double click - Notes -->
@@ -92,17 +127,20 @@
         <item>it.niedermann.owncloud.notes</item>
         <item>com.samsung.android.app.notes</item> <!-- Samsung Notes -->
         <item>com.sec.android.widgetapp.diotek.smemo</item> <!-- S Memo (older devices) -->
+        <item>launcher:lockScreen</item>
     </string-array>
 
     <!-- Long click - Security -->
     <string-array name="default_long_click">
         <item>com.beemdevelopment.aegis</item> <!-- Aegis 2FA -->
+        <item>org.fedorahosted.freeotp</item>
         <item>launcher:settings</item> <!-- Launcher Settings -->
     </string-array>
 
     <!-- Time / Clock -->
     <string-array name="default_time">
         <item>com.android.deskclock</item>
+        <item>com.google.android.deskclock</item>
         <item>com.sec.android.app.clockpackage</item> <!-- Android Clock -->
     </string-array>
 
