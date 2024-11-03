@@ -115,7 +115,7 @@ class HomeActivity : UIObject, AppCompatActivity(),
 
         var dateFMT = "yyyy-MM-dd"
         var timeFMT = "HH:mm"
-        var period = 100L
+        val period = 100L
         if (LauncherPreferences.clock().showSeconds()) {
             timeFMT += ":ss"
         }
@@ -249,15 +249,15 @@ class HomeActivity : UIObject, AppCompatActivity(),
 
         if (edgeActions) {
             if (max(e1.x, e2.x) < edgeWidth * width) {
-                gesture = gesture?.let { it.getEdgeVariant(Gesture.Edge.LEFT) }
+                gesture = gesture?.getEdgeVariant(Gesture.Edge.LEFT)
             } else if (min(e1.x, e2.x) > (1 - edgeWidth) * width) {
-                gesture = gesture?.let { it.getEdgeVariant(Gesture.Edge.RIGHT) }
+                gesture = gesture?.getEdgeVariant(Gesture.Edge.RIGHT)
             }
 
             if (max(e1.y, e2.y) < edgeWidth * height) {
-                gesture = gesture?.let { it.getEdgeVariant(Gesture.Edge.TOP) }
+                gesture = gesture?.getEdgeVariant(Gesture.Edge.TOP)
             } else if (min(e1.y, e2.y) > (1 - edgeWidth) * height) {
-                gesture = gesture?.let { it.getEdgeVariant(Gesture.Edge.BOTTOM) }
+                gesture = gesture?.getEdgeVariant(Gesture.Edge.BOTTOM)
             }
         }
         gesture?.invoke(this)
