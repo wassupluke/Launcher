@@ -1,6 +1,5 @@
 package de.jrpie.android.launcher.actions
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.hardware.camera2.CameraAccessException
 import android.hardware.camera2.CameraCharacteristics
