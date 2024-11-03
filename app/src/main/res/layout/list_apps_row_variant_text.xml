@@ -22,13 +22,15 @@
         android:id="@+id/list_apps_row_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        android:gravity="start|center_horizontal"
+        android:padding="5dp"
+        android:paddingStart="20dp"
         android:text=""
-        android:textSize="25sp"
-        tools:text="some app"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="some app" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
