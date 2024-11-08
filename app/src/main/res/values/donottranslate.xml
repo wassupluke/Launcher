@@ -102,6 +102,8 @@
         <string name="settings_functionality_search_auto_open_keyboard_key" translatable="false">functionality.search_auto_keyboard</string>
 
 
+        <string name="settings_actions_lock_method_key">settings_action_lock_method</string>
+
 
         <!--
           -

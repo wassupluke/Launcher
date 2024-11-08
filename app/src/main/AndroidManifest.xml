@@ -53,7 +53,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".actions.LauncherDeviceAdmin"
+        <receiver android:name=".actions.lock.LauncherDeviceAdmin"
             android:exported="true"
             android:label="@string/app_name"
             android:description="@string/device_admin_description"
@@ -66,7 +66,7 @@
             </intent-filter>
         </receiver>
 
-        <service android:name=".actions.LauncherAccessibilityService"
+        <service android:name=".actions.lock.LauncherAccessibilityService"
             android:exported="true"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
             android:label="@string/accessibility_service_name">

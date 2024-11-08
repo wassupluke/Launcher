@@ -107,6 +107,10 @@
                 android:title="@string/settings_enabled_gestures_edge_swipe_edge_width"/>
         </PreferenceCategory>
 
+        <Preference
+            android:key="@string/settings_actions_lock_method_key"
+            android:title="@string/settings_actions_lock_method" />
+
 
 
     </PreferenceCategory>

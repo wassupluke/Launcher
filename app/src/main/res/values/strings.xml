@@ -247,6 +247,37 @@
     <string name="toast_accessibility_service_not_enabled">μLauncher\'s accessibility service is not enabled. Please enable it in settings</string>
     <string name="toast_lock_screen_not_supported">Error: Locking the screen using accessibility is not supported on this device. Please use device admin instead.</string>
     <string name="accessibility_service_name">µLauncher - lock screen</string>
-    <string name="accessibility_service_description">Setting µLauncher as an accessibility service allows it to lock the screen. Note that excessive permissions are required, you should never grant such permissions lightly to any app. µLauncher will use the accessibility service only for locking the screen. You should check the source code to make sure. Note that locking the screen can also be accomplished by granting µLauncher device administrator permissions. Those are more fine grained. However that method doesn\'t work with fingerprint and facial recognition.</string>
+    <string name="accessibility_service_description">
+        Setting µLauncher as an accessibility service allows it to lock the screen.
+        Note that excessive permissions are required. You should never grant such permissions lightly to any app.
 
+        µLauncher will use the accessibility service only for locking the screen. You can check the source code to make sure.
+
+        Note that locking the screen can also be accomplished by granting µLauncher device administrator permissions. However that method doesn\'t work with fingerprint and face unlock.
+    </string>
+
+
+    <string name="screen_lock_method_dialog_title">Choose Method for Locking</string>
+    <string name="screen_lock_method_dialog_text"><![CDATA[
+        <h1>Choose locking method</h1>
+        There are two methods to lock the screen.
+        Unfortunately both have downsides:<br/><br/>
+
+        <h3>Accessibility Service</h3>
+        Requires excessive privileges.
+        µLauncher will use those privileges only for locking the screen.
+        <br/>
+        (You really should not trust a random app you just downloaded with such a claim, but you can check the <a href=\"https://github.com/jrpie/Launcher\">source code</a>.)
+        <br/>
+        <br/>
+        <h3>Device Admin</h3>
+        Doesn\'t work with unlocking by fingerprint or face recognition.
+
+        <br/><br/><br/><br/>
+        You can change your selection later in settings.
+        ]]>
+    </string>
+    <string name="screen_lock_method_use_accessibility">Use Accessibility Service</string>
+    <string name="screen_lock_method_use_device_admin">Use Device Admin</string>
+    <string name="settings_actions_lock_method">Choose method for locking the screen</string>
 </resources>

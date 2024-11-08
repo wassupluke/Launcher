@@ -5,6 +5,7 @@ import java.util.Set;
 
 import de.jrpie.android.launcher.R;
 import de.jrpie.android.launcher.apps.AppInfo;
+import de.jrpie.android.launcher.actions.lock.LockMethod;
 import de.jrpie.android.launcher.preferences.theme.Background;
 import de.jrpie.android.launcher.preferences.theme.ColorTheme;
 import de.jrpie.android.launcher.preferences.theme.Font;
@@ -61,6 +62,9 @@ import eu.jonahbauer.android.preference.annotations.serializer.PreferenceSeriali
                         @Preference(name = "double_swipe", type = boolean.class, defaultValue = "true"),
                         @Preference(name = "edge_swipe", type = boolean.class, defaultValue = "true"),
                         @Preference(name = "edge_swipe_edge_width", type = int.class, defaultValue = "15"),
+                }),
+                @PreferenceGroup(name = "actions", prefix = "settings_actions_", suffix = "_key", value = {
+                        @Preference(name = "lock_method", type = LockMethod.class, defaultValue = "DEVICE_ADMIN"),
                 }),
         })
 public final class LauncherPreferences$Config {

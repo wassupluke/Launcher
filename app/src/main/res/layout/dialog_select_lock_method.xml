@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:layout_height="match_parent">
+    <de.jrpie.android.launcher.ui.util.HtmlTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/screen_lock_method_dialog_text"
+        android:id="@+id/dialog_select_lock_method_text"
+        android:textColor="@color/material_dynamic_primary0"
+        />
+</LinearLayout>

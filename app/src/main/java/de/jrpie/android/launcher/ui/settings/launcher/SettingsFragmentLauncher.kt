@@ -7,6 +7,7 @@ import androidx.preference.PreferenceFragmentCompat
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.actions.openAppsList
 import de.jrpie.android.launcher.preferences.LauncherPreferences
+import de.jrpie.android.launcher.actions.lock.LockMethod
 import de.jrpie.android.launcher.setDefaultHomeScreen
 
 
@@ -72,6 +73,15 @@ class SettingsFragmentLauncher : PreferenceFragmentCompat() {
         )
         hiddenApps?.setOnPreferenceClickListener {
             openAppsList(requireContext(), favorite = false, hidden = true)
+            true
+        }
+
+        val lockMethod = findPreference<androidx.preference.Preference>(
+            LauncherPreferences.actions().keys().lockMethod()
+        )
+
+        lockMethod?.setOnPreferenceClickListener {
+            LockMethod.chooseMethod(requireContext())
             true
         }
         updateVisibility()

@@ -12,9 +12,9 @@ import android.view.KeyEvent
 import android.widget.Toast
 import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.R
-import de.jrpie.android.launcher.actions.LauncherAccessibilityService.Companion.ACTION_LOCK_SCREEN
 import de.jrpie.android.launcher.apps.AppFilter
 import de.jrpie.android.launcher.apps.AppInfo.Companion.INVALID_USER
+import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.ui.list.ListActivity
 import de.jrpie.android.launcher.ui.settings.SettingsActivity
 
@@ -78,7 +78,7 @@ enum class LauncherAction(
         "launcher:lockScreen",
         R.string.list_other_lock_screen,
         R.drawable.baseline_lock_24px,
-        LauncherDeviceAdmin::lockScreen
+        { c -> LauncherPreferences.actions().lockMethod().lockOrEnable(c) }
     ),
     TORCH(
         "launcher:toggleTorch",

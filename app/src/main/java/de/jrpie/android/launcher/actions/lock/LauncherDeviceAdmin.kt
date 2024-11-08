@@ -1,4 +1,4 @@
-package de.jrpie.android.launcher.actions
+package de.jrpie.android.launcher.actions.lock
 
 import android.app.admin.DeviceAdminReceiver
 import android.app.admin.DevicePolicyManager
@@ -18,11 +18,17 @@ class LauncherDeviceAdmin : DeviceAdminReceiver() {
 
             val intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN).apply {
                 putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, getComponentName(context))
-                putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,
-                    context.getString(R.string.device_admin_explanation))
+                putExtra(
+                    DevicePolicyManager.EXTRA_ADD_EXPLANATION,
+                    context.getString(R.string.device_admin_explanation)
+                )
             }
             context.startActivity(intent)
+        }
 
+        fun isDeviceAdmin(context: Context): Boolean {
+            val dpm = context.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
+            return dpm.isAdminActive(getComponentName(context))
         }
 
         private fun assertDeviceAdmin(context: Context): Boolean {
@@ -36,17 +42,15 @@ class LauncherDeviceAdmin : DeviceAdminReceiver() {
                 requestDeviceAdmin(context)
                 return false
             }
-
             return true
         }
 
         fun lockScreen(context: Context) {
+
             assertDeviceAdmin(context) || return
 
             val dpm = context.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
             dpm.lockNow()
         }
     }
-
-
 }
