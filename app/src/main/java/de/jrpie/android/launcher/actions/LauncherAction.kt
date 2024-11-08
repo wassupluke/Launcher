@@ -12,6 +12,7 @@ import android.view.KeyEvent
 import android.widget.Toast
 import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.R
+import de.jrpie.android.launcher.actions.LauncherAccessibilityService.Companion.ACTION_LOCK_SCREEN
 import de.jrpie.android.launcher.apps.AppFilter
 import de.jrpie.android.launcher.apps.AppInfo.Companion.INVALID_USER
 import de.jrpie.android.launcher.ui.list.ListActivity
@@ -252,8 +253,3 @@ fun openAppsList(context: Context, favorite: Boolean = false, hidden: Boolean = 
 
     context.startActivity(intent)
 }
-
-
-
-
-
