@@ -61,6 +61,7 @@
 
     <!-- Swipe right - Mail -->
     <string-array name="default_right">
+        <item>net.thunderbird.android</item> <!-- Thunderbird -->
         <item>com.fsck.k9</item> <!-- k9-mail -->
         <item>de.web.mobile.android.mail</item> <!-- WebMail -->
         <item>com.samsung.android.email.provider</item> <!-- Samsung Mail -->
