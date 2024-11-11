@@ -1,8 +1,10 @@
 <!-- Shields from shields.io -->
 [![][shield-release]][latest-release]
+[![Android CI](https://github.com/jrpie/Launcher/actions/workflows/android.yml/badge.svg)](https://github.com/jrpie/Launcher/actions/workflows/android.yml)
 [![][shield-license]][license]
 [![Chat on Matrix](https://matrix.to/img/matrix-badge.svg)][matrix]
 [![Chat on Discord](https://img.shields.io/badge/discord-join%20chat-007ec6.svg?style=flat)][discord]
+
 
 
 
@@ -39,6 +41,7 @@ There are several ways to contribute to this app:
   - Open a new pull request.
 
 
+See [BUILD.md](BUILD.md) for instructions how to build this project.
 
 ## Notable changes compared to [Finn's Launcher][original-repo]:
 

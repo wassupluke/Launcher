@@ -11,6 +11,8 @@ cd Launcher
 ./gradlew build
 ```
 
+Note that you need to sign the apk.
+
 
 See [this guide](https://developer.android.com/build/building-cmdline)
 for further instructions.
