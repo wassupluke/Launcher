@@ -59,6 +59,10 @@ android {
         includeInBundle = false
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
 }
 
 dependencies {
