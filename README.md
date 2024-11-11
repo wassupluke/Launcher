@@ -18,8 +18,8 @@ Your home screen only displays the date, time and a wallpaper.
 Pressing back or swiping up (this can be configures) opens a list
 of all installed apps, which can be searched efficiently.
 
-
 This is a fork of [finnmglas's app Launcher][original-repo].
+
 
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
      alt="Get it on F-Droid"
@@ -29,6 +29,23 @@ This is a fork of [finnmglas's app Launcher][original-repo].
      height="80">](https://play.google.com/store/apps/details?id=de.jrpie.android.launcher)
 
 Or download the latest APK from the [Releases Section](https://github.com/jrpie/Launcher/releases/latest).
+
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.jpg"
+     alt="screenshot"
+     height="400">
+     <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/2.jpg"
+     alt="screenshot"
+     height="400">
+     <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/3.jpg"
+     alt="screenshot"
+     height="400">
+     <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/4.jpg"
+     alt="screenshot"
+     height="400">
+     <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/5.jpg"
+     alt="screenshot"
+     height="400">
+
 
 ## Contributing
 
