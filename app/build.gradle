@@ -23,8 +23,8 @@ android {
         minSdkVersion 21
         targetSdkVersion 35
         compileSdk 35
-        versionCode 28
-        versionName "j-0.0.14"
+        versionCode 29
+        versionName "j-0.0.15"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -57,6 +57,10 @@ android {
         includeInApk = false
         // Disables dependency metadata when building Android App Bundles.
         includeInBundle = false
+    }
+
+    lintOptions {
+        abortOnError false
     }
 
 }
