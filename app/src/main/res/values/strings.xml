@@ -142,6 +142,7 @@
 
     <string name="settings_launcher_section_apps">Apps</string>
     <string name="settings_apps_hidden">Hidden apps</string>
+    <string name="settings_apps_hide_bound_apps">Don\'t show apps that are bound to a gesture in the app list</string>
 
     <!--
       -

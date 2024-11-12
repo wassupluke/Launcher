@@ -16,7 +16,7 @@ import de.jrpie.android.launcher.apps.DetailedAppInfo
 import de.jrpie.android.launcher.getIntent
 import de.jrpie.android.launcher.openAppSettings
 
-class AppAction(private var appInfo: AppInfo) : Action {
+class AppAction(val appInfo: AppInfo) : Action {
 
     override fun invoke(context: Context, rect: Rect?): Boolean {
         val packageName = appInfo.packageName.toString()

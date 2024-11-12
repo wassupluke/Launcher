@@ -124,6 +124,11 @@
             android:title="@string/settings_apps_hidden"
             />
 
+        <SwitchPreference
+            android:key="@string/settings_apps_hide_bound_apps_key"
+            android:title="@string/settings_apps_hide_bound_apps"
+            android:defaultValue="false" />
+
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/settings_launcher_section_display"

@@ -2,6 +2,7 @@ package de.jrpie.android.launcher.actions
 
 import android.content.Context
 import de.jrpie.android.launcher.R
+import de.jrpie.android.launcher.preferences.LauncherPreferences
 
 /**
  * @param id internal id to serialize the action. Used as a key in shared preferences.
@@ -32,14 +33,18 @@ enum class Gesture(
         R.string.settings_gesture_description_vol_down,
         R.array.default_volume_down, 0, 0
     ),
-    TIME("action.time",
+    TIME(
+        "action.time",
         R.string.settings_gesture_time,
         R.string.settings_gesture_description_time,
-        R.array.default_time),
-    DATE("action.date",
+        R.array.default_time
+    ),
+    DATE(
+        "action.date",
         R.string.settings_gesture_date,
         R.string.settings_gesture_description_date,
-        R.array.default_date),
+        R.array.default_date
+    ),
     LONG_CLICK(
         "action.long_click",
         R.string.settings_gesture_long_click,
@@ -52,11 +57,13 @@ enum class Gesture(
         R.string.settings_gesture_description_double_click,
         R.array.default_double_click, 0, 0
     ),
-    SWIPE_UP("action.up",
+    SWIPE_UP(
+        "action.up",
         R.string.settings_gesture_up,
         R.string.settings_gesture_description_up,
         R.array.default_up,
-        R.anim.bottom_up),
+        R.anim.bottom_up
+    ),
     SWIPE_UP_LEFT_EDGE(
         "action.up_left",
         R.string.settings_gesture_up_left_edge,
@@ -170,6 +177,7 @@ enum class Gesture(
     fun getLabel(context: Context): String {
         return context.resources.getString(this.labelResource)
     }
+
     fun getDescription(context: Context): String {
         return context.resources.getString(this.descriptionResource)
     }
@@ -240,6 +248,16 @@ enum class Gesture(
 
             else -> false
         }
+    }
+
+    fun isEnabled(): Boolean {
+        if (isEdgeVariant()) {
+            return LauncherPreferences.enabled_gestures().edgeSwipe()
+        }
+        if (isDoubleVariant()) {
+            return LauncherPreferences.enabled_gestures().doubleSwipe()
+        }
+        return true
     }
 
     operator fun invoke(context: Context) {
