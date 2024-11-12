@@ -117,28 +117,28 @@ enum class Gesture(
         "action.left",
         R.string.settings_gesture_left,
         R.string.settings_gesture_description_left,
-        R.array.default_left,
+        R.array.default_messengers,
         R.anim.right_left
     ),
     SWIPE_LEFT_TOP_EDGE(
         "action.left_top",
         R.string.settings_gesture_left_top_edge,
         R.string.settings_gesture_description_left_top_edge,
-        R.array.default_left_top,
+        R.array.default_messengers,
         R.anim.right_left
     ),
     SWIPE_LEFT_BOTTOM_EDGE(
         "action.left_bottom",
         R.string.settings_gesture_left_bottom_edge,
         R.string.settings_gesture_description_left_bottom_edge,
-        R.array.default_left_bottom,
+        R.array.default_messengers,
         R.anim.right_left
     ),
     SWIPE_LEFT_DOUBLE(
         "action.double_left",
         R.string.settings_gesture_double_left,
         R.string.settings_gesture_description_double_left,
-        R.array.default_double_left,
+        R.array.default_messengers,
         R.anim.right_left
     ),
     SWIPE_RIGHT(
