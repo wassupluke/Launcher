@@ -28,6 +28,7 @@ import eu.jonahbauer.android.preference.annotations.serializer.PreferenceSeriali
                 @PreferenceGroup(name = "apps", prefix = "settings_apps_", suffix = "_key", value = {
                         @Preference(name = "favorites", type = Set.class, serializer = LauncherPreferences$Config.AppInfoSetSerializer.class),
                         @Preference(name = "hidden", type = Set.class, serializer = LauncherPreferences$Config.AppInfoSetSerializer.class),
+                        @Preference(name = "hide_bound_apps", type = boolean.class, defaultValue = "false"),
                 }),
                 @PreferenceGroup(name = "gestures", prefix = "settings_gesture_", suffix = "_key", value = {
                 }),

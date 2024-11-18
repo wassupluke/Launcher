@@ -1,8 +1,10 @@
 <!-- Shields from shields.io -->
 [![][shield-release]][latest-release]
+[![Android CI](https://github.com/jrpie/Launcher/actions/workflows/android.yml/badge.svg)](https://github.com/jrpie/Launcher/actions/workflows/android.yml)
 [![][shield-license]][license]
 [![Chat on Matrix](https://matrix.to/img/matrix-badge.svg)][matrix]
 [![Chat on Discord](https://img.shields.io/badge/discord-join%20chat-007ec6.svg?style=flat)][discord]
+
 
 
 
@@ -16,8 +18,8 @@ Your home screen only displays the date, time and a wallpaper.
 Pressing back or swiping up (this can be configures) opens a list
 of all installed apps, which can be searched efficiently.
 
-
 This is a fork of [finnmglas's app Launcher][original-repo].
+
 
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
      alt="Get it on F-Droid"
@@ -27,6 +29,23 @@ This is a fork of [finnmglas's app Launcher][original-repo].
      height="80">](https://play.google.com/store/apps/details?id=de.jrpie.android.launcher)
 
 Or download the latest APK from the [Releases Section](https://github.com/jrpie/Launcher/releases/latest).
+
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.jpg"
+     alt="screenshot"
+     height="400">
+     <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/2.jpg"
+     alt="screenshot"
+     height="400">
+     <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/3.jpg"
+     alt="screenshot"
+     height="400">
+     <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/4.jpg"
+     alt="screenshot"
+     height="400">
+     <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/5.jpg"
+     alt="screenshot"
+     height="400">
+
 
 ## Contributing
 
@@ -39,6 +58,7 @@ There are several ways to contribute to this app:
   - Open a new pull request.
 
 
+See [BUILD.md](BUILD.md) for instructions how to build this project.
 
 ## Notable changes compared to [Finn's Launcher][original-repo]:
 

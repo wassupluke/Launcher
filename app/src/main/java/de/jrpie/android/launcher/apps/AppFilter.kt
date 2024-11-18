@@ -1,5 +1,8 @@
 package de.jrpie.android.launcher.apps
 
+import de.jrpie.android.launcher.actions.Action
+import de.jrpie.android.launcher.actions.AppAction
+import de.jrpie.android.launcher.actions.Gesture
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import java.util.Locale
 import kotlin.text.Regex.Companion.escapeReplacement
@@ -14,20 +17,29 @@ class AppFilter(
 
         val hidden = LauncherPreferences.apps().hidden() ?: setOf()
         val favorites = LauncherPreferences.apps().favorites() ?: setOf()
+
         apps = apps.filter { info ->
             favoritesVisibility.predicate(favorites, info)
                     && hiddenVisibility.predicate(hidden, info)
         }
 
+        if (LauncherPreferences.apps().hideBoundApps()) {
+            val boundApps = Gesture.entries
+                .filter(Gesture::isEnabled)
+                .mapNotNull { g -> (Action.forGesture(g) as? AppAction)?.appInfo }
+                .toSet()
+            apps = apps.filterNot { info -> boundApps.contains(info.app) }
+        }
+
         // normalize text for search
-        var allowedSpecialCharacters = search
+        val allowedSpecialCharacters = search
             .lowercase(Locale.ROOT)
             .toCharArray()
             .distinct()
             .filter { c -> !c.isLetter() }
             .map { c -> escapeReplacement(c.toString()) }
             .fold("") { x, y -> x + y }
-        var disallowedCharsRegex = "[^\\p{L}$allowedSpecialCharacters]".toRegex()
+        val disallowedCharsRegex = "[^\\p{L}$allowedSpecialCharacters]".toRegex()
 
         fun normalize(text: String): String {
             return text.lowercase(Locale.ROOT).replace(disallowedCharsRegex, "")
