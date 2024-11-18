@@ -3,9 +3,13 @@ package de.jrpie.android.launcher.preferences
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
+import de.jrpie.android.launcher.BuildConfig
 import de.jrpie.android.launcher.actions.Action
+import de.jrpie.android.launcher.apps.AppInfo
+import de.jrpie.android.launcher.apps.DetailedAppInfo
 import de.jrpie.android.launcher.preferences.theme.Background
 import de.jrpie.android.launcher.preferences.theme.ColorTheme
+import de.jrpie.android.launcher.ui.HomeActivity
 
 /* Current version of the structure of preferences.
  * Increase when breaking changes are introduced and write an appropriate case in
@@ -413,6 +417,19 @@ fun resetPreferences(context: Context) {
     Log.i(TAG, "resetting preferences")
     LauncherPreferences.clear()
     LauncherPreferences.internal().versionCode(PREFERENCE_VERSION)
+
+    LauncherPreferences.apps().hidden(
+        LauncherPreferences.apps().hidden().also {
+            it.add(
+                DetailedAppInfo.fromAppInfo(
+                    AppInfo(
+                        BuildConfig.APPLICATION_ID,
+                        HomeActivity::class.java.name,
+                        AppInfo.INVALID_USER
+                    ), context
+                )?.app
+            )
+        })
 
     Action.resetToDefaultActions(context)
 }
