@@ -22,28 +22,28 @@
       - Settings : Apps
       -
       -->
-    <string name="settings_gesture_up">Deslizar para cima</string>
+    <string name="settings_gesture_up">Para cima</string>
     <string name="settings_gesture_double_up">2 dedos para cima</string>
-    <string name="settings_gesture_down">Deslizar para baixo</string>
+    <string name="settings_gesture_down">Para baixo</string>
     <string name="settings_gesture_double_down">2 dedos para baixo</string>
-    <string name="settings_gesture_left">Deslizar para esquerda</string>
+    <string name="settings_gesture_left">Para esquerda</string>
     <string name="settings_gesture_double_left">2 dedos para esquerda</string>
-    <string name="settings_gesture_right">Deslizar para direita</string>
+    <string name="settings_gesture_right">Para direita</string>
     <string name="settings_gesture_double_right">2 dedos para direita</string>
-    <string name="settings_gesture_right_top_edge">Deslizar para direita (Cima)</string>
-    <string name="settings_gesture_right_bottom_edge">Deslizar para direita (Baixo)</string>
-    <string name="settings_gesture_left_bottom_edge">Deslizar para esquerda (Baixo)</string>
-    <string name="settings_gesture_left_top_edge">Deslizar para esquerda (Cima)</string>
-    <string name="settings_gesture_up_left_edge">Deslizar para cima (Borda esquerda)</string>
-    <string name="settings_gesture_up_right_edge">Deslizar para cima (Borda direita)</string>
-    <string name="settings_gesture_down_left_edge">Deslizar para baixo (Borda esquerda)</string>
-    <string name="settings_gesture_down_right_edge">Deslizar para baixo (Borda direita)</string>
+    <string name="settings_gesture_right_top_edge">Para direita (No topo)</string>
+    <string name="settings_gesture_right_bottom_edge">Para direita (em baixo)</string>
+    <string name="settings_gesture_left_bottom_edge">Para esquerda (Em baixo)</string>
+    <string name="settings_gesture_left_top_edge">Para esquerda (No topo)</string>
+    <string name="settings_gesture_up_left_edge">Para cima (Borda esquerda)</string>
+    <string name="settings_gesture_up_right_edge">Para cima (Borda direita)</string>
+    <string name="settings_gesture_down_left_edge">Para baixo (Borda esquerda)</string>
+    <string name="settings_gesture_down_right_edge">Para baixo (Borda direita)</string>
     <string name="settings_gesture_vol_up">Aumento de volume</string>
     <string name="settings_gesture_vol_down">Diminuição de volume</string>
     <string name="settings_gesture_double_click">Toque duplo</string>
     <string name="settings_gesture_long_click">Toque longo</string>
-    <string name="settings_gesture_date">Toque em Data</string>
-    <string name="settings_gesture_time">Toque em Tempo</string>
+    <string name="settings_gesture_date">Data</string>
+    <string name="settings_gesture_time">Tempo</string>
     <string name="settings_apps_choose">Selecione um app</string>
     <string name="settings_apps_view_all">Ver todos os apps</string>
     <string name="settings_apps_install">Instalar aplicativos</string>
@@ -95,7 +95,7 @@
       - List (Launchers app drawer)
       -
       -->
-    <string name="list_title_view">Todos os apps</string>
+    <string name="list_title_view">Todos aplicativos</string>
     <string name="list_title_pick">Escolha um app</string>
     <string name="list_tab_app">Aplicativos</string>
     <string name="list_tab_other">Outros</string>
@@ -104,7 +104,7 @@
     <string name="list_removed">O app selecionado foi removido</string>
     <string name="list_not_removed">Não foi possível remover o app</string>
     <string name="list_apps_search_hint">Pesquisar Aplicativos</string>
-    <string name="list_other_settings">Configurações do Launcher</string>
+    <string name="list_other_settings">Configurações do µLauncher</string>
     <string name="list_other_list">Todos os apps</string>
     <string name="list_other_volume_up">Música: Mais alto</string>
     <string name="list_other_volume_down">Música: Mais silencioso</string>
@@ -125,7 +125,7 @@
     <string name="tutorial_usage_text">Sua tela inicial contém a data e a hora locais. Sem distração.</string>
     <string name="tutorial_usage_text_2">Você pode iniciar seus aplicativos com um toque único ou pressionando um botão. Escolha algumas ações no próximo slide.</string>
     <string name="tutorial_setup_title">Configurar</string>
-    <string name="tutorial_setup_text">Selecionamos alguns aplicativos padrões para você. Se quiser, você pode alterá-los agora.</string>
+    <string name="tutorial_setup_text">Selecionamos alguns aplicativos padrão para você. Se quiser, você pode alterá-los agora:</string>
     <string name="tutorial_setup_text_2">Você também pode alterar suas escolhas mais tarde.</string>
     <string name="tutorial_finish_title">Vamos lá!</string>
     <string name="tutorial_finish_text">Você está pronto para começar!\n\nEspero que isso seja de grande valor para você!\n\n- Finn (que criou o Launcher)\n\te Josia (que fez algumas melhorias e mantém o fork μLauncher)</string>
@@ -138,7 +138,7 @@
     <string name="settings_theme_background">Fundo (lista de apps e configurações)</string>
     <string name="settings_theme_font">Fonte</string>
     <string name="settings_theme_monochrome_icons">Ícones de apps monocromáticos</string>
-    <string name="settings_launcher_section_date_time">Data e hora</string>
+    <string name="settings_launcher_section_date_time"><![CDATA[Data e hora]]></string>
     <string name="settings_clock_show_seconds">Mostrar segundos</string>
     <string name="settings_display_rotate_screen">Girar a tela</string>
     <string name="settings_launcher_section_apps">Apps</string>
@@ -152,4 +152,68 @@
     <string name="list_other_expand_notifications_panel">Expandir painel de notificações</string>
     <string name="snackbar_app_hidden">App está oculto. Você pode torná-lo visível nas configurações.</string>
     <string name="undo">Desfazer</string>
+    <string name="list_other_torch">Ligar lanterna</string>
+    <string name="alert_lock_screen_failed">Erro: Falha ao bloquear a tela.</string>
+    <string name="toast_accessibility_service_not_enabled">O serviço de acessibilidade do μLauncher não está ligado. Entre em configurações para ativar</string>
+    <string name="settings_apps_hide_bound_apps">Não mostrar apps com um gesto atribuído na lista de aplicativos</string>
+    <string name="toast_device_admin_not_enabled">O µLauncher precisa tornar-se o administrador do dispositivo para poder bloquear a tela.</string>
+    <string name="device_admin_explanation">Isto é necessário para realizar a ação de bloqueio da tela.</string>
+    <string name="device_admin_description">Permitir a ação de bloqueio da tela</string>
+    <string name="alert_torch_access_exception">Erro: Não é possível acessar a lanterna.</string>
+    <string name="accessibility_service_name">µLauncher - bloqueio da tela</string>
+    <string name="screen_lock_method_use_accessibility">Usar o Serviço de acessibilidade</string>
+    <string name="screen_lock_method_use_device_admin">Usar o Administrador do dispositivo</string>
+    <string name="screen_lock_method_dialog_title">Escolha um método de bloqueio</string>
+    <string name="settings_actions_lock_method">Escolha um método de bloqueio da tela</string>
+    <string name="list_other_expand_settings_panel">Configurações rápidas</string>
+    <string name="alert_requires_android_m">Essa funcionalidade requer o Android 6.0 ou mais recente.</string>
+    <string name="alert_no_torch_found">Nenhuma câmera com lanterna detectada.</string>
+    <string name="toast_lock_screen_not_supported">Erro: O bloqueio da tela via acessibilidade não é compatível com este aparelho. Tente o administrador do dispositivo como método alternativo.</string>
+    <string name="accessibility_service_description">Definindo µLauncher como um serviço de acessibilidade permite a ele bloquear a tela. Considere que é necessário conceder as permissões extras. Você nunca deveria autorizar essas permissões a qualquer aplicativo sem avaliação. O µLauncher usará o serviço de acessibilidade somente para bloqueio da tela. Você pode verificar o código-fonte para ter certeza. O bloqueio da tela também pode ser realizado com a autorização de permissões de administrador do dispositivo para µLauncher. Embora esse método não funciona com impressão digital e desbloqueio facial.</string>
+    <string name="screen_lock_method_dialog_text"><![CDATA[
+        <h1>Escolha um método de bloqueio</h1>
+        Há dois métodos para bloquear a tela.
+        Infelizmente, ambos têm desvantagens:<br/><br/>
+
+        <h3>Serviço de acessibilidade</h3>
+        Exige permissões excessivas.
+        O µLauncher usará essas permissões apenas para bloquear a tela.
+        <br/>
+        (Você realmente não deveria confiar num app aleatório que você baixou que tá pedindo estas permissões, mas pode verificar o <a href=\"https://github.com/jrpie/Launcher\">código-fonte</a>.)
+        <br/>
+        <br/>
+        <h3>Administrador do dispositivo</h3>
+        Não funciona para desbloqueio por impressão digital ou reconhecimento facial.
+
+        <br/><br/><br/><br/>
+        Você pode alterar sua escolha em configurações à qualquer momento.
+        ]]></string>
+    <string name="settings_gesture_description_up">Deslizar para cima</string>
+    <string name="settings_gesture_description_double_up">Deslize com 2 dedos para cima</string>
+    <string name="settings_gesture_description_down">Deslizar para baixo</string>
+    <string name="settings_gesture_description_double_down">Deslize com 2 dedos para baixo</string>
+    <string name="settings_gesture_description_left">Deslizar para esquerda</string>
+    <string name="settings_gesture_description_double_left">Deslize com 2 dedos para esquerda</string>
+    <string name="settings_gesture_description_right">Deslizar para direita</string>
+    <string name="settings_gesture_description_double_right">Deslize com 2 dedos para direita</string>
+    <string name="settings_gesture_description_right_top_edge">Deslizar para direita no topo da tela</string>
+    <string name="settings_gesture_description_right_bottom_edge">Deslizar para direita em baixo da tela</string>
+    <string name="settings_gesture_description_left_bottom_edge">Deslizar para esquerda em baixo da tela</string>
+    <string name="settings_gesture_description_left_top_edge">Deslizar para esquerda no topo da tela</string>
+    <string name="settings_gesture_description_up_left_edge">Deslizar para cima na borda esquerda da tela</string>
+    <string name="settings_gesture_description_up_right_edge">Deslizar para cima na borda direita da tela</string>
+    <string name="settings_gesture_description_down_left_edge">Deslizar para baixo na borda esquerda da tela</string>
+    <string name="settings_gesture_description_down_right_edge">Deslizar para baixo na borda direita da tela</string>
+    <string name="settings_gesture_description_long_click">Toque longo numa área livre</string>
+    <string name="settings_gesture_description_vol_up">Apertar o botão de aumentar volume</string>
+    <string name="settings_gesture_description_vol_down">Apertar o botão de diminuir volume</string>
+    <string name="settings_gesture_description_double_click">Toque 2 vezes numa área livre</string>
+    <string name="settings_gesture_description_date">Toque na Data</string>
+    <string name="settings_gesture_description_time">Toque na Hora</string>
+    <string name="settings_enabled_gestures_double_swipe_summary">Deslize com 2 dedos</string>
+    <string name="settings_enabled_gestures_edge_swipe_summary">Deslizar na borda da tela</string>
+    <string name="settings_enabled_gestures_edge_swipe_edge_width">Largura da borda</string>
+    <string name="settings_meta_view_code">Ver código-fonte</string>
+    <string name="settings_meta_join_chat">Entre no chat do µLauncher</string>
+    <string name="list_other_lock_screen">Tela de bloqueio</string>
 </resources>
