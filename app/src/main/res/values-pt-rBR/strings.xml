@@ -70,7 +70,7 @@
     <string name="settings_display_full_screen">Usar tela cheia</string>
     <string name="settings_launcher_section_functionality">Funções</string>
     <string name="settings_enabled_gestures_double_swipe">Deslize com 2 dedos</string>
-    <string name="settings_enabled_gestures_edge_swipe">Ações de deslizar nas bordas</string>
+    <string name="settings_enabled_gestures_edge_swipe">Ações de deslize nas bordas</string>
     <string name="settings_functionality_auto_launch">Iniciar resultados da pesquisa</string>
     <string name="settings_functionality_auto_keyboard">Mostrar teclado para pesquisa</string>
     <string name="settings_launcher_sensitivity">Sensibilidade</string>
@@ -188,22 +188,22 @@
         <br/><br/><br/><br/>
         Você pode alterar sua escolha em configurações à qualquer momento.
         ]]></string>
-    <string name="settings_gesture_description_up">Deslizar para cima</string>
+    <string name="settings_gesture_description_up">Deslize para cima</string>
     <string name="settings_gesture_description_double_up">Deslize com 2 dedos para cima</string>
-    <string name="settings_gesture_description_down">Deslizar para baixo</string>
+    <string name="settings_gesture_description_down">Deslize para baixo</string>
     <string name="settings_gesture_description_double_down">Deslize com 2 dedos para baixo</string>
-    <string name="settings_gesture_description_left">Deslizar para esquerda</string>
+    <string name="settings_gesture_description_left">Deslize para esquerda</string>
     <string name="settings_gesture_description_double_left">Deslize com 2 dedos para esquerda</string>
-    <string name="settings_gesture_description_right">Deslizar para direita</string>
+    <string name="settings_gesture_description_right">Deslize para direita</string>
     <string name="settings_gesture_description_double_right">Deslize com 2 dedos para direita</string>
-    <string name="settings_gesture_description_right_top_edge">Deslizar para direita no topo da tela</string>
-    <string name="settings_gesture_description_right_bottom_edge">Deslizar para direita em baixo da tela</string>
-    <string name="settings_gesture_description_left_bottom_edge">Deslizar para esquerda em baixo da tela</string>
-    <string name="settings_gesture_description_left_top_edge">Deslizar para esquerda no topo da tela</string>
-    <string name="settings_gesture_description_up_left_edge">Deslizar para cima na borda esquerda da tela</string>
-    <string name="settings_gesture_description_up_right_edge">Deslizar para cima na borda direita da tela</string>
-    <string name="settings_gesture_description_down_left_edge">Deslizar para baixo na borda esquerda da tela</string>
-    <string name="settings_gesture_description_down_right_edge">Deslizar para baixo na borda direita da tela</string>
+    <string name="settings_gesture_description_right_top_edge">Deslize para direita no topo da tela</string>
+    <string name="settings_gesture_description_right_bottom_edge">Deslize para direita em baixo da tela</string>
+    <string name="settings_gesture_description_left_bottom_edge">Deslize para esquerda em baixo da tela</string>
+    <string name="settings_gesture_description_left_top_edge">Deslize para esquerda no topo da tela</string>
+    <string name="settings_gesture_description_up_left_edge">Deslize para cima na borda esquerda da tela</string>
+    <string name="settings_gesture_description_up_right_edge">Deslize para cima na borda direita da tela</string>
+    <string name="settings_gesture_description_down_left_edge">Deslize para baixo na borda esquerda da tela</string>
+    <string name="settings_gesture_description_down_right_edge">Deslize para baixo na borda direita da tela</string>
     <string name="settings_gesture_description_long_click">Toque longo numa área livre</string>
     <string name="settings_gesture_description_vol_up">Apertar o botão de aumentar volume</string>
     <string name="settings_gesture_description_vol_down">Apertar o botão de diminuir volume</string>
@@ -211,7 +211,7 @@
     <string name="settings_gesture_description_date">Toque na Data</string>
     <string name="settings_gesture_description_time">Toque na Hora</string>
     <string name="settings_enabled_gestures_double_swipe_summary">Deslize com 2 dedos</string>
-    <string name="settings_enabled_gestures_edge_swipe_summary">Deslizar na borda da tela</string>
+    <string name="settings_enabled_gestures_edge_swipe_summary">Deslize na borda da tela</string>
     <string name="settings_enabled_gestures_edge_swipe_edge_width">Largura da borda</string>
     <string name="settings_meta_view_code">Ver código-fonte</string>
     <string name="settings_meta_join_chat">Entre no chat do µLauncher</string>
