@@ -24,11 +24,11 @@ This is a fork of [finnmglas's app Launcher][original-repo].
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
      alt="Get it on F-Droid"
      height="80">](https://f-droid.org/packages/de.jrpie.android.launcher/)
-[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png"
-     alt="Get it on Google Play"
-     height="80">](https://play.google.com/store/apps/details?id=de.jrpie.android.launcher)
+[<img src="https://raw.githubusercontent.com/ImranR98/Obtainium/b1c8ac6f2ab08497189721a788a5763e28ff64cd/assets/graphics/badge_obtainium.png" alt="Get it on Obtainium" height="80">](https://apps.obtainium.imranr.dev/redirect?r=obtainium://app/{%22id%22:%22de.android.jrpie.launcher%22,%22url%22:%22https://github.com/jrpie/Launcher%22,%22author%22:%22jrpie%22,%22name%22:%22µLauncher%22,%22additionalSettings%22:%22{\%22apkFilterRegEx\%22:\%22release\%22,\%22invertAPKFilter\%22:false,\%22about\%22:\%22µLauncher%20is%20a%20minimal%20home%20screen.\%22}%22})
 
-Or download the latest APK from the [Releases Section](https://github.com/jrpie/Launcher/releases/latest).
+
+or download the latest APK from the [releases section](https://github.com/jrpie/Launcher/releases/latest).
+You can also [get it on Google Play](https://play.google.com/store/apps/details?id=de.jrpie.android.launcher), but I don't recommend that.
 
 <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.jpg"
      alt="screenshot"
@@ -51,6 +51,7 @@ Or download the latest APK from the [Releases Section](https://github.com/jrpie/
 
 There are several ways to contribute to this app:
 * You can add or improve [translations][toolate].
+     <br><img src="https://toolate.othing.xyz/widget/jrpie-launcher/launcher/horizontal-auto.svg" alt="translation status">
 * If you find a bug or have an idea for a new feature you can [join the Matrix chat][matrix] or open an [issue][issues]. Please note that I work on this project in my free time. Thus I might not respond immediately and not all ideas will be implemented.
 * You can implement a new feature yourself:
   - Create a fork of this repository: [![][shield-gh-fork]][fork]
