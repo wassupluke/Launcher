@@ -5,6 +5,7 @@ import android.os.Build
 import android.view.Window
 import android.view.WindowManager
 import de.jrpie.android.launcher.R
+import de.jrpie.android.launcher.preferences.LauncherPreferences
 
 @Suppress("unused")
 enum class Background(val id: Int, val dim: Boolean = false, val blur: Boolean = false) {
@@ -29,6 +30,10 @@ enum class Background(val id: Int, val dim: Boolean = false, val blur: Boolean =
         if (blur && Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
             blur = false
             dimAmount += 0.1f
+        }
+
+        if (LauncherPreferences.theme().colorTheme() == ColorTheme.LIGHT) {
+            dimAmount = 0f
         }
 
         if (dim) {
