@@ -29,6 +29,12 @@
             android:entries="@array/settings_theme_font_items"
             android:summary="%s"
             android:defaultValue="HACK"/>
+
+        <SwitchPreference
+            android:key="@string/settings_theme_text_shadow_key"
+            android:title="@string/settings_theme_text_shadow"
+            android:defaultValue="false" />
+
         <DropDownPreference
             android:key="@string/settings_theme_background_key"
             android:title="@string/settings_theme_background"

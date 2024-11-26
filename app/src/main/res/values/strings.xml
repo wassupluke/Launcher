@@ -90,8 +90,10 @@
     <string-array name="settings_theme_color_theme_items">
         <item>Default</item>
         <item>Dark</item>
-        <!--<item>Light</item>-->
+        <item>Light</item>
     </string-array>
+
+    <string name="settings_theme_text_shadow">Text shadow</string>
     <string name="settings_theme_background">Background (app list and setting)</string>
     <string-array name="settings_theme_background_items">
         <item>Transparent</item>

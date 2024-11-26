@@ -419,7 +419,7 @@ fun resetPreferences(context: Context) {
     LauncherPreferences.internal().versionCode(PREFERENCE_VERSION)
 
     LauncherPreferences.apps().hidden(
-        LauncherPreferences.apps().hidden().also {
+        LauncherPreferences.apps().hidden()?.also {
             it.add(
                 DetailedAppInfo.fromAppInfo(
                     AppInfo(

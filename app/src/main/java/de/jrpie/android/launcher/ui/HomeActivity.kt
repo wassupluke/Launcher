@@ -162,6 +162,11 @@ class HomeActivity : UIObject, AppCompatActivity(),
         val mTheme = modifyTheme(super.getTheme())
         mTheme.applyStyle(R.style.backgroundWallpaper, true)
         LauncherPreferences.clock().font().applyToTheme(mTheme)
+        LauncherPreferences.theme().colorTheme().applyToTheme(
+            mTheme,
+            LauncherPreferences.theme().textShadow()
+        )
+
         return mTheme
     }
 

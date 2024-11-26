@@ -51,6 +51,7 @@
     <string-array name="settings_theme_color_theme_items">
         <item>Défaut</item>
         <item>Noir</item>
+        <item>Lumière</item>
     </string-array>
     <string name="settings_theme_wallpaper">Choisir un fond d\'écran</string>
     <string name="settings_launcher_change_wallpaper">Changer le fond d\'écran</string>

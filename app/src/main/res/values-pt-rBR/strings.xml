@@ -58,6 +58,7 @@
     <string-array name="settings_theme_color_theme_items">
         <item>Padrão</item>
         <item>Escuro</item>
+        <item>Luz</item>
     </string-array>
     <string name="settings_clock_time_visible">Mostrar Horário</string>
     <string name="settings_clock_date_visible">Mostrar Data</string>

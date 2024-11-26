@@ -59,6 +59,7 @@
     <string-array name="settings_theme_color_theme_items">
         <item>Normal</item>
         <item>Oscuro</item>
+        <item>Luminoso</item>
     </string-array>
     <string name="settings_theme_wallpaper">Seleccionar fondo de pantalla</string>
     <string name="settings_launcher_change_wallpaper">Cambiar fondo de pantalla</string>

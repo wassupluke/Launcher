@@ -40,6 +40,7 @@ import eu.jonahbauer.android.preference.annotations.serializer.PreferenceSeriali
                         @Preference(name = "color_theme", type = ColorTheme.class, defaultValue = "DEFAULT"),
                         @Preference(name = "background", type = Background.class, defaultValue = "DIM"),
                         @Preference(name = "font", type = Font.class, defaultValue = "HACK"),
+                        @Preference(name = "text_shadow", type = boolean.class, defaultValue = "false"),
                         @Preference(name = "monochrome_icons", type = boolean.class, defaultValue = "false"),
                 }),
                 @PreferenceGroup(name = "clock", prefix = "settings_clock_", suffix = "_key", value = {

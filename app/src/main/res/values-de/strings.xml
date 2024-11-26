@@ -88,7 +88,7 @@
     <string-array name="settings_theme_color_theme_items">
         <item>Standard</item>
         <item>Dunkel</item>
-        <!--<item>Hell</item>-->
+        <item>Hell</item>
     </string-array>
     <string name="settings_theme_wallpaper">Hintergrund auswählen</string>
     <string name="settings_launcher_change_wallpaper">Hintergrund ändern</string>

@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo
 import android.content.res.Resources
 import android.view.Window
 import android.view.WindowManager
+import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 
 /**
@@ -53,7 +54,10 @@ interface UIObject {
     }
 
     fun modifyTheme(theme: Resources.Theme): Resources.Theme {
-        LauncherPreferences.theme().colorTheme().applyToTheme(theme)
+        LauncherPreferences.theme().colorTheme().applyToTheme(
+            theme,
+            LauncherPreferences.theme().textShadow()
+        )
         LauncherPreferences.theme().background().applyToTheme(theme)
         LauncherPreferences.theme().font().applyToTheme(theme)
 

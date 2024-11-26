@@ -9,7 +9,7 @@
     <color name="darkTheme_text_color">#fff</color>
 
     <color name="lightTheme_background_color">#fff</color>
-    <color name="lightTheme_accent_color">#5555ff</color>
+    <color name="lightTheme_accent_color">#9999ff</color>
     <color name="lightTheme_text_color">#000</color>
 </resources>
 
