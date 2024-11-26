@@ -5,7 +5,7 @@ import de.jrpie.android.launcher.actions.AppAction
 import de.jrpie.android.launcher.actions.Gesture
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import java.util.Locale
-import kotlin.text.Regex.Companion.escapeReplacement
+import kotlin.text.Regex.Companion.escape
 
 class AppFilter(
     var search: String,
@@ -37,7 +37,7 @@ class AppFilter(
             .toCharArray()
             .distinct()
             .filter { c -> !c.isLetter() }
-            .map { c -> escapeReplacement(c.toString()) }
+            .map { c -> escape(c.toString()) }
             .fold("") { x, y -> x + y }
         val disallowedCharsRegex = "[^\\p{L}$allowedSpecialCharacters]".toRegex()
 
