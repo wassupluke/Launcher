@@ -15,7 +15,7 @@
 It is *minimal, efficient and free of distraction*.
 
 Your home screen only displays the date, time and a wallpaper.
-Pressing back or swiping up (this can be configures) opens a list
+Pressing back or swiping up (this can be configured) opens a list
 of all installed apps, which can be searched efficiently.
 
 This is a fork of [finnmglas's app Launcher][original-repo].
