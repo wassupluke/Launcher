@@ -4,10 +4,12 @@ import android.os.Build
 import android.os.Build.VERSION_CODES
 import androidx.preference.PreferenceManager
 import de.jrpie.android.launcher.actions.TorchManager
+import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 
 class Application : android.app.Application() {
     var torchManager: TorchManager? = null
+    var customAppNames: HashMap<AppInfo, String> = HashMap()
     override fun onCreate() {
         super.onCreate()
 
@@ -18,5 +20,13 @@ class Application : android.app.Application() {
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
         LauncherPreferences.init(preferences, this.resources)
 
+        customAppNames = LauncherPreferences.apps().customNames()
+
+        LauncherPreferences.getSharedPreferences()
+            .registerOnSharedPreferenceChangeListener { _, pref ->
+                if (pref == getString(R.string.settings_apps_custom_names_key)) {
+                    customAppNames = LauncherPreferences.apps().customNames()
+                }
+            }
     }
 }

@@ -1,5 +1,6 @@
 package de.jrpie.android.launcher.apps
 
+import android.content.Context
 import de.jrpie.android.launcher.actions.Action
 import de.jrpie.android.launcher.actions.AppAction
 import de.jrpie.android.launcher.actions.Gesture
@@ -8,12 +9,14 @@ import java.util.Locale
 import kotlin.text.Regex.Companion.escape
 
 class AppFilter(
+    var context: Context,
     var search: String,
     var favoritesVisibility: AppSetVisibility = AppSetVisibility.VISIBLE,
     var hiddenVisibility: AppSetVisibility = AppSetVisibility.HIDDEN,
 ) {
     operator fun invoke(apps: List<DetailedAppInfo>): List<DetailedAppInfo> {
-        var apps = apps
+        var apps =
+            apps.sortedBy { app -> app.getCustomLabel(context).toString().lowercase(Locale.ROOT) }
 
         val hidden = LauncherPreferences.apps().hidden() ?: setOf()
         val favorites = LauncherPreferences.apps().favorites() ?: setOf()
@@ -51,7 +54,7 @@ class AppFilter(
             val appsSecondary: MutableList<DetailedAppInfo> = ArrayList()
             val normalizedText: String = normalize(search)
             for (item in apps) {
-                val itemLabel: String = normalize(item.label.toString())
+                val itemLabel: String = normalize(item.getCustomLabel(context).toString())
 
                 if (itemLabel.startsWith(normalizedText)) {
                     r.add(item)

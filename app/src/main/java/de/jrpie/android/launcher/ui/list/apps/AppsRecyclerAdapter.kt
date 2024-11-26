@@ -5,14 +5,17 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Rect
 import android.os.AsyncTask
+import android.text.InputType
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import de.jrpie.android.launcher.R
@@ -44,7 +47,7 @@ class AppsRecyclerAdapter(
     private val intention: ListActivity.ListActivityIntention
     = ListActivity.ListActivityIntention.VIEW,
     private val forGesture: String? = "",
-    private var appFilter: AppFilter = AppFilter("")
+    private var appFilter: AppFilter = AppFilter(activity, "")
 ) :
     RecyclerView.Adapter<AppsRecyclerAdapter.ViewHolder>() {
 
@@ -69,7 +72,7 @@ class AppsRecyclerAdapter(
 
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
-        val appLabel = appsListDisplayed[i].label.toString()
+        val appLabel = appsListDisplayed[i].getCustomLabel(activity).toString()
         val appIcon = appsListDisplayed[i].icon
 
         viewHolder.textView.text = appLabel
@@ -146,7 +149,10 @@ class AppsRecyclerAdapter(
 
                     if (favorites.contains(appInfo.app)) {
                         favorites.remove(appInfo.app)
-                        Log.i("LAUNCHER", "Removing " + appInfo.app.serialize() + " from favorites.")
+                        Log.i(
+                            "LAUNCHER",
+                            "Removing " + appInfo.app.serialize() + " from favorites."
+                        )
                     } else {
                         Log.i("LAUNCHER", "Adding " + appInfo.app.serialize() + " to favorites.")
                         favorites.add(appInfo.app)
@@ -178,6 +184,30 @@ class AppsRecyclerAdapter(
                     }
                     LauncherPreferences.apps().hidden(hidden)
 
+                    true
+                }
+
+                R.id.app_menu_rename -> {
+                    val builder = AlertDialog.Builder(activity, R.style.AlertDialogCustom)
+
+                    val title = activity.getString(R.string.dialog_rename_title, appInfo.label)
+                    builder.setTitle(title)
+                    builder.setView(R.layout.dialog_rename_app)
+
+                    builder.setNegativeButton(R.string.dialog_rename_cancel) { d, _ -> d.cancel() }
+                    builder.setPositiveButton(R.string.dialog_rename_ok) { d, _ ->
+                        appInfo.setCustomLabel(
+                            (d as? AlertDialog)
+                                ?.findViewById<EditText>(R.id.dialog_rename_app_edit_text)
+                                ?.text.toString()
+                        )
+                    }
+
+                    val dialog = builder.create()
+                    dialog.show()
+                    val input = dialog.findViewById<EditText>(R.id.dialog_rename_app_edit_text)
+                    input?.setText(appInfo.getCustomLabel(activity))
+                    input?.hint = appInfo.label
                     true
                 }
 

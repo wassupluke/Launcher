@@ -66,6 +66,7 @@ class ListFragmentApps : Fragment(), UIObject {
             AppsRecyclerAdapter(
                 requireActivity(), binding.root, intention, forGesture,
                 appFilter = AppFilter(
+                    requireContext(),
                     "",
                     favoritesVisibility = favoritesVisibility,
                     hiddenVisibility = hiddenVisibility

@@ -185,7 +185,7 @@ fun loadApps(packageManager: PackageManager, context: Context) {
             loadList.add(detailedAppInfo)
         }
     }
-    loadList.sortBy { it.label.toString() }
+    loadList.sortBy { it.getCustomLabel(context).toString() }
     appsList.clear()
     appsList.addAll(loadList)
 }

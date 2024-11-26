@@ -136,6 +136,7 @@
     <string name="list_app_delete">Deinstallieren</string>
     <string name="list_app_info">App Info</string>
     <string name="list_app_hidden_remove">Sichtbar machen</string>
+    <string name="list_app_rename">Umbenennen</string>
     <string name="list_removed">Die App wurde entfernt</string>
     <string name="list_not_removed">Die App konnte nicht entfernt werden</string>
     <string name="list_apps_search_hint">Anwendungen suchen</string>
@@ -188,4 +189,7 @@
     <string name="device_admin_description">Die Aktion \"Bildschirm sperren\" aktivieren</string>
     <string name="alert_no_torch_found">Es wurde keine geeignete Kamera gefunden.</string>
     <string name="alert_torch_access_exception">Fehler: Kein Zugriff auf die Kamera möglich.</string>
+    <string name="dialog_rename_cancel">Abbrechen</string>
+    <string name="dialog_rename_ok">Ok</string>
+    <string name="dialog_rename_title">%1$s umbenennen</string>
 </resources>
