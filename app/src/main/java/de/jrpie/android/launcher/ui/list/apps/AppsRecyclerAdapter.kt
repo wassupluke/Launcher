@@ -168,7 +168,7 @@ class AppsRecyclerAdapter(
                 }
 
                 R.id.app_menu_hidden -> {
-                    var hidden: MutableSet<AppInfo> =
+                    val hidden: MutableSet<AppInfo> =
                         LauncherPreferences.apps().hidden() ?: mutableSetOf()
                     if (hidden.contains(appInfo.app)) {
                         hidden.remove(appInfo.app)

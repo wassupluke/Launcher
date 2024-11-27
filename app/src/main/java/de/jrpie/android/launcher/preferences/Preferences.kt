@@ -418,18 +418,18 @@ fun resetPreferences(context: Context) {
     LauncherPreferences.clear()
     LauncherPreferences.internal().versionCode(PREFERENCE_VERSION)
 
-    LauncherPreferences.apps().hidden(
-        LauncherPreferences.apps().hidden()?.also {
-            it.add(
-                DetailedAppInfo.fromAppInfo(
-                    AppInfo(
-                        BuildConfig.APPLICATION_ID,
-                        HomeActivity::class.java.name,
-                        AppInfo.INVALID_USER
-                    ), context
-                )?.app
-            )
-        })
+
+    val hidden: MutableSet<AppInfo> = mutableSetOf()
+    val launcher = DetailedAppInfo.fromAppInfo(
+        AppInfo(
+            BuildConfig.APPLICATION_ID,
+            HomeActivity::class.java.name,
+            AppInfo.INVALID_USER
+        ), context
+    )
+    launcher?.app?.let { hidden.add(it) }
+    Log.i(TAG,"Hiding ${launcher?.app}")
+    LauncherPreferences.apps().hidden(hidden)
 
     Action.resetToDefaultActions(context)
 }
