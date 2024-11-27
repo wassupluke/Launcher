@@ -2,6 +2,7 @@ package de.jrpie.android.launcher.ui.settings.launcher
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
 import de.jrpie.android.launcher.R
@@ -84,6 +85,11 @@ class SettingsFragmentLauncher : PreferenceFragmentCompat() {
             LockMethod.chooseMethod(requireContext())
             true
         }
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
+            lockMethod?.isVisible = false
+        }
+
         updateVisibility()
     }
 }
