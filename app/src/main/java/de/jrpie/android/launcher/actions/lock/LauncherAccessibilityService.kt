@@ -5,6 +5,8 @@ import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.provider.Settings
+import android.util.Log
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityManager
 import android.widget.Toast
@@ -42,15 +44,18 @@ class LauncherAccessibilityService : AccessibilityService() {
         }
 
         fun isEnabled(context: Context): Boolean {
-            val accessibilityManager =
-                context.getSystemService<AccessibilityManager>() ?: return false
-            val enabledServices =
-                accessibilityManager.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_ALL_MASK)
-            return enabledServices.any {
-                it.id.startsWith(BuildConfig.APPLICATION_ID)
+            val enabledServices = Settings.Secure.getString(context.contentResolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES)
+            for (service in enabledServices.split(":")) {
+                val pkg = service.split("/")[0]
+                val serviceClass = service.split("/")[1]
+                if (pkg == context.packageName && serviceClass == LauncherAccessibilityService::class.java.name) {
+                    Log.d("ServiceEnabled", "true")
+                    return true
+                }
             }
+            Log.d("ServiceEnabled", "false")
+            return false
         }
-
     }
 
 
@@ -87,6 +92,13 @@ class LauncherAccessibilityService : AccessibilityService() {
             return
         }
 
-        performGlobalAction(GLOBAL_ACTION_LOCK_SCREEN)
+        val success = performGlobalAction(GLOBAL_ACTION_LOCK_SCREEN)
+        if (!success) {
+            Toast.makeText(
+                this,
+                getText(R.string.alert_lock_screen_failed),
+                Toast.LENGTH_LONG
+                ).show()
+        }
     }
 }
