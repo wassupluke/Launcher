@@ -70,7 +70,8 @@ class ListFragmentApps : Fragment(), UIObject {
                     "",
                     favoritesVisibility = favoritesVisibility,
                     hiddenVisibility = hiddenVisibility
-                )
+                ),
+                layout = LauncherPreferences.list_apps().layout()
             )
 
         // set up the list / recycler

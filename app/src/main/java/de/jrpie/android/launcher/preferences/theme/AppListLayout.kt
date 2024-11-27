@@ -1,8 +1,6 @@
 package de.jrpie.android.launcher.preferences.theme
 
-import android.app.Activity
 import android.content.Context
-import android.util.DisplayMetrics
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,28 +14,30 @@ enum class AppListLayout(
     val layoutManager: (context: Context) -> RecyclerView.LayoutManager,
     val layoutResource: Int,
     val prepareView: (viewHolder: AppsRecyclerAdapter.ViewHolder) -> Unit,
+    val useBadgedText: Boolean
 
     ) {
     DEFAULT(
         { c -> LinearLayoutManager(c) },
         R.layout.list_apps_row,
-        { v -> }
+        { v -> },
+        false
     ),
 
-    // TODO work profile indicator
     TEXT(
         { c -> LinearLayoutManager(c) },
         R.layout.list_apps_row_variant_text,
-        { v ->
-        }
+        { v -> },
+        true
     ),
     GRID(
         { c ->
             val displayMetrics = c.resources.displayMetrics
-            val width_sp = displayMetrics.widthPixels / displayMetrics.scaledDensity
-            GridLayoutManager(c, (width_sp / 90).toInt()) },
+            val widthSp = displayMetrics.widthPixels / displayMetrics.scaledDensity
+            GridLayoutManager(c, (widthSp / 90).toInt()) },
         R.layout.list_apps_row_variant_grid,
         { v ->
-        }
+        },
+        false
     ),
 }

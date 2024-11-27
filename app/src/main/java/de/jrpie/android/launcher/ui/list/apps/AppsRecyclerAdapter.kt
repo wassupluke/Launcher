@@ -26,6 +26,7 @@ import de.jrpie.android.launcher.apps.AppFilter
 import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.apps.DetailedAppInfo
 import de.jrpie.android.launcher.appsList
+import de.jrpie.android.launcher.getUserFromId
 import de.jrpie.android.launcher.loadApps
 import de.jrpie.android.launcher.openAppSettings
 import de.jrpie.android.launcher.preferences.LauncherPreferences
@@ -50,6 +51,7 @@ class AppsRecyclerAdapter(
     = ListActivity.ListActivityIntention.VIEW,
     private val forGesture: String? = "",
     private var appFilter: AppFilter = AppFilter(activity, "")
+    private val layout: AppListLayout
 ) :
     RecyclerView.Adapter<AppsRecyclerAdapter.ViewHolder>() {
 
@@ -76,7 +78,15 @@ class AppsRecyclerAdapter(
 
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
-        val appLabel = appsListDisplayed[i].getCustomLabel(activity).toString()
+        var appLabel = appsListDisplayed[i].label.toString()
+
+        if (layout.useBadgedText) {
+            appLabel = activity.packageManager.getUserBadgedLabel(
+                appLabel,
+                getUserFromId(appsListDisplayed[i].app.user, activity)
+            ).toString()
+        }
+
         val appIcon = appsListDisplayed[i].icon
 
         viewHolder.textView.text = appLabel
