@@ -54,7 +54,7 @@ You can also [get it on Google Play](https://play.google.com/store/apps/details?
 There are several ways to contribute to this app:
 * You can add or improve [translations][toolate].
      <br><img src="https://toolate.othing.xyz/widget/jrpie-launcher/launcher/horizontal-auto.svg" alt="translation status">
-* If you find a bug or have an idea for a new feature you can [join the Matrix chat][matrix] or open an [issue][issues]. Please note that I work on this project in my free time. Thus I might not respond immediately and not all ideas will be implemented.
+* If you find a bug or have an idea for a new feature you can [join the chat][chat] or open an [issue][issues]. Please note that I work on this project in my free time. Thus I might not respond immediately and not all ideas will be implemented.
 * You can implement a new feature yourself:
   - Create a fork of this repository: [![][shield-gh-fork]][fork]
   - Create a new branch named `feature/<your feature>` of `fix/<your fix>` and commit your changes.
@@ -113,6 +113,7 @@ See [BUILD.md](BUILD.md) for instructions how to build this project.
   [shield-gh-fork]: https://img.shields.io/github/forks/jrpie/Launcher?label=Fork&style=social
   [matrix]: https://s.jrpie.de/launcher-matrix
   [discord]: https://s.jrpie.de/launcher-discord
+  [chat]: https://s.jrpie.de/launcher-chat
 
 <!-- Helpful resources -->
 
