@@ -48,11 +48,9 @@
     <string name="settings_launcher_section_appearance">Apparence</string>
     <string name="settings_launcher_section_date_time">Format de date</string>
     <string name="settings_theme_color_theme">Thème</string>
-    <string-array name="settings_theme_color_theme_items">
-        <item>Défaut</item>
-        <item>Noir</item>
-        <item>Lumière</item>
-    </string-array>
+    <string name="settings_theme_color_theme_item_default">Défaut</string>
+    <string name="settings_theme_color_theme_item_dark">Noir</string>
+    <string name="settings_theme_color_theme_item_light">Lumière</string>
     <string name="settings_theme_wallpaper">Choisir un fond d\'écran</string>
     <string name="settings_launcher_change_wallpaper">Changer le fond d\'écran</string>
     <string name="settings_launcher_section_display">Écran</string>

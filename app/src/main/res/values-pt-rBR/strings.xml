@@ -55,11 +55,9 @@
       -->
     <string name="settings_launcher_section_appearance">Aparência</string>
     <string name="settings_theme_color_theme">Tema</string>
-    <string-array name="settings_theme_color_theme_items">
-        <item>Padrão</item>
-        <item>Escuro</item>
-        <item>Luz</item>
-    </string-array>
+    <string name="settings_theme_color_theme_item_default">Padrão</string>
+    <string name="settings_theme_color_theme_item_dark">Escuro</string>
+    <string name="settings_theme_color_theme_item_light">Luz</string>
     <string name="settings_clock_time_visible">Mostrar Horário</string>
     <string name="settings_clock_date_visible">Mostrar Data</string>
     <string name="settings_clock_localized">Use formato de data localizado</string>

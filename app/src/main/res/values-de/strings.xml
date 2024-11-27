@@ -86,11 +86,9 @@
     <string name="settings_theme_monochrome_icons">Einfarbige Icons</string>
     <string name="settings_launcher_section_date_time"><![CDATA[Datum & Uhrzeit]]></string>
     <string name="settings_theme_color_theme">Farbschema</string>
-    <string-array name="settings_theme_color_theme_items">
-        <item>Standard</item>
-        <item>Dunkel</item>
-        <item>Hell</item>
-    </string-array>
+    <string name="settings_theme_color_theme_item_default">Standard</string>
+    <string name="settings_theme_color_theme_item_dark">Dunkel</string>
+    <string name="settings_theme_color_theme_item_light">Hell</string>
     <string name="settings_theme_wallpaper">Hintergrund auswählen</string>
     <string name="settings_launcher_change_wallpaper">Hintergrund ändern</string>
     <string name="settings_launcher_section_display">Bildschirm</string>

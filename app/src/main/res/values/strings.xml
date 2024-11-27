@@ -87,31 +87,27 @@
 
 
     <string name="settings_theme_color_theme">Color theme</string>
-    <string-array name="settings_theme_color_theme_items">
-        <item>Default</item>
-        <item>Dark</item>
-        <item>Light</item>
-    </string-array>
+    <string name="settings_theme_color_theme_item_default">Default</string>
+    <string name="settings_theme_color_theme_item_dark">Dark</string>
+    <string name="settings_theme_color_theme_item_light">Light</string>
 
     <string name="settings_theme_text_shadow">Text shadow</string>
     <string name="settings_theme_background">Background (app list and setting)</string>
-    <string-array name="settings_theme_background_items">
-        <item>Transparent</item>
-        <item>Dim</item>
-        <item>Blur</item>
-        <item>Solid</item>
-    </string-array>
+    <string name="settings_theme_background_item_transparent">Transparent</string>
+    <string name="settings_theme_background_item_dim">Dim</string>
+    <string name="settings_theme_background_item_blur">Blur</string>
+    <string name="settings_theme_background_item_solid">Solid</string>
+
+
     <string name="settings_theme_font">Font</string>
 
     <!-- names for @array/settings_theme_font_values -->
-    <string-array name="settings_theme_font_items">
-        <item>Hack</item>
-        <item>System default</item>
-        <item>Sans serif</item>
-        <item>Serif</item>
-        <item>Monospace</item>
-        <item>Serif monospace</item>
-    </string-array>
+    <string name="settings_theme_font_item_hack">Hack</string>
+    <string name="settings_theme_font_item_system_default">System default</string>
+    <string name="settings_theme_font_item_sans_serif">Sans serif</string>
+    <string name="settings_theme_font_item_serif">Serif</string>
+    <string name="settings_theme_font_item_monospace">Monospace</string>
+    <string name="settings_theme_font_item_serif_monospace">Serif monospace</string>
     <string name="settings_theme_monochrome_icons">Monochrome app icons</string>
 
     <string name="settings_launcher_section_date_time"><![CDATA[Date & time]]></string>
