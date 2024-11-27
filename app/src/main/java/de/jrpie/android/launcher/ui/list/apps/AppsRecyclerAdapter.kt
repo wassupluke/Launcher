@@ -5,7 +5,6 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Rect
 import android.os.AsyncTask
-import android.text.InputType
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +20,6 @@ import com.google.android.material.snackbar.Snackbar
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
 import de.jrpie.android.launcher.actions.AppAction
-import de.jrpie.android.launcher.actions.LauncherDeviceAdmin
 import de.jrpie.android.launcher.apps.AppFilter
 import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.apps.DetailedAppInfo
@@ -30,7 +28,7 @@ import de.jrpie.android.launcher.getUserFromId
 import de.jrpie.android.launcher.loadApps
 import de.jrpie.android.launcher.openAppSettings
 import de.jrpie.android.launcher.preferences.LauncherPreferences
-import de.jrpie.android.launcher.preferences.theme.AppListLayout
+import de.jrpie.android.launcher.preferences.ListLayout
 import de.jrpie.android.launcher.transformGrayscale
 import de.jrpie.android.launcher.ui.list.ListActivity
 import de.jrpie.android.launcher.uninstallApp
@@ -50,8 +48,8 @@ class AppsRecyclerAdapter(
     private val intention: ListActivity.ListActivityIntention
     = ListActivity.ListActivityIntention.VIEW,
     private val forGesture: String? = "",
-    private var appFilter: AppFilter = AppFilter(activity, "")
-    private val layout: AppListLayout
+    private var appFilter: AppFilter = AppFilter(activity, ""),
+    private val layout: ListLayout
 ) :
     RecyclerView.Adapter<AppsRecyclerAdapter.ViewHolder>() {
 
@@ -225,11 +223,10 @@ class AppsRecyclerAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        val layout = LauncherPreferences.list_apps().layout()
+        val layout = LauncherPreferences.list().layout()
         val inflater = LayoutInflater.from(parent.context)
         val view: View = inflater.inflate(layout.layoutResource, parent, false)
         val viewHolder = ViewHolder(view)
-        layout.prepareView(viewHolder)
         return viewHolder
     }
 

@@ -1,20 +1,15 @@
 package de.jrpie.android.launcher.preferences;
 
-import android.util.Log;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import de.jrpie.android.launcher.R;
 import de.jrpie.android.launcher.apps.AppInfo;
 import de.jrpie.android.launcher.actions.lock.LockMethod;
-import de.jrpie.android.launcher.preferences.theme.AppListLayout;
 import de.jrpie.android.launcher.preferences.theme.Background;
 import de.jrpie.android.launcher.preferences.theme.ColorTheme;
 import de.jrpie.android.launcher.preferences.theme.Font;
@@ -40,8 +35,8 @@ import eu.jonahbauer.android.preference.annotations.serializer.PreferenceSeriali
                         @Preference(name = "custom_names", type = HashMap.class, serializer = LauncherPreferences$Config.MapAppInfoStringSerializer.class),
                         @Preference(name = "hide_bound_apps", type = boolean.class, defaultValue = "false"),
                 }),
-                @PreferenceGroup(name = "list_apps", prefix = "settings_list_apps_", suffix = "_key", value = {
-                        @Preference(name = "layout", type = AppListLayout.class, defaultValue = "TEXT")
+                @PreferenceGroup(name = "list", prefix = "settings_list_", suffix = "_key", value = {
+                        @Preference(name = "layout", type = ListLayout.class, defaultValue = "DEFAULT")
                 }),
                 @PreferenceGroup(name = "gestures", prefix = "settings_gesture_", suffix = "_key", value = {
                 }),

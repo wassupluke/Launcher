@@ -145,6 +145,11 @@
     <string name="settings_launcher_section_apps">Apps</string>
     <string name="settings_apps_hidden">Hidden apps</string>
     <string name="settings_apps_hide_bound_apps">Don\'t show apps that are bound to a gesture in the app list</string>
+    <string name="settings_list_layout">Layout of app list</string>
+
+    <string name="settings_list_layout_item_default">Default</string>
+    <string name="settings_list_layout_item_text">Text</string>
+    <string name="settings_list_layout_item_grid">Grid</string>
 
     <!--
       -

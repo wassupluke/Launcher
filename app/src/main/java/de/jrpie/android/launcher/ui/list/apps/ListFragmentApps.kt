@@ -71,15 +71,14 @@ class ListFragmentApps : Fragment(), UIObject {
                     favoritesVisibility = favoritesVisibility,
                     hiddenVisibility = hiddenVisibility
                 ),
-                layout = LauncherPreferences.list_apps().layout()
+                layout = LauncherPreferences.list().layout()
             )
 
         // set up the list / recycler
         binding.listAppsRview.apply {
             // improve performance (since content changes don't change the layout size)
             setHasFixedSize(true)
-            layoutManager = LauncherPreferences.list_apps().layout().layoutManager(context)
-            // TODO: option to change this to GridLayoutManager(context, numCols)
+            layoutManager = LauncherPreferences.list().layout().layoutManager(context)
             adapter = appsRViewAdapter
         }
 
