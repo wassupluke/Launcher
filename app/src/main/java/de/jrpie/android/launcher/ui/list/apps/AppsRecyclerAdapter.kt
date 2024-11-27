@@ -76,7 +76,7 @@ class AppsRecyclerAdapter(
 
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
-        var appLabel = appsListDisplayed[i].label.toString()
+        var appLabel = appsListDisplayed[i].getCustomLabel(activity)
 
         if (layout.useBadgedText) {
             appLabel = activity.packageManager.getUserBadgedLabel(

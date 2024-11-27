@@ -1,5 +1,6 @@
 package de.jrpie.android.launcher
 
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Build.VERSION_CODES
 import androidx.preference.PreferenceManager
@@ -9,7 +10,13 @@ import de.jrpie.android.launcher.preferences.LauncherPreferences
 
 class Application : android.app.Application() {
     var torchManager: TorchManager? = null
-    var customAppNames: HashMap<AppInfo, String> = HashMap()
+    private var customAppNames: HashMap<AppInfo, String>? = null
+    private val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, pref ->
+        if (pref == getString(R.string.settings_apps_custom_names_key)) {
+            customAppNames = LauncherPreferences.apps().customNames()
+        }
+    }
+
     override fun onCreate() {
         super.onCreate()
 
@@ -20,13 +27,12 @@ class Application : android.app.Application() {
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
         LauncherPreferences.init(preferences, this.resources)
 
-        customAppNames = LauncherPreferences.apps().customNames()
-
         LauncherPreferences.getSharedPreferences()
-            .registerOnSharedPreferenceChangeListener { _, pref ->
-                if (pref == getString(R.string.settings_apps_custom_names_key)) {
-                    customAppNames = LauncherPreferences.apps().customNames()
-                }
-            }
+            .registerOnSharedPreferenceChangeListener(listener)
+    }
+
+    fun getCustomAppNames(): HashMap<AppInfo, String> {
+        return (customAppNames ?: LauncherPreferences.apps().customNames() ?: HashMap())
+            .also { customAppNames = it }
     }
 }

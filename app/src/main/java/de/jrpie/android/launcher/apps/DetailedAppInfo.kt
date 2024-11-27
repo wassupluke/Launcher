@@ -30,7 +30,7 @@ class DetailedAppInfo(
     )
 
     fun getCustomLabel(context: Context): CharSequence {
-        val map = (context.applicationContext as? Application)?.customAppNames ?: return label
+        val map = (context.applicationContext as? Application)?.getCustomAppNames() ?: return label
 
         return map[app] ?: label
     }
