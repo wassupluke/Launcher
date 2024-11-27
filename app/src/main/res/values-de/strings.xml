@@ -15,7 +15,7 @@
       -->
     <string name="settings_title">Einstellungen</string>
     <string name="settings_tab_app">Apps</string>
-    <string name="settings_tab_launcher">Launcher</string>
+    <string name="settings_tab_launcher">µLauncher</string>
     <string name="settings_tab_meta">Meta</string>
     <!--
       -
@@ -80,6 +80,7 @@
     <string name="settings_clock_date_visible">Datum anzeigen</string>
     <string name="settings_clock_localized">Lokalisiertes Datumsformat verwenden</string>
     <string name="settings_clock_flip_date_time">Datum und Uhrzeit tauschen</string>
+    <string name="settings_theme_text_shadow">Textschatten</string>
     <string name="settings_theme_background">Hintergrund (Alle Apps und Einstellungen)</string>
     <string name="settings_theme_font">Schriftart</string>
     <string name="settings_theme_monochrome_icons">Einfarbige Icons</string>
@@ -110,6 +111,7 @@
       -
       -->
     <string name="settings_apps_hidden">Versteckte Apps</string>
+    <string name="settings_apps_hide_bound_apps">Apps, die an eine Geste gebunden sind, nicht in der Liste anzeigen</string>
     <string name="settings_general_choose_home_screen">Launcher wählen</string>
     <string name="settings_meta_cant_select_launcher">App Info</string>
     <string name="settings_meta_cant_select_launcher_msg">Dein Gerät unterstützt diese Funktion nicht. Stattdessen die App Details bearbeiten?</string>
@@ -157,7 +159,7 @@
     <string name="tutorial_title">Tutorial</string>
     <string name="tutorial_start_text">Nimm dir kurz Zeit und lerne, wie du diesen Launcher verwendest!</string>
     <string name="tutorial_concept_title">Konzept</string>
-    <string name="tutorial_concept_text">Launcher bietet dir eine minimalistische, effiziente und ablenkungsfreie digitale Umgebung.\n\nDie App kostet dich nichts, enthält keine Werbung, sammelt keine persönlichen Daten.</string>
+    <string name="tutorial_concept_text">µLauncher bietet eine minimalistische, effiziente und ablenkungsfreie digitale Umgebung.\n\nDie App kostet dich nichts, enthält keine Werbung und sammelt keinerlei Daten.</string>
     <string name="tutorial_concept_text_2">Launcher ist open-source (MIT license) und auf GitHub!\n\nSchau gerne mal dort vorbei!</string>
     <string name="tutorial_usage_title">Benutzung</string>
     <string name="tutorial_usage_text">Auf deinem Homescreen siehst du nur das Datum und die Uhrzeit. Keine Ablenkung.</string>
@@ -189,7 +191,47 @@
     <string name="device_admin_description">Die Aktion \"Bildschirm sperren\" aktivieren</string>
     <string name="alert_no_torch_found">Es wurde keine geeignete Kamera gefunden.</string>
     <string name="alert_torch_access_exception">Fehler: Kein Zugriff auf die Kamera möglich.</string>
+    <string name="settings_actions_lock_method">Methode zum Sperren des Bildschirms wählen</string>
     <string name="dialog_rename_cancel">Abbrechen</string>
     <string name="dialog_rename_ok">Ok</string>
     <string name="dialog_rename_title">%1$s umbenennen</string>
+    <string name="toast_lock_screen_not_supported">Fehler: Auf diesem Gerät kann der Bildschirm nicht mittels Bedienungshilfe gesperrt werden. Bitte stattdessen Geräteadministrator verwenden.</string>
+    <string name="accessibility_service_name">µLauncher - Bildschirm sperren</string>
+    <string name="alert_lock_screen_failed">Fehler: Bildschirm konnte nicht gesperrt werden.</string>
+    <string name="toast_accessibility_service_not_enabled">Die Bedienungshilfe ist nicht aktiviert. Bitte in den Einstellungen aktivieren</string>
+    <string name="screen_lock_method_dialog_title">Methode zum Sperren wählen</string>
+    <string name="screen_lock_method_use_accessibility">Bedienungshilfe verwenden</string>
+    <string name="screen_lock_method_use_device_admin">Geräteadministrator verwenden</string>
+    <string name="accessibility_service_description">
+        µLauncher als Bedienungshilfe zu aktivieren ermöglicht es µLauncher, den Bildschirm zu sperren.
+        Achtung: Hierfür sind weitgehende Berechtigungen erforderlich.
+        Solche Berechtigungen sollten niemals leichtfertig vergeben werden.
+        µLauncher wird diese Berechtigungen ausschließlich zum Sperren des Bildschirms verwenden.
+
+        Alternativ kann der Bildschirm auch mithilfe von Geräteadministratorberechtigungen gesperrt werden.
+        Dann ist jedoch ein Entsperren mit Fingerabdruck oder Gesichtserkennung nicht möglich.
+    </string>
+
+
+    <string name="screen_lock_method_dialog_text"><![CDATA[
+        <h1>Methode zum Sperren auswählen</h1>
+        Es gibt zwei Möglichkeiten, wie µLauncher den Bildschirm sperren kann.
+        Leider haben beide Nachteile:<br/><br/>
+
+        <h3>Bedienungshilfe</h3>
+        Dies erfordert sehr weitgehende Berechtigungen.
+        µLauncher wird diese ausschließlich zum Sperren des Bildschirms verwenden.
+        <br/>
+        (Irgeneiner gerade heruntergeladenen App sollte man eine solche Behauptung natürlich nicht einfach glauben.
+        Du kannst jedoch den <a href=\"https://github.com/jrpie/Launcher\">Source Code</a> selbst prüfen.)
+        <br/>
+        <br/>
+        <h3>Geräteadministrator</h3>
+        Ein Entsperren mittels Fingerabdruck oder Gesichtserkennung ist nicht möglich.
+
+
+        <br/><br/><br/><br/>
+        Die Auswahl kann später in den Einstellungen geändert werden.
+        ]]>
+    </string>
 </resources>
