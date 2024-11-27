@@ -82,7 +82,9 @@
     <string name="settings_clock_flip_date_time">Datum und Uhrzeit tauschen</string>
     <string name="settings_theme_text_shadow">Textschatten</string>
     <string name="settings_theme_background">Hintergrund (Alle Apps und Einstellungen)</string>
+    <string name="settings_theme_background_item_solid">Einfarbig</string>
     <string name="settings_theme_font">Schriftart</string>
+    <string name="settings_theme_font_item_serif_monospace">Serif-Monospace</string>
     <string name="settings_theme_monochrome_icons">Einfarbige Icons</string>
     <string name="settings_launcher_section_date_time"><![CDATA[Datum & Uhrzeit]]></string>
     <string name="settings_theme_color_theme">Farbschema</string>
@@ -110,6 +112,7 @@
       -->
     <string name="settings_apps_hidden">Versteckte Apps</string>
     <string name="settings_apps_hide_bound_apps">Apps, die an eine Geste gebunden sind, nicht in der Liste anzeigen</string>
+    <string name="settings_list_layout_item_grid">Raster</string>
     <string name="settings_general_choose_home_screen">Launcher wählen</string>
     <string name="settings_meta_cant_select_launcher">App Info</string>
     <string name="settings_meta_cant_select_launcher_msg">Dein Gerät unterstützt diese Funktion nicht. Stattdessen die App Details bearbeiten?</string>
@@ -232,4 +235,14 @@
         Die Auswahl kann später in den Einstellungen geändert werden.
         ]]>
     </string>
+    <string name="settings_theme_background_item_transparent">Transparent</string>
+    <string name="settings_theme_background_item_dim">Dimmen</string>
+    <string name="settings_theme_background_item_blur">Weichzeichnen</string>
+    <string name="settings_list_layout">Layout der Appliste</string>
+    <string name="settings_list_layout_item_default">Standard</string>
+    <string name="settings_list_layout_item_text">Text</string>
+    <string name="settings_theme_font_item_system_default">Systemstandard</string>
+    <string name="settings_theme_font_item_sans_serif">Serifenlos</string>
+    <string name="settings_theme_font_item_serif">Serif</string>
+    <string name="settings_theme_font_item_monospace">Monospace</string>
 </resources>
