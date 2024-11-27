@@ -1,15 +1,11 @@
 package de.jrpie.android.launcher.preferences;
 
-import android.util.Log;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import de.jrpie.android.launcher.R;
 import de.jrpie.android.launcher.apps.AppInfo;
@@ -38,6 +34,9 @@ import eu.jonahbauer.android.preference.annotations.serializer.PreferenceSeriali
                         @Preference(name = "hidden", type = Set.class, serializer = LauncherPreferences$Config.AppInfoSetSerializer.class),
                         @Preference(name = "custom_names", type = HashMap.class, serializer = LauncherPreferences$Config.MapAppInfoStringSerializer.class),
                         @Preference(name = "hide_bound_apps", type = boolean.class, defaultValue = "false"),
+                }),
+                @PreferenceGroup(name = "list", prefix = "settings_list_", suffix = "_key", value = {
+                        @Preference(name = "layout", type = ListLayout.class, defaultValue = "DEFAULT")
                 }),
                 @PreferenceGroup(name = "gestures", prefix = "settings_gesture_", suffix = "_key", value = {
                 }),

@@ -5,7 +5,6 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Rect
 import android.os.AsyncTask
-import android.text.InputType
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -25,9 +24,11 @@ import de.jrpie.android.launcher.apps.AppFilter
 import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.apps.DetailedAppInfo
 import de.jrpie.android.launcher.appsList
+import de.jrpie.android.launcher.getUserFromId
 import de.jrpie.android.launcher.loadApps
 import de.jrpie.android.launcher.openAppSettings
 import de.jrpie.android.launcher.preferences.LauncherPreferences
+import de.jrpie.android.launcher.preferences.ListLayout
 import de.jrpie.android.launcher.transformGrayscale
 import de.jrpie.android.launcher.ui.list.ListActivity
 import de.jrpie.android.launcher.uninstallApp
@@ -47,7 +48,8 @@ class AppsRecyclerAdapter(
     private val intention: ListActivity.ListActivityIntention
     = ListActivity.ListActivityIntention.VIEW,
     private val forGesture: String? = "",
-    private var appFilter: AppFilter = AppFilter(activity, "")
+    private var appFilter: AppFilter = AppFilter(activity, ""),
+    private val layout: ListLayout
 ) :
     RecyclerView.Adapter<AppsRecyclerAdapter.ViewHolder>() {
 
@@ -74,7 +76,15 @@ class AppsRecyclerAdapter(
 
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
-        val appLabel = appsListDisplayed[i].getCustomLabel(activity).toString()
+        var appLabel = appsListDisplayed[i].label.toString()
+
+        if (layout.useBadgedText) {
+            appLabel = activity.packageManager.getUserBadgedLabel(
+                appLabel,
+                getUserFromId(appsListDisplayed[i].app.user, activity)
+            ).toString()
+        }
+
         val appIcon = appsListDisplayed[i].icon
 
         viewHolder.textView.text = appLabel
@@ -212,9 +222,12 @@ class AppsRecyclerAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
+        val layout = LauncherPreferences.list().layout()
         val inflater = LayoutInflater.from(parent.context)
-        val view: View = inflater.inflate(R.layout.list_apps_row, parent, false)
-        return ViewHolder(view)
+        val view: View = inflater.inflate(layout.layoutResource, parent, false)
+        val viewHolder = ViewHolder(view)
+        return viewHolder
     }
 
     init {
