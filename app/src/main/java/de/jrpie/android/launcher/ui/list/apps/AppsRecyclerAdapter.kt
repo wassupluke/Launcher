@@ -64,7 +64,7 @@ class AppsRecyclerAdapter(
         var img: ImageView = itemView.findViewById(R.id.list_apps_row_icon)
 
         override fun onClick(v: View) {
-            var rect = Rect()
+            val rect = Rect()
             img.getGlobalVisibleRect(rect)
             selectItem(adapterPosition, rect)
         }
