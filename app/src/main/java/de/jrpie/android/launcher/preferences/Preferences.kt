@@ -414,7 +414,7 @@ fun migratePreferencesToNewVersion(context: Context) {
 }
 
 fun resetPreferences(context: Context) {
-    Log.i(TAG, "resetting preferences")
+    Log.i(TAG, "Resetting preferences")
     LauncherPreferences.clear()
     LauncherPreferences.internal().versionCode(PREFERENCE_VERSION)
 

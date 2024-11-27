@@ -40,6 +40,8 @@ const val REQUEST_UNINSTALL = 2
 
 const val REQUEST_SET_DEFAULT_HOME = 42
 
+const val LOG_TAG = "Launcher"
+
 /* Animate */
 
 // Taken from https://stackoverflow.com/questions/47293269
@@ -110,7 +112,7 @@ fun uninstallApp(appInfo: AppInfo, activity: Activity) {
     val packageName = appInfo.packageName.toString()
     val user = appInfo.user
 
-    Log.i("Launcher", "uninstalling $appInfo")
+    Log.i(LOG_TAG, "uninstalling $appInfo")
     val intent = Intent(Intent.ACTION_UNINSTALL_PACKAGE)
     intent.data = Uri.parse("package:$packageName")
     getUserFromId(user, activity).let { user ->
@@ -171,7 +173,7 @@ fun loadApps(packageManager: PackageManager, context: Context) {
 
     // fallback option
     if (loadList.isEmpty()) {
-        Log.i("Launcher", "using fallback option to load packages")
+        Log.w(LOG_TAG, "using fallback option to load packages")
         val i = Intent(Intent.ACTION_MAIN, null)
         i.addCategory(Intent.CATEGORY_LAUNCHER)
         val allApps = packageManager.queryIntentActivities(i, 0)

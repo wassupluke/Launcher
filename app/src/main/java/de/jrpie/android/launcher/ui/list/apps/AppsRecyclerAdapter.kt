@@ -51,6 +51,8 @@ class AppsRecyclerAdapter(
 ) :
     RecyclerView.Adapter<AppsRecyclerAdapter.ViewHolder>() {
 
+    private val LOG_TAG = "Launcher"
+
     private val appsListDisplayed: MutableList<DetailedAppInfo> = mutableListOf()
 
 
@@ -138,32 +140,18 @@ class AppsRecyclerAdapter(
                 }
 
                 R.id.app_menu_favorite -> {
-                    var favorites: MutableSet<AppInfo> =
+                    val favorites: MutableSet<AppInfo> =
                         LauncherPreferences.apps().favorites() ?: mutableSetOf()
-
-                    Log.i("LAUNCHER", favorites.size.toString())
-                    for (app in favorites) {
-                        Log.i("LAUNCHER", app.serialize())
-
-                    }
 
                     if (favorites.contains(appInfo.app)) {
                         favorites.remove(appInfo.app)
-                        Log.i(
-                            "LAUNCHER",
-                            "Removing " + appInfo.app.serialize() + " from favorites."
-                        )
+                        Log.i(LOG_TAG, "Removing $appInfo from favorites.")
                     } else {
-                        Log.i("LAUNCHER", "Adding " + appInfo.app.serialize() + " to favorites.")
+                        Log.i(LOG_TAG, "Adding $appInfo to favorites.")
                         favorites.add(appInfo.app)
                     }
-                    Log.i("LAUNCHER", favorites.size.toString())
-                    for (app in favorites) {
-                        Log.i("LAUNCHER", app.serialize())
 
-                    }
                     LauncherPreferences.apps().favorites(favorites)
-
                     true
                 }
 
