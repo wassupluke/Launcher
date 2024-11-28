@@ -1,17 +1,13 @@
 package de.jrpie.android.launcher.actions.lock
 
 import android.accessibilityservice.AccessibilityService
-import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.provider.Settings
 import android.util.Log
 import android.view.accessibility.AccessibilityEvent
-import android.view.accessibility.AccessibilityManager
 import android.widget.Toast
-import androidx.core.content.getSystemService
-import de.jrpie.android.launcher.BuildConfig
 import de.jrpie.android.launcher.R
 
 class LauncherAccessibilityService : AccessibilityService() {

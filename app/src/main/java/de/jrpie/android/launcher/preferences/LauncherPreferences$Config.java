@@ -8,8 +8,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import de.jrpie.android.launcher.R;
-import de.jrpie.android.launcher.apps.AppInfo;
 import de.jrpie.android.launcher.actions.lock.LockMethod;
+import de.jrpie.android.launcher.apps.AppInfo;
 import de.jrpie.android.launcher.preferences.theme.Background;
 import de.jrpie.android.launcher.preferences.theme.ColorTheme;
 import de.jrpie.android.launcher.preferences.theme.Font;

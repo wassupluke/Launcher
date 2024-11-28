@@ -6,9 +6,9 @@ import android.os.Build
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
 import de.jrpie.android.launcher.R
+import de.jrpie.android.launcher.actions.lock.LockMethod
 import de.jrpie.android.launcher.actions.openAppsList
 import de.jrpie.android.launcher.preferences.LauncherPreferences
-import de.jrpie.android.launcher.actions.lock.LockMethod
 import de.jrpie.android.launcher.setDefaultHomeScreen
 
 

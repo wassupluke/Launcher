@@ -5,7 +5,6 @@ import android.content.pm.ActivityInfo
 import android.content.res.Resources
 import android.view.Window
 import android.view.WindowManager
-import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 
 /**
