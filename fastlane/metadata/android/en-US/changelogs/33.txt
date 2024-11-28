@@ -1,0 +1,2 @@
+* Alternative layouts for app list (grid, text)
+* Fixed bug: renaming of apps works properly now
