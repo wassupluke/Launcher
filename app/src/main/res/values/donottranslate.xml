@@ -119,6 +119,7 @@
           -
           -->
         <string name="settings_clock_font_key" translatable="false">clock.font</string>
+        <string name="settings_clock_color_key" translatable="false">clock.color</string>
         <string name="settings_clock_time_visible_key" translatable="false">clock.time_visible</string>
         <string name="settings_clock_show_seconds_key" translatable="false">clock.show_seconds</string>
         <string name="settings_clock_date_visible_key" translatable="false">clock.date_visible</string>

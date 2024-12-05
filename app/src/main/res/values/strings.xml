@@ -112,6 +112,7 @@
     <string name="settings_theme_monochrome_icons">Monochrome app icons</string>
 
     <string name="settings_launcher_section_date_time"><![CDATA[Date & time]]></string>
+    <string name="settings_clock_color">Color</string>
     <string name="settings_clock_time_visible">Show time</string>
     <string name="settings_clock_date_visible">Show date</string>
     <string name="settings_clock_localized">Use localized date format</string>
@@ -289,4 +290,12 @@
     <string name="dialog_rename_cancel">Cancel</string>
     <string name="dialog_rename_ok">Ok</string>
     <string name="dialog_rename_title">Rename %1$s</string>
+    <string name="dialog_select_color_red">Red</string>
+    <string name="dialog_select_color_alpha">Alpha</string>
+    <string name="dialog_select_color_blue">Blue</string>
+    <string name="dialog_select_color_green">Green</string>
+    <string name="dialog_select_color_ok">Ok</string>
+    <string name="dialog_select_color_cancel">Cancel</string>
+    <string name="dialog_select_color_color_hex">Color</string>
+    <string name="dialog_choose_color_title">Choose color</string>
 </resources>

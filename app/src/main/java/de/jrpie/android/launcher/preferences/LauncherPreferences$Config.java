@@ -53,6 +53,7 @@ import eu.jonahbauer.android.preference.annotations.serializer.PreferenceSeriali
                 }),
                 @PreferenceGroup(name = "clock", prefix = "settings_clock_", suffix = "_key", value = {
                         @Preference(name = "font", type = Font.class, defaultValue = "HACK"),
+                        @Preference(name = "color", type = int.class, defaultValue = "0xffffffff"),
                         @Preference(name = "date_visible", type = boolean.class, defaultValue = "true"),
                         @Preference(name = "time_visible", type = boolean.class, defaultValue = "true"),
                         @Preference(name = "flip_date_time", type = boolean.class, defaultValue = "false"),

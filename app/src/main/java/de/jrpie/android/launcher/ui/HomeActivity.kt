@@ -142,6 +142,10 @@ class HomeActivity : UIObject, AppCompatActivity(),
         binding.homeUpperView.isVisible = upperVisible
         binding.homeLowerView.isVisible = lowerVisible
 
+        binding.homeUpperView.setTextColor(LauncherPreferences.clock().color())
+        binding.homeLowerView.setTextColor(LauncherPreferences.clock().color())
+
+
         clockTimer = fixedRateTimer("clockTimer", true, 0L, period) {
             this@HomeActivity.runOnUiThread {
                 if (lowerVisible) {
@@ -200,6 +204,7 @@ class HomeActivity : UIObject, AppCompatActivity(),
                 }
                 Gesture.VOLUME_UP(this)
             }
+
             KeyEvent.KEYCODE_VOLUME_DOWN -> {
                 if (Action.forGesture(Gesture.VOLUME_DOWN) == LauncherAction.VOLUME_DOWN) {
                     // see above
@@ -229,7 +234,6 @@ class HomeActivity : UIObject, AppCompatActivity(),
         val edgeActions = LauncherPreferences.enabled_gestures().edgeSwipe()
 
         val threshold = ViewConfiguration.get(this).scaledTouchSlop
-
         val angularThreshold = tan(Math.PI / 6)
 
         var gesture = if (angularThreshold * abs(diffX) > abs(diffY)) { // horizontal swipe
@@ -238,7 +242,7 @@ class HomeActivity : UIObject, AppCompatActivity(),
             else if (diffX < -threshold)
                 Gesture.SWIPE_RIGHT
             else null
-        } else if (angularThreshold * abs(diffY) > abs(diffX)){ // vertical swipe
+        } else if (angularThreshold * abs(diffY) > abs(diffX)) { // vertical swipe
             // Only open if the swipe was not from the phones top edge
             // TODO: replace 100px by sensible dp value (e.g. twice the height of the status bar)
             if (diffY < -threshold && e1.y > 100)
