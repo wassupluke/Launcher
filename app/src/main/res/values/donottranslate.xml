@@ -66,11 +66,13 @@
                 <item>DEFAULT</item>
                 <item>DARK</item>
                 <item>LIGHT</item>
+                <item>DYNAMIC</item>
         </string-array>
         <string-array name="settings_theme_color_theme_items" translatable="false">
                 <item>@string/settings_theme_color_theme_item_default</item>
                 <item>@string/settings_theme_color_theme_item_dark</item>
                 <item>@string/settings_theme_color_theme_item_light</item>
+                <item>@string/settings_theme_color_theme_item_dynamic</item>
         </string-array>
 
         <string name="settings_theme_text_shadow_key" translatable="false">theme.text_shadow</string>

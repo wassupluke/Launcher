@@ -9,6 +9,7 @@ import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.actions.lock.LockMethod
 import de.jrpie.android.launcher.actions.openAppsList
 import de.jrpie.android.launcher.preferences.LauncherPreferences
+import de.jrpie.android.launcher.preferences.theme.ColorTheme
 import de.jrpie.android.launcher.setDefaultHomeScreen
 
 
@@ -85,6 +86,16 @@ class SettingsFragmentLauncher : PreferenceFragmentCompat() {
             LockMethod.chooseMethod(requireContext())
             true
         }
+
+        findPreference<androidx.preference.DropDownPreference>(
+            LauncherPreferences.theme().keys().colorTheme()
+        )?.apply {
+            entries = ColorTheme.entries.filter { x -> x.isAvailable() }
+                .map { x -> x.getLabel(requireContext()) }.toTypedArray()
+            entryValues = ColorTheme.entries.filter { x -> x.isAvailable() }
+                .map { x -> x.name }.toTypedArray()
+        }
+
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
             lockMethod?.isVisible = false

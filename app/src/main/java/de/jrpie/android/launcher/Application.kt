@@ -19,6 +19,9 @@ class Application : android.app.Application() {
 
     override fun onCreate() {
         super.onCreate()
+        // TODO  Error: Invalid resource ID 0x00000000.
+        // DynamicColors.applyToActivitiesIfAvailable(this)
+
 
         if (Build.VERSION.SDK_INT >= VERSION_CODES.M) {
             torchManager = TorchManager(this)
