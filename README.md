@@ -47,6 +47,12 @@ You can also [get it on Google Play](https://play.google.com/store/apps/details?
      <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/5.jpg"
      alt="screenshot"
      height="400">
+     <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/7.jpg"
+     alt="screenshot"
+     height="400">
+     <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/8.jpg"
+     alt="screenshot"
+     height="400">
 
 
 ## Contributing
