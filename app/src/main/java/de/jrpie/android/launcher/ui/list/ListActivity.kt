@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import android.window.OnBackInvokedDispatcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -52,6 +53,14 @@ class ListActivity : AppCompatActivity(), UIObject {
     override fun onCreate(savedInstanceState: Bundle?) {
         super<AppCompatActivity>.onCreate(savedInstanceState)
         super<UIObject>.onCreate()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && intention == ListActivityIntention.VIEW) {
+            onBackInvokedDispatcher.registerOnBackInvokedCallback(
+                OnBackInvokedDispatcher.PRIORITY_OVERLAY
+            ) {
+                finish()
+            }
+        }
 
         // get info about which action this activity is open for
         intent.extras?.let { bundle ->

@@ -16,7 +16,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/launcherBaseTheme">
+        android:enableOnBackInvokedCallback="true"
+        android:theme="@style/launcherBaseTheme"
+        tools:ignore="UnusedAttribute" >
+
 
         <activity
             android:name=".ui.HomeActivity"

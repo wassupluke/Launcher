@@ -1,14 +1,17 @@
 package de.jrpie.android.launcher.ui
 
+import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.content.res.Resources
 import android.os.AsyncTask
+import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.GestureDetector
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.ViewConfiguration
+import android.window.OnBackInvokedDispatcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GestureDetectorCompat
 import androidx.core.view.isVisible
@@ -91,6 +94,15 @@ class HomeActivity : UIObject, AppCompatActivity(),
         // Initialise layout
         binding = HomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Handle back key / gesture on Android 13+, cf. onKeyDown()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            onBackInvokedDispatcher.registerOnBackInvokedCallback(
+                OnBackInvokedDispatcher.PRIORITY_OVERLAY
+            ) {
+                handleBack()
+            }
+        }
 
     }
 
@@ -193,9 +205,13 @@ class HomeActivity : UIObject, AppCompatActivity(),
         super.onDestroy()
     }
 
+    @SuppressLint("GestureBackNavigation")
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         when (keyCode) {
-            KeyEvent.KEYCODE_BACK -> LauncherAction.CHOOSE.launch(this)
+            KeyEvent.KEYCODE_BACK -> {
+                // Only used pre Android 13, cf. onBackInvokedDispatcher
+                handleBack()
+            }
             KeyEvent.KEYCODE_VOLUME_UP -> {
                 if (Action.forGesture(Gesture.VOLUME_UP) == LauncherAction.VOLUME_UP) {
                     // Let the OS handle the key event. This works better with some custom ROMs
@@ -326,27 +342,24 @@ class HomeActivity : UIObject, AppCompatActivity(),
         }
     }
 
-    /* TODO: Remove those. For now they are necessary
-     *  because this inherits from GestureDetector.OnGestureListener */
-    override fun onDoubleTapEvent(event: MotionEvent): Boolean {
-        return false
-    }
 
-    override fun onDown(event: MotionEvent): Boolean {
-        return false
-    }
-
-    override fun onScroll(e1: MotionEvent?, e2: MotionEvent, dX: Float, dY: Float): Boolean {
-        return false
-    }
-
-    override fun onShowPress(event: MotionEvent) {}
-    override fun onSingleTapUp(event: MotionEvent): Boolean {
-        return false
+    private fun handleBack() {
+        LauncherAction.CHOOSE.launch(this)
     }
 
     override fun isHomeScreen(): Boolean {
         return true
     }
+
+
+    /* TODO: Remove those. For now they are necessary
+     *  because this inherits from GestureDetector.OnGestureListener */
+    override fun onDoubleTapEvent(event: MotionEvent): Boolean { return false }
+    override fun onDown(event: MotionEvent): Boolean { return false }
+    override fun onScroll(e1: MotionEvent?, e2: MotionEvent, dX: Float, dY: Float): Boolean { return false }
+    override fun onShowPress(event: MotionEvent) {}
+    override fun onSingleTapUp(event: MotionEvent): Boolean { return false }
+
+
 
 }
