@@ -1,12 +1,14 @@
 package de.jrpie.android.launcher.actions.lock
 
 import android.accessibilityservice.AccessibilityService
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.provider.Settings
 import android.util.Log
 import android.view.accessibility.AccessibilityEvent
+import android.widget.CheckBox
 import android.widget.Toast
 import de.jrpie.android.launcher.R
 
@@ -49,6 +51,32 @@ class LauncherAccessibilityService : AccessibilityService() {
             return enabledServices.split(":")
                 .contains("${context.packageName}/${LauncherAccessibilityService::class.java.name}")
                 .also { Log.d(TAG, "Accessibility Service enabled: $it") }
+        }
+
+        fun showEnableDialog(context: Context) {
+            AlertDialog.Builder(context, R.style.AlertDialogDanger).apply {
+                setView(R.layout.dialog_consent_accessibility)
+                setTitle(R.string.dialog_consent_accessibility_title)
+                setPositiveButton(R.string.dialog_consent_accessibility_ok) { _, _ ->
+                    lockScreen(context)
+                }
+                setNegativeButton(R.string.dialog_consent_accessibility_cancel) { _, _ -> }
+            }.create().also { it.show() }.apply {
+                val buttonOk = getButton(AlertDialog.BUTTON_POSITIVE)
+                val checkboxes = listOf(
+                    findViewById<CheckBox>(R.id.dialog_consent_accessibility_checkbox_1),
+                    findViewById(R.id.dialog_consent_accessibility_checkbox_2),
+                    findViewById(R.id.dialog_consent_accessibility_checkbox_3),
+                    findViewById(R.id.dialog_consent_accessibility_checkbox_4),
+                )
+                val update = {
+                    buttonOk.isEnabled = checkboxes.map { b -> b?.isChecked == true }.all { it }
+                }
+                update()
+                checkboxes.forEach { c ->
+                    c?.setOnClickListener { _ -> update() }
+                }
+            }
         }
     }
 

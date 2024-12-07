@@ -22,7 +22,7 @@ enum class LockMethod(
     ACCESSIBILITY_SERVICE(
         LauncherAccessibilityService::lockScreen,
         LauncherAccessibilityService::isEnabled,
-        LauncherAccessibilityService::lockScreen
+        LauncherAccessibilityService::showEnableDialog
     ),
     ;
 
