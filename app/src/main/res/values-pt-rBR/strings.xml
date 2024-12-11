@@ -43,7 +43,7 @@
     <string name="settings_gesture_double_click">Toque duplo</string>
     <string name="settings_gesture_long_click">Toque longo</string>
     <string name="settings_gesture_date">Data</string>
-    <string name="settings_gesture_time">Tempo</string>
+    <string name="settings_gesture_time">Hora</string>
     <string name="settings_apps_choose">Selecione um app</string>
     <string name="settings_apps_view_all">Ver todos os apps</string>
     <string name="settings_apps_install">Instalar aplicativos</string>
@@ -68,7 +68,7 @@
     <string name="settings_display_screen_timeout_disabled">Manter a tela ligada</string>
     <string name="settings_display_full_screen">Usar tela cheia</string>
     <string name="settings_launcher_section_functionality">Funções</string>
-    <string name="settings_enabled_gestures_double_swipe">Deslize com 2 dedos</string>
+    <string name="settings_enabled_gestures_double_swipe">Gesto com 2 dedos</string>
     <string name="settings_enabled_gestures_edge_swipe">Ações de deslize nas bordas</string>
     <string name="settings_functionality_auto_launch">Iniciar resultados da pesquisa</string>
     <string name="settings_functionality_auto_keyboard">Mostrar teclado para pesquisa</string>
@@ -94,7 +94,7 @@
       - List (Launchers app drawer)
       -
       -->
-    <string name="list_title_view">Todos aplicativos</string>
+    <string name="list_title_view">Seus apps</string>
     <string name="list_title_pick">Escolha um app</string>
     <string name="list_tab_app">Aplicativos</string>
     <string name="list_tab_other">Outros</string>
@@ -102,7 +102,7 @@
     <string name="list_app_info">Informações do aplicativo</string>
     <string name="list_removed">O app selecionado foi removido</string>
     <string name="list_not_removed">Não foi possível remover o app</string>
-    <string name="list_apps_search_hint">Pesquisar Aplicativos</string>
+    <string name="list_apps_search_hint">Busque aplicativos</string>
     <string name="list_other_settings">Configurações do µLauncher</string>
     <string name="list_other_list">Todos os apps</string>
     <string name="list_other_volume_up">Música: Mais alto</string>
@@ -153,9 +153,9 @@
     <string name="undo">Desfazer</string>
     <string name="list_other_torch">Ligar lanterna</string>
     <string name="alert_lock_screen_failed">Erro: Falha ao bloquear a tela. (Se você acabou de atualizar o app, tente desativar e reativar o Serviço de acessibilidade em configurações do aparelho)</string>
-    <string name="toast_accessibility_service_not_enabled">O serviço de acessibilidade do μLauncher não está ligado. Entre em configurações para ativar</string>
+    <string name="toast_accessibility_service_not_enabled">O Serviço de acessibilidade do μLauncher não está ativado. Entre em configurações para ativar</string>
     <string name="settings_apps_hide_bound_apps">Não mostrar apps com um gesto atribuído na lista de aplicativos</string>
-    <string name="toast_device_admin_not_enabled">O µLauncher precisa tornar-se o administrador do dispositivo para poder bloquear a tela.</string>
+    <string name="toast_device_admin_not_enabled">O µLauncher precisa tornar-se o Administrador do dispositivo para poder bloquear a tela.</string>
     <string name="device_admin_explanation">Isto é necessário para realizar a ação de bloqueio da tela.</string>
     <string name="device_admin_description">Permitir a ação de bloqueio da tela</string>
     <string name="alert_torch_access_exception">Erro: Não é possível acessar a lanterna.</string>
@@ -167,15 +167,15 @@
     <string name="list_other_expand_settings_panel">Configurações rápidas</string>
     <string name="alert_requires_android_m">Essa funcionalidade requer o Android 6.0 ou mais recente.</string>
     <string name="alert_no_torch_found">Nenhuma câmera com lanterna detectada.</string>
-    <string name="toast_lock_screen_not_supported">Erro: O bloqueio da tela via acessibilidade não é compatível com este aparelho. Tente o administrador do dispositivo como método alternativo.</string>
-    <string name="accessibility_service_description">Definindo µLauncher como um serviço de acessibilidade permite a ele bloquear a tela. Considere que é necessário conceder as permissões extras. Você nunca deveria autorizar essas permissões a qualquer aplicativo sem avaliação. O µLauncher usará o serviço de acessibilidade somente para bloqueio da tela. Você pode verificar o código-fonte para ter certeza. O bloqueio da tela também pode ser realizado com a autorização de permissões de administrador do dispositivo para µLauncher. Embora esse método não funciona com impressão digital e desbloqueio facial.</string>
+    <string name="toast_lock_screen_not_supported">Erro: O bloqueio da tela via Serviço de acessibilidade não é compatível com este aparelho. Tente usar Administrador do dispositivo como método alternativo.</string>
+    <string name="accessibility_service_description">Definindo µLauncher como Serviço de acessibilidade permite a ele bloquear a tela. Considere que é necessário conceder as permissões elevadas. Você nunca deveria autorizar essas permissões a qualquer aplicativo sem avaliação. O µLauncher usará o Serviço de acessibilidade somente para bloquear a tela. Você pode verificar o código-fonte para ter certeza. O bloqueio da tela também pode ser realizado dando permissões de Administrador do dispositivo ao µLauncher. Apesar de que esse método não funciona com impressão digital e desbloqueio facial.</string>
     <string name="screen_lock_method_dialog_text"><![CDATA[
         <h1>Escolha um método de bloqueio</h1>
         Há dois métodos para bloquear a tela.
         Infelizmente, ambos têm desvantagens:<br/><br/>
 
         <h3>Serviço de acessibilidade</h3>
-        Exige permissões excessivas.
+        Exige permissões elevadas.
         O µLauncher usará essas permissões apenas para bloquear a tela.
         <br/>
         (Você realmente não deveria confiar num app aleatório que você baixou que tá pedindo estas permissões, mas pode verificar o <a href=\"https://github.com/jrpie/Launcher\">código-fonte</a>.)
@@ -204,8 +204,8 @@
     <string name="settings_gesture_description_down_left_edge">Deslize para baixo na borda esquerda da tela</string>
     <string name="settings_gesture_description_down_right_edge">Deslize para baixo na borda direita da tela</string>
     <string name="settings_gesture_description_long_click">Toque longo numa área livre</string>
-    <string name="settings_gesture_description_vol_up">Apertar o botão de aumentar volume</string>
-    <string name="settings_gesture_description_vol_down">Apertar o botão de diminuir volume</string>
+    <string name="settings_gesture_description_vol_up">Aperte botão de aumentar volume</string>
+    <string name="settings_gesture_description_vol_down">Aperte botão de diminuir volume</string>
     <string name="settings_gesture_description_double_click">Toque 2 vezes numa área livre</string>
     <string name="settings_gesture_description_date">Toque na Data</string>
     <string name="settings_gesture_description_time">Toque na Hora</string>
@@ -214,7 +214,7 @@
     <string name="settings_enabled_gestures_edge_swipe_edge_width">Largura da borda</string>
     <string name="settings_meta_view_code">Ver código-fonte</string>
     <string name="settings_meta_join_chat">Entre no chat do µLauncher</string>
-    <string name="list_other_lock_screen">Tela de bloqueio</string>
+    <string name="list_other_lock_screen">Bloquear a tela</string>
     <string name="settings_theme_text_shadow">Sombra no texto</string>
     <string name="settings_theme_background_item_transparent">Transparente</string>
     <string name="settings_theme_background_item_dim">Opaco</string>
@@ -249,6 +249,6 @@
     <string name="dialog_consent_accessibility_cancel">Cancelar</string>
     <string name="dialog_consent_accessibility_text"><![CDATA[Você está prestes a ativar o Serviço de acessibilidade. Isto concederá <strong>permissões elevadas</strong> ao µLauncher.<br/>µLauncher usará estas permissões <strong>apenas para bloquear a tela</strong>. µLauncher <strong>nunca coletará nenhum dado</strong>. Sobretudo, o µLauncher não implementa o Serviço de acessibilidade para coletar dados.]]></string>
     <string name="dialog_select_color_ok">beleza</string>
-    <string name="dialog_consent_accessibility_privileges">Estou ciente de que isto concederá permissões excessivas ao µLauncher.</string>
-    <string name="dialog_consent_accessibility_other_options">Estou ciente de que existem outras opções (ao usar permissões de administrador do aparelho ou o botão de ligar).</string>
+    <string name="dialog_consent_accessibility_privileges">Estou ciente de que isto concederá permissões elevadas ao µLauncher.</string>
+    <string name="dialog_consent_accessibility_other_options">Estou ciente de que existem outras opções (permissões de Administrador do aparelho ou o botão de ligar).</string>
 </resources>
