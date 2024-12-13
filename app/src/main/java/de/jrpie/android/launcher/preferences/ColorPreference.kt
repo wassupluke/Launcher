@@ -56,7 +56,7 @@ class ColorPreference(context: Context, attrs: AttributeSet?) :
                 persistInt(currentColor)
                 summary = currentColor.getHex()
             }
-            setNegativeButton(R.string.dialog_select_color_cancel) { _, _ -> }
+            setNegativeButton(R.string.dialog_cancel) { _, _ -> }
         }.create().also { it.show() }.apply {
             val preview = findViewById<EditText>(R.id.dialog_select_color_preview)
 

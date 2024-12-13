@@ -192,7 +192,6 @@
     <string name="tutorial_usage_title">Utilizzo</string>
     <string name="tutorial_usage_text">La schermata principale contiene solo data e ora. Nessuna distrazione.</string>
     <string name="alert_requires_android_m">Questa funzione richiede Android 6.0 o successivi.</string>
-    <string name="dialog_rename_cancel">Annulla</string>
     <string name="dialog_rename_ok">Ok</string>
     <string name="dialog_rename_title">Rinomina %1$s</string>
     <string name="list_not_removed">Impossibile rimuovere l\'applicazione</string>

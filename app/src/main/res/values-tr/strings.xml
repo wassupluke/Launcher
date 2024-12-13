@@ -194,7 +194,7 @@
     <string name="alert_no_torch_found">Fenerli kamera algılanmadı.</string>
     <string name="alert_torch_access_exception">Hata: Fenere erişilemiyor.</string>
     <string name="settings_actions_lock_method">Ekranı kilitleme yöntemini seçin</string>
-    <string name="dialog_rename_cancel">İptal</string>
+    <string name="dialog_cancel">İptal</string>
     <string name="dialog_rename_ok">OK</string>
     <string name="dialog_rename_title">Yeniden Adlandır %1$s</string>
     <string name="settings_theme_color_theme_item_dynamic">Dinamik</string>
@@ -204,7 +204,6 @@
     <string name="dialog_select_color_blue">Mavi</string>
     <string name="dialog_select_color_green">Yeşil</string>
     <string name="dialog_select_color_ok">OK</string>
-    <string name="dialog_select_color_cancel">İptal</string>
     <string name="dialog_select_color_color_hex">Renk</string>
     <string name="dialog_choose_color_title">Renk seçin</string>
 </resources>

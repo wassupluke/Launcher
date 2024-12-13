@@ -179,7 +179,7 @@
     <string name="toast_lock_screen_not_supported">错误：此设备不支持使用无障碍功能锁定屏幕。请改用设备管理员。</string>
     <string name="screen_lock_method_use_accessibility">使用无障碍服务</string>
     <string name="screen_lock_method_use_device_admin">使用设备管理员</string>
-    <string name="dialog_rename_cancel">取消</string>
+    <string name="dialog_cancel">取消</string>
     <string name="settings_theme_color_theme_item_light">浅色</string>
     <string name="list_other_expand_settings_panel">快速设置</string>
     <string name="alert_lock_screen_failed">错误：锁定屏幕失败。（如果您刚刚升级了应用程序，请尝试在手机设置中手动禁用并重新启用无障碍服务）</string>

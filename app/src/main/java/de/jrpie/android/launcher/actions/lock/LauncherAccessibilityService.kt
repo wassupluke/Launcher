@@ -60,7 +60,7 @@ class LauncherAccessibilityService : AccessibilityService() {
                 setPositiveButton(R.string.dialog_consent_accessibility_ok) { _, _ ->
                     lockScreen(context)
                 }
-                setNegativeButton(R.string.dialog_consent_accessibility_cancel) { _, _ -> }
+                setNegativeButton(R.string.dialog_cancel) { _, _ -> }
             }.create().also { it.show() }.apply {
                 val buttonOk = getButton(AlertDialog.BUTTON_POSITIVE)
                 val checkboxes = listOf(

@@ -287,7 +287,6 @@
     <string name="screen_lock_method_use_accessibility">Use Accessibility Service</string>
     <string name="screen_lock_method_use_device_admin">Use Device Admin</string>
     <string name="settings_actions_lock_method">Choose method for locking the screen</string>
-    <string name="dialog_rename_cancel">Cancel</string>
     <string name="dialog_rename_ok">Ok</string>
     <string name="dialog_rename_title">Rename %1$s</string>
     <string name="dialog_select_color_red">Red</string>
@@ -295,7 +294,6 @@
     <string name="dialog_select_color_blue">Blue</string>
     <string name="dialog_select_color_green">Green</string>
     <string name="dialog_select_color_ok">Ok</string>
-    <string name="dialog_select_color_cancel">Cancel</string>
     <string name="dialog_select_color_color_hex">Color</string>
     <string name="dialog_choose_color_title">Choose color</string>
     <string name="dialog_consent_accessibility_privileges">I am aware that this will grant far-reaching privileges to µLauncher.</string>
@@ -305,5 +303,5 @@
     <string name="dialog_consent_accessibility_text"><![CDATA[You are about to activate the accessibility service. This will grant <strong>far-reaching privileges</strong> to µLauncher.<br/>µLauncher will use these privileges <strong>only to lock the screen</strong>. µLauncher <strong>will never collect any data</strong>. In particular, µLauncher does not use the accessibility service to collect any data.]]></string>
     <string name="dialog_consent_accessibility_title">Activating the Accessibility Service</string>
     <string name="dialog_consent_accessibility_ok">Activate Accessibility Service</string>
-    <string name="dialog_consent_accessibility_cancel">Cancel</string>
+    <string name="dialog_cancel">Cancel</string>
 </resources>

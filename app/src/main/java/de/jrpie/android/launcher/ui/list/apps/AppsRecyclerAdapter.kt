@@ -192,7 +192,7 @@ class AppsRecyclerAdapter(
                     builder.setTitle(title)
                     builder.setView(R.layout.dialog_rename_app)
 
-                    builder.setNegativeButton(R.string.dialog_rename_cancel) { d, _ -> d.cancel() }
+                    builder.setNegativeButton(R.string.dialog_cancel) { d, _ -> d.cancel() }
                     builder.setPositiveButton(R.string.dialog_rename_ok) { d, _ ->
                         appInfo.setCustomLabel(
                             (d as? AlertDialog)

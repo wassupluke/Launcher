@@ -2,7 +2,7 @@ package de.jrpie.android.launcher.actions.lock
 
 import android.content.Context
 import android.os.Build
-import android.view.LayoutInflater
+import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.preferences.LauncherPreferences
@@ -41,27 +41,22 @@ enum class LockMethod(
                 setMethod(context, DEVICE_ADMIN)
                 return
             }
-            val builder = AlertDialog.Builder(context, R.style.AlertDialogCustom)
-            builder.setNegativeButton("cancel") { _, _ -> }
-            builder.setCustomTitle(
-                LayoutInflater.from(context).inflate(R.layout.dialog_select_lock_method, null)
-            )
-
-            builder.setItems(
-                arrayOf(
-                    context.getString(R.string.screen_lock_method_use_accessibility),
-                    context.getString(R.string.screen_lock_method_use_device_admin)
-                )
-            ) { _, i ->
-                val method = when (i) {
-                    0 -> ACCESSIBILITY_SERVICE
-                    1 -> DEVICE_ADMIN
-                    else -> return@setItems
+            AlertDialog.Builder(context, R.style.AlertDialogCustom).apply {
+                setNegativeButton(R.string.dialog_cancel) { _, _ -> }
+                setView(R.layout.dialog_select_lock_method)
+                // setTitle()
+            }.create().also { it.show() }.apply {
+                findViewById<Button>(R.id.dialog_select_lock_method_button_accessibility)
+                    ?.setOnClickListener {
+                        setMethod(context, ACCESSIBILITY_SERVICE)
+                        cancel()
+                    }
+                findViewById<Button>(R.id.dialog_select_lock_method_button_device_admin)
+                    ?.setOnClickListener {
+                        setMethod(context, DEVICE_ADMIN)
+                        cancel()
                 }
-                setMethod(context, method)
             }
-            builder.show()
-
             return
         }
 
