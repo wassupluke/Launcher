@@ -1,7 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '2.0.0'
     ext.android_plugin_version = '8.7.3'
     repositories {
         google()
@@ -10,8 +9,6 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.7.3'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.android.tools.build:gradle:$android_plugin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -22,6 +19,7 @@ buildscript {
 plugins {
     // Existing plugins
     alias(libs.plugins.compose.compiler) apply false
+    alias(libs.plugins.org.jetbrains.kotlin.android) apply false
 }
 
 allprojects {
