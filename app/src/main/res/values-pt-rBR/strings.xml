@@ -58,7 +58,7 @@
     <string name="settings_theme_color_theme_item_default">Padrão</string>
     <string name="settings_theme_color_theme_item_dark">Escuro</string>
     <string name="settings_theme_color_theme_item_light">Claro</string>
-    <string name="settings_clock_time_visible">Mostrar Horário</string>
+    <string name="settings_clock_time_visible">Mostrar Hora</string>
     <string name="settings_clock_date_visible">Mostrar Data</string>
     <string name="settings_clock_localized">Use formato de data localizado</string>
     <string name="settings_clock_flip_date_time">Inverter data e hora</string>
@@ -67,11 +67,11 @@
     <string name="settings_launcher_section_display">Exibição</string>
     <string name="settings_display_screen_timeout_disabled">Manter a tela ligada</string>
     <string name="settings_display_full_screen">Usar tela cheia</string>
-    <string name="settings_launcher_section_functionality">Funções</string>
-    <string name="settings_enabled_gestures_double_swipe">Gesto com 2 dedos</string>
+    <string name="settings_launcher_section_functionality">Funcionalidades</string>
+    <string name="settings_enabled_gestures_double_swipe">Gestos com 2 dedos</string>
     <string name="settings_enabled_gestures_edge_swipe">Ações de deslize nas bordas</string>
     <string name="settings_functionality_auto_launch">Iniciar resultados da pesquisa</string>
-    <string name="settings_functionality_auto_keyboard">Mostrar teclado para pesquisa</string>
+    <string name="settings_functionality_auto_keyboard">Iniciar teclado ao mostrar apps</string>
     <string name="settings_launcher_sensitivity">Sensibilidade</string>
     <!--
       -
@@ -121,7 +121,7 @@
     <string name="tutorial_concept_text">O Launcher foi projetado para ser minimalista, eficiente e livre de distrações.\n\nEle é livre de pagamentos, anúncios e serviços de rastreamento.</string>
     <string name="tutorial_concept_text_2">O aplicativo é de código aberto (licença MIT) e está disponível no GitHub!\n\nNão deixe de conferir o repositório!</string>
     <string name="tutorial_usage_title">Uso</string>
-    <string name="tutorial_usage_text">Sua tela inicial contém a data e a hora locais. Sem distração.</string>
+    <string name="tutorial_usage_text">Sua tela inicial contém a data e hora local. Sem distração.</string>
     <string name="tutorial_usage_text_2">Você pode iniciar seus aplicativos com um toque único ou pressionando um botão. Escolha algumas ações no próximo slide.</string>
     <string name="tutorial_setup_title">Configurar</string>
     <string name="tutorial_setup_text">Selecionamos alguns aplicativos padrão para você. Se quiser, você pode alterá-los agora:</string>
@@ -168,7 +168,7 @@
     <string name="alert_requires_android_m">Essa funcionalidade requer o Android 6.0 ou mais recente.</string>
     <string name="alert_no_torch_found">Nenhuma câmera com lanterna detectada.</string>
     <string name="toast_lock_screen_not_supported">Erro: O bloqueio da tela via Serviço de acessibilidade não é compatível com este aparelho. Tente usar Administrador do dispositivo como método alternativo.</string>
-    <string name="accessibility_service_description">Definindo µLauncher como Serviço de acessibilidade permite a ele bloquear a tela. Considere que é necessário conceder as permissões elevadas. Você nunca deveria autorizar essas permissões a qualquer aplicativo sem avaliação. O µLauncher usará o Serviço de acessibilidade somente para bloquear a tela. Você pode verificar o código-fonte para ter certeza. O bloqueio da tela também pode ser realizado dando permissões de Administrador do dispositivo ao µLauncher. Apesar de que esse método não funciona com impressão digital e desbloqueio facial.</string>
+    <string name="accessibility_service_description">Definindo µLauncher como Serviço de acessibilidade permite a ele bloquear a tela. Considere que é necessário conceder as permissões elevadas. Você nunca deveria autorizar essas permissões a qualquer aplicativo sem avaliação. O µLauncher usará o Serviço de acessibilidade somente para bloquear a tela. Você pode verificar o código-fonte para ter certeza. O bloqueio da tela também pode ser realizado dando ao µLauncher permissões de Administrador do dispositivo. Apesar de que esse método não funciona com impressão digital e desbloqueio facial.</string>
     <string name="screen_lock_method_dialog_text"><![CDATA[
         <h1>Escolha um método de bloqueio</h1>
         Há dois métodos para bloquear a tela.
