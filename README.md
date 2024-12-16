@@ -21,13 +21,10 @@ of all installed apps, which can be searched efficiently.
 This is a fork of [finnmglas's app Launcher][original-repo].
 
 
-<a href="https://f-droid.org/packages/de.jrpie.android.launcher/">
-     <img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
-     alt="Get it on F-Droid"
-     height="80"></a>
-<a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://app/{%22id%22:%22de.jrpie.android.launcher%22,%22url%22:%22https://github.com/jrpie/Launcher%22,%22author%22:%22jrpie%22,%22name%22:%22%c2%b5Launcher%22,%22additionalSettings%22:%22{\%22apkFilterRegEx\%22:\%22release\%22,\%22invertAPKFilter\%22:false,\%22about\%22:\%22%c2%b5Launcher%20is%20a%20minimal%20home%20screen.\%22}%22}">
-     <img src="https://raw.githubusercontent.com/ImranR98/Obtainium/b1c8ac6f2ab08497189721a788a5763e28ff64cd/assets/graphics/badge_obtainium.png" alt="Get it on Obtainium" height="80">
-</a>
+<a href="https://f-droid.org/packages/de.jrpie.android.launcher/"><img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="80"></a>
+<a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://app/{%22id%22:%22de.jrpie.android.launcher%22,%22url%22:%22https://github.com/jrpie/Launcher%22,%22author%22:%22jrpie%22,%22name%22:%22%c2%b5Launcher%22,%22additionalSettings%22:%22{\%22apkFilterRegEx\%22:\%22release\%22,\%22invertAPKFilter\%22:false,\%22about\%22:\%22%c2%b5Launcher%20is%20a%20minimal%20home%20screen.\%22}%22}"><img src="https://raw.githubusercontent.com/ImranR98/Obtainium/b1c8ac6f2ab08497189721a788a5763e28ff64cd/assets/graphics/badge_obtainium.png" alt="Get it on Obtainium" height="80"></a>
+<a href="https://github.com/jrpie/launcher/releases/latest"><img src="https://raw.githubusercontent.com/NeoApplications/Neo-Backup/034b226cea5c1b30eb4f6a6f313e4dadcbb0ece4/badge_github.png" alt="Get it on GitHub" height="80"></a>
+
 
 or download the latest APK from the [releases section](https://github.com/jrpie/Launcher/releases/latest).
 You can also [get it on Google Play](https://play.google.com/store/apps/details?id=de.jrpie.android.launcher), but I don't recommend that.
