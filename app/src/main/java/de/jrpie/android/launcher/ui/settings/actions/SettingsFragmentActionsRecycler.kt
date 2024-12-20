@@ -1,5 +1,6 @@
 package de.jrpie.android.launcher.ui.settings.actions
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
@@ -20,9 +21,9 @@ import de.jrpie.android.launcher.actions.Gesture
 import de.jrpie.android.launcher.apps.AppFilter
 import de.jrpie.android.launcher.databinding.SettingsActionsRecyclerBinding
 import de.jrpie.android.launcher.preferences.LauncherPreferences
-import de.jrpie.android.launcher.transformGrayscale
 import de.jrpie.android.launcher.ui.UIObject
 import de.jrpie.android.launcher.ui.list.ListActivity
+import de.jrpie.android.launcher.ui.transformGrayscale
 
 /**
  *  The [SettingsFragmentActionsRecycler] is a fragment containing the [ActionsRecyclerAdapter],
@@ -93,7 +94,8 @@ class SettingsFragmentActionsRecycler : Fragment(), UIObject {
 class ActionsRecyclerAdapter(val activity: Activity) :
     RecyclerView.Adapter<ActionsRecyclerAdapter.ViewHolder>() {
 
-    private val gesturesList: ArrayList<Gesture>
+    private val gesturesList: ArrayList<Gesture> =
+        Gesture.entries.filter(Gesture::isEnabled) as ArrayList<Gesture>
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
@@ -137,7 +139,8 @@ class ActionsRecyclerAdapter(val activity: Activity) :
 
 
         if (LauncherPreferences.theme().monochromeIcons())
-            transformGrayscale(viewHolder.img)
+            viewHolder.img.transformGrayscale()
+
         updateViewHolder(gesture, viewHolder)
         viewHolder.img.setOnClickListener { chooseApp(gesture) }
         viewHolder.chooseButton.setOnClickListener { chooseApp(gesture) }
@@ -154,10 +157,7 @@ class ActionsRecyclerAdapter(val activity: Activity) :
         return ViewHolder(view)
     }
 
-    init {
-        gesturesList = Gesture.entries.filter(Gesture::isEnabled) as ArrayList<Gesture>
-    }
-
+    @SuppressLint("NotifyDataSetChanged")
     fun updateActions() {
         val doubleActions = LauncherPreferences.enabled_gestures().doubleSwipe()
         val edgeActions = LauncherPreferences.enabled_gestures().edgeSwipe()
@@ -170,7 +170,6 @@ class ActionsRecyclerAdapter(val activity: Activity) :
         notifyDataSetChanged()
     }
 
-    /*  */
     private fun chooseApp(gesture: Gesture) {
         val intent = Intent(activity, ListActivity::class.java)
         intent.putExtra("intention", ListActivity.ListActivityIntention.PICK.toString())

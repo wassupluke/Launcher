@@ -7,9 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.LauncherApps
 import android.content.pm.PackageManager
-import android.graphics.ColorMatrix
-import android.graphics.ColorMatrixColorFilter
-import android.graphics.Rect
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -17,11 +14,6 @@ import android.os.UserHandle
 import android.os.UserManager
 import android.provider.Settings
 import android.util.Log
-import android.view.View
-import android.view.animation.AlphaAnimation
-import android.view.animation.Animation
-import android.view.inputmethod.InputMethodManager
-import android.widget.ImageView
 import de.jrpie.android.launcher.actions.Action
 import de.jrpie.android.launcher.actions.Gesture
 import de.jrpie.android.launcher.apps.AppInfo
@@ -41,25 +33,6 @@ const val REQUEST_UNINSTALL = 2
 const val REQUEST_SET_DEFAULT_HOME = 42
 
 const val LOG_TAG = "Launcher"
-
-/* Animate */
-
-// Taken from https://stackoverflow.com/questions/47293269
-fun View.blink(
-    times: Int = Animation.INFINITE,
-    duration: Long = 1000L,
-    offset: Long = 20L,
-    minAlpha: Float = 0.2f,
-    maxAlpha: Float = 1.0f,
-    repeatMode: Int = Animation.REVERSE
-) {
-    startAnimation(AlphaAnimation(minAlpha, maxAlpha).also {
-        it.duration = duration
-        it.startOffset = offset
-        it.repeatMode = repeatMode
-        it.repeatCount = times
-    })
-}
 
 fun setDefaultHomeScreen(context: Context, checkDefault: Boolean = false) {
 
@@ -90,61 +63,19 @@ fun setDefaultHomeScreen(context: Context, checkDefault: Boolean = false) {
     context.startActivity(intent)
 }
 
-
-fun getIntent(packageName: String, context: Context): Intent? {
-    val intent: Intent? = context.packageManager.getLaunchIntentForPackage(packageName)
-    intent?.addCategory(Intent.CATEGORY_LAUNCHER)
-    return intent
-}
-/* --- */
-
-fun getUserFromId(user: Int?, context: Context): UserHandle {
+fun getUserFromId(userId: Int?, context: Context): UserHandle {
     /* TODO: this is an ugly hack.
         Use userManager#getUserForSerialNumber instead (breaking change to SharedPreferences!)
      */
     val userManager = context.getSystemService(Service.USER_SERVICE) as UserManager
     val profiles = userManager.userProfiles
-    return profiles.firstOrNull { it.hashCode() == user } ?: profiles[0]
+    return profiles.firstOrNull { it.hashCode() == userId } ?: profiles[0]
 }
 
-
-fun uninstallApp(appInfo: AppInfo, activity: Activity) {
-    val packageName = appInfo.packageName.toString()
-    val user = appInfo.user
-
-    Log.i(LOG_TAG, "uninstalling $appInfo")
-    val intent = Intent(Intent.ACTION_UNINSTALL_PACKAGE)
-    intent.data = Uri.parse("package:$packageName")
-    getUserFromId(user, activity).let { user ->
-        intent.putExtra(Intent.EXTRA_USER, user)
-    }
-
-    intent.putExtra(Intent.EXTRA_RETURN_RESULT, true)
-    activity.startActivityForResult(
-        intent,
-        REQUEST_UNINSTALL
-    )
-}
-
-fun openNewTabWindow(urls: String, context: Context) {
-    val uris = Uri.parse(urls)
-    val intents = Intent(Intent.ACTION_VIEW, uris)
-    val b = Bundle()
-    b.putBoolean("new_window", true)
-    intents.putExtras(b)
-    context.startActivity(intents)
-}
-
-fun openAppSettings(
-    appInfo: AppInfo,
-    context: Context,
-    sourceBounds: Rect? = null,
-    opts: Bundle? = null
-) {
-    val launcherApps = context.getSystemService(Service.LAUNCHER_APPS_SERVICE) as LauncherApps
-    appInfo.getLauncherActivityInfo(context)?.let { app ->
-        launcherApps.startAppDetailsActivity(app.componentName, app.user, sourceBounds, opts)
-    }
+fun openInBrowser(url: String, context: Context) {
+    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+    intent.putExtras(Bundle().apply { putBoolean("new_window", true) })
+    context.startActivity(intent)
 }
 
 fun openTutorial(context: Context) {
@@ -199,19 +130,3 @@ fun saveListActivityChoice(data: Intent?) {
     Gesture.byId(forGesture)?.let { Action.setActionForGesture(it, Action.fromIntent(data)) }
 }
 
-// Taken from https://stackoverflow.com/a/50743764/12787264
-fun openSoftKeyboard(context: Context, view: View) {
-    view.requestFocus()
-    // open the soft keyboard
-    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
-}
-
-// Taken from: https://stackoverflow.com/a/30340794/12787264
-fun transformGrayscale(imageView: ImageView) {
-    val matrix = ColorMatrix()
-    matrix.setSaturation(0f)
-
-    val filter = ColorMatrixColorFilter(matrix)
-    imageView.colorFilter = filter
-}

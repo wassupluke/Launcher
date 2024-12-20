@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import de.jrpie.android.launcher.blink
 import de.jrpie.android.launcher.databinding.TutorialStartBinding
 import de.jrpie.android.launcher.ui.UIObject
+import de.jrpie.android.launcher.ui.blink
 
 /**
  * The [TutorialFragmentStart] is a used as a tab in the TutorialActivity.

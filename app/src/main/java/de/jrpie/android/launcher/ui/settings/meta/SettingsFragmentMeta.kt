@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.databinding.SettingsMetaBinding
-import de.jrpie.android.launcher.openNewTabWindow
+import de.jrpie.android.launcher.openInBrowser
 import de.jrpie.android.launcher.preferences.resetPreferences
 import de.jrpie.android.launcher.ui.UIObject
 import de.jrpie.android.launcher.ui.tutorial.TutorialActivity
@@ -79,7 +79,7 @@ class SettingsFragmentMeta : Fragment(), UIObject {
 
         // view code
         binding.settingsMetaButtonViewCode.setOnClickListener {
-            openNewTabWindow(
+            openInBrowser(
                 getString(R.string.settings_meta_link_github),
                 requireContext()
             )
@@ -87,7 +87,7 @@ class SettingsFragmentMeta : Fragment(), UIObject {
 
         // report a bug
         binding.settingsMetaButtonReportBug.setOnClickListener {
-            openNewTabWindow(
+            openInBrowser(
                 getString(R.string.settings_meta_report_bug_link),
                 requireContext()
             )
@@ -96,7 +96,7 @@ class SettingsFragmentMeta : Fragment(), UIObject {
 
         // join chat
         binding.settingsMetaButtonJoinChat.setOnClickListener {
-            openNewTabWindow(
+            openInBrowser(
                 getString(R.string.settings_meta_chat_url),
                 requireContext()
             )
@@ -106,7 +106,7 @@ class SettingsFragmentMeta : Fragment(), UIObject {
 
         // contact developer
         binding.settingsMetaButtonContact.setOnClickListener {
-            openNewTabWindow(
+            openInBrowser(
                 getString(R.string.settings_meta_contact_url),
                 requireContext()
             )
@@ -114,7 +114,7 @@ class SettingsFragmentMeta : Fragment(), UIObject {
 
         // contact fork developer
         binding.settingsMetaButtonForkContact.setOnClickListener {
-            openNewTabWindow(
+            openInBrowser(
                 getString(R.string.settings_meta_fork_contact_url),
                 requireContext()
             )
@@ -122,7 +122,7 @@ class SettingsFragmentMeta : Fragment(), UIObject {
 
         // privacy policy
         binding.settingsMetaButtonPrivacy.setOnClickListener {
-            openNewTabWindow(
+            openInBrowser(
                 getString(R.string.settings_meta_privacy_url),
                 requireContext()
             )

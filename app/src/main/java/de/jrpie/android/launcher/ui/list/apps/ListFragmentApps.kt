@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import de.jrpie.android.launcher.apps.AppFilter
 import de.jrpie.android.launcher.databinding.ListAppsBinding
-import de.jrpie.android.launcher.openSoftKeyboard
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.ui.UIObject
 import de.jrpie.android.launcher.ui.list.ListActivity
@@ -16,6 +15,7 @@ import de.jrpie.android.launcher.ui.list.favoritesVisibility
 import de.jrpie.android.launcher.ui.list.forGesture
 import de.jrpie.android.launcher.ui.list.hiddenVisibility
 import de.jrpie.android.launcher.ui.list.intention
+import de.jrpie.android.launcher.ui.openSoftKeyboard
 
 
 /**
@@ -110,7 +110,7 @@ class ListFragmentApps : Fragment(), UIObject {
         if (intention == ListActivity.ListActivityIntention.VIEW
             && LauncherPreferences.functionality().searchAutoOpenKeyboard()
         ) {
-            openSoftKeyboard(requireContext(), binding.listAppsSearchview)
+            binding.listAppsSearchview.openSoftKeyboard(requireContext())
         }
     }
 }

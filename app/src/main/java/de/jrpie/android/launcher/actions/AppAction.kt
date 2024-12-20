@@ -13,8 +13,7 @@ import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.apps.AppInfo.Companion.INVALID_USER
 import de.jrpie.android.launcher.apps.DetailedAppInfo
-import de.jrpie.android.launcher.getIntent
-import de.jrpie.android.launcher.openAppSettings
+import de.jrpie.android.launcher.ui.list.apps.openSettings
 
 class AppAction(val appInfo: AppInfo) : Action {
 
@@ -30,13 +29,11 @@ class AppAction(val appInfo: AppInfo) : Action {
             }
         }
 
-        val intent = getIntent(packageName, context)
-
-        if (intent != null) {
-            context.startActivity(intent)
+        context.packageManager.getLaunchIntentForPackage(packageName)?.let {
+            it.addCategory(Intent.CATEGORY_LAUNCHER)
+            context.startActivity(it)
             return true
         }
-
 
         /* check if app is installed */
         if (isAvailable(context)) {
@@ -47,7 +44,7 @@ class AppAction(val appInfo: AppInfo) : Action {
                 .setTitle(context.getString(R.string.alert_cant_open_title))
                 .setMessage(context.getString(R.string.alert_cant_open_message))
                 .setPositiveButton(android.R.string.ok) { _, _ ->
-                    openAppSettings(appInfo, context)
+                    appInfo.openSettings(context)
                 }
                 .setNegativeButton(android.R.string.cancel, null)
                 .setIcon(android.R.drawable.ic_dialog_info)

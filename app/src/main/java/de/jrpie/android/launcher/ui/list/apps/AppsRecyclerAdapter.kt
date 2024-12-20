@@ -5,18 +5,14 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Rect
 import android.os.AsyncTask
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
 import de.jrpie.android.launcher.actions.AppAction
@@ -26,12 +22,10 @@ import de.jrpie.android.launcher.apps.DetailedAppInfo
 import de.jrpie.android.launcher.appsList
 import de.jrpie.android.launcher.getUserFromId
 import de.jrpie.android.launcher.loadApps
-import de.jrpie.android.launcher.openAppSettings
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.preferences.ListLayout
-import de.jrpie.android.launcher.transformGrayscale
 import de.jrpie.android.launcher.ui.list.ListActivity
-import de.jrpie.android.launcher.uninstallApp
+import de.jrpie.android.launcher.ui.transformGrayscale
 
 /**
  * A [RecyclerView] (efficient scrollable list) containing all apps on the users device.
@@ -52,8 +46,6 @@ class AppsRecyclerAdapter(
     private val layout: ListLayout
 ) :
     RecyclerView.Adapter<AppsRecyclerAdapter.ViewHolder>() {
-
-    private val LOG_TAG = "Launcher"
 
     private val appsListDisplayed: MutableList<DetailedAppInfo> = mutableListOf()
 
@@ -90,9 +82,8 @@ class AppsRecyclerAdapter(
         viewHolder.textView.text = appLabel
         viewHolder.img.setImageDrawable(appIcon)
 
-        if (LauncherPreferences.theme().monochromeIcons()) transformGrayscale(
-            viewHolder.img
-        )
+        if (LauncherPreferences.theme().monochromeIcons())
+            viewHolder.img.transformGrayscale()
 
         // decide when to show the options popup menu about
         if (intention == ListActivity.ListActivityIntention.VIEW) {
@@ -140,73 +131,23 @@ class AppsRecyclerAdapter(
         popup.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.app_menu_delete -> {
-                    uninstallApp(appInfo.app, activity)
-                    true
+                    appInfo.app.uninstall(activity); true
                 }
 
                 R.id.app_menu_info -> {
-                    openAppSettings(appInfo.app, activity)
-                    true
+                    appInfo.app.openSettings(activity); true
                 }
 
                 R.id.app_menu_favorite -> {
-                    val favorites: MutableSet<AppInfo> =
-                        LauncherPreferences.apps().favorites() ?: mutableSetOf()
-
-                    if (favorites.contains(appInfo.app)) {
-                        favorites.remove(appInfo.app)
-                        Log.i(LOG_TAG, "Removing $appInfo from favorites.")
-                    } else {
-                        Log.i(LOG_TAG, "Adding $appInfo to favorites.")
-                        favorites.add(appInfo.app)
-                    }
-
-                    LauncherPreferences.apps().favorites(favorites)
-                    true
+                    appInfo.app.toggleFavorite(); true
                 }
 
                 R.id.app_menu_hidden -> {
-                    val hidden: MutableSet<AppInfo> =
-                        LauncherPreferences.apps().hidden() ?: mutableSetOf()
-                    if (hidden.contains(appInfo.app)) {
-                        hidden.remove(appInfo.app)
-                    } else {
-                        hidden.add(appInfo.app)
-
-                        Snackbar.make(root, R.string.snackbar_app_hidden, Snackbar.LENGTH_LONG)
-                            .setAction(R.string.undo) {
-                                LauncherPreferences.apps().hidden(
-                                    LauncherPreferences.apps().hidden().minus(appInfo.app)
-                                )
-                            }.show()
-                    }
-                    LauncherPreferences.apps().hidden(hidden)
-
-                    true
+                    appInfo.app.toggleHidden(root); true
                 }
 
                 R.id.app_menu_rename -> {
-                    val builder = AlertDialog.Builder(activity, R.style.AlertDialogCustom)
-
-                    val title = activity.getString(R.string.dialog_rename_title, appInfo.label)
-                    builder.setTitle(title)
-                    builder.setView(R.layout.dialog_rename_app)
-
-                    builder.setNegativeButton(R.string.dialog_cancel) { d, _ -> d.cancel() }
-                    builder.setPositiveButton(R.string.dialog_rename_ok) { d, _ ->
-                        appInfo.setCustomLabel(
-                            (d as? AlertDialog)
-                                ?.findViewById<EditText>(R.id.dialog_rename_app_edit_text)
-                                ?.text.toString()
-                        )
-                    }
-
-                    val dialog = builder.create()
-                    dialog.show()
-                    val input = dialog.findViewById<EditText>(R.id.dialog_rename_app_edit_text)
-                    input?.setText(appInfo.getCustomLabel(activity))
-                    input?.hint = appInfo.label
-                    true
+                    appInfo.showRenameDialog(activity); true
                 }
 
                 else -> false
