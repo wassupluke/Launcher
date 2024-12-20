@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Rect
-import android.os.AsyncTask
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,16 +11,16 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
 import de.jrpie.android.launcher.actions.AppAction
 import de.jrpie.android.launcher.apps.AppFilter
 import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.apps.DetailedAppInfo
-import de.jrpie.android.launcher.appsList
 import de.jrpie.android.launcher.getUserFromId
-import de.jrpie.android.launcher.loadApps
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.preferences.ListLayout
 import de.jrpie.android.launcher.ui.list.ListActivity
@@ -47,7 +46,15 @@ class AppsRecyclerAdapter(
 ) :
     RecyclerView.Adapter<AppsRecyclerAdapter.ViewHolder>() {
 
+    private val apps = (activity.applicationContext as Application).apps
     private val appsListDisplayed: MutableList<DetailedAppInfo> = mutableListOf()
+
+    init {
+        apps.observe(this.activity as AppCompatActivity) {
+            updateAppsList()
+        }
+        updateAppsList()
+    }
 
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
@@ -171,18 +178,6 @@ class AppsRecyclerAdapter(
         return viewHolder
     }
 
-    init {
-        // Load the apps
-        if (appsList.size == 0)
-            loadApps(activity.packageManager, activity)
-        else {
-            AsyncTask.execute { loadApps(activity.packageManager, activity) }
-            notifyDataSetChanged()
-        }
-        updateAppsList()
-
-    }
-
     fun selectItem(pos: Int, rect: Rect = Rect()) {
         if (pos >= appsListDisplayed.size) {
             return
@@ -205,7 +200,7 @@ class AppsRecyclerAdapter(
 
     fun updateAppsList(triggerAutoLaunch: Boolean = false) {
         appsListDisplayed.clear()
-        appsListDisplayed.addAll(appFilter(appsList))
+        apps.value?.let { appsListDisplayed.addAll(appFilter(it)) }
 
         if (triggerAutoLaunch &&
             appsListDisplayed.size == 1

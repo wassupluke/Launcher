@@ -18,12 +18,8 @@ import de.jrpie.android.launcher.actions.Action
 import de.jrpie.android.launcher.actions.Gesture
 import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.apps.DetailedAppInfo
-import de.jrpie.android.launcher.ui.list.apps.AppsRecyclerAdapter
 import de.jrpie.android.launcher.ui.tutorial.TutorialActivity
 
-
-/* Objects used by multiple activities */
-val appsList: MutableList<DetailedAppInfo> = ArrayList()
 
 /* REQUEST CODES */
 
@@ -84,10 +80,10 @@ fun openTutorial(context: Context) {
 
 
 /**
- * [loadApps] is used to speed up the [AppsRecyclerAdapter] loading time,
- * as it caches all the apps and allows for fast access to the data.
+ * Load all apps.
  */
-fun loadApps(packageManager: PackageManager, context: Context) {
+fun getApps(packageManager: PackageManager, context: Context): MutableList<DetailedAppInfo> {
+    val start = System.currentTimeMillis()
     val loadList = mutableListOf<DetailedAppInfo>()
 
     val launcherApps = context.getSystemService(Service.LAUNCHER_APPS_SERVICE) as LauncherApps
@@ -100,7 +96,6 @@ fun loadApps(packageManager: PackageManager, context: Context) {
             loadList.add(DetailedAppInfo(it))
         }
     }
-
 
     // fallback option
     if (loadList.isEmpty()) {
@@ -119,8 +114,11 @@ fun loadApps(packageManager: PackageManager, context: Context) {
         }
     }
     loadList.sortBy { it.getCustomLabel(context).toString() }
-    appsList.clear()
-    appsList.addAll(loadList)
+
+    val end = System.currentTimeMillis()
+    Log.i(LOG_TAG, "${loadList.size} apps loaded (${end - start}ms)")
+
+    return loadList
 }
 
 

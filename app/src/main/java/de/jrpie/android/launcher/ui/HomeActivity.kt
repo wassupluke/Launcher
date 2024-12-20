@@ -20,7 +20,6 @@ import de.jrpie.android.launcher.actions.Action
 import de.jrpie.android.launcher.actions.Gesture
 import de.jrpie.android.launcher.actions.LauncherAction
 import de.jrpie.android.launcher.databinding.HomeBinding
-import de.jrpie.android.launcher.loadApps
 import de.jrpie.android.launcher.openTutorial
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.preferences.migratePreferencesToNewVersion
@@ -87,9 +86,6 @@ class HomeActivity : UIObject, AppCompatActivity(),
             LauncherPreferences.internal().started(true)
             openTutorial(this)
         }
-
-        // Preload apps to speed up the Apps Recycler
-        AsyncTask.execute { loadApps(packageManager, applicationContext) }
 
         // Initialise layout
         binding = HomeBinding.inflate(layoutInflater)
