@@ -211,8 +211,6 @@
         Alternativ kann der Bildschirm auch mithilfe von Geräteadministratorberechtigungen gesperrt werden.
         Dann ist jedoch ein Entsperren mit Fingerabdruck oder Gesichtserkennung nicht möglich.
     </string>
-
-
     <string name="screen_lock_method_dialog_text"><![CDATA[
         <h1>Methode zum Sperren auswählen</h1>
         Es gibt zwei Möglichkeiten, wie µLauncher den Bildschirm sperren kann.
@@ -246,4 +244,5 @@
     <string name="settings_theme_font_item_sans_serif">Serifenlos</string>
     <string name="settings_theme_font_item_serif">Serif</string>
     <string name="settings_theme_font_item_monospace">Monospace</string>
+    <string name="dialog_cancel">Abbrechen</string>
 </resources>
