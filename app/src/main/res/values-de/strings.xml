@@ -218,16 +218,18 @@
         Es gibt zwei Möglichkeiten, wie µLauncher den Bildschirm sperren kann.
         Leider haben beide Nachteile:<br/><br/>
 
+
+        <h3>Geräteadministrator</h3>
+        Ein Entsperren mittels Fingerabdruck oder Gesichtserkennung ist nicht möglich.
+        <br/>
+        <br/>
+
         <h3>Bedienungshilfe</h3>
         Dies erfordert sehr weitgehende Berechtigungen.
         µLauncher wird diese ausschließlich zum Sperren des Bildschirms verwenden.
         <br/>
         (Irgeneiner gerade heruntergeladenen App sollte man eine solche Behauptung natürlich nicht einfach glauben.
         Du kannst jedoch den <a href=\"https://github.com/jrpie/Launcher\">Source Code</a> selbst prüfen.)
-        <br/>
-        <br/>
-        <h3>Geräteadministrator</h3>
-        Ein Entsperren mittels Fingerabdruck oder Gesichtserkennung ist nicht möglich.
 
 
         <br/><br/><br/><br/>

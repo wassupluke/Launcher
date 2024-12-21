@@ -19,15 +19,18 @@
         Ekranı kitlemenin iki tane metodu vardır.
         Ne yazık ki ikisinin de eksikleri vardır:<br/><br/>
 
+        <h3>Cihaz Yöneticisi</h3>
+        Yüz ve parmak taramasıyla açılan ekran kilidiyle çalışmaz.
+
+        <br/>
+        <br/>
+
         <h3>Erişilebilirlik Servisi</h3>
         Aşırı yetkiler ister.
         µLauncher bu yetkileri sadece ekranı kilitlemek için kullanacaktır.
         <br/>
         (Böyle bir iddiayla indirdiğiniz rastgele bir uygulamaya gerçekten güvenmemelisiniz ama <a href=\"https://github.com/jrpie/Launcher\">kaynak kodunu</a>.) istediğiniz zaman göz atabilirsiniz.
-        <br/>
-        <br/>
-        <h3>Cihaz Yöneticisi</h3>
-        Yüz ve parmak taramasıyla açılan ekran kilidiyle çalışmaz.
+
 
         <br/><br/><br/><br/>
         Seçimlerinizi sonra da değiştirebilirsiniz.

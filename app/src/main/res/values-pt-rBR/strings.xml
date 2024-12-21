@@ -174,15 +174,18 @@
         Há dois métodos para bloquear a tela.
         Infelizmente, ambos têm desvantagens:<br/><br/>
 
+        <h3>Administrador do dispositivo</h3>
+        Não funciona para desbloqueio por impressão digital ou reconhecimento facial.
+
+        <br/>
+        <br/>
+
         <h3>Serviço de acessibilidade</h3>
         Exige permissões elevadas.
         O µLauncher usará essas permissões apenas para bloquear a tela.
         <br/>
         (Você realmente não deveria confiar num app aleatório que você baixou que tá pedindo estas permissões, mas pode verificar o <a href=\"https://github.com/jrpie/Launcher\">código-fonte</a>.)
-        <br/>
-        <br/>
-        <h3>Administrador do dispositivo</h3>
-        Não funciona para desbloqueio por impressão digital ou reconhecimento facial.
+
 
         <br/><br/><br/><br/>
         Você pode alterar sua escolha em configurações à qualquer momento.

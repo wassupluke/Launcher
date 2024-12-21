@@ -270,15 +270,17 @@
         There are two methods to lock the screen.
         Unfortunately both have downsides:<br/><br/>
 
+        <h3>Device Admin</h3>
+        Doesn\'t work with unlocking by fingerprint or face recognition.
+
+        <br/>
+        <br/>
+
         <h3>Accessibility Service</h3>
         Requires excessive privileges.
         µLauncher will use those privileges only for locking the screen.
         <br/>
         (You really should not trust a random app you just downloaded with such a claim, but you can check the <a href=\"https://github.com/jrpie/Launcher\">source code</a>.)
-        <br/>
-        <br/>
-        <h3>Device Admin</h3>
-        Doesn\'t work with unlocking by fingerprint or face recognition.
 
         <br/><br/><br/><br/>
         You can change your selection later in settings.

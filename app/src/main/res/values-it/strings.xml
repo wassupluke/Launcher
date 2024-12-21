@@ -18,15 +18,18 @@
         Esistono due modi di bloccare lo schermo.
         Sfortunatamente entrambi presentano svantaggi:<br/><br/>
 
+        <h3>Amministratore Dispositivo</h3>
+        Non funziona con impronta e riconoscimento facciale.
+
+        <br/>
+        <br/>
+
         <h3>Servizio Accessibilità</h3>
         Richiede privilegi eccessivi.
         µLauncher userà quei privilegi esclusivamente per bloccare lo schermo.
         <br/>
         (Non ci si dovrebbe mai fidare di un\'applicazione qualsiasi appena scaricata su queste cose, ma puoi verificare il <a href=\"https://github.com/jrpie/Launcher\">codice sorgente</a>.)
-        <br/>
-        <br/>
-        <h3>Amministratore Dispositivo</h3>
-        Non funziona con impronta e riconoscimento facciale.
+
 
         <br/><br/><br/><br/>
         Puoi cambiare le tue scelte in seguito nelle impostazioni.
