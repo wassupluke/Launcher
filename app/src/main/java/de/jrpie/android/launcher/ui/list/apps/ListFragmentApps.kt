@@ -1,5 +1,6 @@
 package de.jrpie.android.launcher.ui.list.apps
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -86,7 +87,13 @@ class ListFragmentApps : Fragment(), UIObject {
 
             override fun onQueryTextSubmit(query: String): Boolean {
                 appsRViewAdapter.setSearchString(query)
-                appsRViewAdapter.selectItem(0)
+
+                if (LauncherPreferences.functionality().searchWeb()) {
+                    val i = Intent(Intent.ACTION_WEB_SEARCH).putExtra("query", query)
+                    activity?.startActivity(i)
+                } else {
+                    appsRViewAdapter.selectItem(0)
+                }
                 return true
             }
 

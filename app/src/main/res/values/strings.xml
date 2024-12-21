@@ -136,6 +136,8 @@
     <string name="settings_enabled_gestures_edge_swipe_summary">Swipe at the edge of the screen</string>
     <string name="settings_enabled_gestures_edge_swipe_edge_width">Edge width</string>
     <string name="settings_functionality_auto_launch">Launch search results</string>
+    <string name="settings_functionality_search_web">Search the web</string>
+    <string name="settings_functionality_search_web_summary">Press return while searching the app list to launch a web search.</string>
     <string name="settings_functionality_auto_keyboard">Start keyboard for search</string>
 
     <string name="settings_launcher_sensitivity">Sensitivity</string>

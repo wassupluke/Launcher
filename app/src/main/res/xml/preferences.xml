@@ -94,6 +94,12 @@
             android:defaultValue="true"
             android:title="@string/settings_functionality_auto_launch" />
         <SwitchPreference
+            android:key="@string/settings_functionality_search_web_key"
+            android:title="@string/settings_functionality_search_web"
+            android:defaultValue="false"
+            android:summary="@string/settings_functionality_search_web_summary"
+            />
+        <SwitchPreference
             android:key="@string/settings_functionality_search_auto_open_keyboard_key"
             android:defaultValue="true"
             android:title="@string/settings_functionality_auto_keyboard" />

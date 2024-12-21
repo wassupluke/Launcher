@@ -62,6 +62,7 @@ import eu.jonahbauer.android.preference.annotations.Preferences;
                 }),
                 @PreferenceGroup(name = "functionality", prefix = "settings_functionality_", suffix = "_key", value = {
                         @Preference(name = "search_auto_launch", type = boolean.class, defaultValue = "true"),
+                        @Preference(name = "search_web", type = boolean.class, description = "false"),
                         @Preference(name = "search_auto_open_keyboard", type = boolean.class, defaultValue = "true"),
                 }),
                 @PreferenceGroup(name = "enabled_gestures", prefix = "settings_enabled_gestures_", suffix = "_key", value = {
