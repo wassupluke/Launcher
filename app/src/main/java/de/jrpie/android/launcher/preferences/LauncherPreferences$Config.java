@@ -107,6 +107,7 @@ public final class LauncherPreferences$Config {
         }
     }
 
+    // TODO migrate to version 2
     public static class MapAppInfoStringSerializer implements PreferenceSerializer<HashMap<AppInfo, String>, Set<String>> {
 
         @Override

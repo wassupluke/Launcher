@@ -1,9 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlinx-serialization'
 
 android {
-
     dataBinding {
         enabled = true
     }
@@ -76,6 +76,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.3.2'
     implementation 'androidx.preference:preference-ktx:1.2.1'
     implementation 'com.google.android.material:material:1.12.0'
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
     implementation "eu.jonahbauer:android-preference-annotations:1.1.2"
     annotationProcessor "eu.jonahbauer:android-preference-annotations:1.1.2"
     annotationProcessor "com.android.databinding:compiler:$android_plugin_version"

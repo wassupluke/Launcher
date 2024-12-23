@@ -2,7 +2,6 @@ package de.jrpie.android.launcher.actions
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences.Editor
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.media.AudioManager
@@ -13,11 +12,20 @@ import android.widget.Toast
 import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.apps.AppFilter
-import de.jrpie.android.launcher.apps.AppInfo.Companion.INVALID_USER
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.ui.list.ListActivity
 import de.jrpie.android.launcher.ui.settings.SettingsActivity
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerializationException
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.descriptors.buildClassSerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
+@Serializable(with = LauncherActionSerializer::class)
+@SerialName("action:launcher")
 enum class LauncherAction(
     val id: String,
     val label: Int,
@@ -25,68 +33,68 @@ enum class LauncherAction(
     val launch: (Context) -> Unit
 ) : Action {
     SETTINGS(
-        "launcher:settings",
+        "settings",
         R.string.list_other_settings,
         R.drawable.baseline_settings_24,
         ::openSettings
     ),
     CHOOSE(
-        "launcher:choose",
+        "choose",
         R.string.list_other_list,
         R.drawable.baseline_menu_24,
         ::openAppsList
     ),
     CHOOSE_FROM_FAVORITES(
-        "launcher:chooseFromFavorites",
+        "choose_from_favorites",
         R.string.list_other_list_favorites,
         R.drawable.baseline_favorite_24,
         { context -> openAppsList(context, true) }
     ),
     VOLUME_UP(
-        "launcher:volumeUp",
+        "volume_up",
         R.string.list_other_volume_up,
         R.drawable.baseline_volume_up_24, ::audioVolumeUp
     ),
     VOLUME_DOWN(
-        "launcher:volumeDown",
+        "volume_down",
         R.string.list_other_volume_down,
         R.drawable.baseline_volume_down_24, ::audioVolumeDown
     ),
     TRACK_NEXT(
-        "launcher:nextTrack",
+        "next_track",
         R.string.list_other_track_next,
         R.drawable.baseline_skip_next_24, ::audioNextTrack
     ),
     TRACK_PREV(
-        "launcher:previousTrack",
+        "previous_track",
         R.string.list_other_track_previous,
         R.drawable.baseline_skip_previous_24, ::audioPreviousTrack
     ),
     EXPAND_NOTIFICATIONS_PANEL(
-        "launcher:expandNotificationsPanel",
+        "expand_notifications_panel",
         R.string.list_other_expand_notifications_panel,
         R.drawable.baseline_notifications_24,
         ::expandNotificationsPanel
     ),
     EXPAND_SETTINGS_PANEL(
-        "launcher:expandSettingsPanel",
+        "expand_settings_panel",
         R.string.list_other_expand_settings_panel,
         R.drawable.baseline_settings_applications_24,
         ::expandSettingsPanel
     ),
     LOCK_SCREEN(
-        "launcher:lockScreen",
+        "lock_screen",
         R.string.list_other_lock_screen,
         R.drawable.baseline_lock_24px,
         { c -> LauncherPreferences.actions().lockMethod().lockOrEnable(c) }
     ),
     TORCH(
-        "launcher:toggleTorch",
+        "toggle_torch",
         R.string.list_other_torch,
         R.drawable.baseline_flashlight_on_24,
         ::toggleTorch
     ),
-    NOP("launcher:nop", R.string.list_other_nop, R.drawable.baseline_not_interested_24, {});
+    NOP("nop", R.string.list_other_nop, R.drawable.baseline_not_interested_24, {});
 
     override fun invoke(context: Context, rect: Rect?): Boolean {
         launch(context)
@@ -101,16 +109,6 @@ enum class LauncherAction(
         return context.getDrawable(icon)
     }
 
-    override fun bindToGesture(editor: Editor, id: String) {
-        editor
-            .putString("$id.app", this.id)
-            .putInt("$id.user", INVALID_USER)
-    }
-
-    override fun writeToIntent(intent: Intent) {
-        intent.putExtra("action_id", id)
-    }
-
     override fun isAvailable(context: Context): Boolean {
         return true
     }
@@ -118,10 +116,6 @@ enum class LauncherAction(
     companion object {
         fun byId(id: String): LauncherAction? {
             return entries.singleOrNull { it.id == id }
-        }
-
-        fun isOtherAction(id: String): Boolean {
-            return id.startsWith("launcher")
         }
     }
 }
@@ -252,4 +246,32 @@ fun openAppsList(context: Context, favorite: Boolean = false, hidden: Boolean = 
     )
 
     context.startActivity(intent)
+}
+
+
+/**
+ * LauncherAction can't be serialized directly, since it needs a type annotation.
+ * Thus this hack is needed.
+ */
+@Serializable
+private class LauncherActionWrapper(val id: String)
+
+private class LauncherActionSerializer() : KSerializer<LauncherAction> {
+    override val descriptor: SerialDescriptor = buildClassSerialDescriptor(
+        "action:launcher",
+    ) {
+        element("id", LauncherActionWrapper.serializer().descriptor)
+    }
+    override fun deserialize(decoder: Decoder): LauncherAction {
+        val wrapper = decoder.decodeSerializableValue(LauncherActionWrapper.serializer())
+        return LauncherAction.byId(wrapper.id) ?: throw SerializationException()
+    }
+
+    override fun serialize(encoder: Encoder, value: LauncherAction) {
+        encoder.encodeSerializableValue(
+            LauncherActionWrapper.serializer(),
+            LauncherActionWrapper(value.id)
+        )
+    }
+
 }

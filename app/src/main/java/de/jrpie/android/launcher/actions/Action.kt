@@ -8,61 +8,36 @@ import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.widget.Toast
 import de.jrpie.android.launcher.R
-import de.jrpie.android.launcher.apps.AppInfo
-import de.jrpie.android.launcher.apps.AppInfo.Companion.INVALID_USER
-import de.jrpie.android.launcher.apps.DetailedAppInfo
 import de.jrpie.android.launcher.preferences.LauncherPreferences
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
-interface Action {
+
+@Serializable
+sealed interface Action {
     fun invoke(context: Context, rect: Rect? = null): Boolean
-    fun bindToGesture(prefEditor: Editor, id: String)
     fun label(context: Context): String
     fun getIcon(context: Context): Drawable?
     fun isAvailable(context: Context): Boolean
 
-    fun writeToIntent(intent: Intent)
+
+    fun bindToGesture(prefEditor: Editor, id: String) {
+        prefEditor.putString(id, Json.encodeToString(this))
+    }
+
+    fun writeToIntent(intent: Intent) {
+        intent.putExtra("action", Json.encodeToString(this))
+    }
 
     companion object {
-        /**
-         * Get an action for a specific id.
-         * An id is of the form:
-         *  - "launcher:${launcher_action_name}", see [LauncherAction]
-         *  - "${package_name}", see [AppAction]
-         *  - "${package_name}:${activity_name}", see  [AppAction]
-         *
-         *  @param id
-         *  @param user a user id, ignored if the action is a [LauncherAction].
-         *  @param context used to complete [AppInfo] if possible
-         */
-        private fun fromId(id: String, user: Int?, context: Context? = null): Action? {
-            if (id.isEmpty()) {
-                return null
-            }
-            if (LauncherAction.isOtherAction(id)) {
-                return LauncherAction.byId(id)
-            }
-
-            val values =  id.split(";")
-
-            var info = AppInfo(values[0], values.getOrNull(1), user ?: INVALID_USER)
-
-            // try to complete an incomplete AppInfo if a context is provided
-            if (context != null && (info.user == INVALID_USER || info.activityName == null)) {
-                info = DetailedAppInfo.fromAppInfo(info, context)?.app?:info
-            }
-
-            return AppAction(info)
-        }
 
         fun forGesture(gesture: Gesture): Action? {
             val id = gesture.id
 
             val preferences = LauncherPreferences.getSharedPreferences()
-            val actionId = preferences.getString("$id.app", "")!!
-            var u: Int? = preferences.getInt("$id.user", INVALID_USER)
-            u = if (u == INVALID_USER) null else u
-
-            return fromId(actionId, u)
+            val json = preferences.getString(id, "null")!!
+            return Json.decodeFromString(json)
         }
 
         fun resetToDefaultActions(context: Context) {
@@ -72,11 +47,11 @@ interface Action {
                 context.resources
                     .getStringArray(gesture.defaultsResource)
                     .filterNot { boundActions.contains(it) }
-                    .map { Pair(it, fromId(it, null, context)) }
-                    .firstOrNull { it.second?.isAvailable(context) ?: false }
+                    .map { Pair(it, Json.decodeFromString<Action>(it)) }
+                    .firstOrNull { it.second.isAvailable(context) }
                     ?.apply {
                         boundActions.add(first)
-                        second?.bindToGesture(editor, gesture.id)
+                        second.bindToGesture(editor, gesture.id)
                     }
             }
             editor.apply()
@@ -94,8 +69,7 @@ interface Action {
 
         fun clearActionForGesture(gesture: Gesture) {
             LauncherPreferences.getSharedPreferences().edit()
-                .putString(gesture.id + ".app", "")
-                .putInt(gesture.id + ".user", INVALID_USER)
+                .remove(gesture.id)
                 .apply()
         }
 
@@ -119,9 +93,8 @@ interface Action {
         }
 
         fun fromIntent(data: Intent): Action? {
-            val value = data.getStringExtra("action_id") ?: return null
-            val user = data.getIntExtra("user", INVALID_USER)
-            return fromId(value, user)
+            val json = data.getStringExtra("action") ?: return null
+            return Json.decodeFromString(json)
         }
     }
 }

@@ -29,7 +29,7 @@ class AppFilter(
         if (LauncherPreferences.apps().hideBoundApps()) {
             val boundApps = Gesture.entries
                 .filter(Gesture::isEnabled)
-                .mapNotNull { g -> (Action.forGesture(g) as? AppAction)?.appInfo }
+                .mapNotNull { g -> (Action.forGesture(g) as? AppAction)?.app }
                 .toSet()
             apps = apps.filterNot { info -> boundApps.contains(info.app) }
         }

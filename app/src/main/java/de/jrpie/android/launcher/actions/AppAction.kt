@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.app.Service
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.LauncherApps
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
@@ -14,16 +13,20 @@ import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.apps.AppInfo.Companion.INVALID_USER
 import de.jrpie.android.launcher.apps.DetailedAppInfo
 import de.jrpie.android.launcher.ui.list.apps.openSettings
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-class AppAction(val appInfo: AppInfo) : Action {
+@Serializable
+@SerialName("action:app")
+class AppAction(val app: AppInfo) : Action {
 
     override fun invoke(context: Context, rect: Rect?): Boolean {
-        val packageName = appInfo.packageName.toString()
-        if (appInfo.user != INVALID_USER) {
+        val packageName = app.packageName
+        if (app.user != INVALID_USER) {
             val launcherApps =
                 context.getSystemService(Service.LAUNCHER_APPS_SERVICE) as LauncherApps
-            appInfo.getLauncherActivityInfo(context)?.let { app ->
-                Log.i("Launcher", "Starting $appInfo")
+            app.getLauncherActivityInfo(context)?.let { app ->
+                Log.i("Launcher", "Starting ${this.app}")
                 launcherApps.startMainActivity(app.componentName, app.user, rect, null)
                 return true
             }
@@ -44,7 +47,7 @@ class AppAction(val appInfo: AppInfo) : Action {
                 .setTitle(context.getString(R.string.alert_cant_open_title))
                 .setMessage(context.getString(R.string.alert_cant_open_message))
                 .setPositiveButton(android.R.string.ok) { _, _ ->
-                    appInfo.openSettings(context)
+                    app.openSettings(context)
                 }
                 .setNegativeButton(android.R.string.cancel, null)
                 .setIcon(android.R.drawable.ic_dialog_info)
@@ -55,33 +58,15 @@ class AppAction(val appInfo: AppInfo) : Action {
     }
 
     override fun label(context: Context): String {
-        return DetailedAppInfo.fromAppInfo(appInfo, context)?.getCustomLabel(context).toString()
+        return DetailedAppInfo.fromAppInfo(app, context)?.getCustomLabel(context).toString()
     }
 
     override fun getIcon(context: Context): Drawable? {
-        return DetailedAppInfo.fromAppInfo(appInfo, context)?.icon
+        return DetailedAppInfo.fromAppInfo(app, context)?.icon
     }
 
     override fun isAvailable(context: Context): Boolean {
         // check if app is installed
-        return DetailedAppInfo.fromAppInfo(appInfo, context) != null
-    }
-
-    override fun bindToGesture(editor: SharedPreferences.Editor, id: String) {
-        val u = appInfo.user
-
-        // TODO: replace this by AppInfo#serialize (breaking change to SharedPreferences!)
-        var app = appInfo.packageName.toString()
-        if (appInfo.activityName != null) {
-            app += ";${appInfo.activityName}"
-        }
-        editor
-            .putString("$id.app", app)
-            .putInt("$id.user", u)
-    }
-
-    override fun writeToIntent(intent: Intent) {
-        intent.putExtra("action_id", "${appInfo.packageName};${appInfo.activityName}")
-        intent.putExtra("user", appInfo.user)
+        return DetailedAppInfo.fromAppInfo(app, context) != null
     }
 }
