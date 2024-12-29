@@ -4,8 +4,11 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import de.jrpie.android.launcher.preferences.LauncherPreferences
+import de.jrpie.android.launcher.preferences.PREFERENCE_VERSION
 import de.jrpie.android.launcher.preferences.theme.Background
 import de.jrpie.android.launcher.preferences.theme.ColorTheme
+
+
 
 private fun migrateStringPreference(
     oldPrefs: SharedPreferences,
@@ -42,7 +45,13 @@ private fun migrateBooleanPreference(
 
 private const val TAG = "Preferences ? -> 1"
 
+/**
+ * Try to migrate from a very old preference version, where no version number was stored
+ * and a different file was used.
+ */
 fun migratePreferencesFromVersionUnknown(context: Context) {
+    assert(PREFERENCE_VERSION == 2)
+
     Log.i(
         TAG,
         "Unknown preference version, trying to restore preferences from old version."

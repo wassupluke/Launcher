@@ -19,10 +19,13 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
+import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.descriptors.buildClassSerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.encoding.decodeStructure
+import kotlinx.serialization.encoding.encodeStructure
 
 @Serializable(with = LauncherActionSerializer::class)
 @SerialName("action:launcher")
@@ -248,30 +251,27 @@ fun openAppsList(context: Context, favorite: Boolean = false, hidden: Boolean = 
     context.startActivity(intent)
 }
 
-
-/**
- * LauncherAction can't be serialized directly, since it needs a type annotation.
- * Thus this hack is needed.
+/* A custom serializer is required to store type information,
+   see https://github.com/Kotlin/kotlinx.serialization/issues/1486
  */
-@Serializable
-private class LauncherActionWrapper(val id: String)
-
-private class LauncherActionSerializer() : KSerializer<LauncherAction> {
+private class LauncherActionSerializer : KSerializer<LauncherAction> {
     override val descriptor: SerialDescriptor = buildClassSerialDescriptor(
         "action:launcher",
     ) {
-        element("id", LauncherActionWrapper.serializer().descriptor)
+        element("value", String.serializer().descriptor)
     }
     override fun deserialize(decoder: Decoder): LauncherAction {
-        val wrapper = decoder.decodeSerializableValue(LauncherActionWrapper.serializer())
-        return LauncherAction.byId(wrapper.id) ?: throw SerializationException()
+        val s = decoder.decodeStructure(descriptor) {
+            decodeElementIndex(descriptor)
+            decodeSerializableElement(descriptor, 0, String.serializer())
+        }
+        return LauncherAction.byId(s) ?: throw SerializationException()
     }
 
     override fun serialize(encoder: Encoder, value: LauncherAction) {
-        encoder.encodeSerializableValue(
-            LauncherActionWrapper.serializer(),
-            LauncherActionWrapper(value.id)
-        )
+        encoder.encodeStructure(descriptor) {
+            encodeSerializableElement(descriptor, 0, String.serializer(), value.id)
+        }
     }
 
 }

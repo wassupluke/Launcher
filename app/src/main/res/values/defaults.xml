@@ -5,12 +5,12 @@
 
     <!-- Swipe up - Apps list -->
     <string-array name="default_up">
-        <item>{\"type\": \"action:launcher\", \"id\": \"choose\"}</item> <!-- All Apps -->
+        <item>{\"type\": \"action:launcher\", \"value\": \"choose\"}</item> <!-- All Apps -->
     </string-array>
 
     <!-- Swipe up (left edge) - Favorite Apps -->
     <string-array name="default_up_left">
-        <item>{\"type\": \"action:launcher\", \"id\": \"choose_from_favorites\"}</item>
+        <item>{\"type\": \"action:launcher\", \"value\": \"choose_from_favorites\"}</item>
     </string-array>
 
     <!-- Swipe up (right edge) - Maps -->
@@ -106,12 +106,12 @@
 
     <!-- Volume up -->
     <string-array name="default_volume_up">
-        <item>{\"type\": \"action:launcher\", \"id\": \"volume_up\"}</item>
+        <item>{\"type\": \"action:launcher\", \"value\": \"volume_up\"}</item>
     </string-array>
 
     <!-- Volume down -->
     <string-array name="default_volume_down">
-        <item>{\"type\": \"action:launcher\", \"id\": \"volume_down\"}</item>
+        <item>{\"type\": \"action:launcher\", \"value\": \"volume_down\"}</item>
     </string-array>
 
     <!-- Double click - Notes -->
@@ -119,7 +119,7 @@
         <item>{\"type\": \"action:app\", \"app\": {\"packageName\": \"it.niedermann.owncloud.notes\", \"activityName\": null}}</item>
         <item>{\"type\": \"action:app\", \"app\": {\"packageName\": \"com.samsung.android.app.notes\", \"activityName\": null}}</item> <!-- Samsung Notes -->
         <item>{\"type\": \"action:app\", \"app\": {\"packageName\": \"com.sec.android.widgetapp.diotek.smemo\", \"activityName\": null}}</item> <!-- S Memo (older devices) -->
-        <item>{\"type\": \"action:launcher\", \"id\": \"lock_screen\"}</item>
+        <item>{\"type\": \"action:launcher\", \"value\": \"lock_screen\"}</item>
     </string-array>
 
     <!-- Long click - Security -->
@@ -128,7 +128,7 @@
         <item>{\"type\": \"action:app\", \"app\": {\"packageName\": \"org.fedorahosted.freeotp\", \"activityName\": null}}</item>
         <item>{\"type\": \"action:app\", \"app\": {\"packageName\": \"proton.android.pass.fdroid\", \"activityName\": null}}</item> <!-- Proton Pass -->
         <item>{\"type\": \"action:app\", \"app\": {\"packageName\": \"com.kunzisoft.keepass.libre\", \"activityName\": null}}</item> <!-- KeePassDX -->
-        <item>{\"type\": \"action:launcher\", \"id\": \"settings\"}</item> <!-- Launcher Settings -->
+        <item>{\"type\": \"action:launcher\", \"value\": \"settings\"}</item> <!-- Launcher Settings -->
     </string-array>
 
     <!-- Time / Clock -->

@@ -13,6 +13,8 @@ import de.jrpie.android.launcher.actions.TorchManager
 import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.apps.DetailedAppInfo
 import de.jrpie.android.launcher.preferences.LauncherPreferences
+import de.jrpie.android.launcher.preferences.migratePreferencesToNewVersion
+import de.jrpie.android.launcher.preferences.resetPreferences
 
 class Application : android.app.Application() {
     val apps = MutableLiveData<List<DetailedAppInfo>>()
@@ -84,6 +86,19 @@ class Application : android.app.Application() {
 
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
         LauncherPreferences.init(preferences, this.resources)
+
+
+        // Try to restore old preferences
+        migratePreferencesToNewVersion(this)
+
+        // First time opening the app: set defaults and start tutorial
+        if (!LauncherPreferences.internal().started()) {
+            resetPreferences(this)
+
+            LauncherPreferences.internal().started(true)
+            openTutorial(this)
+        }
+
 
         LauncherPreferences.getSharedPreferences()
             .registerOnSharedPreferenceChangeListener(listener)

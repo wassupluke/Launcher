@@ -7,8 +7,12 @@ import de.jrpie.android.launcher.actions.LauncherAction
 import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.apps.AppInfo.Companion.INVALID_USER
 import de.jrpie.android.launcher.preferences.LauncherPreferences
+import de.jrpie.android.launcher.preferences.PREFERENCE_VERSION
+import de.jrpie.android.launcher.preferences.serialization.MapAppInfoStringPreferenceSerializer
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import org.json.JSONException
+import org.json.JSONObject
 
 val oldLauncherActionIds: Map<String, LauncherAction> =
     mapOf(
@@ -44,7 +48,7 @@ private fun AppInfo.Companion.legacyDeserialize(serialized: String): AppInfo {
  *  @param id
  *  @param user a user id, ignored if the action is a [LauncherAction].
  */
-private fun Action.Companion.fromId(id: String, user: Int?): Action? {
+private fun Action.Companion.legacyFromId(id: String, user: Int?): Action? {
     if (id.isEmpty()) {
         return null
     }
@@ -68,7 +72,25 @@ private fun Action.Companion.legacyFromPreference(id: String): Action? {
     )
     u = if (u == AppInfo.INVALID_USER) null else u
 
-    return Action.fromId(actionId, u)
+    return Action.legacyFromId(actionId, u)
+}
+
+private fun migrateAppInfoStringMap(key: String) {
+    val preferences = LauncherPreferences.getSharedPreferences()
+    MapAppInfoStringPreferenceSerializer().serialize(
+        preferences.getStringSet(key, setOf())?.mapNotNull { entry ->
+            try {
+                val obj = JSONObject(entry);
+                val info = AppInfo.legacyDeserialize(obj.getString("key"))
+                val value = obj.getString("value");
+                Pair(info, value)
+            } catch (_: JSONException) {
+                null
+            }
+        }?.toMap(HashMap())
+    )?.let {
+        preferences.edit().putStringSet(key, it as Set<String>).apply()
+    }
 }
 
 private fun migrateAppInfoSet(key: String) {
@@ -82,13 +104,24 @@ private fun migrateAppInfoSet(key: String) {
 private fun migrateAction(key: String) {
     Action.legacyFromPreference(key)?.let { action ->
         LauncherPreferences.getSharedPreferences().edit()
-            .putString(key, Json.encodeToString(action)).apply()
+            .putString(key, Json.encodeToString(action))
+            .remove("$key.app")
+            .remove("$key.user")
+            .apply()
     }
 
 }
 
+/**
+ * Migrate preferences from version 1 (used until version j-0.0.18) to the current format
+ * (see [PREFERENCE_VERSION])
+ */
 fun migratePreferencesFromVersion1() {
+    assert(PREFERENCE_VERSION == 2)
+    assert(LauncherPreferences.internal().versionCode() == 1)
     Gesture.entries.forEach { g -> migrateAction(g.id) }
     migrateAppInfoSet(LauncherPreferences.apps().keys().hidden())
     migrateAppInfoSet(LauncherPreferences.apps().keys().favorites())
+    migrateAppInfoStringMap(LauncherPreferences.apps().keys().customNames())
+    LauncherPreferences.internal().versionCode(2)
 }

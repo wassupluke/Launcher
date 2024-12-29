@@ -6,8 +6,8 @@ import de.jrpie.android.launcher.BuildConfig
 import de.jrpie.android.launcher.actions.Action
 import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.apps.DetailedAppInfo
-import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersionUnknown
 import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersion1
+import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersionUnknown
 import de.jrpie.android.launcher.ui.HomeActivity
 
 /* Current version of the structure of preferences.
@@ -19,31 +19,40 @@ const val UNKNOWN_PREFERENCE_VERSION = -1
 private const val TAG = "Launcher - Preferences"
 
 
-
+/*
+ * Tries to detect preferences written by older versions of the app
+ * and migrate them to the current format.
+ */
 fun migratePreferencesToNewVersion(context: Context) {
-    when (LauncherPreferences.internal().versionCode()) {
-        // Check versions, make sure transitions between versions go well
-        PREFERENCE_VERSION -> { /* the version installed and used previously are the same */
-        }
+    try {
+        when (LauncherPreferences.internal().versionCode()) {
+            // Check versions, make sure transitions between versions go well
+            PREFERENCE_VERSION -> { /* the version installed and used previously are the same */
+            }
 
-        UNKNOWN_PREFERENCE_VERSION -> { /* still using the old preferences file */
-            migratePreferencesFromVersionUnknown(context)
+            UNKNOWN_PREFERENCE_VERSION -> { /* still using the old preferences file */
+                migratePreferencesFromVersionUnknown(context)
 
-            Log.i(TAG, "migration of preferences complete.")
-        }
-        1 -> {
-            migratePreferencesFromVersion1()
-            Log.i(TAG, "migration of preferences complete.")
-        }
+                Log.i(TAG, "migration of preferences complete.")
+            }
 
-        else -> {
-            Log.w(
-                TAG,
-                "Shared preferences were written by a newer version of the app (${
-                    LauncherPreferences.internal().versionCode()
-                })!"
-            )
+            1 -> {
+                migratePreferencesFromVersion1()
+                Log.i(TAG, "migration of preferences complete.")
+            }
+
+            else -> {
+                Log.w(
+                    TAG,
+                    "Shared preferences were written by a newer version of the app (${
+                        LauncherPreferences.internal().versionCode()
+                    })!"
+                )
+            }
         }
+    } catch (e: Exception) {
+        Log.e(TAG, "Unable to restore preferences:\n${e.stackTrace}")
+        resetPreferences(context)
     }
 }
 

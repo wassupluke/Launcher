@@ -1,23 +1,18 @@
 package de.jrpie.android.launcher.preferences;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Set;
 
 import de.jrpie.android.launcher.R;
 import de.jrpie.android.launcher.actions.lock.LockMethod;
-import de.jrpie.android.launcher.apps.AppInfo;
+import de.jrpie.android.launcher.preferences.serialization.SetAppInfoPreferenceSerializer;
+import de.jrpie.android.launcher.preferences.serialization.MapAppInfoStringPreferenceSerializer;
 import de.jrpie.android.launcher.preferences.theme.Background;
 import de.jrpie.android.launcher.preferences.theme.ColorTheme;
 import de.jrpie.android.launcher.preferences.theme.Font;
 import eu.jonahbauer.android.preference.annotations.Preference;
 import eu.jonahbauer.android.preference.annotations.PreferenceGroup;
 import eu.jonahbauer.android.preference.annotations.Preferences;
-import eu.jonahbauer.android.preference.annotations.serializer.PreferenceSerializationException;
-import eu.jonahbauer.android.preference.annotations.serializer.PreferenceSerializer;
 
 @Preferences(
         name = "de.jrpie.android.launcher.preferences.LauncherPreferences",
@@ -30,9 +25,9 @@ import eu.jonahbauer.android.preference.annotations.serializer.PreferenceSeriali
                         @Preference(name = "version_code", type = int.class, defaultValue = "-1"),
                 }),
                 @PreferenceGroup(name = "apps", prefix = "settings_apps_", suffix = "_key", value = {
-                        @Preference(name = "favorites", type = Set.class, serializer = LauncherPreferences$Config.AppInfoSetSerializer.class),
-                        @Preference(name = "hidden", type = Set.class, serializer = LauncherPreferences$Config.AppInfoSetSerializer.class),
-                        @Preference(name = "custom_names", type = HashMap.class, serializer = LauncherPreferences$Config.MapAppInfoStringSerializer.class),
+                        @Preference(name = "favorites", type = Set.class, serializer = SetAppInfoPreferenceSerializer.class),
+                        @Preference(name = "hidden", type = Set.class, serializer = SetAppInfoPreferenceSerializer.class),
+                        @Preference(name = "custom_names", type = HashMap.class, serializer = MapAppInfoStringPreferenceSerializer.class),
                         @Preference(name = "hide_bound_apps", type = boolean.class, defaultValue = "false"),
                 }),
                 @PreferenceGroup(name = "list", prefix = "settings_list_", suffix = "_key", value = {
@@ -78,74 +73,4 @@ import eu.jonahbauer.android.preference.annotations.serializer.PreferenceSeriali
                         @Preference(name = "lock_method", type = LockMethod.class, defaultValue = "DEVICE_ADMIN"),
                 }),
         })
-public final class LauncherPreferences$Config {
-    public static class AppInfoSetSerializer implements PreferenceSerializer<Set<AppInfo>, Set<String>> {
-
-        @Override
-        public Set<String> serialize(Set<AppInfo> value) throws PreferenceSerializationException {
-            if (value == null) return null;
-
-            var serialized = new HashSet<String>(value.size());
-            for (var app : value) {
-                serialized.add(app.serialize());
-            }
-
-            return serialized;
-        }
-
-        @Override
-        public Set<AppInfo> deserialize(Set<String> value) throws PreferenceSerializationException {
-            if (value == null) return null;
-
-            var deserialized = new HashSet<AppInfo>(value.size());
-
-            for (var s : value) {
-                deserialized.add(AppInfo.Companion.deserialize(s));
-            }
-
-            return deserialized;
-        }
-    }
-
-    // TODO migrate to version 2
-    public static class MapAppInfoStringSerializer implements PreferenceSerializer<HashMap<AppInfo, String>, Set<String>> {
-
-        @Override
-        public Set<String> serialize(HashMap<AppInfo, String> value) throws PreferenceSerializationException {
-            if (value == null) return null;
-
-            var serialized = new HashSet<String>(value.size());
-
-            for (var entry : value.entrySet()) {
-                JSONObject obj = new JSONObject();
-                try {
-                    obj.put("key", entry.getKey().serialize());
-                    obj.put("value", entry.getValue());
-                    serialized.add(obj.toString());
-                } catch (JSONException ignored) {
-                }
-            }
-
-            return serialized;
-        }
-
-        @Override
-        public HashMap<AppInfo, String> deserialize(Set<String> value) throws PreferenceSerializationException {
-            if (value == null) return null;
-
-            var deserialized = new HashMap<AppInfo, String>();
-
-            for (var entry : value) {
-                try {
-                    JSONObject obj = new JSONObject(entry);
-                    AppInfo info = AppInfo.Companion.deserialize(obj.getString("key"));
-                    String s = obj.getString("value");
-                    deserialized.put(info, s);
-                } catch (JSONException ignored) {
-                }
-            }
-
-            return deserialized;
-        }
-    }
-}
+public final class LauncherPreferences$Config {}

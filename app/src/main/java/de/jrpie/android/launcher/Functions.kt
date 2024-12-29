@@ -75,7 +75,9 @@ fun openInBrowser(url: String, context: Context) {
 }
 
 fun openTutorial(context: Context) {
-    context.startActivity(Intent(context, TutorialActivity::class.java))
+    context.startActivity(Intent(context, TutorialActivity::class.java).apply {
+        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    })
 }
 
 

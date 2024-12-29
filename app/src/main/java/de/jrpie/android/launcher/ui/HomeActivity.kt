@@ -76,17 +76,6 @@ class HomeActivity : UIObject, AppCompatActivity(),
         super<AppCompatActivity>.onCreate(savedInstanceState)
         super<UIObject>.onCreate()
 
-        // Try to restore old preferences
-        migratePreferencesToNewVersion(this)
-
-        // First time opening the app: set defaults and start tutorial
-        if (!LauncherPreferences.internal().started()) {
-            resetPreferences(this)
-
-            LauncherPreferences.internal().started(true)
-            openTutorial(this)
-        }
-
         // Initialise layout
         binding = HomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
