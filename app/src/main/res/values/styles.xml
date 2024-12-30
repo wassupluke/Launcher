@@ -123,7 +123,6 @@
     <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:color">#000000</item>
         <item name="android:textColor">@color/text_color_toggle</item>
-        <item name="android:background">#ffffff</item>
     </style>
 
     <style name="AlertDialogDanger" parent="AlertDialogCustom">
