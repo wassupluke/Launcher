@@ -107,9 +107,7 @@
     <string name="tutorial_start_text">Prenez quelques instants pour apprendre à utiliser ce \'launcher\' !</string>
     <string name="tutorial_concept_title">Concept</string>
     <string name="tutorial_concept_text">Launcher vous offre un environnement minimaliste, efficace et sans distraction.\n\nIl ne vous coûte rien, ne contient aucune publicité, ne recueille pas de données personnelles.</string>
-    <string name="tutorial_concept_text_2">L\'application est open-source (sous licence MIT) et disponible sur GitHub!
-\n
-\nN\'hésitez pas à y faire un tour !</string>
+    <string name="tutorial_concept_text_2">L\'application est open-source (sous licence MIT) et disponible sur GitHub !\n\nN\'hésitez pas à y faire un tour !</string>
     <string name="tutorial_usage_title">Utilisation</string>
     <string name="tutorial_usage_text">Sur votre écran d\'accueil vous ne trouverez rien d\'autre que la date et l\'heure : rien qui pourrait vous distraire.</string>
     <string name="tutorial_usage_text_2">Vous pouvez ouvrir des applications en effectuant des mouvelents latéraux sur l\'écran ou en appuyant sur les touches de volume. Vous pourrez en définir le comportement dans le panneau suivant.</string>
