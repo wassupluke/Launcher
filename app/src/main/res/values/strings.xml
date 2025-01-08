@@ -284,7 +284,7 @@
         <br/>
         (You really should not trust a random app you just downloaded with such a claim, but you can check the <a href=\"https://github.com/jrpie/Launcher\">source code</a>.)
         <br/>
-        On some devices, the screen lock will no longer be used for data encryption after activating an accessibility service.
+        On some devices, the start-up PIN will no longer be used for encrypting data after activating an accessibility service.
         This can be <a href="https://issuetracker.google.com/issues/37010136#comment36">reactivated</a> afterwards.
 
         <br/><br/><br/><br/>
