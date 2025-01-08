@@ -1,0 +1,1 @@
+* improved French translation (thank you, Alexandre Ancel and Nin Dan!)
