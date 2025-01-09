@@ -1,6 +1,5 @@
 package de.jrpie.android.launcher.apps
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.icu.text.Normalizer2
 import android.os.Build
@@ -18,7 +17,6 @@ class AppFilter(
     var hiddenVisibility: AppSetVisibility = AppSetVisibility.HIDDEN,
 ) {
 
-    @SuppressLint("NewApi")
     operator fun invoke(apps: List<DetailedAppInfo>): List<DetailedAppInfo> {
         var apps =
             apps.sortedBy { app -> app.getCustomLabel(context).toString().lowercase(Locale.ROOT) }
