@@ -226,7 +226,7 @@ class AppsRecyclerAdapter(
      * The function [setSearchString] is used to search elements within this [RecyclerView].
      */
     fun setSearchString(search: String) {
-        appFilter.search = search
+        appFilter.query = search
         updateAppsList(true)
 
     }

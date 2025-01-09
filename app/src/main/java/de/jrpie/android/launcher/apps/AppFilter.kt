@@ -1,6 +1,9 @@
 package de.jrpie.android.launcher.apps
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.icu.text.Normalizer2
+import android.os.Build
 import de.jrpie.android.launcher.actions.Action
 import de.jrpie.android.launcher.actions.AppAction
 import de.jrpie.android.launcher.actions.Gesture
@@ -10,10 +13,12 @@ import kotlin.text.Regex.Companion.escape
 
 class AppFilter(
     var context: Context,
-    var search: String,
+    var query: String,
     var favoritesVisibility: AppSetVisibility = AppSetVisibility.VISIBLE,
     var hiddenVisibility: AppSetVisibility = AppSetVisibility.HIDDEN,
 ) {
+
+    @SuppressLint("NewApi")
     operator fun invoke(apps: List<DetailedAppInfo>): List<DetailedAppInfo> {
         var apps =
             apps.sortedBy { app -> app.getCustomLabel(context).toString().lowercase(Locale.ROOT) }
@@ -35,7 +40,7 @@ class AppFilter(
         }
 
         // normalize text for search
-        val allowedSpecialCharacters = search
+        val allowedSpecialCharacters = unicodeNormalize(query)
             .lowercase(Locale.ROOT)
             .toCharArray()
             .distinct()
@@ -45,20 +50,21 @@ class AppFilter(
         val disallowedCharsRegex = "[^\\p{L}$allowedSpecialCharacters]".toRegex()
 
         fun normalize(text: String): String {
-            return text.lowercase(Locale.ROOT).replace(disallowedCharsRegex, "")
+            return unicodeNormalize(text).replace(disallowedCharsRegex, "")
         }
-        if (search.isEmpty()) {
+
+        if (query.isEmpty()) {
             return apps
         } else {
             val r: MutableList<DetailedAppInfo> = ArrayList()
             val appsSecondary: MutableList<DetailedAppInfo> = ArrayList()
-            val normalizedText: String = normalize(search)
+            val normalizedQuery: String = normalize(query)
             for (item in apps) {
                 val itemLabel: String = normalize(item.getCustomLabel(context).toString())
 
-                if (itemLabel.startsWith(normalizedText)) {
+                if (itemLabel.startsWith(normalizedQuery)) {
                     r.add(item)
-                } else if (itemLabel.contains(normalizedText)) {
+                } else if (itemLabel.contains(normalizedQuery)) {
                     appsSecondary.add(item)
                 }
             }
@@ -76,6 +82,14 @@ class AppFilter(
             HIDDEN({ set, appInfo -> !set.contains(appInfo.app) }),
             EXCLUSIVE({ set, appInfo -> set.contains(appInfo.app) }),
             ;
+        }
+
+        private fun unicodeNormalize(s: String): String {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                val normalizer = Normalizer2.getNFKDInstance()
+                return normalizer.normalize(s.lowercase(Locale.ROOT))
+            }
+            return s.lowercase(Locale.ROOT)
         }
     }
 }
