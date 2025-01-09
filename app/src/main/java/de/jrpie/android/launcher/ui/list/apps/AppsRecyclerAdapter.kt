@@ -49,6 +49,9 @@ class AppsRecyclerAdapter(
     private val apps = (activity.applicationContext as Application).apps
     private val appsListDisplayed: MutableList<DetailedAppInfo> = mutableListOf()
 
+    // temporarily disable auto launch
+    var disableAutoLaunch: Boolean = false
+
     init {
         apps.observe(this.activity as AppCompatActivity) {
             updateAppsList()
@@ -205,6 +208,7 @@ class AppsRecyclerAdapter(
         if (triggerAutoLaunch &&
             appsListDisplayed.size == 1
             && intention == ListActivity.ListActivityIntention.VIEW
+            && !disableAutoLaunch
             && LauncherPreferences.functionality().searchAutoLaunch()
         ) {
             val info = appsListDisplayed[0]

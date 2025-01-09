@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.apps.AppFilter
 import de.jrpie.android.launcher.databinding.ListAppsBinding
 import de.jrpie.android.launcher.preferences.LauncherPreferences
@@ -26,11 +27,11 @@ import de.jrpie.android.launcher.ui.openSoftKeyboard
  */
 class ListFragmentApps : Fragment(), UIObject {
     private lateinit var binding: ListAppsBinding
-    private lateinit var appsRViewAdapter: AppsRecyclerAdapter
+    private lateinit var appsRecyclerAdapter: AppsRecyclerAdapter
 
     private var sharedPreferencesListener =
         SharedPreferences.OnSharedPreferenceChangeListener { _, _ ->
-            appsRViewAdapter.updateAppsList()
+            appsRecyclerAdapter.updateAppsList()
         }
 
     override fun onCreateView(
@@ -62,7 +63,7 @@ class ListFragmentApps : Fragment(), UIObject {
 
     override fun adjustLayout() {
 
-        appsRViewAdapter =
+        appsRecyclerAdapter =
             AppsRecyclerAdapter(
                 requireActivity(), binding.root, intention, forGesture,
                 appFilter = AppFilter(
@@ -79,26 +80,40 @@ class ListFragmentApps : Fragment(), UIObject {
             // improve performance (since content changes don't change the layout size)
             setHasFixedSize(true)
             layoutManager = LauncherPreferences.list().layout().layoutManager(context)
-            adapter = appsRViewAdapter
+            adapter = appsRecyclerAdapter
         }
 
         binding.listAppsSearchview.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String): Boolean {
-                appsRViewAdapter.setSearchString(query)
+                appsRecyclerAdapter.setSearchString(query)
 
                 if (LauncherPreferences.functionality().searchWeb()) {
                     val i = Intent(Intent.ACTION_WEB_SEARCH).putExtra("query", query)
                     activity?.startActivity(i)
                 } else {
-                    appsRViewAdapter.selectItem(0)
+                    appsRecyclerAdapter.selectItem(0)
                 }
                 return true
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                appsRViewAdapter.setSearchString(newText)
+
+                if (newText == " " &&
+                    !appsRecyclerAdapter.disableAutoLaunch &&
+                    intention == ListActivity.ListActivityIntention.VIEW &&
+                    LauncherPreferences.functionality().searchAutoLaunch()
+                ) {
+                    appsRecyclerAdapter.disableAutoLaunch = true
+                    binding.listAppsSearchview.apply {
+                        queryHint = context.getString(R.string.list_apps_search_hint_no_auto_launch)
+                        setQuery("", false)
+                    }
+                    return false
+                }
+
+                appsRecyclerAdapter.setSearchString(newText)
                 return false
             }
         })
@@ -110,7 +125,7 @@ class ListFragmentApps : Fragment(), UIObject {
                 } else {
                     AppFilter.Companion.AppSetVisibility.VISIBLE
                 }
-            appsRViewAdapter.setFavoritesVisibility(favoritesVisibility)
+            appsRecyclerAdapter.setFavoritesVisibility(favoritesVisibility)
             (activity as? ListActivity)?.updateTitle()
         }
 

@@ -1,1 +1,2 @@
+* prefix search query with space to temporarily disable auto launch
 * improved French translation (thank you, Alexandre Ancel and Nin Dan!)

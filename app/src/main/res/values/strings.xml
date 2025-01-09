@@ -201,7 +201,8 @@
     <string name="list_removed">Removed the selected application</string>
     <string name="list_not_removed">Unable to remove application</string>
 
-    <string name="list_apps_search_hint">Search Applications</string>
+    <string name="list_apps_search_hint">Search</string>
+    <string name="list_apps_search_hint_no_auto_launch">Search (auto launch disabled)</string>
 
     <string name="list_other_settings">µLauncher Settings</string>
     <string name="list_other_list">All Applications</string>
