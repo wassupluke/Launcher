@@ -12,6 +12,7 @@ import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.databinding.SettingsMetaBinding
 import de.jrpie.android.launcher.openInBrowser
 import de.jrpie.android.launcher.preferences.resetPreferences
+import de.jrpie.android.launcher.ui.LegalInfoActivity
 import de.jrpie.android.launcher.ui.UIObject
 import de.jrpie.android.launcher.ui.tutorial.TutorialActivity
 
@@ -126,6 +127,11 @@ class SettingsFragmentMeta : Fragment(), UIObject {
                 getString(R.string.settings_meta_privacy_url),
                 requireContext()
             )
+        }
+
+        // legal info
+        binding.settingsMetaButtonLicenses.setOnClickListener {
+            startActivity(Intent(this.context, LegalInfoActivity::class.java))
         }
 
     }

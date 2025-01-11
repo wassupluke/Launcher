@@ -84,5 +84,12 @@
             android:text="@string/settings_meta_privacy"
             android:textAllCaps="false" />
 
+        <Button
+            android:id="@+id/settings_meta_button_licenses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_meta_licenses"
+            android:textAllCaps="false" />
+
     </LinearLayout>
 </ScrollView>
