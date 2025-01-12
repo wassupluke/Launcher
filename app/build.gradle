@@ -51,6 +51,29 @@ android {
             versionNameSuffix = "-debug"
         }
     }
+
+    flavorDimensions += "distribution"
+
+    productFlavors {
+        create("default") {
+            dimension = "distribution"
+            getIsDefault().set(true)
+            buildConfigField "boolean", "USE_ACCESSIBILITY_SERVICE", "true"
+        }
+        create("accrescent") {
+            dimension = "distribution"
+            applicationIdSuffix = ".accrescent"
+            versionNameSuffix = "+accrescent"
+            buildConfigField "boolean", "USE_ACCESSIBILITY_SERVICE", "false"
+        }
+    }
+
+    sourceSets {
+        accrescent {
+            manifest.srcFile 'src/accrescent/AndroidManifest.xml'
+        }
+    }
+
     namespace 'de.jrpie.android.launcher'
     buildFeatures {
         buildConfig true

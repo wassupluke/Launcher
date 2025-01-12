@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Build
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
+import de.jrpie.android.launcher.BuildConfig
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 
@@ -36,7 +37,8 @@ enum class LockMethod(
 
     companion object {
         fun chooseMethod(context: Context) {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P ||
+                ! BuildConfig.USE_ACCESSIBILITY_SERVICE) {
                 // only device admin is available
                 setMethod(context, DEVICE_ADMIN)
                 return
