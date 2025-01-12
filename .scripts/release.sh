@@ -4,23 +4,13 @@ OUTPUT_DIR="$HOME/launcher-release"
 BUILD_TOOLS_DIR="$HOME/Android/Sdk/build-tools/35.0.0"
 KEYSTORE="$HOME/data/keys/launcher_jrpie.jks"
 KEYSTORE_ACCRESCENT="$HOME/data/keys/launcher_jrpie_accrescent.jks"
-# KEYSTORE_PASS=$(keepassxc-password "android_keys/launcher")
-# KEYSTORE_ACCRESCENT_PASS=$(keepassxc-password "android_keys/launcher-accrescent")
+KEYSTORE_PASS=$(keepassxc-password "android_keys/launcher")
+KEYSTORE_ACCRESCENT_PASS=$(keepassxc-password "android_keys/launcher-accrescent")
 
 if [[ $(git status --porcelain) ]]; then
     echo "There are uncommitted changes."
     exit 1
 fi
-VERSION_INFO=$(./gradlew -q Version --rerun)
-echo $VERSION_INFO
-
-
-IFS="
-" read -r VERSION_NAME VERSION_CODE MIN_SDK TARGET_SDK <<< $(./gradlew -q Version --rerun)
-
-
-echo "Building Release $VERSION_NAME ($VERSION_CODE)"
-echo "Target SDK: $TARGET_SDK,  Min SDK: $MIN_SDK"
 
 rm -rf "$OUTPUT_DIR"
 mkdir "$OUTPUT_DIR"
