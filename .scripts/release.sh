@@ -23,13 +23,17 @@ echo "======================="
 
 ./gradlew clean
 ./gradlew assembleDefaultRelease
-mv app/build/outputs/apk/default/release/app-default-release-unsigned.apk "$OUTPUT_DIR/unsigned.apk"
-$BUILD_TOOLS_DIR/apksigner sign --ks "$KEYSTORE" \
+mv app/build/outputs/apk/default/release/app-default-release-unsigned.apk "$OUTPUT_DIR/app-release.apk"
+"$BUILD_TOOLS_DIR/apksigner" sign --ks "$KEYSTORE" \
     --ks-key-alias key0 \
     --ks-pass="pass:$KEYSTORE_PASS" \
     --key-pass="pass:$KEYSTORE_PASS" \
-    --v1-signing-enabled=true --v2-signing-enabled=true --v3-signing-enabled=true --v4-signing-enabled=true \
-    "$OUTPUT_DIR/unsigned.apk"
+    --alignment-preserved \
+    --v1-signing-enabled=true \
+    --v2-signing-enabled=true \
+    --v3-signing-enabled=true \
+    --v4-signing-enabled=true \
+    "$OUTPUT_DIR/app-release.apk"
 
 echo
 echo "======================="
@@ -38,16 +42,14 @@ echo "======================="
 
 ./gradlew clean
 ./gradlew bundleDefaultRelease
-mv app/build/outputs/bundle/defaultRelease/app-default-release.aab $OUTPUT_DIR/app-release.aab
-$BUILD_TOOLS_DIR/apksigner sign --ks "$KEYSTORE" \
+mv app/build/outputs/bundle/defaultRelease/app-default-release.aab "$OUTPUT_DIR/app-release.aab"
+"$BUILD_TOOLS_DIR/apksigner" sign --ks "$KEYSTORE" \
     --ks-key-alias key0 \
     --ks-pass="pass:$KEYSTORE_PASS" \
     --key-pass="pass:$KEYSTORE_PASS" \
     --v1-signing-enabled=true --v2-signing-enabled=true --v3-signing-enabled=true --v4-signing-enabled=true \
     --min-sdk-version=21 \
-    --target-sdk-version=35 \
     "$OUTPUT_DIR/app-release.aab"
-
 
 echo
 echo "======================="
@@ -56,8 +58,10 @@ echo "======================="
 
 ./gradlew clean
 ./gradlew bundleAccrescentRelease
-mv app/build/outputs/bundle/accrescentRelease/app-accrescent-release.aab $OUTPUT_DIR/app-accrescent-release.aab
-$JAVA_HOME/bin/java -jar /opt/android/bundletool.jar build-apks \
+mv app/build/outputs/bundle/accrescentRelease/app-accrescent-release.aab "$OUTPUT_DIR/app-accrescent-release.aab"
+
+# build apks using bundletool from https://github.com/google/bundletool/releases
+"$JAVA_HOME/bin/java" -jar /opt/android/bundletool.jar build-apks \
     --bundle="$OUTPUT_DIR/app-accrescent-release.aab" --output="$OUTPUT_DIR/launcher-accrescent.apks" \
     --ks="$KEYSTORE_ACCRESCENT" \
     --ks-pass="pass:$KEYSTORE_ACCRESCENT_PASS" \
