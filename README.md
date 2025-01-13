@@ -22,11 +22,10 @@ This is a fork of [finnmglas's app Launcher][original-repo].
 
 
 <a href="https://f-droid.org/packages/de.jrpie.android.launcher/"><img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="80"></a>
+<a href="https://accrescent.app/app/de.jrpie.android.launcher.accrescent"><img alt="Get it on Accrescent" src="https://accrescent.app/badges/get-it-on.png" height="80"></a>
 <a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://app/{%22id%22:%22de.jrpie.android.launcher%22,%22url%22:%22https://github.com/jrpie/Launcher%22,%22author%22:%22jrpie%22,%22name%22:%22%c2%b5Launcher%22,%22additionalSettings%22:%22{\%22apkFilterRegEx\%22:\%22release\%22,\%22invertAPKFilter\%22:false,\%22about\%22:\%22%c2%b5Launcher%20is%20a%20minimal%20home%20screen.\%22}%22}"><img src="https://raw.githubusercontent.com/ImranR98/Obtainium/b1c8ac6f2ab08497189721a788a5763e28ff64cd/assets/graphics/badge_obtainium.png" alt="Get it on Obtainium" height="80"></a>
 <a href="https://github.com/jrpie/launcher/releases/latest"><img src="https://raw.githubusercontent.com/NeoApplications/Neo-Backup/034b226cea5c1b30eb4f6a6f313e4dadcbb0ece4/badge_github.png" alt="Get it on GitHub" height="80"></a>
 
-
-or download the latest APK from the [releases section](https://github.com/jrpie/Launcher/releases/latest).
 You can also [get it on Google Play](https://play.google.com/store/apps/details?id=de.jrpie.android.launcher), but I don't recommend that.
 
 <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.jpg"
@@ -60,11 +59,13 @@ There are several ways to contribute to this app:
 * If you find a bug or have an idea for a new feature you can [join the chat][chat] or open an [issue][issues]. Please note that I work on this project in my free time. Thus I might not respond immediately and not all ideas will be implemented.
 * You can implement a new feature yourself:
   - Create a fork of this repository: [![][shield-gh-fork]][fork]
-  - Create a new branch named `feature/<your feature>` of `fix/<your fix>` and commit your changes.
+  - Create a new branch named `feature/<your feature>` or `fix/<your fix>` and commit your changes.
   - Open a new pull request.
 
 
 See [BUILD.md](BUILD.md) for instructions how to build this project.
+The [CI pipeline](https://github.com/jrpie/Launcher/actions) automatically creates debug builds.
+Note that those are not signed.
 
 ## Notable changes compared to [Finn's Launcher][original-repo]:
 
