@@ -1,1 +1,1 @@
-A distraction-free minimal homescreen for Android.
+A distraction-free, minimal homescreen for Android.
