@@ -34,6 +34,12 @@ class SettingsFragmentLauncher : PreferenceFragmentCompat() {
         )
         val timeVisible = LauncherPreferences.clock().timeVisible()
         showSeconds?.isVisible = timeVisible
+
+        val background = findPreference<androidx.preference.Preference>(
+            LauncherPreferences.theme().keys().background()
+        )
+        val lightTheme = LauncherPreferences.theme().colorTheme() == ColorTheme.LIGHT
+        background?.isVisible = !lightTheme
     }
 
     override fun onStart() {

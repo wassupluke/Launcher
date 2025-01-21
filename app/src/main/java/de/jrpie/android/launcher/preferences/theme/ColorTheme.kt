@@ -26,7 +26,7 @@ enum class ColorTheme(
         R.style.colorThemeLight,
         R.string.settings_theme_color_theme_item_light,
         R.style.textShadowLight,
-        { false }),
+        { true }),
     DYNAMIC(
         R.style.colorThemeDynamic,
         R.string.settings_theme_color_theme_item_dynamic,
