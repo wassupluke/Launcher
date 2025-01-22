@@ -21,8 +21,6 @@ import de.jrpie.android.launcher.actions.LauncherAction
 import de.jrpie.android.launcher.databinding.HomeBinding
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.ui.tutorial.TutorialActivity
-import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
 import java.util.Timer
 import kotlin.concurrent.fixedRateTimer
@@ -65,8 +63,6 @@ class HomeActivity : UIObject, AppCompatActivity(),
 
     private lateinit var mDetector: GestureDetectorCompat
 
-    // timers
-    private var clockTimer = Timer()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super<AppCompatActivity>.onCreate(savedInstanceState)
@@ -100,30 +96,24 @@ class HomeActivity : UIObject, AppCompatActivity(),
 
     }
 
-    private fun updateClock() {
-        clockTimer.cancel()
+    private fun initClock() {
         val locale = Locale.getDefault()
         val dateVisible = LauncherPreferences.clock().dateVisible()
         val timeVisible = LauncherPreferences.clock().timeVisible()
 
         var dateFMT = "yyyy-MM-dd"
         var timeFMT = "HH:mm"
-        val period = 100L
         if (LauncherPreferences.clock().showSeconds()) {
             timeFMT += ":ss"
         }
-        /*
-         I thought about adding an option to show microseconds as well ( timeFMT += ".SSS" ).
-         However setting period ot 1L (or even 10L) causes high CPU load,
-         so that doesn't seem to be a good idea.
-         */
+
         if (LauncherPreferences.clock().localized()) {
             dateFMT = android.text.format.DateFormat.getBestDateTimePattern(locale, dateFMT)
             timeFMT = android.text.format.DateFormat.getBestDateTimePattern(locale, timeFMT)
         }
 
-        var upperFormat = SimpleDateFormat(dateFMT, locale)
-        var lowerFormat = SimpleDateFormat(timeFMT, locale)
+        var upperFormat = dateFMT
+        var lowerFormat = timeFMT
         var upperVisible = dateVisible
         var lowerVisible = timeVisible
 
@@ -138,21 +128,10 @@ class HomeActivity : UIObject, AppCompatActivity(),
         binding.homeUpperView.setTextColor(LauncherPreferences.clock().color())
         binding.homeLowerView.setTextColor(LauncherPreferences.clock().color())
 
-
-        clockTimer = fixedRateTimer("clockTimer", true, 0L, period) {
-            this@HomeActivity.runOnUiThread {
-                if (lowerVisible) {
-                    val t = lowerFormat.format(Date())
-                    if (binding.homeLowerView.text != t)
-                        binding.homeLowerView.text = t
-                }
-                if (upperVisible) {
-                    val d = upperFormat.format(Date())
-                    if (binding.homeUpperView.text != d)
-                        binding.homeUpperView.text = d
-                }
-            }
-        }
+        binding.homeLowerView.format24Hour = lowerFormat
+        binding.homeUpperView.format24Hour = upperFormat
+        binding.homeLowerView.format12Hour = lowerFormat
+        binding.homeUpperView.format12Hour = upperFormat
     }
 
     override fun getTheme(): Resources.Theme {
@@ -172,12 +151,7 @@ class HomeActivity : UIObject, AppCompatActivity(),
 
         edgeWidth = LauncherPreferences.enabled_gestures().edgeSwipeEdgeWidth() / 100f
 
-        updateClock()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        clockTimer.cancel()
+        initClock()
     }
 
     override fun onDestroy() {

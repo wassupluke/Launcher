@@ -10,7 +10,7 @@
     android:fitsSystemWindows="true"
     tools:context=".ui.HomeActivity">
 
-    <TextView
+    <TextClock
         android:id="@+id/home_upper_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
         app:layout_constraintVertical_bias="0.45"
         tools:text="2024-12-24" />
 
-    <TextView
+    <TextClock
         android:id="@+id/home_lower_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
