@@ -145,6 +145,7 @@
     <string name="settings_launcher_section_apps">Apps</string>
     <string name="settings_apps_hidden">Hidden apps</string>
     <string name="settings_apps_hide_bound_apps">Don\'t show apps that are bound to a gesture in the app list</string>
+    <string name="settings_apps_hide_paused_apps">Hide paused apps</string>
     <string name="settings_list_layout">Layout of app list</string>
 
     <string name="settings_list_layout_item_default">Default</string>
@@ -207,6 +208,7 @@
     <string name="list_other_settings">µLauncher Settings</string>
     <string name="list_other_list">All Applications</string>
     <string name="list_other_list_favorites">Favorite Applications</string>
+    <string name="list_other_toggle_private_space_lock">Toggle Private Space Lock</string>
     <string name="list_other_volume_up">Music: Louder</string>
     <string name="list_other_volume_down">Music: Quieter</string>
     <string name="list_other_track_next">Music: Next</string>
@@ -245,6 +247,7 @@
     <string name="ic_menu_alt">More options</string>
     <string name="alert_cant_expand_status_bar_panel">Error: Can\'t expand status bar. This action is using functionality that is not part of the published Android API. Unfortunately, it does not seem to work on your device.</string>
     <string name="alert_requires_android_m">This functionality requires Android 6.0 or later.</string>
+    <string name="alert_requires_android_v">This functionality requires Android 15.0 or later.</string>
     <string name="snackbar_app_hidden">App hidden. You can make it visible again in settings.</string>
     <string name="undo">Undo</string>
     <string name="list_other_expand_settings_panel">Quick Settings</string>
@@ -255,6 +258,10 @@
     <string name="alert_torch_access_exception">Error: Can\'t access torch.</string>
     <string name="alert_lock_screen_failed">Error: Failed to lock screen. (If you just upgraded the app, try to disable and re-enable the accessibility service in phone settings)</string>
     <string name="toast_accessibility_service_not_enabled">μLauncher\'s accessibility service is not enabled. Please enable it in settings</string>
+    <string name="toast_private_space_locked">Private space locked</string>
+    <string name="toast_private_space_unlocked">Private space unlocked</string>
+    <string name="toast_private_space_not_available">Private space is not available</string>
+    <string name="toast_private_space_default_home_screen">µLauncher needs to be the default home screen to access private space.</string>
     <string name="toast_lock_screen_not_supported">Error: Locking the screen using accessibility is not supported on this device. Please use device admin instead.</string>
     <string name="accessibility_service_name">µLauncher - lock screen</string>
     <string name="accessibility_service_description">

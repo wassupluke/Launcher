@@ -5,8 +5,8 @@ import java.util.Set;
 
 import de.jrpie.android.launcher.R;
 import de.jrpie.android.launcher.actions.lock.LockMethod;
-import de.jrpie.android.launcher.preferences.serialization.SetAppInfoPreferenceSerializer;
 import de.jrpie.android.launcher.preferences.serialization.MapAppInfoStringPreferenceSerializer;
+import de.jrpie.android.launcher.preferences.serialization.SetAppInfoPreferenceSerializer;
 import de.jrpie.android.launcher.preferences.theme.Background;
 import de.jrpie.android.launcher.preferences.theme.ColorTheme;
 import de.jrpie.android.launcher.preferences.theme.Font;
@@ -29,6 +29,7 @@ import eu.jonahbauer.android.preference.annotations.Preferences;
                         @Preference(name = "hidden", type = Set.class, serializer = SetAppInfoPreferenceSerializer.class),
                         @Preference(name = "custom_names", type = HashMap.class, serializer = MapAppInfoStringPreferenceSerializer.class),
                         @Preference(name = "hide_bound_apps", type = boolean.class, defaultValue = "false"),
+                        @Preference(name = "hide_paused_apps", type = boolean.class, defaultValue = "false"),
                 }),
                 @PreferenceGroup(name = "list", prefix = "settings_list_", suffix = "_key", value = {
                         @Preference(name = "layout", type = ListLayout.class, defaultValue = "DEFAULT")

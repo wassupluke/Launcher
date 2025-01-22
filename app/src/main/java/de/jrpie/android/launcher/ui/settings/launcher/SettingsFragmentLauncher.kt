@@ -40,6 +40,11 @@ class SettingsFragmentLauncher : PreferenceFragmentCompat() {
         )
         val lightTheme = LauncherPreferences.theme().colorTheme() == ColorTheme.LIGHT
         background?.isVisible = !lightTheme
+
+        val hidePausedApps = findPreference<androidx.preference.Preference>(
+            LauncherPreferences.apps().keys().hidePausedApps()
+        )
+        hidePausedApps?.isVisible = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
     }
 
     override fun onStart() {

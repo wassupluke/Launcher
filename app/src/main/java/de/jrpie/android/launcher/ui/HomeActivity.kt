@@ -3,7 +3,6 @@ package de.jrpie.android.launcher.ui
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.content.res.Resources
-import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
@@ -20,10 +19,7 @@ import de.jrpie.android.launcher.actions.Action
 import de.jrpie.android.launcher.actions.Gesture
 import de.jrpie.android.launcher.actions.LauncherAction
 import de.jrpie.android.launcher.databinding.HomeBinding
-import de.jrpie.android.launcher.openTutorial
 import de.jrpie.android.launcher.preferences.LauncherPreferences
-import de.jrpie.android.launcher.preferences.migratePreferencesToNewVersion
-import de.jrpie.android.launcher.preferences.resetPreferences
 import de.jrpie.android.launcher.ui.tutorial.TutorialActivity
 import java.text.SimpleDateFormat
 import java.util.Date

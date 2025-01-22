@@ -1,5 +1,9 @@
 package de.jrpie.android.launcher
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.content.SharedPreferences
 import android.content.pm.LauncherApps
 import android.content.pm.ShortcutInfo
@@ -7,6 +11,7 @@ import android.os.AsyncTask
 import android.os.Build
 import android.os.Build.VERSION_CODES
 import android.os.UserHandle
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.preference.PreferenceManager
 import de.jrpie.android.launcher.actions.TorchManager
@@ -18,6 +23,14 @@ import de.jrpie.android.launcher.preferences.resetPreferences
 
 class Application : android.app.Application() {
     val apps = MutableLiveData<List<DetailedAppInfo>>()
+
+    private val profileAvailabilityBroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            // TODO: only update specific apps
+            // use Intent.EXTRA_USER
+            loadApps()
+        }
+    }
 
     // TODO: only update specific apps
     private val launcherAppsCallback = object : LauncherApps.Callback() {
@@ -106,6 +119,21 @@ class Application : android.app.Application() {
 
         val launcherApps = getSystemService(LAUNCHER_APPS_SERVICE) as LauncherApps
         launcherApps.registerCallback(launcherAppsCallback)
+
+        if (Build.VERSION.SDK_INT >= VERSION_CODES.N) {
+            val filter = IntentFilter().also {
+                if (Build.VERSION.SDK_INT >= VERSION_CODES.VANILLA_ICE_CREAM) {
+                    it.addAction(Intent.ACTION_PROFILE_AVAILABLE)
+                    it.addAction(Intent.ACTION_PROFILE_UNAVAILABLE)
+                } else {
+                    it.addAction(Intent.ACTION_MANAGED_PROFILE_AVAILABLE)
+                    it.addAction(Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE)
+                }
+            }
+            ContextCompat.registerReceiver(this, profileAvailabilityBroadcastReceiver, filter,
+                ContextCompat.RECEIVER_EXPORTED
+            )
+        }
 
         loadApps()
     }

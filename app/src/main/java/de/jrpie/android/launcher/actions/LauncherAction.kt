@@ -1,17 +1,22 @@
 package de.jrpie.android.launcher.actions
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.content.pm.LauncherApps
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.media.AudioManager
 import android.os.Build
 import android.os.SystemClock
+import android.os.UserManager
+import android.provider.Settings
 import android.view.KeyEvent
 import android.widget.Toast
 import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.apps.AppFilter
+import de.jrpie.android.launcher.isDefaultHomeScreen
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.ui.list.ListActivity
 import de.jrpie.android.launcher.ui.settings.SettingsActivity
@@ -33,7 +38,8 @@ enum class LauncherAction(
     val id: String,
     val label: Int,
     val icon: Int,
-    val launch: (Context) -> Unit
+    val launch: (Context) -> Unit,
+    val available: (Context) -> Boolean = { true }
 ) : Action {
     SETTINGS(
         "settings",
@@ -52,6 +58,13 @@ enum class LauncherAction(
         R.string.list_other_list_favorites,
         R.drawable.baseline_favorite_24,
         { context -> openAppsList(context, true) }
+    ),
+    TOGGLE_PRIVATE_SPACE_LOCK(
+        "toggle_private_space_lock",
+        R.string.list_other_toggle_private_space_lock,
+        R.drawable.baseline_security_24,
+        ::togglePrivateSpaceLock,
+        available = { Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM }
     ),
     VOLUME_UP(
         "volume_up",
@@ -207,6 +220,46 @@ private fun expandNotificationsPanel(context: Context) {
     }
 }
 
+private fun togglePrivateSpaceLock(context: Context) {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+        Toast.makeText(
+            context,
+            context.getString(R.string.alert_requires_android_v),
+            Toast.LENGTH_LONG
+        ).show()
+        return
+    }
+    val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
+    val launcherApps = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
+    val privateSpaceUser = userManager.userProfiles.firstOrNull { u ->
+        launcherApps.getLauncherUserInfo(u)?.userType == UserManager.USER_TYPE_PROFILE_PRIVATE
+    }
+    if (privateSpaceUser == null) {
+        Toast.makeText(context, context.getString(R.string.toast_private_space_not_available), Toast.LENGTH_LONG).show()
+
+        if (!isDefaultHomeScreen(context)) {
+            Toast.makeText(context, context.getString(R.string.toast_private_space_default_home_screen), Toast.LENGTH_LONG).show()
+            return
+        }
+
+        try {
+            context.startActivity(Intent(Settings.ACTION_PRIVACY_SETTINGS))
+        } catch (_: ActivityNotFoundException) {}
+        return
+    }
+    if (userManager.isQuietModeEnabled(privateSpaceUser)) {
+        userManager.requestQuietModeEnabled(false, privateSpaceUser)
+            Toast.makeText(
+                context,
+                context.getString(R.string.toast_private_space_unlocked),
+                Toast.LENGTH_LONG
+            ).show()
+        return
+    }
+    userManager.requestQuietModeEnabled(true, privateSpaceUser)
+    Toast.makeText(context, context.getString(R.string.toast_private_space_locked), Toast.LENGTH_LONG).show()
+}
+
 private fun expandSettingsPanel(context: Context) {
     /* https://stackoverflow.com/a/31898506 */
     try {
@@ -260,6 +313,7 @@ private class LauncherActionSerializer : KSerializer<LauncherAction> {
     ) {
         element("value", String.serializer().descriptor)
     }
+
     override fun deserialize(decoder: Decoder): LauncherAction {
         val s = decoder.decodeStructure(descriptor) {
             decodeElementIndex(descriptor)

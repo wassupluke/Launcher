@@ -23,7 +23,8 @@ import de.jrpie.android.launcher.ui.list.forGesture
 class OtherRecyclerAdapter(val activity: Activity) :
     RecyclerView.Adapter<OtherRecyclerAdapter.ViewHolder>() {
 
-    private val othersList: Array<LauncherAction> = LauncherAction.values()
+    private val othersList: Array<LauncherAction> =
+        LauncherAction.entries.filter { it.isAvailable(activity) }.toTypedArray()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {

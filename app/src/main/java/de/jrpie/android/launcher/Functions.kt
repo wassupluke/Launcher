@@ -18,6 +18,7 @@ import de.jrpie.android.launcher.actions.Action
 import de.jrpie.android.launcher.actions.Gesture
 import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.apps.DetailedAppInfo
+import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.ui.tutorial.TutorialActivity
 
 
@@ -30,31 +31,36 @@ const val REQUEST_SET_DEFAULT_HOME = 42
 
 const val LOG_TAG = "Launcher"
 
-fun setDefaultHomeScreen(context: Context, checkDefault: Boolean = false) {
-
-    if (checkDefault
-        && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
-        && context is Activity
-    ) {
+fun isDefaultHomeScreen(context: Context): Boolean {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
         val roleManager = context.getSystemService(RoleManager::class.java)
-        if (!roleManager.isRoleHeld(RoleManager.ROLE_HOME)) {
-            context.startActivityForResult(
-                roleManager.createRequestRoleIntent(RoleManager.ROLE_HOME),
-                REQUEST_SET_DEFAULT_HOME
-            )
-        }
-        return
-    }
-
-    if (checkDefault) {
+        return roleManager.isRoleHeld(RoleManager.ROLE_HOME)
+    } else {
         val testIntent = Intent(Intent.ACTION_MAIN)
         testIntent.addCategory(Intent.CATEGORY_HOME)
         val defaultHome = testIntent.resolveActivity(context.packageManager)?.packageName
-        if (defaultHome == context.packageName) {
-            // Launcher is already the default home app
-            return
-        }
+        return defaultHome == context.packageName
     }
+}
+
+fun setDefaultHomeScreen(context: Context, checkDefault: Boolean = false) {
+    if (checkDefault && isDefaultHomeScreen(context)) {
+        // Launcher is already the default home app
+        return
+    }
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
+        && context is Activity
+        && checkDefault // using role manager only works when µLauncher is not already the default.
+    ) {
+        val roleManager = context.getSystemService(RoleManager::class.java)
+        context.startActivityForResult(
+            roleManager.createRequestRoleIntent(RoleManager.ROLE_HOME),
+            REQUEST_SET_DEFAULT_HOME
+        )
+        return
+    }
+
     val intent = Intent(Settings.ACTION_HOME_SETTINGS)
     context.startActivity(intent)
 }
@@ -94,6 +100,21 @@ fun getApps(packageManager: PackageManager, context: Context): MutableList<Detai
     // TODO: shortcuts - launcherApps.getShortcuts()
     val users = userManager.userProfiles
     for (user in users) {
+        // don't load apps from a user profile that has quiet mode enabled
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            if (userManager.isQuietModeEnabled(user)) {
+                // hide paused apps
+                if (LauncherPreferences.apps().hidePausedApps()) {
+                    continue
+                }
+                // hide apps from private space
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM &&
+                    launcherApps.getLauncherUserInfo(user)?.userType == UserManager.USER_TYPE_PROFILE_PRIVATE
+                ) {
+                    continue
+                }
+            }
+        }
         launcherApps.getActivityList(null, user).forEach {
             loadList.add(DetailedAppInfo(it))
         }

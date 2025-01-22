@@ -2,8 +2,8 @@ package de.jrpie.android.launcher.preferences.theme
 
 import android.content.Context
 import android.content.res.Resources
-import de.jrpie.android.launcher.R
 import com.google.android.material.color.DynamicColors
+import de.jrpie.android.launcher.R
 
 @Suppress("unused")
 enum class ColorTheme(
