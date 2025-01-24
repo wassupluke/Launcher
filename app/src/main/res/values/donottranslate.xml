@@ -154,7 +154,8 @@
           -
         -->
         <string name="settings_meta_link_github" translatable="false">https://github.com/jrpie/Launcher</string>
-        <string name="settings_meta_report_bug_link" translatable="false">https://github.com/jrpie/Launcher/issues/new/choose</string>
+        <string name="settings_meta_report_bug_link" translatable="false">https://github.com/jrpie/Launcher/issues/new?template=bug_report.md</string>
+        <string name="settings_meta_report_vulnerability_link" translatable="false">https://github.com/jrpie/Launcher/security/policy</string>
         <string name="settings_meta_fork_contact_url" translatable="false">https://s.jrpie.de/contact</string>
         <string name="settings_meta_privacy_url" translatable="false">https://s.jrpie.de/android-legal</string>
         <string name="settings_meta_contact_url" translatable="false">https://www.finnmglas.com/contact/</string>

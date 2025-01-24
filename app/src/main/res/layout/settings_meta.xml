@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/settings_meta_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".ui.settings.meta.SettingsFragmentMeta">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -90,6 +90,17 @@
             android:layout_height="wrap_content"
             android:text="@string/settings_meta_licenses"
             android:textAllCaps="false" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="32sp" />
+
+        <TextView
+            android:id="@+id/settings_meta_text_version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="textEnd"
+            tools:text="v1.2.3" />
 
     </LinearLayout>
 </ScrollView>

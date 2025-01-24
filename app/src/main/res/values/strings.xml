@@ -169,6 +169,13 @@
     <string name="settings_meta_view_code">View source code</string>
     <string name="settings_meta_report_bug">Report a bug</string>
 
+    <string name="dialog_report_bug_title">Report a bug</string>
+    <string name="dialog_report_bug_info">Thank you for helping to improve µLauncher!\nPlease consider adding the following information to your bug report:</string>
+    <string name="dialog_report_bug_button_clipboard">Copy to clipboard</string>
+    <string name="dialog_report_bug_security_info">Please do not report security vulnerabilities publicly on GitHub, but use the following instead:</string>
+    <string name="dialog_report_bug_button_security">Report a security vulnerability</string>
+    <string name="dialog_report_bug_create_report">Create report</string>
+
     <string name="settings_meta_fork_contact">Contact the developer of the fork</string>
     <string name="settings_meta_join_chat">Join µLauncher chat</string>
 

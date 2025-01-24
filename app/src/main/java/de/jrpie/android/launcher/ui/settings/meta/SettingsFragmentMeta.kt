@@ -7,9 +7,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import de.jrpie.android.launcher.BuildConfig
 import de.jrpie.android.launcher.R
+import de.jrpie.android.launcher.copyToClipboard
 import de.jrpie.android.launcher.databinding.SettingsMetaBinding
+import de.jrpie.android.launcher.getDeviceInfo
 import de.jrpie.android.launcher.openInBrowser
 import de.jrpie.android.launcher.preferences.resetPreferences
 import de.jrpie.android.launcher.ui.LegalInfoActivity
@@ -88,12 +93,36 @@ class SettingsFragmentMeta : Fragment(), UIObject {
 
         // report a bug
         binding.settingsMetaButtonReportBug.setOnClickListener {
-            openInBrowser(
-                getString(R.string.settings_meta_report_bug_link),
-                requireContext()
-            )
+            val deviceInfo = getDeviceInfo()
+            AlertDialog.Builder(context, R.style.AlertDialogCustom).apply {
+                setView(R.layout.dialog_report_bug)
+                setTitle(R.string.dialog_report_bug_title)
+                setPositiveButton(R.string.dialog_report_bug_create_report) { _, _ ->
+                    openInBrowser(
+                        getString(R.string.settings_meta_report_bug_link),
+                        requireContext()
+                    )
+                }
+                setNegativeButton(R.string.dialog_cancel) { _, _ -> }
+            }.create().also { it.show() }.apply {
+                val info = findViewById<TextView>(R.id.dialog_report_bug_device_info)
+                val buttonClipboard = findViewById<Button>(R.id.dialog_report_bug_button_clipboard)
+                val buttonSecurity = findViewById<Button>(R.id.dialog_report_bug_button_security)
+                info.text = deviceInfo
+                buttonClipboard.setOnClickListener {
+                    copyToClipboard(requireContext(), deviceInfo)
+                }
+                info.setOnClickListener {
+                    copyToClipboard(requireContext(), deviceInfo)
+                }
+                buttonSecurity.setOnClickListener {
+                    openInBrowser(
+                        getString(R.string.settings_meta_report_vulnerability_link),
+                        requireContext()
+                    )
+                }
+            }
         }
-
 
         // join chat
         binding.settingsMetaButtonJoinChat.setOnClickListener {
@@ -102,7 +131,6 @@ class SettingsFragmentMeta : Fragment(), UIObject {
                 requireContext()
             )
         }
-
 
 
         // contact developer
@@ -133,6 +161,8 @@ class SettingsFragmentMeta : Fragment(), UIObject {
         binding.settingsMetaButtonLicenses.setOnClickListener {
             startActivity(Intent(this.context, LegalInfoActivity::class.java))
         }
+
+        binding.settingsMetaTextVersion.text = BuildConfig.VERSION_NAME
 
     }
 }

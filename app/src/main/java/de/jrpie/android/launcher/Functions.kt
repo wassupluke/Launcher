@@ -3,6 +3,8 @@ package de.jrpie.android.launcher
 import android.app.Activity
 import android.app.Service
 import android.app.role.RoleManager
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.LauncherApps
@@ -151,3 +153,21 @@ fun saveListActivityChoice(data: Intent?) {
     Gesture.byId(forGesture)?.let { Action.setActionForGesture(it, Action.fromIntent(data)) }
 }
 
+
+// used for the bug report button
+fun getDeviceInfo(): String {
+    return """
+        µLauncher version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})
+        Android version: ${Build.VERSION.RELEASE} (sdk ${Build.VERSION.SDK_INT})
+        Model: ${Build.MODEL}
+        Device: ${Build.DEVICE}
+        Brand: ${Build.BRAND}
+        Manufacturer: ${Build.MANUFACTURER}
+    """.trimIndent()
+}
+
+fun copyToClipboard(context: Context, text: String) {
+    val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    val clipData = ClipData.newPlainText("Debug Info", text)
+    clipboardManager.setPrimaryClip(clipData);
+}
