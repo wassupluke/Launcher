@@ -76,6 +76,17 @@ fun getUserFromId(userId: Int?, context: Context): UserHandle {
     return profiles.firstOrNull { it.hashCode() == userId } ?: profiles[0]
 }
 
+fun getPrivateSpaceUser(context: Context): UserHandle? {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+        return null
+    }
+    val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
+    val launcherApps = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
+    return userManager.userProfiles.firstOrNull { u ->
+            launcherApps.getLauncherUserInfo(u)?.userType == UserManager.USER_TYPE_PROFILE_PRIVATE
+    }
+}
+
 fun openInBrowser(url: String, context: Context) {
     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
     intent.putExtras(Bundle().apply { putBoolean("new_window", true) })

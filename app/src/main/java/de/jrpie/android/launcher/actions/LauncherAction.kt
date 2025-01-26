@@ -16,6 +16,7 @@ import android.widget.Toast
 import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.apps.AppFilter
+import de.jrpie.android.launcher.getPrivateSpaceUser
 import de.jrpie.android.launcher.isDefaultHomeScreen
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.ui.list.ListActivity
@@ -230,10 +231,7 @@ private fun togglePrivateSpaceLock(context: Context) {
         return
     }
     val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
-    val launcherApps = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
-    val privateSpaceUser = userManager.userProfiles.firstOrNull { u ->
-        launcherApps.getLauncherUserInfo(u)?.userType == UserManager.USER_TYPE_PROFILE_PRIVATE
-    }
+    val privateSpaceUser = getPrivateSpaceUser(context)
     if (privateSpaceUser == null) {
         Toast.makeText(context, context.getString(R.string.toast_private_space_not_available), Toast.LENGTH_LONG).show()
 
@@ -249,11 +247,6 @@ private fun togglePrivateSpaceLock(context: Context) {
     }
     if (userManager.isQuietModeEnabled(privateSpaceUser)) {
         userManager.requestQuietModeEnabled(false, privateSpaceUser)
-            Toast.makeText(
-                context,
-                context.getString(R.string.toast_private_space_unlocked),
-                Toast.LENGTH_LONG
-            ).show()
         return
     }
     userManager.requestQuietModeEnabled(true, privateSpaceUser)
