@@ -2,6 +2,7 @@ package de.jrpie.android.launcher.actions
 
 import android.app.AlertDialog
 import android.app.Service
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.LauncherApps
@@ -34,7 +35,11 @@ class AppAction(val app: AppInfo) : Action {
 
         context.packageManager.getLaunchIntentForPackage(packageName)?.let {
             it.addCategory(Intent.CATEGORY_LAUNCHER)
-            context.startActivity(it)
+            try {
+                context.startActivity(it)
+            } catch (_: ActivityNotFoundException) {
+                return false
+            }
             return true
         }
 

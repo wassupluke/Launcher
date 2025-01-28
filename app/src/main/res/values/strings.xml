@@ -328,5 +328,7 @@
     <string name="dialog_cancel">Cancel</string>
     <string name="settings_meta_licenses">Open Source Licenses</string>
     <string name="legal_info_title">Open Source Licenses</string>
+    <string name="toast_activity_not_found_search_web">No app found to handle search.</string>
+    <string name="toast_activity_not_found_browser">Can\'t open URL: no browser found.</string>
 
 </resources>

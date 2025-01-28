@@ -3,6 +3,7 @@ package de.jrpie.android.launcher
 import android.app.Activity
 import android.app.Service
 import android.app.role.RoleManager
+import android.content.ActivityNotFoundException
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -16,6 +17,7 @@ import android.os.UserHandle
 import android.os.UserManager
 import android.provider.Settings
 import android.util.Log
+import android.widget.Toast
 import de.jrpie.android.launcher.actions.Action
 import de.jrpie.android.launcher.actions.Gesture
 import de.jrpie.android.launcher.apps.AppInfo
@@ -83,14 +85,18 @@ fun getPrivateSpaceUser(context: Context): UserHandle? {
     val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
     val launcherApps = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
     return userManager.userProfiles.firstOrNull { u ->
-            launcherApps.getLauncherUserInfo(u)?.userType == UserManager.USER_TYPE_PROFILE_PRIVATE
+        launcherApps.getLauncherUserInfo(u)?.userType == UserManager.USER_TYPE_PROFILE_PRIVATE
     }
 }
 
 fun openInBrowser(url: String, context: Context) {
     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
     intent.putExtras(Bundle().apply { putBoolean("new_window", true) })
-    context.startActivity(intent)
+    try {
+        context.startActivity(intent)
+    } catch (_: ActivityNotFoundException) {
+        Toast.makeText(context, R.string.toast_activity_not_found_browser, Toast.LENGTH_LONG).show()
+    }
 }
 
 fun openTutorial(context: Context) {

@@ -1,11 +1,13 @@
 package de.jrpie.android.launcher.ui.list.apps
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.apps.AppFilter
@@ -91,7 +93,16 @@ class ListFragmentApps : Fragment(), UIObject {
 
                 if (LauncherPreferences.functionality().searchWeb()) {
                     val i = Intent(Intent.ACTION_WEB_SEARCH).putExtra("query", query)
-                    activity?.startActivity(i)
+                    try {
+                        activity?.startActivity(i)
+                    } catch (_: ActivityNotFoundException) {
+                        Toast.makeText(
+                            requireContext(),
+                            R.string.toast_activity_not_found_search_web,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+
                 } else {
                     appsRecyclerAdapter.selectItem(0)
                 }
