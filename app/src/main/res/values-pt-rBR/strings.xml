@@ -258,4 +258,17 @@
     <string name="list_apps_search_hint_no_auto_launch">Busca (sem inicialização automática)</string>
     <string name="settings_meta_licenses">Licenças de código aberto</string>
     <string name="legal_info_title">Licenças de código aberto</string>
+    <string name="settings_apps_hide_paused_apps">Ocultar apps pausados</string>
+    <string name="list_other_toggle_private_space_lock">Ativar o Espaço privado</string>
+    <string name="alert_requires_android_v">Essa funcionalidade requer o Android 15.0 ou mais recente.</string>
+    <string name="toast_private_space_locked">Espaço privado trancado</string>
+    <string name="toast_private_space_unlocked">Espaço privado liberado</string>
+    <string name="toast_private_space_not_available">Espaço privado indisponível</string>
+    <string name="toast_private_space_default_home_screen">O µLauncher precisa ser definido como a tela inicial padrão para poder usar Espaço privado.</string>
+    <string name="dialog_report_bug_button_clipboard">Copiar para memória</string>
+    <string name="dialog_report_bug_security_info">Não relate vulnerabilidades de segurança publicamente no GitHub, use o seguinte:</string>
+    <string name="dialog_report_bug_button_security">Relatar vulnerabilidade de segurança</string>
+    <string name="dialog_report_bug_create_report">Criar relatório</string>
+    <string name="dialog_report_bug_title">Relatar um bug</string>
+    <string name="dialog_report_bug_info">Obrigado por ajudar a melhorar o µLauncher!\nConsidere adicionar as seguintes informações ao relatório de bug:</string>
 </resources>
