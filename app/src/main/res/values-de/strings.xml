@@ -76,10 +76,12 @@
       -
       -->
     <string name="settings_launcher_section_appearance">Aussehen</string>
+    <string name="settings_clock_color">Farbe</string>
     <string name="settings_clock_time_visible">Zeit anzeigen</string>
     <string name="settings_clock_date_visible">Datum anzeigen</string>
     <string name="settings_clock_localized">Lokalisiertes Datumsformat verwenden</string>
     <string name="settings_clock_flip_date_time">Datum und Uhrzeit tauschen</string>
+    <string name="settings_theme_color_theme_item_dynamic">Dynamisch</string>
     <string name="settings_theme_text_shadow">Textschatten</string>
     <string name="settings_theme_background">Hintergrund (Alle Apps und Einstellungen)</string>
     <string name="settings_theme_background_item_solid">Einfarbig</string>
@@ -103,6 +105,7 @@
     <string name="settings_enabled_gestures_edge_swipe">Kantenaktionen</string>
     <string name="settings_enabled_gestures_edge_swipe_edge_width">Kantenbreite</string>
     <string name="settings_functionality_auto_launch">Suchergebnis starten</string>
+    <string name="settings_functionality_search_web_summary">Beim Durchsuchen der Apps Enter drücken um stattdessen im Internet zu suchen</string>
     <string name="settings_functionality_auto_keyboard">Tastatur automatisch öffnen</string>
     <string name="settings_launcher_sensitivity">Empfindlichkeit</string>
     <!--
@@ -123,6 +126,7 @@
     <string name="settings_meta_report_bug">Einen Fehler melden</string>
     <string name="settings_meta_discord">Unserem Discord beitreten</string>
     <string name="settings_meta_contact">Entwickler kontaktieren</string>
+    <string name="dialog_report_bug_create_report">Report erstellen</string>
     <string name="settings_meta_fork_contact">Entwickler des Fork kontaktieren</string>
     <string name="settings_meta_join_chat">Dem µLauncher-Chat beitreten</string>
     <string name="settings_meta_privacy">Datenschutzerklärung</string>
@@ -143,9 +147,11 @@
     <string name="list_removed">Die App wurde entfernt</string>
     <string name="list_not_removed">Die App konnte nicht entfernt werden</string>
     <string name="list_apps_search_hint">Anwendungen suchen</string>
+    <string name="list_apps_search_hint_no_auto_launch">Suchen (kein Schnellstart)</string>
     <string name="list_other_settings">µLauncher Einstellungen</string>
     <string name="list_other_list">Alle Anwendungen</string>
     <string name="list_other_list_favorites">Favoriten</string>
+    <string name="list_other_toggle_private_space_lock">Privaten Bereich (ent)sperren</string>
     <string name="list_other_volume_up">Musik: Lauter</string>
     <string name="list_other_volume_down">Musik: Leiser</string>
     <string name="list_other_track_next">Musik: Weiter</string>
@@ -186,6 +192,7 @@
     <string name="list_app_hidden_add">Verstecken</string>
     <string name="list_other_lock_screen">Bildschirm sperren</string>
     <string name="alert_requires_android_m">Diese Funktionalität benötigt Android 6 oder neuer.</string>
+    <string name="alert_requires_android_v">Diese Funktionalität benötigt Android 15 oder neuer.</string>
     <string name="snackbar_app_hidden">Die App wurde versteckt. Sie kann in den Einstellungen wieder sichtbar gemacht werden.</string>
     <string name="toast_device_admin_not_enabled">µLauncher muss Geräteadministrator sein, um den Bildschirm sperren zu dürfen.</string>
     <string name="device_admin_explanation">Dies ist erforderlich, damit µLauncher den Bildschirm spreen kann.</string>
@@ -195,6 +202,7 @@
     <string name="settings_actions_lock_method">Methode zum Sperren des Bildschirms wählen</string>
     <string name="dialog_rename_ok">Ok</string>
     <string name="dialog_rename_title">%1$s umbenennen</string>
+    <string name="toast_private_space_default_home_screen">µLauncher muss als Standardlauncher eingerichtet sein um auf den privaten Bereich zugreifen zu können.</string>
     <string name="toast_lock_screen_not_supported">Fehler: Auf diesem Gerät kann der Bildschirm nicht mittels Bedienungshilfe gesperrt werden. Bitte stattdessen Geräteadministrator verwenden.</string>
     <string name="accessibility_service_name">µLauncher - Bildschirm sperren</string>
     <string name="alert_lock_screen_failed">Fehler: Bildschirm konnte nicht gesperrt werden.</string>
@@ -236,6 +244,7 @@
     <string name="settings_theme_background_item_transparent">Transparent</string>
     <string name="settings_theme_background_item_dim">Dimmen</string>
     <string name="settings_theme_background_item_blur">Weichzeichnen</string>
+    <string name="settings_apps_hide_paused_apps">Pausierte Apps verstecken</string>
     <string name="settings_list_layout">Layout der Appliste</string>
     <string name="settings_list_layout_item_default">Standard</string>
     <string name="settings_list_layout_item_text">Text</string>
@@ -243,5 +252,29 @@
     <string name="settings_theme_font_item_sans_serif">Serifenlos</string>
     <string name="settings_theme_font_item_serif">Serif</string>
     <string name="settings_theme_font_item_monospace">Monospace</string>
+    <string name="dialog_consent_accessibility_ok">Bedienungshilfe aktivieren</string>
     <string name="dialog_cancel">Abbrechen</string>
+    <string name="settings_functionality_auto_launch_summary">Leertaste drücken um diese Funktion zu unterdrücken.</string>
+    <string name="settings_functionality_search_web">Im Internet suchen</string>
+    <string name="dialog_report_bug_title">Bug melden</string>
+    <string name="dialog_report_bug_button_clipboard">In Zwischenablage kopieren</string>
+    <string name="toast_private_space_locked">Privater Bereich gesperrt</string>
+    <string name="toast_private_space_unlocked">Privater Bereich entsperrt</string>
+    <string name="toast_private_space_not_available">Der private Bereich ist nicht verfügbar</string>
+    <string name="dialog_select_color_red">Rot</string>
+    <string name="dialog_select_color_alpha">Transparenz</string>
+    <string name="dialog_select_color_blue">Blau</string>
+    <string name="dialog_select_color_green">Grün</string>
+    <string name="dialog_select_color_ok">Ok</string>
+    <string name="dialog_select_color_color_hex">Farbe</string>
+    <string name="dialog_choose_color_title">Farbe wählen</string>
+    <string name="settings_meta_licenses">Open Source Lizenzen</string>
+    <string name="legal_info_title">Open Source Lizenzen</string>
+    <string name="toast_activity_not_found_search_web">Keine App gefunden um die Suche durchzuführen.</string>
+    <string name="toast_activity_not_found_browser">URL kann nicht geöffnet werden: kein Browser gefunden.</string>
+    <string name="dialog_consent_accessibility_privileges">Mir ist bewusst, dass µLauncher hierdurch weitreichende Berechtigungen erhält.</string>
+    <string name="dialog_consent_accessibility_other_options">Mir ist bewusst, dass Alternativen existieren (Geräteadministrator oder der Power-Button).</string>
+    <string name="dialog_consent_accessibility_consent">Ich willige ein, dass µLauncher eine Bedienungshilfe für Zwecke verwendet, die nicht unter Barrierefreiheit fallen.</string>
+    <string name="dialog_consent_accessibility_data_collection">Ich willige ein, dass µLauncher keine Daten sammelt.</string>
+    <string name="dialog_consent_accessibility_title">Bedienungshilfe aktivieren</string>
 </resources>
