@@ -16,6 +16,8 @@ import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
 import de.jrpie.android.launcher.databinding.SettingsBinding
 import de.jrpie.android.launcher.preferences.LauncherPreferences
+import de.jrpie.android.launcher.preferences.theme.Background
+import de.jrpie.android.launcher.preferences.theme.ColorTheme
 import de.jrpie.android.launcher.saveListActivityChoice
 import de.jrpie.android.launcher.ui.UIObject
 import de.jrpie.android.launcher.ui.settings.actions.SettingsFragmentActions
@@ -33,8 +35,24 @@ import de.jrpie.android.launcher.ui.settings.meta.SettingsFragmentMeta
  */
 class SettingsActivity : AppCompatActivity(), UIObject {
 
-    private var sharedPreferencesListener =
+    private val solidBackground = LauncherPreferences.theme().background() == Background.SOLID
+            || LauncherPreferences.theme().colorTheme() == ColorTheme.LIGHT
+
+    private val sharedPreferencesListener =
         SharedPreferences.OnSharedPreferenceChangeListener { _, prefKey ->
+            if (solidBackground &&
+                (prefKey == LauncherPreferences.theme().keys().background() ||
+                        prefKey == LauncherPreferences.theme().keys().colorTheme())
+            ) {
+                // Switching from solid background to a transparent background using `recreate()`
+                // causes a very ugly glitch, making the settings unreadable.
+                // This ugly workaround causes a jump to the top of the list, but at least
+                // the text stays readable.
+                val i = Intent(this, SettingsActivity::class.java)
+                    .also { it.putExtra("tab", 1) }
+                finish()
+                startActivity(i)
+            } else
             if (prefKey?.startsWith("theme.") == true ||
                 prefKey?.startsWith("display.") == true
             ) {
@@ -59,6 +77,9 @@ class SettingsActivity : AppCompatActivity(), UIObject {
 
         val tabs: TabLayout = findViewById(R.id.settings_tabs)
         tabs.setupWithViewPager(viewPager)
+        if (intent.hasExtra("tab")) {
+            tabs.getTabAt(intent.getIntExtra("tab", 0))?.select()
+        }
     }
 
     override fun onStart() {
