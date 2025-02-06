@@ -74,4 +74,8 @@ class AppAction(val app: AppInfo) : Action {
         // check if app is installed
         return DetailedAppInfo.fromAppInfo(app, context) != null
     }
+
+    override fun canReachSettings(): Boolean {
+        return false
+    }
 }

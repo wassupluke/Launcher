@@ -168,6 +168,12 @@ enum class Gesture(
         R.string.settings_gesture_description_double_right,
         R.array.default_double_right,
         R.anim.left_right
+    ),
+    BACK(
+        "action.back",
+        R.string.settings_gesture_back,
+        R.string.settings_gesture_description_back,
+        R.array.default_up
     );
 
     enum class Edge {

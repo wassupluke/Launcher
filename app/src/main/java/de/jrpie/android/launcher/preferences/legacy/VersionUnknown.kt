@@ -50,7 +50,6 @@ private const val TAG = "Preferences ? -> 1"
  * and a different file was used.
  */
 fun migratePreferencesFromVersionUnknown(context: Context) {
-    assert(PREFERENCE_VERSION == 2)
 
     Log.i(
         TAG,

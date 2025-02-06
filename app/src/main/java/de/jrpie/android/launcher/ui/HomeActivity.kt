@@ -9,6 +9,7 @@ import android.util.DisplayMetrics
 import android.view.GestureDetector
 import android.view.KeyEvent
 import android.view.MotionEvent
+import android.view.View
 import android.view.ViewConfiguration
 import android.window.OnBackInvokedDispatcher
 import androidx.appcompat.app.AppCompatActivity
@@ -54,6 +55,10 @@ class HomeActivity : UIObject, AppCompatActivity(),
             ) {
                 recreate()
             }
+
+            if (prefKey?.startsWith("action.") == true) {
+                updateSettingsFallbackButtonVisibility()
+            }
         }
 
     private var edgeWidth = 0.15f
@@ -80,6 +85,10 @@ class HomeActivity : UIObject, AppCompatActivity(),
                 handleBack()
             }
         }
+        binding.buttonFallbackSettings.setOnClickListener {
+            LauncherAction.SETTINGS.invoke(this)
+        }
+
 
     }
 
@@ -94,6 +103,20 @@ class HomeActivity : UIObject, AppCompatActivity(),
         LauncherPreferences.getSharedPreferences()
             .registerOnSharedPreferenceChangeListener(sharedPreferencesListener)
 
+    }
+
+    private fun updateSettingsFallbackButtonVisibility() {
+        // If µLauncher settings can not be reached from any action bound to an enabled gesture,
+        // show the fallback button.
+        binding.buttonFallbackSettings.visibility = if (
+            !Gesture.entries.any { g ->
+                g.isEnabled() && Action.forGesture(g)?.canReachSettings() == true
+            }
+        ) {
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
     }
 
     private fun initClock() {
@@ -152,6 +175,7 @@ class HomeActivity : UIObject, AppCompatActivity(),
         edgeWidth = LauncherPreferences.enabled_gestures().edgeSwipeEdgeWidth() / 100f
 
         initClock()
+        updateSettingsFallbackButtonVisibility()
     }
 
     override fun onDestroy() {
@@ -299,7 +323,7 @@ class HomeActivity : UIObject, AppCompatActivity(),
 
 
     private fun handleBack() {
-        LauncherAction.CHOOSE.launch(this)
+        Gesture.BACK(this)
     }
 
     override fun isHomeScreen(): Boolean {

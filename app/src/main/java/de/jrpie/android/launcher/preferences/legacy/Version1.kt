@@ -117,11 +117,12 @@ private fun migrateAction(key: String) {
  * (see [PREFERENCE_VERSION])
  */
 fun migratePreferencesFromVersion1() {
-    assert(PREFERENCE_VERSION == 2)
     assert(LauncherPreferences.internal().versionCode() == 1)
     Gesture.entries.forEach { g -> migrateAction(g.id) }
     migrateAppInfoSet(LauncherPreferences.apps().keys().hidden())
     migrateAppInfoSet(LauncherPreferences.apps().keys().favorites())
     migrateAppInfoStringMap(LauncherPreferences.apps().keys().customNames())
     LauncherPreferences.internal().versionCode(2)
+
+    migratePreferencesFromVersion2()
 }

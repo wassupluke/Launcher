@@ -25,6 +25,8 @@
       - Settings : Apps
       -
       -->
+    <string name="settings_gesture_back">Back</string>
+    <string name="settings_gesture_description_back">Back button / back gesture</string>
     <string name="settings_gesture_up">Up</string>
     <string name="settings_gesture_description_up">Swipe up</string>
     <string name="settings_gesture_double_up">Double Up</string>

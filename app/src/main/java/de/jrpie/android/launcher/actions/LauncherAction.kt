@@ -13,6 +13,7 @@ import android.os.UserManager
 import android.provider.Settings
 import android.view.KeyEvent
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatDrawableManager
 import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.apps.AppFilter
@@ -40,25 +41,29 @@ enum class LauncherAction(
     val label: Int,
     val icon: Int,
     val launch: (Context) -> Unit,
-    val available: (Context) -> Boolean = { true }
+    private val canReachSettings: Boolean = false,
+    val available: (Context) -> Boolean = { true },
 ) : Action {
     SETTINGS(
         "settings",
         R.string.list_other_settings,
         R.drawable.baseline_settings_24,
-        ::openSettings
+        ::openSettings,
+        true
     ),
     CHOOSE(
         "choose",
         R.string.list_other_list,
         R.drawable.baseline_menu_24,
-        ::openAppsList
+        ::openAppsList,
+        true
     ),
     CHOOSE_FROM_FAVORITES(
         "choose_from_favorites",
         R.string.list_other_list_favorites,
         R.drawable.baseline_favorite_24,
-        { context -> openAppsList(context, true) }
+        { context -> openAppsList(context, true) },
+        true
     ),
     TOGGLE_PRIVATE_SPACE_LOCK(
         "toggle_private_space_lock",
@@ -127,7 +132,11 @@ enum class LauncherAction(
     }
 
     override fun isAvailable(context: Context): Boolean {
-        return true
+        return this.available(context)
+    }
+
+    override fun canReachSettings(): Boolean {
+        return this.canReachSettings
     }
 
     companion object {

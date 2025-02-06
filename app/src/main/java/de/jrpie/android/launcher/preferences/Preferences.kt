@@ -7,6 +7,7 @@ import de.jrpie.android.launcher.actions.Action
 import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.apps.DetailedAppInfo
 import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersion1
+import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersion2
 import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersionUnknown
 import de.jrpie.android.launcher.ui.HomeActivity
 
@@ -14,7 +15,7 @@ import de.jrpie.android.launcher.ui.HomeActivity
  * Increase when breaking changes are introduced and write an appropriate case in
  * `migratePreferencesToNewVersion`
  */
-const val PREFERENCE_VERSION = 2
+const val PREFERENCE_VERSION = 3
 const val UNKNOWN_PREFERENCE_VERSION = -1
 private const val TAG = "Launcher - Preferences"
 
@@ -32,13 +33,16 @@ fun migratePreferencesToNewVersion(context: Context) {
 
             UNKNOWN_PREFERENCE_VERSION -> { /* still using the old preferences file */
                 migratePreferencesFromVersionUnknown(context)
-
-                Log.i(TAG, "migration of preferences complete.")
+                Log.i(TAG, "migration of preferences  complete (${UNKNOWN_PREFERENCE_VERSION} -> ${PREFERENCE_VERSION}).")
             }
 
             1 -> {
                 migratePreferencesFromVersion1()
-                Log.i(TAG, "migration of preferences complete.")
+                Log.i(TAG, "migration of preferences  complete (1 -> ${PREFERENCE_VERSION}).")
+            }
+            2 -> {
+                migratePreferencesFromVersion2()
+                Log.i(TAG, "migration of preferences  complete (2 -> ${PREFERENCE_VERSION}).")
             }
 
             else -> {

@@ -3,6 +3,12 @@
 <resources>
     <!-- Default Apps for different actions (button-press, swipes ...) -->
 
+    <!-- Back - Apps list -->
+    <string-array name="default_back">
+        <item>{\"type\": \"action:launcher\", \"value\": \"choose\"}</item> <!-- All Apps -->
+    </string-array>
+
+
     <!-- Swipe up - Apps list -->
     <string-array name="default_up">
         <item>{\"type\": \"action:launcher\", \"value\": \"choose\"}</item> <!-- All Apps -->

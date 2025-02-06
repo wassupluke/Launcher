@@ -21,6 +21,9 @@ sealed interface Action {
     fun getIcon(context: Context): Drawable?
     fun isAvailable(context: Context): Boolean
 
+    // Can the action be used to reach µLauncher settings?
+    fun canReachSettings(): Boolean
+
 
     fun bindToGesture(prefEditor: Editor, id: String) {
         prefEditor.putString(id, Json.encodeToString(this))
@@ -50,7 +53,10 @@ sealed interface Action {
                     .map { Pair(it, Json.decodeFromString<Action>(it)) }
                     .firstOrNull { it.second.isAvailable(context) }
                     ?.apply {
-                        boundActions.add(first)
+                        // allow to bind CHOOSE to multiple gestures
+                        if (second != LauncherAction.CHOOSE) {
+                            boundActions.add(first)
+                        }
                         second.bindToGesture(editor, gesture.id)
                     }
             }
