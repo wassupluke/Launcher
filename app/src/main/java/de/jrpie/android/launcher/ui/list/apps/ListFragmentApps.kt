@@ -19,6 +19,7 @@ import de.jrpie.android.launcher.ui.list.favoritesVisibility
 import de.jrpie.android.launcher.ui.list.forGesture
 import de.jrpie.android.launcher.ui.list.hiddenVisibility
 import de.jrpie.android.launcher.ui.list.intention
+import de.jrpie.android.launcher.ui.list.privateSpaceVisibility
 import de.jrpie.android.launcher.ui.openSoftKeyboard
 
 
@@ -72,6 +73,7 @@ class ListFragmentApps : Fragment(), UIObject {
                     requireContext(),
                     "",
                     favoritesVisibility = favoritesVisibility,
+                    privateSpaceVisibility = privateSpaceVisibility,
                     hiddenVisibility = hiddenVisibility
                 ),
                 layout = LauncherPreferences.list().layout()

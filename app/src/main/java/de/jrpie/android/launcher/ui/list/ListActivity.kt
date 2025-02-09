@@ -16,10 +16,14 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
+import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_UNINSTALL
 import de.jrpie.android.launcher.actions.LauncherAction
 import de.jrpie.android.launcher.apps.AppFilter
+import de.jrpie.android.launcher.apps.isPrivateSpaceLocked
+import de.jrpie.android.launcher.apps.isPrivateSpaceSetUp
+import de.jrpie.android.launcher.apps.togglePrivateSpaceLock
 import de.jrpie.android.launcher.databinding.ListBinding
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.ui.UIObject
@@ -30,6 +34,8 @@ import de.jrpie.android.launcher.ui.list.other.ListFragmentOther
 // TODO: Better solution for this intercommunication functionality (used in list-fragments)
 var intention = ListActivity.ListActivityIntention.VIEW
 var favoritesVisibility: AppFilter.Companion.AppSetVisibility = AppFilter.Companion.AppSetVisibility.VISIBLE
+var privateSpaceVisibility: AppFilter.Companion.AppSetVisibility =
+    AppFilter.Companion.AppSetVisibility.VISIBLE
 var hiddenVisibility: AppFilter.Companion.AppSetVisibility = AppFilter.Companion.AppSetVisibility.HIDDEN
 var forGesture: String? = null
 
@@ -42,6 +48,29 @@ var forGesture: String? = null
  */
 class ListActivity : AppCompatActivity(), UIObject {
     private lateinit var binding: ListBinding
+
+
+    private fun updateLockIcon(locked: Boolean) {
+        binding.listLock.setImageDrawable(
+            getDrawable(
+                if (locked) {
+                    R.drawable.baseline_lock_24
+                } else {
+                    R.drawable.baseline_lock_open_24
+                }
+            )
+        )
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            binding.listLock.tooltipText = getString(
+                if (locked) {
+                    R.string.tooltip_unlock_private_space
+                } else {
+                    R.string.tooltip_lock_private_space
+                }
+            )
+        }
+    }
+
 
 
     enum class ListActivityIntention(val titleResource: Int) {
@@ -70,8 +99,10 @@ class ListActivity : AppCompatActivity(), UIObject {
 
             favoritesVisibility = bundle.getSerializable("favoritesVisibility")
                     as? AppFilter.Companion.AppSetVisibility ?: favoritesVisibility
+            privateSpaceVisibility = bundle.getSerializable("privateSpaceVisibility")
+                    as? AppFilter.Companion.AppSetVisibility ?: privateSpaceVisibility
             hiddenVisibility = bundle.getSerializable("hiddenVisibility")
-                    as? AppFilter.Companion.AppSetVisibility ?: favoritesVisibility
+                    as? AppFilter.Companion.AppSetVisibility ?: hiddenVisibility
 
             if (intention != ListActivityIntention.VIEW)
                 forGesture = bundle.getString("forGesture")
@@ -86,6 +117,31 @@ class ListActivity : AppCompatActivity(), UIObject {
             LauncherAction.SETTINGS.launch(this@ListActivity)
         }
 
+        binding.listLock.visibility =
+            if (intention != ListActivityIntention.VIEW) {
+                View.GONE
+            } else if (!isPrivateSpaceSetUp(this)) {
+                View.GONE
+            } else if (LauncherPreferences.apps().hidePrivateSpaceApps()) {
+                if (privateSpaceVisibility == AppFilter.Companion.AppSetVisibility.EXCLUSIVE) {
+                    View.VISIBLE
+                } else {
+                    View.GONE
+                }
+            } else {
+                View.VISIBLE
+            }
+
+        if (privateSpaceVisibility == AppFilter.Companion.AppSetVisibility.EXCLUSIVE) {
+            isPrivateSpaceSetUp(this, showToast = true, launchSettings = true)
+            if (isPrivateSpaceLocked(this)) {
+                togglePrivateSpaceLock(this)
+            }
+        }
+        updateLockIcon(isPrivateSpaceLocked(this))
+
+        val privateSpaceLocked = (this.applicationContext as Application).privateSpaceLocked
+        privateSpaceLocked.observe(this) { updateLockIcon(it) }
 
         // android:windowSoftInputMode="adjustResize" doesn't work in full screen.
         // workaround from https://stackoverflow.com/a/57623505
@@ -144,6 +200,8 @@ class ListActivity : AppCompatActivity(), UIObject {
         if (intention == ListActivityIntention.VIEW) {
             titleResource = if (hiddenVisibility == AppFilter.Companion.AppSetVisibility.EXCLUSIVE) {
                 R.string.list_title_hidden
+            } else if (privateSpaceVisibility == AppFilter.Companion.AppSetVisibility.EXCLUSIVE) {
+                R.string.list_title_private_space
             } else if (favoritesVisibility == AppFilter.Companion.AppSetVisibility.EXCLUSIVE) {
                 R.string.list_title_favorite
             } else {
@@ -161,6 +219,12 @@ class ListActivity : AppCompatActivity(), UIObject {
 
     override fun setOnClicks() {
         binding.listClose.setOnClickListener { finish() }
+        binding.listLock.setOnClickListener {
+            togglePrivateSpaceLock(this)
+            if (privateSpaceVisibility == AppFilter.Companion.AppSetVisibility.EXCLUSIVE) {
+                finish()
+            }
+        }
     }
 
     override fun adjustLayout() {

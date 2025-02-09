@@ -1,24 +1,19 @@
 package de.jrpie.android.launcher.actions
 
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.content.pm.LauncherApps
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.media.AudioManager
 import android.os.Build
 import android.os.SystemClock
-import android.os.UserManager
-import android.provider.Settings
 import android.view.KeyEvent
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatDrawableManager
 import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.apps.AppFilter
-import de.jrpie.android.launcher.getPrivateSpaceUser
-import de.jrpie.android.launcher.isDefaultHomeScreen
+import de.jrpie.android.launcher.apps.isPrivateSpaceSupported
+import de.jrpie.android.launcher.apps.togglePrivateSpaceLock
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.ui.list.ListActivity
 import de.jrpie.android.launcher.ui.settings.SettingsActivity
@@ -62,15 +57,26 @@ enum class LauncherAction(
         "choose_from_favorites",
         R.string.list_other_list_favorites,
         R.drawable.baseline_favorite_24,
-        { context -> openAppsList(context, true) },
+        { context -> openAppsList(context, favorite = true) },
         true
+    ),
+    CHOOSE_FROM_PRIVATE_SPACE(
+        "choose_from_private_space",
+        R.string.list_other_list_private_space,
+        R.drawable.baseline_security_24,
+        { context ->
+            openAppsList(context, private = true)
+        },
+        available = { _ ->
+            isPrivateSpaceSupported()
+        }
     ),
     TOGGLE_PRIVATE_SPACE_LOCK(
         "toggle_private_space_lock",
         R.string.list_other_toggle_private_space_lock,
         R.drawable.baseline_security_24,
         ::togglePrivateSpaceLock,
-        available = { Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM }
+        available = { _ -> isPrivateSpaceSupported() }
     ),
     VOLUME_UP(
         "volume_up",
@@ -107,7 +113,7 @@ enum class LauncherAction(
     LOCK_SCREEN(
         "lock_screen",
         R.string.list_other_lock_screen,
-        R.drawable.baseline_lock_24px,
+        R.drawable.baseline_lock_24,
         { c -> LauncherPreferences.actions().lockMethod().lockOrEnable(c) }
     ),
     TORCH(
@@ -230,37 +236,6 @@ private fun expandNotificationsPanel(context: Context) {
     }
 }
 
-private fun togglePrivateSpaceLock(context: Context) {
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM) {
-        Toast.makeText(
-            context,
-            context.getString(R.string.alert_requires_android_v),
-            Toast.LENGTH_LONG
-        ).show()
-        return
-    }
-    val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
-    val privateSpaceUser = getPrivateSpaceUser(context)
-    if (privateSpaceUser == null) {
-        Toast.makeText(context, context.getString(R.string.toast_private_space_not_available), Toast.LENGTH_LONG).show()
-
-        if (!isDefaultHomeScreen(context)) {
-            Toast.makeText(context, context.getString(R.string.toast_private_space_default_home_screen), Toast.LENGTH_LONG).show()
-            return
-        }
-
-        try {
-            context.startActivity(Intent(Settings.ACTION_PRIVACY_SETTINGS))
-        } catch (_: ActivityNotFoundException) {}
-        return
-    }
-    if (userManager.isQuietModeEnabled(privateSpaceUser)) {
-        userManager.requestQuietModeEnabled(false, privateSpaceUser)
-        return
-    }
-    userManager.requestQuietModeEnabled(true, privateSpaceUser)
-    Toast.makeText(context, context.getString(R.string.toast_private_space_locked), Toast.LENGTH_LONG).show()
-}
 
 private fun expandSettingsPanel(context: Context) {
     /* https://stackoverflow.com/a/31898506 */
@@ -283,7 +258,12 @@ private fun openSettings(context: Context) {
     context.startActivity(Intent(context, SettingsActivity::class.java))
 }
 
-fun openAppsList(context: Context, favorite: Boolean = false, hidden: Boolean = false) {
+fun openAppsList(
+    context: Context,
+    favorite: Boolean = false,
+    hidden: Boolean = false,
+    private: Boolean = false
+) {
     val intent = Intent(context, ListActivity::class.java)
     intent.putExtra("intention", ListActivity.ListActivityIntention.VIEW.toString())
     intent.putExtra(
@@ -300,6 +280,16 @@ fun openAppsList(context: Context, favorite: Boolean = false, hidden: Boolean = 
             AppFilter.Companion.AppSetVisibility.EXCLUSIVE
         } else {
             AppFilter.Companion.AppSetVisibility.HIDDEN
+        }
+    )
+    intent.putExtra(
+        "privateSpaceVisibility",
+        if (private) {
+            AppFilter.Companion.AppSetVisibility.EXCLUSIVE
+        } else if (!hidden && LauncherPreferences.apps().hidePrivateSpaceApps()) {
+            AppFilter.Companion.AppSetVisibility.HIDDEN
+        } else {
+            AppFilter.Companion.AppSetVisibility.VISIBLE
         }
     )
 

@@ -150,6 +150,7 @@
     <string name="settings_apps_hidden">Hidden apps</string>
     <string name="settings_apps_hide_bound_apps">Don\'t show apps that are bound to a gesture in the app list</string>
     <string name="settings_apps_hide_paused_apps">Hide paused apps</string>
+    <string name="settings_apps_hide_private_space_apps">Hide private space from app list</string>
     <string name="settings_list_layout">Layout of app list</string>
 
     <string name="settings_list_layout_item_default">Default</string>
@@ -197,6 +198,7 @@
     <string name="list_title_view">All Apps</string>
     <string name="list_title_favorite">Favorite Apps</string>
     <string name="list_title_hidden">Hidden Apps</string>
+    <string name="list_title_private_space">Private Space</string>
     <string name="list_title_pick">Choose App</string>
 
     <string name="list_tab_app">Apps</string>
@@ -219,6 +221,7 @@
     <string name="list_other_settings">µLauncher Settings</string>
     <string name="list_other_list">All Applications</string>
     <string name="list_other_list_favorites">Favorite Applications</string>
+    <string name="list_other_list_private_space">Private Space</string>
     <string name="list_other_toggle_private_space_lock">Toggle Private Space Lock</string>
     <string name="list_other_volume_up">Music: Louder</string>
     <string name="list_other_volume_down">Music: Quieter</string>
@@ -273,6 +276,8 @@
     <string name="toast_private_space_unlocked">Private space unlocked</string>
     <string name="toast_private_space_not_available">Private space is not available</string>
     <string name="toast_private_space_default_home_screen">µLauncher needs to be the default home screen to access private space.</string>
+    <string name="tooltip_lock_private_space">Lock private space</string>
+    <string name="tooltip_unlock_private_space">Unlock private space</string>
     <string name="toast_lock_screen_not_supported">Error: Locking the screen using accessibility is not supported on this device. Please use device admin instead.</string>
     <string name="accessibility_service_name">µLauncher - lock screen</string>
     <string name="accessibility_service_description">

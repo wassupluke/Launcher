@@ -22,6 +22,8 @@ import de.jrpie.android.launcher.actions.Action
 import de.jrpie.android.launcher.actions.Gesture
 import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.apps.DetailedAppInfo
+import de.jrpie.android.launcher.apps.getPrivateSpaceUser
+import de.jrpie.android.launcher.apps.isPrivateSpaceSupported
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.ui.tutorial.TutorialActivity
 
@@ -48,14 +50,15 @@ fun isDefaultHomeScreen(context: Context): Boolean {
 }
 
 fun setDefaultHomeScreen(context: Context, checkDefault: Boolean = false) {
-    if (checkDefault && isDefaultHomeScreen(context)) {
+    val isDefault = isDefaultHomeScreen(context)
+    if (checkDefault && isDefault) {
         // Launcher is already the default home app
         return
     }
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
         && context is Activity
-        && checkDefault // using role manager only works when µLauncher is not already the default.
+        && !isDefault // using role manager only works when µLauncher is not already the default.
     ) {
         val roleManager = context.getSystemService(RoleManager::class.java)
         context.startActivityForResult(
@@ -78,16 +81,6 @@ fun getUserFromId(userId: Int?, context: Context): UserHandle {
     return profiles.firstOrNull { it.hashCode() == userId } ?: profiles[0]
 }
 
-fun getPrivateSpaceUser(context: Context): UserHandle? {
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM) {
-        return null
-    }
-    val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
-    val launcherApps = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
-    return userManager.userProfiles.firstOrNull { u ->
-        launcherApps.getLauncherUserInfo(u)?.userType == UserManager.USER_TYPE_PROFILE_PRIVATE
-    }
-}
 
 fun openInBrowser(url: String, context: Context) {
     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
@@ -116,6 +109,8 @@ fun getApps(packageManager: PackageManager, context: Context): MutableList<Detai
     val launcherApps = context.getSystemService(Service.LAUNCHER_APPS_SERVICE) as LauncherApps
     val userManager = context.getSystemService(Service.USER_SERVICE) as UserManager
 
+    val privateSpaceUser = getPrivateSpaceUser(context)
+
     // TODO: shortcuts - launcherApps.getShortcuts()
     val users = userManager.userProfiles
     for (user in users) {
@@ -127,7 +122,7 @@ fun getApps(packageManager: PackageManager, context: Context): MutableList<Detai
                     continue
                 }
                 // hide apps from private space
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM &&
+                if (isPrivateSpaceSupported() &&
                     launcherApps.getLauncherUserInfo(user)?.userType == UserManager.USER_TYPE_PROFILE_PRIVATE
                 ) {
                     continue
@@ -135,7 +130,7 @@ fun getApps(packageManager: PackageManager, context: Context): MutableList<Detai
             }
         }
         launcherApps.getActivityList(null, user).forEach {
-            loadList.add(DetailedAppInfo(it))
+            loadList.add(DetailedAppInfo(it, it.user == privateSpaceUser))
         }
     }
 
@@ -150,7 +145,8 @@ fun getApps(packageManager: PackageManager, context: Context): MutableList<Detai
             val detailedAppInfo = DetailedAppInfo(
                 app,
                 ri.loadLabel(packageManager),
-                ri.activityInfo.loadIcon(packageManager)
+                ri.activityInfo.loadIcon(packageManager),
+                false
             )
             loadList.add(detailedAppInfo)
         }

@@ -151,6 +151,11 @@
             android:title="@string/settings_apps_hide_paused_apps"
             android:defaultValue="false" />
 
+        <SwitchPreference
+            android:key="@string/settings_apps_hide_private_space_apps_key"
+            android:title="@string/settings_apps_hide_private_space_apps"
+            android:defaultValue="false" />
+
         <DropDownPreference
             android:key="@string/settings_list_layout_key"
             android:title="@string/settings_list_layout"

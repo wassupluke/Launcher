@@ -15,6 +15,7 @@ class AppFilter(
     var query: String,
     var favoritesVisibility: AppSetVisibility = AppSetVisibility.VISIBLE,
     var hiddenVisibility: AppSetVisibility = AppSetVisibility.HIDDEN,
+    var privateSpaceVisibility: AppSetVisibility = AppSetVisibility.VISIBLE
 ) {
 
     operator fun invoke(apps: List<DetailedAppInfo>): List<DetailedAppInfo> {
@@ -23,10 +24,12 @@ class AppFilter(
 
         val hidden = LauncherPreferences.apps().hidden() ?: setOf()
         val favorites = LauncherPreferences.apps().favorites() ?: setOf()
+        val private = apps.filter { it.isPrivateSpaceApp }.map { it.app }.toSet()
 
         apps = apps.filter { info ->
             favoritesVisibility.predicate(favorites, info)
                     && hiddenVisibility.predicate(hidden, info)
+                    && privateSpaceVisibility.predicate(private, info)
         }
 
         if (LauncherPreferences.apps().hideBoundApps()) {

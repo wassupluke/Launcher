@@ -30,6 +30,7 @@ import eu.jonahbauer.android.preference.annotations.Preferences;
                         @Preference(name = "custom_names", type = HashMap.class, serializer = MapAppInfoStringPreferenceSerializer.class),
                         @Preference(name = "hide_bound_apps", type = boolean.class, defaultValue = "false"),
                         @Preference(name = "hide_paused_apps", type = boolean.class, defaultValue = "false"),
+                        @Preference(name = "hide_private_space_apps", type = boolean.class, defaultValue = "false"),
                 }),
                 @PreferenceGroup(name = "list", prefix = "settings_list_", suffix = "_key", value = {
                         @Preference(name = "layout", type = ListLayout.class, defaultValue = "DEFAULT")

@@ -15,10 +15,11 @@ class DetailedAppInfo(
     val app: AppInfo,
     val label: CharSequence,
     val icon: Drawable,
+    val isPrivateSpaceApp: Boolean,
     val isSystemApp: Boolean = false,
 ) {
 
-    constructor(activityInfo: LauncherActivityInfo) : this(
+    constructor(activityInfo: LauncherActivityInfo, private: Boolean) : this(
         AppInfo(
             activityInfo.applicationInfo.packageName,
             activityInfo.name,
@@ -26,6 +27,7 @@ class DetailedAppInfo(
         ),
         activityInfo.label,
         activityInfo.getBadgedIcon(0),
+        private,
         activityInfo.applicationInfo.flags.and(ApplicationInfo.FLAG_SYSTEM) != 0
     )
 
@@ -51,7 +53,9 @@ class DetailedAppInfo(
 
     companion object {
         fun fromAppInfo(appInfo: AppInfo, context: Context): DetailedAppInfo? {
-            return appInfo.getLauncherActivityInfo(context)?.let { DetailedAppInfo(it) }
+            return appInfo.getLauncherActivityInfo(context)?.let {
+                DetailedAppInfo(it, it.user == getPrivateSpaceUser(context))
+            }
         }
     }
 }

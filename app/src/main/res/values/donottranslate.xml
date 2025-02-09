@@ -14,6 +14,7 @@
         <string name="settings_apps_custom_names_key" translatable="false">apps.custom_names</string>
         <string name="settings_apps_hide_bound_apps_key" translatable="false">apps.hide_bound_apps</string>
         <string name="settings_apps_hide_paused_apps_key" translatable="false">apps.hide_paused_apps</string>
+        <string name="settings_apps_hide_private_space_apps_key" translatable="false">apps.hide_private_space_apps</string>
         <string name="settings_list_layout_key" translatable="false">list.layout</string>
         <string name="settings_general_choose_home_screen_key" translatable="false">general.select_launcher</string>
 
