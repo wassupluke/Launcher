@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.SystemClock
 import android.view.KeyEvent
 import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources
 import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.apps.AppFilter
@@ -134,7 +135,7 @@ enum class LauncherAction(
     }
 
     override fun getIcon(context: Context): Drawable? {
-        return context.getDrawable(icon)
+        return AppCompatResources.getDrawable(context, icon)
     }
 
     override fun isAvailable(context: Context): Boolean {

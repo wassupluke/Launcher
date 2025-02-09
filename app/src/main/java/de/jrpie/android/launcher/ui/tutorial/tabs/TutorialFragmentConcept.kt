@@ -21,7 +21,7 @@ class TutorialFragmentConcept : Fragment(), UIObject {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = TutorialConceptBinding.inflate(inflater, container, false)
+        binding = TutorialConceptBinding.inflate(inflater, container, false)
         binding.tutorialConceptBadgeVersion.text = BuildConfig.VERSION_NAME
         return binding.root
     }

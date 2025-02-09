@@ -216,7 +216,7 @@ class HomeActivity : UIObject, AppCompatActivity(),
         if (e1 == null) return false
 
 
-        val displayMetrics: DisplayMetrics = DisplayMetrics()
+        val displayMetrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(displayMetrics)
 
         val width = displayMetrics.widthPixels

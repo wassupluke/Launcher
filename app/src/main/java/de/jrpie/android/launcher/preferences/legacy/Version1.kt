@@ -68,9 +68,9 @@ private fun Action.Companion.legacyFromPreference(id: String): Action? {
     val actionId = preferences.getString("$id.app", "")!!
     var u: Int? = preferences.getInt(
         "$id.user",
-        AppInfo.INVALID_USER
+        INVALID_USER
     )
-    u = if (u == AppInfo.INVALID_USER) null else u
+    u = if (u == INVALID_USER) null else u
 
     return Action.legacyFromId(actionId, u)
 }
@@ -80,9 +80,9 @@ private fun migrateAppInfoStringMap(key: String) {
     MapAppInfoStringPreferenceSerializer().serialize(
         preferences.getStringSet(key, setOf())?.mapNotNull { entry ->
             try {
-                val obj = JSONObject(entry);
+                val obj = JSONObject(entry)
                 val info = AppInfo.legacyDeserialize(obj.getString("key"))
-                val value = obj.getString("value");
+                val value = obj.getString("value")
                 Pair(info, value)
             } catch (_: JSONException) {
                 null

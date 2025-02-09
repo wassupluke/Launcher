@@ -25,6 +25,7 @@
         android:gravity="start|center_horizontal"
         android:padding="5dp"
         android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         android:text=""
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

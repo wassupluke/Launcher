@@ -182,5 +182,5 @@ fun getDeviceInfo(): String {
 fun copyToClipboard(context: Context, text: String) {
     val clipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     val clipData = ClipData.newPlainText("Debug Info", text)
-    clipboardManager.setPrimaryClip(clipData);
+    clipboardManager.setPrimaryClip(clipData)
 }

@@ -45,21 +45,6 @@ class SettingsFragmentMeta : Fragment(), UIObject {
         super<UIObject>.onStart()
     }
 
-    // Rate App
-    //  Just copied code from https://stackoverflow.com/q/10816757/12787264
-    //   that is how we write good software ^^
-
-    private fun rateIntentForUrl(url: String): Intent {
-        val intent = Intent(
-            Intent.ACTION_VIEW,
-            Uri.parse(String.format("%s?id=%s", url, this.requireContext().packageName))
-        )
-        var flags = Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
-        flags = flags or Intent.FLAG_ACTIVITY_NEW_DOCUMENT
-        intent.addFlags(flags)
-        return intent
-    }
-
     override fun setOnClicks() {
 
         binding.settingsMetaButtonViewTutorial.setOnClickListener {

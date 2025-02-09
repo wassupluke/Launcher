@@ -15,7 +15,7 @@ import kotlinx.serialization.json.Json
 class SetAppInfoPreferenceSerializer :
     PreferenceSerializer<java.util.Set<AppInfo>?, java.util.Set<java.lang.String>?> {
     @Throws(PreferenceSerializationException::class)
-    override fun serialize(value: java.util.Set<AppInfo>?): java.util.Set<java.lang.String>? {
+    override fun serialize(value: java.util.Set<AppInfo>?): java.util.Set<java.lang.String> {
         return value?.map(AppInfo::serialize)?.toHashSet() as java.util.Set<java.lang.String>
     }
 
@@ -29,7 +29,7 @@ class SetAppInfoPreferenceSerializer :
 class MapAppInfoStringPreferenceSerializer :
     PreferenceSerializer<java.util.HashMap<AppInfo, String>?, java.util.Set<java.lang.String>?> {
 
-    @Serializable()
+    @Serializable
     private class MapEntry(val key: AppInfo, val value: String)
 
     @Throws(PreferenceSerializationException::class)

@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.Toast
 import android.window.OnBackInvokedDispatcher
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -52,7 +53,8 @@ class ListActivity : AppCompatActivity(), UIObject {
 
     private fun updateLockIcon(locked: Boolean) {
         binding.listLock.setImageDrawable(
-            getDrawable(
+            AppCompatResources.getDrawable(
+                this,
                 if (locked) {
                     R.drawable.baseline_lock_24
                 } else {

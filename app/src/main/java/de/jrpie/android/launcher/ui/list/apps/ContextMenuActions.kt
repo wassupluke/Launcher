@@ -33,7 +33,7 @@ fun AppInfo.openSettings(
 }
 
 fun AppInfo.uninstall(activity: android.app.Activity) {
-    val packageName = this.packageName.toString()
+    val packageName = this.packageName
     val userId = this.user
 
     Log.i(LOG_TAG, "uninstalling $this")

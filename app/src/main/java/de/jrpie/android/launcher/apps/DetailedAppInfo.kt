@@ -9,7 +9,7 @@ import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 
 /**
- * Stores information used to create [AppsRecyclerAdapter] rows.
+ * Stores information used to create [de.jrpie.android.launcher.ui.list.apps.AppsRecyclerAdapter] rows.
  */
 class DetailedAppInfo(
     val app: AppInfo,

@@ -273,7 +273,7 @@ enum class Gesture(
 
     companion object {
         fun byId(id: String): Gesture? {
-            return Gesture.values().firstOrNull { it.id == id }
+            return Gesture.entries.firstOrNull { it.id == id }
         }
     }
 

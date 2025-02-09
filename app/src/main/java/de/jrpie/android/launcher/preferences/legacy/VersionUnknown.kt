@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import de.jrpie.android.launcher.preferences.LauncherPreferences
-import de.jrpie.android.launcher.preferences.PREFERENCE_VERSION
 import de.jrpie.android.launcher.preferences.theme.Background
 import de.jrpie.android.launcher.preferences.theme.ColorTheme
 
