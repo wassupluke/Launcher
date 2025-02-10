@@ -9,7 +9,14 @@ KEYSTORE_ACCRESCENT_PASS=$(keepassxc-password "android_keys/launcher-accrescent"
 
 if [[ $(git status --porcelain) ]]; then
     echo "There are uncommitted changes."
-    exit 1
+
+    read -p "Continue anyway? (y/n) " -n 1 -r
+    echo    # (optional) move to a new line
+    if ! [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        exit 1
+    fi
+
 fi
 
 rm -rf "$OUTPUT_DIR"
