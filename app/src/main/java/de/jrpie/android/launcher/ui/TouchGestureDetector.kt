@@ -107,11 +107,16 @@ class TouchGestureDetector(
             )
         }
 
-        for( i in 0..<event.pointerCount) {
+        for (i in 0..<event.pointerCount) {
             val index = pointerIdToIndex[i] ?: continue
 
-            repeat(event.historySize) {
-                paths[i]?.update(Vector(event.getHistoricalX(index), event.getHistoricalY(index)))
+            for (j in 0..<event.historySize) {
+                paths[i]?.update(
+                    Vector(
+                        event.getHistoricalX(index, j),
+                        event.getHistoricalY(index, j)
+                    )
+                )
             }
             paths[i]?.update(Vector(event.getX(index), event.getY(index)))
         }
