@@ -1,6 +1,7 @@
 package de.jrpie.android.launcher.actions
 
 import android.content.Context
+import android.util.Log
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 
@@ -169,6 +170,54 @@ enum class Gesture(
         R.array.default_double_right,
         R.anim.left_right
     ),
+    SWIPE_LARGER(
+        "action.larger",
+        R.string.settings_gesture_swipe_larger,
+        R.string.settings_gesture_description_swipe_larger,
+        R.array.no_default
+    ),
+    SWIPE_LARGER_REVERSE(
+        "action.larger_reverse",
+        R.string.settings_gesture_swipe_larger_reverse,
+        R.string.settings_gesture_description_swipe_larger_reverse,
+        R.array.no_default
+    ),
+    SWIPE_SMALLER(
+        "action.smaller",
+        R.string.settings_gesture_swipe_smaller,
+        R.string.settings_gesture_description_swipe_smaller,
+        R.array.no_default
+    ),
+    SWIPE_SMALLER_REVERSE(
+        "action.smaller_reverse",
+        R.string.settings_gesture_swipe_smaller_reverse,
+        R.string.settings_gesture_description_swipe_smaller_reverse,
+        R.array.no_default
+    ),
+    SWIPE_LAMBDA(
+        "action.lambda",
+        R.string.settings_gesture_swipe_lambda,
+        R.string.settings_gesture_description_swipe_lambda,
+        R.array.no_default
+    ),
+    SWIPE_LAMBDA_REVERSE(
+        "action.lambda_reverse",
+        R.string.settings_gesture_swipe_lambda_reverse,
+        R.string.settings_gesture_description_swipe_lambda_reverse,
+        R.array.no_default
+    ),
+    SWIPE_V(
+        "action.v",
+        R.string.settings_gesture_swipe_v,
+        R.string.settings_gesture_description_swipe_v,
+        R.array.no_default
+    ),
+    SWIPE_V_REVERSE(
+        "action.v_reverse",
+        R.string.settings_gesture_swipe_v_reverse,
+        R.string.settings_gesture_description_swipe_v_reverse,
+        R.array.no_default
+    ),
     BACK(
         "action.back",
         R.string.settings_gesture_back,
@@ -267,6 +316,7 @@ enum class Gesture(
     }
 
     operator fun invoke(context: Context) {
+        Log.i("Launcher", "Detected gesture: $this")
         val action = Action.forGesture(this)
         Action.launch(action, context, this.animationIn, this.animationOut)
     }

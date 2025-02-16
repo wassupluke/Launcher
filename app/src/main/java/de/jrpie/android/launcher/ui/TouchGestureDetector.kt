@@ -25,6 +25,8 @@ class TouchGestureDetector(
     private val TAP_TIMEOUT: Int
     private val DOUBLE_TAP_TIMEOUT: Int
 
+    private val MIN_TRIANGLE_HEIGHT = 250
+
 
     data class Vector(val x: Float, val y: Float) {
         fun absSquared(): Float {
@@ -94,19 +96,24 @@ class TouchGestureDetector(
         }
 
         // add new pointers
-        (0..<event.pointerCount).filter {
-            !paths.containsKey(event.getPointerId(it))
-        }.forEach {
-            val index = pointerIdToIndex[it] ?: return@forEach
-            paths[it] = PointerPath(
+        for(i in 0..<event.pointerCount){
+            if(paths.containsKey(event.getPointerId(i))) {
+                continue
+            }
+            val index = pointerIdToIndex[i] ?: continue
+            paths[i] = PointerPath(
                 paths.entries.size,
                 Vector(event.getX(index), event.getY(index))
             )
         }
 
-        (0..<event.pointerCount).forEach {
-            val index = pointerIdToIndex[it] ?: return@forEach
-            paths[it]?.update(Vector(event.getX(index), event.getY(index)))
+        for( i in 0..<event.pointerCount) {
+            val index = pointerIdToIndex[i] ?: continue
+
+            repeat(event.historySize) {
+                paths[i]?.update(Vector(event.getHistoricalX(index), event.getHistoricalY(index)))
+            }
+            paths[i]?.update(Vector(event.getX(index), event.getY(index)))
         }
 
         if (event.actionMasked == MotionEvent.ACTION_UP) {
@@ -178,6 +185,41 @@ class TouchGestureDetector(
                     return
                 }
                 gesture = gesture?.let(Gesture::getDoubleVariant)
+            }
+
+            // detect triangles
+            val startEndMin = mainPointerPath.start.min(mainPointerPath.last)
+            val startEndMax = mainPointerPath.start.max(mainPointerPath.last)
+            when (gesture) {
+                Gesture.SWIPE_DOWN -> {
+                    if(startEndMax.x + MIN_TRIANGLE_HEIGHT < mainPointerPath.max.x) {
+                        gesture = Gesture.SWIPE_LARGER
+                    } else if (startEndMin.x - MIN_TRIANGLE_HEIGHT > mainPointerPath.min.x) {
+                        gesture = Gesture.SWIPE_SMALLER
+                    }
+                }
+                Gesture.SWIPE_UP -> {
+                    if(startEndMax.x + MIN_TRIANGLE_HEIGHT < mainPointerPath.max.x) {
+                        gesture = Gesture.SWIPE_LARGER_REVERSE
+                    } else if (startEndMin.x - MIN_TRIANGLE_HEIGHT > mainPointerPath.min.x) {
+                        gesture = Gesture.SWIPE_SMALLER_REVERSE
+                    }
+                }
+                Gesture.SWIPE_RIGHT -> {
+                    if(startEndMax.y + MIN_TRIANGLE_HEIGHT < mainPointerPath.max.y) {
+                        gesture = Gesture.SWIPE_V
+                    } else if (startEndMin.y - MIN_TRIANGLE_HEIGHT > mainPointerPath.min.y) {
+                        gesture = Gesture.SWIPE_LAMBDA
+                    }
+                }
+                Gesture.SWIPE_LEFT -> {
+                    if(startEndMax.y + MIN_TRIANGLE_HEIGHT < mainPointerPath.max.y) {
+                        gesture = Gesture.SWIPE_V_REVERSE
+                    } else if (startEndMin.y - MIN_TRIANGLE_HEIGHT > mainPointerPath.min.y) {
+                        gesture = Gesture.SWIPE_LAMBDA_REVERSE
+                    }
+                }
+                else -> { }
             }
 
             if (edgeActions) {

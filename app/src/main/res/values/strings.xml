@@ -59,6 +59,24 @@
     <string name="settings_gesture_description_down_left_edge">Swipe down at the left edge of the screen</string>
     <string name="settings_gesture_down_right_edge">Down (Right Edge)</string>
     <string name="settings_gesture_description_down_right_edge">Swipe down at the right edge of the screen</string>
+
+    <string name="settings_gesture_swipe_larger"><![CDATA[>]]></string>
+    <string name="settings_gesture_description_swipe_larger">Top left -> mid right -> bottom left</string>
+    <string name="settings_gesture_swipe_larger_reverse"><![CDATA[> (reverse)]]></string>
+    <string name="settings_gesture_description_swipe_larger_reverse">Bottom left -> mid right -> top left</string>
+    <string name="settings_gesture_swipe_smaller"><![CDATA[<]]></string>
+    <string name="settings_gesture_description_swipe_smaller">Top right -> mid left -> bottom right</string>
+    <string name="settings_gesture_swipe_smaller_reverse"><![CDATA[< (reverse)]]></string>
+    <string name="settings_gesture_description_swipe_smaller_reverse">Bottom right -> mid left -> top right</string>
+    <string name="settings_gesture_swipe_v">V</string>
+    <string name="settings_gesture_description_swipe_v">Top left -> bottom mid -> top right</string>
+    <string name="settings_gesture_swipe_v_reverse">V (reverse)</string>
+    <string name="settings_gesture_description_swipe_v_reverse">Top right -> bottom mid -> top left</string>
+    <string name="settings_gesture_swipe_lambda">Λ</string>
+    <string name="settings_gesture_description_swipe_lambda">Bottom left -> top mid -> bottom right</string>
+    <string name="settings_gesture_swipe_lambda_reverse">Λ (reverse)</string>
+    <string name="settings_gesture_description_swipe_lambda_reverse">Bottom right -> top mid -> bottom left</string>
+
     <string name="settings_gesture_vol_up">Volume Up</string>
     <string name="settings_gesture_description_vol_up">Press the volume up button</string>
     <string name="settings_gesture_vol_down">Volume Down</string>
