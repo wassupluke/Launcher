@@ -82,22 +82,32 @@ enum class LauncherAction(
     VOLUME_UP(
         "volume_up",
         R.string.list_other_volume_up,
-        R.drawable.baseline_volume_up_24, ::audioVolumeUp
+        R.drawable.baseline_volume_up_24,
+        { context -> audioVolumeAdjust(context, true)}
     ),
     VOLUME_DOWN(
         "volume_down",
         R.string.list_other_volume_down,
-        R.drawable.baseline_volume_down_24, ::audioVolumeDown
+        R.drawable.baseline_volume_down_24,
+        { context -> audioVolumeAdjust(context, false)}
+    ),
+    TRACK_PLAY_PAUSE(
+        "play_pause_track",
+        R.string.list_other_track_play_pause,
+        R.drawable.baseline_play_arrow_24,
+        { context -> audioManagerPressKey(context, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE)}
     ),
     TRACK_NEXT(
         "next_track",
         R.string.list_other_track_next,
-        R.drawable.baseline_skip_next_24, ::audioNextTrack
+        R.drawable.baseline_skip_next_24,
+        { context -> audioManagerPressKey(context, KeyEvent.KEYCODE_MEDIA_NEXT)}
     ),
     TRACK_PREV(
         "previous_track",
         R.string.list_other_track_previous,
-        R.drawable.baseline_skip_previous_24, ::audioPreviousTrack
+        R.drawable.baseline_skip_previous_24,
+        { context -> audioManagerPressKey(context, KeyEvent.KEYCODE_MEDIA_PREVIOUS)}
     ),
     EXPAND_NOTIFICATIONS_PANEL(
         "expand_notifications_panel",
@@ -155,56 +165,32 @@ enum class LauncherAction(
 
 
 /* Media player actions */
-
-private fun audioNextTrack(context: Context) {
-
+private fun audioManagerPressKey(context: Context, key: Int) {
     val mAudioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-
     val eventTime: Long = SystemClock.uptimeMillis()
-
     val downEvent =
-        KeyEvent(eventTime, eventTime, KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_NEXT, 0)
+        KeyEvent(eventTime, eventTime, KeyEvent.ACTION_DOWN, key, 0)
     mAudioManager.dispatchMediaKeyEvent(downEvent)
-
-    val upEvent = KeyEvent(eventTime, eventTime, KeyEvent.ACTION_UP, KeyEvent.KEYCODE_MEDIA_NEXT, 0)
+    val upEvent = KeyEvent(eventTime, eventTime, KeyEvent.ACTION_UP, key, 0)
     mAudioManager.dispatchMediaKeyEvent(upEvent)
+
 }
 
-private fun audioPreviousTrack(context: Context) {
-    val mAudioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-
-    val eventTime: Long = SystemClock.uptimeMillis()
-
-    val downEvent =
-        KeyEvent(eventTime, eventTime, KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PREVIOUS, 0)
-    mAudioManager.dispatchMediaKeyEvent(downEvent)
-
-    val upEvent =
-        KeyEvent(eventTime, eventTime, KeyEvent.ACTION_UP, KeyEvent.KEYCODE_MEDIA_PREVIOUS, 0)
-    mAudioManager.dispatchMediaKeyEvent(upEvent)
-}
-
-private fun audioVolumeUp(context: Context) {
+private fun audioVolumeAdjust(context: Context, louder: Boolean) {
     val audioManager =
         context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
     audioManager.adjustStreamVolume(
         AudioManager.STREAM_MUSIC,
-        AudioManager.ADJUST_RAISE,
+        if (louder) {
+            AudioManager.ADJUST_RAISE
+        } else {
+            AudioManager.ADJUST_LOWER
+        },
         AudioManager.FLAG_SHOW_UI
     )
 }
 
-private fun audioVolumeDown(context: Context) {
-    val audioManager =
-        context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-
-    audioManager.adjustStreamVolume(
-        AudioManager.STREAM_MUSIC,
-        AudioManager.ADJUST_LOWER,
-        AudioManager.FLAG_SHOW_UI
-    )
-}
 /* End media player actions */
 
 private fun toggleTorch(context: Context) {
@@ -320,5 +306,4 @@ private class LauncherActionSerializer : KSerializer<LauncherAction> {
             encodeSerializableElement(descriptor, 0, String.serializer(), value.id)
         }
     }
-
 }

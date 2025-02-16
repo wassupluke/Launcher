@@ -245,6 +245,7 @@
     <string name="list_other_volume_down">Music: Quieter</string>
     <string name="list_other_track_next">Music: Next</string>
     <string name="list_other_track_previous">Music: Previous</string>
+    <string name="list_other_track_play_pause">Music: Play / Pause</string>
     <string name="list_other_expand_notifications_panel">Expand notifications panel</string>
     <string name="list_other_nop">Do nothing</string>
     <string name="list_other_lock_screen">Lock Screen</string>
