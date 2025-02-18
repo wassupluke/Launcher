@@ -9,7 +9,9 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.LauncherApps
+import android.content.pm.LauncherApps.ShortcutQuery
 import android.content.pm.PackageManager
+import android.content.pm.ShortcutInfo
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -18,8 +20,11 @@ import android.os.UserManager
 import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import de.jrpie.android.launcher.actions.Action
 import de.jrpie.android.launcher.actions.Gesture
+import de.jrpie.android.launcher.actions.ShortcutAction
+import de.jrpie.android.launcher.actions.shortcuts.PinnedShortcutInfo
 import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.apps.DetailedAppInfo
 import de.jrpie.android.launcher.apps.getPrivateSpaceUser
@@ -81,6 +86,34 @@ fun getUserFromId(userId: Int?, context: Context): UserHandle {
     return profiles.firstOrNull { it.hashCode() == userId } ?: profiles[0]
 }
 
+@RequiresApi(Build.VERSION_CODES.N_MR1)
+fun removeUnusedShortcuts(context: Context) {
+    val launcherApps = context.getSystemService(Service.LAUNCHER_APPS_SERVICE) as LauncherApps
+    fun getShortcuts(profile: UserHandle): List<ShortcutInfo>? {
+        return launcherApps.getShortcuts(
+            ShortcutQuery().apply {
+                setQueryFlags(ShortcutQuery.FLAG_MATCH_PINNED)
+            },
+            profile
+        )
+    }
+
+    val userManager = context.getSystemService(Service.USER_SERVICE) as UserManager
+    val boundActions: Set<PinnedShortcutInfo> =
+        Gesture.entries.mapNotNull { Action.forGesture(it) as? ShortcutAction }.map { it.shortcut }
+            .toSet()
+    try {
+        userManager.userProfiles.filter { !userManager.isQuietModeEnabled(it) }.forEach { profile ->
+            getShortcuts(profile)?.groupBy { it.`package` }?.forEach { (p, shortcuts) ->
+                launcherApps.pinShortcuts(p,
+                    shortcuts.filter { boundActions.contains(PinnedShortcutInfo(it)) }
+                        .map { it.id }.toList(),
+                    profile
+                )
+            }
+        }
+    } catch (_: SecurityException) { }
+}
 
 fun openInBrowser(url: String, context: Context) {
     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))

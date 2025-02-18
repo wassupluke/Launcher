@@ -250,6 +250,11 @@
     <string name="list_other_lock_screen">Lock Screen</string>
     <string name="list_other_torch">Toggle Torch</string>
 
+    <!-- Pin shortcuts -->
+    <string name="pin_shortcut_title">Add Shortcut</string>
+    <string name="pin_shortcut_button_bind">Bind to gesture</string>
+    <string name="pin_shortcut_switch_visible">Show in app list</string>
+
     <!--
       -
       - Tutorial

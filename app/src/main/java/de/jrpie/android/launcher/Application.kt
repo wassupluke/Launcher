@@ -137,6 +137,9 @@ class Application : android.app.Application() {
             )
         }
 
+        if (Build.VERSION.SDK_INT >= VERSION_CODES.N_MR1) {
+            removeUnusedShortcuts(this)
+        }
         loadApps()
     }
 
