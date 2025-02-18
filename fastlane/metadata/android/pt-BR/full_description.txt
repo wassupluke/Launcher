@@ -10,7 +10,7 @@ O app é uma modificação do <a href="https://f-droid.org/packages/com.finnmgla
 feito por Finn M Glas.
 
 Funcionalidades:
-* Você pode associar várias ações a 22 gestos diferentes.
+* Você pode associar várias ações a 35 gestos diferentes.
 * Pode definir algumas das seguintes ações:
     - Iniciar vários apps
     - Listar todos aplicativos

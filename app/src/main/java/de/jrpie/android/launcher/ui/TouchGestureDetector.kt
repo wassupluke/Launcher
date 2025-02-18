@@ -240,6 +240,10 @@ class TouchGestureDetector(
                     gesture = gesture?.getEdgeVariant(Gesture.Edge.BOTTOM)
                 }
             }
+
+            if (timeStart - lastTappedTime < 2 * DOUBLE_TAP_TIMEOUT) {
+                gesture = gesture?.getTapComboVariant()
+            }
             gesture?.invoke(context)
         }
     }
