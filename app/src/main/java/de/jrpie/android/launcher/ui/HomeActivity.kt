@@ -9,6 +9,7 @@ import android.util.DisplayMetrics
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
+import android.view.Window
 import android.window.OnBackInvokedDispatcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -97,6 +98,38 @@ class HomeActivity : UIObject, AppCompatActivity() {
         LauncherPreferences.getSharedPreferences()
             .registerOnSharedPreferenceChangeListener(sharedPreferencesListener)
 
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+
+        if (hasFocus && LauncherPreferences.display().hideNavigationBar()) {
+            hideNavigationBar()
+        }
+    }
+
+    @Suppress("DEPRECATION")
+    private fun hideNavigationBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val windowInsetsController = window.insetsController ?: return
+            windowInsetsController.hide(android.view.WindowInsets.Type.navigationBars())
+            windowInsetsController.systemBarsBehavior =
+                android.view.WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        } else {
+            val decorView = window.decorView
+            val uiOptions =
+                (View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or View.SYSTEM_UI_FLAG_IMMERSIVE or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
+
+            // Try to hide the navigation bar but do not hide the status bar
+            decorView.systemUiVisibility = uiOptions
+
+            // Add listener to hide the navigation bar
+            decorView.setOnSystemUiVisibilityChangeListener { visibility ->
+                if (visibility and View.SYSTEM_UI_FLAG_FULLSCREEN == 0) {
+                    decorView.systemUiVisibility = uiOptions
+                }
+            }
+        }
     }
 
     private fun updateSettingsFallbackButtonVisibility() {
