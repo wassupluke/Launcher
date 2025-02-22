@@ -10,6 +10,8 @@ import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
 import android.view.Window
+import android.view.WindowInsets
+import android.view.WindowInsetsController
 import android.window.OnBackInvokedDispatcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -111,14 +113,18 @@ class HomeActivity : UIObject, AppCompatActivity() {
     @Suppress("DEPRECATION")
     private fun hideNavigationBar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            val windowInsetsController = window.insetsController ?: return
-            windowInsetsController.hide(android.view.WindowInsets.Type.navigationBars())
-            windowInsetsController.systemBarsBehavior =
-                android.view.WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            window.insetsController?.apply {
+                hide(WindowInsets.Type.navigationBars())
+                systemBarsBehavior =
+                    WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            }
         } else {
             val decorView = window.decorView
-            val uiOptions =
-                (View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or View.SYSTEM_UI_FLAG_IMMERSIVE or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
+            val uiOptions = (View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    or View.SYSTEM_UI_FLAG_IMMERSIVE
+                    or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
 
             // Try to hide the navigation bar but do not hide the status bar
             decorView.systemUiVisibility = uiOptions
@@ -219,6 +225,7 @@ class HomeActivity : UIObject, AppCompatActivity() {
                 // Only used pre Android 13, cf. onBackInvokedDispatcher
                 handleBack()
             }
+
             KeyEvent.KEYCODE_VOLUME_UP -> {
                 if (Action.forGesture(Gesture.VOLUME_UP) == LauncherAction.VOLUME_UP) {
                     // Let the OS handle the key event. This works better with some custom ROMs
