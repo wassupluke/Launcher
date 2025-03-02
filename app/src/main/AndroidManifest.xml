@@ -20,6 +20,16 @@
         android:theme="@style/launcherBaseTheme"
         tools:ignore="UnusedAttribute">
         <activity
+            android:name=".ui.PinShortcutActivity"
+            android:autoRemoveFromRecents="true"
+            android:excludeFromRecents="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.content.pm.action.CONFIRM_PIN_SHORTCUT" />
+                <action android:name="android.content.pm.action.CONFIRM_PIN_APPWIDGET" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".ui.HomeActivity"
             android:clearTaskOnLaunch="true"
             android:configChanges="orientation|screenSize"

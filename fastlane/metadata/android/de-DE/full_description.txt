@@ -11,7 +11,7 @@ Es handelt sich um einen Fork von <a href="https://f-droid.org/packages/com.finn
 App Launcher</a>.
 
 <b>Funktionen:</b>
-* Aktionen können an 22 verschiedene Gesten gebunden werden.
+* Aktionen können an 35 verschiedene Gesten gebunden werden.
 * Die folgenden Aktionen stehen zur Verfügung:
     - Eine App starten
     - Alle Apps auflisten

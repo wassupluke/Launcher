@@ -79,6 +79,13 @@ enum class Gesture(
         R.array.default_up_right,
         R.anim.bottom_up
     ),
+    TAP_AND_SWIPE_UP(
+        "action.tap_up",
+        R.string.settings_gesture_tap_up,
+        R.string.settings_gesture_description_tap_up,
+        R.array.default_up,
+        R.anim.bottom_up
+    ),
     SWIPE_UP_DOUBLE(
         "action.double_up",
         R.string.settings_gesture_double_up,
@@ -106,6 +113,13 @@ enum class Gesture(
         R.string.settings_gesture_description_down_right_edge,
         R.array.default_down_right,
         R.anim.top_down
+    ),
+    TAP_AND_SWIPE_DOWN(
+        "action.tap_down",
+        R.string.settings_gesture_tap_down,
+        R.string.settings_gesture_description_tap_down,
+        R.array.default_down,
+        R.anim.bottom_up
     ),
     SWIPE_DOWN_DOUBLE(
         "action.double_down",
@@ -135,6 +149,13 @@ enum class Gesture(
         R.array.default_messengers,
         R.anim.right_left
     ),
+    TAP_AND_SWIPE_LEFT(
+        "action.tap_left",
+        R.string.settings_gesture_tap_left,
+        R.string.settings_gesture_description_tap_left,
+        R.array.default_messengers,
+        R.anim.right_left
+    ),
     SWIPE_LEFT_DOUBLE(
         "action.double_left",
         R.string.settings_gesture_double_left,
@@ -161,6 +182,13 @@ enum class Gesture(
         R.string.settings_gesture_right_bottom_edge,
         R.string.settings_gesture_description_right_bottom_edge,
         R.array.default_right_bottom,
+        R.anim.left_right
+    ),
+    TAP_AND_SWIPE_RIGHT(
+        "action.tap_right",
+        R.string.settings_gesture_tap_right,
+        R.string.settings_gesture_description_tap_right,
+        R.array.default_right,
         R.anim.left_right
     ),
     SWIPE_RIGHT_DOUBLE(
@@ -277,6 +305,17 @@ enum class Gesture(
                     else -> this
                 }
         }
+    }
+
+    fun getTapComboVariant(): Gesture {
+        return when (this) {
+            SWIPE_UP -> TAP_AND_SWIPE_UP
+            SWIPE_DOWN -> TAP_AND_SWIPE_DOWN
+            SWIPE_LEFT -> TAP_AND_SWIPE_LEFT
+            SWIPE_RIGHT -> TAP_AND_SWIPE_RIGHT
+            else -> this
+        }
+
     }
 
     fun isDoubleVariant(): Boolean {

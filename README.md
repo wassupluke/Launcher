@@ -59,6 +59,7 @@ The following gestures are available:
  - swipe up / down / left / right,
  - swipe with two fingers,
  - swipe on the left / right resp. top / bottom edge,
+ - tap, then swipe up / down / left / right,
  - draw < / > / V / Λ
  - click on date / time,
  - double click,

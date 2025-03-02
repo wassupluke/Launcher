@@ -10,7 +10,7 @@ This is a fork of the app <a href="https://f-droid.org/packages/com.finnmglas.la
 by Finn M Glas.
 
 Features:
-* You can bind actions to 22 different gestures.
+* You can bind actions to 35 different gestures.
 * An action can be one of the following:
     - Launch an app
     - List all apps

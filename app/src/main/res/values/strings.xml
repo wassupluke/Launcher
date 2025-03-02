@@ -29,18 +29,26 @@
     <string name="settings_gesture_description_back">Back button / back gesture</string>
     <string name="settings_gesture_up">Up</string>
     <string name="settings_gesture_description_up">Swipe up</string>
+    <string name="settings_gesture_tap_up">Tap + Up</string>
+    <string name="settings_gesture_description_tap_up">Tap and swipe up</string>
     <string name="settings_gesture_double_up">Double Up</string>
     <string name="settings_gesture_description_double_up">Swipe up with two fingers</string>
     <string name="settings_gesture_down">Down</string>
     <string name="settings_gesture_description_down">Swipe down</string>
+    <string name="settings_gesture_tap_down">Tap + Down</string>
+    <string name="settings_gesture_description_tap_down">Tap and swipe down</string>
     <string name="settings_gesture_double_down">Double Down</string>
     <string name="settings_gesture_description_double_down">Swipe down with two fingers</string>
     <string name="settings_gesture_left">Left</string>
     <string name="settings_gesture_description_left">Swipe left</string>
+    <string name="settings_gesture_tap_left">Tap + Left</string>
+    <string name="settings_gesture_description_tap_left">Tap and swipe left</string>
     <string name="settings_gesture_double_left">Double Left</string>
     <string name="settings_gesture_description_double_left">Swipe left with two fingers</string>
     <string name="settings_gesture_right">Right</string>
     <string name="settings_gesture_description_right">Swipe right</string>
+    <string name="settings_gesture_tap_right">Tap + Right</string>
+    <string name="settings_gesture_description_tap_right">Tap and swipe right</string>
     <string name="settings_gesture_double_right">Double Right</string>
     <string name="settings_gesture_description_double_right">Swipe right with two fingers</string>
     <string name="settings_gesture_right_top_edge">Right (Top)</string>
@@ -62,19 +70,19 @@
 
     <string name="settings_gesture_swipe_larger"><![CDATA[>]]></string>
     <string name="settings_gesture_description_swipe_larger">Top left -> mid right -> bottom left</string>
-    <string name="settings_gesture_swipe_larger_reverse"><![CDATA[> (reverse)]]></string>
+    <string name="settings_gesture_swipe_larger_reverse"><![CDATA[> (Reverse)]]></string>
     <string name="settings_gesture_description_swipe_larger_reverse">Bottom left -> mid right -> top left</string>
     <string name="settings_gesture_swipe_smaller"><![CDATA[<]]></string>
     <string name="settings_gesture_description_swipe_smaller">Top right -> mid left -> bottom right</string>
-    <string name="settings_gesture_swipe_smaller_reverse"><![CDATA[< (reverse)]]></string>
+    <string name="settings_gesture_swipe_smaller_reverse"><![CDATA[< (Reverse)]]></string>
     <string name="settings_gesture_description_swipe_smaller_reverse">Bottom right -> mid left -> top right</string>
     <string name="settings_gesture_swipe_v">V</string>
     <string name="settings_gesture_description_swipe_v">Top left -> bottom mid -> top right</string>
-    <string name="settings_gesture_swipe_v_reverse">V (reverse)</string>
+    <string name="settings_gesture_swipe_v_reverse">V (Reverse)</string>
     <string name="settings_gesture_description_swipe_v_reverse">Top right -> bottom mid -> top left</string>
     <string name="settings_gesture_swipe_lambda">Λ</string>
     <string name="settings_gesture_description_swipe_lambda">Bottom left -> top mid -> bottom right</string>
-    <string name="settings_gesture_swipe_lambda_reverse">Λ (reverse)</string>
+    <string name="settings_gesture_swipe_lambda_reverse">Λ (Reverse)</string>
     <string name="settings_gesture_description_swipe_lambda_reverse">Bottom right -> top mid -> bottom left</string>
 
     <string name="settings_gesture_vol_up">Volume Up</string>
@@ -250,6 +258,11 @@
     <string name="list_other_nop">Do nothing</string>
     <string name="list_other_lock_screen">Lock Screen</string>
     <string name="list_other_torch">Toggle Torch</string>
+
+    <!-- Pin shortcuts -->
+    <string name="pin_shortcut_title">Add Shortcut</string>
+    <string name="pin_shortcut_button_bind">Bind to gesture</string>
+    <string name="pin_shortcut_switch_visible">Show in app list</string>
 
     <!--
       -
