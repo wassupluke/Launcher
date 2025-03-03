@@ -123,6 +123,9 @@
     <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:color">#000000</item>
         <item name="android:textColor">@color/text_color_toggle</item>
+        <item name="android:shadowRadius">0</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">0</item>
     </style>
 
     <style name="AlertDialogDanger" parent="AlertDialogCustom">
