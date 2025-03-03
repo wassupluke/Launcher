@@ -40,8 +40,7 @@
                 android:src="@drawable/baseline_settings_24"
                 custom:layout_constraintBottom_toBottomOf="parent"
                 custom:layout_constraintStart_toStartOf="parent"
-                custom:layout_constraintTop_toTopOf="parent"
-                custom:type="solid" />
+                custom:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/list_heading"
@@ -70,8 +69,7 @@
                 android:src="@drawable/baseline_close_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                custom:type="solid" />
+                app:layout_constraintTop_toTopOf="parent" />
             <ImageView
                 android:id="@+id/list_lock"
                 android:visibility="gone"
@@ -85,8 +83,7 @@
                 android:src="@drawable/baseline_lock_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/list_close"
-                app:layout_constraintTop_toTopOf="parent"
-                custom:type="solid" />
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.tabs.TabLayout
