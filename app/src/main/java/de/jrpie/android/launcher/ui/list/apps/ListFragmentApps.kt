@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.apps.AppFilter
 import de.jrpie.android.launcher.databinding.ListAppsBinding
@@ -79,11 +81,18 @@ class ListFragmentApps : Fragment(), UIObject {
                 layout = LauncherPreferences.list().layout()
             )
 
+
         // set up the list / recycler
         binding.listAppsRview.apply {
             // improve performance (since content changes don't change the layout size)
             setHasFixedSize(true)
             layoutManager = LauncherPreferences.list().layout().layoutManager(context)
+                .also {
+                    if (LauncherPreferences.list().reverseLayout()) {
+                        (it as? LinearLayoutManager)?.reverseLayout = true
+                        (it as? GridLayoutManager)?.reverseLayout = true
+                    }
+                }
             adapter = appsRecyclerAdapter
         }
 

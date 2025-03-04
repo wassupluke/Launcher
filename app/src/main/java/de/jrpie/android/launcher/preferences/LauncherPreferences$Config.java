@@ -33,7 +33,8 @@ import eu.jonahbauer.android.preference.annotations.Preferences;
                         @Preference(name = "hide_private_space_apps", type = boolean.class, defaultValue = "false"),
                 }),
                 @PreferenceGroup(name = "list", prefix = "settings_list_", suffix = "_key", value = {
-                        @Preference(name = "layout", type = ListLayout.class, defaultValue = "DEFAULT")
+                        @Preference(name = "layout", type = ListLayout.class, defaultValue = "DEFAULT"),
+                        @Preference(name = "reverse_layout", type = boolean.class, defaultValue = "false")
                 }),
                 @PreferenceGroup(name = "gestures", prefix = "settings_gesture_", suffix = "_key", value = {
                 }),

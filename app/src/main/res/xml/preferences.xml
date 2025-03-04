@@ -164,6 +164,12 @@
             android:summary="%s"
             android:defaultValue="DEFAULT"/>
 
+        <SwitchPreference
+            android:key="@string/settings_list_reverse_layout_key"
+            android:title="@string/settings_list_reverse_layout"
+            android:defaultValue="false"/>
+
+
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/settings_launcher_section_display"
