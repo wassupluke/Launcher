@@ -5,14 +5,25 @@ import de.jrpie.android.launcher.actions.AppAction
 import de.jrpie.android.launcher.actions.Gesture
 import de.jrpie.android.launcher.actions.LauncherAction
 import de.jrpie.android.launcher.apps.AppInfo
-import de.jrpie.android.launcher.apps.AppInfo.Companion.INVALID_USER
+import de.jrpie.android.launcher.apps.AbstractAppInfo.Companion.INVALID_USER
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.preferences.PREFERENCE_VERSION
-import de.jrpie.android.launcher.preferences.serialization.MapAppInfoStringPreferenceSerializer
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.json.JSONException
 import org.json.JSONObject
+
+
+@Serializable
+private class LegacyMapEntry(val key: AppInfo, val value: String)
+
+private fun serializeMapAppInfo(value: Map<AppInfo, String>?): Set<String>? {
+    return value?.map { (key, value) ->
+        Json.encodeToString(LegacyMapEntry(key, value))
+    }?.toSet()
+}
+
 
 val oldLauncherActionIds: Map<String, LauncherAction> =
     mapOf(
@@ -77,7 +88,7 @@ private fun Action.Companion.legacyFromPreference(id: String): Action? {
 
 private fun migrateAppInfoStringMap(key: String) {
     val preferences = LauncherPreferences.getSharedPreferences()
-    MapAppInfoStringPreferenceSerializer().serialize(
+    serializeMapAppInfo(
         preferences.getStringSet(key, setOf())?.mapNotNull { entry ->
             try {
                 val obj = JSONObject(entry)

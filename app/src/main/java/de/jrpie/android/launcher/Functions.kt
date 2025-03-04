@@ -24,9 +24,12 @@ import androidx.annotation.RequiresApi
 import de.jrpie.android.launcher.actions.Action
 import de.jrpie.android.launcher.actions.Gesture
 import de.jrpie.android.launcher.actions.ShortcutAction
-import de.jrpie.android.launcher.actions.shortcuts.PinnedShortcutInfo
+import de.jrpie.android.launcher.apps.AbstractAppInfo.Companion.INVALID_USER
+import de.jrpie.android.launcher.apps.AbstractDetailedAppInfo
 import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.apps.DetailedAppInfo
+import de.jrpie.android.launcher.apps.DetailedPinnedShortcutInfo
+import de.jrpie.android.launcher.apps.PinnedShortcutInfo
 import de.jrpie.android.launcher.apps.getPrivateSpaceUser
 import de.jrpie.android.launcher.apps.isPrivateSpaceSupported
 import de.jrpie.android.launcher.preferences.LauncherPreferences
@@ -99,9 +102,10 @@ fun removeUnusedShortcuts(context: Context) {
     }
 
     val userManager = context.getSystemService(Service.USER_SERVICE) as UserManager
-    val boundActions: Set<PinnedShortcutInfo> =
+    val boundActions: MutableSet<PinnedShortcutInfo> =
         Gesture.entries.mapNotNull { Action.forGesture(it) as? ShortcutAction }.map { it.shortcut }
-            .toSet()
+            .toMutableSet()
+    boundActions.addAll(LauncherPreferences.apps().pinnedShortcuts())
     try {
         userManager.userProfiles.filter { !userManager.isQuietModeEnabled(it) }.forEach { profile ->
             getShortcuts(profile)?.groupBy { it.`package` }?.forEach { (p, shortcuts) ->
@@ -135,9 +139,12 @@ fun openTutorial(context: Context) {
 /**
  * Load all apps.
  */
-fun getApps(packageManager: PackageManager, context: Context): MutableList<DetailedAppInfo> {
-    val start = System.currentTimeMillis()
-    val loadList = mutableListOf<DetailedAppInfo>()
+fun getApps(
+    packageManager: PackageManager,
+    context: Context
+): MutableList<AbstractDetailedAppInfo> {
+    var start = System.currentTimeMillis()
+    val loadList = mutableListOf<AbstractDetailedAppInfo>()
 
     val launcherApps = context.getSystemService(Service.LAUNCHER_APPS_SERVICE) as LauncherApps
     val userManager = context.getSystemService(Service.USER_SERVICE) as UserManager
@@ -174,7 +181,7 @@ fun getApps(packageManager: PackageManager, context: Context): MutableList<Detai
         i.addCategory(Intent.CATEGORY_LAUNCHER)
         val allApps = packageManager.queryIntentActivities(i, 0)
         for (ri in allApps) {
-            val app = AppInfo(ri.activityInfo.packageName, null, AppInfo.INVALID_USER)
+            val app = AppInfo(ri.activityInfo.packageName, null, INVALID_USER)
             val detailedAppInfo = DetailedAppInfo(
                 app,
                 ri.loadLabel(packageManager),
@@ -186,8 +193,18 @@ fun getApps(packageManager: PackageManager, context: Context): MutableList<Detai
     }
     loadList.sortBy { it.getCustomLabel(context).toString() }
 
-    val end = System.currentTimeMillis()
+    var end = System.currentTimeMillis()
     Log.i(LOG_TAG, "${loadList.size} apps loaded (${end - start}ms)")
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+        start = System.currentTimeMillis()
+        LauncherPreferences.apps().pinnedShortcuts()
+            ?.mapNotNull { DetailedPinnedShortcutInfo.fromPinnedShortcutInfo(it, context) }
+            ?.let {
+                end = System.currentTimeMillis()
+                Log.i(LOG_TAG, "${it.size} shortcuts loaded (${end - start}ms)")
+                loadList.addAll(it)
+            }
+    }
 
     return loadList
 }

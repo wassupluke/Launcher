@@ -6,7 +6,7 @@ import android.content.pm.LauncherApps
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.os.Build
-import de.jrpie.android.launcher.actions.shortcuts.PinnedShortcutInfo
+import de.jrpie.android.launcher.apps.PinnedShortcutInfo
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

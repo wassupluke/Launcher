@@ -21,7 +21,7 @@ import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.actions.Action
 import de.jrpie.android.launcher.actions.Gesture
 import de.jrpie.android.launcher.actions.ShortcutAction
-import de.jrpie.android.launcher.actions.shortcuts.PinnedShortcutInfo
+import de.jrpie.android.launcher.apps.PinnedShortcutInfo
 import de.jrpie.android.launcher.databinding.ActivityPinShortcutBinding
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 
@@ -29,6 +29,7 @@ class PinShortcutActivity : AppCompatActivity(), UIObject {
     private lateinit var binding: ActivityPinShortcutBinding
 
     private var isBound = false
+    private var request: PinItemRequest? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super<AppCompatActivity>.onCreate(savedInstanceState)
@@ -46,6 +47,7 @@ class PinShortcutActivity : AppCompatActivity(), UIObject {
         val launcherApps = getSystemService(Service.LAUNCHER_APPS_SERVICE) as LauncherApps
 
         val request = launcherApps.getPinItemRequest(intent)
+        this.request = request
         if (request == null || request.requestType != PinItemRequest.REQUEST_TYPE_SHORTCUT) {
             finish()
             return
@@ -84,11 +86,30 @@ class PinShortcutActivity : AppCompatActivity(), UIObject {
         }
 
         binding.pinShortcutClose.setOnClickListener { finish() }
+        binding.pinShortcutButtonOk.setOnClickListener { finish() }
     }
 
     override fun onStart() {
         super<AppCompatActivity>.onStart()
         super<UIObject>.onStart()
+    }
+
+    override fun onDestroy() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            super.onDestroy()
+            return
+        }
+        if(binding.pinShortcutSwitchVisible.isChecked) {
+            if(!isBound) {
+                request?.accept()
+            }
+            request?.shortcutInfo?.let {
+                val set = LauncherPreferences.apps().pinnedShortcuts() ?: mutableSetOf()
+                set.add(PinnedShortcutInfo(it))
+                LauncherPreferences.apps().pinnedShortcuts(set)
+            }
+        }
+        super.onDestroy()
     }
 
     override fun getTheme(): Resources.Theme {
@@ -124,5 +145,6 @@ class PinShortcutActivity : AppCompatActivity(), UIObject {
         override fun getItemCount(): Int {
             return gestures.size
         }
+
     }
 }

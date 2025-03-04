@@ -263,6 +263,7 @@
     <!-- Pin shortcuts -->
     <string name="pin_shortcut_title">Add Shortcut</string>
     <string name="pin_shortcut_button_bind">Bind to gesture</string>
+    <string name="pin_shortcut_button_ok">Ok</string>
     <string name="pin_shortcut_switch_visible">Show in app list</string>
 
     <!--

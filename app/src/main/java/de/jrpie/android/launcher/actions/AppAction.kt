@@ -11,7 +11,7 @@ import android.graphics.drawable.Drawable
 import android.util.Log
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.apps.AppInfo
-import de.jrpie.android.launcher.apps.AppInfo.Companion.INVALID_USER
+import de.jrpie.android.launcher.apps.AbstractAppInfo.Companion.INVALID_USER
 import de.jrpie.android.launcher.apps.DetailedAppInfo
 import de.jrpie.android.launcher.ui.list.apps.openSettings
 import kotlinx.serialization.SerialName
@@ -67,7 +67,7 @@ class AppAction(val app: AppInfo) : Action {
     }
 
     override fun getIcon(context: Context): Drawable? {
-        return DetailedAppInfo.fromAppInfo(app, context)?.icon
+        return DetailedAppInfo.fromAppInfo(app, context)?.getIcon(context)
     }
 
     override fun isAvailable(context: Context): Boolean {
