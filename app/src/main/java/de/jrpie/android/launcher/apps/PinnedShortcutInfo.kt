@@ -1,4 +1,4 @@
-package de.jrpie.android.launcher.actions.shortcuts
+package de.jrpie.android.launcher.apps
 
 import android.app.Service
 import android.content.ComponentName
@@ -9,17 +9,19 @@ import android.content.pm.ShortcutInfo
 import android.os.Build
 import androidx.annotation.RequiresApi
 import de.jrpie.android.launcher.getUserFromId
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 
 @RequiresApi(Build.VERSION_CODES.N_MR1)
 @Serializable
+@SerialName("shortcut")
 class PinnedShortcutInfo(
     val id: String,
     val packageName: String,
     val activityName: String,
     val user: Int
-) {
+): AbstractAppInfo {
 
     constructor(info: ShortcutInfo) : this(info.id, info.`package`, info.activity?.className ?: "", info.userHandle.hashCode())
 

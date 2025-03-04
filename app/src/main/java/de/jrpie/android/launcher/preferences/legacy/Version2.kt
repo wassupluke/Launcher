@@ -12,9 +12,9 @@ import de.jrpie.android.launcher.preferences.PREFERENCE_VERSION
  * (see [PREFERENCE_VERSION])
  */
 fun migratePreferencesFromVersion2() {
-    assert(PREFERENCE_VERSION == 3)
     assert(LauncherPreferences.internal().versionCode() == 2)
     // previously there was no setting for this
     Action.setActionForGesture(Gesture.BACK, LauncherAction.CHOOSE)
     LauncherPreferences.internal().versionCode(3)
+    migratePreferencesFromVersion3()
 }

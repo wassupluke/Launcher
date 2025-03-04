@@ -5,9 +5,12 @@ import android.util.Log
 import de.jrpie.android.launcher.BuildConfig
 import de.jrpie.android.launcher.actions.Action
 import de.jrpie.android.launcher.apps.AppInfo
+import de.jrpie.android.launcher.apps.AbstractAppInfo
+import de.jrpie.android.launcher.apps.AbstractAppInfo.Companion.INVALID_USER
 import de.jrpie.android.launcher.apps.DetailedAppInfo
 import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersion1
 import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersion2
+import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersion3
 import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersionUnknown
 import de.jrpie.android.launcher.ui.HomeActivity
 
@@ -15,7 +18,7 @@ import de.jrpie.android.launcher.ui.HomeActivity
  * Increase when breaking changes are introduced and write an appropriate case in
  * `migratePreferencesToNewVersion`
  */
-const val PREFERENCE_VERSION = 3
+const val PREFERENCE_VERSION = 4
 const val UNKNOWN_PREFERENCE_VERSION = -1
 private const val TAG = "Launcher - Preferences"
 
@@ -44,6 +47,10 @@ fun migratePreferencesToNewVersion(context: Context) {
                 migratePreferencesFromVersion2()
                 Log.i(TAG, "migration of preferences  complete (2 -> ${PREFERENCE_VERSION}).")
             }
+            3 -> {
+                migratePreferencesFromVersion3()
+                Log.i(TAG, "migration of preferences  complete (3 -> ${PREFERENCE_VERSION}).")
+            }
 
             else -> {
                 Log.w(
@@ -66,16 +73,16 @@ fun resetPreferences(context: Context) {
     LauncherPreferences.internal().versionCode(PREFERENCE_VERSION)
 
 
-    val hidden: MutableSet<AppInfo> = mutableSetOf()
+    val hidden: MutableSet<AbstractAppInfo> = mutableSetOf()
     val launcher = DetailedAppInfo.fromAppInfo(
         AppInfo(
             BuildConfig.APPLICATION_ID,
             HomeActivity::class.java.name,
-            AppInfo.INVALID_USER
+            INVALID_USER
         ), context
     )
-    launcher?.app?.let { hidden.add(it) }
-    Log.i(TAG,"Hiding ${launcher?.app}")
+    launcher?.getRawInfo()?.let { hidden.add(it) }
+    Log.i(TAG,"Hiding ${launcher?.getRawInfo()}")
     LauncherPreferences.apps().hidden(hidden)
 
     Action.resetToDefaultActions(context)

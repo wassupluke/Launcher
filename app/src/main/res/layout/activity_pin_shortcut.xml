@@ -80,7 +80,6 @@
                 android:minHeight="40dp"
                 tools:drawableLeft="@drawable/baseline_settings_24"
                 tools:text="Shortcut name" />
-            <!--
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="10dp" />
@@ -90,8 +89,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="?android:textColor"
+                android:checked="true"
                 android:text="@string/pin_shortcut_switch_visible" />
-            -->
 
             <Space
                 android:layout_width="match_parent"
@@ -103,8 +102,21 @@
                 android:layout_height="wrap_content"
                 android:text="@string/pin_shortcut_button_bind" />
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
         </LinearLayout>
 
 
     </ScrollView>
+
+    <Button
+        android:id="@+id/pin_shortcut_button_ok"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/pin_shortcut_button_ok"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,11 +16,10 @@ import androidx.recyclerview.widget.RecyclerView
 import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
-import de.jrpie.android.launcher.actions.AppAction
+import de.jrpie.android.launcher.apps.AbstractDetailedAppInfo
 import de.jrpie.android.launcher.apps.AppFilter
 import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.apps.DetailedAppInfo
-import de.jrpie.android.launcher.getUserFromId
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.preferences.ListLayout
 import de.jrpie.android.launcher.ui.list.ListActivity
@@ -47,7 +46,7 @@ class AppsRecyclerAdapter(
     RecyclerView.Adapter<AppsRecyclerAdapter.ViewHolder>() {
 
     private val apps = (activity.applicationContext as Application).apps
-    private val appsListDisplayed: MutableList<DetailedAppInfo> = mutableListOf()
+    private val appsListDisplayed: MutableList<AbstractDetailedAppInfo> = mutableListOf()
 
     // temporarily disable auto launch
     var disableAutoLaunch: Boolean = false
@@ -83,11 +82,11 @@ class AppsRecyclerAdapter(
         if (layout.useBadgedText) {
             appLabel = activity.packageManager.getUserBadgedLabel(
                 appLabel,
-                getUserFromId(appsListDisplayed[i].app.user, activity)
+                appsListDisplayed[i].getUser(activity)
             ).toString()
         }
 
-        val appIcon = appsListDisplayed[i].icon
+        val appIcon = appsListDisplayed[i].getIcon(activity)
 
         viewHolder.textView.text = appLabel
         viewHolder.img.setImageDrawable(appIcon)
@@ -118,22 +117,26 @@ class AppsRecyclerAdapter(
     @Suppress("SameReturnValue")
     private fun showOptionsPopup(
         viewHolder: ViewHolder,
-        appInfo: DetailedAppInfo
+        appInfo: AbstractDetailedAppInfo
     ): Boolean {
         //create the popup menu
 
         val popup = PopupMenu(activity, viewHolder.img)
         popup.inflate(R.menu.menu_app)
 
-        if (appInfo.isSystemApp) {
+        if (!appInfo.isRemovable()) {
             popup.menu.findItem(R.id.app_menu_delete).setVisible(false)
         }
 
-        if (LauncherPreferences.apps().hidden()?.contains(appInfo.app) == true) {
+        if (appInfo !is DetailedAppInfo) {
+            popup.menu.findItem(R.id.app_menu_info).setVisible(false)
+        }
+
+        if (LauncherPreferences.apps().hidden()?.contains(appInfo.getRawInfo()) == true) {
             popup.menu.findItem(R.id.app_menu_hidden).setTitle(R.string.list_app_hidden_remove)
         }
 
-        if (LauncherPreferences.apps().favorites()?.contains(appInfo.app) == true) {
+        if (LauncherPreferences.apps().favorites()?.contains(appInfo.getRawInfo()) == true) {
             popup.menu.findItem(R.id.app_menu_favorite).setTitle(R.string.list_app_favorite_remove)
         }
 
@@ -141,19 +144,19 @@ class AppsRecyclerAdapter(
         popup.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.app_menu_delete -> {
-                    appInfo.app.uninstall(activity); true
+                    appInfo.getRawInfo().uninstall(activity); true
                 }
 
                 R.id.app_menu_info -> {
-                    appInfo.app.openSettings(activity); true
+                    (appInfo.getRawInfo() as? AppInfo)?.openSettings(activity); true
                 }
 
                 R.id.app_menu_favorite -> {
-                    appInfo.app.toggleFavorite(); true
+                    appInfo.getRawInfo().toggleFavorite(); true
                 }
 
                 R.id.app_menu_hidden -> {
-                    appInfo.app.toggleHidden(root); true
+                    appInfo.getRawInfo().toggleHidden(root); true
                 }
 
                 R.id.app_menu_rename -> {
@@ -188,12 +191,12 @@ class AppsRecyclerAdapter(
         val appInfo = appsListDisplayed[pos]
         when (intention) {
             ListActivity.ListActivityIntention.VIEW -> {
-                AppAction(appInfo.app).invoke(activity, rect)
+                appInfo.getAction().invoke(activity, rect)
             }
 
             ListActivity.ListActivityIntention.PICK -> {
                 val returnIntent = Intent()
-                AppAction(appInfo.app).writeToIntent(returnIntent)
+                appInfo.getAction().writeToIntent(returnIntent)
                 returnIntent.putExtra("forGesture", forGesture)
                 activity.setResult(REQUEST_CHOOSE_APP, returnIntent)
                 activity.finish()
@@ -211,8 +214,8 @@ class AppsRecyclerAdapter(
             && !disableAutoLaunch
             && LauncherPreferences.functionality().searchAutoLaunch()
         ) {
-            val info = appsListDisplayed[0]
-            AppAction(info.app).invoke(activity)
+            val app = appsListDisplayed[0]
+            app.getAction().invoke(activity)
 
             val inputMethodManager =
                 activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager

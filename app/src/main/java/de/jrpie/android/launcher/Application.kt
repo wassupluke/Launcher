@@ -15,15 +15,15 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.preference.PreferenceManager
 import de.jrpie.android.launcher.actions.TorchManager
-import de.jrpie.android.launcher.apps.AppInfo
-import de.jrpie.android.launcher.apps.DetailedAppInfo
+import de.jrpie.android.launcher.apps.AbstractAppInfo
+import de.jrpie.android.launcher.apps.AbstractDetailedAppInfo
 import de.jrpie.android.launcher.apps.isPrivateSpaceLocked
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.preferences.migratePreferencesToNewVersion
 import de.jrpie.android.launcher.preferences.resetPreferences
 
 class Application : android.app.Application() {
-    val apps = MutableLiveData<List<DetailedAppInfo>>()
+    val apps = MutableLiveData<List<AbstractDetailedAppInfo>>()
     val privateSpaceLocked = MutableLiveData<Boolean>()
 
     private val profileAvailabilityBroadcastReceiver = object : BroadcastReceiver() {
@@ -82,10 +82,12 @@ class Application : android.app.Application() {
     }
 
     var torchManager: TorchManager? = null
-    private var customAppNames: HashMap<AppInfo, String>? = null
+    private var customAppNames: HashMap<AbstractAppInfo, String>? = null
     private val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, pref ->
         if (pref == getString(R.string.settings_apps_custom_names_key)) {
             customAppNames = LauncherPreferences.apps().customNames()
+        } else if (pref == LauncherPreferences.apps().keys().pinnedShortcuts()) {
+            loadApps()
         }
     }
 
@@ -143,7 +145,7 @@ class Application : android.app.Application() {
         loadApps()
     }
 
-    fun getCustomAppNames(): HashMap<AppInfo, String> {
+    fun getCustomAppNames(): HashMap<AbstractAppInfo, String> {
         return (customAppNames ?: LauncherPreferences.apps().customNames() ?: HashMap())
             .also { customAppNames = it }
     }

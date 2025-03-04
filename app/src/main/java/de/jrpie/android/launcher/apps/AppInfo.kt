@@ -4,21 +4,18 @@ import android.app.Service
 import android.content.Context
 import android.content.pm.LauncherActivityInfo
 import android.content.pm.LauncherApps
+import de.jrpie.android.launcher.apps.AbstractAppInfo.Companion.INVALID_USER
 import de.jrpie.android.launcher.getUserFromId
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 
 /**
  * Represents an app installed on the users device.
  * Contains the minimal amount of data required to identify the app.
  */
 @Serializable
-class AppInfo(val packageName: String, val activityName: String?, val user: Int = INVALID_USER) {
-
-    fun serialize(): String {
-        return Json.encodeToString(this)
-    }
+@SerialName("app")
+class AppInfo(val packageName: String, val activityName: String?, val user: Int = INVALID_USER): AbstractAppInfo {
 
     override fun equals(other: Any?): Boolean {
         if(other is AppInfo) {
@@ -47,11 +44,4 @@ class AppInfo(val packageName: String, val activityName: String?, val user: Int 
         return "AppInfo {package=$packageName, activity=$activityName, user=$user}"
     }
 
-    companion object {
-        const val INVALID_USER = -1
-
-        fun deserialize(serialized: String): AppInfo {
-            return Json.decodeFromString(serialized)
-        }
-    }
 }

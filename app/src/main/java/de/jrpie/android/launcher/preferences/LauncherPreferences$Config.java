@@ -5,8 +5,9 @@ import java.util.Set;
 
 import de.jrpie.android.launcher.R;
 import de.jrpie.android.launcher.actions.lock.LockMethod;
-import de.jrpie.android.launcher.preferences.serialization.MapAppInfoStringPreferenceSerializer;
-import de.jrpie.android.launcher.preferences.serialization.SetAppInfoPreferenceSerializer;
+import de.jrpie.android.launcher.preferences.serialization.MapAbstractAppInfoStringPreferenceSerializer;
+import de.jrpie.android.launcher.preferences.serialization.SetAbstractAppInfoPreferenceSerializer;
+import de.jrpie.android.launcher.preferences.serialization.SetPinnedShortcutInfoPreferenceSerializer;
 import de.jrpie.android.launcher.preferences.theme.Background;
 import de.jrpie.android.launcher.preferences.theme.ColorTheme;
 import de.jrpie.android.launcher.preferences.theme.Font;
@@ -25,9 +26,10 @@ import eu.jonahbauer.android.preference.annotations.Preferences;
                         @Preference(name = "version_code", type = int.class, defaultValue = "-1"),
                 }),
                 @PreferenceGroup(name = "apps", prefix = "settings_apps_", suffix = "_key", value = {
-                        @Preference(name = "favorites", type = Set.class, serializer = SetAppInfoPreferenceSerializer.class),
-                        @Preference(name = "hidden", type = Set.class, serializer = SetAppInfoPreferenceSerializer.class),
-                        @Preference(name = "custom_names", type = HashMap.class, serializer = MapAppInfoStringPreferenceSerializer.class),
+                        @Preference(name = "favorites", type = Set.class, serializer = SetAbstractAppInfoPreferenceSerializer.class),
+                        @Preference(name = "hidden", type = Set.class, serializer = SetAbstractAppInfoPreferenceSerializer.class),
+                        @Preference(name = "pinned_shortcuts", type = Set.class, serializer = SetPinnedShortcutInfoPreferenceSerializer.class),
+                        @Preference(name = "custom_names", type = HashMap.class, serializer = MapAbstractAppInfoStringPreferenceSerializer.class),
                         @Preference(name = "hide_bound_apps", type = boolean.class, defaultValue = "false"),
                         @Preference(name = "hide_paused_apps", type = boolean.class, defaultValue = "false"),
                         @Preference(name = "hide_private_space_apps", type = boolean.class, defaultValue = "false"),

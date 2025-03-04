@@ -6,6 +6,7 @@ import android.os.Build
 import de.jrpie.android.launcher.actions.Action
 import de.jrpie.android.launcher.actions.AppAction
 import de.jrpie.android.launcher.actions.Gesture
+import de.jrpie.android.launcher.actions.ShortcutAction
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import java.util.Locale
 import kotlin.text.Regex.Companion.escape
@@ -18,13 +19,14 @@ class AppFilter(
     var privateSpaceVisibility: AppSetVisibility = AppSetVisibility.VISIBLE
 ) {
 
-    operator fun invoke(apps: List<DetailedAppInfo>): List<DetailedAppInfo> {
+    operator fun invoke(apps: List<AbstractDetailedAppInfo>): List<AbstractDetailedAppInfo> {
         var apps =
-            apps.sortedBy { app -> app.getCustomLabel(context).toString().lowercase(Locale.ROOT) }
+            apps.sortedBy { app -> app.getCustomLabel(context).lowercase(Locale.ROOT) }
 
         val hidden = LauncherPreferences.apps().hidden() ?: setOf()
         val favorites = LauncherPreferences.apps().favorites() ?: setOf()
-        val private = apps.filter { it.isPrivateSpaceApp }.map { it.app }.toSet()
+        val private = apps.filter { it.isPrivate() }
+            .map { it.getRawInfo() }.toSet()
 
         apps = apps.filter { info ->
             favoritesVisibility.predicate(favorites, info)
@@ -35,9 +37,13 @@ class AppFilter(
         if (LauncherPreferences.apps().hideBoundApps()) {
             val boundApps = Gesture.entries
                 .filter(Gesture::isEnabled)
-                .mapNotNull { g -> (Action.forGesture(g) as? AppAction)?.app }
+                .mapNotNull { g -> Action.forGesture(g) }
+                .mapNotNull {
+                    (it as? AppAction)?.app
+                    ?: (it as? ShortcutAction)?.shortcut
+                }
                 .toSet()
-            apps = apps.filterNot { info -> boundApps.contains(info.app) }
+            apps = apps.filterNot { info -> boundApps.contains(info.getRawInfo()) }
         }
 
         // normalize text for search
@@ -57,11 +63,11 @@ class AppFilter(
         if (query.isEmpty()) {
             return apps
         } else {
-            val r: MutableList<DetailedAppInfo> = ArrayList()
-            val appsSecondary: MutableList<DetailedAppInfo> = ArrayList()
+            val r: MutableList<AbstractDetailedAppInfo> = ArrayList()
+            val appsSecondary: MutableList<AbstractDetailedAppInfo> = ArrayList()
             val normalizedQuery: String = normalize(query)
             for (item in apps) {
-                val itemLabel: String = normalize(item.getCustomLabel(context).toString())
+                val itemLabel: String = normalize(item.getCustomLabel(context))
 
                 if (itemLabel.startsWith(normalizedQuery)) {
                     r.add(item)
@@ -77,11 +83,11 @@ class AppFilter(
 
     companion object {
         enum class AppSetVisibility(
-            val predicate: (set: Set<AppInfo>, DetailedAppInfo) -> Boolean
+            val predicate: (set: Set<AbstractAppInfo>, AbstractDetailedAppInfo) -> Boolean
         ) {
             VISIBLE({ _, _ -> true }),
-            HIDDEN({ set, appInfo -> !set.contains(appInfo.app) }),
-            EXCLUSIVE({ set, appInfo -> set.contains(appInfo.app) }),
+            HIDDEN({ set, appInfo -> !set.contains(appInfo.getRawInfo()) }),
+            EXCLUSIVE({ set, appInfo -> set.contains(appInfo.getRawInfo()) }),
             ;
         }
 
