@@ -153,9 +153,9 @@
     <string name="settings_launcher_section_display">Display</string>
 
     <string name="settings_display_screen_timeout_disabled">Keep screen on</string>
-    <string name="settings_display_full_screen">Use full screen</string>
-    <string name="settings_display_rotate_screen">Rotate screen</string>
+    <string name="settings_display_hide_status_bar">Hide status bar</string>
     <string name="settings_display_hide_navigation_bar">Hide navigation bar</string>
+    <string name="settings_display_rotate_screen">Rotate screen</string>
 
     <string name="settings_launcher_section_functionality">Functionality</string>
 

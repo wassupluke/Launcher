@@ -169,10 +169,6 @@
         android:title="@string/settings_launcher_section_display"
         app:allowDividerAbove="false">
         <SwitchPreference
-            android:key="@string/settings_display_full_screen_key"
-            android:defaultValue="true"
-            android:title="@string/settings_display_full_screen"/>
-        <SwitchPreference
             android:key="@string/settings_display_rotate_screen_key"
             android:defaultValue="true"
             android:title="@string/settings_display_rotate_screen"/>
@@ -180,6 +176,10 @@
             android:key="@string/settings_display_screen_timeout_disabled_key"
             android:defaultValue="false"
             android:title="@string/settings_display_screen_timeout_disabled"/>
+        <SwitchPreference
+            android:key="@string/settings_display_hide_status_bar_key"
+            android:defaultValue="true"
+            android:title="@string/settings_display_hide_status_bar"/>
         <SwitchPreference
             android:key="@string/settings_display_hide_navigation_bar_key"
             android:defaultValue="false"

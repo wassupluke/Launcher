@@ -3,7 +3,11 @@ package de.jrpie.android.launcher.ui
 import android.app.Activity
 import android.content.pm.ActivityInfo
 import android.content.res.Resources
+import android.os.Build
+import android.view.View
 import android.view.Window
+import android.view.WindowInsets
+import android.view.WindowInsetsController
 import android.view.WindowManager
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 
@@ -14,7 +18,7 @@ import de.jrpie.android.launcher.preferences.LauncherPreferences
 fun setWindowFlags(window: Window, homeScreen: Boolean) {
     window.setFlags(0, 0) // clear flags
     // Display notification bar
-    if (LauncherPreferences.display().fullScreen())
+    if (LauncherPreferences.display().hideStatusBar())
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
@@ -36,17 +40,19 @@ fun setWindowFlags(window: Window, homeScreen: Boolean) {
 
 }
 
+
 interface UIObject {
     fun onCreate() {
-        if (this is Activity) {
-            setWindowFlags(window, isHomeScreen())
+        if (this !is Activity) {
+            return
+        }
+        setWindowFlags(window, isHomeScreen())
 
-            if (!LauncherPreferences.display().rotateScreen()) {
-                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_NOSENSOR
-            }
-
+        if (!LauncherPreferences.display().rotateScreen()) {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_NOSENSOR
         }
     }
+
     fun onStart() {
         setOnClicks()
         adjustLayout()
@@ -69,5 +75,27 @@ interface UIObject {
 
     fun isHomeScreen(): Boolean {
         return false
+    }
+
+
+    @Suppress("DEPRECATION")
+    fun hideNavigationBar() {
+        if (this !is Activity) {
+            return
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.apply {
+                hide(WindowInsets.Type.navigationBars())
+                systemBarsBehavior =
+                    WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            }
+        } else {
+            // Try to hide the navigation bar but do not hide the status bar
+            window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    or View.SYSTEM_UI_FLAG_IMMERSIVE
+                    or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
+        }
     }
 }

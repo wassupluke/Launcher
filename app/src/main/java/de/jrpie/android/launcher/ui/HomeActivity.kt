@@ -110,33 +110,6 @@ class HomeActivity : UIObject, AppCompatActivity() {
         }
     }
 
-    @Suppress("DEPRECATION")
-    private fun hideNavigationBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.insetsController?.apply {
-                hide(WindowInsets.Type.navigationBars())
-                systemBarsBehavior =
-                    WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-            }
-        } else {
-            val decorView = window.decorView
-            val uiOptions = (View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                    or View.SYSTEM_UI_FLAG_IMMERSIVE
-                    or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
-
-            // Try to hide the navigation bar but do not hide the status bar
-            decorView.systemUiVisibility = uiOptions
-
-            // Add listener to hide the navigation bar
-            decorView.setOnSystemUiVisibilityChangeListener { visibility ->
-                if (visibility and View.SYSTEM_UI_FLAG_FULLSCREEN == 0) {
-                    decorView.systemUiVisibility = uiOptions
-                }
-            }
-        }
-    }
 
     private fun updateSettingsFallbackButtonVisibility() {
         // If µLauncher settings can not be reached from any action bound to an enabled gesture,
