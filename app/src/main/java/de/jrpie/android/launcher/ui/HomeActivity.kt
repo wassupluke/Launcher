@@ -9,6 +9,9 @@ import android.util.DisplayMetrics
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
+import android.view.Window
+import android.view.WindowInsets
+import android.view.WindowInsetsController
 import android.window.OnBackInvokedDispatcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -99,6 +102,15 @@ class HomeActivity : UIObject, AppCompatActivity() {
 
     }
 
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+
+        if (hasFocus && LauncherPreferences.display().hideNavigationBar()) {
+            hideNavigationBar()
+        }
+    }
+
+
     private fun updateSettingsFallbackButtonVisibility() {
         // If µLauncher settings can not be reached from any action bound to an enabled gesture,
         // show the fallback button.
@@ -186,6 +198,7 @@ class HomeActivity : UIObject, AppCompatActivity() {
                 // Only used pre Android 13, cf. onBackInvokedDispatcher
                 handleBack()
             }
+
             KeyEvent.KEYCODE_VOLUME_UP -> {
                 if (Action.forGesture(Gesture.VOLUME_UP) == LauncherAction.VOLUME_UP) {
                     // Let the OS handle the key event. This works better with some custom ROMs

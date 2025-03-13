@@ -155,7 +155,7 @@ class ListActivity : AppCompatActivity(), UIObject {
                     binding.listContainer.context.resources.displayMetrics.heightPixels
                 val diff = height - r.bottom
                 if (diff != 0 &&
-                    LauncherPreferences.display().fullScreen()
+                    LauncherPreferences.display().hideStatusBar()
                 ) {
                     if (binding.listContainer.paddingBottom != diff) {
                         binding.listContainer.setPadding(0, 0, 0, diff)
