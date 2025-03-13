@@ -93,12 +93,17 @@ fun getUserFromId(userId: Int?, context: Context): UserHandle {
 fun removeUnusedShortcuts(context: Context) {
     val launcherApps = context.getSystemService(Service.LAUNCHER_APPS_SERVICE) as LauncherApps
     fun getShortcuts(profile: UserHandle): List<ShortcutInfo>? {
-        return launcherApps.getShortcuts(
-            ShortcutQuery().apply {
-                setQueryFlags(ShortcutQuery.FLAG_MATCH_PINNED)
-            },
-            profile
-        )
+        return try {
+            launcherApps.getShortcuts(
+                ShortcutQuery().apply {
+                    setQueryFlags(ShortcutQuery.FLAG_MATCH_PINNED)
+                },
+                profile
+            )
+        } catch (e: IllegalStateException) {
+            // https://github.com/jrpie/launcher/issues/116
+            return null
+        }
     }
 
     val userManager = context.getSystemService(Service.USER_SERVICE) as UserManager
