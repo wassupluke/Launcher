@@ -95,6 +95,12 @@ fun lockPrivateSpace(context: Context, lock: Boolean) {
     if (!isPrivateSpaceSupported()) {
         return
     }
+
+    // silently return when trying to unlock but hide when locked is set
+    if (!lock && hidePrivateSpaceWhenLocked(context)) {
+        return
+    }
+
     val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
     val privateSpaceUser = getPrivateSpaceUser(context) ?: return
     userManager.requestQuietModeEnabled(lock, privateSpaceUser)
@@ -114,5 +120,13 @@ fun togglePrivateSpaceLock(context: Context) {
             Toast.LENGTH_LONG
         ).show()
     }
+}
+
+fun hidePrivateSpaceWhenLocked(context: Context): Boolean {
+    // TODO: perhaps this should be cached
+
+    // https://cs.android.com/android/platform/superproject/main/+/main:packages/apps/Launcher3/src/com/android/launcher3/util/SettingsCache.java;l=61;drc=56bf7ad33bc9d5ed3c18e7abefeec5c177ec75d7
+    val key = "hide_privatespace_entry_point"
+    return Settings.Secure.getInt(context.contentResolver, key, 0) == 1
 }
 

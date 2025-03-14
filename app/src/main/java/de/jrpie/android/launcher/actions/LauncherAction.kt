@@ -13,6 +13,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.apps.AppFilter
+import de.jrpie.android.launcher.apps.hidePrivateSpaceWhenLocked
 import de.jrpie.android.launcher.apps.isPrivateSpaceSupported
 import de.jrpie.android.launcher.apps.togglePrivateSpaceLock
 import de.jrpie.android.launcher.preferences.LauncherPreferences
@@ -66,7 +67,11 @@ enum class LauncherAction(
         R.string.list_other_list_private_space,
         R.drawable.baseline_security_24,
         { context ->
-            openAppsList(context, private = true)
+            if ((context.applicationContext as Application).privateSpaceLocked.value != true
+                || !hidePrivateSpaceWhenLocked(context)
+            ) {
+                openAppsList(context, private = true)
+            }
         },
         available = { _ ->
             isPrivateSpaceSupported()
@@ -83,31 +88,31 @@ enum class LauncherAction(
         "volume_up",
         R.string.list_other_volume_up,
         R.drawable.baseline_volume_up_24,
-        { context -> audioVolumeAdjust(context, true)}
+        { context -> audioVolumeAdjust(context, true) }
     ),
     VOLUME_DOWN(
         "volume_down",
         R.string.list_other_volume_down,
         R.drawable.baseline_volume_down_24,
-        { context -> audioVolumeAdjust(context, false)}
+        { context -> audioVolumeAdjust(context, false) }
     ),
     TRACK_PLAY_PAUSE(
         "play_pause_track",
         R.string.list_other_track_play_pause,
         R.drawable.baseline_play_arrow_24,
-        { context -> audioManagerPressKey(context, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE)}
+        { context -> audioManagerPressKey(context, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE) }
     ),
     TRACK_NEXT(
         "next_track",
         R.string.list_other_track_next,
         R.drawable.baseline_skip_next_24,
-        { context -> audioManagerPressKey(context, KeyEvent.KEYCODE_MEDIA_NEXT)}
+        { context -> audioManagerPressKey(context, KeyEvent.KEYCODE_MEDIA_NEXT) }
     ),
     TRACK_PREV(
         "previous_track",
         R.string.list_other_track_previous,
         R.drawable.baseline_skip_previous_24,
-        { context -> audioManagerPressKey(context, KeyEvent.KEYCODE_MEDIA_PREVIOUS)}
+        { context -> audioManagerPressKey(context, KeyEvent.KEYCODE_MEDIA_PREVIOUS) }
     ),
     EXPAND_NOTIFICATIONS_PANEL(
         "expand_notifications_panel",

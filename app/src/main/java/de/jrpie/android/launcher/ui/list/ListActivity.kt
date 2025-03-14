@@ -22,6 +22,7 @@ import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_UNINSTALL
 import de.jrpie.android.launcher.actions.LauncherAction
 import de.jrpie.android.launcher.apps.AppFilter
+import de.jrpie.android.launcher.apps.hidePrivateSpaceWhenLocked
 import de.jrpie.android.launcher.apps.isPrivateSpaceLocked
 import de.jrpie.android.launcher.apps.isPrivateSpaceSetUp
 import de.jrpie.android.launcher.apps.togglePrivateSpaceLock
@@ -34,10 +35,12 @@ import de.jrpie.android.launcher.ui.list.other.ListFragmentOther
 
 // TODO: Better solution for this intercommunication functionality (used in list-fragments)
 var intention = ListActivity.ListActivityIntention.VIEW
-var favoritesVisibility: AppFilter.Companion.AppSetVisibility = AppFilter.Companion.AppSetVisibility.VISIBLE
+var favoritesVisibility: AppFilter.Companion.AppSetVisibility =
+    AppFilter.Companion.AppSetVisibility.VISIBLE
 var privateSpaceVisibility: AppFilter.Companion.AppSetVisibility =
     AppFilter.Companion.AppSetVisibility.VISIBLE
-var hiddenVisibility: AppFilter.Companion.AppSetVisibility = AppFilter.Companion.AppSetVisibility.HIDDEN
+var hiddenVisibility: AppFilter.Companion.AppSetVisibility =
+    AppFilter.Companion.AppSetVisibility.HIDDEN
 var forGesture: String? = null
 
 /**
@@ -52,6 +55,23 @@ class ListActivity : AppCompatActivity(), UIObject {
 
 
     private fun updateLockIcon(locked: Boolean) {
+        if (
+            // only show lock for VIEW intention
+            (intention != ListActivityIntention.VIEW)
+            // hide lock when private space does not exist
+            || !isPrivateSpaceSetUp(this)
+            // hide lock when private space apps are hidden from the main list and we are not in the private space list
+            || (LauncherPreferences.apps().hidePrivateSpaceApps()
+                    && privateSpaceVisibility != AppFilter.Companion.AppSetVisibility.EXCLUSIVE)
+            // hide lock when private space is locked and the hidden when locked setting is set
+            || (locked && hidePrivateSpaceWhenLocked(this))
+        ) {
+            binding.listLock.visibility = View.GONE
+            return
+        }
+
+        binding.listLock.visibility = View.VISIBLE
+
         binding.listLock.setImageDrawable(
             AppCompatResources.getDrawable(
                 this,
@@ -72,7 +92,6 @@ class ListActivity : AppCompatActivity(), UIObject {
             )
         }
     }
-
 
 
     enum class ListActivityIntention(val titleResource: Int) {
@@ -119,20 +138,6 @@ class ListActivity : AppCompatActivity(), UIObject {
             LauncherAction.SETTINGS.launch(this@ListActivity)
         }
 
-        binding.listLock.visibility =
-            if (intention != ListActivityIntention.VIEW) {
-                View.GONE
-            } else if (!isPrivateSpaceSetUp(this)) {
-                View.GONE
-            } else if (LauncherPreferences.apps().hidePrivateSpaceApps()) {
-                if (privateSpaceVisibility == AppFilter.Companion.AppSetVisibility.EXCLUSIVE) {
-                    View.VISIBLE
-                } else {
-                    View.GONE
-                }
-            } else {
-                View.VISIBLE
-            }
 
         if (privateSpaceVisibility == AppFilter.Companion.AppSetVisibility.EXCLUSIVE) {
             isPrivateSpaceSetUp(this, showToast = true, launchSettings = true)
@@ -200,15 +205,16 @@ class ListActivity : AppCompatActivity(), UIObject {
     fun updateTitle() {
         var titleResource = intention.titleResource
         if (intention == ListActivityIntention.VIEW) {
-            titleResource = if (hiddenVisibility == AppFilter.Companion.AppSetVisibility.EXCLUSIVE) {
-                R.string.list_title_hidden
-            } else if (privateSpaceVisibility == AppFilter.Companion.AppSetVisibility.EXCLUSIVE) {
-                R.string.list_title_private_space
-            } else if (favoritesVisibility == AppFilter.Companion.AppSetVisibility.EXCLUSIVE) {
-                R.string.list_title_favorite
-            } else {
-                R.string.list_title_view
-            }
+            titleResource =
+                if (hiddenVisibility == AppFilter.Companion.AppSetVisibility.EXCLUSIVE) {
+                    R.string.list_title_hidden
+                } else if (privateSpaceVisibility == AppFilter.Companion.AppSetVisibility.EXCLUSIVE) {
+                    R.string.list_title_private_space
+                } else if (favoritesVisibility == AppFilter.Companion.AppSetVisibility.EXCLUSIVE) {
+                    R.string.list_title_favorite
+                } else {
+                    R.string.list_title_view
+                }
         }
 
         binding.listHeading.text = getString(titleResource)
