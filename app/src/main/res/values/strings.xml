@@ -192,7 +192,6 @@
       -->
     <string name="settings_general_choose_home_screen">Set μLauncher as home screen</string>
     <string name="settings_meta_cant_select_launcher">App Info</string>
-    <string name="settings_meta_cant_select_launcher_msg">Your device does not support this feature. Manage application details instead?</string>
 
     <string name="settings_meta_show_tutorial">View Launcher Tutorial</string>
 
