@@ -47,6 +47,7 @@ class AppsRecyclerAdapter(
 
     private val apps = (activity.applicationContext as Application).apps
     private val appsListDisplayed: MutableList<AbstractDetailedAppInfo> = mutableListOf()
+    private val grayscale = LauncherPreferences.theme().monochromeIcons()
 
     // temporarily disable auto launch
     var disableAutoLaunch: Boolean = false
@@ -79,20 +80,19 @@ class AppsRecyclerAdapter(
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
         var appLabel = appsListDisplayed[i].getCustomLabel(activity)
 
+        val appIcon = appsListDisplayed[i].getIcon(activity)
+
+        viewHolder.img.transformGrayscale(grayscale)
+        viewHolder.img.setImageDrawable(appIcon.constantState?.newDrawable() ?: appIcon)
+
         if (layout.useBadgedText) {
             appLabel = activity.packageManager.getUserBadgedLabel(
                 appLabel,
                 appsListDisplayed[i].getUser(activity)
             ).toString()
         }
-
-        val appIcon = appsListDisplayed[i].getIcon(activity)
-
         viewHolder.textView.text = appLabel
-        viewHolder.img.setImageDrawable(appIcon)
 
-        if (LauncherPreferences.theme().monochromeIcons())
-            viewHolder.img.transformGrayscale()
 
         // decide when to show the options popup menu about
         if (intention == ListActivity.ListActivityIntention.VIEW) {

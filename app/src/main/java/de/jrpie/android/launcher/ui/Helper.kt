@@ -27,10 +27,14 @@ fun View.blink(
 }
 
 // Taken from: https://stackoverflow.com/a/30340794/12787264
-fun ImageView.transformGrayscale() {
-    this.colorFilter = ColorMatrixColorFilter(ColorMatrix().apply {
-        setSaturation(0f)
-    })
+fun ImageView.transformGrayscale(grayscale: Boolean) {
+    this.colorFilter = if (grayscale) {
+        ColorMatrixColorFilter(ColorMatrix().apply {
+            setSaturation(0f)
+        })
+    } else {
+        null
+    }
 }
 
 

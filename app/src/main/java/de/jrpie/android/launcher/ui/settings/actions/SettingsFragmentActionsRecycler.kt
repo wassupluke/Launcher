@@ -143,9 +143,7 @@ class ActionsRecyclerAdapter(val activity: Activity) :
         val description = gesture.getDescription(activity)
         viewHolder.descriptionTextView.text = description
 
-
-        if (LauncherPreferences.theme().monochromeIcons())
-            viewHolder.img.transformGrayscale()
+        viewHolder.img.transformGrayscale(LauncherPreferences.theme().monochromeIcons())
 
         updateViewHolder(gesture, viewHolder)
         viewHolder.img.setOnClickListener { chooseApp(gesture) }

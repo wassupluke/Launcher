@@ -194,7 +194,7 @@ fun getApps(
             loadList.add(detailedAppInfo)
         }
     }
-    loadList.sortBy { it.getCustomLabel(context).toString() }
+    loadList.sortBy { it.getCustomLabel(context) }
 
     var end = System.currentTimeMillis()
     Log.i(LOG_TAG, "${loadList.size} apps loaded (${end - start}ms)")
