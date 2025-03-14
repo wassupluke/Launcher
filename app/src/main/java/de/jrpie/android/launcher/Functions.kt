@@ -100,7 +100,7 @@ fun removeUnusedShortcuts(context: Context) {
                 },
                 profile
             )
-        } catch (e: IllegalStateException) {
+        } catch (e: Exception) {
             // https://github.com/jrpie/launcher/issues/116
             return null
         }

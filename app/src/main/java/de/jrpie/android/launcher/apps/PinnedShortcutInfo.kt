@@ -28,15 +28,20 @@ class PinnedShortcutInfo(
     fun getShortcutInfo(context: Context): ShortcutInfo? {
         val launcherApps = context.getSystemService(Service.LAUNCHER_APPS_SERVICE) as LauncherApps
 
-        return launcherApps.getShortcuts(
-            ShortcutQuery().apply {
-                setQueryFlags(ShortcutQuery.FLAG_MATCH_PINNED)
-                setPackage(packageName)
-                setActivity(ComponentName(packageName, activityName))
-                setShortcutIds(listOf(id))
-            },
-            getUserFromId(user, context)
-        )?.firstOrNull()
+        return try {
+            launcherApps.getShortcuts(
+                ShortcutQuery().apply {
+                    setQueryFlags(ShortcutQuery.FLAG_MATCH_PINNED)
+                    setPackage(packageName)
+                    setActivity(ComponentName(packageName, activityName))
+                    setShortcutIds(listOf(id))
+                },
+                getUserFromId(user, context)
+            )?.firstOrNull()
+        } catch(_: Exception) {
+            // can throw SecurityException or IllegalStateException when profile is locked
+            null
+        }
     }
 
     override fun equals(other: Any?): Boolean {
