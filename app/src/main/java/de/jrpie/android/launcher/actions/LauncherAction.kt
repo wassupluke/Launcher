@@ -88,13 +88,19 @@ enum class LauncherAction(
         "volume_up",
         R.string.list_other_volume_up,
         R.drawable.baseline_volume_up_24,
-        { context -> audioVolumeAdjust(context, true) }
+        { context -> audioVolumeAdjust(context, AudioManager.ADJUST_RAISE) }
     ),
     VOLUME_DOWN(
         "volume_down",
         R.string.list_other_volume_down,
         R.drawable.baseline_volume_down_24,
-        { context -> audioVolumeAdjust(context, false) }
+        { context -> audioVolumeAdjust(context, AudioManager.ADJUST_LOWER) }
+    ),
+    VOLUME_ADJUST(
+        "volume_adjust",
+        R.string.list_other_volume_adjust,
+        R.drawable.baseline_volume_adjust_24,
+        { context -> audioVolumeAdjust(context, AudioManager.ADJUST_SAME) }
     ),
     TRACK_PLAY_PAUSE(
         "play_pause_track",
@@ -181,17 +187,13 @@ private fun audioManagerPressKey(context: Context, key: Int) {
 
 }
 
-private fun audioVolumeAdjust(context: Context, louder: Boolean) {
+private fun audioVolumeAdjust(context: Context, direction: Int) {
     val audioManager =
         context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
     audioManager.adjustStreamVolume(
         AudioManager.STREAM_MUSIC,
-        if (louder) {
-            AudioManager.ADJUST_RAISE
-        } else {
-            AudioManager.ADJUST_LOWER
-        },
+        direction,
         AudioManager.FLAG_SHOW_UI
     )
 }
