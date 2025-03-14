@@ -129,6 +129,7 @@
     <string name="dialog_report_bug_create_report">Report erstellen</string>
     <string name="settings_meta_fork_contact">Entwickler des Fork kontaktieren</string>
     <string name="settings_meta_join_chat">Dem µLauncher-Chat beitreten</string>
+    <string name="settings_meta_donate">Spenden</string>
     <string name="settings_meta_privacy">Datenschutzerklärung</string>
     <!--
       -

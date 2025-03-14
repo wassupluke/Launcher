@@ -210,6 +210,7 @@
 
     <string name="settings_meta_fork_contact">Contact the developer of the fork</string>
     <string name="settings_meta_join_chat">Join µLauncher chat</string>
+    <string name="settings_meta_donate">Donate</string>
 
     <string name="settings_meta_privacy">Privacy Policy</string>
 

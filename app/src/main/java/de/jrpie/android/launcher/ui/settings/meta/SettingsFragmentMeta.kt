@@ -48,6 +48,15 @@ class SettingsFragmentMeta : Fragment(), UIObject {
 
     override fun setOnClicks() {
 
+        fun bindURL(view: View, urlRes: Int) {
+            view.setOnClickListener {
+                openInBrowser(
+                    getString(urlRes),
+                    requireContext()
+                )
+            }
+        }
+
         binding.settingsMetaButtonViewTutorial.setOnClickListener {
             openTutorial(requireContext())
         }
@@ -70,12 +79,7 @@ class SettingsFragmentMeta : Fragment(), UIObject {
 
 
         // view code
-        binding.settingsMetaButtonViewCode.setOnClickListener {
-            openInBrowser(
-                getString(R.string.settings_meta_link_github),
-                requireContext()
-            )
-        }
+        bindURL(binding.settingsMetaButtonViewCode, R.string.settings_meta_link_github)
 
         // report a bug
         binding.settingsMetaButtonReportBug.setOnClickListener {
@@ -111,37 +115,19 @@ class SettingsFragmentMeta : Fragment(), UIObject {
         }
 
         // join chat
-        binding.settingsMetaButtonJoinChat.setOnClickListener {
-            openInBrowser(
-                getString(R.string.settings_meta_chat_url),
-                requireContext()
-            )
-        }
-
+        bindURL(binding.settingsMetaButtonJoinChat, R.string.settings_meta_chat_url)
 
         // contact developer
-        binding.settingsMetaButtonContact.setOnClickListener {
-            openInBrowser(
-                getString(R.string.settings_meta_contact_url),
-                requireContext()
-            )
-        }
+        // bindURL(binding.settingsMetaButtonContact, R.string.settings_meta_contact_url)
 
         // contact fork developer
-        binding.settingsMetaButtonForkContact.setOnClickListener {
-            openInBrowser(
-                getString(R.string.settings_meta_fork_contact_url),
-                requireContext()
-            )
-        }
+        bindURL(binding.settingsMetaButtonForkContact, R.string.settings_meta_fork_contact_url)
+
+        // donate
+        bindURL(binding.settingsMetaButtonDonate, R.string.settings_meta_donate_url)
 
         // privacy policy
-        binding.settingsMetaButtonPrivacy.setOnClickListener {
-            openInBrowser(
-                getString(R.string.settings_meta_privacy_url),
-                requireContext()
-            )
-        }
+        bindURL(binding.settingsMetaButtonPrivacy, R.string.settings_meta_privacy_url)
 
         // legal info
         binding.settingsMetaButtonLicenses.setOnClickListener {

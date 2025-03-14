@@ -59,18 +59,25 @@
             android:text="@string/settings_meta_join_chat"
             android:textAllCaps="false" />
 
-        <Button
+        <!--<Button
             android:id="@+id/settings_meta_button_contact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/settings_meta_contact"
-            android:textAllCaps="false" />
+            android:textAllCaps="false" />-->
 
         <Button
             android:id="@+id/settings_meta_button_fork_contact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/settings_meta_fork_contact"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/settings_meta_button_donate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_meta_donate"
             android:textAllCaps="false" />
 
         <Space
