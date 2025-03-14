@@ -91,6 +91,7 @@ fun isPrivateSpaceLocked(context: Context): Boolean {
     val privateSpaceUser = getPrivateSpaceUser(context) ?: return false
     return userManager.isQuietModeEnabled(privateSpaceUser)
 }
+
 fun lockPrivateSpace(context: Context, lock: Boolean) {
     if (!isPrivateSpaceSupported()) {
         return
@@ -123,10 +124,16 @@ fun togglePrivateSpaceLock(context: Context) {
 }
 
 fun hidePrivateSpaceWhenLocked(context: Context): Boolean {
-    // TODO: perhaps this should be cached
+    // Trying to access the setting as a 3rd party launcher raises a security exception.
+    // This is an Android bug: https://issuetracker.google.com/issues/352276244#comment5
+    // The logic for this is implemented.
+    // TODO: replace this once the Android bug is fixed
+    return false
 
+    // TODO: perhaps this should be cached
     // https://cs.android.com/android/platform/superproject/main/+/main:packages/apps/Launcher3/src/com/android/launcher3/util/SettingsCache.java;l=61;drc=56bf7ad33bc9d5ed3c18e7abefeec5c177ec75d7
-    val key = "hide_privatespace_entry_point"
-    return Settings.Secure.getInt(context.contentResolver, key, 0) == 1
+
+    // val key = "hide_privatespace_entry_point"
+    // return Settings.Secure.getInt(context.contentResolver, key, 0) == 1
 }
 
