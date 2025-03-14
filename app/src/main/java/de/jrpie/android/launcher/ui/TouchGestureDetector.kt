@@ -1,6 +1,8 @@
 package de.jrpie.android.launcher.ui
 
 import android.content.Context
+import android.os.Handler
+import android.os.Looper
 import android.view.MotionEvent
 import android.view.ViewConfiguration
 import de.jrpie.android.launcher.actions.Gesture
@@ -26,6 +28,8 @@ class TouchGestureDetector(
     private val DOUBLE_TAP_TIMEOUT: Int
 
     private val MIN_TRIANGLE_HEIGHT = 250
+
+    private val longPressHandler = Handler(Looper.getMainLooper())
 
 
     data class Vector(val x: Float, val y: Float) {
@@ -83,16 +87,28 @@ class TouchGestureDetector(
     }
 
     private var paths = HashMap<Int, PointerPath>()
+    private var gestureIsLongClick = false
 
     private var lastTappedTime = 0L
     private var lastTappedLocation: Vector? = null
 
-    fun onTouchEvent(event: MotionEvent): Boolean {
+    fun onTouchEvent(event: MotionEvent) {
         val pointerIdToIndex =
             (0..<event.pointerCount).associateBy { event.getPointerId(it) }
 
         if (event.actionMasked == MotionEvent.ACTION_DOWN) {
-            paths = HashMap()
+            synchronized(this@TouchGestureDetector) {
+                paths = HashMap()
+                gestureIsLongClick = false
+            }
+            longPressHandler.postDelayed({
+                synchronized(this@TouchGestureDetector) {
+                    if (paths.entries.size == 1 && paths.entries.firstOrNull()?.value?.isTap() == true) {
+                        gestureIsLongClick = true
+                        Gesture.LONG_CLICK.invoke(context)
+                    }
+                }
+            }, LONG_PRESS_TIMEOUT.toLong())
         }
 
         // add new pointers
@@ -122,9 +138,17 @@ class TouchGestureDetector(
         }
 
         if (event.actionMasked == MotionEvent.ACTION_UP) {
+            synchronized(this@TouchGestureDetector) {
+                // if the long press handler is still running, kill it
+                longPressHandler.removeCallbacksAndMessages(null)
+                // if the gesture was already detected as a long click, there is nothing to do
+                if (gestureIsLongClick) {
+                    return
+                }
+            }
             classifyPaths(paths, event.downTime, event.eventTime)
         }
-        return true
+        return
     }
 
     private fun getGestureForDirection(direction: Vector): Gesture? {
@@ -171,10 +195,6 @@ class TouchGestureDetector(
                     lastTappedTime = timeEnd
                     lastTappedLocation = mainPointerPath.last
                 }
-            } else if (duration > LONG_PRESS_TIMEOUT) {
-                // TODO: Don't wait until the finger is lifted.
-                // Instead set a timer to start long click as soon as LONG_PRESS_TIMEOUT is reached
-                Gesture.LONG_CLICK.invoke(context)
             }
         } else {
             // detect swipes

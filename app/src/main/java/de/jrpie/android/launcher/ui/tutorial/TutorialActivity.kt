@@ -2,7 +2,9 @@ package de.jrpie.android.launcher.ui.tutorial
 
 import android.content.Intent
 import android.content.res.Resources
+import android.os.Build
 import android.os.Bundle
+import android.window.OnBackInvokedDispatcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -33,6 +35,19 @@ class TutorialActivity : AppCompatActivity(), UIObject {
         super<AppCompatActivity>.onCreate(savedInstanceState)
         super<UIObject>.onCreate()
 
+        // Handle back key / gesture on Android 13+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            onBackInvokedDispatcher.registerOnBackInvokedCallback(
+                OnBackInvokedDispatcher.PRIORITY_OVERLAY
+            ) {
+                // prevent going back when the tutorial is shown for the first time
+                if (!LauncherPreferences.internal().started()) {
+                    return@registerOnBackInvokedCallback
+                }
+                finish()
+            }
+        }
+
         // Initialise layout
         setContentView(R.layout.tutorial)
 
@@ -60,7 +75,7 @@ class TutorialActivity : AppCompatActivity(), UIObject {
         }
     }
 
-    // Default: prevent going back, allow if viewed again later
+    // prevent going back when the tutorial is shown for the first time
     override fun onBackPressed() {
         if (LauncherPreferences.internal().started())
             super.onBackPressed()

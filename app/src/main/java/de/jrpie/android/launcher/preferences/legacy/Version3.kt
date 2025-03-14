@@ -11,6 +11,7 @@ import de.jrpie.android.launcher.preferences.serialization.SetAbstractAppInfoPre
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import java.util.HashSet
+import androidx.core.content.edit
 
 /**
  * Migrate preferences from version 3 (used until version 0.0.23) to the current format
@@ -42,6 +43,7 @@ private fun migrateSetAppInfo(key: String, preferences: SharedPreferences, edito
         deserializeSet(preferences.getStringSet(key, null))?.let {
             set.addAll(it)
         }
+        @Suppress("UNCHECKED_CAST")
         editor.putStringSet(
             key,
             serializer.serialize(set as java.util.Set<AbstractAppInfo>) as Set<String>?
@@ -60,6 +62,7 @@ private fun migrateMapAppInfoString(key: String, preferences: SharedPreferences,
         deserializeMap(preferences.getStringSet(key, null))?.let {
             map.putAll(it)
         }
+        @Suppress("UNCHECKED_CAST")
         editor.putStringSet(key, serializer.serialize(map) as Set<String>?)
     } catch (e: Exception) {
         e.printStackTrace()
@@ -72,14 +75,11 @@ fun migratePreferencesFromVersion3() {
     assert(LauncherPreferences.internal().versionCode() == 3)
 
     val preferences = LauncherPreferences.getSharedPreferences()
-    val editor = preferences.edit()
-    migrateSetAppInfo(LauncherPreferences.apps().keys().favorites(), preferences, editor)
-    migrateSetAppInfo(LauncherPreferences.apps().keys().hidden(), preferences, editor)
-    migrateMapAppInfoString(LauncherPreferences.apps().keys().customNames(), preferences, editor)
-
-    editor.apply()
-
-
+    preferences.edit {
+        migrateSetAppInfo(LauncherPreferences.apps().keys().favorites(), preferences, this)
+        migrateSetAppInfo(LauncherPreferences.apps().keys().hidden(), preferences, this)
+        migrateMapAppInfoString(LauncherPreferences.apps().keys().customNames(), preferences, this)
+    }
 
     LauncherPreferences.internal().versionCode(4)
 }

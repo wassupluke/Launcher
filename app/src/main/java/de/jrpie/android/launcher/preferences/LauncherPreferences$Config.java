@@ -21,8 +21,10 @@ import eu.jonahbauer.android.preference.annotations.Preferences;
         r = R.class,
         value = {
                 @PreferenceGroup(name = "internal", prefix = "settings_internal_", suffix = "_key", value = {
+                        // set after the user finished the tutorial
                         @Preference(name = "started", type = boolean.class, defaultValue = "false"),
                         @Preference(name = "started_time", type = long.class),
+                        // see PREFERENCE_VERSION in de.jrpie.android.launcher.preferences.Preferences.kt
                         @Preference(name = "version_code", type = int.class, defaultValue = "-1"),
                 }),
                 @PreferenceGroup(name = "apps", prefix = "settings_apps_", suffix = "_key", value = {

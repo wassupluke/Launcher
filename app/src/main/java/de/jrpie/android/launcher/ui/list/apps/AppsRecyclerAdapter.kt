@@ -67,7 +67,7 @@ class AppsRecyclerAdapter(
         override fun onClick(v: View) {
             val rect = Rect()
             img.getGlobalVisibleRect(rect)
-            selectItem(adapterPosition, rect)
+            selectItem(bindingAdapterPosition, rect)
         }
 
         init {

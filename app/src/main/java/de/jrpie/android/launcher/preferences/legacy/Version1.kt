@@ -100,7 +100,7 @@ private fun migrateAppInfoStringMap(key: String) {
             }
         }?.toMap(HashMap())
     )?.let {
-        preferences.edit().putStringSet(key, it as Set<String>).apply()
+        preferences.edit().putStringSet(key, it).apply()
     }
 }
 

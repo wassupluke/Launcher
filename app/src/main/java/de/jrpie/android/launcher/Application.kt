@@ -10,6 +10,8 @@ import android.content.pm.ShortcutInfo
 import android.os.AsyncTask
 import android.os.Build
 import android.os.Build.VERSION_CODES
+import android.os.Handler
+import android.os.Looper
 import android.os.UserHandle
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
@@ -108,12 +110,10 @@ class Application : android.app.Application() {
         // Try to restore old preferences
         migratePreferencesToNewVersion(this)
 
-        // First time opening the app: set defaults and start tutorial
+        // First time opening the app: set defaults
+        // The tutorial is started from HomeActivity#onStart, as starting it here is blocked by android
         if (!LauncherPreferences.internal().started()) {
             resetPreferences(this)
-
-            LauncherPreferences.internal().started(true)
-            openTutorial(this)
         }
 
 
@@ -134,7 +134,8 @@ class Application : android.app.Application() {
                     it.addAction(Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE)
                 }
             }
-            ContextCompat.registerReceiver(this, profileAvailabilityBroadcastReceiver, filter,
+            ContextCompat.registerReceiver(
+                this, profileAvailabilityBroadcastReceiver, filter,
                 ContextCompat.RECEIVER_EXPORTED
             )
         }

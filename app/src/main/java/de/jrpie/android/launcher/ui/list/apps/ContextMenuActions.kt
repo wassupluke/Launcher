@@ -22,6 +22,7 @@ import de.jrpie.android.launcher.apps.DetailedAppInfo
 import de.jrpie.android.launcher.apps.PinnedShortcutInfo
 import de.jrpie.android.launcher.getUserFromId
 import de.jrpie.android.launcher.preferences.LauncherPreferences
+import androidx.core.net.toUri
 
 private const val LOG_TAG = "AppContextMenu"
 
@@ -44,7 +45,7 @@ fun AbstractAppInfo.uninstall(activity: Activity) {
         Log.i(LOG_TAG, "uninstalling $this")
 
         val intent = Intent(Intent.ACTION_UNINSTALL_PACKAGE)
-        intent.data = Uri.parse("package:$packageName")
+        intent.data = "package:$packageName".toUri()
         getUserFromId(userId, activity).let { user ->
             intent.putExtra(Intent.EXTRA_USER, user)
         }

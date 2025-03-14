@@ -9,9 +9,6 @@ import android.util.DisplayMetrics
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
-import android.view.Window
-import android.view.WindowInsets
-import android.view.WindowInsetsController
 import android.window.OnBackInvokedDispatcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -20,6 +17,7 @@ import de.jrpie.android.launcher.actions.Action
 import de.jrpie.android.launcher.actions.Gesture
 import de.jrpie.android.launcher.actions.LauncherAction
 import de.jrpie.android.launcher.databinding.HomeBinding
+import de.jrpie.android.launcher.openTutorial
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.ui.tutorial.TutorialActivity
 import java.util.Locale
@@ -58,7 +56,6 @@ class HomeActivity : UIObject, AppCompatActivity() {
         super<AppCompatActivity>.onCreate(savedInstanceState)
         super<UIObject>.onCreate()
 
-
         val displayMetrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(displayMetrics)
 
@@ -88,14 +85,17 @@ class HomeActivity : UIObject, AppCompatActivity() {
         binding.buttonFallbackSettings.setOnClickListener {
             LauncherAction.SETTINGS.invoke(this)
         }
-
-
     }
 
     override fun onStart() {
         super<AppCompatActivity>.onStart()
 
         super<UIObject>.onStart()
+
+        // If the tutorial was not finished, start it
+        if (!LauncherPreferences.internal().started()) {
+            openTutorial(this)
+        }
 
         LauncherPreferences.getSharedPreferences()
             .registerOnSharedPreferenceChangeListener(sharedPreferencesListener)
@@ -220,7 +220,8 @@ class HomeActivity : UIObject, AppCompatActivity() {
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        return touchGestureDetector.onTouchEvent(event) || super.onTouchEvent(event)
+        touchGestureDetector.onTouchEvent(event)
+        return true
     }
 
     override fun setOnClicks() {

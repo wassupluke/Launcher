@@ -33,7 +33,7 @@ class OtherRecyclerAdapter(val activity: Activity) :
 
 
         override fun onClick(v: View) {
-            val pos = adapterPosition
+            val pos = bindingAdapterPosition
             val content = othersList[pos]
 
             forGesture?.let { returnChoiceIntent(it, content) }
