@@ -1,7 +1,6 @@
 package de.jrpie.android.launcher.ui.list
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Rect
@@ -33,16 +32,6 @@ import de.jrpie.android.launcher.ui.list.apps.ListFragmentApps
 import de.jrpie.android.launcher.ui.list.other.ListFragmentOther
 
 
-// TODO: Better solution for this intercommunication functionality (used in list-fragments)
-var intention = ListActivity.ListActivityIntention.VIEW
-var favoritesVisibility: AppFilter.Companion.AppSetVisibility =
-    AppFilter.Companion.AppSetVisibility.VISIBLE
-var privateSpaceVisibility: AppFilter.Companion.AppSetVisibility =
-    AppFilter.Companion.AppSetVisibility.VISIBLE
-var hiddenVisibility: AppFilter.Companion.AppSetVisibility =
-    AppFilter.Companion.AppSetVisibility.HIDDEN
-var forGesture: String? = null
-
 /**
  * The [ListActivity] is the most general purpose activity in Launcher:
  * - used to view all apps and edit their settings
@@ -52,11 +41,19 @@ var forGesture: String? = null
  */
 class ListActivity : AppCompatActivity(), UIObject {
     private lateinit var binding: ListBinding
+    var intention = ListActivityIntention.VIEW
+    var favoritesVisibility: AppFilter.Companion.AppSetVisibility =
+        AppFilter.Companion.AppSetVisibility.VISIBLE
+    var privateSpaceVisibility: AppFilter.Companion.AppSetVisibility =
+        AppFilter.Companion.AppSetVisibility.VISIBLE
+    var hiddenVisibility: AppFilter.Companion.AppSetVisibility =
+        AppFilter.Companion.AppSetVisibility.HIDDEN
+    var forGesture: String? = null
 
 
     private fun updateLockIcon(locked: Boolean) {
         if (
-            // only show lock for VIEW intention
+        // only show lock for VIEW intention
             (intention != ListActivityIntention.VIEW)
             // hide lock when private space does not exist
             || !isPrivateSpaceSetUp(this)
@@ -261,7 +258,7 @@ private val TAB_TITLES = arrayOf(
  * The [ListSectionsPagerAdapter] returns the fragment,
  * which corresponds to the selected tab in [ListActivity].
  */
-class ListSectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
+class ListSectionsPagerAdapter(private val activity: ListActivity, fm: FragmentManager) :
     FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     override fun getItem(position: Int): Fragment {
@@ -273,11 +270,11 @@ class ListSectionsPagerAdapter(private val context: Context, fm: FragmentManager
     }
 
     override fun getPageTitle(position: Int): CharSequence {
-        return context.resources.getString(TAB_TITLES[position])
+        return activity.resources.getString(TAB_TITLES[position])
     }
 
     override fun getCount(): Int {
-        return when (intention) {
+        return when (activity.intention) {
             ListActivity.ListActivityIntention.VIEW -> 1
             else -> 2
         }

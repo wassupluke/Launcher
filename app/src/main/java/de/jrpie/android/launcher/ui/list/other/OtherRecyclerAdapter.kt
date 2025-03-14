@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
 import de.jrpie.android.launcher.actions.LauncherAction
-import de.jrpie.android.launcher.ui.list.forGesture
+import de.jrpie.android.launcher.ui.list.ListActivity
 
 /**
  * The [OtherRecyclerAdapter] will only be displayed in the ListActivity,
@@ -36,7 +36,7 @@ class OtherRecyclerAdapter(val activity: Activity) :
             val pos = bindingAdapterPosition
             val content = othersList[pos]
 
-            forGesture?.let { returnChoiceIntent(it, content) }
+            (activity as? ListActivity)?.forGesture?.let { returnChoiceIntent(it, content) }
         }
 
         init {

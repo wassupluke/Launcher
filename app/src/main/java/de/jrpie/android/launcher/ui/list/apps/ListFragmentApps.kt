@@ -17,11 +17,6 @@ import de.jrpie.android.launcher.databinding.ListAppsBinding
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.ui.UIObject
 import de.jrpie.android.launcher.ui.list.ListActivity
-import de.jrpie.android.launcher.ui.list.favoritesVisibility
-import de.jrpie.android.launcher.ui.list.forGesture
-import de.jrpie.android.launcher.ui.list.hiddenVisibility
-import de.jrpie.android.launcher.ui.list.intention
-import de.jrpie.android.launcher.ui.list.privateSpaceVisibility
 import de.jrpie.android.launcher.ui.openSoftKeyboard
 
 
@@ -54,7 +49,7 @@ class ListFragmentApps : Fragment(), UIObject {
             .registerOnSharedPreferenceChangeListener(sharedPreferencesListener)
 
         binding.listAppsCheckBoxFavorites.isChecked =
-            (favoritesVisibility == AppFilter.Companion.AppSetVisibility.EXCLUSIVE)
+            ((activity as? ListActivity)?.favoritesVisibility == AppFilter.Companion.AppSetVisibility.EXCLUSIVE)
     }
 
     override fun onStop() {
@@ -67,16 +62,17 @@ class ListFragmentApps : Fragment(), UIObject {
     override fun setOnClicks() {}
 
     override fun adjustLayout() {
+        val listActivity = activity as? ListActivity ?: return
 
         appsRecyclerAdapter =
             AppsRecyclerAdapter(
-                requireActivity(), binding.root, intention, forGesture,
+                listActivity, binding.root, listActivity.intention, listActivity.forGesture,
                 appFilter = AppFilter(
                     requireContext(),
                     "",
-                    favoritesVisibility = favoritesVisibility,
-                    privateSpaceVisibility = privateSpaceVisibility,
-                    hiddenVisibility = hiddenVisibility
+                    favoritesVisibility = listActivity.favoritesVisibility,
+                    privateSpaceVisibility = listActivity.privateSpaceVisibility,
+                    hiddenVisibility = listActivity.hiddenVisibility
                 ),
                 layout = LauncherPreferences.list().layout()
             )
@@ -124,7 +120,8 @@ class ListFragmentApps : Fragment(), UIObject {
 
                 if (newText == " " &&
                     !appsRecyclerAdapter.disableAutoLaunch &&
-                    intention == ListActivity.ListActivityIntention.VIEW &&
+                    (activity as? ListActivity)?.intention
+                        == ListActivity.ListActivityIntention.VIEW &&
                     LauncherPreferences.functionality().searchAutoLaunch()
                 ) {
                     appsRecyclerAdapter.disableAutoLaunch = true
@@ -141,17 +138,17 @@ class ListFragmentApps : Fragment(), UIObject {
         })
 
         binding.listAppsCheckBoxFavorites.setOnClickListener {
-            favoritesVisibility =
+            listActivity.favoritesVisibility =
                 if (binding.listAppsCheckBoxFavorites.isChecked) {
                     AppFilter.Companion.AppSetVisibility.EXCLUSIVE
                 } else {
                     AppFilter.Companion.AppSetVisibility.VISIBLE
                 }
-            appsRecyclerAdapter.setFavoritesVisibility(favoritesVisibility)
+            appsRecyclerAdapter.setFavoritesVisibility(listActivity.favoritesVisibility)
             (activity as? ListActivity)?.updateTitle()
         }
 
-        if (intention == ListActivity.ListActivityIntention.VIEW
+        if (listActivity.intention == ListActivity.ListActivityIntention.VIEW
             && LauncherPreferences.functionality().searchAutoOpenKeyboard()
         ) {
             binding.listAppsSearchview.openSoftKeyboard(requireContext())
