@@ -87,24 +87,40 @@ class TouchGestureDetector(
     }
 
     private var paths = HashMap<Int, PointerPath>()
-    private var gestureIsLongClick = false
+
+    /* Set when
+     *  - the longPressHandler has detected this gesture as a long press
+     *  - the gesture was cancelled by MotionEvent.ACTION_CANCEL
+     * In any case, the current gesture should be ignored by further detection logic.
+     */
+    private var cancelled = false
 
     private var lastTappedTime = 0L
     private var lastTappedLocation: Vector? = null
 
     fun onTouchEvent(event: MotionEvent) {
+
+        if (event.actionMasked == MotionEvent.ACTION_CANCEL) {
+            synchronized(this@TouchGestureDetector) {
+                cancelled = true
+            }
+        }
+
         val pointerIdToIndex =
             (0..<event.pointerCount).associateBy { event.getPointerId(it) }
 
         if (event.actionMasked == MotionEvent.ACTION_DOWN) {
             synchronized(this@TouchGestureDetector) {
                 paths = HashMap()
-                gestureIsLongClick = false
+                cancelled = false
             }
             longPressHandler.postDelayed({
                 synchronized(this@TouchGestureDetector) {
+                    if (cancelled) {
+                        return@postDelayed
+                    }
                     if (paths.entries.size == 1 && paths.entries.firstOrNull()?.value?.isTap() == true) {
-                        gestureIsLongClick = true
+                        cancelled = true
                         Gesture.LONG_CLICK.invoke(context)
                     }
                 }
@@ -142,7 +158,7 @@ class TouchGestureDetector(
                 // if the long press handler is still running, kill it
                 longPressHandler.removeCallbacksAndMessages(null)
                 // if the gesture was already detected as a long click, there is nothing to do
-                if (gestureIsLongClick) {
+                if (cancelled) {
                     return
                 }
             }
