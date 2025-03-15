@@ -10,7 +10,7 @@
     tools:context=".ui.tutorial.TutorialActivity">
 
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/tutorial_viewpager"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -22,15 +22,37 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <ImageView
+        android:id="@+id/tutorial_button_back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:alpha="0.5"
+        android:src="@drawable/baseline_navigate_before_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tutorial_viewpager" />
+
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tutorial_tabs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tutorial_button_next"
+        app:layout_constraintStart_toEndOf="@+id/tutorial_button_back"
         app:tabBackground="@drawable/tutorial_tab_selector"
         app:tabGravity="center"
-        app:tabIndicatorHeight="0dp"
+        app:tabIndicatorHeight="0dp" />
+
+    <ImageView
+        android:id="@+id/tutorial_button_next"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:src="@drawable/baseline_navigate_next_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tutorial_viewpager" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

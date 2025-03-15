@@ -193,7 +193,7 @@
     <string name="settings_general_choose_home_screen">Set μLauncher as home screen</string>
     <string name="settings_meta_cant_select_launcher">App Info</string>
 
-    <string name="settings_meta_show_tutorial">View Launcher Tutorial</string>
+    <string name="settings_meta_show_tutorial">View µLauncher Tutorial</string>
 
     <string name="settings_meta_reset">Reset Settings</string>
     <string name="settings_meta_reset_confirm">You are going to discard all your preferences. Continue?</string>
@@ -202,14 +202,14 @@
     <string name="settings_meta_report_bug">Report a bug</string>
 
     <string name="dialog_report_bug_title">Report a bug</string>
-    <string name="dialog_report_bug_info">Thank you for helping to improve µLauncher!\nPlease consider adding the following information to your bug report:</string>
+    <string name="dialog_report_bug_info">Thank you for helping to improve μLauncher!\nPlease consider adding the following information to your bug report:</string>
     <string name="dialog_report_bug_button_clipboard">Copy to clipboard</string>
     <string name="dialog_report_bug_security_info">Please do not report security vulnerabilities publicly on GitHub, but use the following instead:</string>
     <string name="dialog_report_bug_button_security">Report a security vulnerability</string>
     <string name="dialog_report_bug_create_report">Create report</string>
 
     <string name="settings_meta_fork_contact">Contact the developer of the fork</string>
-    <string name="settings_meta_join_chat">Join µLauncher chat</string>
+    <string name="settings_meta_join_chat">Join μLauncher chat</string>
     <string name="settings_meta_donate">Donate</string>
 
     <string name="settings_meta_privacy">Privacy Policy</string>
@@ -246,7 +246,7 @@
     <string name="list_apps_search_hint">Search</string>
     <string name="list_apps_search_hint_no_auto_launch">Search (no auto launch)</string>
 
-    <string name="list_other_settings">µLauncher Settings</string>
+    <string name="list_other_settings">μLauncher Settings</string>
     <string name="list_other_list">All Applications</string>
     <string name="list_other_list_favorites">Favorite Applications</string>
     <string name="list_other_list_private_space">Private Space</string>
@@ -274,22 +274,29 @@
       -
       -->
     <string name="tutorial_title">Tutorial</string>
-    <string name="tutorial_start_text">Take a few seconds to learn how to use this Launcher!</string>
+    <string name="tutorial_start_text">👋\n\nTake a few seconds to learn how to use this Launcher!</string>
 
     <string name="tutorial_concept_title">Concept</string>
-    <string name="tutorial_concept_text">Launcher is designed to be minimal, efficient and free of distraction.  It is free of payments, ads and tracking services.</string>
-    <string name="tutorial_concept_text_2">The app is open-source (MIT license) and available on GitHub!  Make sure to check out the repository!</string>
+    <string name="tutorial_concept_text">μLauncher is designed to be minimal, efficient and free of distraction.
+        \n\nIt contains no ads and collects no data.</string>
+    <string name="tutorial_concept_text_2">It is free software (MIT license)!\nMake sure to check out the repository!</string>
+    <string name="tutorial_concept_label_version">Version</string>
 
     <string name="tutorial_usage_title">Usage</string>
     <string name="tutorial_usage_text">Your home screen contains the local date and time. No distraction.</string>
-    <string name="tutorial_usage_text_2">You can launch your apps with a single swipe or button press. Choose some in the next slide.</string>
+    <string name="tutorial_usage_text_2">You can launch your most important apps with touch gestures or button presses.</string>
+
+    <string name="tutorial_app_list_title">All Apps</string>
+    <string name="tutorial_app_list_text">You can quickly search through all apps in the app list.\n\nSwipe up to open it, or bind it to a different gesture.</string>
+    <string name="tutorial_app_list_text_2">Once only one app matches, it launches automatically.\nThis can be disabled by prefixing the query with a space.</string>
+
 
     <string name="tutorial_setup_title">Setup</string>
     <string name="tutorial_setup_text">We chose some default apps for you. You can change them now if you want to:</string>
     <string name="tutorial_setup_text_2">You can also change your selection later.</string>
 
     <string name="tutorial_finish_title">Let\'s go!</string>
-    <string name="tutorial_finish_text">You are ready to get started!  I hope this is of great value to you!  - Finn (who made Launcher) \tand Josia (who made some improvements and maintains the fork μLauncher)</string>
+    <string name="tutorial_finish_text">You are ready to get started!\n\nI hope this is of great value to you!\n\n- Finn (who made Launcher) and Josia (who made some improvements and maintains the fork μLauncher)</string>
     <string name="tutorial_finish_button">Start</string>
 
 
@@ -301,7 +308,7 @@
     <string name="snackbar_app_hidden">App hidden. You can make it visible again in settings.</string>
     <string name="undo">Undo</string>
     <string name="list_other_expand_settings_panel">Quick Settings</string>
-    <string name="toast_device_admin_not_enabled">µLauncher needs to be a device admin in order to lock the screen.</string>
+    <string name="toast_device_admin_not_enabled">μLauncher needs to be a device admin in order to lock the screen.</string>
     <string name="device_admin_explanation">This is required for the lock screen action.</string>
     <string name="device_admin_description">Enable the lock screen action</string>
     <string name="alert_no_torch_found">No camera with torch detected.</string>
@@ -311,18 +318,18 @@
     <string name="toast_private_space_locked">Private space locked</string>
     <string name="toast_private_space_unlocked">Private space unlocked</string>
     <string name="toast_private_space_not_available">Private space is not available</string>
-    <string name="toast_private_space_default_home_screen">µLauncher needs to be the default home screen to access private space.</string>
+    <string name="toast_private_space_default_home_screen">μLauncher needs to be the default home screen to access private space.</string>
     <string name="tooltip_lock_private_space">Lock private space</string>
     <string name="tooltip_unlock_private_space">Unlock private space</string>
     <string name="toast_lock_screen_not_supported">Error: Locking the screen using accessibility is not supported on this device. Please use device admin instead.</string>
-    <string name="accessibility_service_name">µLauncher - lock screen</string>
+    <string name="accessibility_service_name">μLauncher - lock screen</string>
     <string name="accessibility_service_description">
-        Setting µLauncher as an accessibility service allows it to lock the screen.
+        Setting μLauncher as an accessibility service allows it to lock the screen.
         Note that excessive permissions are required. You should never grant such permissions lightly to any app.
 
-        µLauncher will use the accessibility service only for locking the screen. You can check the source code to make sure.
+        μLauncher will use the accessibility service only for locking the screen. You can check the source code to make sure.
 
-        Note that locking the screen can also be accomplished by granting µLauncher device administrator permissions. However that method doesn\'t work with fingerprint and face unlock.
+        Note that locking the screen can also be accomplished by granting μLauncher device administrator permissions. However that method doesn\'t work with fingerprint and face unlock.
     </string>
 
 
@@ -340,7 +347,7 @@
 
         <h3>Accessibility Service</h3>
         Requires excessive privileges.
-        µLauncher will use those privileges only for locking the screen.
+        μLauncher will use those privileges only for locking the screen.
         <br/>
         (You really should not trust a random app you just downloaded with such a claim, but you can check the <a href=\"https://github.com/jrpie/Launcher\">source code</a>.)
         <br/>
@@ -363,11 +370,11 @@
     <string name="dialog_select_color_ok">Ok</string>
     <string name="dialog_select_color_color_hex">Color</string>
     <string name="dialog_choose_color_title">Choose color</string>
-    <string name="dialog_consent_accessibility_privileges">I am aware that this will grant far-reaching privileges to µLauncher.</string>
+    <string name="dialog_consent_accessibility_privileges">I am aware that this will grant far-reaching privileges to μLauncher.</string>
     <string name="dialog_consent_accessibility_other_options">I am aware that other options exist (using device administrator privileges or the power button).</string>
-    <string name="dialog_consent_accessibility_consent">I consent to µLauncher using the accessibility service to provide functionality unrelated to accessibility.</string>
-    <string name="dialog_consent_accessibility_data_collection">I consent to µLauncher not collecting any data.</string>
-    <string name="dialog_consent_accessibility_text"><![CDATA[You are about to activate the accessibility service. This will grant <strong>far-reaching privileges</strong> to µLauncher.<br/>µLauncher will use these privileges <strong>only to lock the screen</strong>. µLauncher <strong>will never collect any data</strong>. In particular, µLauncher does not use the accessibility service to collect any data.]]></string>
+    <string name="dialog_consent_accessibility_consent">I consent to μLauncher using the accessibility service to provide functionality unrelated to accessibility.</string>
+    <string name="dialog_consent_accessibility_data_collection">I consent to μLauncher not collecting any data.</string>
+    <string name="dialog_consent_accessibility_text"><![CDATA[You are about to activate the accessibility service. This will grant <strong>far-reaching privileges</strong> to μLauncher.<br/>μLauncher will use these privileges <strong>only to lock the screen</strong>. μLauncher <strong>will never collect any data</strong>. In particular, μLauncher does not use the accessibility service to collect any data.]]></string>
     <string name="dialog_consent_accessibility_title">Activating the Accessibility Service</string>
     <string name="dialog_consent_accessibility_ok">Activate Accessibility Service</string>
     <string name="dialog_cancel">Cancel</string>

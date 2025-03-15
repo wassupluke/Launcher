@@ -6,22 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import de.jrpie.android.launcher.BuildConfig
-import de.jrpie.android.launcher.databinding.TutorialConceptBinding
+import de.jrpie.android.launcher.databinding.Tutorial1ConceptBinding
 import de.jrpie.android.launcher.ui.UIObject
 
 /**
- * The [TutorialFragmentConcept] is a used as a tab in the TutorialActivity.
+ * The [TutorialFragment1Concept] is a used as a tab in the TutorialActivity.
  *
  * It is used to display info about Launchers concept (open source, efficiency ...)
  */
-class TutorialFragmentConcept : Fragment(), UIObject {
-    private lateinit var binding: TutorialConceptBinding
+class TutorialFragment1Concept : Fragment(), UIObject {
+    private lateinit var binding: Tutorial1ConceptBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = TutorialConceptBinding.inflate(inflater, container, false)
+        binding = Tutorial1ConceptBinding.inflate(inflater, container, false)
         binding.tutorialConceptBadgeVersion.text = BuildConfig.VERSION_NAME
         return binding.root
     }

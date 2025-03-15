@@ -9,17 +9,17 @@ import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.ui.UIObject
 
 /**
- * The [TutorialFragmentSetup] is a used as a tab in the TutorialActivity.
+ * The [TutorialFragment2Usage] is a used as a tab in the TutorialActivity.
  *
- * It is used to display info in the tutorial
+ * Tells the user how his screen will look and how the app can be used
  */
-class TutorialFragmentSetup : Fragment(), UIObject {
+class TutorialFragment2Usage : Fragment(), UIObject {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.tutorial_setup, container, false)
+        return inflater.inflate(R.layout.tutorial_2_usage, container, false)
     }
 
     override fun onStart() {

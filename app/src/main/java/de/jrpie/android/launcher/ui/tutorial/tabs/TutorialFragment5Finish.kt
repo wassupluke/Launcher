@@ -6,25 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import de.jrpie.android.launcher.BuildConfig.VERSION_CODE
-import de.jrpie.android.launcher.databinding.TutorialFinishBinding
+import de.jrpie.android.launcher.databinding.Tutorial5FinishBinding
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.setDefaultHomeScreen
 import de.jrpie.android.launcher.ui.UIObject
 
 /**
- * The [TutorialFragmentFinish] is a used as a tab in the TutorialActivity.
+ * The [TutorialFragment5Finish] is a used as a tab in the TutorialActivity.
  *
  * It is used to display further resources and let the user start Launcher
  */
-class TutorialFragmentFinish : Fragment(), UIObject {
+class TutorialFragment5Finish : Fragment(), UIObject {
 
-    private lateinit var binding: TutorialFinishBinding
+    private lateinit var binding: Tutorial5FinishBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = TutorialFinishBinding.inflate(inflater, container, false)
+        binding = Tutorial5FinishBinding.inflate(inflater, container, false)
         return binding.root
     }
 
