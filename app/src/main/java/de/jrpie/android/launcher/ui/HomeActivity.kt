@@ -69,9 +69,22 @@ class HomeActivity : UIObject, AppCompatActivity() {
             LauncherPreferences.enabled_gestures().edgeSwipeEdgeWidth() / 100f
         )
 
+
+
         // Initialise layout
         binding = HomeBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            binding.root.setOnApplyWindowInsetsListener { _, windowInsets ->
+                val insets = windowInsets.systemGestureInsets
+                touchGestureDetector.setSystemGestureInsets(insets)
+
+                windowInsets
+            }
+        }
+
 
 
         // Handle back key / gesture on Android 13+, cf. onKeyDown()
