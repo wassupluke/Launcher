@@ -206,15 +206,7 @@
     <string name="screen_lock_method_dialog_title">Methode zum Sperren wählen</string>
     <string name="screen_lock_method_use_accessibility">Bedienungshilfe verwenden</string>
     <string name="screen_lock_method_use_device_admin">Geräteadministrator verwenden</string>
-    <string name="accessibility_service_description">
-        µLauncher als Bedienungshilfe zu aktivieren ermöglicht es µLauncher, den Bildschirm zu sperren.
-        Achtung: Hierfür sind weitgehende Berechtigungen erforderlich.
-        Solche Berechtigungen sollten niemals leichtfertig vergeben werden.
-        µLauncher wird diese Berechtigungen ausschließlich zum Sperren des Bildschirms verwenden.
-
-        Alternativ kann der Bildschirm auch mithilfe von Geräteadministratorberechtigungen gesperrt werden.
-        Dann ist jedoch ein Entsperren mit Fingerabdruck oder Gesichtserkennung nicht möglich.
-    </string>
+    <string name="accessibility_service_description">µLauncher als Bedienungshilfe zu aktivieren ermöglicht es µLauncher, den Bildschirm zu sperren. Achtung: Hierfür sind weitgehende Berechtigungen erforderlich. Solche Berechtigungen sollten niemals leichtfertig vergeben werden. µLauncher wird diese Berechtigungen ausschließlich zum Sperren des Bildschirms verwenden. Alternativ kann der Bildschirm auch mithilfe von Geräteadministratorberechtigungen gesperrt werden. Dann ist jedoch ein Entsperren mit Fingerabdruck oder Gesichtserkennung nicht möglich.</string>
     <string name="screen_lock_method_dialog_text"><![CDATA[
         <h1>Methode zum Sperren auswählen</h1>
         Es gibt zwei Möglichkeiten, wie µLauncher den Bildschirm sperren kann.
