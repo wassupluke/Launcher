@@ -12,10 +12,8 @@ import android.window.OnBackInvokedDispatcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.viewpager.widget.ViewPager
-import com.google.android.material.tabs.TabLayout
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_UNINSTALL
@@ -241,11 +239,14 @@ class ListActivity : AppCompatActivity(), UIObject {
 
         updateTitle()
 
-        val sectionsPagerAdapter = ListSectionsPagerAdapter(this, supportFragmentManager)
-        val viewPager: ViewPager = findViewById(R.id.list_viewpager)
-        viewPager.adapter = sectionsPagerAdapter
-        val tabs: TabLayout = findViewById(R.id.list_tabs)
-        tabs.setupWithViewPager(viewPager)
+        val sectionsPagerAdapter = ListSectionsPagerAdapter(this)
+        binding.listViewpager.apply {
+            adapter = sectionsPagerAdapter
+            currentItem = 0
+        }
+        TabLayoutMediator(binding.listTabs, binding.listViewpager) { tab, position ->
+            tab.text = sectionsPagerAdapter.getPageTitle(position)
+        }.attach()
     }
 }
 
@@ -258,10 +259,10 @@ private val TAB_TITLES = arrayOf(
  * The [ListSectionsPagerAdapter] returns the fragment,
  * which corresponds to the selected tab in [ListActivity].
  */
-class ListSectionsPagerAdapter(private val activity: ListActivity, fm: FragmentManager) :
-    FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class ListSectionsPagerAdapter(private val activity: ListActivity) :
+    FragmentStateAdapter(activity) {
 
-    override fun getItem(position: Int): Fragment {
+    override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> ListFragmentApps()
             1 -> ListFragmentOther()
@@ -269,11 +270,11 @@ class ListSectionsPagerAdapter(private val activity: ListActivity, fm: FragmentM
         }
     }
 
-    override fun getPageTitle(position: Int): CharSequence {
+    fun getPageTitle(position: Int): CharSequence {
         return activity.resources.getString(TAB_TITLES[position])
     }
 
-    override fun getCount(): Int {
+    override fun getItemCount(): Int {
         return when (activity.intention) {
             ListActivity.ListActivityIntention.VIEW -> 1
             else -> 2

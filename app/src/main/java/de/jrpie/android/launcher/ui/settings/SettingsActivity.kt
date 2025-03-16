@@ -1,6 +1,5 @@
 package de.jrpie.android.launcher.ui.settings
 
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Resources
@@ -8,10 +7,9 @@ import android.os.Bundle
 import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.viewpager.widget.ViewPager
-import com.google.android.material.tabs.TabLayout
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
 import de.jrpie.android.launcher.databinding.SettingsBinding
@@ -34,6 +32,7 @@ import de.jrpie.android.launcher.ui.settings.meta.SettingsFragmentMeta
  * Settings are closed automatically if the activity goes `onPause` unexpectedly.
  */
 class SettingsActivity : AppCompatActivity(), UIObject {
+    private val EXTRA_TAB = "tab"
 
     private val solidBackground = LauncherPreferences.theme().background() == Background.SOLID
             || LauncherPreferences.theme().colorTheme() == ColorTheme.LIGHT
@@ -49,15 +48,15 @@ class SettingsActivity : AppCompatActivity(), UIObject {
                 // This ugly workaround causes a jump to the top of the list, but at least
                 // the text stays readable.
                 val i = Intent(this, SettingsActivity::class.java)
-                    .also { it.putExtra("tab", 1) }
+                    .also { it.putExtra(EXTRA_TAB, 1) }
                 finish()
                 startActivity(i)
             } else
-            if (prefKey?.startsWith("theme.") == true ||
-                prefKey?.startsWith("display.") == true
-            ) {
-                recreate()
-            }
+                if (prefKey?.startsWith("theme.") == true ||
+                    prefKey?.startsWith("display.") == true
+                ) {
+                    recreate()
+                }
         }
     private lateinit var binding: SettingsBinding
 
@@ -71,15 +70,14 @@ class SettingsActivity : AppCompatActivity(), UIObject {
         setContentView(binding.root)
 
         // set up tabs and swiping in settings
-        val sectionsPagerAdapter = SettingsSectionsPagerAdapter(this, supportFragmentManager)
-        val viewPager: ViewPager = findViewById(R.id.settings_viewpager)
-        viewPager.adapter = sectionsPagerAdapter
-
-        val tabs: TabLayout = findViewById(R.id.settings_tabs)
-        tabs.setupWithViewPager(viewPager)
-        if (intent.hasExtra("tab")) {
-            tabs.getTabAt(intent.getIntExtra("tab", 0))?.select()
+        val sectionsPagerAdapter = SettingsSectionsPagerAdapter(this)
+        binding.settingsViewpager.apply {
+            adapter = sectionsPagerAdapter
+            setCurrentItem(intent.getIntExtra(EXTRA_TAB, 0), false)
         }
+        TabLayoutMediator(binding.settingsTabs, binding.settingsViewpager) { tab, position ->
+            tab.text = sectionsPagerAdapter.getPageTitle(position)
+        }.attach()
     }
 
     override fun onStart() {
@@ -122,10 +120,10 @@ private val TAB_TITLES = arrayOf(
     R.string.settings_tab_meta
 )
 
-class SettingsSectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
-    FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class SettingsSectionsPagerAdapter(private val activity: FragmentActivity) :
+    FragmentStateAdapter(activity) {
 
-    override fun getItem(position: Int): Fragment {
+    override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> SettingsFragmentActions()
             1 -> SettingsFragmentLauncher()
@@ -134,11 +132,11 @@ class SettingsSectionsPagerAdapter(private val context: Context, fm: FragmentMan
         }
     }
 
-    override fun getPageTitle(position: Int): CharSequence {
-        return context.resources.getString(TAB_TITLES[position])
+    fun getPageTitle(position: Int): CharSequence {
+        return activity.resources.getString(TAB_TITLES[position])
     }
 
-    override fun getCount(): Int {
+    override fun getItemCount(): Int {
         return 3
     }
 }
