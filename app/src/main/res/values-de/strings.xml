@@ -196,7 +196,6 @@
     <string name="alert_no_torch_found">Es wurde keine geeignete Kamera gefunden.</string>
     <string name="alert_torch_access_exception">Fehler: Kein Zugriff auf die Kamera möglich.</string>
     <string name="settings_actions_lock_method">Methode zum Sperren des Bildschirms wählen</string>
-    <string name="dialog_rename_ok">Ok</string>
     <string name="dialog_rename_title">%1$s umbenennen</string>
     <string name="toast_private_space_default_home_screen">µLauncher muss als Standardlauncher eingerichtet sein um auf den privaten Bereich zugreifen zu können.</string>
     <string name="toast_lock_screen_not_supported">Fehler: Auf diesem Gerät kann der Bildschirm nicht mittels Bedienungshilfe gesperrt werden. Bitte stattdessen Geräteadministrator verwenden.</string>
@@ -253,7 +252,6 @@
     <string name="dialog_select_color_alpha">Transparenz</string>
     <string name="dialog_select_color_blue">Blau</string>
     <string name="dialog_select_color_green">Grün</string>
-    <string name="dialog_select_color_ok">Ok</string>
     <string name="dialog_select_color_color_hex">Farbe</string>
     <string name="dialog_choose_color_title">Farbe wählen</string>
     <string name="settings_meta_licenses">Open Source Lizenzen</string>
