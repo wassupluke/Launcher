@@ -9,7 +9,6 @@ import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 
 
-@Suppress("unused")
 enum class LockMethod(
     private val lock: (Context) -> Unit,
     private val isEnabled: (Context) -> Boolean,

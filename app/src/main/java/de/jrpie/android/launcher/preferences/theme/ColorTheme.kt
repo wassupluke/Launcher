@@ -5,7 +5,6 @@ import android.content.res.Resources
 import com.google.android.material.color.DynamicColors
 import de.jrpie.android.launcher.R
 
-@Suppress("unused")
 enum class ColorTheme(
     private val id: Int,
     private val labelResource: Int,

@@ -1,6 +1,5 @@
 package de.jrpie.android.launcher.ui.tutorial
 
-import android.content.Intent
 import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
@@ -12,10 +11,8 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
-import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
 import de.jrpie.android.launcher.databinding.TutorialBinding
 import de.jrpie.android.launcher.preferences.LauncherPreferences
-import de.jrpie.android.launcher.saveListActivityChoice
 import de.jrpie.android.launcher.ui.UIObject
 import de.jrpie.android.launcher.ui.blink
 import de.jrpie.android.launcher.ui.tutorial.tabs.TutorialFragment0Start
@@ -35,6 +32,7 @@ import de.jrpie.android.launcher.ui.tutorial.tabs.TutorialFragment5Finish
 class TutorialActivity : AppCompatActivity(), UIObject {
 
     private lateinit var binding: TutorialBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super<AppCompatActivity>.onCreate(savedInstanceState)
@@ -113,14 +111,9 @@ class TutorialActivity : AppCompatActivity(), UIObject {
         super<UIObject>.onStart()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when (requestCode) {
-            REQUEST_CHOOSE_APP -> saveListActivityChoice(data)
-            else -> super.onActivityResult(requestCode, resultCode, data)
-        }
-    }
-
     // prevent going back when the tutorial is shown for the first time
+    @Deprecated("Deprecated in Java", ReplaceWith("use anyway"))
+    @Suppress("deprecation") // support API level < 33
     override fun onBackPressed() {
         if (LauncherPreferences.internal().started())
             super.onBackPressed()

@@ -17,6 +17,7 @@ import androidx.core.graphics.green
 import androidx.core.graphics.red
 import androidx.preference.Preference
 import de.jrpie.android.launcher.R
+import androidx.core.graphics.toColorInt
 
 class ColorPreference(context: Context, attrs: AttributeSet?) :
     Preference(context, attrs) {
@@ -52,7 +53,7 @@ class ColorPreference(context: Context, attrs: AttributeSet?) :
         AlertDialog.Builder(context, R.style.AlertDialogCustom).apply {
             setView(R.layout.dialog_choose_color)
             setTitle(R.string.dialog_choose_color_title)
-            setPositiveButton(R.string.dialog_select_color_ok) { _, _ ->
+            setPositiveButton(android.R.string.ok) { _, _ ->
                 persistInt(currentColor)
                 summary = currentColor.getHex()
             }
@@ -83,10 +84,10 @@ class ColorPreference(context: Context, attrs: AttributeSet?) :
                 override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {}
                 override fun afterTextChanged(editable: Editable?) {
                     preview.hasFocus() || return
-                    val newText = editable?.toString()
-                    newText.isNullOrBlank() && return
+                    val newText = editable?.toString() ?: return
+                    newText.isBlank() && return
                     try {
-                        val newColor = Color.parseColor(newText.toString())
+                        val newColor = newText.toColorInt()
                         currentColor = newColor
                         updateColor(false)
                     } catch (_: IllegalArgumentException) {

@@ -16,7 +16,7 @@ import kotlinx.serialization.Serializable
 @RequiresApi(Build.VERSION_CODES.N_MR1)
 @Serializable
 @SerialName("shortcut")
-class PinnedShortcutInfo(
+data class PinnedShortcutInfo(
     val id: String,
     val packageName: String,
     val activityName: String,
@@ -42,26 +42,5 @@ class PinnedShortcutInfo(
             // can throw SecurityException or IllegalStateException when profile is locked
             null
         }
-    }
-
-    override fun equals(other: Any?): Boolean {
-        return (other as? PinnedShortcutInfo)?.let {
-            packageName == this.packageName &&
-                    activityName == this.activityName &&
-                    id == this.id &&
-                    user == this.user
-        } ?: false
-    }
-
-    override fun hashCode(): Int {
-        var result = id.hashCode()
-        result = 31 * result + packageName.hashCode()
-        result = 31 * result + activityName.hashCode()
-        result = 31 * result + user
-        return result
-    }
-
-    override fun toString(): String {
-        return "PinnedShortcutInfo { package=$packageName, activity=$activityName, user=$user, id=$id}"
     }
 }

@@ -15,19 +15,7 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 @SerialName("app")
-class AppInfo(val packageName: String, val activityName: String?, val user: Int = INVALID_USER): AbstractAppInfo {
-
-    override fun equals(other: Any?): Boolean {
-        if(other is AppInfo) {
-            return other.user == user && other.packageName == packageName
-                    && other.activityName == activityName
-        }
-        return super.equals(other)
-    }
-
-    override fun hashCode(): Int {
-        return packageName.hashCode()
-    }
+data class AppInfo(val packageName: String, val activityName: String?, val user: Int = INVALID_USER): AbstractAppInfo {
 
     fun getLauncherActivityInfo(
         context: Context
@@ -38,10 +26,4 @@ class AppInfo(val packageName: String, val activityName: String?, val user: Int 
         return activityList.firstOrNull { app -> app.name == activityName }
             ?: activityList.firstOrNull()
     }
-
-
-    override fun toString(): String {
-        return "AppInfo {package=$packageName, activity=$activityName, user=$user}"
-    }
-
 }

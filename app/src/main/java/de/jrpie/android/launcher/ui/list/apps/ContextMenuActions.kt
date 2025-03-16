@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.LauncherApps
 import android.graphics.Rect
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -14,11 +13,9 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
 import de.jrpie.android.launcher.R
-import de.jrpie.android.launcher.REQUEST_UNINSTALL
 import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.apps.AbstractAppInfo
 import de.jrpie.android.launcher.apps.AbstractDetailedAppInfo
-import de.jrpie.android.launcher.apps.DetailedAppInfo
 import de.jrpie.android.launcher.apps.PinnedShortcutInfo
 import de.jrpie.android.launcher.getUserFromId
 import de.jrpie.android.launcher.preferences.LauncherPreferences
@@ -44,17 +41,13 @@ fun AbstractAppInfo.uninstall(activity: Activity) {
 
         Log.i(LOG_TAG, "uninstalling $this")
 
-        val intent = Intent(Intent.ACTION_UNINSTALL_PACKAGE)
+        val intent = Intent(Intent.ACTION_DELETE)
         intent.data = "package:$packageName".toUri()
         getUserFromId(userId, activity).let { user ->
             intent.putExtra(Intent.EXTRA_USER, user)
         }
+        activity.startActivity(intent)
 
-        intent.putExtra(Intent.EXTRA_RETURN_RESULT, true)
-        activity.startActivityForResult(
-            intent,
-            REQUEST_UNINSTALL
-        )
     } else if(this is PinnedShortcutInfo) {
         val pinned = LauncherPreferences.apps().pinnedShortcuts() ?: mutableSetOf()
         pinned.remove(this)
@@ -102,8 +95,8 @@ fun AbstractDetailedAppInfo.showRenameDialog(context: Context) {
     AlertDialog.Builder(context, R.style.AlertDialogCustom).apply {
         setTitle(context.getString(R.string.dialog_rename_title, getLabel()))
         setView(R.layout.dialog_rename_app)
-        setNegativeButton(R.string.dialog_cancel) { d, _ -> d.cancel() }
-        setPositiveButton(R.string.dialog_rename_ok) { d, _ ->
+        setNegativeButton(android.R.string.cancel) { d, _ -> d.cancel() }
+        setPositiveButton(android.R.string.ok) { d, _ ->
             setCustomLabel(
                 (d as? AlertDialog)
                     ?.findViewById<EditText>(R.id.dialog_rename_app_edit_text)

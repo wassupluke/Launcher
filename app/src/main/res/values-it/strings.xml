@@ -34,7 +34,6 @@
         <br/><br/><br/><br/>
         Puoi cambiare le tue scelte in seguito nelle impostazioni.
         ]]></string>
-    <string name="settings_meta_cant_select_launcher_msg">Il tuo dispositivo non supporta questa funzione. Vuoi aprire la pagina di dettaglio dell\'applicazione?</string>
     <string name="alert_cant_open_title">Impossibile aprire l\'applicazione</string>
     <string name="alert_cant_open_message">Desideri modificare le impostazioni?</string>
     <string name="toast_cant_open_message">Apri le impostazioni per abbinare un\'azione a questo gesto</string>
@@ -83,7 +82,6 @@
     <string name="settings_gesture_description_vol_up">Premi il pulsante di aumento del volume</string>
     <string name="settings_gesture_vol_down">Riduci il volume</string>
     <string name="settings_gesture_description_vol_down">Premi il pulsante per ridurre il volume</string>
-    <string name="settings_apps_view_all">Vedi tutte le applicazioni</string>
     <string name="settings_apps_install">Installa le applicazioni</string>
     <string name="settings_theme_monochrome_icons">Icone monocromatiche</string>
     <string name="settings_clock_time_visible">Mostra l\'ora</string>
@@ -112,10 +110,8 @@
     <string name="settings_theme_font">Font</string>
     <string name="settings_clock_flip_date_time">Inverti data e ora</string>
     <string name="settings_theme_wallpaper">Scegli uno sfondo</string>
-    <string name="settings_launcher_change_wallpaper">Cambia immagine di sfondo</string>
     <string name="settings_launcher_section_display">Schermo</string>
     <string name="settings_display_screen_timeout_disabled">Mantieni lo schermo acceso</string>
-    <string name="settings_display_full_screen">Schermo intero</string>
     <string name="settings_display_rotate_screen">Ruota lo schermo</string>
     <string name="settings_launcher_section_functionality">Funzionalità</string>
     <string name="settings_functionality_auto_keyboard">Apri automaticamente la tastiera per cercare</string>
@@ -181,7 +177,6 @@
     <string name="list_app_hidden_add">Nascondi</string>
     <string name="list_app_hidden_remove">Mostra</string>
     <string name="list_app_rename">Rinomina</string>
-    <string name="list_removed">Le applicazioni selezionate sono state rimosse</string>
     <string name="list_apps_search_hint">Cerca</string>
     <string name="list_other_settings">Impostazioni μLauncher</string>
     <string name="list_other_expand_notifications_panel">Espandi il pannello notifiche</string>
@@ -197,7 +192,6 @@
     <string name="alert_requires_android_m">Questa funzione richiede Android 6 o successivi.</string>
     <string name="dialog_rename_ok">Ok</string>
     <string name="dialog_rename_title">Rinomina %1$s</string>
-    <string name="list_not_removed">Impossibile rimuovere l\'applicazione</string>
     <string name="settings_theme_color_theme_item_dynamic">Dinamico</string>
     <string name="settings_clock_color">Colore</string>
     <string name="settings_gesture_double_up">Due dita verso l\'alto</string>

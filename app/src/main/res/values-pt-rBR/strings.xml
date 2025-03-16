@@ -45,7 +45,6 @@
     <string name="settings_gesture_date">Data</string>
     <string name="settings_gesture_time">Hora</string>
     <string name="settings_apps_choose">Selecione um app</string>
-    <string name="settings_apps_view_all">Ver todos os apps</string>
     <string name="settings_apps_install">Instalar aplicativos</string>
     <string name="settings_apps_toast_store_not_found">Loja não encontrada</string>
     <!--
@@ -63,10 +62,8 @@
     <string name="settings_clock_localized">Use formato de data localizado</string>
     <string name="settings_clock_flip_date_time">Inverter data e hora</string>
     <string name="settings_theme_wallpaper">Escolha papel de parede</string>
-    <string name="settings_launcher_change_wallpaper">Alterar papel de parede</string>
     <string name="settings_launcher_section_display">Exibição</string>
     <string name="settings_display_screen_timeout_disabled">Manter a tela ligada</string>
-    <string name="settings_display_full_screen">Usar tela cheia</string>
     <string name="settings_launcher_section_functionality">Funcionalidades</string>
     <string name="settings_enabled_gestures_double_swipe">Gestos com 2 dedos</string>
     <string name="settings_enabled_gestures_edge_swipe">Ações de deslize nas bordas</string>
@@ -80,7 +77,6 @@
       -->
     <string name="settings_general_choose_home_screen">Definir o μLauncher como tela inicial</string>
     <string name="settings_meta_cant_select_launcher">Informações do aplicativo</string>
-    <string name="settings_meta_cant_select_launcher_msg">Seu dispositivo não é compatível com esse recurso. Gerenciar detalhes do app em vez disso?</string>
     <string name="settings_meta_show_tutorial">Ver tutorial do launcher</string>
     <string name="settings_meta_reset">Redefinir configuraçãos</string>
     <string name="settings_meta_reset_confirm">Você vai descartar todas as suas preferências. Continuar?</string>
@@ -100,8 +96,6 @@
     <string name="list_tab_other">Outros</string>
     <string name="list_app_delete">Desinstalar</string>
     <string name="list_app_info">Informações do aplicativo</string>
-    <string name="list_removed">O app selecionado foi removido</string>
-    <string name="list_not_removed">Não foi possível remover o app</string>
     <string name="list_apps_search_hint">Busque</string>
     <string name="list_other_settings">Configurações do µLauncher</string>
     <string name="list_other_list">Todos os apps</string>

@@ -15,8 +15,10 @@ import de.jrpie.android.launcher.preferences.LauncherPreferences
  * An interface implemented by every [Activity], Fragment etc. in Launcher.
  * It handles themes and window flags - a useful abstraction as it is the same everywhere.
  */
+@Suppress("deprecation") // FLAG_FULLSCREEN is required to support API level < 30
 fun setWindowFlags(window: Window, homeScreen: Boolean) {
     window.setFlags(0, 0) // clear flags
+
     // Display notification bar
     if (LauncherPreferences.display().hideStatusBar())
         window.setFlags(

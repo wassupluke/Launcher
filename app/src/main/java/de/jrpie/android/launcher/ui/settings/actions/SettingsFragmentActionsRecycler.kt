@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.jrpie.android.launcher.R
-import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
 import de.jrpie.android.launcher.actions.Action
 import de.jrpie.android.launcher.actions.Gesture
 import de.jrpie.android.launcher.apps.AppFilter
@@ -179,9 +178,6 @@ class ActionsRecyclerAdapter(val activity: Activity) :
         intent.putExtra("intention", ListActivity.ListActivityIntention.PICK.toString())
         intent.putExtra("hiddenVisibility", AppFilter.Companion.AppSetVisibility.VISIBLE)
         intent.putExtra("forGesture", gesture.id) // for which action we choose the app
-        activity.startActivityForResult(
-            intent,
-            REQUEST_CHOOSE_APP
-        )
+        activity.startActivity(intent)
     }
 }

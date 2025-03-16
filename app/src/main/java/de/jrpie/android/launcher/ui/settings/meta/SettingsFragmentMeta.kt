@@ -2,7 +2,6 @@ package de.jrpie.android.launcher.ui.settings.meta
 
 import android.app.AlertDialog
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +19,6 @@ import de.jrpie.android.launcher.openTutorial
 import de.jrpie.android.launcher.preferences.resetPreferences
 import de.jrpie.android.launcher.ui.LegalInfoActivity
 import de.jrpie.android.launcher.ui.UIObject
-import de.jrpie.android.launcher.ui.tutorial.TutorialActivity
 
 /**
  * The [SettingsFragmentMeta] is a used as a tab in the SettingsActivity.

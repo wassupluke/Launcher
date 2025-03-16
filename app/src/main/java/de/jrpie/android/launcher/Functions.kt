@@ -12,7 +12,6 @@ import android.content.pm.LauncherApps
 import android.content.pm.LauncherApps.ShortcutQuery
 import android.content.pm.PackageManager
 import android.content.pm.ShortcutInfo
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.UserHandle
@@ -34,14 +33,8 @@ import de.jrpie.android.launcher.apps.getPrivateSpaceUser
 import de.jrpie.android.launcher.apps.isPrivateSpaceSupported
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.ui.tutorial.TutorialActivity
+import androidx.core.net.toUri
 
-
-/* REQUEST CODES */
-
-const val REQUEST_CHOOSE_APP = 1
-const val REQUEST_UNINSTALL = 2
-
-const val REQUEST_SET_DEFAULT_HOME = 42
 
 const val LOG_TAG = "Launcher"
 
@@ -69,9 +62,8 @@ fun setDefaultHomeScreen(context: Context, checkDefault: Boolean = false) {
         && !isDefault // using role manager only works when µLauncher is not already the default.
     ) {
         val roleManager = context.getSystemService(RoleManager::class.java)
-        context.startActivityForResult(
-            roleManager.createRequestRoleIntent(RoleManager.ROLE_HOME),
-            REQUEST_SET_DEFAULT_HOME
+        context.startActivity(
+            roleManager.createRequestRoleIntent(RoleManager.ROLE_HOME)
         )
         return
     }
@@ -125,7 +117,7 @@ fun removeUnusedShortcuts(context: Context) {
 }
 
 fun openInBrowser(url: String, context: Context) {
-    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+    val intent = Intent(Intent.ACTION_VIEW, url.toUri())
     intent.putExtras(Bundle().apply { putBoolean("new_window", true) })
     try {
         context.startActivity(intent)
@@ -211,14 +203,6 @@ fun getApps(
 
     return loadList
 }
-
-
-// Used in Tutorial and Settings `ActivityOnResult`
-fun saveListActivityChoice(data: Intent?) {
-    val forGesture = data?.getStringExtra("forGesture") ?: return
-    Gesture.byId(forGesture)?.let { Action.setActionForGesture(it, Action.fromIntent(data)) }
-}
-
 
 // used for the bug report button
 fun getDeviceInfo(): String {

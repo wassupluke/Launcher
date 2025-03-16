@@ -1,13 +1,10 @@
 package de.jrpie.android.launcher.ui.list
 
-import android.app.Activity
-import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import android.window.OnBackInvokedDispatcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
@@ -16,7 +13,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.R
-import de.jrpie.android.launcher.REQUEST_UNINSTALL
 import de.jrpie.android.launcher.actions.LauncherAction
 import de.jrpie.android.launcher.apps.AppFilter
 import de.jrpie.android.launcher.apps.hidePrivateSpaceWhenLocked
@@ -113,10 +109,13 @@ class ListActivity : AppCompatActivity(), UIObject {
                 ?.let { ListActivityIntention.valueOf(it) }
                 ?: ListActivityIntention.VIEW
 
+            @Suppress("deprecation") // required to support API level < 33
             favoritesVisibility = bundle.getSerializable("favoritesVisibility")
                     as? AppFilter.Companion.AppSetVisibility ?: favoritesVisibility
+            @Suppress("deprecation") // required to support API level < 33
             privateSpaceVisibility = bundle.getSerializable("privateSpaceVisibility")
                     as? AppFilter.Companion.AppSetVisibility ?: privateSpaceVisibility
+            @Suppress("deprecation") // required to support API level < 33
             hiddenVisibility = bundle.getSerializable("hiddenVisibility")
                     as? AppFilter.Companion.AppSetVisibility ?: hiddenVisibility
 
@@ -182,20 +181,6 @@ class ListActivity : AppCompatActivity(), UIObject {
         // and when the user navigates to recent apps
         finish()
     }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_UNINSTALL) {
-            if (resultCode == Activity.RESULT_OK) {
-                Toast.makeText(this, getString(R.string.list_removed), Toast.LENGTH_LONG).show()
-                finish()
-            } else if (resultCode == Activity.RESULT_FIRST_USER) {
-                Toast.makeText(this, getString(R.string.list_not_removed), Toast.LENGTH_LONG).show()
-                finish()
-            }
-        }
-    }
-
 
     fun updateTitle() {
         var titleResource = intention.titleResource

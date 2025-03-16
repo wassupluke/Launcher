@@ -24,6 +24,7 @@ import de.jrpie.android.launcher.actions.ShortcutAction
 import de.jrpie.android.launcher.apps.PinnedShortcutInfo
 import de.jrpie.android.launcher.databinding.ActivityPinShortcutBinding
 import de.jrpie.android.launcher.preferences.LauncherPreferences
+import androidx.core.content.edit
 
 class PinShortcutActivity : AppCompatActivity(), UIObject {
     private lateinit var binding: ActivityPinShortcutBinding
@@ -72,9 +73,12 @@ class PinShortcutActivity : AppCompatActivity(), UIObject {
                             isBound = true
                             request.accept()
                         }
-                        val editor = LauncherPreferences.getSharedPreferences().edit()
-                        ShortcutAction(PinnedShortcutInfo(request.shortcutInfo!!)).bindToGesture(editor, gesture.id)
-                        editor.apply()
+                        LauncherPreferences.getSharedPreferences().edit {
+                            ShortcutAction(PinnedShortcutInfo(request.shortcutInfo!!)).bindToGesture(
+                                this,
+                                gesture.id
+                            )
+                        }
                         dialog.dismiss()
                     }
                     dialog.findViewById<RecyclerView>(R.id.dialog_select_gesture_recycler).apply {
@@ -117,11 +121,11 @@ class PinShortcutActivity : AppCompatActivity(), UIObject {
     }
 
     inner class GestureRecyclerAdapter(val context: Context, val onClick: (Gesture) -> Unit): RecyclerView.Adapter<GestureRecyclerAdapter.ViewHolder>() {
-        val gestures = Gesture.entries.filter { it.isEnabled() }.toList()
+        private val gestures = Gesture.entries.filter { it.isEnabled() }.toList()
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val label = itemView.findViewById<TextView>(R.id.dialog_select_gesture_row_name)
-            val description = itemView.findViewById<TextView>(R.id.dialog_select_gesture_row_description)
-            val icon = itemView.findViewById<ImageView>(R.id.dialog_select_gesture_row_icon)
+            val label: TextView = itemView.findViewById(R.id.dialog_select_gesture_row_name)
+            val description: TextView = itemView.findViewById(R.id.dialog_select_gesture_row_description)
+            val icon: ImageView = itemView.findViewById(R.id.dialog_select_gesture_row_icon)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

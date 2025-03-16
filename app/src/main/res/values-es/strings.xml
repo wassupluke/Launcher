@@ -46,7 +46,6 @@
     <string name="settings_gesture_date">Toca la fecha</string>
     <string name="settings_gesture_time">Toca el reloj</string>
     <string name="settings_apps_choose">Elegir Aplicación</string>
-    <string name="settings_apps_view_all">Todas las aplicaciones</string>
     <string name="settings_apps_install">Instalar aplicaciones</string>
     <string name="settings_apps_toast_store_not_found">No se encontró la Store</string>
     <!--
@@ -60,10 +59,8 @@
     <string name="settings_theme_color_theme_item_dark">Oscuro</string>
     <string name="settings_theme_color_theme_item_light">Luminoso</string>
     <string name="settings_theme_wallpaper">Seleccionar fondo de pantalla</string>
-    <string name="settings_launcher_change_wallpaper">Cambiar fondo de pantalla</string>
     <string name="settings_launcher_section_display">Pantalla</string>
     <string name="settings_display_screen_timeout_disabled">Mantener encendida</string>
-    <string name="settings_display_full_screen">Pantalla completa</string>
     <string name="settings_launcher_section_functionality">Funciones</string>
     <string name="settings_enabled_gestures_double_swipe">Deslizar con dos dedos</string>
     <string name="settings_functionality_auto_launch">Auto-lanzar búsquedas</string>
@@ -76,7 +73,6 @@
       -->
     <string name="settings_general_choose_home_screen">Seleccionar Launcher</string>
     <string name="settings_meta_cant_select_launcher">Información de la aplicación</string>
-    <string name="settings_meta_cant_select_launcher_msg">Su dispositivo no posee esta caracrerística. Desea cambiar los detalles de la aplicación?</string>
     <string name="settings_meta_show_tutorial">Ver tutorial de Launcher</string>
     <string name="settings_meta_reset">Configuración por defecto</string>
     <string name="settings_meta_reset_confirm">Todas sus preferencias se eliminarán. Desea continuar?</string>
@@ -96,8 +92,6 @@
     <string name="list_tab_other">Otros</string>
     <string name="list_app_delete">Desinstalar</string>
     <string name="list_app_info">Información</string>
-    <string name="list_removed">Se eliminó la aplicación</string>
-    <string name="list_not_removed">No se pudo eliminar la aplicación</string>
     <string name="list_apps_search_hint">Buscar Aplicaciones</string>
     <string name="list_other_settings">Configuración de Launcher</string>
     <string name="list_other_list">Aplicaciones</string>

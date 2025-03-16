@@ -13,9 +13,11 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.json.JSONException
 import org.json.JSONObject
+import androidx.core.content.edit
 
 
 @Serializable
+@Suppress("unused")
 private class LegacyMapEntry(val key: AppInfo, val value: String)
 
 private fun serializeMapAppInfo(value: Map<AppInfo, String>?): Set<String>? {
@@ -100,7 +102,7 @@ private fun migrateAppInfoStringMap(key: String) {
             }
         }?.toMap(HashMap())
     )?.let {
-        preferences.edit().putStringSet(key, it).apply()
+        preferences.edit { putStringSet(key, it) }
     }
 }
 
@@ -109,16 +111,16 @@ private fun migrateAppInfoSet(key: String) {
         .map(AppInfo.Companion::legacyDeserialize)
         .map(AppInfo::serialize)
         .toSet()
-        .let { LauncherPreferences.getSharedPreferences().edit().putStringSet(key, it).apply() }
+        .let { LauncherPreferences.getSharedPreferences().edit { putStringSet(key, it) } }
 }
 
 private fun migrateAction(key: String) {
     Action.legacyFromPreference(key)?.let { action ->
-        LauncherPreferences.getSharedPreferences().edit()
-            .putString(key, Json.encodeToString(action))
-            .remove("$key.app")
-            .remove("$key.user")
-            .apply()
+        LauncherPreferences.getSharedPreferences().edit {
+            putString(key, Json.encodeToString(action))
+                .remove("$key.app")
+                .remove("$key.user")
+        }
     }
 
 }

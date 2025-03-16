@@ -11,12 +11,10 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import de.jrpie.android.launcher.R
-import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
 import de.jrpie.android.launcher.databinding.SettingsBinding
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.preferences.theme.Background
 import de.jrpie.android.launcher.preferences.theme.ColorTheme
-import de.jrpie.android.launcher.saveListActivityChoice
 import de.jrpie.android.launcher.ui.UIObject
 import de.jrpie.android.launcher.ui.settings.actions.SettingsFragmentActions
 import de.jrpie.android.launcher.ui.settings.launcher.SettingsFragmentLauncher
@@ -32,7 +30,6 @@ import de.jrpie.android.launcher.ui.settings.meta.SettingsFragmentMeta
  * Settings are closed automatically if the activity goes `onPause` unexpectedly.
  */
 class SettingsActivity : AppCompatActivity(), UIObject {
-    private val EXTRA_TAB = "tab"
 
     private val solidBackground = LauncherPreferences.theme().background() == Background.SOLID
             || LauncherPreferences.theme().colorTheme() == ColorTheme.LIGHT
@@ -106,11 +103,8 @@ class SettingsActivity : AppCompatActivity(), UIObject {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when (requestCode) {
-            REQUEST_CHOOSE_APP -> saveListActivityChoice(data)
-            else -> super.onActivityResult(requestCode, resultCode, data)
-        }
+    companion object {
+        private const val EXTRA_TAB = "tab"
     }
 }
 

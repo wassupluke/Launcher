@@ -2,7 +2,6 @@ package de.jrpie.android.launcher.ui.list.apps
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Intent
 import android.graphics.Rect
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +14,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.R
-import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
+import de.jrpie.android.launcher.actions.Action
+import de.jrpie.android.launcher.actions.Gesture
 import de.jrpie.android.launcher.apps.AbstractDetailedAppInfo
 import de.jrpie.android.launcher.apps.AppFilter
 import de.jrpie.android.launcher.apps.AppInfo
@@ -195,11 +195,10 @@ class AppsRecyclerAdapter(
             }
 
             ListActivity.ListActivityIntention.PICK -> {
-                val returnIntent = Intent()
-                appInfo.getAction().writeToIntent(returnIntent)
-                returnIntent.putExtra("forGesture", forGesture)
-                activity.setResult(REQUEST_CHOOSE_APP, returnIntent)
                 activity.finish()
+                forGesture ?: return
+                val gesture = Gesture.byId(forGesture) ?: return
+                Action.setActionForGesture(gesture, appInfo.getAction())
             }
         }
     }

@@ -37,7 +37,6 @@
     <string name="settings_gesture_date">Date</string>
     <string name="settings_gesture_time">Horloge</string>
     <string name="settings_apps_choose">Choisir une application</string>
-    <string name="settings_apps_view_all">Voir toutes les applications</string>
     <string name="settings_apps_install">Installer des applications</string>
     <string name="settings_apps_toast_store_not_found">Magasin d\'applications introuvable</string>
     <!--
@@ -52,10 +51,8 @@
     <string name="settings_theme_color_theme_item_dark">Sombre</string>
     <string name="settings_theme_color_theme_item_light">Clair</string>
     <string name="settings_theme_wallpaper">Choisir un fond d\'écran</string>
-    <string name="settings_launcher_change_wallpaper">Changer le fond d\'écran</string>
     <string name="settings_launcher_section_display">Écran</string>
     <string name="settings_display_screen_timeout_disabled">Garder l\'écran allumé</string>
-    <string name="settings_display_full_screen">Utiliser le plein écran</string>
     <string name="settings_launcher_section_functionality">Fonctions</string>
     <string name="settings_enabled_gestures_double_swipe">Actions de double balayage</string>
     <string name="settings_functionality_auto_launch">Lancer apps par recherche</string>
@@ -68,7 +65,6 @@
       -->
     <string name="settings_general_choose_home_screen">Choisir μLauncher comme application d\'écran d\'accueil par défaut</string>
     <string name="settings_meta_cant_select_launcher">Informations sur l\'application</string>
-    <string name="settings_meta_cant_select_launcher_msg">Votre appareil ne prend pas en charge cette fonctionnalité. Souhaitez-vous plutôt accéder aux détails de l\'application ?</string>
     <string name="settings_meta_show_tutorial">Regarder le tutoriel</string>
     <string name="settings_meta_reset">Réinitialiser</string>
     <string name="settings_meta_reset_confirm">Vous allez réinitialiser tous vos paramètres. Souhaitez-vous poursuivre ?</string>
@@ -88,8 +84,6 @@
     <string name="list_tab_other">Autre</string>
     <string name="list_app_delete">Désinstaller</string>
     <string name="list_app_info">Informations</string>
-    <string name="list_removed">Application supprimée</string>
-    <string name="list_not_removed">Impossible de désinstaller l\'application</string>
     <string name="list_apps_search_hint">Chercher des applications</string>
     <string name="list_other_settings">Réglages d\'µLauncher</string>
     <string name="list_other_list">Toutes les Applications</string>

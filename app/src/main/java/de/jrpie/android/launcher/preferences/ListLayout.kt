@@ -1,6 +1,7 @@
 package de.jrpie.android.launcher.preferences
 
 import android.content.Context
+import android.util.TypedValue
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,8 +28,10 @@ enum class ListLayout(
     GRID(
         { c ->
             val displayMetrics = c.resources.displayMetrics
-            val widthSp = displayMetrics.widthPixels / displayMetrics.scaledDensity
-            GridLayoutManager(c, (widthSp / 90).toInt())
+            val widthColumnPx =
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 90f, displayMetrics)
+            val numColumns = (displayMetrics.widthPixels / widthColumnPx).toInt()
+            GridLayoutManager(c, numColumns)
         },
         R.layout.list_apps_row_variant_grid,
         false

@@ -7,11 +7,8 @@ import android.content.IntentFilter
 import android.content.SharedPreferences
 import android.content.pm.LauncherApps
 import android.content.pm.ShortcutInfo
-import android.os.AsyncTask
 import android.os.Build
 import android.os.Build.VERSION_CODES
-import android.os.Handler
-import android.os.Looper
 import android.os.UserHandle
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
@@ -23,6 +20,9 @@ import de.jrpie.android.launcher.apps.isPrivateSpaceLocked
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.preferences.migratePreferencesToNewVersion
 import de.jrpie.android.launcher.preferences.resetPreferences
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class Application : android.app.Application() {
     val apps = MutableLiveData<List<AbstractDetailedAppInfo>>()
@@ -153,6 +153,8 @@ class Application : android.app.Application() {
 
     private fun loadApps() {
         privateSpaceLocked.postValue(isPrivateSpaceLocked(this))
-        AsyncTask.execute { apps.postValue(getApps(packageManager, applicationContext)) }
+        CoroutineScope(Dispatchers.Default).launch {
+            apps.postValue(getApps(packageManager, applicationContext))
+        }
     }
 }

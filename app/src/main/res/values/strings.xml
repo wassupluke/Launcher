@@ -101,8 +101,6 @@
 
     <string name="settings_apps_choose">Choose App</string>
 
-    <string name="settings_apps_view_all">View all apps</string>
-
     <string name="settings_apps_install">Install apps</string>
     <string name="settings_apps_toast_store_not_found">Store not found</string>
 
@@ -148,7 +146,6 @@
     <string name="settings_clock_flip_date_time">Flip date and time</string>
 
     <string name="settings_theme_wallpaper">Choose a wallpaper</string>
-    <string name="settings_launcher_change_wallpaper">Change wallpaper</string>
 
     <string name="settings_launcher_section_display">Display</string>
 
@@ -240,9 +237,6 @@
     <string name="list_app_hidden_remove">Show</string>
     <string name="list_app_rename">Rename</string>
 
-    <string name="list_removed">Removed the selected application</string>
-    <string name="list_not_removed">Unable to remove application</string>
-
     <string name="list_apps_search_hint">Search</string>
     <string name="list_apps_search_hint_no_auto_launch">Search (no auto launch)</string>
 
@@ -265,7 +259,6 @@
     <!-- Pin shortcuts -->
     <string name="pin_shortcut_title">Add Shortcut</string>
     <string name="pin_shortcut_button_bind">Bind to gesture</string>
-    <string name="pin_shortcut_button_ok">Ok</string>
     <string name="pin_shortcut_switch_visible">Show in app list</string>
 
     <!--
@@ -361,13 +354,11 @@
     <string name="screen_lock_method_use_accessibility">Use Accessibility Service</string>
     <string name="screen_lock_method_use_device_admin">Use Device Admin</string>
     <string name="settings_actions_lock_method">Choose method for locking the screen</string>
-    <string name="dialog_rename_ok">Ok</string>
     <string name="dialog_rename_title">Rename %1$s</string>
     <string name="dialog_select_color_red">Red</string>
     <string name="dialog_select_color_alpha">Alpha</string>
     <string name="dialog_select_color_blue">Blue</string>
     <string name="dialog_select_color_green">Green</string>
-    <string name="dialog_select_color_ok">Ok</string>
     <string name="dialog_select_color_color_hex">Color</string>
     <string name="dialog_choose_color_title">Choose color</string>
     <string name="dialog_consent_accessibility_privileges">I am aware that this will grant far-reaching privileges to μLauncher.</string>

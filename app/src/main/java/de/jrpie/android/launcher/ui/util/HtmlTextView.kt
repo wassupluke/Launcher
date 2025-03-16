@@ -12,6 +12,7 @@ class HtmlTextView(context: Context, attr: AttributeSet?, int: Int) :
     constructor(context: Context) : this(context, null, 0)
 
     init {
+        @Suppress("deprecation") // required to support API level < 24
         text = Html.fromHtml(text.toString())
         movementMethod = LinkMovementMethod.getInstance()
     }

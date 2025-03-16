@@ -105,7 +105,6 @@
     <string name="settings_gesture_time">Saat</string>
     <string name="settings_gesture_description_time">Saate tıklayın</string>
     <string name="settings_apps_choose">Uygulama Seçin</string>
-    <string name="settings_apps_view_all">Tüm uygulamaları göster</string>
     <string name="settings_apps_install">Uygulamaları yükle</string>
     <string name="settings_apps_toast_store_not_found">Mağaza bulunamadı</string>
     <string name="settings_launcher_section_appearance">Görünüş</string>
@@ -120,8 +119,6 @@
     <string name="list_other_nop">Hiçbir şey yapma</string>
     <string name="settings_meta_view_code">Kaynak kodunu göster</string>
     <string name="settings_meta_report_bug">Hatayı bildirin</string>
-    <string name="list_removed">Seçilen uygulama kaldırıldı</string>
-    <string name="list_not_removed">Uygulama kaldırılamadı</string>
     <string name="list_apps_search_hint">Uygulamaları Ara</string>
     <string name="list_other_list">Tüm Uygulamalar</string>
     <string name="list_other_list_favorites">Favori Uygulamalar</string>
@@ -134,10 +131,8 @@
     <string name="settings_clock_show_seconds">Saniyeleri gösteri</string>
     <string name="settings_clock_flip_date_time">Tarih ile zamanı yer değiştir</string>
     <string name="settings_theme_wallpaper">Duvar kağıdı seç</string>
-    <string name="settings_launcher_change_wallpaper">Duvar kağıdını değiştir</string>
     <string name="settings_launcher_section_display">Ekran</string>
     <string name="settings_display_screen_timeout_disabled">Ekranı açık tut</string>
-    <string name="settings_display_full_screen">Tam ekran kullan</string>
     <string name="settings_display_rotate_screen">Ekranı döndür</string>
     <string name="settings_launcher_section_functionality">İşlevsellik</string>
     <string name="settings_enabled_gestures_edge_swipe_summary">Ekranın köşesinden kaydırın</string>
@@ -165,7 +160,6 @@
     <string name="settings_list_layout_item_text">Metin</string>
     <string name="settings_list_layout_item_grid">Izgara</string>
     <string name="settings_meta_cant_select_launcher">Uygulama Detayı</string>
-    <string name="settings_meta_cant_select_launcher_msg">Sizin cihazınız bu özelliği desteklemiyor. Onun yerine uygulama detaylarını düzenleyin?</string>
     <string name="settings_meta_reset">Ayarları Sıfırlayın</string>
     <string name="settings_meta_reset_confirm">Tüm tercihlerinizi bir kenara bırakacaksınız. Devam mı?</string>
     <string name="settings_theme_font_item_monospace">Tek uzay</string>

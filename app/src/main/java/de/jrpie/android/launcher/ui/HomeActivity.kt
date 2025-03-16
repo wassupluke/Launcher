@@ -57,6 +57,8 @@ class HomeActivity : UIObject, AppCompatActivity() {
         super<UIObject>.onCreate()
 
         val displayMetrics = DisplayMetrics()
+
+        @Suppress("deprecation") // required to support API < 30
         windowManager.defaultDisplay.getMetrics(displayMetrics)
 
         val width = displayMetrics.widthPixels
@@ -78,6 +80,7 @@ class HomeActivity : UIObject, AppCompatActivity() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             binding.root.setOnApplyWindowInsetsListener { _, windowInsets ->
+                @Suppress("deprecation") // required to support API 29
                 val insets = windowInsets.systemGestureInsets
                 touchGestureDetector.setSystemGestureInsets(insets)
 

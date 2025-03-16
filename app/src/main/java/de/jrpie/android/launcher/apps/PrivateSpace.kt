@@ -123,6 +123,7 @@ fun togglePrivateSpaceLock(context: Context) {
     }
 }
 
+@Suppress("SameReturnValue")
 fun hidePrivateSpaceWhenLocked(context: Context): Boolean {
     // Trying to access the setting as a 3rd party launcher raises a security exception.
     // This is an Android bug: https://issuetracker.google.com/issues/352276244#comment5

@@ -250,7 +250,7 @@ enum class Gesture(
         "action.back",
         R.string.settings_gesture_back,
         R.string.settings_gesture_description_back,
-        R.array.default_up
+        R.array.default_back
     );
 
     enum class Edge {

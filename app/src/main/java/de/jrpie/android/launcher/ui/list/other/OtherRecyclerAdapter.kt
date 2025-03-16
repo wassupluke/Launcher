@@ -1,7 +1,6 @@
 package de.jrpie.android.launcher.ui.list.other
 
 import android.app.Activity
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import de.jrpie.android.launcher.R
-import de.jrpie.android.launcher.REQUEST_CHOOSE_APP
+import de.jrpie.android.launcher.actions.Action
+import de.jrpie.android.launcher.actions.Gesture
 import de.jrpie.android.launcher.actions.LauncherAction
 import de.jrpie.android.launcher.ui.list.ListActivity
 
@@ -36,7 +36,10 @@ class OtherRecyclerAdapter(val activity: Activity) :
             val pos = bindingAdapterPosition
             val content = othersList[pos]
 
-            (activity as? ListActivity)?.forGesture?.let { returnChoiceIntent(it, content) }
+            activity.finish()
+            val gestureId = (activity as? ListActivity)?.forGesture ?: return
+            val gesture = Gesture.byId(gestureId) ?: return
+            Action.setActionForGesture(gesture, content)
         }
 
         init {
@@ -60,13 +63,5 @@ class OtherRecyclerAdapter(val activity: Activity) :
         val inflater = LayoutInflater.from(parent.context)
         val view: View = inflater.inflate(R.layout.list_other_row, parent, false)
         return ViewHolder(view)
-    }
-
-    private fun returnChoiceIntent(forGesture: String, action: LauncherAction) {
-        val returnIntent = Intent()
-        returnIntent.putExtra("forGesture", forGesture)
-        action.writeToIntent(returnIntent)
-        activity.setResult(REQUEST_CHOOSE_APP, returnIntent)
-        activity.finish()
     }
 }
