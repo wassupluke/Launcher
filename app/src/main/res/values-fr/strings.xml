@@ -169,7 +169,6 @@
     <string name="dialog_consent_accessibility_privileges">Je suis conscient que cela accordera des privilèges importants à µLauncher.</string>
     <string name="dialog_choose_color_title">Choisir une couleur</string>
     <string name="dialog_consent_accessibility_title">Activation du service d\'accessibilité</string>
-    <string name="dialog_select_color_ok">Ok</string>
     <string name="dialog_select_color_color_hex">Couleur</string>
     <string name="dialog_consent_accessibility_consent">Je consent à µLauncher utilisation du service d’accessibilité pour fournir une fonction non liée à l’accessibilité.</string>
     <string name="dialog_consent_accessibility_data_collection">Je consent à la non-collecte de données par µLauncher.</string>
@@ -216,7 +215,6 @@
     <string name="settings_theme_background_item_solid">Plein</string>
     <string name="dialog_rename_title">Renommer %1$s</string>
     <string name="screen_lock_method_use_accessibility">Utiliser le service d’accessibilité</string>
-    <string name="dialog_rename_ok">Ok</string>
     <string name="settings_functionality_search_web">Chercher sur le web</string>
     <string name="settings_functionality_search_web_summary">Appuyer sur entrée en cherchant une application pour lancer une recherche web.</string>
     <string name="dialog_cancel">Annuler</string>

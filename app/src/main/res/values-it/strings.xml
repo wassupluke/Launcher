@@ -190,7 +190,6 @@
     <string name="tutorial_usage_title">Utilizzo</string>
     <string name="tutorial_usage_text">La schermata principale contiene solo data e ora. Nessuna distrazione.</string>
     <string name="alert_requires_android_m">Questa funzione richiede Android 6 o successivi.</string>
-    <string name="dialog_rename_ok">Ok</string>
     <string name="dialog_rename_title">Rinomina %1$s</string>
     <string name="settings_theme_color_theme_item_dynamic">Dinamico</string>
     <string name="settings_clock_color">Colore</string>
@@ -205,7 +204,6 @@
     <string name="dialog_select_color_alpha">Trasparente</string>
     <string name="dialog_select_color_blue">Blu</string>
     <string name="dialog_select_color_green">Verde</string>
-    <string name="dialog_select_color_ok">Ok</string>
     <string name="dialog_select_color_color_hex">Colore</string>
     <string name="dialog_choose_color_title">Scegli colore</string>
     <string name="dialog_consent_accessibility_ok">Attiva Servizi di Accessibilità</string>

@@ -102,7 +102,7 @@
     <string name="settings_enabled_gestures_edge_swipe">Kantenaktionen</string>
     <string name="settings_enabled_gestures_edge_swipe_edge_width">Kantenbreite</string>
     <string name="settings_functionality_auto_launch">Suchergebnis starten</string>
-    <string name="settings_functionality_search_web_summary">Beim Durchsuchen der Apps Enter drücken um stattdessen im Internet zu suchen</string>
+    <string name="settings_functionality_search_web_summary">Beim Durchsuchen der Apps Enter drücken, um stattdessen im Internet zu suchen.</string>
     <string name="settings_functionality_auto_keyboard">Tastatur automatisch öffnen</string>
     <string name="settings_launcher_sensitivity">Empfindlichkeit</string>
     <!--
@@ -124,7 +124,7 @@
     <string name="settings_meta_contact">Entwickler kontaktieren</string>
     <string name="dialog_report_bug_create_report">Report erstellen</string>
     <string name="settings_meta_fork_contact">Entwickler des Fork kontaktieren</string>
-    <string name="settings_meta_join_chat">Dem µLauncher-Chat beitreten</string>
+    <string name="settings_meta_join_chat">Dem μLauncher-Chat beitreten</string>
     <string name="settings_meta_donate">Spenden</string>
     <string name="settings_meta_privacy">Datenschutzerklärung</string>
     <!--
@@ -141,9 +141,9 @@
     <string name="list_app_info">App Info</string>
     <string name="list_app_hidden_remove">Sichtbar machen</string>
     <string name="list_app_rename">Umbenennen</string>
-    <string name="list_apps_search_hint">Anwendungen suchen</string>
+    <string name="list_apps_search_hint">Suchen</string>
     <string name="list_apps_search_hint_no_auto_launch">Suchen (kein Schnellstart)</string>
-    <string name="list_other_settings">µLauncher Einstellungen</string>
+    <string name="list_other_settings">μLauncher Einstellungen</string>
     <string name="list_other_list">Alle Anwendungen</string>
     <string name="list_other_list_favorites">Favoriten</string>
     <string name="list_other_toggle_private_space_lock">Privaten Bereich (ent)sperren</string>
@@ -160,18 +160,18 @@
       -->
     <string name="list_other_torch">Taschenlampe umschalten</string>
     <string name="tutorial_title">Tutorial</string>
-    <string name="tutorial_start_text">Hier eine kurze Erklärung, wie dieser Launcher funktioniert.</string>
+    <string name="tutorial_start_text">👋\n\nHier eine kurze Erklärung, wie dieser Launcher funktioniert.</string>
     <string name="tutorial_concept_title">Konzept</string>
-    <string name="tutorial_concept_text">µLauncher bietet eine minimalistische, effiziente und ablenkungsfreie digitale Umgebung.\n\nDie App ist freie Software, enthält keine Werbung und sammelt keinerlei Daten.</string>
+    <string name="tutorial_concept_text">µLauncher bietet eine minimalistische, effiziente und ablenkungsfreie Umgebung.\n\nDie App ist freie Software, enthält keine Werbung und sammelt keinerlei Daten.</string>
     <string name="tutorial_concept_text_2">Der Quellcode ist bei GitHub zu finden.</string>
     <string name="tutorial_usage_title">Benutzung</string>
     <string name="tutorial_usage_text">Der Homescreen zeigt nur das Datum und die Uhrzeit. Keine Ablenkung.</string>
-    <string name="tutorial_usage_text_2">Häufig verwendete Apps können mittels Gesten, z.B. Wischen oder den Lautstärketasten geöffnet werden. Gleich können die Apps ausgewählt werden.</string>
+    <string name="tutorial_usage_text_2">Häufig verwendete Apps können mittels Gesten, z.B. Wischen oder den Lautstärketasten geöffnet werden.</string>
     <string name="tutorial_setup_title">Einrichtung</string>
     <string name="tutorial_setup_text">Es wurden Standardapps ausgewählt, die Zuordnung kann hier angepasst werden:</string>
     <string name="tutorial_setup_text_2">Die Auswahl kann in den Einstellungen später jederzeit geändert werden.</string>
     <string name="tutorial_finish_title">Los gehts!</string>
-    <string name="tutorial_finish_text">Es kann losgehen!\n\nWir hoffen, dass diese App hilfreich ist!\n\n- Finn (der Entwickler)\n\tund Josia (der einige Änderungen vorgenommen hat und den Fork μLauncher entwickelt)</string>
+    <string name="tutorial_finish_text">Es kann losgehen!\n\nWir hoffen, dass diese App hilfreich ist!\n\n- Finn (der Entwickler)\nund Josia (der einige Änderungen vorgenommen hat und den Fork μLauncher entwickelt)</string>
     <string name="tutorial_finish_button">Starten</string>
     <string name="settings">Einstellungen</string>
     <string name="ic_menu_alt">Mehr Optionen</string>
@@ -196,7 +196,6 @@
     <string name="alert_no_torch_found">Es wurde keine geeignete Kamera gefunden.</string>
     <string name="alert_torch_access_exception">Fehler: Kein Zugriff auf die Kamera möglich.</string>
     <string name="settings_actions_lock_method">Methode zum Sperren des Bildschirms wählen</string>
-    <string name="dialog_rename_ok">Ok</string>
     <string name="dialog_rename_title">%1$s umbenennen</string>
     <string name="toast_private_space_default_home_screen">µLauncher muss als Standardlauncher eingerichtet sein um auf den privaten Bereich zugreifen zu können.</string>
     <string name="toast_lock_screen_not_supported">Fehler: Auf diesem Gerät kann der Bildschirm nicht mittels Bedienungshilfe gesperrt werden. Bitte stattdessen Geräteadministrator verwenden.</string>
@@ -206,15 +205,7 @@
     <string name="screen_lock_method_dialog_title">Methode zum Sperren wählen</string>
     <string name="screen_lock_method_use_accessibility">Bedienungshilfe verwenden</string>
     <string name="screen_lock_method_use_device_admin">Geräteadministrator verwenden</string>
-    <string name="accessibility_service_description">
-        µLauncher als Bedienungshilfe zu aktivieren ermöglicht es µLauncher, den Bildschirm zu sperren.
-        Achtung: Hierfür sind weitgehende Berechtigungen erforderlich.
-        Solche Berechtigungen sollten niemals leichtfertig vergeben werden.
-        µLauncher wird diese Berechtigungen ausschließlich zum Sperren des Bildschirms verwenden.
-
-        Alternativ kann der Bildschirm auch mithilfe von Geräteadministratorberechtigungen gesperrt werden.
-        Dann ist jedoch ein Entsperren mit Fingerabdruck oder Gesichtserkennung nicht möglich.
-    </string>
+    <string name="accessibility_service_description">µLauncher als Bedienungshilfe zu aktivieren ermöglicht es µLauncher, den Bildschirm zu sperren. Achtung: Hierfür sind weitgehende Berechtigungen erforderlich. Solche Berechtigungen sollten niemals leichtfertig vergeben werden. µLauncher wird diese Berechtigungen ausschließlich zum Sperren des Bildschirms verwenden. Alternativ kann der Bildschirm auch mithilfe von Geräteadministratorberechtigungen gesperrt werden. Dann ist jedoch ein Entsperren mit Fingerabdruck oder Gesichtserkennung nicht möglich.</string>
     <string name="screen_lock_method_dialog_text"><![CDATA[
         <h1>Methode zum Sperren auswählen</h1>
         Es gibt zwei Möglichkeiten, wie µLauncher den Bildschirm sperren kann.
@@ -261,7 +252,6 @@
     <string name="dialog_select_color_alpha">Transparenz</string>
     <string name="dialog_select_color_blue">Blau</string>
     <string name="dialog_select_color_green">Grün</string>
-    <string name="dialog_select_color_ok">Ok</string>
     <string name="dialog_select_color_color_hex">Farbe</string>
     <string name="dialog_choose_color_title">Farbe wählen</string>
     <string name="settings_meta_licenses">Open Source Lizenzen</string>
@@ -273,4 +263,50 @@
     <string name="dialog_consent_accessibility_consent">Ich willige ein, dass µLauncher eine Bedienungshilfe für Zwecke verwendet, die nicht unter Barrierefreiheit fallen.</string>
     <string name="dialog_consent_accessibility_data_collection">Ich willige ein, dass µLauncher keine Daten sammelt.</string>
     <string name="dialog_consent_accessibility_title">Bedienungshilfe aktivieren</string>
+    <string name="dialog_report_bug_info">Danke für die Mithilfe, μLauncher zu verbessern!\nEs wird darum gebeten, Bug Reports die folgenden Informationen anzufügen, um diese besser nachvollziehen zu können:</string>
+    <string name="settings_gesture_back">Zurück</string>
+    <string name="settings_gesture_description_back">Zurück-Taste oder -Geste</string>
+    <string name="settings_gesture_swipe_larger_reverse"><![CDATA[> (Rückwärts)]]></string>
+    <string name="settings_gesture_description_swipe_larger_reverse">Unten links -&gt; mitte rechts -&gt; oben links</string>
+    <string name="settings_gesture_swipe_smaller"><![CDATA[<]]></string>
+    <string name="settings_gesture_swipe_smaller_reverse"><![CDATA[< (Rückwärts)]]></string>
+    <string name="settings_gesture_swipe_v">V</string>
+    <string name="settings_gesture_description_swipe_v">Oben links -&gt; unten mitte -&gt; oben rechts</string>
+    <string name="settings_gesture_swipe_v_reverse">V (Rückwärts)</string>
+    <string name="settings_gesture_description_swipe_smaller_reverse">Unten rechts -&gt; mitte links -&gt; oben rechts</string>
+    <string name="settings_gesture_swipe_lambda">Λ</string>
+    <string name="settings_gesture_description_swipe_lambda">Unten links -&gt; oben mitte -&gt; unten rechts</string>
+    <string name="settings_gesture_description_swipe_v_reverse">Oben rechts -&gt; unten mitte -&gt; oben links</string>
+    <string name="settings_gesture_swipe_lambda_reverse">Λ (Rückwärts)</string>
+    <string name="settings_gesture_description_swipe_lambda_reverse">Unten rechts -&gt; oben mtte -&gt; unten links</string>
+    <string name="dialog_report_bug_button_security">Sicherheitslücke melden</string>
+    <string name="settings_apps_hide_private_space_apps">Privaten Bereich nicht in der App Liste anzeigen</string>
+    <string name="list_title_private_space">Privater Bereich</string>
+    <string name="pin_shortcut_title">Shortcut hinzufügen</string>
+    <string name="pin_shortcut_button_bind">An Geste binden</string>
+    <string name="pin_shortcut_switch_visible">In Appliste anzeigen</string>
+    <string name="tooltip_unlock_private_space">Privaten Bereich entsperren</string>
+    <string name="settings_display_hide_status_bar">Statusleiste verstecken</string>
+    <string name="settings_display_hide_navigation_bar">Navigationsleiste verstecken</string>
+    <string name="tooltip_lock_private_space">Privaten Bereich sperren</string>
+    <string name="tutorial_concept_label_version">Version</string>
+    <string name="tutorial_app_list_title">Alle Apps</string>
+    <string name="tutorial_app_list_text_2">Sobald nur noch eine App passt, wird diese automatisch gestartet.\nDas lässt sich unterdrücken, indem der Suche ein Leerzeichen vorangestellt wird.</string>
+    <string name="settings_gesture_swipe_larger"><![CDATA[>]]></string>
+    <string name="settings_gesture_description_swipe_smaller">Oben rechts -&gt; mitte links -&gt; unten rechts</string>
+    <string name="settings_gesture_description_swipe_larger">Oben links -&gt; mitte rechts -&gt; unten links</string>
+    <string name="tutorial_app_list_text">In der Appliste kann effizient nach Apps gesucht werden.\n\nDie Liste wird standardmäßig durch Wischen nach oben geöffnet (auch das lässt sich einstellen).</string>
+    <string name="dialog_consent_accessibility_text"><![CDATA[Das Aktivieren der Bedienungshilfe erteilt μLauncher <strong>weitreichende Zugriffsrechte</strong> .<br/>μLauncher wird diese <strong>ausschließlich zum Sperren des Bildschirms</strong> verwenden. μLauncher wird <strong>niemals irgendwelche Daten sammeln</strong>. Insbesondere werden mittels der Bedienungshilfe keine Daten gesammelt.]]></string>
+    <string name="settings_gesture_tap_up">Tippen und hoch</string>
+    <string name="settings_gesture_description_tap_up">Tippen, dann nach oben wischen</string>
+    <string name="settings_gesture_tap_down">Tippen und nach unten</string>
+    <string name="settings_gesture_description_tap_down">Tippen, dann nach unten wischen</string>
+    <string name="settings_gesture_tap_left">Tippen und links</string>
+    <string name="settings_gesture_description_tap_left">Tippen, dann nach links wischen</string>
+    <string name="settings_gesture_tap_right">Tippen und rechts</string>
+    <string name="settings_gesture_description_tap_right">Tippen, dann nach rechts wischen</string>
+    <string name="dialog_report_bug_security_info">Sicherheitslücken bitte nicht öffentlich bei GitHub melden, sondern auf dem folgenden Weg:</string>
+    <string name="list_other_list_private_space">Privater Bereich</string>
+    <string name="list_other_track_play_pause">Musik: Wiedergabe / Pause</string>
+    <string name="settings_list_reverse_layout">Appliste umkehren</string>
 </resources>

@@ -143,7 +143,6 @@
     <string name="list_other_lock_screen">锁屏</string>
     <string name="settings_theme_text_shadow">文本阴影</string>
     <string name="settings_enabled_gestures_double_swipe_summary">双指滑动</string>
-    <string name="dialog_rename_ok">确定</string>
     <string name="dialog_rename_title">重命名 %1$s</string>
     <string name="settings_theme_color_theme_item_default">默认</string>
     <string name="settings_theme_color_theme_item_dark">深色</string>
@@ -174,7 +173,6 @@
     <string name="dialog_select_color_blue">蓝色</string>
     <string name="dialog_select_color_alpha">透明度</string>
     <string name="dialog_select_color_green">绿色</string>
-    <string name="dialog_select_color_ok">确定</string>
     <string name="settings_theme_color_theme_item_dynamic">动态</string>
     <string name="list_title_private_space">私人空间</string>
     <string name="list_other_list_private_space">私人空间</string>

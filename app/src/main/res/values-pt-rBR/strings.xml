@@ -226,7 +226,6 @@
     <string name="settings_list_layout_item_text">Texto</string>
     <string name="settings_list_layout_item_grid">Grade</string>
     <string name="list_app_rename">Renomear</string>
-    <string name="dialog_rename_ok">beleza</string>
     <string name="dialog_rename_title">Renomear %1$s</string>
     <string name="settings_theme_font_item_serif_monospace">Serif monospace</string>
     <string name="settings_theme_font_item_serif">Serif</string>
@@ -244,7 +243,6 @@
     <string name="dialog_consent_accessibility_ok">Ativar o Serviço de acessibilidade</string>
     <string name="dialog_cancel">Cancelar</string>
     <string name="dialog_consent_accessibility_text"><![CDATA[Você está prestes a ativar o Serviço de acessibilidade. Isto concederá <strong>permissões elevadas</strong> ao µLauncher.<br/>µLauncher usará estas permissões <strong>apenas para bloquear a tela</strong>. µLauncher <strong>nunca coletará nenhum dado</strong>. Sobretudo, o µLauncher não implementa o Serviço de acessibilidade para coletar dados.]]></string>
-    <string name="dialog_select_color_ok">beleza</string>
     <string name="dialog_consent_accessibility_privileges">Estou ciente de que isto concederá permissões elevadas ao µLauncher.</string>
     <string name="dialog_consent_accessibility_other_options">Estou ciente de que existem outras opções (permissões de Administrador do aparelho ou o botão de ligar).</string>
     <string name="settings_functionality_search_web">Pesquise na internet</string>
@@ -304,5 +302,4 @@
     <string name="settings_gesture_description_swipe_smaller_reverse">Canto inferior direito -&gt; centro esquerdo -&gt; canto superior direito</string>
     <string name="settings_gesture_description_swipe_lambda_reverse">Inferior direito -&gt; superior médio -&gt; inferior esquerdo</string>
     <string name="settings_list_reverse_layout">Lista de apps inversa</string>
-    <string name="pin_shortcut_button_ok">Ok</string>
 </resources>
