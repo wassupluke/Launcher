@@ -16,7 +16,7 @@
       -->
     <string name="settings_title">Settings</string>
 
-    <string name="settings_tab_app">Apps</string>
+    <string name="settings_tab_actions">Actions</string>
     <string name="settings_tab_launcher">Launcher</string>
     <string name="settings_tab_meta">Meta</string>
 
@@ -85,9 +85,9 @@
     <string name="settings_gesture_swipe_lambda_reverse">Λ (Reverse)</string>
     <string name="settings_gesture_description_swipe_lambda_reverse">Bottom right -> top mid -> bottom left</string>
 
-    <string name="settings_gesture_vol_up">Volume Up</string>
+    <string name="settings_gesture_vol_up">Volume Up Key</string>
     <string name="settings_gesture_description_vol_up">Press the volume up button</string>
-    <string name="settings_gesture_vol_down">Volume Down</string>
+    <string name="settings_gesture_vol_down">Volume Down Key</string>
     <string name="settings_gesture_description_vol_down">Press the volume down button</string>
     <string name="settings_gesture_double_click">Double Click</string>
     <string name="settings_gesture_description_double_click">Double click an empty area</string>

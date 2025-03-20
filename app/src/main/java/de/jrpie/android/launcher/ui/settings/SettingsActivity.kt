@@ -109,7 +109,7 @@ class SettingsActivity : AppCompatActivity(), UIObject {
 }
 
 private val TAB_TITLES = arrayOf(
-    R.string.settings_tab_app,
+    R.string.settings_tab_actions,
     R.string.settings_tab_launcher,
     R.string.settings_tab_meta
 )

@@ -14,7 +14,7 @@
       -
       -->
     <string name="settings_title">Einstellungen</string>
-    <string name="settings_tab_app">Apps</string>
+    <string name="settings_tab_actions">Aktionen</string>
     <string name="settings_tab_launcher">Launcher</string>
     <string name="settings_tab_meta">Meta</string>
     <!--
@@ -54,9 +54,9 @@
     <string name="settings_gesture_description_down_left_edge">An der linken Kante nach unten wischen</string>
     <string name="settings_gesture_down_right_edge">Abwärts (rechts)</string>
     <string name="settings_gesture_description_down_right_edge">An der rechten Kanten nach unten wischen</string>
-    <string name="settings_gesture_vol_up">Lautstärke +</string>
+    <string name="settings_gesture_vol_up">Lauter-Taste</string>
     <string name="settings_gesture_description_vol_up">Die Taste \"Lauter\" drücken</string>
-    <string name="settings_gesture_vol_down">Lautstärke -</string>
+    <string name="settings_gesture_vol_down">Leiser-Taste</string>
     <string name="settings_gesture_description_vol_down">Die Taste \"Leiser\" drücken</string>
     <string name="settings_gesture_double_click">Doppelklick</string>
     <string name="settings_gesture_description_double_click">In einem leeren Bereich doppelt klicken</string>
