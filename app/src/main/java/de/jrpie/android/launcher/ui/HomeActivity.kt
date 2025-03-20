@@ -2,10 +2,10 @@ package de.jrpie.android.launcher.ui
 
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
@@ -56,22 +56,11 @@ class HomeActivity : UIObject, AppCompatActivity() {
         super<AppCompatActivity>.onCreate(savedInstanceState)
         super<UIObject>.onCreate()
 
-        val displayMetrics = DisplayMetrics()
-
-        @Suppress("deprecation") // required to support API < 30
-        windowManager.defaultDisplay.getMetrics(displayMetrics)
-
-        val width = displayMetrics.widthPixels
-        val height = displayMetrics.heightPixels
-
         touchGestureDetector = TouchGestureDetector(
-            this,
-            width,
-            height,
+            this, 0, 0,
             LauncherPreferences.enabled_gestures().edgeSwipeEdgeWidth() / 100f
         )
-
-
+        touchGestureDetector.updateScreenSize(windowManager)
 
         // Initialise layout
         binding = HomeBinding.inflate(layoutInflater)
@@ -101,6 +90,11 @@ class HomeActivity : UIObject, AppCompatActivity() {
         binding.buttonFallbackSettings.setOnClickListener {
             LauncherAction.SETTINGS.invoke(this)
         }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        touchGestureDetector.updateScreenSize(windowManager)
     }
 
     override fun onStart() {

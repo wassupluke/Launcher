@@ -5,8 +5,10 @@ import android.graphics.Insets
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import android.util.DisplayMetrics
 import android.view.MotionEvent
 import android.view.ViewConfiguration
+import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import de.jrpie.android.launcher.actions.Gesture
 import de.jrpie.android.launcher.preferences.LauncherPreferences
@@ -17,8 +19,8 @@ import kotlin.math.tan
 
 class TouchGestureDetector(
     private val context: Context,
-    val width: Int,
-    val height: Int,
+    var width: Int,
+    var height: Int,
     var edgeWidth: Float
 ) {
     private val ANGULAR_THRESHOLD = tan(Math.PI / 6)
@@ -317,6 +319,14 @@ class TouchGestureDetector(
             }
             gesture?.invoke(context)
         }
+    }
+
+    fun updateScreenSize(windowManager: WindowManager) {
+        val displayMetrics = DisplayMetrics()
+        @Suppress("deprecation") // required to support API < 30
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
+        width = displayMetrics.widthPixels
+        height = displayMetrics.heightPixels
     }
 
     @RequiresApi(Build.VERSION_CODES.Q)
