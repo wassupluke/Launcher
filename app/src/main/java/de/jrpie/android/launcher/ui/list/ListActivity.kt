@@ -9,8 +9,7 @@ import android.window.OnBackInvokedDispatcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.google.android.material.tabs.TabLayoutMediator
+import androidx.fragment.app.FragmentPagerAdapter
 import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.actions.LauncherAction
@@ -225,13 +224,10 @@ class ListActivity : AppCompatActivity(), UIObject {
         updateTitle()
 
         val sectionsPagerAdapter = ListSectionsPagerAdapter(this)
-        binding.listViewpager.apply {
-            adapter = sectionsPagerAdapter
-            currentItem = 0
+        binding.listViewpager.let {
+            it.adapter = sectionsPagerAdapter
+            binding.listTabs.setupWithViewPager(it)
         }
-        TabLayoutMediator(binding.listTabs, binding.listViewpager) { tab, position ->
-            tab.text = sectionsPagerAdapter.getPageTitle(position)
-        }.attach()
     }
 }
 
@@ -243,11 +239,17 @@ private val TAB_TITLES = arrayOf(
 /**
  * The [ListSectionsPagerAdapter] returns the fragment,
  * which corresponds to the selected tab in [ListActivity].
+ *
+ * This should eventually be replaced by a [FragmentStateAdapter]
+ * However this keyboard does not open when using [ViewPager2]
+ * so currently [ViewPager] is used here.
+ * https://github.com/jrpie/launcher/issues/130
  */
+@Suppress("deprecation")
 class ListSectionsPagerAdapter(private val activity: ListActivity) :
-    FragmentStateAdapter(activity) {
+    FragmentPagerAdapter(activity.supportFragmentManager) {
 
-    override fun createFragment(position: Int): Fragment {
+    override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> ListFragmentApps()
             1 -> ListFragmentOther()
@@ -255,11 +257,11 @@ class ListSectionsPagerAdapter(private val activity: ListActivity) :
         }
     }
 
-    fun getPageTitle(position: Int): CharSequence {
+    override fun getPageTitle(position: Int): CharSequence {
         return activity.resources.getString(TAB_TITLES[position])
     }
 
-    override fun getItemCount(): Int {
+    override fun getCount(): Int {
         return when (activity.intention) {
             ListActivity.ListActivityIntention.VIEW -> 1
             else -> 2
