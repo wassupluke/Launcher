@@ -11,7 +11,9 @@ import android.view.KeyEvent
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import de.jrpie.android.launcher.Application
+import de.jrpie.android.launcher.BuildConfig
 import de.jrpie.android.launcher.R
+import de.jrpie.android.launcher.actions.lock.LauncherAccessibilityService
 import de.jrpie.android.launcher.apps.AppFilter
 import de.jrpie.android.launcher.apps.hidePrivateSpaceWhenLocked
 import de.jrpie.android.launcher.apps.isPrivateSpaceSupported
@@ -132,6 +134,14 @@ enum class LauncherAction(
         R.drawable.baseline_settings_applications_24,
         ::expandSettingsPanel
     ),
+    RECENT_APPS(
+        "recent_apps",
+        R.string.list_other_recent_apps,
+        R.drawable.baseline_apps_24,
+        LauncherAccessibilityService::openRecentApps,
+        false,
+        { _ -> BuildConfig.USE_ACCESSIBILITY_SERVICE }
+    ),
     LOCK_SCREEN(
         "lock_screen",
         R.string.list_other_lock_screen,
@@ -142,7 +152,7 @@ enum class LauncherAction(
         "toggle_torch",
         R.string.list_other_torch,
         R.drawable.baseline_flashlight_on_24,
-        ::toggleTorch
+        ::toggleTorch,
     ),
     NOP("nop", R.string.list_other_nop, R.drawable.baseline_not_interested_24, {});
 

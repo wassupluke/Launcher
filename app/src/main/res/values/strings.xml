@@ -252,6 +252,7 @@
     <string name="list_other_track_previous">Music: Previous</string>
     <string name="list_other_track_play_pause">Music: Play / Pause</string>
     <string name="list_other_expand_notifications_panel">Expand notifications panel</string>
+    <string name="list_other_recent_apps">Recent Apps</string>
     <string name="list_other_nop">Do nothing</string>
     <string name="list_other_lock_screen">Lock Screen</string>
     <string name="list_other_torch">Toggle Torch</string>
@@ -307,6 +308,8 @@
     <string name="alert_no_torch_found">No camera with torch detected.</string>
     <string name="alert_torch_access_exception">Error: Can\'t access torch.</string>
     <string name="alert_lock_screen_failed">Error: Failed to lock screen. (If you just upgraded the app, try to disable and re-enable the accessibility service in phone settings)</string>
+    <string name="alert_recent_apps_failed">Error: Failed to show recent apps. (If you just upgraded the app, try to disable and re-enable the accessibility service in phone settings)</string>
+    <string name="alert_enable_accessibility_failed">Error: Failed to enable the accessibility service.</string>
     <string name="toast_accessibility_service_not_enabled">μLauncher\'s accessibility service is not enabled. Please enable it in settings</string>
     <string name="toast_private_space_locked">Private space locked</string>
     <string name="toast_private_space_unlocked">Private space unlocked</string>
@@ -315,12 +318,17 @@
     <string name="tooltip_lock_private_space">Lock private space</string>
     <string name="tooltip_unlock_private_space">Unlock private space</string>
     <string name="toast_lock_screen_not_supported">Error: Locking the screen using accessibility is not supported on this device. Please use device admin instead.</string>
-    <string name="accessibility_service_name">μLauncher - lock screen</string>
+    <string name="accessibility_service_name">μLauncher</string>
     <string name="accessibility_service_description">
-        Setting μLauncher as an accessibility service allows it to lock the screen.
+        Setting μLauncher as an accessibility service allows it to lock the screen and open the recent apps menu.
         Note that excessive permissions are required. You should never grant such permissions lightly to any app.
 
-        μLauncher will use the accessibility service only for locking the screen. You can check the source code to make sure.
+        μLauncher will use the accessibility service only for performing the following actions when requested by the user:
+
+        * lock screen
+        * open recent apps
+
+        μLauncher will never use the accessibility service to collect data. You can check the source code to make sure.
 
         Note that locking the screen can also be accomplished by granting μLauncher device administrator permissions. However that method doesn\'t work with fingerprint and face unlock.
     </string>
@@ -365,7 +373,12 @@
     <string name="dialog_consent_accessibility_other_options">I am aware that other options exist (using device administrator privileges or the power button).</string>
     <string name="dialog_consent_accessibility_consent">I consent to μLauncher using the accessibility service to provide functionality unrelated to accessibility.</string>
     <string name="dialog_consent_accessibility_data_collection">I consent to μLauncher not collecting any data.</string>
-    <string name="dialog_consent_accessibility_text"><![CDATA[You are about to activate the accessibility service. This will grant <strong>far-reaching privileges</strong> to μLauncher.<br/>μLauncher will use these privileges <strong>only to lock the screen</strong>. μLauncher <strong>will never collect any data</strong>. In particular, μLauncher does not use the accessibility service to collect any data.]]></string>
+    <string name="dialog_consent_accessibility_text"><![CDATA[You are about to activate the accessibility service. This will grant <strong>far-reaching privileges</strong> to μLauncher.<br/>μLauncher will use these privileges <strong>only</strong> to perform the following actions:
+    <ul>
+        <li>Lock Screen</li>
+        <li>Recent Apps</li>
+    </ul>
+     μLauncher <strong>will never collect any data</strong>. In particular, μLauncher does not use the accessibility service to collect any data.]]></string>
     <string name="dialog_consent_accessibility_title">Activating the Accessibility Service</string>
     <string name="dialog_consent_accessibility_ok">Activate Accessibility Service</string>
     <string name="dialog_cancel">Cancel</string>

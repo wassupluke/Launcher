@@ -22,23 +22,41 @@ class LauncherAccessibilityService : AccessibilityService() {
 
     companion object {
         private const val TAG = "Launcher Accessibility"
+        private const val ACTION_REQUEST_ENABLE = "ACTION_REQUEST_ENABLE"
         const val ACTION_LOCK_SCREEN = "ACTION_LOCK_SCREEN"
+        const val ACTION_RECENT_APPS = "ACTION_RECENT_APPS"
 
-        fun lockScreen(context: Context) {
+        private fun invoke(context: Context, action: String, failureMessageRes: Int) {
             try {
                 context.startService(
                     Intent(
                         context,
                         LauncherAccessibilityService::class.java
                     ).apply {
-                        action = ACTION_LOCK_SCREEN
+                        this.action = action
                     })
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 Toast.makeText(
                     context,
-                    context.getString(R.string.alert_lock_screen_failed),
+                    context.getString(failureMessageRes),
                     Toast.LENGTH_LONG
                 ).show()
+            }
+        }
+
+        fun lockScreen(context: Context) {
+            if (!isEnabled(context)) {
+                showEnableDialog(context)
+            } else {
+                invoke(context, ACTION_LOCK_SCREEN, R.string.alert_lock_screen_failed)
+            }
+        }
+
+        fun openRecentApps(context: Context) {
+            if (!isEnabled(context)) {
+                showEnableDialog(context)
+            } else {
+                invoke(context, ACTION_RECENT_APPS, R.string.alert_recent_apps_failed)
             }
         }
 
@@ -58,7 +76,7 @@ class LauncherAccessibilityService : AccessibilityService() {
                 setView(R.layout.dialog_consent_accessibility)
                 setTitle(R.string.dialog_consent_accessibility_title)
                 setPositiveButton(R.string.dialog_consent_accessibility_ok) { _, _ ->
-                    lockScreen(context)
+                    invoke(context, ACTION_REQUEST_ENABLE, R.string.alert_enable_accessibility_failed)
                 }
                 setNegativeButton(R.string.dialog_cancel) { _, _ -> }
             }.create().also { it.show() }.apply {
@@ -94,7 +112,9 @@ class LauncherAccessibilityService : AccessibilityService() {
             }
 
             when (action) {
+                ACTION_REQUEST_ENABLE -> {} // do nothing
                 ACTION_LOCK_SCREEN -> handleLockScreen()
+                ACTION_RECENT_APPS -> performGlobalAction(GLOBAL_ACTION_RECENTS)
             }
         }
         return super.onStartCommand(intent, flags, startId)

@@ -6,6 +6,7 @@ import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import de.jrpie.android.launcher.BuildConfig
 import de.jrpie.android.launcher.R
+import de.jrpie.android.launcher.actions.lock.LauncherAccessibilityService
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 
 
