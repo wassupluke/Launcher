@@ -256,6 +256,7 @@
     <string name="list_other_nop">Do nothing</string>
     <string name="list_other_lock_screen">Lock Screen</string>
     <string name="list_other_torch">Toggle Torch</string>
+    <string name="list_other_launch_other_launcher">Launch other Home Screen</string>
 
     <!-- Pin shortcuts -->
     <string name="pin_shortcut_title">Add Shortcut</string>

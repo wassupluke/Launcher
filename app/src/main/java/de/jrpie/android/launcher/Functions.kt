@@ -61,7 +61,7 @@ fun setDefaultHomeScreen(context: Context, checkDefault: Boolean = false) {
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
         && context is Activity
-        && !isDefault // using role manager only works when µLauncher is not already the default.
+        && checkDefault // using role manager only works when µLauncher is not already the default.
     ) {
         val roleManager = context.getSystemService(RoleManager::class.java)
         context.startActivityForResult(

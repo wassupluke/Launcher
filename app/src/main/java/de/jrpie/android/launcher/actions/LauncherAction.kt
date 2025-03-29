@@ -154,6 +154,12 @@ enum class LauncherAction(
         R.drawable.baseline_flashlight_on_24,
         ::toggleTorch,
     ),
+    LAUNCH_OTHER_LAUNCHER(
+        "launcher_other_launcher",
+        R.string.list_other_launch_other_launcher,
+        R.drawable.baseline_home_24,
+        ::launchOtherLauncher
+    ),
     NOP("nop", R.string.list_other_nop, R.drawable.baseline_not_interested_24, {});
 
     override fun invoke(context: Context, rect: Rect?): Boolean {
@@ -256,6 +262,15 @@ private fun expandSettingsPanel(context: Context) {
             Toast.LENGTH_LONG
         ).show()
     }
+}
+
+private fun launchOtherLauncher(context: Context) {
+    context.startActivity(
+        Intent.createChooser(
+            Intent(Intent.ACTION_MAIN).also { it.addCategory(Intent.CATEGORY_HOME) },
+            context.getString(R.string.list_other_launch_other_launcher)
+        )
+    )
 }
 
 private fun openSettings(context: Context) {
