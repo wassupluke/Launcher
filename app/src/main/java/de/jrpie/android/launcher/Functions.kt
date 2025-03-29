@@ -38,6 +38,8 @@ import androidx.core.net.toUri
 
 const val LOG_TAG = "Launcher"
 
+const val REQUEST_SET_DEFAULT_HOME = 42
+
 fun isDefaultHomeScreen(context: Context): Boolean {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
         val roleManager = context.getSystemService(RoleManager::class.java)
@@ -62,8 +64,9 @@ fun setDefaultHomeScreen(context: Context, checkDefault: Boolean = false) {
         && !isDefault // using role manager only works when µLauncher is not already the default.
     ) {
         val roleManager = context.getSystemService(RoleManager::class.java)
-        context.startActivity(
-            roleManager.createRequestRoleIntent(RoleManager.ROLE_HOME)
+        context.startActivityForResult(
+            roleManager.createRequestRoleIntent(RoleManager.ROLE_HOME),
+            REQUEST_SET_DEFAULT_HOME
         )
         return
     }
