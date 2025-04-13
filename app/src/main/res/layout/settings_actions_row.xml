@@ -43,13 +43,15 @@
         android:id="@+id/settings_actions_row_button_choose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:maxWidth="100dp"
         android:text="@string/settings_apps_choose"
         android:textAllCaps="false"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/settings_actions_row_icon_img"

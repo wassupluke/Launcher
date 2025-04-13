@@ -2,7 +2,7 @@
 <resources>
     <string name="settings_gesture_description_right_bottom_edge">Scorri verso destra sul bordo inferiore dello schermo</string>
     <string name="settings_launcher_section_appearance">Aspetto</string>
-    <string name="settings_apps_choose">Scegliere l\'applicazione</string>
+    <string name="settings_apps_choose">Scegliere</string>
     <string name="settings_theme_color_theme">Tema</string>
     <string name="tutorial_concept_text">Questo launcher è progettato per essere minimale, efficiente e privo di distrazioni. Non contiene pagamenti, pubblicità o servizi di tracciamento.</string>
     <string name="settings_theme_color_theme_item_default">Predefinito</string>
