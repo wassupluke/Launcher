@@ -1,5 +1,5 @@
 #!/bin/bash
-export JAVA_HOME="/usr/lib/jvm/java-23-openjdk/"
+export JAVA_HOME="/usr/lib/jvm/java-21-openjdk/"
 OUTPUT_DIR="$HOME/launcher-release"
 BUILD_TOOLS_DIR="$HOME/Android/Sdk/build-tools/35.0.0"
 KEYSTORE="$HOME/data/keys/launcher_jrpie.jks"
