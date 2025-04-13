@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="alert_cant_open_message">Norite pakeisti nustatymus?</string>
+    <string name="settings_title">Nustatymai</string>
+    <string name="settings_tab_actions">Veiksmai</string>
+    <string name="settings_tab_launcher">Paleidimo programėlė</string>
+    <string name="settings_tab_meta">Apie</string>
+    <string name="settings_gesture_back">Atgal</string>
+    <string name="settings_gesture_description_back">Grįžimo mygtukas / grįžimo gestas</string>
+    <string name="settings_gesture_description_up">Perbraukimas aukštyn</string>
+    <string name="settings_gesture_tap_up">Bakstelėkite + aukštyn</string>
+    <string name="alert_cant_open_title">Nepavyksta paleisti programėlės</string>
+    <string name="toast_cant_open_message">Atidarykite nustatymus norėdami pasirinkti šio gesto veiksmą</string>
+    <string name="settings_gesture_up">Aukštyn</string>
+    <string name="settings_gesture_description_tap_up">Bakstelėjimas ir perbraukimas aukštyn</string>
+</resources>
