@@ -251,12 +251,12 @@
     <string name="list_other_track_next">Music: Next</string>
     <string name="list_other_track_previous">Music: Previous</string>
     <string name="list_other_track_play_pause">Music: Play / Pause</string>
-    <string name="list_other_expand_notifications_panel">Expand notifications panel</string>
+    <string name="list_other_expand_notifications_panel">Expand Notifications Panel</string>
     <string name="list_other_recent_apps">Recent Apps</string>
-    <string name="list_other_nop">Do nothing</string>
+    <string name="list_other_nop">Do Nothing</string>
     <string name="list_other_lock_screen">Lock Screen</string>
     <string name="list_other_torch">Toggle Torch</string>
-    <string name="list_other_launch_other_launcher">Launch other Home Screen</string>
+    <string name="list_other_launch_other_launcher">Launch Other Home Screen</string>
 
     <!-- Pin shortcuts -->
     <string name="pin_shortcut_title">Add Shortcut</string>
