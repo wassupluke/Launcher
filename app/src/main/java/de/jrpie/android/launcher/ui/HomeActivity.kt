@@ -37,7 +37,7 @@ import java.util.Locale
 class HomeActivity : UIObject, AppCompatActivity() {
 
     private lateinit var binding: HomeBinding
-    private lateinit var touchGestureDetector: TouchGestureDetector
+    private var touchGestureDetector: TouchGestureDetector? = null
 
     private var sharedPreferencesListener =
         SharedPreferences.OnSharedPreferenceChangeListener { _, prefKey ->
@@ -56,28 +56,11 @@ class HomeActivity : UIObject, AppCompatActivity() {
         super<AppCompatActivity>.onCreate(savedInstanceState)
         super<UIObject>.onCreate()
 
-        touchGestureDetector = TouchGestureDetector(
-            this, 0, 0,
-            LauncherPreferences.enabled_gestures().edgeSwipeEdgeWidth() / 100f
-        )
-        touchGestureDetector.updateScreenSize(windowManager)
 
         // Initialise layout
         binding = HomeBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            binding.root.setOnApplyWindowInsetsListener { _, windowInsets ->
-                @Suppress("deprecation") // required to support API 29
-                val insets = windowInsets.systemGestureInsets
-                touchGestureDetector.setSystemGestureInsets(insets)
-
-                windowInsets
-            }
-        }
-
-
 
         // Handle back key / gesture on Android 13+, cf. onKeyDown()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -94,7 +77,7 @@ class HomeActivity : UIObject, AppCompatActivity() {
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        touchGestureDetector.updateScreenSize(windowManager)
+        touchGestureDetector?.updateScreenSize(windowManager)
     }
 
     override fun onStart() {
@@ -188,8 +171,28 @@ class HomeActivity : UIObject, AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        touchGestureDetector.edgeWidth =
+        /* This should be initialized in onCreate()
+           However on some devices there seems to be a bug where the touchGestureDetector
+           is not working properly after resuming the app.
+           Reinitializing the touchGestureDetector every time the app is resumed might help to fix that.
+           (see issue #138)
+         */
+        touchGestureDetector = TouchGestureDetector(
+            this, 0, 0,
             LauncherPreferences.enabled_gestures().edgeSwipeEdgeWidth() / 100f
+        ).also {
+            it.updateScreenSize(windowManager)
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            binding.root.setOnApplyWindowInsetsListener { _, windowInsets ->
+                @Suppress("deprecation") // required to support API 29
+                val insets = windowInsets.systemGestureInsets
+                touchGestureDetector?.setSystemGestureInsets(insets)
+
+                windowInsets
+            }
+        }
 
         initClock()
         updateSettingsFallbackButtonVisibility()
@@ -230,7 +233,7 @@ class HomeActivity : UIObject, AppCompatActivity() {
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        touchGestureDetector.onTouchEvent(event)
+        touchGestureDetector?.onTouchEvent(event)
         return true
     }
 
