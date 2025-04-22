@@ -13,7 +13,31 @@
     <string name="settings_gesture_description_double_up">Scorri verso l\'alto con due dita</string>
     <string name="settings_apps_toast_store_not_found">Store non trovato</string>
     <string name="settings_list_layout_item_grid">Griglia</string>
-    <string name="screen_lock_method_dialog_text">"&lt;a href=\"https://issuetracker.google.com/issues/37010136#comment36\"&gt;&lt;![CDATA[\n        &lt;h1&gt;Scegli un sistema di blocco&lt;/h1&gt;\n        Esistono due modi di bloccare lo schermo.\n        Sfortunatamente entrambi presentano svantaggi:&lt;br/&gt;&lt;br/&gt;\n\n        &lt;h3&gt;Amministratore Dispositivo&lt;/h3&gt;\n        Non funziona con impronta e riconoscimento facciale.\n\n        &lt;br/&gt;\n        &lt;br/&gt;\n\n        &lt;h3&gt;Servizio Accessibilità&lt;/h3&gt;\n        Richiede privilegi eccessivi.\n        µLauncher userà quei privilegi esclusivamente per bloccare lo schermo.\n        &lt;br/&gt;\n        (Non ci si dovrebbe mai fidare di un\\\'applicazione qualsiasi appena scaricata su queste cose, ma puoi verificare il &lt;a href=\\\"https://github.com/jrpie/Launcher\\\"&gt;codice sorgente&lt;/a&gt;.)\n\n        In alcuni dispositivi, il  PIN iniziale non verrà più utilizzato per la crittografia dei dati dopo aver attivato un servizio di accessibilità.\n\n        Può essere &lt;a href=\"https://issuetracker.google.com/issues/37010136#comment36\"&gt;riattivato&lt;/a&gt; dopo.\n\n\n        &lt;br/&gt;&lt;br/&gt;&lt;br/&gt;&lt;br/&gt;\n        Puoi cambiare le tue scelte in seguito nelle impostazioni.\n        ]]&gt;"</string>
+    <string name="screen_lock_method_dialog_text"><![CDATA[
+        <h1>Scegli un sistema di blocco</h1>
+        Esistono due modi di bloccare lo schermo.
+        Sfortunatamente entrambi presentano svantaggi:<br/><br/>
+
+        <h3>Amministratore Dispositivo</h3>
+        Non funziona con impronta e riconoscimento facciale.
+
+        <br/>
+        <br/>
+
+        <h3>Servizio Accessibilità</h3>
+        Richiede privilegi eccessivi.
+        µLauncher userà quei privilegi esclusivamente per bloccare lo schermo.
+        <br/>
+        (Non ci si dovrebbe mai fidare di un\'applicazione qualsiasi appena scaricata su queste cose, ma puoi verificare il <a href=\"https://github.com/jrpie/Launcher\">codice sorgente</a>.)
+
+        In alcuni dispositivi, il  PIN iniziale non verrà più utilizzato per la crittografia dei dati dopo aver attivato un servizio di accessibilità.
+
+        Può essere <a href="https://issuetracker.google.com/issues/37010136#comment36">riattivato</a> dopo.
+
+
+        <br/><br/><br/><br/>
+        Puoi cambiare le tue scelte in seguito nelle impostazioni.
+        ]]></string>
     <string name="alert_cant_open_title">Impossibile avviare l\'app</string>
     <string name="alert_cant_open_message">Modificare le impostazioni?</string>
     <string name="toast_cant_open_message">Apri impostazioni per associare un\'azione a questo gesto</string>
@@ -109,15 +133,15 @@
     <string name="snackbar_app_hidden">Applicazione nascosta. Puoi renderla nuovamente visibile dalle impostazioni.</string>
     <string name="toast_device_admin_not_enabled">µLauncher deve amministrare il dispositivo per poter bloccare lo schermo.</string>
     <string name="device_admin_description">Abilita il blocco schermo</string>
-    <string name="alert_no_torch_found">Nessuna camera con torcia rilevata</string>
-    <string name="alert_torch_access_exception">Errore: impossibile accedere alla torcia</string>
+    <string name="alert_no_torch_found">Nessuna camera con torcia rilevata.</string>
+    <string name="alert_torch_access_exception">Errore: impossibile accedere alla torcia.</string>
     <string name="toast_accessibility_service_not_enabled">Il servizio accessibilità per µLauncher non è attivo. Attivalo nelle impostazioni</string>
     <string name="alert_lock_screen_failed">Errore: impossibile bloccare lo schermo. (Se hai appena aggiornato l\'app, prova a disabilitare e riattivare il servizio accessibilità nelle impostazioni del telefono)</string>
     <string name="toast_lock_screen_not_supported">Errore: Il blocco schermo tramite accessibilità non è supportato su questo dispositivo. In alternativa usa il servizio amministratore dispositivo.</string>
     <string name="accessibility_service_name">μLauncher</string>
     <string name="screen_lock_method_dialog_title">Scegli come bloccare lo schermo</string>
     <string name="screen_lock_method_use_accessibility">Usa il servizio accessibilità</string>
-    <string name="screen_lock_method_use_device_admin">Usa l\'amministratore dispositivo</string>
+    <string name="screen_lock_method_use_device_admin">Usa Amministratore dispositivo</string>
     <string name="settings_actions_lock_method">Scegli un sistema di blocco dello schermo</string>
     <string name="settings_theme_color_theme_item_dark">Scuro</string>
     <string name="settings_theme_color_theme_item_light">Chiaro</string>
@@ -132,7 +156,7 @@
     <string name="settings_apps_hidden">Applicazioni nascoste</string>
     <string name="settings_list_layout">Configura la lista applicazioni</string>
     <string name="settings_list_layout_item_default">Predefinito</string>
-    <string name="settings_theme_background_item_dim">Offuscato</string>
+    <string name="settings_theme_background_item_dim">Soffuso</string>
     <string name="settings_general_choose_home_screen">Imposta μLauncher come predefinito</string>
     <string name="settings_meta_cant_select_launcher">Informazioni app</string>
     <string name="settings_meta_show_tutorial">Tutorial di µLauncher</string>
@@ -180,7 +204,7 @@
     <string name="list_other_toggle_private_space_lock">Blocca/Sblocca Spazio Privato</string>
     <string name="alert_requires_android_v">Questa funzione richiede Android 15 o successivi.</string>
     <string name="dialog_select_color_red">Rosso</string>
-    <string name="dialog_select_color_alpha">Trasparente</string>
+    <string name="dialog_select_color_alpha">Alpha</string>
     <string name="dialog_select_color_blue">Blu</string>
     <string name="dialog_select_color_green">Verde</string>
     <string name="dialog_select_color_color_hex">Colore</string>
@@ -189,7 +213,7 @@
     <string name="dialog_consent_accessibility_other_options">Sono consapevole che esistono altre opzioni (utilizzando i privilegi di amministratore del dispositivo o il pulsante di accensione).</string>
     <string name="dialog_consent_accessibility_title">Attivazione dei Servizi di Accessibilità</string>
     <string name="settings_functionality_search_web">Cerca sul web</string>
-    <string name="settings_functionality_search_web_summary">Invio in ricerca app per avviare una ricerca web</string>
+    <string name="settings_functionality_search_web_summary">Invio in ricerca app per avviare una ricerca web.</string>
     <string name="list_apps_search_hint_no_auto_launch">Cerca (senza avvio automatico)</string>
     <string name="settings_meta_licenses">Licenze Open Source</string>
     <string name="legal_info_title">Licenze Open Source</string>
@@ -198,7 +222,7 @@
     <string name="dialog_report_bug_button_clipboard">Copia negli appunti</string>
     <string name="dialog_report_bug_security_info">Non segnalare le vulnerabilità di sicurezza pubblicamente su GitHub, ma usa invece:</string>
     <string name="dialog_cancel">Annulla</string>
-    <string name="settings_functionality_auto_launch_summary">Spazio per disabilitare temporaneamente</string>
+    <string name="settings_functionality_auto_launch_summary">Spazio per disabilitare temporaneamente.</string>
     <string name="dialog_report_bug_button_security">Segnala una vulnerabilità di sicurezza</string>
     <string name="dialog_report_bug_create_report">Crea una segnalazione</string>
     <string name="toast_private_space_locked">Spazio privato bloccato</string>
@@ -207,7 +231,12 @@
     <string name="toast_private_space_default_home_screen">µLauncher deve essere il launcher predefinito per poter accedere allo spazio privato.</string>
     <string name="toast_activity_not_found_browser">Impossibile aprire l\'URL: nessun browser trovato.</string>
     <string name="toast_activity_not_found_search_web">Nessuna applicazione trovata per gestire la ricerca.</string>
-    <string name="dialog_consent_accessibility_text"><![CDATA[Stai per arrivare il servizio di accessibilità. Questo garantirà <strong>privilegi più ampi</strong> a µLauncher.<br/>µLauncher utilizzerà questi privilegi <strong>solo per bloccare lo schermo</strong>. µLauncher <strong>non raccoglierà mai alcun dato</strong>. In particolare, µLauncher non usa il servizio di accessibilità per raccogliere nessun dato.]]></string>
+    <string name="dialog_consent_accessibility_text"><![CDATA[Stai per attivare il servizio di accessibilità. Questo concederà <strong>privilegi estesi</strong> a μLauncher.<br/>μLauncher userà questi privilegi <strong>solo</strong> per eseguire le seguenti azioni:
+    <ul>
+        <li>Blocco shermo</li>
+        <li>App recenti</li>
+    </ul>
+     μLauncher <strong>non raccoglierà mai alcun dato</strong>. In particolare, μLauncher non utilizza il servizio di accessibilità per raccogliere dati.]]></string>
     <string name="list_title_private_space">Spazio privato</string>
     <string name="list_other_list_private_space">Spazio privato</string>
     <string name="list_other_volume_adjust">Regola volume</string>
@@ -238,7 +267,7 @@
     <string name="settings_gesture_swipe_smaller"><![CDATA[<]]></string>
     <string name="settings_gesture_swipe_smaller_reverse"><![CDATA[< (Inverso)]]></string>
     <string name="settings_gesture_swipe_lambda_reverse">Λ (Inverso)</string>
-    <string name="list_other_track_play_pause">"Musica: Riproduci  / Pausa"</string>
+    <string name="list_other_track_play_pause">Musica: Riproduci / Pausa</string>
     <string name="settings_list_reverse_layout">Inverti la lista applicazioni</string>
     <string name="settings_tab_actions">Azioni</string>
     <string name="settings_gesture_description_back">Pulsante / gesto indietro</string>
@@ -252,7 +281,7 @@
     <string name="tooltip_lock_private_space">Blocca spazio privato</string>
     <string name="tooltip_unlock_private_space">Sblocca spazio privato</string>
     <string name="tutorial_concept_label_version">Versione</string>
-    <string name="alert_enable_accessibility_failed">Errore: impossibile abilitare il servizio di accessibilità</string>
+    <string name="alert_enable_accessibility_failed">Errore: impossibile abilitare il servizio di accessibilità.</string>
     <string name="tutorial_app_list_text_2">Quando corrisponde una sola app, viene avviata automaticamente.\nPuoi disabilitare l\'avvio con uno spazio prima della query.</string>
     <string name="tutorial_app_list_title">Tutte le app</string>
     <string name="tutorial_app_list_text">Puoi cercare rapidamente tra tutte le app nella lista app.\n\nScorri su per la lista o associa ad un gesto diverso.</string>
