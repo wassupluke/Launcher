@@ -1,5 +1,6 @@
 package de.jrpie.android.launcher.ui
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
@@ -38,10 +39,17 @@ fun ImageView.transformGrayscale(grayscale: Boolean) {
 }
 
 
-// Taken from https://stackoverflow.com/a/50743764/12787264
+// Taken from https://stackoverflow.com/a/50743764
 fun View.openSoftKeyboard(context: Context) {
     this.requestFocus()
-    // open the soft keyboard
-    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+    (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+        .showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+}
+
+// https://stackoverflow.com/a/17789187
+fun closeSoftKeyboard(activity: Activity) {
+    activity.currentFocus?.let { focus ->
+        (activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+            .hideSoftInputFromWindow( focus.windowToken, 0 )
+    }
 }

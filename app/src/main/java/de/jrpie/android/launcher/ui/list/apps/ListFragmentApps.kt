@@ -11,13 +11,16 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.apps.AppFilter
 import de.jrpie.android.launcher.databinding.ListAppsBinding
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.ui.UIObject
+import de.jrpie.android.launcher.ui.closeSoftKeyboard
 import de.jrpie.android.launcher.ui.list.ListActivity
 import de.jrpie.android.launcher.ui.openSoftKeyboard
+import kotlin.math.absoluteValue
 
 
 /**
@@ -90,6 +93,20 @@ class ListFragmentApps : Fragment(), UIObject {
                     }
                 }
             adapter = appsRecyclerAdapter
+            if (LauncherPreferences.functionality().searchAutoCloseKeyboard()) {
+                addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                    var totalDy: Int = 0
+                    var threshold = (resources.displayMetrics.density * 100).toInt()
+                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                        totalDy += dy
+
+                        if (totalDy.absoluteValue > 100) {
+                            totalDy = 0
+                            closeSoftKeyboard(requireActivity())
+                        }
+                    }
+                })
+            }
         }
 
         binding.listAppsSearchview.setOnQueryTextListener(object :

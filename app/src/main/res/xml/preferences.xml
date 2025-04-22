@@ -105,6 +105,10 @@
             android:defaultValue="true"
             android:title="@string/settings_functionality_auto_keyboard" />
         <SwitchPreference
+            android:key="@string/settings_functionality_search_auto_close_keyboard_key"
+            android:defaultValue="false"
+            android:title="@string/settings_functionality_auto_close_keyboard" />
+        <SwitchPreference
             android:key="@string/settings_enabled_gestures_double_swipe_key"
             android:summary="@string/settings_enabled_gestures_double_swipe_summary"
             android:defaultValue="true"
