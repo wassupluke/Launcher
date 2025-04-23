@@ -286,4 +286,5 @@
     <string name="tutorial_app_list_title">Tutte le app</string>
     <string name="tutorial_app_list_text">Puoi cercare rapidamente tra tutte le app nella lista app.\n\nScorri su per la lista o associa ad un gesto diverso.</string>
     <string name="alert_recent_apps_failed">Errore: impossibile mostrare le app recenti. (Se hai appena aggiornato l\'app, prova a disabilitare e riabilitare il servizio di accessibilità dalle impostazioni del telefono)</string>
+    <string name="settings_functionality_auto_close_keyboard">Chiudi la tastiera durante lo scorrimento</string>
 </resources>
