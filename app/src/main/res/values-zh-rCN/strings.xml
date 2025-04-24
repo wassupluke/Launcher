@@ -284,4 +284,5 @@
     <string name="alert_enable_accessibility_failed">错误：启用“无障碍”服务失败。</string>
     <string name="alert_recent_apps_failed">错误：无法展示最近应用屏幕。（如果您刚刚升级了本启动器，请尝试在手机设置中手动禁用再重新启用“无障碍”服务。）</string>
     <string name="list_other_launch_other_launcher">启动其他启动器</string>
+    <string name="settings_functionality_auto_close_keyboard">滚动应用程序列表时自动隐藏键盘</string>
 </resources>
