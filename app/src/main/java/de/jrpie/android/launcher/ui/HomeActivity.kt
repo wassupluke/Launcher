@@ -1,6 +1,7 @@
 package de.jrpie.android.launcher.ui
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.content.res.Resources
@@ -10,8 +11,7 @@ import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
 import android.window.OnBackInvokedDispatcher
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
+import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.actions.Action
 import de.jrpie.android.launcher.actions.Gesture
@@ -20,7 +20,6 @@ import de.jrpie.android.launcher.databinding.HomeBinding
 import de.jrpie.android.launcher.openTutorial
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.ui.tutorial.TutorialActivity
-import java.util.Locale
 
 /**
  * [HomeActivity] is the actual application Launcher,
@@ -34,7 +33,7 @@ import java.util.Locale
  * - Setting global variables (preferences etc.)
  * - Opening the [TutorialActivity] on new installations
  */
-class HomeActivity : UIObject, AppCompatActivity() {
+class HomeActivity : UIObject, Activity() {
 
     private lateinit var binding: HomeBinding
     private var touchGestureDetector: TouchGestureDetector? = null
@@ -45,15 +44,18 @@ class HomeActivity : UIObject, AppCompatActivity() {
                 prefKey?.startsWith("display.") == true
             ) {
                 recreate()
+            } else if (prefKey?.startsWith("action.") == true) {
+                updateSettingsFallbackButtonVisibility()
+            } else if (prefKey == LauncherPreferences.widgets().keys().widgets()) {
+                binding.homeWidgetContainer.updateWidgets(this@HomeActivity,
+                    LauncherPreferences.widgets().widgets()
+                )
             }
 
-            if (prefKey?.startsWith("action.") == true) {
-                updateSettingsFallbackButtonVisibility()
-            }
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super<AppCompatActivity>.onCreate(savedInstanceState)
+        super<Activity>.onCreate(savedInstanceState)
         super<UIObject>.onCreate()
 
 
@@ -81,8 +83,7 @@ class HomeActivity : UIObject, AppCompatActivity() {
     }
 
     override fun onStart() {
-        super<AppCompatActivity>.onStart()
-
+        super<Activity>.onStart()
         super<UIObject>.onStart()
 
         // If the tutorial was not finished, start it
@@ -93,6 +94,15 @@ class HomeActivity : UIObject, AppCompatActivity() {
         LauncherPreferences.getSharedPreferences()
             .registerOnSharedPreferenceChangeListener(sharedPreferencesListener)
 
+        (application as Application).appWidgetHost.startListening()
+
+    }
+
+
+
+    override fun onStop() {
+        (application as Application).appWidgetHost.stopListening()
+        super.onStop()
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -116,44 +126,6 @@ class HomeActivity : UIObject, AppCompatActivity() {
         } else {
             View.GONE
         }
-    }
-
-    private fun initClock() {
-        val locale = Locale.getDefault()
-        val dateVisible = LauncherPreferences.clock().dateVisible()
-        val timeVisible = LauncherPreferences.clock().timeVisible()
-
-        var dateFMT = "yyyy-MM-dd"
-        var timeFMT = "HH:mm"
-        if (LauncherPreferences.clock().showSeconds()) {
-            timeFMT += ":ss"
-        }
-
-        if (LauncherPreferences.clock().localized()) {
-            dateFMT = android.text.format.DateFormat.getBestDateTimePattern(locale, dateFMT)
-            timeFMT = android.text.format.DateFormat.getBestDateTimePattern(locale, timeFMT)
-        }
-
-        var upperFormat = dateFMT
-        var lowerFormat = timeFMT
-        var upperVisible = dateVisible
-        var lowerVisible = timeVisible
-
-        if (LauncherPreferences.clock().flipDateTime()) {
-            upperFormat = lowerFormat.also { lowerFormat = upperFormat }
-            upperVisible = lowerVisible.also { lowerVisible = upperVisible }
-        }
-
-        binding.homeUpperView.isVisible = upperVisible
-        binding.homeLowerView.isVisible = lowerVisible
-
-        binding.homeUpperView.setTextColor(LauncherPreferences.clock().color())
-        binding.homeLowerView.setTextColor(LauncherPreferences.clock().color())
-
-        binding.homeLowerView.format24Hour = lowerFormat
-        binding.homeUpperView.format24Hour = upperFormat
-        binding.homeLowerView.format12Hour = lowerFormat
-        binding.homeUpperView.format12Hour = upperFormat
     }
 
     override fun getTheme(): Resources.Theme {
@@ -193,9 +165,11 @@ class HomeActivity : UIObject, AppCompatActivity() {
                 windowInsets
             }
         }
-
-        initClock()
         updateSettingsFallbackButtonVisibility()
+
+        binding.homeWidgetContainer.updateWidgets(this@HomeActivity,
+            LauncherPreferences.widgets().widgets()
+        )
     }
 
     override fun onDestroy() {
@@ -233,29 +207,10 @@ class HomeActivity : UIObject, AppCompatActivity() {
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
+        android.util.Log.e("Launcher", "on touch")
         touchGestureDetector?.onTouchEvent(event)
         return true
     }
-
-    override fun setOnClicks() {
-
-        binding.homeUpperView.setOnClickListener {
-            if (LauncherPreferences.clock().flipDateTime()) {
-                Gesture.TIME(this)
-            } else {
-                Gesture.DATE(this)
-            }
-        }
-
-        binding.homeLowerView.setOnClickListener {
-            if (LauncherPreferences.clock().flipDateTime()) {
-                Gesture.DATE(this)
-            } else {
-                Gesture.TIME(this)
-            }
-        }
-    }
-
 
     private fun handleBack() {
         Gesture.BACK(this)

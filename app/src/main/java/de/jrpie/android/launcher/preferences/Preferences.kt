@@ -13,6 +13,9 @@ import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersio
 import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersion3
 import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersionUnknown
 import de.jrpie.android.launcher.ui.HomeActivity
+import de.jrpie.android.launcher.widgets.ClockWidget
+import de.jrpie.android.launcher.widgets.WidgetPosition
+import de.jrpie.android.launcher.widgets.deleteAllWidgets
 
 /* Current version of the structure of preferences.
  * Increase when breaking changes are introduced and write an appropriate case in
@@ -71,6 +74,13 @@ fun resetPreferences(context: Context) {
     Log.i(TAG, "Resetting preferences")
     LauncherPreferences.clear()
     LauncherPreferences.internal().versionCode(PREFERENCE_VERSION)
+    deleteAllWidgets(context)
+
+    LauncherPreferences.widgets().widgets(
+        setOf(
+            ClockWidget(-500, WidgetPosition(1,4,10,3))
+        )
+    )
 
 
     val hidden: MutableSet<AbstractAppInfo> = mutableSetOf()
