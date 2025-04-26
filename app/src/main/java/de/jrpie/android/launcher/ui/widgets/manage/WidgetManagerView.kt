@@ -20,6 +20,7 @@ import androidx.core.graphics.toRect
 import androidx.core.view.children
 import de.jrpie.android.launcher.ui.widgets.WidgetContainerView
 import de.jrpie.android.launcher.widgets.Widget
+import de.jrpie.android.launcher.widgets.WidgetPanel
 import de.jrpie.android.launcher.widgets.WidgetPosition
 import de.jrpie.android.launcher.widgets.updateWidget
 import kotlin.math.max
@@ -28,8 +29,9 @@ import kotlin.math.min
 /**
  * A variant of the [WidgetContainerView] which allows to manage widgets.
  */
-class WidgetManagerView(context: Context, attrs: AttributeSet? = null) :
-    WidgetContainerView(context, attrs) {
+class WidgetManagerView(widgetPanelId: Int, context: Context, attrs: AttributeSet? = null) :
+    WidgetContainerView(widgetPanelId, context, attrs) {
+    constructor(context: Context, attrs: AttributeSet?) : this(WidgetPanel.HOME.id, context, attrs)
 
     val TOUCH_SLOP: Int
     val TOUCH_SLOP_SQUARE: Int
@@ -155,13 +157,14 @@ class WidgetManagerView(context: Context, attrs: AttributeSet? = null) :
         selectedWidgetOverlayView?.mode = null
     }
 
-    override fun updateWidgets(activity: Activity, widgets: Set<Widget>?) {
+    override fun updateWidgets(activity: Activity, widgets: Collection<Widget>?) {
         super.updateWidgets(activity, widgets)
         if (widgets == null) {
             return
         }
+        children.mapNotNull { it as? WidgetOverlayView }.forEach { removeView(it) }
 
-        widgets.forEach { widget ->
+        widgets.filter { it.panelId == widgetPanelId }.forEach { widget ->
             WidgetOverlayView(activity).let {
                 addView(it)
                 it.widgetId = widget.id

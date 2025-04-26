@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import androidx.core.graphics.contains
 import androidx.core.view.size
 import de.jrpie.android.launcher.widgets.Widget
+import de.jrpie.android.launcher.widgets.WidgetPanel
 import de.jrpie.android.launcher.widgets.WidgetPosition
 import kotlin.math.max
 
@@ -20,22 +21,29 @@ import kotlin.math.max
 /**
  * This only works in an Activity, not AppCompatActivity
  */
-open class WidgetContainerView(context: Context, attrs: AttributeSet? = null) : ViewGroup(context, attrs) {
+open class WidgetContainerView(
+    var widgetPanelId: Int,
+    context: Context,
+    attrs: AttributeSet? = null
+) : ViewGroup(context, attrs) {
+    constructor(context: Context, attrs: AttributeSet) : this(WidgetPanel.HOME.id, context, attrs)
 
     var widgetViewById = HashMap<Int, View>()
 
-    open fun updateWidgets(activity: Activity, widgets: Set<Widget>?) {
-        if (widgets == null) {
-            return
-        }
-        Log.i("WidgetContainer", "updating ${activity.localClassName}")
-        widgetViewById.clear()
-        (0..<size).forEach { removeViewAt(0) }
-        widgets.forEach { widget ->
+    open fun updateWidgets(activity: Activity, widgets: Collection<Widget>?) {
+        synchronized(widgetViewById) {
+            if (widgets == null) {
+                return
+            }
+            Log.i("WidgetContainer", "updating ${activity.localClassName}")
+            widgetViewById.forEach { removeView(it.value) }
+            widgetViewById.clear()
+            widgets.filter { it.panelId == widgetPanelId }.forEach { widget ->
                 widget.createView(activity)?.let {
-                    addView(it, WidgetContainerView.Companion.LayoutParams(widget.position))
+                    addView(it, LayoutParams(widget.position))
                     widgetViewById.put(widget.id, it)
                 }
+            }
         }
     }
 
@@ -67,7 +75,6 @@ open class WidgetContainerView(context: Context, attrs: AttributeSet? = null) : 
         (0..<size).map { getChildAt(it) }.forEach {
             val position = (it.layoutParams as LayoutParams).position.getAbsoluteRect(mWidth, mHeight)
             it.measure(makeMeasureSpec(position.width(), MeasureSpec.EXACTLY), makeMeasureSpec(position.height(), MeasureSpec.EXACTLY))
-            Log.e("measure", "$position")
         }
 
         // Find rightmost and bottom-most child

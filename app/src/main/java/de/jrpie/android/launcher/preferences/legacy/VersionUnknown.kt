@@ -3,10 +3,10 @@ package de.jrpie.android.launcher.preferences.legacy
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
+import androidx.core.content.edit
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.preferences.theme.Background
 import de.jrpie.android.launcher.preferences.theme.ColorTheme
-import androidx.core.content.edit
 
 
 private fun migrateStringPreference(
@@ -392,5 +392,5 @@ fun migratePreferencesFromVersionUnknown(context: Context) {
     LauncherPreferences.internal().versionCode(1)
     Log.i(TAG, "migrated preferences to version 1.")
 
-    migratePreferencesFromVersion1()
+    migratePreferencesFromVersion1(context)
 }

@@ -3,14 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory
         app:allowDividerAbove="false" > <!-- general -->
+
         <Preference
             android:key="@string/settings_general_choose_home_screen_key"
             android:title="@string/settings_general_choose_home_screen"/>
-        <Preference
-            android:key="@string/settings_widgets_widgets_key"
-            android:title="@string/settings_widgets_widgets"/>
-
-
     </PreferenceCategory>
     <PreferenceCategory
         app:allowDividerAbove="false"
@@ -178,6 +174,16 @@
             android:defaultValue="false"/>
 
 
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/settings_launcher_section_widgets"
+        app:allowDividerAbove="false">
+        <Preference
+            android:key="@string/settings_widgets_widgets_key"
+            android:title="@string/settings_widgets_widgets" />
+        <Preference
+            android:key="@string/settings_widgets_custom_panels_key"
+            android:title="@string/settings_widgets_custom_panels" />
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/settings_launcher_section_display"

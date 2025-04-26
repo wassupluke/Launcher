@@ -1,17 +1,17 @@
 package de.jrpie.android.launcher.preferences.legacy
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
-import de.jrpie.android.launcher.apps.AppInfo
+import androidx.core.content.edit
 import de.jrpie.android.launcher.apps.AbstractAppInfo
+import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.preferences.PREFERENCE_VERSION
 import de.jrpie.android.launcher.preferences.serialization.MapAbstractAppInfoStringPreferenceSerializer
 import de.jrpie.android.launcher.preferences.serialization.SetAbstractAppInfoPreferenceSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
-import java.util.HashSet
-import androidx.core.content.edit
 
 /**
  * Migrate preferences from version 3 (used until version 0.0.23) to the current format
@@ -70,8 +70,7 @@ private fun migrateMapAppInfoString(key: String, preferences: SharedPreferences,
     }
 }
 
-fun migratePreferencesFromVersion3() {
-    assert(PREFERENCE_VERSION == 4)
+fun migratePreferencesFromVersion3(context: Context) {
     assert(LauncherPreferences.internal().versionCode() == 3)
 
     val preferences = LauncherPreferences.getSharedPreferences()
@@ -82,4 +81,5 @@ fun migratePreferencesFromVersion3() {
     }
 
     LauncherPreferences.internal().versionCode(4)
+    migratePreferencesFromVersion4(context)
 }

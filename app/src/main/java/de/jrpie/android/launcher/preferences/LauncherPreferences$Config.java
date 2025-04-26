@@ -8,6 +8,7 @@ import de.jrpie.android.launcher.actions.lock.LockMethod;
 import de.jrpie.android.launcher.preferences.serialization.MapAbstractAppInfoStringPreferenceSerializer;
 import de.jrpie.android.launcher.preferences.serialization.SetAbstractAppInfoPreferenceSerializer;
 import de.jrpie.android.launcher.preferences.serialization.SetPinnedShortcutInfoPreferenceSerializer;
+import de.jrpie.android.launcher.preferences.serialization.SetWidgetPanelSerializer;
 import de.jrpie.android.launcher.preferences.serialization.SetWidgetSerializer;
 import de.jrpie.android.launcher.preferences.theme.Background;
 import de.jrpie.android.launcher.preferences.theme.ColorTheme;
@@ -84,7 +85,8 @@ import eu.jonahbauer.android.preference.annotations.Preferences;
                         @Preference(name = "lock_method", type = LockMethod.class, defaultValue = "DEVICE_ADMIN"),
                 }),
                 @PreferenceGroup(name = "widgets", prefix = "settings_widgets_", suffix= "_key", value = {
-                        @Preference(name = "widgets", type = Set.class, serializer = SetWidgetSerializer.class)
+                        @Preference(name = "widgets", type = Set.class, serializer = SetWidgetSerializer.class),
+                        @Preference(name = "custom_panels", type = Set.class, serializer = SetWidgetPanelSerializer.class)
                 }),
         })
 public final class LauncherPreferences$Config {}

@@ -14,6 +14,7 @@ import kotlinx.serialization.Serializable
 class ClockWidget(
     override val id: Int,
     override var position: WidgetPosition,
+    override val panelId: Int,
     override var allowInteraction: Boolean = true
 ) : Widget() {
 

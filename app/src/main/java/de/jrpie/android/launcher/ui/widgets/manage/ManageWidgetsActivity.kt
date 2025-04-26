@@ -2,7 +2,6 @@ package de.jrpie.android.launcher.ui.widgets.manage
 
 import android.app.Activity
 import android.appwidget.AppWidgetManager
-import android.appwidget.AppWidgetProviderInfo
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Resources
@@ -18,6 +17,7 @@ import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.ui.UIObject
 import de.jrpie.android.launcher.ui.widgets.WidgetContainerView
 import de.jrpie.android.launcher.widgets.AppWidget
+import de.jrpie.android.launcher.widgets.WidgetPanel
 import de.jrpie.android.launcher.widgets.WidgetPosition
 import kotlin.math.min
 
@@ -27,8 +27,12 @@ import kotlin.math.min
 const val REQUEST_CREATE_APPWIDGET = 1
 const val REQUEST_PICK_APPWIDGET = 2
 
+const val EXTRA_PANEL_ID = "widgetPanelId"
+
 // We can't use AppCompatActivity, since some AppWidgets don't work there.
 class ManageWidgetsActivity : Activity(), UIObject {
+
+    var panelId: Int = WidgetPanel.HOME.id
 
     private var sharedPreferencesListener =
         SharedPreferences.OnSharedPreferenceChangeListener { _, prefKey ->
@@ -44,6 +48,9 @@ class ManageWidgetsActivity : Activity(), UIObject {
         super<Activity>.onCreate(savedInstanceState)
         super<UIObject>.onCreate()
         setContentView(R.layout.activity_manage_widgets)
+
+        panelId = intent.extras?.getInt(EXTRA_PANEL_ID, WidgetPanel.HOME.id) ?: WidgetPanel.HOME.id
+
         findViewById<FloatingActionButton>(R.id.manage_widgets_button_add).setOnClickListener {
             selectWidget()
         }
@@ -54,9 +61,10 @@ class ManageWidgetsActivity : Activity(), UIObject {
             insets
         }
 
-        findViewById<WidgetContainerView>(R.id.manage_widgets_container).updateWidgets(this,
-            (application as Application).widgets.value
-        )
+        findViewById<WidgetContainerView>(R.id.manage_widgets_container).let {
+            it.widgetPanelId = panelId
+            it.updateWidgets(this, (application as Application).widgets.value)
+        }
     }
 
     override fun onStart() {
@@ -101,6 +109,10 @@ class ManageWidgetsActivity : Activity(), UIObject {
                     AppWidgetManager.EXTRA_APPWIDGET_ID,
                     appWidgetHost.allocateAppWidgetId()
                 )
+                it.putExtra(
+                    EXTRA_PANEL_ID,
+                    panelId
+                )
             }, REQUEST_PICK_APPWIDGET
         )
     }
@@ -124,7 +136,7 @@ class ManageWidgetsActivity : Activity(), UIObject {
             display.height
         )
 
-        val widget = AppWidget(appWidgetId, provider, position)
+        val widget = AppWidget(appWidgetId, position, panelId, provider)
         LauncherPreferences.widgets().widgets(
             (LauncherPreferences.widgets().widgets() ?: HashSet()).also {
                 it.add(widget)
@@ -135,7 +147,7 @@ class ManageWidgetsActivity : Activity(), UIObject {
     private fun configureWidget(data: Intent) {
         val extras = data.extras
         val appWidgetId = extras!!.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1)
-        val widget = AppWidget(appWidgetId)
+        val widget = AppWidget(appWidgetId, panelId = panelId)
         if (widget.isConfigurable(this)) {
             widget.configure(this, REQUEST_CREATE_APPWIDGET)
         } else {

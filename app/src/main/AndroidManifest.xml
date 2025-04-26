@@ -21,9 +21,15 @@
         android:theme="@style/launcherBaseTheme"
         tools:ignore="UnusedAttribute">
         <activity
-            android:name=".ui.widgets.manage.ManageWidgetsActivity"
-            android:theme="@style/launcherHomeTheme"
+            android:name=".ui.widgets.manage.ManageWidgetPanelsActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.widgets.WidgetPanelActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.widgets.manage.ManageWidgetsActivity"
+            android:exported="false"
+            android:theme="@style/launcherHomeTheme" />
         <activity
             android:name=".ui.widgets.manage.SelectWidgetActivity"
             android:exported="false" />

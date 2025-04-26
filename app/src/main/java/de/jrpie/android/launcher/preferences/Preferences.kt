@@ -2,18 +2,21 @@ package de.jrpie.android.launcher.preferences
 
 import android.content.Context
 import android.util.Log
+import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.BuildConfig
 import de.jrpie.android.launcher.actions.Action
-import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.apps.AbstractAppInfo
 import de.jrpie.android.launcher.apps.AbstractAppInfo.Companion.INVALID_USER
+import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.apps.DetailedAppInfo
 import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersion1
 import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersion2
 import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersion3
+import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersion4
 import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersionUnknown
 import de.jrpie.android.launcher.ui.HomeActivity
 import de.jrpie.android.launcher.widgets.ClockWidget
+import de.jrpie.android.launcher.widgets.WidgetPanel
 import de.jrpie.android.launcher.widgets.WidgetPosition
 import de.jrpie.android.launcher.widgets.deleteAllWidgets
 
@@ -21,7 +24,7 @@ import de.jrpie.android.launcher.widgets.deleteAllWidgets
  * Increase when breaking changes are introduced and write an appropriate case in
  * `migratePreferencesToNewVersion`
  */
-const val PREFERENCE_VERSION = 4
+const val PREFERENCE_VERSION = 5
 const val UNKNOWN_PREFERENCE_VERSION = -1
 private const val TAG = "Launcher - Preferences"
 
@@ -43,16 +46,21 @@ fun migratePreferencesToNewVersion(context: Context) {
             }
 
             1 -> {
-                migratePreferencesFromVersion1()
+                migratePreferencesFromVersion1(context)
                 Log.i(TAG, "migration of preferences  complete (1 -> ${PREFERENCE_VERSION}).")
             }
             2 -> {
-                migratePreferencesFromVersion2()
+                migratePreferencesFromVersion2(context)
                 Log.i(TAG, "migration of preferences  complete (2 -> ${PREFERENCE_VERSION}).")
             }
             3 -> {
-                migratePreferencesFromVersion3()
+                migratePreferencesFromVersion3(context)
                 Log.i(TAG, "migration of preferences  complete (3 -> ${PREFERENCE_VERSION}).")
+            }
+
+            4 -> {
+                migratePreferencesFromVersion4(context)
+                Log.i(TAG, "migration of preferences  complete (4 -> ${PREFERENCE_VERSION}).")
             }
 
             else -> {
@@ -78,7 +86,11 @@ fun resetPreferences(context: Context) {
 
     LauncherPreferences.widgets().widgets(
         setOf(
-            ClockWidget(-500, WidgetPosition(1,4,10,3))
+            ClockWidget(
+                (context.applicationContext as Application).appWidgetHost.allocateAppWidgetId(),
+                WidgetPosition(1, 3, 10, 4),
+                WidgetPanel.HOME.id
+            )
         )
     )
 

@@ -99,6 +99,7 @@
     <string name="settings_gesture_description_time">Click on time</string>
 
     <string name="settings_widgets_widgets">Manage widgets</string>
+    <string name="settings_widgets_custom_panels">Manage widget panels</string>
 
 
     <string name="settings_apps_choose">Choose App</string>
@@ -400,5 +401,23 @@
 
     <string name="widget_clock_label">Clock</string>
     <string name="widget_clock_description">The default clock of μLauncher</string>
+    <string name="manage_widget_panels_delete">Delete</string>
+    <string name="manage_widget_panels_rename">Rename</string>
+
+    <string name="widget_panel_default_name">Widget Panel #%1$d</string>
+    <plurals name="widget_panel_number_of_widgets">
+        <item quantity="one">Contains %d widget.</item>
+        <item quantity="other">Contains %d widgets.</item>
+    </plurals>
+
+
+    <string name="dialog_ok">Ok</string>
+    <string name="widget_panels_title">Widget Panels</string>
+    <string name="dialog_select_widget_panel_title">Select a Widget Panel</string>
+    <string name="dialog_create_widget_panel_title">Create new widget panel</string>
+    <string name="dialog_select_widget_panel_info_no_panels"><![CDATA[No widget panels found. You can create widget panels in Settings > Launcher > Manage Widget Panels.]]></string>
+    <string name="list_other_open_widget_panel">Open Widget Panel</string>
+    <string name="alert_widget_panel_not_found">This widget panel no longer exists.</string>
+    <string name="settings_launcher_section_widgets">Widgets</string>
 
 </resources>

@@ -14,6 +14,7 @@ import kotlinx.serialization.json.Json
 sealed class Widget {
     abstract val id: Int
     abstract var position: WidgetPosition
+    abstract val panelId: Int
     abstract var allowInteraction: Boolean
 
     /**
@@ -34,6 +35,10 @@ sealed class Widget {
                 it.remove(this)
             }
         )
+    }
+
+    fun getPanel(): WidgetPanel? {
+        return WidgetPanel.byId(panelId)
     }
 
     override fun hashCode(): Int {

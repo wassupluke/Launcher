@@ -74,9 +74,19 @@ fun getAppWidgetProviders( context: Context ): List<LauncherWidgetProvider> {
 
 
 fun updateWidget(widget: Widget) {
-    var widgets = LauncherPreferences.widgets().widgets() ?: setOf()
-    widgets = widgets.minus(widget).plus(widget)
-    LauncherPreferences.widgets().widgets(widgets)
+    LauncherPreferences.widgets().widgets(
+        (LauncherPreferences.widgets().widgets() ?: setOf())
+            .minus(widget)
+            .plus(widget)
+    )
+}
+
+fun updateWidgetPanel(widgetPanel: WidgetPanel) {
+    LauncherPreferences.widgets().customPanels(
+        (LauncherPreferences.widgets().customPanels() ?: setOf())
+            .minus(widgetPanel)
+            .plus(widgetPanel)
+    )
 }
 
 fun Context.getAppWidgetHost(): AppWidgetHost {

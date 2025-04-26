@@ -1,11 +1,13 @@
 package de.jrpie.android.launcher.preferences.legacy
 
+import android.content.Context
+import androidx.core.content.edit
 import de.jrpie.android.launcher.actions.Action
 import de.jrpie.android.launcher.actions.AppAction
 import de.jrpie.android.launcher.actions.Gesture
 import de.jrpie.android.launcher.actions.LauncherAction
-import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.apps.AbstractAppInfo.Companion.INVALID_USER
+import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.preferences.PREFERENCE_VERSION
 import kotlinx.serialization.Serializable
@@ -13,7 +15,6 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.json.JSONException
 import org.json.JSONObject
-import androidx.core.content.edit
 
 
 @Serializable
@@ -129,7 +130,7 @@ private fun migrateAction(key: String) {
  * Migrate preferences from version 1 (used until version j-0.0.18) to the current format
  * (see [PREFERENCE_VERSION])
  */
-fun migratePreferencesFromVersion1() {
+fun migratePreferencesFromVersion1(context: Context) {
     assert(LauncherPreferences.internal().versionCode() == 1)
     Gesture.entries.forEach { g -> migrateAction(g.id) }
     migrateAppInfoSet(LauncherPreferences.apps().keys().hidden())
@@ -137,5 +138,5 @@ fun migratePreferencesFromVersion1() {
     migrateAppInfoStringMap(LauncherPreferences.apps().keys().customNames())
     LauncherPreferences.internal().versionCode(2)
 
-    migratePreferencesFromVersion2()
+    migratePreferencesFromVersion2(context)
 }

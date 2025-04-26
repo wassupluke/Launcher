@@ -207,7 +207,6 @@ class HomeActivity : UIObject, Activity() {
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        android.util.Log.e("Launcher", "on touch")
         touchGestureDetector?.onTouchEvent(event)
         return true
     }

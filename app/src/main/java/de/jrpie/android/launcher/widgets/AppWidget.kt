@@ -1,4 +1,4 @@
-package de.jrpie.android.launcher.widgets;
+package de.jrpie.android.launcher.widgets
 
 import android.app.Activity
 import android.appwidget.AppWidgetHostView
@@ -11,7 +11,6 @@ import android.util.DisplayMetrics
 import android.util.SizeF
 import android.view.View
 import de.jrpie.android.launcher.Application
-import de.jrpie.android.launcher.ui.HomeActivity
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -20,6 +19,7 @@ import kotlinx.serialization.Serializable
 class AppWidget(
     override val id: Int,
     override var position: WidgetPosition = WidgetPosition(0,0,1,1),
+    override var panelId: Int = WidgetPanel.HOME.id,
     override var allowInteraction: Boolean = false,
 
     // We keep track of packageName, className and user to make it possible to restore the widget
@@ -31,10 +31,16 @@ class AppWidget(
 ): Widget() {
 
 
-    constructor(id: Int, widgetProviderInfo: AppWidgetProviderInfo, position: WidgetPosition) :
+    constructor(
+        id: Int,
+        position: WidgetPosition,
+        panelId: Int,
+        widgetProviderInfo: AppWidgetProviderInfo
+    ) :
             this(
                 id,
                 position,
+                panelId,
                 false,
                 widgetProviderInfo.provider.packageName,
                 widgetProviderInfo.provider.className,

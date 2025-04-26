@@ -11,6 +11,7 @@ import de.jrpie.android.launcher.actions.openAppsList
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.preferences.theme.ColorTheme
 import de.jrpie.android.launcher.setDefaultHomeScreen
+import de.jrpie.android.launcher.ui.widgets.manage.ManageWidgetPanelsActivity
 import de.jrpie.android.launcher.ui.widgets.manage.ManageWidgetsActivity
 
 
@@ -87,6 +88,14 @@ class SettingsFragmentLauncher : PreferenceFragmentCompat() {
         )
         manageWidgets?.setOnPreferenceClickListener {
             startActivity(Intent(requireActivity(), ManageWidgetsActivity::class.java))
+            true
+        }
+
+        val manageWidgetPanels = findPreference<androidx.preference.Preference>(
+            LauncherPreferences.widgets().keys().customPanels()
+        )
+        manageWidgetPanels?.setOnPreferenceClickListener {
+            startActivity(Intent(requireActivity(), ManageWidgetPanelsActivity::class.java))
             true
         }
 

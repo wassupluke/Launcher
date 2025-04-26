@@ -6,20 +6,28 @@ import android.content.SharedPreferences.Editor
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.widget.Toast
+import androidx.core.content.edit
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import androidx.core.content.edit
 
 
+/**
+ * Represents an action that can be bound to a [Gesture].
+ * There are four types of actions: [AppAction], [ShortcutAction], [LauncherAction] and [WidgetPanelAction]
+ */
 @Serializable
 sealed interface Action {
     fun invoke(context: Context, rect: Rect? = null): Boolean
     fun label(context: Context): String
     fun getIcon(context: Context): Drawable?
     fun isAvailable(context: Context): Boolean
+
+    fun showConfigurationDialog(context: Context, onSuccess: (Action) -> Unit) {
+        onSuccess(this)
+    }
 
     // Can the action be used to reach µLauncher settings?
     fun canReachSettings(): Boolean

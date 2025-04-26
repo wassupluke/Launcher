@@ -11,6 +11,7 @@ import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.actions.Action
 import de.jrpie.android.launcher.actions.Gesture
 import de.jrpie.android.launcher.actions.LauncherAction
+import de.jrpie.android.launcher.actions.WidgetPanelAction
 import de.jrpie.android.launcher.ui.list.ListActivity
 
 /**
@@ -23,8 +24,10 @@ import de.jrpie.android.launcher.ui.list.ListActivity
 class OtherRecyclerAdapter(val activity: Activity) :
     RecyclerView.Adapter<OtherRecyclerAdapter.ViewHolder>() {
 
-    private val othersList: Array<LauncherAction> =
-        LauncherAction.entries.filter { it.isAvailable(activity) }.toTypedArray()
+    private val othersList: Array<Action> =
+        LauncherAction.entries.filter { it.isAvailable(activity) }
+            .plus(WidgetPanelAction(-1))
+            .toTypedArray()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
@@ -36,10 +39,12 @@ class OtherRecyclerAdapter(val activity: Activity) :
             val pos = bindingAdapterPosition
             val content = othersList[pos]
 
-            activity.finish()
             val gestureId = (activity as? ListActivity)?.forGesture ?: return
             val gesture = Gesture.byId(gestureId) ?: return
-            Action.setActionForGesture(gesture, content)
+            content.showConfigurationDialog(activity) { configuredAction ->
+                Action.setActionForGesture(gesture, configuredAction)
+                activity.finish()
+            }
         }
 
         init {
@@ -48,11 +53,11 @@ class OtherRecyclerAdapter(val activity: Activity) :
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
-        val otherLabel = activity.getString(othersList[i].label)
-        val icon = othersList[i].icon
+        val otherLabel = othersList[i].label(activity)
+        val icon = othersList[i].getIcon(activity)
 
         viewHolder.textView.text = otherLabel
-        viewHolder.iconView.setImageResource(icon)
+        viewHolder.iconView.setImageDrawable(icon)
     }
 
     override fun getItemCount(): Int {

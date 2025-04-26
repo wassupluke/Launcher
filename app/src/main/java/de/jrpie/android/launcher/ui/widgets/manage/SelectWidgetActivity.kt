@@ -21,6 +21,7 @@ import de.jrpie.android.launcher.widgets.ClockWidget
 import de.jrpie.android.launcher.widgets.LauncherAppWidgetProvider
 import de.jrpie.android.launcher.widgets.LauncherClockWidgetProvider
 import de.jrpie.android.launcher.widgets.LauncherWidgetProvider
+import de.jrpie.android.launcher.widgets.WidgetPanel
 import de.jrpie.android.launcher.widgets.WidgetPosition
 import de.jrpie.android.launcher.widgets.bindAppWidgetOrRequestPermission
 import de.jrpie.android.launcher.widgets.getAppWidgetHost
@@ -38,6 +39,7 @@ private const val REQUEST_WIDGET_PERMISSION = 29
 class SelectWidgetActivity : AppCompatActivity(), UIObject {
     lateinit var binding: ActivitySelectWidgetBinding
     var widgetId: Int = -1
+    var widgetPanelId: Int = WidgetPanel.HOME.id
 
     private fun tryBindWidget(info: LauncherWidgetProvider) {
         when (info) {
@@ -53,13 +55,14 @@ class SelectWidgetActivity : AppCompatActivity(), UIObject {
                         RESULT_OK,
                         Intent().also {
                             it.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId)
+                            it.putExtra(EXTRA_PANEL_ID, widgetPanelId)
                         }
                     )
                     finish()
                 }
             }
             is LauncherClockWidgetProvider -> {
-                updateWidget(ClockWidget(widgetId, WidgetPosition(0,4,12,3)))
+                updateWidget(ClockWidget(widgetId, WidgetPosition(0, 4, 12, 3), widgetPanelId))
                 finish()
             }
         }
@@ -79,6 +82,7 @@ class SelectWidgetActivity : AppCompatActivity(), UIObject {
 
 
         widgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, -1)
+        widgetPanelId = intent.getIntExtra(EXTRA_PANEL_ID, WidgetPanel.HOME.id)
         if (widgetId == -1) {
             widgetId = getAppWidgetHost().allocateAppWidgetId()
         }

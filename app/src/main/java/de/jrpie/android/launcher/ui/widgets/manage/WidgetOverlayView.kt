@@ -13,12 +13,13 @@ import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.widgets.Widget
 import de.jrpie.android.launcher.widgets.updateWidget
 
-/**
- * An overlay to show configuration options for a widget.
- */
 
 private const val HANDLE_SIZE = 100
 private const val HANDLE_EDGE_SIZE = (1.2 * HANDLE_SIZE).toInt()
+
+/**
+ * An overlay to show configuration options for a widget in [WidgetManagerView]
+ */
 class WidgetOverlayView : View {
 
 
