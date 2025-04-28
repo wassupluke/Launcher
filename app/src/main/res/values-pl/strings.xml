@@ -3,7 +3,6 @@
     <string name="settings_gesture_right_bottom_edge">W prawo (Dół)</string>
     <string name="settings_gesture_description_down_left_edge">Przeciągnij w dół, po lewej krawędzi ekranu</string>
     <string name="settings_gesture_swipe_smaller"><![CDATA[<]]></string>
-    <string name="settings_theme_font_item_serif"></string>
     <string name="toast_cant_open_message">Otwórz ustawienia by wybrać akcje dla tego gestu</string>
     <string name="settings_title">Ustawienia</string>
     <string name="settings_tab_actions">Akcja</string>
@@ -47,7 +46,6 @@
     <string name="settings_gesture_swipe_larger"><![CDATA[>]]></string>
     <string name="settings_gesture_swipe_v">V</string>
     <string name="settings_gesture_swipe_lambda">Λ</string>
-    <string name="settings_theme_font_item_sans_serif"></string>
     <string name="alert_cant_open_title">Nie można otworzyć aplikacji</string>
     <string name="settings_gesture_back">Cofnij</string>
     <string name="alert_cant_open_message">Chcesz zmienić to ustawienie?</string>
