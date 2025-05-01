@@ -48,6 +48,6 @@ The complete list of changes can be viewed [here](https://github.com/jrpie/launc
 
 ---
 
-[original-repo]: https://github.com/finnmglas/Launcher
+\[original-repo\]: [https://github.com/finnmglas/Launcher](https://github.com/finnmglas/Launcher) 
 
-[hack-font]: https://sourcefoundry.org/hack/
+\[hack-font\]: [https://sourcefoundry.org/hack/](https://sourcefoundry.org/hack/)
