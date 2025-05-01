@@ -1,19 +1,20 @@
+# Launcher Settings
+
 Tweaks and customizations can be made from within the Launcher Settings page.
 
 These settings let you change wallpapers, change colors and fonts, enable monochrome app icons, change the app drawer layout, and much more.
 
 In the following documentation, 'app drawer' will be used to refer to the 'All Apps' and 'Favorite Apps' views.
 
+## Appearance
 
-# Appearance
+> ### Choose a wallpaper
 
-### Choose a wallpaper</summary>
 Lets you change the wallpaper using a photos app, file explorer, or native wallpaper setting app.
-</details>
 
-> ### Font
+> ### Font (in-app font)
 
-Set the font used within the app settings. This setting does not affect the date/time [home screen font](https://github.com/wassupluke/Launcher/wiki/Tweaks-and-Customizations/_edit#font-1).
+Set the font used within the app settings. This setting does not affect the date/time home screen font.
 
 **type:**&nbsp;`dropdown`
 
@@ -35,12 +36,11 @@ Remove coloring from all app icons. Can help decrease visual stimulus when enabl
 
 **type:**&nbsp;`toggle`
 
+## Date & Time
 
-# Date & Time
+> ### Font (home screen)
 
-> ### Font
-
-Set the home screen font for date and time. This setting does not affect the [app settings font](https://github.com/wassupluke/Launcher/wiki/Tweaks-and-Customizations/_edit#font).
+Set the home screen font for date and time. This setting does not affect the in-app font.
 
 **type:**&nbsp;`dropdown`
 
@@ -86,8 +86,7 @@ Place the current time above the current date on the home screen.
 
 **type:**&nbsp;`toggle`
 
-
-# Functionality
+## Functionality
 
 > ### Launch search results
 
@@ -134,20 +133,24 @@ Change how large a margin is used for detecting edge gestures. Shows the edge ma
 > ### Choose method for locking the screen
 
 There are two methods to lock the screen and unfortunately both have downsides.
+
 1. **`Device Admin`**
-  - Doesn't work with unlocking by fingerprint or face recognition.
+
+    - Doesn't work with unlocking by fingerprint or face recognition.
+
 2. **`Accessibility Service`**
-  - Requires excessive privileges.
-  - μLauncher will use those privileges *only* for locking the screen.
-  - As a rule of thumb, it is [not recommended](https://android.stackexchange.com/questions/248171/is-it-safe-to-give-accessibility-permission-to-an-app) to grant access to accessibility services on a random app. Always review the [source code](https://github.com/jrpie/Launcher) before granting accessibility permissions so you familiarize yourself with what the code might do.
-  - On some devices, the start-up PIN will no longer be used for encrypting data after activating an accessibility service.
+
+    - Requires excessive privileges.
+    - μLauncher will use those privileges *only* for locking the screen.
+    - As a rule of thumb, it is [not recommended](https://android.stackexchange.com/questions/248171/is-it-safe-to-give-accessibility-permission-to-an-app) to grant access to accessibility services on a random app. Always review the [source code](https://github.com/jrpie/Launcher) before granting accessibility permissions so you familiarize yourself with what the code might do.
+    - On some devices, the start-up PIN will no longer be used for encrypting data after activating an accessibility service.
     - This can be [reactivated](https://issuetracker.google.com/issues/37010136#comment36) afterwards.
 
-**type:**&nbsp;`text buttons`
+   **type:**&nbsp;`text buttons`
 
-**options:**&nbsp;`USE DEVICE ADMIN`,`USE ACCESSIBILITY SERVICE`
+   **options:**&nbsp;`USE DEVICE ADMIN`,`USE ACCESSIBILITY SERVICE`
 
-# Apps
+## Apps
 
 > ### Hidden apps
 
@@ -187,8 +190,7 @@ Enable Z-A sorting of apps in the app drawer. Useful for keeping apps within eas
 
 **type:**&nbsp;`toggle`
 
-
-# Display
+## Display
 
 > ### Rotate screen
 
@@ -210,8 +212,7 @@ Remove the navigation bar from the home screen. Enabling this setting may make i
 
 **type:**&nbsp;`toggle`
 
-
-# Additional Settings
+## Additional Settings
 
 > ### App Drawer Long Press on App
 

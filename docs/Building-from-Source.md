@@ -1,4 +1,6 @@
-# Using the command line
+# Building from Source
+
+## Using the command line
 
 Install JDK 17 and the Android SDK.
 Make sure that `JAVA_HOME` and `ANDROID_HOME` are set correctly.
@@ -13,6 +15,7 @@ cd Launcher
 This will create an apk file at `app/build/outputs/apk/default/release/app-default-release-unsigned.apk`.
 
 Note that you need to sign it:
+
 ```bash
 apksigner sign --ks "$YOUR_KEYSTORE" \
     --ks-key-alias "$YOUR_ALIAS" \
@@ -29,15 +32,14 @@ apksigner sign --ks "$YOUR_KEYSTORE" \
 See [this guide](https://developer.android.com/build/building-cmdline)
 for further instructions.
 
-
-# Using Android Studio
+## Using Android Studio
 
 Install [Android Studio](https://developer.android.com/studio), import this project and build it.
 
 See [this guide](https://developer.android.com/studio/run)
 for further instructions. How to
 
-# CI Pipeline
+## CI Pipeline
 
 The [CI pipeline](https://github.com/jrpie/Launcher/actions) automatically creates debug builds.
 > Note: These builds are *not* signed.
