@@ -153,7 +153,7 @@
     <string name="list_other_nop">لا تفعل شيئًا</string>
     <string name="list_other_lock_screen">قفل الشاشة</string>
     <string name="list_other_torch">تبديل الفلاش</string>
-    <string name="list_other_launch_other_launcher">شغل شاشة منزل أخرى</string>
+    <string name="list_other_launch_other_launcher">تشغيل شاشة رئيسية أخرى</string>
     <string name="pin_shortcut_title">أضف اختصارًا</string>
     <string name="pin_shortcut_button_bind">اربط بإيماءة</string>
     <string name="tutorial_title">درس تعليمي</string>
@@ -261,4 +261,56 @@
     <string name="settings_enabled_gestures_edge_swipe_summary">اسحب من حواف الشاشة</string>
     <string name="toast_lock_screen_not_supported">خطأ: قفل الشاشة باستخدام إمكانية الوصول غير مدعوم على هذا الجهاز. الرجاء استخدام طريقة مسؤول الجهاز بدلاً من ذلك.</string>
     <string name="accessibility_service_description">يتيح تعيين μlauncher كخدمة إمكانية الوصول قفل الشاشة وفتح قائمة التطبيقات الحديثة. يرجى ملاحظة أنه يتطلب كمية كبيرة من الأذونات. يجب ألا تمنح مثل هذه الأذونات باستخفاف لأي تطبيق. سوف يستخدم μlauncher خدمة إمكانية الوصول فقط لأداء الإجراءات التالية عند طلب المستخدم: * قفل شاشة * فتح التطبيقات الحديثة μlauncher لن يستخدم أبدًا خدمة إمكانية الوصول لجمع البيانات. يمكنك التحقق من شيفرة المصدر للتأكد. يرجى ملاحظة أنه يمكنك قفل الشاشة من خلال منح أذونات مسؤول الجهاز، لكنها لا تعمل مع بصمات الأصابع وفتح الوجه.</string>
+    <string name="dialog_create_widget_panel_title">إنشاء لوحة أداة جديدة</string>
+    <string name="settings_widgets_widgets">إدارة الأدوات المصغّرة</string>
+    <string name="settings_widgets_custom_panels">إدارة لوحات الأدوات المصغّرة</string>
+    <string name="screen_lock_method_dialog_text"><![CDATA[
+        <h1>اختر طريقة القفل</h1>
+        هناك طريقتان لقفل الشاشة.
+        للأسف، كلا الطريقتين لهما عيوب:<br/><br/>
+
+        <h3>إدارة الجهاز</h3>
+        لا تعمل مع فتح القفل باستخدام بصمة الإصبع أو التعرف على الوجه.
+
+        <br/>
+        <br/>
+
+        <h3>خدمة الوصول</h3>
+        تتطلب صلاحيات واسعة.
+        سيستخدم تطبيق μLauncher هذه الصلاحيات فقط لقفل الشاشة.
+        <br/>
+        (يجب ألا تثق بتطبيق عشوائي قمت بتحميله للتو بهذا الادعاء، ولكن يمكنك التحقق من <a href=\"https://github.com/jrpie/Launcher\">الكود المصدري</a>.)
+        <br/>
+        في بعض الأجهزة، لن يُستخدم رمز PIN الخاص بالتشغيل لتشفير البيانات بعد تفعيل خدمة الوصول.
+        يمكن <a href="https://issuetracker.google.com/issues/37010136#comment36">إعادة تفعيل</a> هذا لاحقًا.
+
+        <br/><br/><br/><br/>
+        يمكنك تغيير اختيارك لاحقًا في الإعدادات.
+]]></string>
+    <string name="widget_clock_description">الساعة الافتراضية لـ μLauncher</string>
+    <string name="dialog_select_widget_panel_info_no_panels">&lt;![CDATA[لم يتم العثور على لوحات عناصر واجهة المستخدم. يمكنك إنشاء لوحات الأدوات في الإعدادات &gt; المشغّل &gt; إدارة لوحات الأدوات.]].</string>
+    <string name="select_widget_title">اختر الأداة</string>
+    <string name="widget_menu_remove">إزالة</string>
+    <string name="widget_menu_configure">تهيئة</string>
+    <string name="widget_menu_enable_interaction">Enable Interaction</string>
+    <string name="widget_menu_disable_interaction">تعطيل التفاعل</string>
+    <string name="widget_clock_label">ساعة</string>
+    <string name="manage_widget_panels_delete">حذف</string>
+    <string name="manage_widget_panels_rename">إعادة التسمية</string>
+    <string name="widget_panel_default_name">لوحة الأداة المصغّرة #%1$d</string>
+    <string name="dialog_ok">حسنا</string>
+    <string name="widget_panels_title">لوحات الأداة</string>
+    <string name="dialog_select_widget_panel_title">تحديد لوحة الأداة</string>
+    <string name="list_other_open_widget_panel">افتح لوحة الأدوات</string>
+    <string name="alert_widget_panel_not_found">لم تعد لوحة الأدوات هذه موجودة.</string>
+    <string name="settings_launcher_section_widgets">الأدوات</string>
+    <plurals name="widget_panel_number_of_widgets">
+        <item quantity="zero">يحتوي على %d أداة.</item>
+        <item quantity="one">يحتوي على %d أداة.</item>
+        <item quantity="two">يحتوي على %d أدوات.</item>
+        <item quantity="few">يحتوي على %d أدوات.</item>
+        <item quantity="many">يحتوي على %d أداة.</item>
+        <item quantity="other"></item>
+    </plurals>
+    <string name="settings_functionality_auto_close_keyboard">إغلاق لوحة المفاتيح عند التمرير</string>
 </resources>
