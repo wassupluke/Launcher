@@ -19,6 +19,7 @@ import androidx.core.graphics.minus
 import androidx.core.graphics.toRect
 import androidx.core.view.children
 import de.jrpie.android.launcher.ui.widgets.WidgetContainerView
+import de.jrpie.android.launcher.widgets.GRID_SIZE
 import de.jrpie.android.launcher.widgets.Widget
 import de.jrpie.android.launcher.widgets.WidgetPanel
 import de.jrpie.android.launcher.widgets.WidgetPosition
@@ -47,21 +48,27 @@ class WidgetManagerView(widgetPanelId: Int, context: Context, attrs: AttributeSe
 
 
 
-    enum class EditMode(val resize: (dx: Int, dy: Int, rect: Rect) -> Rect) {
-        MOVE({ dx, dy, rect ->
-            Rect(rect.left + dx, rect.top + dy, rect.right + dx, rect.bottom + dy)
+    enum class EditMode(val resize: (dx: Int, dy: Int, screenWidth: Int, screenHeight: Int, rect: Rect) -> Rect) {
+        MOVE({ dx, dy, sw, sh, rect ->
+            val cdx = dx.coerceIn(-rect.left, sw - rect.right)
+            val cdy = dy.coerceIn(-rect.top, sh - rect.bottom)
+            Rect(rect.left + cdx, rect.top + cdy, rect.right + cdx, rect.bottom + cdy)
         }),
-        TOP({ dx, dy, rect ->
-            Rect(rect.left, min(rect.top + dy, rect.bottom - 200), rect.right, rect.bottom)
+        TOP({ dx, dy, sw, sh, rect ->
+            val cdy = dy.coerceIn(-rect.top, rect.bottom - rect.top - (2 * sh / GRID_SIZE) + 5)
+            Rect(rect.left, rect.top + cdy, rect.right, rect.bottom)
         }),
-        BOTTOM({ dx, dy, rect ->
-            Rect(rect.left, rect.top, rect.right, max(rect.top + 200, rect.bottom + dy))
+        BOTTOM({ dx, dy, sw, sh, rect ->
+            val cdy = dy.coerceIn((2 * sh / GRID_SIZE) + 5 + rect.top - rect.bottom, sh - rect.bottom)
+            Rect(rect.left, rect.top, rect.right, rect.bottom + cdy)
         }),
-        LEFT({ dx, dy, rect ->
-            Rect(min(rect.left + dx, rect.right - 200), rect.top, rect.right, rect.bottom)
+        LEFT({ dx, dy, sw, sh, rect ->
+            val cdx = dx.coerceIn(-rect.left, rect.right - rect.left - (2 * sw / GRID_SIZE) + 5)
+            Rect(rect.left + cdx, rect.top, rect.right, rect.bottom)
         }),
-        RIGHT({ dx, dy, rect ->
-            Rect(rect.left, rect.top, max(rect.left + 200, rect.right + dx), rect.bottom)
+        RIGHT({ dx, dy, sw, sh, rect ->
+            val cdx = dx.coerceIn((2 * sw / GRID_SIZE) + 5 + rect.left - rect.right, sw - rect.right)
+            Rect(rect.left, rect.top, rect.right + cdx, rect.bottom)
         }),
     }
 
@@ -120,6 +127,7 @@ class WidgetManagerView(widgetPanelId: Int, context: Context, attrs: AttributeSe
                 val absoluteNewPosition = view.mode?.resize(
                         distanceX.toInt(),
                         distanceY.toInt(),
+                        width, height,
                         start
                     ) ?: return true
                 val newPosition = WidgetPosition.fromAbsoluteRect(
@@ -162,7 +170,7 @@ class WidgetManagerView(widgetPanelId: Int, context: Context, attrs: AttributeSe
         if (widgets == null) {
             return
         }
-        children.mapNotNull { it as? WidgetOverlayView }.forEach { removeView(it) }
+        children.filter { it is WidgetOverlayView }.forEach { removeView(it) }
 
         widgets.filter { it.panelId == widgetPanelId }.forEach { widget ->
             WidgetOverlayView(activity).let {

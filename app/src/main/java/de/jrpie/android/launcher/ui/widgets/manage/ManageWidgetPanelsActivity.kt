@@ -49,7 +49,6 @@ class ManageWidgetPanelsActivity : AppCompatActivity(), UIObject {
                 })
         }
         binding.manageWidgetPanelsRecycler.apply {
-            // improve performance (since content changes don't change the layout size)
             setHasFixedSize(true)
             layoutManager = viewManager
             adapter = viewAdapter

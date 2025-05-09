@@ -22,8 +22,6 @@ import de.jrpie.android.launcher.apps.isPrivateSpaceLocked
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.preferences.migratePreferencesToNewVersion
 import de.jrpie.android.launcher.preferences.resetPreferences
-import de.jrpie.android.launcher.widgets.LauncherWidgetProvider
-import de.jrpie.android.launcher.widgets.Widget
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,7 +32,6 @@ const val APP_WIDGET_HOST_ID = 42;
 
 class Application : android.app.Application() {
     val apps = MutableLiveData<List<AbstractDetailedAppInfo>>()
-    val widgets = MutableLiveData<Set<Widget>>()
     val privateSpaceLocked = MutableLiveData<Boolean>()
     lateinit var appWidgetHost: AppWidgetHost
     lateinit var appWidgetManager: AppWidgetManager
@@ -101,8 +98,6 @@ class Application : android.app.Application() {
             customAppNames = LauncherPreferences.apps().customNames()
         } else if (pref == LauncherPreferences.apps().keys().pinnedShortcuts()) {
             loadApps()
-        } else if (pref == LauncherPreferences.widgets().keys().widgets()) {
-            widgets.postValue(LauncherPreferences.widgets().widgets() ?: setOf())
         }
     }
 
