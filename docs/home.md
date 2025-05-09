@@ -2,7 +2,7 @@
 
 ## What is μLauncher?
 
-µLauncher is an *minimal* and *distraction-free* Android home screen that lets you launch apps using [swipe gestures and button presses](docs/actions-and-gestured.md).
+µLauncher is an *minimal* and *distraction-free* Android home screen that lets you launch apps using [swipe gestures and button presses](/actions-and-gestured.md).
 
 This project is a fork of [finnmglas's app Launcher](https://github.com/finnmglas/Launcher). An incomplete list of changes can be found [here](https://github.com/wassupluke/Launcher/blob/master/docs/launcher.md).
 
@@ -21,7 +21,7 @@ This project is a fork of [finnmglas's app Launcher](https://github.com/finnmgla
 
 ## How can I contribute?
 
-See [docs/contribute](docs/contribute.md)
+See [docs/contribute](/contribute.md)
 
 ## Screenshots
 

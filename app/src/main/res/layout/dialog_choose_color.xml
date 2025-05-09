@@ -27,6 +27,21 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/dialog_select_color_alpha" />
+
+    <SeekBar
+        android:id="@+id/dialog_select_color_seekbar_alpha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="255" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/dialog_select_color_red" />
 
     <SeekBar
@@ -65,18 +80,4 @@
         android:layout_height="wrap_content"
         android:max="255" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/dialog_select_color_alpha" />
-
-    <SeekBar
-        android:id="@+id/dialog_select_color_seekbar_alpha"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:max="255" />
 </LinearLayout>
