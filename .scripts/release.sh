@@ -1,9 +1,25 @@
 #!/bin/bash
+
+# This script builds all variants of µLauncher to create a release, namely:
+# - app-release.apk (GitHub release; used by F-Droid for reproducible builds)
+# - launcher-accrescent.apks (Accrescent)
+# - app-release.aab (Play Store)
+
+# This is only intended to work on my (@jrpie) computer.
+# To use this script for building a fork you need to:
+#   - install bundletool.jar and
+#   - create a keystore and modify the variables below accordingly
+
 export JAVA_HOME="/usr/lib/jvm/java-21-openjdk/"
 OUTPUT_DIR="$HOME/launcher-release"
 BUILD_TOOLS_DIR="$HOME/Android/Sdk/build-tools/35.0.0"
+
+# keystore for the default release
 KEYSTORE="$HOME/data/keys/launcher_jrpie.jks"
+# keystore for the default accrescent release
 KEYSTORE_ACCRESCENT="$HOME/data/keys/launcher_jrpie_accrescent.jks"
+
+# keepassxc-password is a custom script to fetch passwords from my password manager
 KEYSTORE_PASS=$(keepassxc-password "android_keys/launcher")
 KEYSTORE_ACCRESCENT_PASS=$(keepassxc-password "android_keys/launcher-accrescent")
 
@@ -11,12 +27,11 @@ if [[ $(git status --porcelain) ]]; then
     echo "There are uncommitted changes."
 
     read -p "Continue anyway? (y/n) " -n 1 -r
-    echo    # (optional) move to a new line
+    echo
     if ! [[ $REPLY =~ ^[Yy]$ ]]
     then
         exit 1
     fi
-
 fi
 
 rm -rf "$OUTPUT_DIR"

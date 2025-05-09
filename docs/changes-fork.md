@@ -14,12 +14,15 @@ The decision to create a hard fork was made two years later.-->
 
 - Compatible with [work profile](https://www.android.com/enterprise/work-profile/), so apps like [Shelter](https://gitea.angry.im/PeterCxy/Shelter) can be used.
 - Compatible with [private space](https://source.android.com/docs/security/features/private-space)
+- Support for [app widgets](https://developer.android.com/develop/ui/views/appwidgets/overview)
+- Support for [pinned shortcuts](https://developer.android.com/develop/ui/views/launch/shortcuts/creating-shortcuts)
 - Option to rename apps
 - Option to hide apps
 - Favorite apps
 - New actions:
   - Toggle Torch
   - Lock screen
+  - Open a widget panel
 - The home button now works as expected.
 - Improved gesture detection.
 
@@ -48,6 +51,6 @@ The complete list of changes can be viewed [here](https://github.com/jrpie/launc
 
 ---
 
-\[original-repo\]: [https://github.com/finnmglas/Launcher](https://github.com/finnmglas/Launcher) 
+\[original-repo\]: [https://github.com/finnmglas/Launcher](https://github.com/finnmglas/Launcher)
 
 \[hack-font\]: [https://sourcefoundry.org/hack/](https://sourcefoundry.org/hack/)

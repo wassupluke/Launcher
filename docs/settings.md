@@ -4,13 +4,14 @@ Tweaks and customizations can be made from within the Launcher Settings page.
 
 These settings let you change wallpapers, change colors and fonts, enable monochrome app icons, change the app drawer layout, and much more.
 
-In the following documentation, 'app drawer' will be used to refer to the 'All Apps' and 'Favorite Apps' views.
+In the following documentation, 'app drawer' will be used to refer to the 'All Apps', 'Favorite Apps' and 'Private Space' views.
 
 ## Appearance
 
 > ### Choose a wallpaper
 
-Lets you change the wallpaper using a photos app, file explorer, or native wallpaper setting app.
+This triggers Android's mechanism to change the wallpaper using a photos app, file explorer, or native wallpaper setting app.
+µLauncher uses the system-wide wallpaper, i.e. this change also affects other launchers.
 
 > ### Font (in-app font)
 
@@ -92,11 +93,15 @@ Place the current time above the current date on the home screen.
 
 Launches any app that matches user keyboard input when no other apps match.
 
-As you type inside the app drawer, the app narrows down the list of apps shown based on the app title matching your text input. For example, if you type, `a`, the app list narrows to any apps with a title containing the letter `a`. Continuing the example, if you then follow your `a` with the letter `m`, the list now shows only apps containing the letter combination `am` in that order. If the only app matching this combination was, for example, `Amazon`, simply typing `am` in the app drawer would immediately launch the `Amazon` app for you.
+As you type inside the app drawer, the app narrows down the list of apps shown based on the app title matching your text input.
+With the 'launch search results' setting, once only one matching app remains, it is launched immediately.
+Usually it suffices to type two or three characters the single out the desired app.
 
-This feature becomes more powerful when combined with [renaming](https://github.com/wassupluke/Launcher/wiki/Launcher-Settings/_edit#additional-settings) apps, effectively letting you define custom app names that could be considered 'aliases' or shortcuts. For instance, if you wanted to "bind" the keyboard input `gh` to open your `GitHub` app, you could rename `GitHub` to `GitHub gh`, `gh GitHub`, or simply `gh`. Assuming no other installed apps have the `gh` combination of letters in them, opening the app drawer and typing `gh` would immediately launch your `GitHub` app.
+This feature becomes more powerful when combined with [renaming](#additional-settings) apps, effectively letting you define custom app names that could be considered 'aliases' or shortcuts.
+For instance, if you want the keyboard input `gh` to open your `GitHub` app, you could rename `GitHub` to `GitHub gh`, `gh GitHub`, or simply `gh`.
+Assuming no other installed apps have the `gh` combination of letters in them, opening the app drawer and typing `gh` would immediately launch your `GitHub` app.
 
-Press space to temporarily disable this feature and allow text entry without prematurely launching an app. Useful when combined with the [Search the web](https://github.com/wassupluke/Launcher/wiki/Launcher-Settings/_edit#search-the-web) feature.
+Press space to temporarily disable this feature and allow text entry without prematurely launching an app. Useful when combined with the [Search the web](#search-the-web) feature.
 
 **type:**&nbsp;`toggle`
 
@@ -112,15 +117,15 @@ Automatically open the keyboard when the app drawer is opened.
 
 **type:**&nbsp;`toggle`
 
-> ### Double swipe actions
+> ### Double swipe gestures
 
-Enable double swipe (two finger) actions as bindable gestures in launcher settings. Does not erase gesture bindings if accidentally turned off.
+Enable double swipe (two finger) gestures in launcher settings. Does not erase gesture bindings if accidentally turned off.
 
 **type:**&nbsp;`toggle`
 
-> ### Edge swipe actions
+> ### Edge swipe gestures
 
-Enable edge swipe (near edges of screen) actions as bindable gestures in launcher settings. Does not erase gesture bindings if accidentally turned off.
+Enable edge swipe (near edges of screen) gestures in launcher settings. Does not erase gesture bindings if accidentally turned off.
 
 **type:**&nbsp;`toggle`
 
@@ -167,6 +172,7 @@ Reduces redundancy and tidies up app drawer.
 > ### Hide paused apps
 
 Remove paused apps from the app drawer.
+For example an app belonging to the work profile is paused when the work profile is inactive.
 
 **type:**&nbsp;`toggle`
 
@@ -178,7 +184,12 @@ Remove private space from app drawer.
 
 > ### Layout of app list
 
-Change how the apps are displayed when accessing the app drawer. By `Default`, all apps in the drawer will show in a vertically-scrolled list with their app icon and title. `Text` removes the app icons, shows only app titles in the drawer as a vertically-scrolled list. `Grid` shows apps with their app icon and title in a grid layout.
+Changes how the apps are displayed when accessing the app drawer.
+
+- `Default`: All apps in the drawer will show in a vertically-scrolled list with their app icon and title.
+- `Text`: Removes the app icons, shows only app titles in the drawer as a vertically-scrolled list.
+    Work profile and private space apps are distinguished by a different label instead of a badge.
+- `Grid`: Shows apps with their app icon and title in a grid layout.
 
 **type:**&nbsp;`dropdown`
 
@@ -186,7 +197,8 @@ Change how the apps are displayed when accessing the app drawer. By `Default`, a
 
 > ### Reverse the app list
 
-Enable Z-A sorting of apps in the app drawer. Useful for keeping apps within easier reach from the keyboard.
+Enable reverse alphabetical sorting of apps in the app drawer.
+Useful for keeping apps within easier reach from the keyboard.
 
 **type:**&nbsp;`toggle`
 

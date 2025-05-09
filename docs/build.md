@@ -42,4 +42,4 @@ for further instructions. How to
 ## CI Pipeline
 
 The [CI pipeline](https://github.com/jrpie/Launcher/actions) automatically creates debug builds.
-> Note: These builds are *not* signed.
+> Note: These builds are *not* signed. They are in built in debug mode and only suitable for testing.
