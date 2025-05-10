@@ -9,8 +9,8 @@ import de.jrpie.android.launcher.widgets.WidgetPanel
 import de.jrpie.android.launcher.widgets.WidgetPosition
 
 fun migratePreferencesFromVersion4(context: Context) {
-    assert(PREFERENCE_VERSION == 5)
-    assert(LauncherPreferences.internal().versionCode() == 4)
+    assert(PREFERENCE_VERSION == 100)
+    assert(LauncherPreferences.internal().versionCode() < 100)
 
     LauncherPreferences.widgets().widgets(
         setOf(
@@ -23,5 +23,5 @@ fun migratePreferencesFromVersion4(context: Context) {
     )
 
 
-    LauncherPreferences.internal().versionCode(5)
+    LauncherPreferences.internal().versionCode(100)
 }

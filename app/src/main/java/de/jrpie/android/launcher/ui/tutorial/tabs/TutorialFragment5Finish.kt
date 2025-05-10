@@ -42,7 +42,6 @@ class TutorialFragment5Finish : Fragment(), UIObject {
         if (!LauncherPreferences.internal().started()) {
             LauncherPreferences.internal().started(true)
             LauncherPreferences.internal().startedTime(System.currentTimeMillis() / 1000L)
-            LauncherPreferences.internal().versionCode(VERSION_CODE)
         }
         context?.let { setDefaultHomeScreen(it, checkDefault = true) }
         activity?.finish()

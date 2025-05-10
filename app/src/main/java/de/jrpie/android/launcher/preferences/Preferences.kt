@@ -24,7 +24,7 @@ import de.jrpie.android.launcher.widgets.deleteAllWidgets
  * Increase when breaking changes are introduced and write an appropriate case in
  * `migratePreferencesToNewVersion`
  */
-const val PREFERENCE_VERSION = 5
+const val PREFERENCE_VERSION = 100
 const val UNKNOWN_PREFERENCE_VERSION = -1
 private const val TAG = "Launcher - Preferences"
 
@@ -58,7 +58,8 @@ fun migratePreferencesToNewVersion(context: Context) {
                 Log.i(TAG, "migration of preferences  complete (3 -> ${PREFERENCE_VERSION}).")
             }
 
-            4 -> {
+            // There was a bug where instead of the preference version the app version was written.
+            in 4..99 -> {
                 migratePreferencesFromVersion4(context)
                 Log.i(TAG, "migration of preferences  complete (4 -> ${PREFERENCE_VERSION}).")
             }
