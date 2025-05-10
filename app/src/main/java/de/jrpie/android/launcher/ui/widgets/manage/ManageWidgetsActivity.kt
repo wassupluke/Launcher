@@ -32,10 +32,8 @@ const val EXTRA_PANEL_ID = "widgetPanelId"
 // We can't use AppCompatActivity, since some AppWidgets don't work there.
 class ManageWidgetsActivity : Activity(), UIObject {
 
-    var panelId: Int = WidgetPanel.HOME.id
+    private var panelId: Int = WidgetPanel.HOME.id
 
-
-    // We can't observe the livedata because this is not an AppCompatActivity
     private var sharedPreferencesListener =
         SharedPreferences.OnSharedPreferenceChangeListener { _, prefKey ->
             if (prefKey == LauncherPreferences.widgets().keys().widgets()) {

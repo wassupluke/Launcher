@@ -17,15 +17,12 @@ import android.view.ViewConfiguration
 import androidx.core.graphics.contains
 import androidx.core.graphics.minus
 import androidx.core.graphics.toRect
-import androidx.core.view.children
 import de.jrpie.android.launcher.ui.widgets.WidgetContainerView
 import de.jrpie.android.launcher.widgets.GRID_SIZE
 import de.jrpie.android.launcher.widgets.Widget
 import de.jrpie.android.launcher.widgets.WidgetPanel
 import de.jrpie.android.launcher.widgets.WidgetPosition
 import de.jrpie.android.launcher.widgets.updateWidget
-import kotlin.math.max
-import kotlin.math.min
 
 /**
  * A variant of the [WidgetContainerView] which allows to manage widgets.
@@ -38,6 +35,9 @@ class WidgetManagerView(widgetPanelId: Int, context: Context, attrs: AttributeSe
     val TOUCH_SLOP_SQUARE: Int
     val LONG_PRESS_TIMEOUT: Long
 
+
+    private var overlayViewById = HashMap<Int, WidgetOverlayView>()
+
     init {
         val configuration = ViewConfiguration.get(context)
         TOUCH_SLOP = configuration.scaledTouchSlop
@@ -47,36 +47,37 @@ class WidgetManagerView(widgetPanelId: Int, context: Context, attrs: AttributeSe
     }
 
 
-
     enum class EditMode(val resize: (dx: Int, dy: Int, screenWidth: Int, screenHeight: Int, rect: Rect) -> Rect) {
         MOVE({ dx, dy, sw, sh, rect ->
             val cdx = dx.coerceIn(-rect.left, sw - rect.right)
             val cdy = dy.coerceIn(-rect.top, sh - rect.bottom)
             Rect(rect.left + cdx, rect.top + cdy, rect.right + cdx, rect.bottom + cdy)
         }),
-        TOP({ dx, dy, sw, sh, rect ->
+        TOP({ _, dy, _, sh, rect ->
             val cdy = dy.coerceIn(-rect.top, rect.bottom - rect.top - (2 * sh / GRID_SIZE) + 5)
             Rect(rect.left, rect.top + cdy, rect.right, rect.bottom)
         }),
-        BOTTOM({ dx, dy, sw, sh, rect ->
-            val cdy = dy.coerceIn((2 * sh / GRID_SIZE) + 5 + rect.top - rect.bottom, sh - rect.bottom)
+        BOTTOM({ _, dy, _, sh, rect ->
+            val cdy =
+                dy.coerceIn((2 * sh / GRID_SIZE) + 5 + rect.top - rect.bottom, sh - rect.bottom)
             Rect(rect.left, rect.top, rect.right, rect.bottom + cdy)
         }),
-        LEFT({ dx, dy, sw, sh, rect ->
+        LEFT({ dx, _, sw, _, rect ->
             val cdx = dx.coerceIn(-rect.left, rect.right - rect.left - (2 * sw / GRID_SIZE) + 5)
             Rect(rect.left + cdx, rect.top, rect.right, rect.bottom)
         }),
-        RIGHT({ dx, dy, sw, sh, rect ->
-            val cdx = dx.coerceIn((2 * sw / GRID_SIZE) + 5 + rect.left - rect.right, sw - rect.right)
+        RIGHT({ dx, _, sw, _, rect ->
+            val cdx =
+                dx.coerceIn((2 * sw / GRID_SIZE) + 5 + rect.left - rect.right, sw - rect.right)
             Rect(rect.left, rect.top, rect.right + cdx, rect.bottom)
         }),
     }
 
-    var selectedWidgetOverlayView: WidgetOverlayView? = null
-    var selectedWidgetView: View? = null
-    var currentGestureStart: Point? = null
-    var startWidgetPosition: Rect? = null
-    var lastPosition = Rect()
+    private var selectedWidgetOverlayView: WidgetOverlayView? = null
+    private var selectedWidgetView: View? = null
+    private var currentGestureStart: Point? = null
+    private var startWidgetPosition: Rect? = null
+    private var lastPosition = Rect()
 
     private val longPressHandler = Handler(Looper.getMainLooper())
 
@@ -94,17 +95,31 @@ class WidgetManagerView(widgetPanelId: Int, context: Context, attrs: AttributeSe
             if (event.actionMasked == MotionEvent.ACTION_DOWN) {
                 val start = Point(event.x.toInt(), event.y.toInt())
                 currentGestureStart = start
-                val view = children.mapNotNull { it as? WidgetOverlayView }.firstOrNull {
-                    RectF(it.x, it.y, it.x + it.width, it.y + it.height).toRect().contains(start) == true
-                } ?: return false
+                val view = overlayViewById.asIterable()
+                    .map { it.value }.firstOrNull { overlayView ->
+                        RectF(
+                            overlayView.x,
+                            overlayView.y,
+                            overlayView.x + overlayView.width,
+                            overlayView.y + overlayView.height
+                        )
+                            .toRect()
+                            .contains(start)
+                    } ?: return true
 
-                val position = (view.layoutParams as Companion.LayoutParams).position.getAbsoluteRect(width, height)
+                val position =
+                    (view.layoutParams as Companion.LayoutParams).position.getAbsoluteRect(
+                        width,
+                        height
+                    )
                 selectedWidgetOverlayView = view
-                selectedWidgetView = widgetViewById.get(view.widgetId) ?: return true
+                selectedWidgetView = widgetViewById[view.widgetId] ?: return true
                 startWidgetPosition = position
 
                 val positionInView = start.minus(Point(position.left, position.top))
-                view.mode = view.getHandles().firstOrNull { it.position.contains(positionInView) }?.mode ?: EditMode.MOVE
+                view.mode =
+                    view.getHandles().firstOrNull { it.position.contains(positionInView) }?.mode
+                        ?: EditMode.MOVE
 
                 longPressHandler.postDelayed({
                     synchronized(this@WidgetManagerView) {
@@ -124,19 +139,20 @@ class WidgetManagerView(widgetPanelId: Int, context: Context, attrs: AttributeSe
                 }
                 val view = selectedWidgetOverlayView ?: return true
                 val start = startWidgetPosition ?: return true
-                val absoluteNewPosition = view.mode?.resize(
-                        distanceX.toInt(),
-                        distanceY.toInt(),
-                        width, height,
-                        start
-                    ) ?: return true
+                val absoluteNewPosition = (view.mode ?: return true).resize(
+                    distanceX.toInt(),
+                    distanceY.toInt(),
+                    width, height,
+                    start
+                )
                 val newPosition = WidgetPosition.fromAbsoluteRect(
                     absoluteNewPosition, width, height
                 )
-                if (newPosition != lastPosition) {
+                if (absoluteNewPosition != lastPosition) {
                     lastPosition = absoluteNewPosition
                     (view.layoutParams as Companion.LayoutParams).position = newPosition
-                    (selectedWidgetView?.layoutParams as? Companion.LayoutParams)?.position = newPosition
+                    (selectedWidgetView?.layoutParams as? Companion.LayoutParams)?.position =
+                        newPosition
                     requestLayout()
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
                         view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_PRESS)
@@ -156,10 +172,9 @@ class WidgetManagerView(widgetPanelId: Int, context: Context, attrs: AttributeSe
                 }
             }
         }
-
-
         return true
     }
+
     private fun endInteraction() {
         startWidgetPosition = null
         selectedWidgetOverlayView?.mode = null
@@ -167,16 +182,17 @@ class WidgetManagerView(widgetPanelId: Int, context: Context, attrs: AttributeSe
 
     override fun updateWidgets(activity: Activity, widgets: Collection<Widget>?) {
         super.updateWidgets(activity, widgets)
-        if (widgets == null) {
-            return
-        }
-        children.filter { it is WidgetOverlayView }.forEach { removeView(it) }
 
-        widgets.filter { it.panelId == widgetPanelId }.forEach { widget ->
-            WidgetOverlayView(activity).let {
-                addView(it)
-                it.widgetId = widget.id
-                (it.layoutParams as Companion.LayoutParams).position = widget.position
+        synchronized(overlayViewById) {
+            overlayViewById.forEach { removeView(it.value) }
+            overlayViewById.clear()
+            widgets?.filter { it.panelId == widgetPanelId }?.forEach { widget ->
+                WidgetOverlayView(activity).let {
+                    it.widgetId = widget.id
+                    addView(it)
+                    (it.layoutParams as Companion.LayoutParams).position = widget.position
+                    overlayViewById[widget.id] = it
+                }
             }
         }
     }

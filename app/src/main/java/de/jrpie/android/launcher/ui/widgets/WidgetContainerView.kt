@@ -41,7 +41,7 @@ open class WidgetContainerView(
             widgets.filter { it.panelId == widgetPanelId }.forEach { widget ->
                 widget.createView(activity)?.let {
                     addView(it, LayoutParams(widget.position))
-                    widgetViewById.put(widget.id, it)
+                    widgetViewById[widget.id] = it
                 }
             }
         }
