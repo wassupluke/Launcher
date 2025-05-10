@@ -102,7 +102,7 @@
     <string name="list_other_volume_down">Diminuir volume</string>
     <string name="list_other_track_next">Música: Próximo</string>
     <string name="list_other_track_previous">Música: Anterior</string>
-    <string name="list_other_nop">Não faça nada</string>
+    <string name="list_other_nop">Não fazer nada</string>
     <!--
       -
       - Tutorial
@@ -319,4 +319,30 @@
     <string name="alert_enable_accessibility_failed">Erro: Falha ao ativar o Serviço de acessibilidade.</string>
     <string name="list_other_launch_other_launcher">Usar outro iniciador</string>
     <string name="alert_recent_apps_failed">Erro: Falha ao mostrar apps recentes. (Se você acabou de atualizar o app, tente desativar e reativar o Serviço de acessibilidade em configurações do Android)</string>
+    <string name="settings_widgets_widgets">Gerenciar widgets</string>
+    <string name="select_widget_title">Escolha widget</string>
+    <string name="settings_widgets_custom_panels">Gerenciar painéis de widgets</string>
+    <string name="widget_menu_configure">Configurar</string>
+    <string name="widget_menu_enable_interaction">Ativar interação</string>
+    <string name="widget_clock_label">Relógio</string>
+    <string name="widget_clock_description">O relógio padrão do μLauncher</string>
+    <string name="manage_widget_panels_delete">Apagar</string>
+    <string name="manage_widget_panels_rename">Renomear</string>
+    <string name="widget_panel_default_name">Painel do widget #%1$d</string>
+    <plurals name="widget_panel_number_of_widgets">
+        <item quantity="one">Contém %d widget.</item>
+        <item quantity="many">Contém %d widgets.</item>
+        <item quantity="other"></item>
+    </plurals>
+    <string name="dialog_ok">Ok</string>
+    <string name="widget_panels_title">Painéis de widget</string>
+    <string name="dialog_create_widget_panel_title">Criar novo painel de widget</string>
+    <string name="list_other_open_widget_panel">Abrir painel de widget</string>
+    <string name="alert_widget_panel_not_found">Esse painel de widget não existe mais.</string>
+    <string name="settings_launcher_section_widgets">Widgets</string>
+    <string name="widget_menu_remove">Remover</string>
+    <string name="widget_menu_disable_interaction">Desativar interação</string>
+    <string name="dialog_select_widget_panel_title">Selecione um painel de widget</string>
+    <string name="dialog_select_widget_panel_info_no_panels"><![CDATA[Nenhum painel de widget encontrado. Você pode criar painéis de widgets em Configurações > Launcher > Gerenciar painéis de widget.]]></string>
+    <string name="settings_functionality_auto_close_keyboard">Esconder o teclado durante a rolagem</string>
 </resources>
