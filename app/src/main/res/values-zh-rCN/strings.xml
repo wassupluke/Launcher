@@ -285,4 +285,22 @@
     <string name="alert_recent_apps_failed">错误：无法展示最近应用屏幕。（如果您刚刚升级了本启动器，请尝试在手机设置中手动禁用再重新启用“无障碍”服务。）</string>
     <string name="list_other_launch_other_launcher">启动其他启动器</string>
     <string name="settings_functionality_auto_close_keyboard">滚动应用程序列表时自动隐藏键盘</string>
+    <string name="settings_widgets_widgets">设置小部件</string>
+    <string name="widget_menu_remove">删除</string>
+    <string name="widget_menu_enable_interaction">开启交互功能</string>
+    <string name="widget_menu_disable_interaction">关闭交互功能</string>
+    <string name="widget_clock_label">时钟</string>
+    <string name="manage_widget_panels_delete">删除</string>
+    <string name="manage_widget_panels_rename">重命名</string>
+    <string name="widget_panel_default_name">小部件面板 #%1$d</string>
+    <string name="widget_panels_title">小部件面板</string>
+    <string name="dialog_select_widget_panel_title">选择小部件面板</string>
+    <string name="list_other_open_widget_panel">打开小部件面板</string>
+    <string name="dialog_create_widget_panel_title">创建新面板</string>
+    <string name="dialog_select_widget_panel_info_no_panels"><![CDATA[未发现小部件面板。您可以在“设置 > 启动器 > 设置小部件面板”中进行创建。]]></string>
+    <string name="settings_launcher_section_widgets">桌面小部件</string>
+    <string name="alert_widget_panel_not_found">该小部件面板不存在</string>
+    <string name="widget_clock_description">μLauncher 默认时钟小部件</string>
+    <string name="select_widget_title">选择小部件</string>
+    <string name="settings_widgets_custom_panels">设置小部件面板</string>
 </resources>
