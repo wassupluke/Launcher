@@ -1,26 +1,26 @@
 [versions]
+activity = "1.10.1"
+activity-ktx = "1.8.0"
+activityCompose = "1.10.1"
 agp = "8.10.0"
-kotlin = "2.1.0"
-kapt = "1.8.10"
-serialization = "1.8.10"
+android-preference-annotations = "1.1.2"
+appcompat = "1.7.0"
+composeBom = "2025.05.00"
+constraintlayout = "2.2.0"
+core-ktx = "1.15.0"
+espresso-core = "3.6.1"
+gridlayout = "1.0.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
-espresso-core = "3.6.1"
-lifecycleRuntimeKtx = "2.9.0"
-activityCompose = "1.10.1"
-composeBom = "2025.05.00"
-appcompat = "1.7.0"
-constraintlayout = "2.2.0"
-gridlayout = "1.0.0"
-recyclerview = "1.4.0"
-material = "1.12.0"
-android-preference-annotations = "1.1.2"
-activity = "1.10.1"
+kapt = "1.8.10"
+kotlin = "2.1.0"
 kotlinx-serialization-json = "1.7.3"
-activity-ktx = "1.8.0"
-core-ktx = "1.15.0"
+lifecycleRuntimeKtx = "2.9.0"
+material = "1.12.0"
 palette-ktx = "1.0.0"
 preference-ktx = "1.2.1"
+recyclerview = "1.4.0"
+serialization = "1.8.10"
 
 [libraries]
 # AndroidX dependencies
@@ -48,14 +48,10 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 google-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 # Kotlin and Serialization
-kotlin-stdlib-jdk7 = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk7", version.ref = "kotlin" } # Use kotlin version
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 
 # Annotation Processors
 jonahbauer-android-preference-annotations = { group = "eu.jonahbauer", name = "android-preference-annotations", version.ref = "android-preference-annotations" }
-# The databinding library is bundled with the Android Gradle plugin. You do not need to declare a dependency on the library, but you must enable it in your module's build.gradle file.
-# see https://developer.android.com/jetpack/androidx/releases/databinding
-# android-databinding-compiler = { group = "com.android.databinding", name = "compiler", version.ref = "agp" } # Use agp version
 
 # Testing dependencies
 junit = { group = "junit", name = "junit", version.ref = "junit" }
