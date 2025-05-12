@@ -34,16 +34,18 @@ android {
         }
     }
 
-    flavorDimensions += "distribution"
+    val distributionDimension = "distribution"
+    
+    flavorDimensions += distributionDimension
 
     productFlavors {
         create("default") {
-            dimension = "distribution"
+            dimension = distributionDimension
             isDefault = true
             buildConfigField("boolean", "USE_ACCESSIBILITY_SERVICE", "true")
         }
         create("accrescent") {
-            dimension = "distribution"
+            dimension = distributionDimension
             applicationIdSuffix = ".accrescent"
             versionNameSuffix = "+accrescent"
             buildConfigField("boolean", "USE_ACCESSIBILITY_SERVICE", "false")
