@@ -289,9 +289,9 @@
     <string name="settings_display_hide_navigation_bar">Navigatiebalk verbergen</string>
     <string name="settings_display_rotate_screen">Scherm draaien</string>
     <string name="settings_launcher_section_functionality">Functionaliteit</string>
-    <string name="settings_enabled_gestures_double_swipe">Dubbele veeg acties</string>
+    <string name="settings_enabled_gestures_double_swipe">Dubbele veeg gebaaren</string>
     <string name="settings_enabled_gestures_double_swipe_summary">Met twee vingers vegen</string>
-    <string name="settings_enabled_gestures_edge_swipe">Hoek-acties</string>
+    <string name="settings_enabled_gestures_edge_swipe">Hoek-gebaren</string>
     <string name="settings_enabled_gestures_edge_swipe_edge_width">Kantbreedte</string>
     <string name="settings_functionality_auto_launch">Start zoekresultaten</string>
     <string name="settings_functionality_auto_launch_summary">Spatie drukken om deze functie tijdelijk te onderdruken.</string>
