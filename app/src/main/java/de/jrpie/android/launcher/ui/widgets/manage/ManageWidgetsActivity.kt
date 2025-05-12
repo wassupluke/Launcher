@@ -17,9 +17,12 @@ import de.jrpie.android.launcher.databinding.ActivityManageWidgetsBinding
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.ui.UIObject
 import de.jrpie.android.launcher.widgets.AppWidget
+import de.jrpie.android.launcher.widgets.GRID_SIZE
 import de.jrpie.android.launcher.widgets.WidgetPanel
 import de.jrpie.android.launcher.widgets.WidgetPosition
+import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.roundToInt
 
 
 // http://coderender.blogspot.com/2012/01/hosting-android-widgets-my.html
@@ -143,14 +146,12 @@ class ManageWidgetsActivity : UIObject, Activity() {
 
         val display = windowManager.defaultDisplay
 
-        val position = WidgetPosition.fromAbsoluteRect(
-            Rect(
-                0, 0,
-                min(400, appWidgetManager.getAppWidgetInfo(appWidgetId).minWidth),
-                min(400, appWidgetManager.getAppWidgetInfo(appWidgetId).minHeight)
-            ),
-            display.width,
-            display.height
+        val widgetInfo = appWidgetManager.getAppWidgetInfo(appWidgetId)
+
+        val position = WidgetPosition.findFreeSpace(
+            WidgetPanel.byId(panelId),
+            max(3, (GRID_SIZE * (widgetInfo.minWidth) / display.width.toFloat()).roundToInt()),
+            max(3, (GRID_SIZE * (widgetInfo.minHeight) / display.height.toFloat()).roundToInt())
         )
 
         val widget = AppWidget(appWidgetId, position, panelId, provider)
