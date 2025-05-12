@@ -78,7 +78,8 @@ class TorchManager(context: Context) {
                     cameraManager.setTorchMode(camera, !torchEnabled)
                 }
 
-            } catch (e: CameraAccessException) {
+            } catch (e: Exception) {
+                // CameraAccessException, IllegalArgumentException
                 Toast.makeText(
                     context,
                     context.getString(R.string.alert_torch_access_exception),
