@@ -132,7 +132,12 @@ class SettingsFragmentMeta : Fragment(), UIObject {
             startActivity(Intent(this.context, LegalInfoActivity::class.java))
         }
 
+        // version
         binding.settingsMetaTextVersion.text = BuildConfig.VERSION_NAME
+        binding.settingsMetaTextVersion.setOnClickListener {
+            val deviceInfo = getDeviceInfo()
+            copyToClipboard(requireContext(), deviceInfo)
+        }
 
     }
 }
