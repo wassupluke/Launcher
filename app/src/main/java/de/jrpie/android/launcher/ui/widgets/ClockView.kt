@@ -6,13 +6,13 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import de.jrpie.android.launcher.actions.Gesture
-import de.jrpie.android.launcher.databinding.ClockBinding
+import de.jrpie.android.launcher.databinding.WidgetClockBinding
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import java.util.Locale
 
 class ClockView(context: Context, attrs: AttributeSet? = null, val appWidgetId: Int): ConstraintLayout(context, attrs) {
 
-    val binding: ClockBinding = ClockBinding.inflate(LayoutInflater.from(context), this, true)
+    val binding: WidgetClockBinding = WidgetClockBinding.inflate(LayoutInflater.from(context), this, true)
     init {
         initClock()
         setOnClicks()

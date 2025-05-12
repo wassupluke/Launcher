@@ -12,11 +12,10 @@ import android.view.MotionEvent
 import android.view.View
 import android.window.OnBackInvokedDispatcher
 import de.jrpie.android.launcher.Application
-import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.actions.Action
 import de.jrpie.android.launcher.actions.Gesture
 import de.jrpie.android.launcher.actions.LauncherAction
-import de.jrpie.android.launcher.databinding.HomeBinding
+import de.jrpie.android.launcher.databinding.ActivityHomeBinding
 import de.jrpie.android.launcher.openTutorial
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.ui.tutorial.TutorialActivity
@@ -35,7 +34,7 @@ import de.jrpie.android.launcher.ui.tutorial.TutorialActivity
  */
 class HomeActivity : UIObject, Activity() {
 
-    private lateinit var binding: HomeBinding
+    private lateinit var binding: ActivityHomeBinding
     private var touchGestureDetector: TouchGestureDetector? = null
 
     private var sharedPreferencesListener =
@@ -60,7 +59,7 @@ class HomeActivity : UIObject, Activity() {
 
 
         // Initialise layout
-        binding = HomeBinding.inflate(layoutInflater)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
 

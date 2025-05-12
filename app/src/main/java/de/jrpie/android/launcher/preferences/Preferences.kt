@@ -16,6 +16,7 @@ import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersio
 import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersionUnknown
 import de.jrpie.android.launcher.ui.HomeActivity
 import de.jrpie.android.launcher.widgets.ClockWidget
+import de.jrpie.android.launcher.widgets.DebugInfoWidget
 import de.jrpie.android.launcher.widgets.WidgetPanel
 import de.jrpie.android.launcher.widgets.WidgetPosition
 import de.jrpie.android.launcher.widgets.deleteAllWidgets
@@ -95,17 +96,33 @@ fun resetPreferences(context: Context) {
         )
     )
 
+    if (BuildConfig.DEBUG) {
+        LauncherPreferences.widgets().widgets(
+            LauncherPreferences.widgets().widgets().also {
+                it.add(
+                    DebugInfoWidget(
+                        (context.applicationContext as Application).appWidgetHost.allocateAppWidgetId(),
+                        WidgetPosition(1, 1, 10, 4),
+                        WidgetPanel.HOME.id
+                    )
+                )
+            }
+        )
+    }
 
     val hidden: MutableSet<AbstractAppInfo> = mutableSetOf()
-    val launcher = DetailedAppInfo.fromAppInfo(
-        AppInfo(
-            BuildConfig.APPLICATION_ID,
-            HomeActivity::class.java.name,
-            INVALID_USER
-        ), context
-    )
-    launcher?.getRawInfo()?.let { hidden.add(it) }
-    Log.i(TAG,"Hiding ${launcher?.getRawInfo()}")
+
+    if (!BuildConfig.DEBUG) {
+        val launcher = DetailedAppInfo.fromAppInfo(
+            AppInfo(
+                BuildConfig.APPLICATION_ID,
+                HomeActivity::class.java.name,
+                INVALID_USER
+            ), context
+        )
+        launcher?.getRawInfo()?.let { hidden.add(it) }
+        Log.i(TAG, "Hiding ${launcher?.getRawInfo()}")
+    }
     LauncherPreferences.apps().hidden(hidden)
 
     Action.resetToDefaultActions(context)
