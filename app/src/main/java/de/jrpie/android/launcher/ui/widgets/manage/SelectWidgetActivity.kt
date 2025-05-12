@@ -95,6 +95,11 @@ class SelectWidgetActivity : AppCompatActivity(), UIObject {
             layoutManager = viewManager
             adapter = viewAdapter
         }
+
+        binding.selectWidgetClose.setOnClickListener {
+            setResult(RESULT_CANCELED)
+            finish()
+        }
     }
 
     override fun getTheme(): Resources.Theme {
