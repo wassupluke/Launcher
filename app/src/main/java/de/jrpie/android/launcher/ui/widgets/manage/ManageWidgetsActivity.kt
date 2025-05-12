@@ -8,14 +8,14 @@ import android.content.res.Resources
 import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
+import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import androidx.core.view.updateLayoutParams
 import de.jrpie.android.launcher.Application
-import de.jrpie.android.launcher.R
+import de.jrpie.android.launcher.databinding.ActivityManageWidgetsBinding
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.ui.UIObject
-import de.jrpie.android.launcher.ui.widgets.WidgetContainerView
 import de.jrpie.android.launcher.widgets.AppWidget
 import de.jrpie.android.launcher.widgets.WidgetPanel
 import de.jrpie.android.launcher.widgets.WidgetPosition
@@ -30,14 +30,16 @@ const val REQUEST_PICK_APPWIDGET = 2
 const val EXTRA_PANEL_ID = "widgetPanelId"
 
 // We can't use AppCompatActivity, since some AppWidgets don't work there.
-class ManageWidgetsActivity : Activity(), UIObject {
+class ManageWidgetsActivity : UIObject, Activity() {
 
     private var panelId: Int = WidgetPanel.HOME.id
+    private lateinit var binding: ActivityManageWidgetsBinding
 
     private var sharedPreferencesListener =
         SharedPreferences.OnSharedPreferenceChangeListener { _, prefKey ->
             if (prefKey == LauncherPreferences.widgets().keys().widgets()) {
-                findViewById<WidgetContainerView>(R.id.manage_widgets_container).updateWidgets(this,
+                binding.manageWidgetsContainer.updateWidgets(
+                    this,
                     LauncherPreferences.widgets().widgets()
                 )
             }
@@ -46,21 +48,33 @@ class ManageWidgetsActivity : Activity(), UIObject {
     override fun onCreate(savedInstanceState: Bundle?) {
         super<Activity>.onCreate(savedInstanceState)
         super<UIObject>.onCreate()
-        setContentView(R.layout.activity_manage_widgets)
+        binding = ActivityManageWidgetsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         panelId = intent.extras?.getInt(EXTRA_PANEL_ID, WidgetPanel.HOME.id) ?: WidgetPanel.HOME.id
 
-        findViewById<FloatingActionButton>(R.id.manage_widgets_button_add).setOnClickListener {
+        binding.manageWidgetsButtonAdd.setOnClickListener {
             selectWidget()
         }
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        // The widget container should extend below the status and navigation bars,
+        // so let's set an empty WindowInsetsListener to prevent it from being moved.
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, windowInsets ->
+            windowInsets
         }
 
-        findViewById<WidgetContainerView>(R.id.manage_widgets_container).let {
+        // The button must not be placed under the navigation bar
+        ViewCompat.setOnApplyWindowInsetsListener(binding.manageWidgetsButtonAdd) { v, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                leftMargin = insets.left
+                bottomMargin = insets.bottom
+                rightMargin = insets.right
+            }
+            WindowInsetsCompat.CONSUMED
+        }
+
+        binding.manageWidgetsContainer.let {
             it.widgetPanelId = panelId
             it.updateWidgets(this, LauncherPreferences.widgets().widgets())
         }
@@ -77,20 +91,23 @@ class ManageWidgetsActivity : Activity(), UIObject {
 
     override fun onResume() {
         super.onResume()
-        findViewById<WidgetContainerView>(R.id.manage_widgets_container).updateWidgets(this,
+        binding.manageWidgetsContainer.updateWidgets(
+            this,
             LauncherPreferences.widgets().widgets()
         )
 
     }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+
+        if (hasFocus && LauncherPreferences.display().hideNavigationBar()) {
+            hideNavigationBar()
+        }
+    }
+
     override fun getTheme(): Resources.Theme {
-        val mTheme = modifyTheme(super.getTheme())
-        mTheme.applyStyle(R.style.backgroundWallpaper, true)
-        LauncherPreferences.clock().font().applyToTheme(mTheme)
-        LauncherPreferences.theme().colorTheme().applyToTheme(
-            mTheme,
-            LauncherPreferences.theme().textShadow()
-        )
-        return mTheme
+        return modifyTheme(super.getTheme())
     }
 
     override fun onDestroy() {
@@ -100,7 +117,7 @@ class ManageWidgetsActivity : Activity(), UIObject {
     }
 
 
-    fun selectWidget() {
+    private fun selectWidget() {
         val appWidgetHost = (application as Application).appWidgetHost
         startActivityForResult(
             Intent(this, SelectWidgetActivity::class.java).also {
@@ -117,7 +134,7 @@ class ManageWidgetsActivity : Activity(), UIObject {
     }
 
 
-    fun createWidget(data: Intent) {
+    private fun createWidget(data: Intent) {
         Log.i("Launcher", "creating widget")
         val appWidgetManager = (application as Application).appWidgetManager
         val appWidgetId = data.extras?.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID) ?: return
@@ -127,9 +144,10 @@ class ManageWidgetsActivity : Activity(), UIObject {
         val display = windowManager.defaultDisplay
 
         val position = WidgetPosition.fromAbsoluteRect(
-            Rect(0,0,
-            min(400, appWidgetManager.getAppWidgetInfo(appWidgetId).minWidth),
-            min(400, appWidgetManager.getAppWidgetInfo(appWidgetId).minHeight)
+            Rect(
+                0, 0,
+                min(400, appWidgetManager.getAppWidgetInfo(appWidgetId).minWidth),
+                min(400, appWidgetManager.getAppWidgetInfo(appWidgetId).minHeight)
             ),
             display.width,
             display.height

@@ -10,6 +10,7 @@ import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.view.WindowManager
 import de.jrpie.android.launcher.preferences.LauncherPreferences
+import de.jrpie.android.launcher.preferences.theme.Background
 
 /**
  * An interface implemented by every [Activity], Fragment etc. in Launcher.
@@ -65,8 +66,14 @@ interface UIObject {
             theme,
             LauncherPreferences.theme().textShadow()
         )
-        LauncherPreferences.theme().background().applyToTheme(theme)
-        LauncherPreferences.theme().font().applyToTheme(theme)
+
+        if (isHomeScreen()) {
+            Background.TRANSPARENT.applyToTheme(theme)
+            LauncherPreferences.clock().font().applyToTheme(theme)
+        } else {
+            LauncherPreferences.theme().background().applyToTheme(theme)
+            LauncherPreferences.theme().font().applyToTheme(theme)
+        }
 
         return theme
     }

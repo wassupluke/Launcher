@@ -21,7 +21,5 @@ fun migratePreferencesFromVersion4(context: Context) {
             )
         )
     )
-
-
     LauncherPreferences.internal().versionCode(100)
 }
