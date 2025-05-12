@@ -26,10 +26,16 @@ class WidgetPanelsRecyclerAdapter(
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var labelView: TextView = itemView.findViewById(R.id.list_widget_panels_label)
+        var infoView: TextView = itemView.findViewById(R.id.list_widget_panels_info)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
         viewHolder.labelView.text = widgetPanels[i].label
+        val numWidgets = widgetPanels[i].getWidgets().size
+        viewHolder.infoView.text = context.resources.getQuantityString(
+            R.plurals.widget_panel_number_of_widgets,
+            numWidgets, numWidgets
+        )
 
         viewHolder.itemView.setOnClickListener {
             onSelectWidgetPanel(widgetPanels[i])

@@ -32,6 +32,12 @@ class WidgetPanel(val id: Int, var label: String) {
             .filter { it.panelId == this.id }.forEach { it.delete(context) }
     }
 
+    fun getWidgets(): List<Widget> {
+        return LauncherPreferences.widgets().widgets().filter {
+            it.panelId == this.id
+        }
+    }
+
 
     companion object {
         val HOME = WidgetPanel(0, "home")
