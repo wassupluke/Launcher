@@ -97,9 +97,9 @@
     <string name="settings_display_screen_timeout_disabled">Bildschirm nicht ausschalten</string>
     <string name="settings_display_rotate_screen">Bildschirm drehen</string>
     <string name="settings_launcher_section_functionality">Funktionalität</string>
-    <string name="settings_enabled_gestures_double_swipe">Doppelte Wischaktionen</string>
+    <string name="settings_enabled_gestures_double_swipe">Doppelte Wischgesten</string>
     <string name="settings_enabled_gestures_double_swipe_summary">Mit zwei Fingern wischen</string>
-    <string name="settings_enabled_gestures_edge_swipe">Kantenaktionen</string>
+    <string name="settings_enabled_gestures_edge_swipe">Kantengesten</string>
     <string name="settings_enabled_gestures_edge_swipe_edge_width">Kantenbreite</string>
     <string name="settings_functionality_auto_launch">Suchergebnis starten</string>
     <string name="settings_functionality_search_web_summary">Beim Durchsuchen der Apps Enter drücken, um stattdessen im Internet zu suchen.</string>
