@@ -310,7 +310,7 @@
         <item quantity="two">يحتوي على %d أدوات.</item>
         <item quantity="few">يحتوي على %d أدوات.</item>
         <item quantity="many">يحتوي على %d أداة.</item>
-        <item quantity="other"/>
+        <item quantity="other"></item>
     </plurals>
     <string name="settings_functionality_auto_close_keyboard">إغلاق لوحة المفاتيح عند التمرير</string>
 </resources>
