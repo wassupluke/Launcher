@@ -2,11 +2,13 @@ package de.jrpie.android.launcher.ui.widgets.manage
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
+import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.core.graphics.toRectF
 import de.jrpie.android.launcher.R
@@ -20,8 +22,9 @@ private const val HANDLE_EDGE_SIZE = (1.2 * HANDLE_SIZE).toInt()
 /**
  * An overlay to show configuration options for a widget in [WidgetManagerView]
  */
-class WidgetOverlayView : View {
+class WidgetOverlayView : ViewGroup {
 
+    private val popupAnchor = View(context)
 
     val paint = Paint()
     val handlePaint = Paint()
@@ -29,6 +32,8 @@ class WidgetOverlayView : View {
     var mode: WidgetManagerView.EditMode? = null
     class Handle(val mode: WidgetManagerView.EditMode, val position: Rect)
     init {
+        addView(popupAnchor)
+        setWillNotDraw(false)
         handlePaint.style = Paint.Style.STROKE
         handlePaint.setARGB(255, 255, 255, 255)
 
@@ -84,12 +89,13 @@ class WidgetOverlayView : View {
         //preview?.bounds = bounds
         //preview?.draw(canvas)
 
-
+    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
+        popupAnchor.layout(0,0,0,0)
     }
 
     fun showPopupMenu() {
         val widget = Widget.byId(context, widgetId)?: return
-        val menu = PopupMenu(context, this)
+        val menu = PopupMenu(context, popupAnchor)
         menu.menu.let {
             it.add(
                 context.getString(R.string.widget_menu_remove)
