@@ -27,6 +27,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.widgets.manage.ManageWidgetsActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="false"
             android:theme="@style/launcherHomeTheme" />
         <activity

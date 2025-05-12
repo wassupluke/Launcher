@@ -129,15 +129,7 @@ class HomeActivity : UIObject, Activity() {
     }
 
     override fun getTheme(): Resources.Theme {
-        val mTheme = modifyTheme(super.getTheme())
-        mTheme.applyStyle(R.style.backgroundWallpaper, true)
-        LauncherPreferences.clock().font().applyToTheme(mTheme)
-        LauncherPreferences.theme().colorTheme().applyToTheme(
-            mTheme,
-            LauncherPreferences.theme().textShadow()
-        )
-
-        return mTheme
+        return modifyTheme(super.getTheme())
     }
 
     override fun onResume() {
