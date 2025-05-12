@@ -18,13 +18,16 @@ import de.jrpie.android.launcher.widgets.updateWidgetPanel
 
 class ManageWidgetPanelsActivity : AppCompatActivity(), UIObject {
 
+    @SuppressLint("NotifyDataSetChanged")
     private val sharedPreferencesListener =
         SharedPreferences.OnSharedPreferenceChangeListener { _, prefKey ->
-            if (prefKey == LauncherPreferences.widgets().keys().customPanels()) {
+            if (
+                prefKey == LauncherPreferences.widgets().keys().customPanels()
+                || prefKey == LauncherPreferences.widgets().keys().widgets()
+            ) {
                 viewAdapter.widgetPanels =
                     (LauncherPreferences.widgets().customPanels() ?: setOf()).toTypedArray()
 
-                @SuppressLint("NotifyDataSetChanged")
                 viewAdapter.notifyDataSetChanged()
             }
         }
@@ -76,7 +79,6 @@ class ManageWidgetPanelsActivity : AppCompatActivity(), UIObject {
                         )
                     )
             }
-            true
         }
     }
 

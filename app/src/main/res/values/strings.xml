@@ -406,8 +406,8 @@
 
     <string name="widget_panel_default_name">Widget Panel #%1$d</string>
     <plurals name="widget_panel_number_of_widgets">
-        <item quantity="one">Contains %d widget.</item>
-        <item quantity="other">Contains %d widgets.</item>
+        <item quantity="one">Contains %1$d widget.</item>
+        <item quantity="other">Contains %1$d widgets.</item>
     </plurals>
 
 

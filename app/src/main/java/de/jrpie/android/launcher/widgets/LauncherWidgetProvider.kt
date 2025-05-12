@@ -37,13 +37,14 @@ class LauncherAppWidgetProvider(val info: AppWidgetProviderInfo) : LauncherWidge
     }
 
 }
-class LauncherClockWidgetProvider : LauncherWidgetProvider() {
 
-    override fun loadLabel(context: Context): CharSequence? {
+data object LauncherClockWidgetProvider : LauncherWidgetProvider() {
+
+    override fun loadLabel(context: Context): CharSequence {
         return context.getString(R.string.widget_clock_label)
     }
 
-    override fun loadDescription(context: Context): CharSequence? {
+    override fun loadDescription(context: Context): CharSequence {
         return context.getString(R.string.widget_clock_description)
     }
 
@@ -55,4 +56,3 @@ class LauncherClockWidgetProvider : LauncherWidgetProvider() {
         return AppCompatResources.getDrawable(context, R.drawable.baseline_clock_24)
     }
 }
-
