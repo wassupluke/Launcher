@@ -15,6 +15,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -23,6 +24,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
@@ -74,7 +76,13 @@ class SettingsFragmentMeta : Fragment(), UIObject {
     }
 }
 
-// Here we define what the settings meta screen looks like
+// Data class to represent a settings action
+private data class SettingsAction(
+    val textResId: Int,
+    val onClick: (Context) -> Unit
+)
+
+// Composable for the settings meta screen
 @Composable
 fun SettingsMetaScreen(
     context: Context,
@@ -82,101 +90,12 @@ fun SettingsMetaScreen(
 ) {
     val openAlertDialog = remember { mutableStateOf(false) }
 
-    // Here we tell the screen to lay out the settings buttons in a column.
-    // This could also be a row, but that's hella ugly in this use case.
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
-            .verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        // View Tutorial
-        SettingsButton(
-            text = stringResource(R.string.settings_meta_show_tutorial),
-            onClick = { openTutorial(context) }
-        )
-
-        // Reset Settings
-        SettingsButton(
-            text = stringResource(R.string.settings_meta_reset),
-            onClick = { openAlertDialog.value = true }
-        )
-
-        SettingsButtonSpacer()
-
-        // View Code
-        SettingsButton(
-            text = stringResource(R.string.settings_meta_view_code),
-            onClick = { openInBrowser(context.getString(R.string.settings_meta_link_github), context) }
-        )
-
-        // Report a Bug (Placeholder for dialog, simplified for now)
-        SettingsButton(
-            text = stringResource(R.string.settings_meta_report_bug),
-            onClick = {
-                // Simplified: Directly open bug report link
-                // TODO: Implement Compose dialog for bug reporting if needed
-                openInBrowser(context.getString(R.string.settings_meta_report_bug_link), context)
-            }
-        )
-
-        SettingsButtonSpacer()
-
-        // Join Chat
-        SettingsButton(
-            text = stringResource(R.string.settings_meta_join_chat),
-            onClick = { openInBrowser(context.getString(R.string.settings_meta_chat_url), context) }
-        )
-
-        // Contact Fork Developer
-        SettingsButton(
-            text = stringResource(R.string.settings_meta_fork_contact),
-            onClick = { openInBrowser(context.getString(R.string.settings_meta_fork_contact_url), context) }
-        )
-
-        // Donate
-        SettingsButton(
-            text = stringResource(R.string.settings_meta_donate),
-            onClick = { openInBrowser(context.getString(R.string.settings_meta_donate_url), context) }
-        )
-
-        SettingsButtonSpacer()
-
-        // Privacy Policy
-        SettingsButton(
-            text = stringResource(R.string.settings_meta_privacy),
-            onClick = { openInBrowser(context.getString(R.string.settings_meta_privacy_url), context) }
-        )
-
-        // Legal Info
-        SettingsButton(
-            text = stringResource(R.string.settings_meta_licenses),
-            onClick = {
-                context.startActivity(Intent(context, LegalInfoActivity::class.java))
-            }
-        )
-
-        // Version
-        Text(
-            text = BuildConfig.VERSION_NAME,
-            // TODO: Implement matching font to Launcher Appearance font
-            textAlign = TextAlign.Right,
-            color = colorResource(R.color.finnmglasTheme_text_color),
-            modifier = Modifier
-                .fillMaxWidth(1f)
-                .padding(
-                    top = 16.dp,
-                    bottom = 8.dp,
-                    end = 8.dp
-                )
-                .clickable {
-                    val deviceInfo = getDeviceInfo()
-                    copyToClipboard(context, deviceInfo)
-                }
-        )
-
-        // Reset Settings Dialog
+        SettingsButtonList(context, openAlertDialog)
         if (openAlertDialog.value) {
             AlertDialogResetSettings(
                 onDismissRequest = { openAlertDialog.value = false },
@@ -193,7 +112,73 @@ fun SettingsMetaScreen(
     }
 }
 
-// Here we define what a settings button looks like
+// Composable for the scrollable button list and version number
+@Composable
+private fun SettingsButtonList(
+    context: Context,
+    openAlertDialog: MutableState<Boolean>
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        val actions = listOf(
+            SettingsAction(R.string.settings_meta_show_tutorial) { openTutorial(it) },
+            SettingsAction(R.string.settings_meta_reset) { openAlertDialog.value = true },
+            SettingsAction(R.string.settings_meta_view_code) {
+                openInBrowser(it.getString(R.string.settings_meta_link_github), it)
+            },
+            SettingsAction(R.string.settings_meta_report_bug) {
+                openInBrowser(it.getString(R.string.settings_meta_report_bug_link), it)
+            },
+            SettingsAction(R.string.settings_meta_join_chat) {
+                openInBrowser(it.getString(R.string.settings_meta_chat_url), it)
+            },
+            SettingsAction(R.string.settings_meta_fork_contact) {
+                openInBrowser(it.getString(R.string.settings_meta_fork_contact_url), it)
+            },
+            SettingsAction(R.string.settings_meta_donate) {
+                openInBrowser(it.getString(R.string.settings_meta_donate_url), it)
+            },
+            SettingsAction(R.string.settings_meta_privacy) {
+                openInBrowser(it.getString(R.string.settings_meta_privacy_url), it)
+            },
+            SettingsAction(R.string.settings_meta_licenses) {
+                it.startActivity(Intent(it, LegalInfoActivity::class.java))
+            }
+        )
+
+        actions.forEachIndexed { index, action ->
+            SettingsButton(
+                text = stringResource(action.textResId),
+                onClick = { action.onClick(context) }
+            )
+            if (index == 1 || index == 3 || index == 6) {
+                SettingsButtonSpacer()
+            }
+        }
+        // Version number at the bottom of buttons
+        Text(
+            text = BuildConfig.VERSION_NAME,
+            style = MaterialTheme.typography.bodyMedium,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.End,
+            color = colorResource(R.color.finnmglasTheme_text_color),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp, end = 8.dp)
+                .clickable {
+                    val deviceInfo = getDeviceInfo()
+                    copyToClipboard(context, deviceInfo)
+                }
+        )
+        Spacer(modifier = Modifier.height(48.dp))
+    }
+}
+
+// Composable for a settings button
 @Composable
 fun SettingsButton(
     text: String,
@@ -204,8 +189,6 @@ fun SettingsButton(
         modifier = Modifier.fillMaxWidth(),
         contentPadding = PaddingValues(8.dp),
         shape = RoundedCornerShape(4.dp),
-        // TODO: colors can be changed to match the dynamic system theme
-        // https://developer.android.com/codelabs/jetpack-compose-theming#0
         colors = ButtonDefaults.buttonColors(
             containerColor = colorResource(R.color.finnmglasTheme_accent_color),
             contentColor = colorResource(R.color.finnmglasTheme_text_color)
@@ -220,13 +203,13 @@ fun SettingsButton(
     }
 }
 
-// Here we define some space to put between the buttons
+// Composable for spacing between buttons
 @Composable
 fun SettingsButtonSpacer() {
-    Spacer(modifier = Modifier.height(48.dp))
+    Spacer(modifier = Modifier.height(16.dp))
 }
 
-// Here we define what an alert dialog looks like
+// Composable for the reset settings alert dialog
 @Composable
 fun AlertDialogResetSettings(
     onDismissRequest: () -> Unit,
@@ -251,17 +234,12 @@ fun AlertDialogResetSettings(
         },
         onDismissRequest = onDismissRequest,
         confirmButton = {
-            TextButton(
-                onClick = onConfirmation
-                )
-            {
+            TextButton(onClick = onConfirmation) {
                 Text(stringResource(android.R.string.ok))
             }
         },
         dismissButton = {
-            TextButton(
-                onClick = onDismissRequest
-            ) {
+            TextButton(onClick = onDismissRequest) {
                 Text(stringResource(android.R.string.cancel))
             }
         },
