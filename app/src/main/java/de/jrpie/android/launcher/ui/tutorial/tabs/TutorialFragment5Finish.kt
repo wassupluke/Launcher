@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import de.jrpie.android.launcher.BuildConfig.VERSION_CODE
 import de.jrpie.android.launcher.databinding.Tutorial5FinishBinding
 import de.jrpie.android.launcher.preferences.LauncherPreferences
+import de.jrpie.android.launcher.requestNotificationPermission
 import de.jrpie.android.launcher.setDefaultHomeScreen
 import de.jrpie.android.launcher.ui.UIObject
 
@@ -31,7 +32,9 @@ class TutorialFragment5Finish : Fragment(), UIObject {
     override fun onStart() {
         super<Fragment>.onStart()
         super<UIObject>.onStart()
+        requestNotificationPermission(requireActivity())
     }
+
 
     override fun setOnClicks() {
         super.setOnClicks()
@@ -44,6 +47,7 @@ class TutorialFragment5Finish : Fragment(), UIObject {
             LauncherPreferences.internal().startedTime(System.currentTimeMillis() / 1000L)
         }
         context?.let { setDefaultHomeScreen(it, checkDefault = true) }
+
         activity?.finish()
     }
 }

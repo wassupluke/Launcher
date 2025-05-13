@@ -14,6 +14,7 @@ import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersio
 import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersion3
 import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersion4
 import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersionUnknown
+import de.jrpie.android.launcher.sendCrashNotification
 import de.jrpie.android.launcher.ui.HomeActivity
 import de.jrpie.android.launcher.widgets.ClockWidget
 import de.jrpie.android.launcher.widgets.DebugInfoWidget
@@ -76,6 +77,7 @@ fun migratePreferencesToNewVersion(context: Context) {
         }
     } catch (e: Exception) {
         Log.e(TAG, "Unable to restore preferences:\n${e.stackTrace}")
+        sendCrashNotification(context, e)
         resetPreferences(context)
     }
 }

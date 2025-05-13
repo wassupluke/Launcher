@@ -25,6 +25,7 @@ import de.jrpie.android.launcher.preferences.resetPreferences
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlin.system.exitProcess
 
 
 const val APP_WIDGET_HOST_ID = 42;
@@ -106,6 +107,11 @@ class Application : android.app.Application() {
         // TODO  Error: Invalid resource ID 0x00000000.
         // DynamicColors.applyToActivitiesIfAvailable(this)
 
+        Thread.setDefaultUncaughtExceptionHandler { _, throwable ->
+            sendCrashNotification(this@Application, throwable)
+            exitProcess(1)
+        }
+
 
         if (Build.VERSION.SDK_INT >= VERSION_CODES.M) {
             torchManager = TorchManager(this)
@@ -157,6 +163,8 @@ class Application : android.app.Application() {
             removeUnusedShortcuts(this)
         }
         loadApps()
+
+        createNotificationChannels(this)
     }
 
     fun getCustomAppNames(): HashMap<AbstractAppInfo, String> {
