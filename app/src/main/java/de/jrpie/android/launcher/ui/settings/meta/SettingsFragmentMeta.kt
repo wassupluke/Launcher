@@ -22,10 +22,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import androidx.fragment.app.Fragment
@@ -112,6 +114,15 @@ fun SettingsMetaScreen(
     }
 }
 
+@Preview
+@Composable
+fun SettingsMetaScreenPreview() {
+    SettingsMetaScreen(
+        context = LocalContext.current,
+        onResetConfirmed = {}
+    )
+}
+
 // Composable for the scrollable button list and version number
 @Composable
 private fun SettingsButtonList(
@@ -178,6 +189,14 @@ private fun SettingsButtonList(
     }
 }
 
+@Preview
+@Composable
+fun SettingsButtonListPreview() {
+    SettingsButtonList(
+        context = LocalContext.current,
+        openAlertDialog = remember { mutableStateOf(false) })
+}
+
 // Composable for a settings button
 @Composable
 fun SettingsButton(
@@ -201,6 +220,12 @@ fun SettingsButton(
             color = colorResource(R.color.finnmglasTheme_text_color)
         )
     }
+}
+
+@Preview
+@Composable
+fun SettingsButtonPreview() {
+    SettingsButton(text = "Here's a button preview", onClick = {})
 }
 
 // Composable for spacing between buttons
@@ -247,5 +272,17 @@ fun AlertDialogResetSettings(
             dismissOnBackPress = true,
             dismissOnClickOutside = true
         )
+    )
+}
+
+@Preview
+@Composable
+fun AlertDialogResetSettingsPreview() {
+    AlertDialogResetSettings(
+        onDismissRequest = {},
+        onConfirmation = {},
+        dialogTitle = "Reset settings",
+        dialogText = "Are you sure you want to reset all settings?",
+        icon = Icons.Default.Warning
     )
 }

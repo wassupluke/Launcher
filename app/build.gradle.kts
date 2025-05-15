@@ -102,6 +102,7 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.jonahbauer.android.preference.annotations)
     implementation(libs.androidx.ui.tooling.preview.android)
+    debugImplementation(libs.androidx.ui.tooling)
     kapt(libs.jonahbauer.android.preference.annotations)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
