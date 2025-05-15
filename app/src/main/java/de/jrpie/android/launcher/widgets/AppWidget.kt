@@ -41,7 +41,7 @@ class AppWidget(
                 id,
                 position,
                 panelId,
-                false,
+                panelId != WidgetPanel.HOME.id,
                 widgetProviderInfo.provider.packageName,
                 widgetProviderInfo.provider.className,
                 widgetProviderInfo.profile.hashCode()
