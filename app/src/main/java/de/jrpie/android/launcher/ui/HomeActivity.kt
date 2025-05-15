@@ -93,15 +93,6 @@ class HomeActivity : UIObject, Activity() {
         LauncherPreferences.getSharedPreferences()
             .registerOnSharedPreferenceChangeListener(sharedPreferencesListener)
 
-        (application as Application).appWidgetHost.startListening()
-
-    }
-
-
-
-    override fun onStop() {
-        (application as Application).appWidgetHost.stopListening()
-        super.onStop()
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -111,7 +102,6 @@ class HomeActivity : UIObject, Activity() {
             hideNavigationBar()
         }
     }
-
 
     private fun updateSettingsFallbackButtonVisibility() {
         // If µLauncher settings can not be reached from any action bound to an enabled gesture,
@@ -129,6 +119,11 @@ class HomeActivity : UIObject, Activity() {
 
     override fun getTheme(): Resources.Theme {
         return modifyTheme(super.getTheme())
+    }
+
+    override fun onPause() {
+        (application as Application).appWidgetHost.stopListening()
+        super.onPause()
     }
 
     override fun onResume() {
@@ -161,6 +156,9 @@ class HomeActivity : UIObject, Activity() {
         binding.homeWidgetContainer.updateWidgets(this@HomeActivity,
             LauncherPreferences.widgets().widgets()
         )
+
+
+        (application as Application).appWidgetHost.startListening()
     }
 
     override fun onDestroy() {

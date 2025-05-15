@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.res.Resources
 import android.os.Bundle
 import androidx.core.view.ViewCompat
+import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.databinding.ActivityWidgetPanelBinding
 import de.jrpie.android.launcher.preferences.LauncherPreferences
@@ -57,6 +58,17 @@ class WidgetPanelActivity : Activity(), UIObject {
     override fun onStart() {
         super<Activity>.onStart()
         super<UIObject>.onStart()
+
+    }
+
+    override fun onPause() {
+        (application as Application).appWidgetHost.stopListening()
+        super.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (application as Application).appWidgetHost.startListening()
     }
 
     override fun isHomeScreen(): Boolean {

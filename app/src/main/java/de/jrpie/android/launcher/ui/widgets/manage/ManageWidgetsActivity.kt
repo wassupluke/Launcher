@@ -92,13 +92,19 @@ class ManageWidgetsActivity : UIObject, Activity() {
 
     }
 
+    override fun onPause() {
+        (application as Application).appWidgetHost.stopListening()
+        super.onPause()
+    }
+
     override fun onResume() {
         super.onResume()
+        (application as Application).appWidgetHost.startListening()
+
         binding.manageWidgetsContainer.updateWidgets(
             this,
             LauncherPreferences.widgets().widgets()
         )
-
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {

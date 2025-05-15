@@ -78,6 +78,10 @@ class AppWidget(
 
     override fun createView(activity: Activity): AppWidgetHostView? {
         val providerInfo = activity.getAppWidgetManager().getAppWidgetInfo(id) ?: return null
+        /* TODO: if providerInfo is null, the corresponding app was probably uninstalled.
+            There does not seem to be a way to recover the widget when the app is installed again,
+            hence it should be deleted. */
+
         val view = activity.getAppWidgetHost()
                 .createView(activity, this.id, providerInfo)
 

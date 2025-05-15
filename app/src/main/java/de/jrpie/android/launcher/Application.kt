@@ -120,8 +120,6 @@ class Application : android.app.Application() {
         appWidgetHost = AppWidgetHost(this.applicationContext, APP_WIDGET_HOST_ID)
         appWidgetManager = AppWidgetManager.getInstance(this.applicationContext)
 
-        appWidgetHost.startListening()
-
 
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
         LauncherPreferences.init(preferences, this.resources)
@@ -177,11 +175,5 @@ class Application : android.app.Application() {
         CoroutineScope(Dispatchers.Default).launch {
             apps.postValue(getApps(packageManager, applicationContext))
         }
-    }
-
-    override fun onTerminate() {
-        appWidgetHost.stopListening()
-        super.onTerminate()
-
     }
 }
