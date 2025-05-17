@@ -136,10 +136,6 @@ class ManageWidgetsActivity : UIObject, Activity() {
         startActivityForResult(
             Intent(this, SelectWidgetActivity::class.java).also {
                 it.putExtra(
-                    AppWidgetManager.EXTRA_APPWIDGET_ID,
-                    appWidgetHost.allocateAppWidgetId()
-                )
-                it.putExtra(
                     EXTRA_PANEL_ID,
                     panelId
                 )

@@ -27,7 +27,9 @@ sealed class Widget {
     abstract fun configure(activity: Activity, requestCode: Int)
 
     fun delete(context: Context) {
-        context.getAppWidgetHost().deleteAppWidgetId(id)
+        if (id >= 0) {
+            context.getAppWidgetHost().deleteAppWidgetId(id)
+        }
 
         LauncherPreferences.widgets().widgets(
             LauncherPreferences.widgets().widgets()?.also {

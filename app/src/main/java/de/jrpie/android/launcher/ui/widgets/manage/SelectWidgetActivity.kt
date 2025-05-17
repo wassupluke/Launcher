@@ -14,6 +14,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.databinding.ActivitySelectWidgetBinding
 import de.jrpie.android.launcher.ui.UIObject
@@ -24,7 +25,7 @@ import de.jrpie.android.launcher.widgets.LauncherWidgetProvider
 import de.jrpie.android.launcher.widgets.WidgetPanel
 import de.jrpie.android.launcher.widgets.WidgetPosition
 import de.jrpie.android.launcher.widgets.bindAppWidgetOrRequestPermission
-import de.jrpie.android.launcher.widgets.getAppWidgetHost
+import de.jrpie.android.launcher.widgets.generateInternalId
 import de.jrpie.android.launcher.widgets.getAppWidgetProviders
 import de.jrpie.android.launcher.widgets.updateWidget
 
@@ -38,12 +39,13 @@ private const val REQUEST_WIDGET_PERMISSION = 29
  */
 class SelectWidgetActivity : AppCompatActivity(), UIObject {
     lateinit var binding: ActivitySelectWidgetBinding
-    var widgetId: Int = -1
     var widgetPanelId: Int = WidgetPanel.HOME.id
 
     private fun tryBindWidget(info: LauncherWidgetProvider) {
         when (info) {
             is LauncherAppWidgetProvider -> {
+                val widgetId =
+                    (applicationContext as Application).appWidgetHost.allocateAppWidgetId()
                 if (bindAppWidgetOrRequestPermission(
                         this,
                         info.info,
@@ -62,7 +64,7 @@ class SelectWidgetActivity : AppCompatActivity(), UIObject {
                 }
             }
             is LauncherClockWidgetProvider -> {
-                updateWidget(ClockWidget(widgetId, WidgetPosition(0, 4, 12, 3), widgetPanelId))
+                updateWidget(ClockWidget(generateInternalId(), WidgetPosition(0, 4, 12, 3), widgetPanelId))
                 finish()
             }
         }
@@ -81,11 +83,7 @@ class SelectWidgetActivity : AppCompatActivity(), UIObject {
         setContentView(binding.root)
 
 
-        widgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, -1)
         widgetPanelId = intent.getIntExtra(EXTRA_PANEL_ID, WidgetPanel.HOME.id)
-        if (widgetId == -1) {
-            widgetId = getAppWidgetHost().allocateAppWidgetId()
-        }
 
         val viewManager = LinearLayoutManager(this)
         val viewAdapter = SelectWidgetRecyclerAdapter()

@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 @SerialName("widget:clock")
 class ClockWidget(
-    override val id: Int,
+    override var id: Int,
     override var position: WidgetPosition,
     override val panelId: Int,
     override var allowInteraction: Boolean = true

@@ -13,6 +13,7 @@ import android.os.UserManager
 import android.util.Log
 import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.preferences.LauncherPreferences
+import kotlin.math.min
 
 fun deleteAllWidgets(context: Context) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -29,12 +30,9 @@ fun deleteAllWidgets(context: Context) {
  *
  * @return true iff the app widget was bound successfully.
  */
-fun bindAppWidgetOrRequestPermission(activity: Activity, providerInfo: AppWidgetProviderInfo, id: Int, requestCode: Int? = null): Boolean {
-    val appWidgetId = if(id == -1) {
-        activity.getAppWidgetHost().allocateAppWidgetId()
-    } else { id }
+fun bindAppWidgetOrRequestPermission(activity: Activity, providerInfo: AppWidgetProviderInfo, appWidgetId: Int, requestCode: Int? = null): Boolean {
 
-    Log.i("Launcher", "Binding new widget ${appWidgetId}")
+    Log.i("Launcher", "Binding new widget $appWidgetId")
     if (!activity.getAppWidgetManager().bindAppWidgetIdIfAllowed(
             appWidgetId,
             providerInfo.provider
@@ -77,6 +75,13 @@ fun updateWidget(widget: Widget) {
             .minus(widget)
             .plus(widget)
     )
+}
+
+
+// TODO: this needs to be improved
+fun generateInternalId(): Int {
+    val minId = min(-5,(LauncherPreferences.widgets().widgets() ?: setOf()).minOfOrNull { it.id } ?: 0)
+    return minId -1
 }
 
 fun updateWidgetPanel(widgetPanel: WidgetPanel) {

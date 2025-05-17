@@ -10,6 +10,7 @@ import de.jrpie.android.launcher.apps.AbstractAppInfo.Companion.INVALID_USER
 import de.jrpie.android.launcher.apps.AppInfo
 import de.jrpie.android.launcher.apps.DetailedAppInfo
 import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersion1
+import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersion100
 import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersion2
 import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersion3
 import de.jrpie.android.launcher.preferences.legacy.migratePreferencesFromVersion4
@@ -21,12 +22,13 @@ import de.jrpie.android.launcher.widgets.DebugInfoWidget
 import de.jrpie.android.launcher.widgets.WidgetPanel
 import de.jrpie.android.launcher.widgets.WidgetPosition
 import de.jrpie.android.launcher.widgets.deleteAllWidgets
+import de.jrpie.android.launcher.widgets.generateInternalId
 
 /* Current version of the structure of preferences.
  * Increase when breaking changes are introduced and write an appropriate case in
  * `migratePreferencesToNewVersion`
  */
-const val PREFERENCE_VERSION = 100
+const val PREFERENCE_VERSION = 101
 const val UNKNOWN_PREFERENCE_VERSION = -1
 private const val TAG = "Launcher - Preferences"
 
@@ -65,6 +67,10 @@ fun migratePreferencesToNewVersion(context: Context) {
                 migratePreferencesFromVersion4(context)
                 Log.i(TAG, "migration of preferences  complete (4 -> ${PREFERENCE_VERSION}).")
             }
+            100 -> {
+                migratePreferencesFromVersion100(context)
+                Log.i(TAG, "migration of preferences  complete (100 -> ${PREFERENCE_VERSION}).")
+            }
 
             else -> {
                 Log.w(
@@ -91,7 +97,7 @@ fun resetPreferences(context: Context) {
     LauncherPreferences.widgets().widgets(
         setOf(
             ClockWidget(
-                (context.applicationContext as Application).appWidgetHost.allocateAppWidgetId(),
+                generateInternalId(),
                 WidgetPosition(1, 3, 10, 4),
                 WidgetPanel.HOME.id
             )
@@ -103,7 +109,7 @@ fun resetPreferences(context: Context) {
             LauncherPreferences.widgets().widgets().also {
                 it.add(
                     DebugInfoWidget(
-                        (context.applicationContext as Application).appWidgetHost.allocateAppWidgetId(),
+                        generateInternalId(),
                         WidgetPosition(1, 1, 10, 4),
                         WidgetPanel.HOME.id
                     )
