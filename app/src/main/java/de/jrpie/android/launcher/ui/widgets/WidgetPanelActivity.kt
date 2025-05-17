@@ -62,7 +62,12 @@ class WidgetPanelActivity : Activity(), UIObject {
     }
 
     override fun onPause() {
-        (application as Application).appWidgetHost.stopListening()
+        try {
+            (application as Application).appWidgetHost.stopListening()
+        } catch (e: Exception) {
+            // Throws a NullPointerException on Android 12 an earlier, see #172
+            e.printStackTrace()
+        }
         super.onPause()
     }
 
