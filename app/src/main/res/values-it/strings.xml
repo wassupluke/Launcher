@@ -302,9 +302,9 @@
     <string name="dialog_ok">Ok</string>
     <string name="widget_panels_title">Pannelli widget</string>
     <plurals name="widget_panel_number_of_widgets">
-        <item quantity="one">Contiene %d widget.</item>
-        <item quantity="many">Contiene %d widget.</item>
-        <item quantity="other">Contiene %d widget.</item>
+        <item quantity="one">Contiene %1$d widget.</item>
+        <item quantity="many">Contiene %1$d widget.</item>
+        <item quantity="other">Contiene %1$d widget.</item>
     </plurals>
     <string name="dialog_create_widget_panel_title">Crea nuovo pannello widget</string>
     <string name="list_other_open_widget_panel">Apri pannello widget</string>
