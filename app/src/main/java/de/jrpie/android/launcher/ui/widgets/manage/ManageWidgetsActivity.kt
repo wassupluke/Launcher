@@ -147,13 +147,17 @@ class ManageWidgetsActivity : UIObject, Activity() {
     private fun createWidget(data: Intent) {
         Log.i("Launcher", "creating widget")
         val appWidgetManager = (application as Application).appWidgetManager
+        val appWidgetHost = (application as Application).appWidgetHost
         val appWidgetId = data.extras?.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID) ?: return
-
-        val provider = appWidgetManager.getAppWidgetInfo(appWidgetId)
 
         val display = windowManager.defaultDisplay
 
         val widgetInfo = appWidgetManager.getAppWidgetInfo(appWidgetId)
+        if (widgetInfo == null) {
+            Log.w("Launcher", "can't access widget")
+            appWidgetHost.deleteAppWidgetId(appWidgetId)
+            return
+        }
 
         val position = WidgetPosition.findFreeSpace(
             WidgetPanel.byId(panelId),
@@ -161,7 +165,7 @@ class ManageWidgetsActivity : UIObject, Activity() {
             max(3, (GRID_SIZE * (widgetInfo.minHeight) / display.height.toFloat()).roundToInt())
         )
 
-        val widget = AppWidget(appWidgetId, position, panelId, provider)
+        val widget = AppWidget(appWidgetId, position, panelId, widgetInfo)
         LauncherPreferences.widgets().widgets(
             (LauncherPreferences.widgets().widgets() ?: HashSet()).also {
                 it.add(widget)
