@@ -42,6 +42,13 @@
             android:textAllCaps="false" />
 
         <Button
+            android:id="@+id/settings_meta_button_view_docs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_meta_view_docs"
+            android:textAllCaps="false" />
+
+        <Button
             android:id="@+id/settings_meta_button_report_bug"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

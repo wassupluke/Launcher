@@ -443,4 +443,5 @@
     <string name="report_crash_title">μLauncher crashed</string>
     <string name="send_email">Send Email</string>
     <string name="notification_channel_crash">Crashes and Debug Information</string>
+    <string name="settings_meta_view_docs">Documentation</string>
 </resources>

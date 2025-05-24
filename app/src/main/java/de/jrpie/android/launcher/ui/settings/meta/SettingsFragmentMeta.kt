@@ -79,6 +79,9 @@ class SettingsFragmentMeta : Fragment(), UIObject {
         // view code
         bindURL(binding.settingsMetaButtonViewCode, R.string.settings_meta_link_github)
 
+        // view documentation
+        bindURL(binding.settingsMetaButtonViewDocs, R.string.settings_meta_link_docs)
+
         // report a bug
         binding.settingsMetaButtonReportBug.setOnClickListener {
             val deviceInfo = getDeviceInfo()

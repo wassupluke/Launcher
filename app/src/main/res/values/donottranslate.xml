@@ -161,6 +161,7 @@
           -
         -->
         <string name="settings_meta_link_github" translatable="false">https://github.com/jrpie/Launcher</string>
+        <string name="settings_meta_link_docs" translatable="false">https://launcher.jrpie.de/</string>
         <string name="settings_meta_report_bug_link" translatable="false">https://github.com/jrpie/Launcher/issues/new?template=bug_report.yaml</string>
         <string name="settings_meta_report_bug_mail" translatable="false">android-launcher-crash@jrpie.de</string>
         <string name="settings_meta_report_vulnerability_link" translatable="false">https://github.com/jrpie/Launcher/security/policy</string>
