@@ -1,5 +1,6 @@
 +++
   title = 'Widgets'
+  weight = 11
 +++
 
 # Widgets

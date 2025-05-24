@@ -1,3 +1,7 @@
++++
+  weight = 10
++++
+
 # Actions and Gestures
 
 µLauncher's central mechanism for accessing important functionality quickly

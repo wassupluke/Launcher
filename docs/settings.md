@@ -1,3 +1,7 @@
++++
+  weight = 10
++++
+
 # Settings
 
 Tweaks and customizations can be made from within the settings page.
