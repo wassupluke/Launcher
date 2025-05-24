@@ -49,18 +49,19 @@ This is a comparison of open-source home screens for Android.
 **Main mode of interaction:** `app grid`
 
 #### Features:
-:white_check_mark: Search: `apps`
-:x: Search history
-:x: Customizable gestures
-:white_check_mark:Folders
-:x: Tags
-:white_check_mark: Rename apps
-:x: Widgets
-:grey_question: Private space
-:white_check_mark: Work profile
-:white_check_mark: Pinned shortcuts
-:white_check_mark: Icon packs
-:x: Material You
+
+:white_check_mark: Search: `apps`  
+:x: Search history  
+:x: Customizable gestures  
+:white_check_mark:Folders  
+:x: Tags  
+:white_check_mark: Rename apps  
+:x: Widgets  
+:grey_question: Private space  
+:white_check_mark: Work profile  
+:white_check_mark: Pinned shortcuts  
+:white_check_mark: Icon packs  
+:x: Material You  
 
 ---
 
@@ -72,24 +73,25 @@ This is a comparison of open-source home screens for Android.
 **Main mode of interaction:** `app grid`
 
 #### Features:
-:white_check_mark: Search:  `apps`
-:x: Search history
-:x: Customizable gestures
-:white_check_mark: Folders
-:x: Tags
-:white_check_mark: Rename apps
-:white_check_mark: Widgets
-:grey_question: Private space
-:x: Work profile
-:white_check_mark: Pinned shortcuts
-:x: Icon packs
-:white_check_mark: Material You
+
+:white_check_mark: Search:  `apps`  
+:x: Search history  
+:x: Customizable gestures  
+:white_check_mark: Folders  
+:x: Tags  
+:white_check_mark: Rename apps  
+:white_check_mark: Widgets  
+:grey_question: Private space  
+:x: Work profile  
+:white_check_mark: Pinned shortcuts  
+:x: Icon packs  
+:white_check_mark: Material You  
 
 ---
 
 ### Lawnchair
 
-License: `Apache License 2.0`
+**License:** `Apache License 2.0`
 [Website](https://lawnchair.app/) | [Repository](https://github.com/LawnchairLauncher/lawnchair)
     
 Seems to be a regular (grid of apps) launcher.
@@ -98,25 +100,24 @@ Seems to be a regular (grid of apps) launcher.
     
 #### Features:
     
-:white_check_mark: Search: `Apps & Shortcuts` `Web suggestions` `People` `Files` `Android Settings` `Calculator`
-:white_check_mark: Search history
-:white_check_mark: Customizable gestures: `double tap` `swipe up` `swipe down` `home button` `back button`
-:white_check_mark: Folders
-:x: Tags
-:white_check_mark: Rename apps
-:white_check_mark: Widgets
-:grey_question: Private space
-:grey_question: Work profile
-:x: Pinned shortcuts
-:white_check_mark: Icon packs
-:white_check_mark: Material You
+:white_check_mark: Search: `Apps & Shortcuts` `Web suggestions` `People` `Files` `Android Settings` `Calculator`  
+:white_check_mark: Search history  
+:white_check_mark: Customizable gestures: `double tap` `swipe up` `swipe down` `home button` `back button`  
+:white_check_mark: Folders  
+:x: Tags  
+:white_check_mark: Rename apps  
+:white_check_mark: Widgets  
+:grey_question: Private space  
+:grey_question: Work profile  
+:x: Pinned shortcuts  
+:white_check_mark: Icon packs  
+:white_check_mark: Material You  
 
 ---
 
 ### Rootless Pixel Launcher
-:::info
-Abandoned
-:::
+
+> **Abandoned**
 
 **License:** `Apache License 2.0`
 [Repository](https://github.com/amirzaidi/Launcher3)
@@ -125,18 +126,18 @@ Abandoned
 
 #### Features:
 
-:white_check_mark: Search:  `Apps`
-:x: Search history
-:x: Customizable gestures:
-:x: Folders
-:x: Tags
-:x: Rename apps
-:warning: Widgets `buggy/broken`
-:grey_question: Private space
-:white_check_mark: Work profile
-:white_check_mark: Pinned shortcuts
-:white_check_mark: Icon packs
-:x: Material You
+:white_check_mark: Search:  `Apps`  
+:x: Search history  
+:x: Customizable gestures  
+:x: Folders  
+:x: Tags  
+:x: Rename apps  
+:warning: Widgets `buggy/broken`  
+:grey_question: Private space  
+:white_check_mark: Work profile  
+:white_check_mark: Pinned shortcuts  
+:white_check_mark: Icon packs  
+:x: Material You  
 
 ---
 
@@ -144,28 +145,27 @@ Abandoned
 
 ### Aster Launcher
 
-:::info
-Abandoned?
-:::
+> **Abandoned**
 
 **License:** `GPL-3.0`
 [Repository](https://github.com/neophtex/AsterLauncher) | [F-Droid](https://f-droid.org/en/packages/com.series.aster.launcher/)
 
-**Main mode of interaction:** `<Search | Gestures | App grid>`
+**Main mode of interaction:** `search`
 
 #### Features:
-:warning: Search:  `apps` (apps list is buggy/broken) `web`
-:x: Search history
-:x: Customizable gestures
-:x: Folders
-:x: Tags
-:x: Rename apps
-:x: Widgets
-:grey_question: Private space
-:white_check_mark: Work profile
-:white_check_mark: Pinned shortcuts
-:x: Icon packs
-:x: Material You
+
+:warning: Search:  `apps` (apps list is buggy/broken) `web`  
+:x: Search history  
+:x: Customizable gestures  
+:x: Folders  
+:x: Tags  
+:x: Rename apps  
+:x: Widgets  
+:grey_question: Private space  
+:white_check_mark: Work profile  
+:white_check_mark: Pinned shortcuts  
+:x: Icon packs  
+:x: Material You  
 
 ---
 
@@ -178,18 +178,18 @@ Abandoned?
 
 #### Features:
 
-:white_check_mark: Search:  `Apps` `Contacts` `Call history`
-:white_check_mark: Search history
-:white_check_mark: Customizable gestures: `swipe left` `swipe right` `swipe up` `swipe down` `long press` `double tap`
-:x: Folders
-:white_check_mark: Tags
-:white_check_mark: Rename apps
-:white_check_mark: Widgets
-:grey_question: Private space
-:white_check_mark: Work profile
-:white_check_mark: Pinned shortcuts
-:white_check_mark: Icon packs
-:grey_question: Material You
+:white_check_mark: Search:  `Apps` `Contacts` `Call history`  
+:white_check_mark: Search history  
+:white_check_mark: Customizable gestures: `swipe left` `swipe right` `swipe up` `swipe down` `long press` `double tap`  
+:x: Folders  
+:white_check_mark: Tags  
+:white_check_mark: Rename apps  
+:white_check_mark: Widgets  
+:grey_question: Private space  
+:white_check_mark: Work profile  
+:white_check_mark: Pinned shortcuts  
+:white_check_mark: Icon packs  
+:grey_question: Material You  
 
 ---
 
@@ -202,22 +202,24 @@ Even natively supports RSS feeds to homescreen?
 **Main mode of interaction:** `alphabet scroller`
 
 #### Features:
-:white_check_mark: Search:  `swipe up` `swipe down` `swipe left` `swipe right` `tap and hold battery indicator/clock` `tap and hold lower part of screen` `double tap` `tap and hold favorite item`
-:x: Search history
-:x: Customizable gestures
-:x: Folders
-:x: Tags
-:x: Rename apps
-:x: Widgets
-:grey_question: Private space
-:x: Work profile
-:white_check_mark: Pinned shortcuts
-:x: Icon packs
-:x: Material You
+
+:white_check_mark: Search:  `swipe up` `swipe down` `swipe left` `swipe right` `tap and hold battery indicator/clock` `tap and hold lower part of screen` `double tap` `tap and hold favorite item`  
+:x: Search history  
+:x: Customizable gestures  
+:x: Folders  
+:x: Tags  
+:x: Rename apps  
+:x: Widgets  
+:grey_question: Private space  
+:x: Work profile  
+:white_check_mark: Pinned shortcuts  
+:x: Icon packs  
+:x: Material You  
 
 ---
 
 ### OLauncher
+
 **License:** `GPL-3.0`
 [Repository](https://github.com/tanujnotes/Olauncher) | [F-Droid](https://f-droid.org/en/packages/app.olauncher/)
 
@@ -227,20 +229,21 @@ Extremely minimal launcher with lots of forks.
 
 #### Features:
 
-:white_check_mark: Search:  `apps`
-:x: Search history
-:white_check_mark: Customizable gestures: `swipe left` `swipe right` `double tap`
-:x: Folders
-:x: Tags
-:white_check_mark: Rename apps
-:x: Widgets
-:grey_question: Private space
-:white_check_mark: Work profile
-:grey_question: Pinned shortcuts
-:x: Icon packs
-:grey_question: Material You
+:white_check_mark: Search:  `apps`  
+:x: Search history. 
+:white_check_mark: Customizable gestures: `swipe left` `swipe right` `double tap`  
+:x: Folders  
+:x: Tags  
+:white_check_mark: Rename apps  
+:x: Widgets  
+:grey_question: Private space  
+:white_check_mark: Work profile  
+:grey_question: Pinned shortcuts  
+:x: Icon packs  
+:grey_question: Material You  
 
 #### Forks:
+
 * [Olauncher Clutter Free](https://f-droid.org/en/packages/app.olaunchercf/)
 * [mLauncher](https://f-droid.org/en/packages/app.mlauncher/)
 * [CLauncher](https://f-droid.org/en/packages/app.clauncher/) (even more minimalistic, search without feedback)
@@ -256,18 +259,19 @@ Extremely minimal launcher with lots of forks.
 **Main mode of interaction:** `search` `some gestures`
 
 #### Features:
-:white_check_mark: Search:  `apps` `contacts` `web` `maps` `playstore` `youtube`
-:white_check_mark: Search history
-:white_check_mark:Customizable gestures: `tap` `double tap` `swipe up` `swipe left` `swipe right` `swipe down on left` `swipe down on right`
-:x: Folders
-:white_check_mark: Tags
-:white_check_mark: Rename apps
-:white_check_mark: Widgets
-:grey_question: Private space
-:white_check_mark: Work profile
-:white_check_mark: Pinned shortcuts
-:white_check_mark: Icon packs
-:x: Material You
+
+:white_check_mark: Search:  `apps` `contacts` `web` `maps` `playstore` `youtube`  
+:white_check_mark: Search history  
+:white_check_mark:Customizable gestures: `tap` `double tap` `swipe up` `swipe left` `swipe right` `swipe down on left` `swipe down on right`  
+:x: Folders  
+:white_check_mark: Tags  
+:white_check_mark: Rename apps  
+:white_check_mark: Widgets  
+:grey_question: Private space  
+:white_check_mark: Work profile  
+:white_check_mark: Pinned shortcuts  
+:white_check_mark: Icon packs  
+:x: Material You  
 
 ---
 
@@ -281,18 +285,19 @@ Similar to OLauncher?
 **Main mode of interaction:** `search` `home screen text buttons`
 
 #### Features:
-:white_check_mark: Search:  `apps` `contacts (optional)`
-:x: Search history
-:white_check_mark: Customizable gestures: `swipe left` `swipe right`
-:x: Folders
-:x: Tags
-:white_check_mark: Rename apps
-:x: Widgets
-:grey_question: Private space
-:white_check_mark: Work profile
-:white_check_mark: Pinned shortcuts
-:x: Icon packs
-:white_check_mark: Material You
+
+:white_check_mark: Search:  `apps` `contacts (optional)`  
+:x: Search history  
+:white_check_mark: Customizable gestures: `swipe left` `swipe right`  
+:x: Folders  
+:x: Tags  
+:white_check_mark: Rename apps  
+:x: Widgets  
+:grey_question: Private space  
+:white_check_mark: Work profile  
+:white_check_mark: Pinned shortcuts  
+:x: Icon packs  
+:white_check_mark: Material You  
 
 ---
 
@@ -306,18 +311,19 @@ Similar to OLauncher?
 **Main mode of interaction:** `directory navigation`
 
 #### Features:
-:white_check_mark: Search:  `apps`
-:x: Search history
-:x: Customizable gestures
-:white_check_mark: Folders
-:x: Tags
-:white_check_mark: Rename apps
-:white_check_mark: Widgets
-:grey_question: Private space
-:x: Work profile
-:white_check_mark: Pinned shortcuts
-:x: Icon packs
-:x: Material You
+
+:white_check_mark: Search:  `apps`  
+:x: Search history  
+:x: Customizable gestures  
+:white_check_mark: Folders  
+:x: Tags  
+:white_check_mark: Rename apps  
+:white_check_mark: Widgets  
+:grey_question: Private space  
+:x: Work profile  
+:white_check_mark: Pinned shortcuts  
+:x: Icon packs  
+:x: Material You  
 
 ---
 
@@ -329,42 +335,45 @@ Similar to OLauncher?
 **Main mode of interaction:** `App grid` `Search`
 
 #### Features:
-:warning: Search:  `apps` `contacts: buggy/broken`
-:white_check_mark: Search history `shows recently launched apps`
-:x: Customizable gestures
-:warning: Folders `prebuilt` `not customizable`
-:x: Tags
-:white_check_mark: Rename apps
-:x: Widgets
-:grey_question: Private space
-:white_check_mark: Work profile
-:white_check_mark: Pinned shortcuts
-:white_check_mark: Icon packs
-:x: Material You
+
+:warning: Search:  `apps` `contacts: buggy/broken`  
+:white_check_mark: Search history `shows recently launched apps`  
+:x: Customizable gestures  
+:warning: Folders `prebuilt` `not customizable`  
+:x: Tags  
+:white_check_mark: Rename apps  
+:x: Widgets  
+:grey_question: Private space  
+:white_check_mark: Work profile  
+:white_check_mark: Pinned shortcuts  
+:white_check_mark: Icon packs  
+:x: Material You  
 
 ---
 
 ## Gesture based
 
 ### Pie Launcher
+
 **License:** `MIT`
 [Repository](https://github.com/markusfisch/PieLauncher)
 
 **Main mode of interaction:** `Selection wheel`
 
 #### Features:
-:white_check_mark: Search:  `apps`
-:x: Search history
-:x: Customizable gestures
-:x: Folders
-:x: Tags
-:x: Rename apps
-:x: Widgets
-:grey_question: Private space
-:white_check_mark: Work profile
-:white_check_mark: Pinned shortcuts
-:x: Icon packs
-:x: Material You
+
+:white_check_mark: Search:  `apps`  
+:x: Search history  
+:x: Customizable gestures  
+:x: Folders  
+:x: Tags  
+:x: Rename apps  
+:x: Widgets  
+:grey_question: Private space  
+:white_check_mark: Work profile  
+:white_check_mark: Pinned shortcuts  
+:x: Icon packs  
+:x: Material You  
 
 ---
 
@@ -377,18 +386,18 @@ Similar to OLauncher?
 
 #### Features:
 
-:white_check_mark: Search:  `apps`
-:x: Search history
-:white_check_mark: Customizable gestures: `35 avilable` [read the docs](https://github.com/jrpie/launcher/blob/master/docs/actions-and-gestures.md)
-:x: Folders
-:x: Tags
-:white_check_mark: Rename apps
-:white_check_mark: Widgets
-:white_check_mark: Private space
-:white_check_mark: Work profile
-:white_check_mark: Pinned shortcuts
-:x:Icon packs
-:white_check_mark: Material You
+:white_check_mark: Search:  `apps`  
+:x: Search history  
+:white_check_mark: Customizable gestures: `35 avilable` [read the docs](https://github.com/jrpie/launcher/blob/master/docs/actions-and-gestures.md)  
+:x: Folders  
+:x: Tags  
+:white_check_mark: Rename apps  
+:white_check_mark: Widgets  
+:white_check_mark: Private space  
+:white_check_mark: Work profile  
+:white_check_mark: Pinned shortcuts  
+:x:Icon packs  
+:white_check_mark: Material You  
 
 ---
 
@@ -396,9 +405,9 @@ Similar to OLauncher?
 
 #### Legend: 
 
-:white_check_mark: = Supported
-:x: = Unsupported
-:warning: = Buggy/Broken; check this launcher's notes above
+:white_check_mark: = Supported  
+:x: = Unsupported  
+:warning: = Buggy/Broken; check this launcher's notes above  
 
 | Launcher | Search | Search history | Customizable gestures | Folders | Tags | Rename apps | Widgets | Private space | Work profile | Pinned shortcuts | Icon packs | Material You |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
