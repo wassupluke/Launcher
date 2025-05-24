@@ -42,7 +42,7 @@ for further instructions.
 Install [Android Studio](https://developer.android.com/studio), import this project and build it.
 
 See [this guide](https://developer.android.com/studio/run)
-for further instructions. How to
+for further instructions.
 
 ## CI Pipeline
 
