@@ -1,3 +1,7 @@
++++
+  weight = 10
++++
+
 # Settings
 
 Tweaks and customizations can be made from within the settings page.
@@ -230,13 +234,3 @@ Remove the top status bar from the home screen.
 Remove the navigation bar from the home screen. Enabling this setting may make it difficult to use the device if gestures are not setup properly.
 
 **type:**&nbsp;`toggle`
-
-## Additional Settings
-
-### App Drawer Long Press on App
-
-Access additional per-app details and settings. To use, open the app drawer and long press on any app.
-
-**type:**&nbsp;`dropdown`
-
-**options:**&nbsp;`App Info`,`Add to favorites`,`Hide`,`Rename`,`Uninstall`
