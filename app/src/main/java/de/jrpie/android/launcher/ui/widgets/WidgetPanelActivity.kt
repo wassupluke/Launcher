@@ -1,26 +1,30 @@
 package de.jrpie.android.launcher.ui.widgets
 
-import android.app.Activity
 import android.content.res.Resources
 import android.os.Bundle
+import android.view.View
 import androidx.core.view.ViewCompat
 import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.R
 import de.jrpie.android.launcher.databinding.ActivityWidgetPanelBinding
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.ui.UIObject
+import de.jrpie.android.launcher.ui.util.LauncherGestureActivity
 import de.jrpie.android.launcher.ui.widgets.manage.EXTRA_PANEL_ID
 import de.jrpie.android.launcher.widgets.WidgetPanel
 
-class WidgetPanelActivity : Activity(), UIObject {
-    lateinit var binding: ActivityWidgetPanelBinding
-    private var widgetPanelId: Int = WidgetPanel.HOME.id
+class WidgetPanelActivity : LauncherGestureActivity(), UIObject {
+    var binding: ActivityWidgetPanelBinding? = null
+
+    var widgetPanelId: Int = WidgetPanel.HOME.id
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        super<Activity>.onCreate(savedInstanceState)
+        super<LauncherGestureActivity>.onCreate(savedInstanceState)
         super<UIObject>.onCreate()
-        widgetPanelId = intent.getIntExtra(EXTRA_PANEL_ID, WidgetPanel.HOME.id)
         val binding = ActivityWidgetPanelBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        widgetPanelId = intent.getIntExtra(EXTRA_PANEL_ID, WidgetPanel.HOME.id)
 
         // The widget container should extend below the status and navigation bars,
         // so let's set an empty WindowInsetsListener to prevent it from being moved.
@@ -56,9 +60,8 @@ class WidgetPanelActivity : Activity(), UIObject {
     }
 
     override fun onStart() {
-        super<Activity>.onStart()
+        super<LauncherGestureActivity>.onStart()
         super<UIObject>.onStart()
-
     }
 
     override fun onPause() {
@@ -74,6 +77,14 @@ class WidgetPanelActivity : Activity(), UIObject {
     override fun onResume() {
         super.onResume()
         (application as Application).appWidgetHost.startListening()
+    }
+
+    override fun getRootView(): View? {
+        return binding?.root
+    }
+
+    override fun handleBack() {
+        finish()
     }
 
     override fun isHomeScreen(): Boolean {

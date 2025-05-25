@@ -1,16 +1,9 @@
 package de.jrpie.android.launcher.ui
 
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.SharedPreferences
-import android.content.res.Configuration
 import android.content.res.Resources
-import android.os.Build
 import android.os.Bundle
-import android.view.KeyEvent
-import android.view.MotionEvent
 import android.view.View
-import android.window.OnBackInvokedDispatcher
 import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.actions.Action
 import de.jrpie.android.launcher.actions.Gesture
@@ -19,6 +12,7 @@ import de.jrpie.android.launcher.databinding.ActivityHomeBinding
 import de.jrpie.android.launcher.openTutorial
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import de.jrpie.android.launcher.ui.tutorial.TutorialActivity
+import de.jrpie.android.launcher.ui.util.LauncherGestureActivity
 
 /**
  * [HomeActivity] is the actual application Launcher,
@@ -32,10 +26,9 @@ import de.jrpie.android.launcher.ui.tutorial.TutorialActivity
  * - Setting global variables (preferences etc.)
  * - Opening the [TutorialActivity] on new installations
  */
-class HomeActivity : UIObject, Activity() {
+class HomeActivity : UIObject, LauncherGestureActivity() {
 
     private lateinit var binding: ActivityHomeBinding
-    private var touchGestureDetector: TouchGestureDetector? = null
 
     private var sharedPreferencesListener =
         SharedPreferences.OnSharedPreferenceChangeListener { _, prefKey ->
@@ -54,35 +47,21 @@ class HomeActivity : UIObject, Activity() {
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super<Activity>.onCreate(savedInstanceState)
+        super<LauncherGestureActivity>.onCreate(savedInstanceState)
         super<UIObject>.onCreate()
-
 
         // Initialise layout
         binding = ActivityHomeBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
 
-        // Handle back key / gesture on Android 13+, cf. onKeyDown()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            onBackInvokedDispatcher.registerOnBackInvokedCallback(
-                OnBackInvokedDispatcher.PRIORITY_OVERLAY
-            ) {
-                handleBack()
-            }
-        }
         binding.buttonFallbackSettings.setOnClickListener {
             LauncherAction.SETTINGS.invoke(this)
         }
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        touchGestureDetector?.updateScreenSize(windowManager)
-    }
-
     override fun onStart() {
-        super<Activity>.onStart()
+        super<LauncherGestureActivity>.onStart()
         super<UIObject>.onStart()
 
         // If the tutorial was not finished, start it
@@ -133,38 +112,15 @@ class HomeActivity : UIObject, Activity() {
 
     override fun onResume() {
         super.onResume()
-
-        /* This should be initialized in onCreate()
-           However on some devices there seems to be a bug where the touchGestureDetector
-           is not working properly after resuming the app.
-           Reinitializing the touchGestureDetector every time the app is resumed might help to fix that.
-           (see issue #138)
-         */
-        touchGestureDetector = TouchGestureDetector(
-            this, 0, 0,
-            LauncherPreferences.enabled_gestures().edgeSwipeEdgeWidth() / 100f
-        ).also {
-            it.updateScreenSize(windowManager)
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            binding.root.setOnApplyWindowInsetsListener { _, windowInsets ->
-                @Suppress("deprecation") // required to support API 29
-                val insets = windowInsets.systemGestureInsets
-                touchGestureDetector?.setSystemGestureInsets(insets)
-
-                windowInsets
-            }
-        }
         updateSettingsFallbackButtonVisibility()
 
         binding.homeWidgetContainer.updateWidgets(this@HomeActivity,
             LauncherPreferences.widgets().widgets()
         )
 
-
         (application as Application).appWidgetHost.startListening()
     }
+
 
     override fun onDestroy() {
         LauncherPreferences.getSharedPreferences()
@@ -172,41 +128,12 @@ class HomeActivity : UIObject, Activity() {
         super.onDestroy()
     }
 
-    @SuppressLint("GestureBackNavigation")
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        when (keyCode) {
-            KeyEvent.KEYCODE_BACK -> {
-                // Only used pre Android 13, cf. onBackInvokedDispatcher
-                handleBack()
-            }
-
-            KeyEvent.KEYCODE_VOLUME_UP -> {
-                if (Action.forGesture(Gesture.VOLUME_UP) == LauncherAction.VOLUME_UP) {
-                    // Let the OS handle the key event. This works better with some custom ROMs
-                    // and apps like Samsung Sound Assistant.
-                    return false
-                }
-                Gesture.VOLUME_UP(this)
-            }
-
-            KeyEvent.KEYCODE_VOLUME_DOWN -> {
-                if (Action.forGesture(Gesture.VOLUME_DOWN) == LauncherAction.VOLUME_DOWN) {
-                    // see above
-                    return false
-                }
-                Gesture.VOLUME_DOWN(this)
-            }
-        }
-        return true
-    }
-
-    override fun onTouchEvent(event: MotionEvent): Boolean {
-        touchGestureDetector?.onTouchEvent(event)
-        return true
-    }
-
-    private fun handleBack() {
+    override fun handleBack() {
         Gesture.BACK(this)
+    }
+
+    override fun getRootView(): View {
+        return binding.root
     }
 
     override fun isHomeScreen(): Boolean {

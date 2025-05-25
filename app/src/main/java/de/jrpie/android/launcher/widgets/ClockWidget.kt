@@ -18,8 +18,8 @@ class ClockWidget(
     override var allowInteraction: Boolean = true
 ) : Widget() {
 
-    override fun createView(activity: Activity): View? {
-        return ClockView(activity, null, id)
+    override fun createView(activity: Activity): View {
+        return ClockView(activity, null, id, panelId)
     }
 
     override fun findView(views: Sequence<View>): ClockView? {

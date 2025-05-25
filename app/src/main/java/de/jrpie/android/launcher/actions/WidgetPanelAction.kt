@@ -1,5 +1,6 @@
 package de.jrpie.android.launcher.actions
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
@@ -25,11 +26,18 @@ class WidgetPanelAction(val widgetPanelId: Int) : Action {
 
     override fun invoke(context: Context, rect: Rect?): Boolean {
 
-        if (WidgetPanel.byId(widgetPanelId) == null) {
+        if (context is WidgetPanelActivity) {
+            if (context.widgetPanelId == widgetPanelId) {
+                context.finish()
+                return true
+            }
+        }
+
+        if (WidgetPanel.byId(this.widgetPanelId) == null) {
             Toast.makeText(context, R.string.alert_widget_panel_not_found, Toast.LENGTH_LONG).show()
         } else {
             context.startActivity(Intent(context, WidgetPanelActivity::class.java).also {
-                it.putExtra(EXTRA_PANEL_ID, widgetPanelId)
+                it.putExtra(EXTRA_PANEL_ID, this.widgetPanelId)
             })
         }
         return true
