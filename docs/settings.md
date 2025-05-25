@@ -30,6 +30,15 @@ Set the font used within the app settings. This setting does not affect the date
 
 ### Background (app list and setting)
 
+Defines which background should be used in app drawers, settings, etc.
+to increase legibility.
+* `Transparent` does not change the wallpaper.
+* `Dim` dims the wallpaper.
+* `Blur` tries to blur the wallpaper. This is not possible on all devices. Some older devices don't support the operation. Also blur can be temporarily unavailable when the device is in power saving mode. In these case, `Dim` is used as a fallback.
+* `Solid` sets the background to a solid color (depending on the color theme). For the light theme only this option is available.
+
+On the home screen and on widget panels the wallpaper is always shown unmodified.
+
 **type:**&nbsp;`dropdown`
 
 **type:**&nbsp;`Transparent`,`Dim`,`Blur`,`Solid`
