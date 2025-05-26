@@ -15,11 +15,6 @@ import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.preferences.LauncherPreferences
 import kotlin.math.min
 
-fun deleteAllWidgets(context: Context) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        context.getAppWidgetHost().appWidgetIds.forEach { AppWidget(it).delete(context) }
-    }
-}
 
 /**
  * Tries to bind [providerInfo] to the id [id].

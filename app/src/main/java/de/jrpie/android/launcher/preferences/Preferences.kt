@@ -2,7 +2,6 @@ package de.jrpie.android.launcher.preferences
 
 import android.content.Context
 import android.util.Log
-import de.jrpie.android.launcher.Application
 import de.jrpie.android.launcher.BuildConfig
 import de.jrpie.android.launcher.actions.Action
 import de.jrpie.android.launcher.apps.AbstractAppInfo
@@ -21,8 +20,8 @@ import de.jrpie.android.launcher.widgets.ClockWidget
 import de.jrpie.android.launcher.widgets.DebugInfoWidget
 import de.jrpie.android.launcher.widgets.WidgetPanel
 import de.jrpie.android.launcher.widgets.WidgetPosition
-import de.jrpie.android.launcher.widgets.deleteAllWidgets
 import de.jrpie.android.launcher.widgets.generateInternalId
+import de.jrpie.android.launcher.widgets.getAppWidgetHost
 
 /* Current version of the structure of preferences.
  * Increase when breaking changes are introduced and write an appropriate case in
@@ -92,7 +91,7 @@ fun resetPreferences(context: Context) {
     Log.i(TAG, "Resetting preferences")
     LauncherPreferences.clear()
     LauncherPreferences.internal().versionCode(PREFERENCE_VERSION)
-    deleteAllWidgets(context)
+    context.getAppWidgetHost().deleteHost()
 
     LauncherPreferences.widgets().widgets(
         setOf(
