@@ -6,7 +6,6 @@
     android:id="@+id/list_apps_row_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="15sp"
     android:layout_marginHorizontal="30sp">
 
     <androidx.cardview.widget.CardView
@@ -15,6 +14,7 @@
         app:cardBackgroundColor="?cardBackgroundColor"
         app:cardElevation="8dp"
         app:cardCornerRadius="12dp"
+        app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
