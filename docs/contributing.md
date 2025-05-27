@@ -1,3 +1,8 @@
++++
+  weight = 40
++++
+
+
 # Contributing
 
 There are several ways to contribute to this app:
@@ -13,7 +18,7 @@ There are several ways to contribute to this app:
   - Open a new pull request.
 
 
-See [build.md](build.md) for instructions how to build this project.
+See [here](/docs/build) for instructions how to build this project.
 The [CI pipeline](https://github.com/jrpie/Launcher/actions) automatically creates debug builds.
 
 

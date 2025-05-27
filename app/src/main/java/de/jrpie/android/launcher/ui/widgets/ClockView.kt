@@ -8,9 +8,11 @@ import androidx.core.view.isVisible
 import de.jrpie.android.launcher.actions.Gesture
 import de.jrpie.android.launcher.databinding.WidgetClockBinding
 import de.jrpie.android.launcher.preferences.LauncherPreferences
+import de.jrpie.android.launcher.widgets.WidgetPanel
 import java.util.Locale
 
-class ClockView(context: Context, attrs: AttributeSet? = null, val appWidgetId: Int): ConstraintLayout(context, attrs) {
+class ClockView(context: Context, attrs: AttributeSet? = null, val appWidgetId: Int, val panelId: Int): ConstraintLayout(context, attrs) {
+    constructor(context: Context, attrs: AttributeSet?): this(context, attrs, WidgetPanel.HOME.id, -1)
 
     val binding: WidgetClockBinding = WidgetClockBinding.inflate(LayoutInflater.from(context), this, true)
     init {
@@ -57,7 +59,7 @@ class ClockView(context: Context, attrs: AttributeSet? = null, val appWidgetId: 
         binding.clockUpperView.format12Hour = upperFormat
     }
 
-    fun setOnClicks() {
+    private fun setOnClicks() {
         binding.clockUpperView.setOnClickListener {
             if (LauncherPreferences.clock().flipDateTime()) {
                 Gesture.TIME(context)
@@ -74,7 +76,4 @@ class ClockView(context: Context, attrs: AttributeSet? = null, val appWidgetId: 
             }
         }
     }
-
-
-
 }

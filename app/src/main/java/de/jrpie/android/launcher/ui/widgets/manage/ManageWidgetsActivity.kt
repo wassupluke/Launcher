@@ -92,13 +92,24 @@ class ManageWidgetsActivity : UIObject, Activity() {
 
     }
 
+    override fun onPause() {
+        try {
+            (application as Application).appWidgetHost.stopListening()
+        } catch (e: Exception) {
+            // Throws a NullPointerException on Android 12 an earlier, see #172
+            e.printStackTrace()
+        }
+        super.onPause()
+    }
+
     override fun onResume() {
         super.onResume()
+        (application as Application).appWidgetHost.startListening()
+
         binding.manageWidgetsContainer.updateWidgets(
             this,
             LauncherPreferences.widgets().widgets()
         )
-
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -125,10 +136,6 @@ class ManageWidgetsActivity : UIObject, Activity() {
         startActivityForResult(
             Intent(this, SelectWidgetActivity::class.java).also {
                 it.putExtra(
-                    AppWidgetManager.EXTRA_APPWIDGET_ID,
-                    appWidgetHost.allocateAppWidgetId()
-                )
-                it.putExtra(
                     EXTRA_PANEL_ID,
                     panelId
                 )
@@ -140,13 +147,17 @@ class ManageWidgetsActivity : UIObject, Activity() {
     private fun createWidget(data: Intent) {
         Log.i("Launcher", "creating widget")
         val appWidgetManager = (application as Application).appWidgetManager
+        val appWidgetHost = (application as Application).appWidgetHost
         val appWidgetId = data.extras?.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID) ?: return
-
-        val provider = appWidgetManager.getAppWidgetInfo(appWidgetId)
 
         val display = windowManager.defaultDisplay
 
         val widgetInfo = appWidgetManager.getAppWidgetInfo(appWidgetId)
+        if (widgetInfo == null) {
+            Log.w("Launcher", "can't access widget")
+            appWidgetHost.deleteAppWidgetId(appWidgetId)
+            return
+        }
 
         val position = WidgetPosition.findFreeSpace(
             WidgetPanel.byId(panelId),
@@ -154,7 +165,7 @@ class ManageWidgetsActivity : UIObject, Activity() {
             max(3, (GRID_SIZE * (widgetInfo.minHeight) / display.height.toFloat()).roundToInt())
         )
 
-        val widget = AppWidget(appWidgetId, position, panelId, provider)
+        val widget = AppWidget(appWidgetId, position, panelId, widgetInfo)
         LauncherPreferences.widgets().widgets(
             (LauncherPreferences.widgets().widgets() ?: HashSet()).also {
                 it.add(widget)

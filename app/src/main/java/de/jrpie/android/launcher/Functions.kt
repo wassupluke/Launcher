@@ -6,9 +6,6 @@ import android.app.role.RoleManager
 import android.content.ActivityNotFoundException
 import android.content.ClipData
 import android.content.ClipboardManager
-import android.appwidget.AppWidgetManager
-import android.appwidget.AppWidgetProvider
-import android.appwidget.AppWidgetProviderInfo
 import android.content.Context
 import android.content.Intent
 import android.content.pm.LauncherApps
@@ -227,3 +224,13 @@ fun copyToClipboard(context: Context, text: String) {
     val clipData = ClipData.newPlainText("Debug Info", text)
     clipboardManager.setPrimaryClip(clipData)
 }
+
+fun writeEmail(context: Context, to: String, subject: String, text: String) {
+    val intent = Intent(Intent.ACTION_SENDTO)
+    intent.setData("mailto:".toUri())
+    intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(to))
+    intent.putExtra(Intent.EXTRA_SUBJECT, subject)
+    intent.putExtra(Intent.EXTRA_TEXT, text)
+    context.startActivity(Intent.createChooser(intent, context.getString(R.string.send_email)))
+}
+

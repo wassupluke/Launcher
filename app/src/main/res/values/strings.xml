@@ -419,5 +419,29 @@
     <string name="list_other_open_widget_panel">Open Widget Panel</string>
     <string name="alert_widget_panel_not_found">This widget panel no longer exists.</string>
     <string name="settings_launcher_section_widgets">Widgets</string>
-
+    <string name="notification_crash_title">μLauncher crashed</string>
+    <string name="notification_crash_explanation">Sorry! Click for more information.</string>
+    <string name="crash_info"><![CDATA[
+        Looks like something went wrong, sorry about that!<br><br>
+        For privacy reasons, crash logs are not collected automatically.<br>
+        However logs are very useful for debugging, so I would be very grateful if you could send me the attached log by mail
+        or create a bug report on github.<br><br>
+        Note that crash logs might contain <strong>sensitive information</strong>, e.g. the name of an app you tried to launch.
+        Please <strong>redact</strong> such information before sending the report.
+        <h2>What can I do now?</h2>
+        If this bug appears again and again, you can try several things:
+        <ul>
+        <li>Force stop μLauncher</li>
+        <li>Clear μLauncher\'s storage (<strong>Your settings will be lost!</strong>)</li>
+        <li>Install an older version (<a href=\"https://github.com/jrpie/Launcher/releases\">GitHub</a>, <a href=\"https://f-droid.org/en/packages/de.jrpie.android.launcher\">F-Droid</a>)</li>
+        </ul>
+        ]]>
+    </string>
+    <string name="report_crash_button_copy">Copy crash report to clipboard</string>
+    <string name="report_crash_button_mail">Send report by mail</string>
+    <string name="report_crash_button_report">Create bug report on GitHub</string>
+    <string name="report_crash_title">μLauncher crashed</string>
+    <string name="send_email">Send Email</string>
+    <string name="notification_channel_crash">Crashes and Debug Information</string>
+    <string name="settings_meta_view_docs">Documentation</string>
 </resources>

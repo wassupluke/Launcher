@@ -93,9 +93,9 @@
     <string name="settings_clock_show_seconds">Mostra secondi</string>
     <string name="settings_launcher_section_date_time"><![CDATA[Data e ora]]></string>
     <string name="settings_enabled_gestures_double_swipe_summary">Scorri con due dita</string>
-    <string name="settings_enabled_gestures_double_swipe">Azioni a due dita</string>
+    <string name="settings_enabled_gestures_double_swipe">Scorrimento a due dita</string>
     <string name="settings_functionality_auto_launch">Apri il risultato della ricerca</string>
-    <string name="settings_enabled_gestures_edge_swipe">Azioni sui bordi dello schermo</string>
+    <string name="settings_enabled_gestures_edge_swipe">Scorrimento sui bordi dello schermo</string>
     <string name="settings_enabled_gestures_edge_swipe_summary">Scorri sui bordi dello schermo</string>
     <string name="settings_enabled_gestures_edge_swipe_edge_width">Larghezza bordo</string>
     <string name="settings_meta_view_code">Codice sorgente</string>
@@ -287,4 +287,29 @@
     <string name="tutorial_app_list_text">Puoi cercare rapidamente tra tutte le app nella lista app.\n\nScorri su per la lista o associa ad un gesto diverso.</string>
     <string name="alert_recent_apps_failed">Errore: impossibile mostrare le app recenti. (Se hai appena aggiornato l\'app, prova a disabilitare e riabilitare il servizio di accessibilità dalle impostazioni del telefono)</string>
     <string name="settings_functionality_auto_close_keyboard">Chiudi la tastiera durante lo scorrimento</string>
+    <string name="settings_widgets_widgets">Gestione widget</string>
+    <string name="widget_menu_remove">Rimuovi</string>
+    <string name="settings_widgets_custom_panels">Gestione pannelli widget</string>
+    <string name="select_widget_title">Scegli widget</string>
+    <string name="widget_menu_configure">Configura</string>
+    <string name="widget_menu_enable_interaction">Abilita interazione</string>
+    <string name="widget_menu_disable_interaction">Disabilita interazione</string>
+    <string name="widget_clock_label">Orologio</string>
+    <string name="widget_clock_description">Orologio predefinito di μLauncher</string>
+    <string name="manage_widget_panels_delete">Elimina</string>
+    <string name="manage_widget_panels_rename">Rinomina</string>
+    <string name="widget_panel_default_name">Pannello widget #%1$d</string>
+    <string name="dialog_ok">Ok</string>
+    <string name="widget_panels_title">Pannelli widget</string>
+    <plurals name="widget_panel_number_of_widgets">
+        <item quantity="one">Contiene %1$d widget.</item>
+        <item quantity="many">Contiene %1$d widget.</item>
+        <item quantity="other">Contiene %1$d widget.</item>
+    </plurals>
+    <string name="dialog_create_widget_panel_title">Crea nuovo pannello widget</string>
+    <string name="list_other_open_widget_panel">Apri pannello widget</string>
+    <string name="alert_widget_panel_not_found">Questo pannello widget non esiste più.</string>
+    <string name="settings_launcher_section_widgets">Widget</string>
+    <string name="dialog_select_widget_panel_title">Seleziona pannello widget</string>
+    <string name="dialog_select_widget_panel_info_no_panels"><![CDATA[Nessun pannello widget trovato. Puoi creare pannelli widget da Impostazioni > Launcher > Gestione Pannelli Widget.]]></string>
 </resources>

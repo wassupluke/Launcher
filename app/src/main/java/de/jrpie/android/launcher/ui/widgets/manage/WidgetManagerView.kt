@@ -113,7 +113,7 @@ class WidgetManagerView(widgetPanelId: Int, context: Context, attrs: AttributeSe
                         height
                     )
                 selectedWidgetOverlayView = view
-                selectedWidgetView = widgetViewById[view.widgetId] ?: return true
+                selectedWidgetView = widgetViewById[view.widgetId]
                 startWidgetPosition = position
 
                 val positionInView = start.minus(Point(position.left, position.top))

@@ -8,6 +8,7 @@
         tools:ignore="QueryAllPackagesPermission" />
     <uses-permission android:name="android.permission.ACCESS_HIDDEN_PROFILES" />
     <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:name=".Application"
@@ -19,6 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/launcherBaseTheme"
         tools:ignore="UnusedAttribute">
+
         <activity
             android:name=".ui.widgets.manage.ManageWidgetPanelsActivity"
             android:exported="false" />
@@ -80,6 +82,9 @@
         <activity
             android:name=".ui.LegalInfoActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.ReportCrashActivity"
+            android:exported="false" />
 
         <receiver
             android:name=".actions.lock.LauncherDeviceAdmin"
@@ -110,5 +115,4 @@
                 android:resource="@xml/accessibility_service_config" />
         </service>
     </application>
-
 </manifest>
