@@ -23,16 +23,16 @@ class TouchGestureDetector(
     var height: Int,
     var edgeWidth: Float
 ) {
-    private val ANGULAR_THRESHOLD = tan(Math.PI / 6)
-    private val TOUCH_SLOP: Int
-    private val TOUCH_SLOP_SQUARE: Int
-    private val DOUBLE_TAP_SLOP: Int
-    private val DOUBLE_TAP_SLOP_SQUARE: Int
-    private val LONG_PRESS_TIMEOUT: Int
-    private val TAP_TIMEOUT: Int
-    private val DOUBLE_TAP_TIMEOUT: Int
+    private val angularThreshold = tan(Math.PI / 6)
+    private val touchSlop: Int
+    private val touchSlopSquare: Int
+    private val doubleTapSlop: Int
+    private val doubleTapSlopSquare: Int
+    private val longPressTimeout: Int
+    private val tapTimeout: Int
+    private val doubleTapTimeout: Int
 
-    private val MIN_TRIANGLE_HEIGHT = 250
+    private val minTriangleHeight = 250
 
     private val longPressHandler = Handler(Looper.getMainLooper())
 
@@ -104,19 +104,19 @@ class TouchGestureDetector(
         if (intersectsSystemGestureInsets()) {
             return false
         }
-        return sizeSquared() < TOUCH_SLOP_SQUARE
+        return sizeSquared() < touchSlopSquare
     }
 
     init {
         val configuration = ViewConfiguration.get(context)
-        TOUCH_SLOP = configuration.scaledTouchSlop
-        TOUCH_SLOP_SQUARE = TOUCH_SLOP * TOUCH_SLOP
-        DOUBLE_TAP_SLOP = configuration.scaledDoubleTapSlop
-        DOUBLE_TAP_SLOP_SQUARE = DOUBLE_TAP_SLOP * DOUBLE_TAP_SLOP
+        touchSlop = configuration.scaledTouchSlop
+        touchSlopSquare = touchSlop * touchSlop
+        doubleTapSlop = configuration.scaledDoubleTapSlop
+        doubleTapSlopSquare = doubleTapSlop * doubleTapSlop
 
-        LONG_PRESS_TIMEOUT = ViewConfiguration.getLongPressTimeout()
-        TAP_TIMEOUT = ViewConfiguration.getTapTimeout()
-        DOUBLE_TAP_TIMEOUT = ViewConfiguration.getDoubleTapTimeout()
+        longPressTimeout = ViewConfiguration.getLongPressTimeout()
+        tapTimeout = ViewConfiguration.getTapTimeout()
+        doubleTapTimeout = ViewConfiguration.getDoubleTapTimeout()
     }
 
     private var paths = HashMap<Int, PointerPath>()
@@ -157,7 +157,7 @@ class TouchGestureDetector(
                         Gesture.LONG_CLICK.invoke(context)
                     }
                 }
-            }, LONG_PRESS_TIMEOUT.toLong())
+            }, longPressTimeout.toLong())
         }
 
         // add new pointers
@@ -201,16 +201,16 @@ class TouchGestureDetector(
     }
 
     private fun getGestureForDirection(direction: Vector): Gesture? {
-        return if (ANGULAR_THRESHOLD * abs(direction.x) > abs(direction.y)) { // horizontal swipe
-            if (direction.x > TOUCH_SLOP)
+        return if (angularThreshold * abs(direction.x) > abs(direction.y)) { // horizontal swipe
+            if (direction.x > touchSlop)
                 Gesture.SWIPE_RIGHT
-            else if (direction.x < -TOUCH_SLOP)
+            else if (direction.x < -touchSlop)
                 Gesture.SWIPE_LEFT
             else null
-        } else if (ANGULAR_THRESHOLD * abs(direction.y) > abs(direction.x)) { // vertical swipe
-            if (direction.y < -TOUCH_SLOP)
+        } else if (angularThreshold * abs(direction.y) > abs(direction.x)) { // vertical swipe
+            if (direction.y < -touchSlop)
                 Gesture.SWIPE_UP
-            else if (direction.y > TOUCH_SLOP)
+            else if (direction.y > touchSlop)
                 Gesture.SWIPE_DOWN
             else null
         } else null
@@ -233,10 +233,10 @@ class TouchGestureDetector(
         if (pointerCount == 1 && mainPointerPath.isTap()) {
             // detect taps
 
-            if (duration in 0..TAP_TIMEOUT) {
-                if (timeStart - lastTappedTime < DOUBLE_TAP_TIMEOUT &&
+            if (duration in 0..tapTimeout) {
+                if (timeStart - lastTappedTime < doubleTapTimeout &&
                     lastTappedLocation?.let {
-                        (mainPointerPath.last - it).absSquared() < DOUBLE_TAP_SLOP_SQUARE
+                        (mainPointerPath.last - it).absSquared() < doubleTapSlopSquare
                     } == true
                 ) {
                     Gesture.DOUBLE_CLICK.invoke(context)
@@ -266,37 +266,36 @@ class TouchGestureDetector(
             val startEndMax = mainPointerPath.start.max(mainPointerPath.last)
             when (gesture) {
                 Gesture.SWIPE_DOWN -> {
-                    if (startEndMax.x + MIN_TRIANGLE_HEIGHT < mainPointerPath.max.x) {
+                    if (startEndMax.x + minTriangleHeight < mainPointerPath.max.x) {
                         gesture = Gesture.SWIPE_LARGER
-                    } else if (startEndMin.x - MIN_TRIANGLE_HEIGHT > mainPointerPath.min.x) {
+                    } else if (startEndMin.x - minTriangleHeight > mainPointerPath.min.x) {
                         gesture = Gesture.SWIPE_SMALLER
                     }
                 }
 
                 Gesture.SWIPE_UP -> {
-                    if (startEndMax.x + MIN_TRIANGLE_HEIGHT < mainPointerPath.max.x) {
+                    if (startEndMax.x + minTriangleHeight < mainPointerPath.max.x) {
                         gesture = Gesture.SWIPE_LARGER_REVERSE
-                    } else if (startEndMin.x - MIN_TRIANGLE_HEIGHT > mainPointerPath.min.x) {
+                    } else if (startEndMin.x - minTriangleHeight > mainPointerPath.min.x) {
                         gesture = Gesture.SWIPE_SMALLER_REVERSE
                     }
                 }
 
                 Gesture.SWIPE_RIGHT -> {
-                    if (startEndMax.y + MIN_TRIANGLE_HEIGHT < mainPointerPath.max.y) {
+                    if (startEndMax.y + minTriangleHeight < mainPointerPath.max.y) {
                         gesture = Gesture.SWIPE_V
-                    } else if (startEndMin.y - MIN_TRIANGLE_HEIGHT > mainPointerPath.min.y) {
+                    } else if (startEndMin.y - minTriangleHeight > mainPointerPath.min.y) {
                         gesture = Gesture.SWIPE_LAMBDA
                     }
                 }
 
                 Gesture.SWIPE_LEFT -> {
-                    if (startEndMax.y + MIN_TRIANGLE_HEIGHT < mainPointerPath.max.y) {
+                    if (startEndMax.y + minTriangleHeight < mainPointerPath.max.y) {
                         gesture = Gesture.SWIPE_V_REVERSE
-                    } else if (startEndMin.y - MIN_TRIANGLE_HEIGHT > mainPointerPath.min.y) {
+                    } else if (startEndMin.y - minTriangleHeight > mainPointerPath.min.y) {
                         gesture = Gesture.SWIPE_LAMBDA_REVERSE
                     }
                 }
-
                 else -> {}
             }
 
@@ -314,7 +313,7 @@ class TouchGestureDetector(
                 }
             }
 
-            if (timeStart - lastTappedTime < 2 * DOUBLE_TAP_TIMEOUT) {
+            if (timeStart - lastTappedTime < 2 * doubleTapTimeout) {
                 gesture = gesture?.getTapComboVariant()
             }
             gesture?.invoke(context)
