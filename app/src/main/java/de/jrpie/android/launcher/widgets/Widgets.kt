@@ -55,7 +55,7 @@ fun getAppWidgetProviders( context: Context ): List<LauncherWidgetProvider> {
             (context.getSystemService(Service.USER_SERVICE) as UserManager).userProfiles
         }
     list.addAll(
-        profiles.map {
+        profiles.map { it ->
             appWidgetManager.getInstalledProvidersForProfile(it)
                 .map { LauncherAppWidgetProvider(it) }
         }.flatten()
