@@ -1,7 +1,6 @@
 package de.jrpie.android.launcher.ui
 
 import android.app.AlertDialog
-import android.app.Service
 import android.content.Context
 import android.content.pm.LauncherApps
 import android.content.pm.LauncherApps.PinItemRequest
@@ -45,7 +44,7 @@ class PinShortcutActivity : AppCompatActivity(), UIObject {
         binding = ActivityPinShortcutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val launcherApps = getSystemService(Service.LAUNCHER_APPS_SERVICE) as LauncherApps
+        val launcherApps = getSystemService(LAUNCHER_APPS_SERVICE) as LauncherApps
 
         val request = launcherApps.getPinItemRequest(intent)
         this.request = request
