@@ -117,7 +117,9 @@ Seems to be a regular (grid of apps) launcher.
 
 ### Rootless Pixel Launcher
 
-> **Abandoned**
+{{% hint warning %}}
+**Abandoned**
+{{% /hint %}}
 
 **License:** `Apache License 2.0`  
 [Repository](https://github.com/amirzaidi/Launcher3)
@@ -145,8 +147,10 @@ Seems to be a regular (grid of apps) launcher.
 
 ### Aster Launcher
 
-> **Abandoned**
-> 
+{{% hint warning %}}
+**Abandoned**
+{{% /hint %}}
+
 **License:** `GPL-3.0`  
 [Repository](https://github.com/neophtex/AsterLauncher) | [F-Droid](https://f-droid.org/en/packages/com.series.aster.launcher/)
 
