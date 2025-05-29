@@ -57,23 +57,15 @@ class WidgetOverlayView : ViewGroup {
             preview = Widget.byId(context, widgetId)?.getPreview(context)
         }
 
-    constructor(context: Context) : super(context) {
-        init()
-    }
+    constructor(context: Context) : super(context)
 
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        init()
-    }
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
     constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
         context,
         attrs,
         defStyle
-    ) {
-        init()
-    }
-
-    private fun init() { }
+    )
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
