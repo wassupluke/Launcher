@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.serialization)
 }
@@ -14,8 +13,8 @@ android {
         applicationId = "de.jrpie.android.launcher"
         minSdk = 21
         targetSdk = 35
-        versionCode = 46
-        versionName = "0.2.1"
+        versionCode = 47
+        versionName = "0.2.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -67,7 +66,7 @@ android {
     }
     buildFeatures {
         buildConfig = true
-        compose = true
+        compose = false
         dataBinding = true
         viewBinding = true
     }
@@ -84,14 +83,8 @@ android {
 
 dependencies {
     implementation(libs.androidx.activity)
-    implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.compose.material)
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.runtime)
-    implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.gridlayout)
@@ -101,8 +94,6 @@ dependencies {
     implementation(libs.google.material)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.jonahbauer.android.preference.annotations)
-    implementation(libs.androidx.ui.tooling.preview.android)
-    debugImplementation(libs.androidx.ui.tooling)
     kapt(libs.jonahbauer.android.preference.annotations)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
