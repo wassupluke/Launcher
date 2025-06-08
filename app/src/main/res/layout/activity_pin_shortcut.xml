@@ -94,7 +94,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/pin_shortcut_label"
-                app:layout_constraintWidth_max="320dp" />
+                app:layout_constraintWidth_max="@dimen/max_button_width" />
 
             <Button
                 android:id="@+id/pin_shortcut_button_bind"
@@ -105,7 +105,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/pin_shortcut_switch_visible"
-                app:layout_constraintWidth_max="320dp" />
+                app:layout_constraintWidth_max="@dimen/max_button_width" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -120,6 +120,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_max="320dp" />
+        app:layout_constraintWidth_max="@dimen/max_button_width" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

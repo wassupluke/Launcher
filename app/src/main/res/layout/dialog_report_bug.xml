@@ -42,7 +42,7 @@
             app:layout_constraintTop_toBottomOf="@id/dialog_report_bug_device_info"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintWidth_max="320dp" />
+            app:layout_constraintWidth_max="@dimen/max_button_width" />
 
         <TextView
             android:id="@+id/dialog_report_bug_security_info"
@@ -66,7 +66,7 @@
             app:layout_constraintTop_toBottomOf="@id/dialog_report_bug_security_info"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintWidth_max="320dp" />
+            app:layout_constraintWidth_max="@dimen/max_button_width" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -43,14 +43,12 @@
                 android:id="@+id/button_container"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:maxWidth="320dp"
-                app:layout_constraintWidth_min="320dp"
-                app:layout_constraintWidth_default="wrap"
                 android:layout_marginTop="20dp"
-                app:layout_constraintTop_toBottomOf="@id/crash_info_text"
-                app:layout_constraintStart_toStartOf="parent"
+                android:maxWidth="@dimen/max_button_width"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/crash_info_text">
 
                 <Button
                     android:id="@+id/report_crash_button_copy"
@@ -58,9 +56,10 @@
                     android:layout_height="wrap_content"
                     android:minHeight="48dp"
                     android:text="@string/report_crash_button_copy"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/report_crash_button_mail"
@@ -68,9 +67,9 @@
                     android:layout_height="wrap_content"
                     android:minHeight="48dp"
                     android:text="@string/report_crash_button_mail"
-                    app:layout_constraintTop_toBottomOf="@id/report_crash_button_copy"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/report_crash_button_copy" />
 
                 <Button
                     android:id="@+id/report_crash_button_report"
@@ -78,10 +77,10 @@
                     android:layout_height="wrap_content"
                     android:minHeight="48dp"
                     android:text="@string/report_crash_button_report"
-                    app:layout_constraintTop_toBottomOf="@id/report_crash_button_mail"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/report_crash_button_mail" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

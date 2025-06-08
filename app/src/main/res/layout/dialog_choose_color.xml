@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_max="320dp"
+        app:layout_constraintWidth_max="@dimen/max_button_width"
         tools:text="#ffbb00" />
 
     <TextView
@@ -34,7 +34,7 @@
         app:layout_constraintTop_toBottomOf="@id/dialog_select_color_preview"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_max="320dp" />
+        app:layout_constraintWidth_max="@dimen/max_button_width" />
 
     <SeekBar
         android:id="@+id/dialog_select_color_seekbar_alpha"
@@ -45,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@id/label_alpha"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_max="320dp" />
+        app:layout_constraintWidth_max="@dimen/max_button_width" />
 
     <TextView
         android:id="@+id/label_red"
@@ -55,7 +55,7 @@
         app:layout_constraintTop_toBottomOf="@id/dialog_select_color_seekbar_alpha"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_max="320dp" />
+        app:layout_constraintWidth_max="@dimen/max_button_width" />
 
     <SeekBar
         android:id="@+id/dialog_select_color_seekbar_red"
@@ -66,7 +66,7 @@
         app:layout_constraintTop_toBottomOf="@id/label_red"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_max="320dp" />
+        app:layout_constraintWidth_max="@dimen/max_button_width" />
 
     <TextView
         android:id="@+id/label_green"
@@ -76,7 +76,7 @@
         app:layout_constraintTop_toBottomOf="@id/dialog_select_color_seekbar_red"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_max="320dp" />
+        app:layout_constraintWidth_max="@dimen/max_button_width" />
 
     <SeekBar
         android:id="@+id/dialog_select_color_seekbar_green"
@@ -87,7 +87,7 @@
         app:layout_constraintTop_toBottomOf="@id/label_green"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_max="320dp" />
+        app:layout_constraintWidth_max="@dimen/max_button_width" />
 
     <TextView
         android:id="@+id/label_blue"
@@ -97,7 +97,7 @@
         app:layout_constraintTop_toBottomOf="@id/dialog_select_color_seekbar_green"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_max="320dp" />
+        app:layout_constraintWidth_max="@dimen/max_button_width" />
 
     <SeekBar
         android:id="@+id/dialog_select_color_seekbar_blue"
@@ -109,6 +109,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintWidth_max="320dp" />
+        app:layout_constraintWidth_max="@dimen/max_button_width" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
