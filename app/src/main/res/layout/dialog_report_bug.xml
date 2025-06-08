@@ -33,7 +33,7 @@
 
         <Button
             android:id="@+id/dialog_report_bug_button_clipboard"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="48dp"
             android:paddingTop="12dp"
@@ -41,8 +41,7 @@
             android:text="@string/dialog_report_bug_button_clipboard"
             app:layout_constraintTop_toBottomOf="@id/dialog_report_bug_device_info"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintWidth_max="@dimen/max_button_width" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/dialog_report_bug_security_info"
@@ -56,7 +55,7 @@
 
         <Button
             android:id="@+id/dialog_report_bug_button_security"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:minHeight="48dp"
@@ -65,8 +64,7 @@
             android:text="@string/dialog_report_bug_button_security"
             app:layout_constraintTop_toBottomOf="@id/dialog_report_bug_security_info"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintWidth_max="@dimen/max_button_width" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
